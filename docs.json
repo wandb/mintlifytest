@@ -1,0 +1,132 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "palm",
+  "name": "Weights & Biases",
+  "colors": {
+    "primary": "#ffb633",
+    "light": "#ffb633",
+    "dark": "#ffb633"
+  },
+  "fonts": {
+    "heading": {
+      "family": "Source Serif 4",
+      "weight": 600,
+      "format": "woff2"
+    }
+  },
+  "favicon": "/favicon.png",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Home",
+        "groups": [
+          {
+            "group": "Home",
+            "pages": [
+              "index"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/index",
+              "guides/quickstart",
+              {
+                "group": "W&B Models",
+                "pages": [
+                  "guides/models",
+                  {
+                    "group": "Experiments",
+                    "pages": [
+                      "guides/track",
+                      "guides/track/launch"
+                    ]
+                  }
+                ]
+              },
+              "guides/weave"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Tutorials",
+        "groups": [
+          {
+            "group": "Tutorials",
+            "pages": [
+              "tutorials/index",
+              "tutorials/experiments"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Reference",
+        "groups": [
+          {
+            "group": "Reference",
+            "pages": [
+              "ref/index",
+              "ref/js/index"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Support",
+        "groups": [
+          {
+            "group": "Support",
+            "pages": [
+              "support/support",
+              "support/index_academic"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+
+    }
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg",
+    "href": "https://wandb.ai/"
+  },
+  "appearance": {
+    "default": "dark",
+    "strict": true
+  },
+  "background": {
+    "decoration": "gradient"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Log in",
+        "href": "https://app.wandb.ai/login?_gl=1*8ninq0*_ga*MTE3ODEwNDkyLjE3MzQwMjk0NjA.*_ga_JH1SJHJQXJ*MTczNDA2Mzc4OS4yLjEuMTczNDA2MzkxMC42MC4wLjA.*_ga_GMYDGNGKDT*MTczNDA2Mzc4OS4zLjEuMTczNDA2Mzg2Ny4wLjAuMA..*_gcl_au*MTc0Mjk3ODgzMi4xNzM0MDI5NDYw"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Sign Up",
+      "href": "https://app.wandb.ai/login?signup=true&_gl=1*y15ckv*_ga*MTE3ODEwNDkyLjE3MzQwMjk0NjA.*_ga_JH1SJHJQXJ*MTczNDA2Mzc4OS4yLjEuMTczNDA2Mzk3MC42MC4wLjA.*_ga_GMYDGNGKDT*MTczNDA2Mzc4OS4zLjEuMTczNDA2Mzg2Ny4wLjAuMA..*_gcl_au*MTc0Mjk3ODgzMi4xNzM0MDI5NDYw"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/wandb/docs",
+      "discord": "https://discord.com/invite/RgB8CPk2ce",
+      "x": "https://x.com/weights_biases?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor",
+      "youtube": "https://www.youtube.com/c/WeightsBiases",
+      "linkedin": "https://www.linkedin.com/company/wandb/"
+    }
+  }
+}
