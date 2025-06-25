@@ -454,4 +454,4 @@
     subtree: true
   });
   
-})(); 
+})(); // Animation script for navigation
