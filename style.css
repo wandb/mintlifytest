@@ -10,6 +10,16 @@ svg.transition-transform {
   transform: rotate(90deg);
 }
 
+/* Ensure sidebar toggle button works properly */
+button[class*="absolute"][class*="top-5"][class*="right-5"],
+button[class*="sidebar-toggle"],
+button[class*="toggle"] {
+  /* Ensure the toggle button is not affected by any navigation animations */
+  transform: none !important;
+  transition: background-color 0.2s ease, opacity 0.2s ease !important;
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
 /* Let JavaScript handle all sliding animations for topics below */
 /* Remove all conflicting CSS that might interfere with JavaScript-controlled animations */
 
