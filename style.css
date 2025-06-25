@@ -20,8 +20,6 @@ button[class*="toggle"] {
   z-index: 1000; /* Ensure it's above other elements */
 }
 
-/* Let JavaScript handle all sliding animations for topics below */
-/* Remove all conflicting CSS that might interfere with JavaScript-controlled animations */
 
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
