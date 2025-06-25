@@ -1,4 +1,4 @@
-// Mintlify Tab Fade Animations - Universal Approach
+// Mintlify Tab Fade Animations
 (function() {
   'use strict';
   

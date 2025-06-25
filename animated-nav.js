@@ -1,4 +1,4 @@
-// Simple Navigation Animations - Focus on sliding topics below downwards
+// Left-side navigation animations
 (function() {
   
   // Function to check if an element is the sidebar toggle button
