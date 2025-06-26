@@ -100,10 +100,6 @@
     "dark": "/logo/dark.svg",
     "href": "https://wandb.ai/"
   },
-  "appearance": {
-    "default": "dark",
-    "strict": true
-  },
   "background": {
     "decoration": "gradient"
   },
