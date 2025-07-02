@@ -1,0 +1,117 @@
+---
+- title: W&B クイックスタート
+- description: W&Bをインストールして、あらゆる規模の機械学習実験を追跡、視覚化、管理しましょう。
+---
+
+<Info>
+  W\&B Weaveに関する情報をお探しですか？[Weave Python SDK quickstart](https://weave-docs.wandb.ai/quickstart)または[Weave TypeScript SDK quickstart](https://weave-docs.wandb.ai/reference/generated_typescript_docs/intro-notebook)をご覧ください。
+</Info>
+
+## サインアップしてAPIキーを作成する
+
+マシンをW\&Bで認証するには、ユーザープロファイルまたは[wandb.ai/authorize](https://wandb.ai/authorize)からAPIキーを生成します。APIキーをコピーして安全に保管してください。
+
+## インストールする`wandb`ライブラリとログイン
+
+<Tabs>
+  <Tab title="コマンドライン">
+    1. 設定する`WANDB_API_KEY` [environment variable](/guides/track/environment-variables/)。
+       ```bash
+       export WANDB_API_KEY=<your_api_key>
+       ```
+    2. インストールする`wandb`ライブラリとログイン。
+       ```bash
+       pip install wandb
+       wandb login
+       ```
+  </Tab>
+
+  <Tab title="Python">
+    ```bash
+    pip install wandb
+    ```
+
+    ```python
+    import wandb
+
+    wandb.login()
+    ```
+  </Tab>
+
+  <Tab title="Pythonノートブック">
+    ```python
+    !pip install wandb
+    import wandb
+    wandb.login()
+    ```
+  </Tab>
+</Tabs>
+
+## 実行を開始してハイパーパラメータを追跡する
+
+PythonスクリプトまたはノートブックでW\&B runオブジェクトを初期化します：[`wandb.init()`](/ref/python/run/). configパラメータにディクショナリを使用して、ハイパーパラメータの名前と値を指定します。
+
+```python
+run = wandb.init(
+    project="my-awesome-project",  # Specify your project
+    config={                        # Track hyperparameters and metadata
+        "learning_rate": 0.01,
+        "epochs": 10,
+    },
+)
+```
+
+A [run](/guides/runs/) はW\&Bの中核要素として、[メトリクスの追跡](/ja/guides/track)、[ログの作成](/guides/track/log/)などに使用されます。
+
+## コンポーネントを組み立てる
+
+このモックトレーニングスクリプトは、シミュレートされた精度と損失メトリクスをW\&Bに記録します：
+
+```python
+# train.py
+import wandb
+import random
+
+wandb.login()
+
+epochs = 10
+lr = 0.01
+
+run = wandb.init(
+    project="my-awesome-project",    # Specify your project
+    config={                         # Track hyperparameters and metadata
+        "learning_rate": lr,
+        "epochs": epochs,
+    },
+)
+
+offset = random.random() / 5
+print(f"lr: {lr}")
+
+# Simulate a training run
+for epoch in range(2, epochs):
+    acc = 1 - 2**-epoch - random.random() / epoch - offset
+    loss = 2**-epoch + random.random() / epoch + offset
+    print(f"epoch={epoch}, accuracy={acc}, loss={loss}")
+    wandb.log({"accuracy": acc, "loss": loss})
+
+# run.log_code()
+```
+
+以下にアクセスしてください [wandb.ai/home](https://wandb.ai/home) 精度や損失などの記録されたメトリクスと、各トレーニングステップでそれらがどのように変化したかを確認できます。次の画像は、各実行から追跡された損失と精度を示しています。各runオブジェクトは、生成された名前とともにRuns列に表示されます。
+
+<Frame>
+  <img src="/images/quickstart/quickstart_image.png" />
+</Frame>
+
+## 次のステップ
+
+W\&Bエコシステムのより多くの機能を探索してください：
+
+1. 以下をお読みください [W\&B Integrations](/ja/guides/integrations) W\&BとPyTorchのようなフレームワーク、Hugging Faceのようなライブラリ、SageMakerのようなサービスを組み合わせます。
+2. 実行を整理し、視覚化を自動化し、結果をまとめ、コラボレーターと更新を共有するには [W\&B Reports](/guides/reports/)を使用します。
+3. 機械学習パイプライン全体でデータセット、モデル、依存関係、結果を追跡するために [W\&B Artifacts](/guides/artifacts/) を作成します。
+4. ハイパーパラメータ検索を自動化し、モデルを最適化するには [W\&B Sweeps](/guides/sweeps/)を使用します。
+5. 実行を分析し、モデルの予測を視覚化し、インサイトを [central dashboard](/guides/models/tables/)で共有します。
+6. 以下にアクセスしてください [W\&B AI Academy](https://wandb.ai/site/courses/) ハンズオンコースからLLM、MLOps、W\&B Modelsについて学びましょう。
+7. 以下にアクセスしてください [official W\&B Weave documentation](https://weave-docs.wandb.ai/) Weaveを使用してLLMベースのアプリケーションを追跡、実験、評価、デプロイ、改善する方法を学びましょう。
