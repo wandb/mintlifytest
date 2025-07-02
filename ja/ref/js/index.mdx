@@ -1,0 +1,84 @@
+---
+- title: JavaScriptライブラリ
+- description: TypeScript、Node、および最新のWebブラウザ向けのW&B SDK
+---
+
+Pythonライブラリと同様に、JavaScript/TypeScriptで実験を追跡するためのクライアントを提供しています。
+
+* Nodeサーバーからメトリクスをログに記録し、W\&Bでインタラクティブなプロットとして表示します
+* インタラクティブなトレースでLLMアプリケーションをデバッグします
+* [LangChain.js](https://github.com/hwchase17/langchainjs)の使用をデバッグします
+
+このライブラリはNodeと最新のJSランタイムと互換性があります。
+
+JavaScriptクライアントのソースコードは[Githubリポジトリ](https://github.com/wandb/wandb-js)で見つけることができます。
+
+<Note>
+  JavaScriptインテグレーションはまだベータ版です。問題が発生した場合はお知らせください！
+</Note>
+
+### インストール
+
+```
+npm install @wandb/sdk
+# or ...
+yarn add @wandb/sdk
+```
+
+### 使用方法
+
+TypeScript/ESM:
+
+```js
+import wandb from '@wandb/sdk'
+
+async function track() {
+    await wandb.init({config: {test: 1}});
+    wandb.log({acc: 0.9, loss: 0.1});
+    wandb.log({acc: 0.91, loss: 0.09});
+    await wandb.finish();
+}
+
+await track()
+```
+
+<Warning>
+  すべてのAPI呼び出しを非同期で処理するために別のMessageChannelを生成します。`await wandb.finish()`を呼び出さないとスクリプトがハングします。
+</Warning>
+
+Node/CommonJS:
+
+```js
+const wandb = require('@wandb/sdk').default;
+```
+
+現在、Python SDKにある多くの機能が不足していますが、基本的なロギング機能は利用可能です。[Tables](/guides/tables?utm_source=github\&utm_medium=code\&utm_campaign=wandb\&utm_content=readme)などの追加機能をまもなく追加する予定です。
+
+### 認証と設定
+
+Node環境では`process.env.WANDB_API_KEY`を探し、TTYがある場合はその入力を求めます。Node以外の環境では`sessionStorage.getItem("WANDB_API_KEY")`を探します。追加の設定は[こちらで見つけることができます](https://github.com/wandb/wandb-js/blob/main/src/sdk/lib/config.ts)。
+
+## インテグレーション
+
+私たちの[Pythonインテグレーション](/ja/guides/integrations)はコミュニティで広く使用されており、LLMアプリ開発者が望むツールを活用できるよう、より多くのJavaScriptインテグレーションを構築したいと考えています。
+
+追加のインテグレーションのリクエストがある場合は、リクエストの詳細を記載したissueを開いていただけると嬉しいです。
+
+### LangChain.js
+
+このライブラリは、LLMアプリケーション構築のための人気ライブラリである[LangChain.js](https://github.com/hwchase17/langchainjs)バージョン0.0.75以上と統合されています。
+
+```js
+import {WandbTracer} from '@wandb/sdk/integrations/langchain';
+
+const wbTracer = await WandbTracer.init({project: 'langchain-test'});
+// run your langchain workloads...
+chain.call({input: "My prompt"}, wbTracer)
+await WandbTracer.finish();
+```
+
+<Warning>
+  すべてのAPI呼び出しを非同期で処理するために別のMessageChannelを生成します。`await WandbTracer.finish()`を呼び出さないとスクリプトがハングします。
+</Warning>
+
+[this test](https://github.com/wandb/wandb-js/blob/main/src/sdk/integrations/langchain/langchain.test.ts)でより詳細な例を参照してください。

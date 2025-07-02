@@ -1,0 +1,150 @@
+---
+- mode: custom
+---
+
+export function openSearch() {
+  document.getElementById('search-bar-entry').click();
+}
+
+<div className="relative w-full flex items-center justify-left" style={{ height: '24rem', overflow: 'hidden'}}>
+  {/* Background image */}
+
+  <div
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style={{
+    backgroundImage: 'url("https://docs.wandb.ai/images/support/support_banner.png")',
+  }}
+  />
+
+  {/* Overlay */}
+
+  <div className="absolute inset-0 bg-primary dark:bg-primary-light" style={{opacity: 0.05 }} />
+
+  <div style={{ position: 'absolute', textAlign: 'center', padding: '0 1rem', paddingLeft: '10%', zIndex: 10 }}>
+    <div
+      className="text-white"
+      style={{
+     fontWeight: '600',
+     fontSize: '28px',
+     margin: '0',
+    }}
+    >
+      Weights & Biases 문서
+    </div>
+
+    <p
+      className="text-white"
+      style={{
+      marginTop: '1rem',
+     fontWeight: '400',
+     fontSize: '16px',
+     maxWidth: '42rem'
+    }}
+    >
+      문서가 필요한 제품을 선택하세요.
+    </p>
+
+    {/* <div className="flex items-center justify-center">
+        <button
+          type="button"
+          className="hidden w-full lg:flex items-center text-sm leading-6 rounded-lg py-1.5 pl-2.5 pr-3 shadow-sm text-gray-400 dark:text-white/50 bg-background-light dark:bg-background-dark dark:brightness-[1.1] dark:ring-1 dark:hover:brightness-[1.25] ring-1 ring-gray-400/20 hover:ring-gray-600/25 dark:ring-gray-600/30 dark:hover:ring-gray-500/30 focus:outline-primary"
+          id="home-search-entry"
+          style={{
+            marginTop: '2rem',
+            maxWidth: '28rem',
+          }}
+          onClick={openSearch}
+        >
+          <svg
+            className="h-4 w-4 ml-1.5 flex-none bg-gray-500 hover:bg-gray-600 dark:bg-white/50 dark:hover:bg-white/70"
+            style={{
+            marginRight: '0.5rem',
+             maskImage:
+               'url("https://mintlify.b-cdn.net/v6.5.1/solid/magnifying-glass.svg")',
+             maskRepeat: 'no-repeat',
+             maskPosition: 'center center',
+            }}
+          />
+
+          Search or ask
+        </button>
+        </div> */}
+  </div>
+</div>
+
+<div
+  style={{marginTop: '2rem', marginBottom: '8rem', maxWidth: '70rem', marginLeft: 'auto',
+marginRight: 'auto', paddingLeft: '1.25rem',
+paddingRight: '1.25rem' }}
+>
+  <br />
+
+  <div style={{ display: 'flex', gap: '1.5rem', padding: '2rem' }}>
+    {/* Card 1 */}
+
+    <div
+      style={{
+  border: '1px solid #e0e0e0',
+  borderRadius: '8px',
+  padding: '1.5rem',
+  width: '100%',
+  maxWidth: '500px',
+  boxShadow: '0 0 0 1px rgba(0, 0, 0, 0.03)'
+}}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem' }}>
+        <img src="https://docs.wandb.ai/img/weave-logo.svg" alt="W&B Weave Icon" style={{ width: '24px', height: '24px', marginRight: '0.5rem' }} />
+
+        <h2 style={{ fontSize: '20px', margin: 0 }}>W\&B Weave</h2>
+      </div>
+
+      <p style={{ margin: '0 0 1rem 0'}}><a href="https://weave-docs.wandb.ai/"> 앱에서 AI 모델 사용</a></p>
+
+      <p style={{ lineHeight: '1.6', marginBottom: '1rem' }}>
+        사용 <a href="#" style={{ color: '#1881B6', textDecoration: 'none' }}>W\&B Weave</a> 코드에서 AI 모델을 관리합니다.
+        기능에는 추적, 출력 평가, 비용 추정 및 다양한 대규모 언어 모델(LLM)과 설정을 비교하기 위한 플레이그라운드가 포함됩니다.
+      </p>
+
+      <ul style={{ paddingLeft: '1.2rem', margin: 0 }}>
+        <li>• <a href="#" style={{ color: '#1881B6' }}>소개</a></li>
+        <li>• <a href="#" style={{ color: '#1881B6' }}>빠른 시작</a></li>
+        <li>• <a href="#" style={{ color: '#1881B6' }}>YouTube 데모</a></li>
+        <li>• <a href="#" style={{ color: '#1881B6' }}>플레이그라운드 시도하기</a></li>
+      </ul>
+    </div>
+
+    {/* Card 2 */}
+
+    <div
+      style={{
+  border: '1px solid #e0e0e0',
+  borderRadius: '8px',
+  padding: '1.5rem',
+  width: '100%',
+  maxWidth: '500px',
+  boxShadow: '0 0 0 1px rgba(0, 0, 0, 0.03)'
+}}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem' }}>
+        <img src="https://docs.wandb.ai/img/wandb-gold.svg" alt="W&B Models Icon" style={{ width: '24px', height: '24px', marginRight: '0.5rem' }} />
+
+        <h2 style={{ fontSize: '20px', margin: 0 }}>W\&B Models</h2>
+      </div>
+
+      <p style={{ margin: '0 0 1rem 0'}}><a href="/guides/">AI 모델 개발</a></p>
+
+      <p style={{ lineHeight: '1.6', marginBottom: '1rem' }}>
+        사용 <a href="#" style={{ color: '#1881B6', textDecoration: 'none' }}>W\&B Models</a> AI 모델 개발을 관리합니다.
+        기능에는 훈련, 미세 조정, 보고, 하이퍼파라미터 스윕 자동화,
+        버전 관리 및 재현성을 위한 모델 레지스트리 활용이 포함됩니다.
+      </p>
+
+      <ul style={{ paddingLeft: '1.2rem', margin: 0 }}>
+        <li>• <a href="#" style={{ color: '#1881B6' }}>소개</a></li>
+        <li>• <a href="#" style={{ color: '#1881B6' }}>빠른 시작</a></li>
+        <li>• <a href="#" style={{ color: '#1881B6' }}>YouTube 튜토리얼</a></li>
+        <li>• <a href="#" style={{ color: '#1881B6' }}>온라인 코스</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
