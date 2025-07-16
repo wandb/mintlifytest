@@ -1,0 +1,327 @@
+[**weave**](../README.mdx) • **Docs**
+
+***
+
+[weave](../README.mdx) / WeaveClient
+
+# Class: WeaveClient
+
+## 생성자
+
+### new WeaveClient()
+
+> **new WeaveClient**(`traceServerApi`, `wandbServerApi`, `projectId`, `settings`): [`WeaveClient`](WeaveClient.mdx)
+
+#### 매개변수
+
+• **traceServerApi**: `Api`\<`any`>
+
+• **wandbServerApi**: `WandbServerApi`
+
+• **projectId**: `string`
+
+• **settings**: `Settings` = `...`
+
+#### 반환값
+
+[`WeaveClient`](WeaveClient.mdx)
+
+#### 정의된 위치
+
+[weaveClient.ts:82](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L82)
+
+## 속성
+
+### projectId
+
+> **projectId**: `string`
+
+#### 정의된 위치
+
+[weaveClient.ts:85](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L85)
+
+***
+
+### settings
+
+> **settings**: `Settings`
+
+#### 정의된 위치
+
+[weaveClient.ts:86](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L86)
+
+***
+
+### traceServerApi
+
+> **traceServerApi**: `Api`\<`any`>
+
+#### 정의된 위치
+
+[weaveClient.ts:83](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L83)
+
+## 메서드
+
+### createCall()
+
+> **createCall**(`opRef`, `params`, `parameterNames`, `thisArg`, `currentCall`, `parentCall`, `startTime`, `displayName`?): `Promise`\<`void`>
+
+#### 매개변수
+
+• **opRef**: `any`
+
+• **params**: `any`\[]
+
+• **parameterNames**: `ParameterNamesOption`
+
+• **thisArg**: `any`
+
+• **currentCall**: `CallStackEntry`
+
+• **parentCall**: `undefined` | `CallStackEntry`
+
+• **startTime**: `Date`
+
+• **displayName?**: `string`
+
+#### 반환값
+
+`Promise`\<`void`>
+
+#### 정의된 위치
+
+[weaveClient.ts:610](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L610)
+
+***
+
+### finishCall()
+
+> **finishCall**(`result`, `currentCall`, `parentCall`, `summarize`, `endTime`, `startCallPromise`): `Promise`\<`void`>
+
+#### 매개변수
+
+• **result**: `any`
+
+• **currentCall**: `CallStackEntry`
+
+• **parentCall**: `undefined` | `CallStackEntry`
+
+• **summarize**: `undefined` | (`result`) => `Record`\<`string`, `any`>
+
+• **endTime**: `Date`
+
+• **startCallPromise**: `Promise`\<`void`>
+
+#### 반환값
+
+`Promise`\<`void`>
+
+#### 정의된 위치
+
+[weaveClient.ts:648](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L648)
+
+***
+
+### finishCallWithException()
+
+> **finishCallWithException**(`error`, `currentCall`, `parentCall`, `endTime`, `startCallPromise`): `Promise`\<`void`>
+
+#### 매개변수
+
+• **error**: `any`
+
+• **currentCall**: `CallStackEntry`
+
+• **parentCall**: `undefined` | `CallStackEntry`
+
+• **endTime**: `Date`
+
+• **startCallPromise**: `Promise`\<`void`>
+
+#### 반환값
+
+`Promise`\<`void`>
+
+#### 정의된 위치
+
+[weaveClient.ts:677](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L677)
+
+***
+
+### get()
+
+> **get**(`ref`): `Promise`\<`any`>
+
+#### 매개변수
+
+• **ref**: `ObjectRef`
+
+#### 반환값
+
+`Promise`\<`any`>
+
+#### 정의된 위치
+
+[weaveClient.ts:229](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L229)
+
+***
+
+### getCalls()
+
+> **getCalls**(`filter`, `includeCosts`, `limit`): `Promise`\<[`CallSchema`](../interfaces/CallSchema.mdx)\[]>
+
+#### 매개변수
+
+• **filter**: [`CallsFilter`](../interfaces/CallsFilter.mdx) = `{}`
+
+• **includeCosts**: `boolean` = `false`
+
+• **limit**: `number` = `1000`
+
+#### 반환값
+
+`Promise`\<[`CallSchema`](../interfaces/CallSchema.mdx)\[]>
+
+#### 정의된 위치
+
+[weaveClient.ts:172](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L172)
+
+***
+
+### getCallsIterator()
+
+> **getCallsIterator**(`filter`, `includeCosts`, `limit`): `AsyncIterableIterator`\<[`CallSchema`](../interfaces/CallSchema.mdx)>
+
+#### 매개변수
+
+• **filter**: [`CallsFilter`](../interfaces/CallsFilter.mdx) = `{}`
+
+• **includeCosts**: `boolean` = `false`
+
+• **limit**: `number` = `1000`
+
+#### 반환값
+
+`AsyncIterableIterator`\<[`CallSchema`](../interfaces/CallSchema.mdx)>
+
+#### 정의된 위치
+
+[weaveClient.ts:184](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L184)
+
+***
+
+### getCallStack()
+
+> **getCallStack**(): `CallStack`
+
+#### 반환값
+
+`CallStack`
+
+#### 정의된 위치
+
+[weaveClient.ts:537](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L537)
+
+***
+
+### publish()
+
+> **publish**(`obj`, `objId`?): `Promise`\<`ObjectRef`>
+
+#### 매개변수
+
+• **obj**: `any`
+
+• **objId?**: `string`
+
+#### Returns
+
+`Promise`\<`ObjectRef`>
+
+#### 정의된 위치
+
+[weaveClient.ts:160](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L160)
+
+***
+
+### pushNewCall()
+
+> **pushNewCall**(): `object`
+
+#### 반환값
+
+`object`
+
+##### currentCall
+
+> **currentCall**: `CallStackEntry`
+
+##### newStack
+
+> **newStack**: `CallStack`
+
+##### parentCall?
+
+> `optional` **parentCall**: `CallStackEntry`
+
+#### 정의된 위치
+
+[weaveClient.ts:541](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L541)
+
+***
+
+### runWithCallStack()
+
+> **runWithCallStack**\<`T`>(`callStack`, `fn`): `T`
+
+#### 타입 매개변수
+
+• **T**
+
+#### 매개변수
+
+• **callStack**: `CallStack`
+
+• **fn**
+
+#### 반환값
+
+`T`
+
+#### 정의된 위치
+
+[weaveClient.ts:545](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L545)
+
+***
+
+### saveOp()
+
+> **saveOp**(`op`, `objId`?): `Promise`\<`any`>
+
+#### 매개변수
+
+• **op**: [`Op`](../type-aliases/Op.mdx)\<(...`args`) => `any`>
+
+• **objId?**: `string`
+
+#### 반환값
+
+`Promise`\<`any`>
+
+#### 정의된 위치
+
+[weaveClient.ts:575](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L575)
+
+***
+
+### waitForBatchProcessing()
+
+> **waitForBatchProcessing**(): `Promise`\<`void`>
+
+#### 반환값
+
+`Promise`\<`void`>
+
+#### 정의된 위치
+
+[weaveClient.ts:103](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/weaveClient.ts#L103)

@@ -1,0 +1,82 @@
+---
+- title: 추적 소개
+- description: W&B Weave로 추적 소개를 사용하는 방법 알아보기
+---
+
+<Note>
+  이것은 인터랙티브 노트북입니다. 로컬에서 실행하거나 아래 링크를 사용할 수 있습니다:
+
+  * [Google Colab에서 열기](https://colab.research.google.com/github/wandb/weave/blob/master/docs/notebooks/Intro_to_Weave_Hello_Trace.ipynb)
+  * [GitHub에서 소스 보기](https://github.com/wandb/weave/blob/master/docs/notebooks/Intro_to_Weave_Hello_Trace.ipynb)
+</Note>
+
+## 🔑 사전 요구사항
+
+Weave에서 추적을 시작하기 전에 다음 사전 요구사항을 완료하세요.
+
+1. W\&B Weave SDK를 설치하고 다음으로 로그인하세요 [API key](https://wandb.ai/settings#api).
+2. OpenAI SDK를 설치하고 다음으로 로그인하세요 [API key](https://platform.openai.com/api-keys).
+3. W\&B 프로젝트를 초기화하세요.
+
+```python
+# Install dependancies and imports
+!pip install wandb weave openai -q
+
+import json
+import os
+from getpass import getpass
+
+from openai import OpenAI
+
+import weave
+
+# 🔑 Setup your API keys
+# Running this cell will prompt you for your API key with `getpass` and will not echo to the terminal.
+#####
+print("---")
+print(
+    "You can find your Weights and Biases API key here: https://wandb.ai/settings#api"
+)
+os.environ["WANDB_API_KEY"] = getpass("Enter your Weights and Biases API key: ")
+print("---")
+print("You can generate your OpenAI API key here: https://platform.openai.com/api-keys")
+os.environ["OPENAI_API_KEY"] = getpass("Enter your OpenAI API key: ")
+print("---")
+#####
+
+# 🏠 Enter your W&B project name
+weave_client = weave.init("MY_PROJECT_NAME")  # 🐝 Your W&B project name
+```
+
+## 🐝 첫 번째 추적 실행하기
+
+다음 코드 샘플은 `@weave.op` 데코레이터를 사용하여 Weave에서 추적을 캡처하고 시각화하는 방법을 보여줍니다. 이는 `extract_fruit`라는 함수를 정의하며, 이 함수는 OpenAI의 GPT-4o에 문장에서 구조화된 데이터(과일, 색상, 맛)를 추출하도록 프롬프트를 보냅니다. 함수를 `@weave.op`로 데코레이팅하면, Weave는 입력, 출력 및 중간 단계를 포함한 함수 실행을 자동으로 추적합니다. 샘플 문장으로 함수가 호출되면 전체 추적이 저장되고 Weave UI에서 볼 수 있습니다.
+
+```python
+@weave.op()  # 🐝 Decorator to track requests
+def extract_fruit(sentence: str) -> dict:
+    client = OpenAI()
+    system_prompt = (
+        "Parse sentences into a JSON dict with keys: fruit, color and flavor."
+    )
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": sentence},
+        ],
+        temperature=0.7,
+        response_format={"type": "json_object"},
+    )
+    extracted = response.choices[0].message.content
+    return json.loads(extracted)
+
+sentence = "There are many fruits that were found on the recently discovered planet Goocrux. There are neoskizzles that grow there, which are purple and taste like candy."
+extract_fruit(sentence)
+```
+
+## 🚀 더 많은 예제를 찾고 계신가요?
+
+* 다음을 확인해보세요 [Quickstart guide](https://weave-docs.wandb.ai/quickstart).
+* 다음에 대해 자세히 알아보세요 [advanced tracing topics](https://weave-docs.wandb.ai/tutorial-tracing_2).
+* 다음에 대해 자세히 알아보세요 [tracing in Weave](https://weave-docs.wandb.ai/guides/tracking/tracing)

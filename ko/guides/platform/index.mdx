@@ -1,0 +1,47 @@
+---
+- title: 플랫폼 및 보안
+- description: Weave 배포 옵션 및 보안 기능
+---
+
+Weave는 다음 배포 옵션에서 사용할 수 있습니다:
+
+* **[W\&B SaaS Cloud](https://docs.wandb.ai/guides/hosting/hosting-options/saas_cloud):** W\&B의 Google Cloud Platform(GCP) 계정 내 북미 지역에 배포된 멀티 테넌트, 완전 관리형 플랫폼입니다.
+* **[W\&B Dedicated Cloud](https://docs.wandb.ai/guides/hosting/hosting-options/dedicated_cloud):** AWS에서 일반적으로 사용 가능하며 GCP 및 Azure에서는 미리보기로 제공됩니다.
+* **[자체 관리 인스턴스](./weave-self-managed.mdx):** Weave를 독립적으로 호스팅하고자 하는 팀을 위해, W\&B 팀에서 배포 옵션을 평가하기 위한 지침을 제공합니다.
+
+## ID 및 액세스 관리
+
+ID 및 액세스 관리 기능을 사용하여 [W\&B Organization](https://docs.wandb.ai/guides/hosting/iam/org_team_struct#organization)에서 안전한 인증 및 효과적인 권한 부여를 수행하세요. 다음 기능은 배포 옵션 및 [pricing plan](https://wandb.ai/site/pricing/)에 따라 Weave 사용자가 사용할 수 있습니다:
+
+* **Single-Sign On(SSO)을 사용한 인증:** Google 및 Github와 같은 공개 ID 제공업체와 Okta, Azure Active Directory 등과 같은 엔터프라이즈 제공업체 옵션이 포함됩니다, [using OIDC](https://docs.wandb.ai/guides/technical-faq/general#does-wb-support-sso-for-saas).
+* **[팀 기반 논리적 분리](https://docs.wandb.ai/guides/models/app/settings-page/teams/):** 각 팀은 조직 내 사업부, 부서 또는 프로젝트 팀에 해당할 수 있습니다.
+* **W\&B 프로젝트를 사용하여 이니셔티브 구성:** 팀 내에서 이니셔티브를 구성하고 필요한 [visibility scope](https://docs.wandb.ai/guides/hosting/restricted-projects)를 구성하세요, 여기에는 `restricted` 민감한 협업을 위한 범위가 포함됩니다.
+* **역할 기반 액세스 제어:** [team](https://docs.wandb.ai/guides/hosting/iam/manage-organization#assign-or-update-a-team-members-role) 또는 [project](https://docs.wandb.ai/guides/hosting/iam/restricted-projects#project-level-roles) 수준에서 액세스를 구성하여 사용자가 필요에 따라 데이터에 액세스할 수 있도록 합니다.
+* **범위가 지정된 서비스 계정:** 조직이나 팀에 범위가 지정된 서비스 계정을 사용하여 Gen AI 워크플로우를 자동화합니다.
+* **[SCIM API 및 Python SDK](https://docs.wandb.ai/guides/hosting/iam/automate_iam):** SCIM API 및 Python SDK로 사용자와 팀을 효율적으로 관리합니다.
+
+## 데이터 보안
+
+* **SaaS Cloud:** 모든 Weave 사용자의 데이터는 클라우드 네이티브 암호화를 사용하여 암호화된 공유 Clickhouse Cloud 클러스터에 저장됩니다. 공유 컴퓨팅 서비스가 데이터를 처리하며, W\&B 조직, 팀 및 프로젝트로 구성된 보안 컨텍스트를 통해 격리를 보장합니다.
+
+* **Dedicated Cloud:** 데이터는 선택한 클라우드 및 지역의 고유한 Clickhouse Cloud 클러스터에 저장됩니다. 고유한 컴퓨팅 환경이 데이터를 처리하며, 다음과 같은 추가 보호 기능이 있습니다:
+  * **[IP allowlisting](https://docs.wandb.ai/guides/hosting/data-security/ip-allowlisting):** 특정 IP 주소에서 인스턴스에 대한 액세스를 승인합니다. 이는 선택적 기능입니다.
+  * **[Private connectivity](https://docs.wandb.ai/guides/hosting/data-security/private-connectivity):** 클라우드 제공업체의 사설 네트워크를 통해 데이터를 안전하게 라우팅합니다. 이는 선택적 기능입니다.
+  * **[Data encryption](https://docs.wandb.ai/guides/hosting/data-security/data-encryption):** W\&B는 고유한 W\&B 관리 암호화 키를 사용하여 저장 데이터를 암호화합니다.
+  * **Clickhouse 클러스터 보안:** W\&B는 클라우드 제공업체의 사설 네트워크를 통해 Dedicated Cloud 인스턴스용 고유한 Clickhouse Cloud 클러스터에 연결합니다. W\&B는 또한 Clickhouse의 파일 수준 암호화를 활용하면서 고유한 W\&B 관리 암호화 키를 사용하여 클러스터를 암호화합니다.
+
+<Warning>
+  [The W\&B Platform secure storage connector or BYOB](https://docs.wandb.ai/guides/hosting/data-security/secure-storage-connector)는 Weave에서 사용할 수 없습니다.
+</Warning>
+
+## 유지 관리
+
+SaaS Cloud 또는 Dedicated Cloud에서 Weave를 사용하는 경우, W\&B 플랫폼이 완전히 관리되므로 프로비저닝, 운영 및 유지 관리에 따른 오버헤드와 비용을 피할 수 있습니다.
+
+## 규정 준수
+
+<Tip>
+  SOC 2 보고서 및 기타 보안 및 규정 준수 문서를 요청하려면 [W\&B Security Portal](https://security.wandb.ai/)을 참조하거나 자세한 정보는 W\&B 팀에 문의하세요.
+</Tip>
+
+SaaS Cloud 및 Dedicated Cloud 모두의 보안 제어는 내부 및 외부에서 정기적으로 감사됩니다. 두 플랫폼 모두 SOC 2 Type II 규정을 준수합니다. 또한 Dedicated Cloud는 생성형 AI 애플리케이션을 구축하는 동안 PHI 데이터를 관리하는 조직을 위한 HIPAA 규정을 준수합니다.

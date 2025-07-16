@@ -1,0 +1,26 @@
+---
+- title: デプロイ
+- description: Weaveモデルをクラウドプラットフォームにデプロイする
+---
+
+## GCPにデプロイ
+
+<Note>
+  `weave deploy` には、マシンに `gcloud` がインストールされ設定されている必要があります。 `weave deploy gcp` は、コマンドライン引数で直接指定されていない場合、事前設定された構成を使用します。
+</Note>
+
+任意のWeave Modelへの参照があれば、以下を実行できます：
+
+```
+weave deploy gcp <ref>
+```
+
+モデルを提供するGCP Cloud Functionをデプロイするには。デプロイメントの最後の行は次のようになります`Service URL: <PATH_TO_MODEL>`。訪問先：`<PATH_TO_MODEL>/docs` あなたのモデルと対話するために！
+
+実行
+
+```
+weave deploy gcp --help
+```
+
+すべてのコマンドラインオプションを確認するには。

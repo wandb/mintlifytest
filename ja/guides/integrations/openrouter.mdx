@@ -1,0 +1,48 @@
+---
+- title: Open Router
+- description: 自動Weave統合で多くのLLMのためのOpen Routerの統一インターフェースを使用する
+---
+
+Openrouter.aiは多くのLLMのための統一インターフェースで、OpenAI GPT-4、Anthropic Claude、Google Geminiなどの基盤モデルだけでなく、LLama-3、Mixtralなどのオープンソースモデルもサポートしており、[many more](https://openrouter.ai/models)、一部のモデルは無料で提供されています。
+
+Open RouterはRest APIとOpenAI SDK互換性（[docs](https://docs.together.ai/docs/openai-api-compatibility)）を提供し、WeaveはこれらをOpen Router [quick start](https://openrouter.ai/docs/quick-start)で詳細を参照）自動的に検出して統合します。
+
+OpenAI SDKコードをOpen Routerに切り替えるには、APIキーを[Open Router API](https://openrouter.ai/docs/api-keys)キーに、`base_url`を`https://openrouter.ai/api/v1`に、そしてモデルを彼らの多くの[chat models](https://openrouter.ai/docs/models)のいずれかに切り替えるだけです。
+
+```python
+import os
+import openai
+import weave
+
+# highlight-next-line
+weave.init('together-weave')
+
+system_content = "You are a travel agent. Be descriptive and helpful."
+user_content = "Tell me about San Francisco"
+
+# highlight-next-line
+client = openai.OpenAI(
+# highlight-next-line
+    api_key=os.environ.get("OPENROUTER_API_KEY"),
+# highlight-next-line
+    base_url="https://openrouter.ai/api/v1",
+# highlight-next-line
+)
+chat_completion = client.chat.completions.create(
+    extra_headers={
+    "HTTP-Referer": $YOUR_SITE_URL, # Optional, for including your app on openrouter.ai rankings.
+    "X-Title": $YOUR_APP_NAME, # Optional. Shows in rankings on openrouter.ai.
+    },
+    model="meta-llama/llama-3.1-8b-instruct:free",
+    messages=[
+        {"role": "system", "content": system_content},
+        {"role": "user", "content": user_content},
+    ],
+    temperature=0.7,
+    max_tokens=1024,
+)
+response = chat_completion.choices[0].message.content
+print("Model response:\n", response)
+```
+
+これは始めるための簡単な例ですが、より複雑なユースケースでWeaveを独自の関数と統合する方法の詳細については、[OpenAI](/ja/guides/integrations/openai#track-your-own-ops)ガイドを参照してください。

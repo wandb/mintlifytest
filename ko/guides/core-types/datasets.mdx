@@ -1,0 +1,312 @@
+---
+- title: Datasets
+- description: LLM 애플리케이션 평가를 위한 예제를 구성, 수집, 추적 및 버전 관리
+---
+
+Weave `Dataset`s는 LLM 애플리케이션 평가를 위한 예제를 구성, 수집, 추적 및 버전 관리하여 쉽게 비교할 수 있도록 도와줍니다. 프로그래밍 방식으로 또는 UI를 통해 `Dataset`s를 생성하고 상호 작용할 수 있습니다.
+
+이 페이지에서는 다음을 설명합니다:
+
+* 기본 `Dataset` Python 및 TypeScript의 작업 및 시작 방법
+* Python 및 TypeScript에서 `Dataset` 생성 방법 및 Weave [calls](../tracking/tracing.mdx)
+* UI에서 `Dataset`에 사용 가능한 작업
+
+## `Dataset` quickstart
+
+다음 코드 샘플은 Python 및 TypeScript를 사용하여 기본 `Dataset` 작업을 수행하는 방법을 보여줍니다. SDK를 사용하여 다음을 수행할 수 있습니다:
+
+* 생성 `Dataset`
+* 게시 `Dataset`
+* 검색 `Dataset`
+* 특정 예제에 접근 `Dataset`
+
+Python 및 TypeScript 특정 코드를 보려면 탭을 선택하세요.
+
+<Tabs>
+  <Tab title="Python">
+    ```python
+    import weave
+    from weave import Dataset
+    # Initialize Weave
+    weave.init('intro-example')
+
+    # Create a dataset
+    dataset = Dataset(
+        name='grammar',
+        rows=[
+            {'id': '0', 'sentence': "He no likes ice cream.", 'correction': "He doesn't like ice cream."},
+            {'id': '1', 'sentence': "She goed to the store.", 'correction': "She went to the store."},
+            {'id': '2', 'sentence': "They plays video games all day.", 'correction': "They play video games all day."}
+        ]
+    )
+
+    # Publish the dataset
+    weave.publish(dataset)
+
+    # Retrieve the dataset
+    dataset_ref = weave.ref('grammar').get()
+
+    # Access a specific example
+    example_label = dataset_ref.rows[2]['sentence']
+    ```
+  </Tab>
+
+  <Tab title="TypeScript">
+    ```typescript
+    import * as weave from 'weave';
+
+    // Initialize Weave
+    await weave.init('intro-example');
+
+    // Create a dataset
+    const dataset = new weave.Dataset({
+        name: 'grammar',
+        rows: [
+            {id: '0', sentence: "He no likes ice cream.", correction: "He doesn't like ice cream."},
+            {id: '1', sentence: "She goed to the store.", correction: "She went to the store."},
+            {id: '2', sentence: "They plays video games all day.", correction: "They play video games all day."}
+        ]
+    });
+
+    // Publish the dataset
+    await dataset.save();
+
+    // Access a specific example
+    const exampleLabel = datasetRef.getRow(2).sentence;
+    ```
+  </Tab>
+</Tabs>
+
+## 다른 객체에서 `Dataset` 생성
+
+<Tabs>
+  <Tab title="Python">
+    Python에서 `Dataset`s는 Weave [calls](../tracking/tracing.mdx)와 같은 일반적인 Weave 객체와 `pandas.DataFrame`s와 같은 Python 객체에서도 구성할 수 있습니다. 이 기능은 특정 예제에서 예제 `Dataset`를 생성하려는 경우에 유용합니다.
+
+    ### Weave call
+
+    하나 이상의 Weave 호출에서 `Dataset`를 생성하려면 호출 객체를 검색하고 `from_calls` 메서드의 목록에 추가하세요.
+
+    ```python
+    @weave.op
+    def model(task: str) -> str:
+        return f"Now working on {task}"
+
+    res1, call1 = model.call(task="fetch")
+    res2, call2 = model.call(task="parse")
+
+    dataset = Dataset.from_calls([call1, call2])
+    # Now you can use the dataset to evaluate the model, etc.
+    ```
+
+    ### Pandas DataFrame
+
+    Pandas `Dataset` 객체에서 `DataFrame` 객체를 생성하려면 `from_pandas` 메서드를 사용하세요.
+
+    다시 `Dataset`를 변환하려면 `to_pandas`를 사용하세요.
+
+    ```python
+    import pandas as pd
+
+    df = pd.DataFrame([
+        {'id': '0', 'sentence': "He no likes ice cream.", 'correction': "He doesn't like ice cream."},
+        {'id': '1', 'sentence': "She goed to the store.", 'correction': "She went to the store."},
+        {'id': '2', 'sentence': "They plays video games all day.", 'correction': "They play video games all day."}
+    ])
+    dataset = Dataset.from_pandas(df)
+    df2 = dataset.to_pandas()
+
+    assert df.equals(df2)
+    ```
+
+    ### Hugging Face Datasets
+
+    Hugging Face `Dataset` 또는 `datasets.Dataset` 또는 `datasets.DatasetDict` 객체에서 생성하려면 먼저 필요한 종속성이 설치되어 있는지 확인하세요:
+
+    ```bash
+    pip install weave[huggingface]
+    ```
+
+    그런 다음 `from_hf` 메서드를 사용하세요. 여러 분할('train', 'test', 'validation' 등)이 있는 `DatasetDict`를 제공하면 Weave는 자동으로 'train' 분할을 사용하고 경고를 발생시킵니다. 'train' 분할이 없으면 오류가 발생합니다. 특정 분할을 직접 제공할 수 있습니다(예: `hf_dataset_dict['test']`).
+
+    를 Hugging Face `weave.Dataset`를 다시 Hugging Face `Dataset`로 변환하려면 `to_hf` 메서드를 사용하세요.
+
+    ```python
+    # Ensure datasets is installed: pip install datasets
+    from datasets import Dataset as HFDataset, DatasetDict
+
+    # Example with HF Dataset
+    hf_rows = [
+        {'id': '0', 'sentence': "He no likes ice cream.", 'correction': "He doesn't like ice cream."},
+        {'id': '1', 'sentence': "She goed to the store.", 'correction': "She went to the store."},
+    ]
+    hf_ds = HFDataset.from_list(hf_rows)
+    weave_ds_from_hf = Dataset.from_hf(hf_ds)
+
+    # Convert back to HF Dataset
+    converted_hf_ds = weave_ds_from_hf.to_hf()
+
+    # Example with HF DatasetDict (uses 'train' split by default)
+    hf_dict = DatasetDict({
+        'train': HFDataset.from_list(hf_rows),
+        'test': HFDataset.from_list([{'id': '2', 'sentence': "Test sentence", 'correction': "Test correction"}])
+    })
+    # This will issue a warning and use the 'train' split
+    weave_ds_from_dict = Dataset.from_hf(hf_dict)
+
+    # Providing a specific split
+    weave_ds_from_test_split = Dataset.from_hf(hf_dict['test'])
+    ```
+  </Tab>
+
+  <Tab title="TypeScript">
+    이 기능은 현재 TypeScript에서 사용할 수 없습니다. 계속 지켜봐 주세요!
+  </Tab>
+</Tabs>
+
+## UI에서 `Dataset` 생성, 편집 및 삭제
+
+UI에서 `Dataset`s를 생성, 편집 및 삭제할 수 있습니다.
+
+### 새 `Dataset`
+
+1. 편집하려는 Weave 프로젝트로 이동하세요.
+
+2. 사이드바에서 **Traces**를 선택하세요.
+
+3. 새 `Dataset`를 생성하려는 하나 이상의 호출을 선택하세요.
+
+4. 오른쪽 상단 메뉴에서 **Add selected rows to a dataset** 아이콘(휴지통 아이콘 옆에 위치)을 클릭하세요.
+
+5. 다음의 **Choose a dataset** 드롭다운에서 **Create new**를 선택하세요. **Dataset name** 필드가 나타납니다.
+
+6. 다음의 **Dataset name** 필드에 데이터셋 이름을 입력하세요. **Configure dataset fields** 옵션이 나타납니다.
+
+   :::important
+   데이터셋 이름은 문자나 숫자로 시작해야 하며 문자, 숫자, 하이픈 및 밑줄만 포함할 수 있습니다.
+   :::
+
+7. (선택 사항) **Configure dataset fields**에서 데이터셋에 포함할 호출의 필드를 선택하세요.
+   * 선택한 각 필드의 열 이름을 사용자 지정할 수 있습니다.
+   * 새 `Dataset`에 포함할 필드의 하위 집합을 선택하거나 모든 필드를 선택 해제할 수 있습니다.
+
+8. 데이터셋 필드 구성을 완료한 후 **Next**를 클릭하세요. 새 `Dataset`의 미리보기가 나타납니다.
+
+9. (선택 사항) **Dataset**에서 편집 가능한 필드를 클릭하여 항목을 편집하세요.
+
+10. 다음의 **Create dataset**를 클릭하세요. 새 데이터셋이 생성됩니다.
+
+11. 확인 팝업에서 **View the dataset**를 클릭하여 새 `Dataset`를 확인하세요. 또는 **Datasets** 탭으로 이동하세요.
+
+### 다음을 편집하세요 `Dataset`
+
+1. 편집하려는 `Dataset`가 포함된 Weave 프로젝트로 이동하세요.
+
+2. 사이드바에서 **Datasets**를 선택하세요. 사용 가능한 `Dataset`가 표시됩니다.
+
+   ![Dataset UI](./imgs/datasetui.png)
+
+3. 다음의 **Object** 열에서 편집하려는 `Dataset`의 이름과 버전을 클릭하세요. `Dataset`의 이름, 버전, 작성자 및 `Dataset` 행과 같은 정보를 보여주는 팝업 모달이 표시됩니다.
+
+   ![View Dataset information](./imgs/datasetui-popout.png)
+
+4. 모달의 오른쪽 상단 모서리에서 **Edit dataset** 버튼(연필 아이콘)을 클릭하세요. **+ Add row** 버튼이 모달 하단에 표시됩니다.
+
+   ![Dataset UI- Add row icon](./imgs/datasetui-popout-edit.png)
+
+5. 다음의 **+ Add row**를 클릭하세요. 기존 `Dataset` 행 상단에 녹색 행이 표시되어 `Dataset`에 새 행을 추가할 수 있음을 나타냅니다.
+
+   ![Dataset UI](./imgs/datasetui-popout-edit-green.png)
+
+6. 새 행에 데이터를 추가하려면 해당 행 내에서 원하는 열을 클릭하세요. 기본 **id** 열은 `Dataset` 행에서 편집할 수 없으며, Weave가 생성 시 자동으로 할당합니다. **Text**, **Code**, 및 **Diff** 옵션이 있는 편집 모달이 나타납니다.
+
+   ![Dataset UI - Add data to a column and format.](./imgs/datasetui-popout-edit-addcol.png)
+
+7. 새 행에서 데이터를 추가하려는 각 열에 대해 6단계를 반복하세요.
+
+   ![Dataset UI - Add data to all columns.](./imgs/datasetui-popout-edit-colsadded.png)
+
+8. 다음에 추가하려는 각 행에 대해 5단계를 반복하세요 `Dataset`.
+
+9. 편집을 마치면 `Dataset`를 게시하려면 모달의 오른쪽 상단 모서리에 있는 **Publish**를 클릭하세요. 또는 변경 사항을 게시하지 않으려면 **Cancel**를 클릭하세요.
+
+   ![Dataset UI - Publish or cancel.](./imgs/datasetui-popout-edit-publish.png)
+
+   게시되면 업데이트된 행이 있는 `Dataset`의 새 버전을 UI에서 사용할 수 있습니다.
+
+   ![Dataset UI - Published metadata.](./imgs/datasetui-popout-edit-published-meta.png)
+   ![Dataset UI - Published rows.](./imgs/datasetui-popout-edit-published-rows.png)
+
+### 다음을 삭제하세요 `Dataset`
+
+1. 편집하려는 `Dataset`가 포함된 Weave 프로젝트로 이동하세요.
+
+2. 사이드바에서 **Datasets**를 선택하세요. 사용 가능한 `Dataset`가 표시됩니다.
+
+3. 다음의 **Object** 열에서 삭제하려는 `Dataset`의 이름과 버전을 클릭하세요. `Dataset`의 이름, 버전, 작성자 및 `Dataset` 행과 같은 정보를 보여주는 팝업 모달이 표시됩니다.
+
+4. 모달의 오른쪽 상단 모서리에서 휴지통 아이콘을 클릭하세요.
+
+   다음의 삭제를 확인하라는 팝업 모달이 표시됩니다 `Dataset`.
+
+   ![Dataset UI - Confirm deletion modal.](./imgs/datasetui-delete-modal.png)
+
+5. 팝업 모달에서 빨간색 **Delete** 버튼을 클릭하여 `Dataset`를 삭제하세요. 또는 **Cancel**를 클릭하여 `Dataset`를 삭제하지 마세요.
+
+   이제 `Dataset`가 삭제되어 Weave 대시보드의 **Datasets** 탭에서 더 이상 볼 수 없습니다.
+
+### 다음에 새 예제를 추가하세요 `Dataset`
+
+1. 편집하려는 Weave 프로젝트로 이동하세요.
+
+2. 사이드바에서 **Traces**를 선택하세요.
+
+3. 새 예제를 만들려는 `Datasets`가 있는 하나 이상의 호출을 선택하세요.
+
+4. 오른쪽 상단 메뉴에서 **Add selected rows to a dataset** 아이콘(휴지통 아이콘 옆에 위치)을 클릭하세요. 선택적으로 **Show latest versions**를 끄면 사용 가능한 모든 데이터셋의 모든 버전을 표시할 수 있습니다.
+
+5. 다음의 **Choose a dataset** 드롭다운에서 예제를 추가하려는 `Dataset`를 선택하세요. **Configure field mapping** 옵션이 표시됩니다.
+
+6. (선택 사항) **Configure field mapping**에서 호출의 필드를 해당 데이터셋 열에 매핑하는 방식을 조정할 수 있습니다.
+
+7. 필드 매핑 구성을 완료한 후 **Next**를 클릭하세요. 새 `Dataset`의 미리보기가 나타납니다.
+
+8. 빈 행(녹색)에 새 예제 값을 추가하세요. **id** 필드는 편집할 수 없으며 Weave에 의해 자동으로 생성됩니다.
+
+9. 다음의 **Add to dataset**를 클릭하세요. 또는 **Configure field mapping** 화면으로 돌아가려면 **Back**를 클릭하세요.
+
+10. 확인 팝업에서 **View the dataset**를 클릭하여 변경 사항을 확인하세요. 또는 **Datasets** 탭을 클릭하여 업데이트 내용을 확인하세요 `Dataset`.
+
+## 기타 Dataset 작업
+
+<Tabs>
+  <Tab title="Python">
+    ### 행 선택하기
+
+    특정 행을 `Dataset`에서 인덱스를 사용하여 `select` 메서드로 선택할 수 있습니다. 이는 데이터의 하위 집합을 만드는 데 유용합니다.
+
+    ```python
+    import weave
+    from weave import Dataset
+
+    # Create a sample dataset
+    dataset = Dataset(rows=[
+        {'col_a': 1, 'col_b': 'x'},
+        {'col_a': 2, 'col_b': 'y'},
+        {'col_a': 3, 'col_b': 'z'},
+        {'col_a': 4, 'col_b': 'w'},
+    ])
+
+    # Select rows at index 0 and 2
+    subset_dataset = dataset.select([0, 2])
+
+    # Now subset_dataset contains only the first and third rows
+    # print(list(subset_dataset))
+    # Output: [{'col_a': 1, 'col_b': 'x'}, {'col_a': 3, 'col_b': 'z'}]
+    ```
+  </Tab>
+
+  <Tab title="TypeScript">
+    이 기능은 현재 TypeScript에서 사용할 수 없습니다. 계속 지켜봐 주세요!
+  </Tab>
+</Tabs>

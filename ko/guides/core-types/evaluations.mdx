@@ -1,0 +1,302 @@
+---
+- title: Evaluations
+- description: 애플리케이션을 체계적으로 개선하기 위한 평가 중심 LLM 애플리케이션 개발
+---
+
+*평가 기반 LLM 애플리케이션 개발*는 일관되고 엄선된 예제를 사용하여 LLM 애플리케이션의 동작을 체계적으로 측정함으로써 LLM 애플리케이션을 체계적으로 개선하는 데 도움을 줍니다.
+
+Weave에서 워크플로우의 핵심은 *`Evaluation` 객체*이며, 다음을 정의합니다:
+
+* 테스트 예제를 위한 [`Dataset`](../core-types/datasets) 또는 딕셔너리 목록.
+* 하나 이상의 [scoring functions](../evaluation/scorers.mdx).
+* 선택적 구성(예: [input preprocessing](#format-dataset-rows-before-evaluating)).
+
+일단 `Evaluation`를 정의하면, [`Model`](../core-types/models.mdx) 객체나 LLM 애플리케이션 로직이 포함된 사용자 정의 함수에 대해 실행할 수 있습니다. `.evaluate()`에 대한 각 호출은 *evaluation run*을 트리거합니다. `Evaluation` 객체를 청사진으로, 각 실행을 해당 설정에서 애플리케이션이 어떻게 수행되는지에 대한 측정으로 생각하세요.
+
+평가를 시작하려면 다음 단계를 완료하세요:
+
+1. [객체 `Evaluation` 생성](#1-create-an-evaluation-object)
+2. [예제 데이터셋 정의](#2-define-a-datset-of-test-examples)
+3. [점수 매기기 함수 정의](#3-define-scoring-functions)
+4. [평가할 `Model` 정의](#4-define-a-model-to-evaluate)
+5. [평가 실행](#5-run-the-evaluation)
+
+완전한 평가 코드 샘플은 [here](#full-evaluation-code-sample)에서 찾을 수 있습니다. 또한 [advanced evaluation features](#advanced-evaluation-usage)에 대해 더 자세히 알아볼 수 있습니다. 예를 들어 [Saved views](#saved-views)와 [Imperative evaluations](#imperative-evaluations-evaluationlogger).
+
+## 1. `Evaluation` 객체 생성
+
+객체 `Evaluation`를 생성하는 것은 평가 구성을 설정하는 첫 번째 단계입니다. `Evaluation`는 예제 데이터, 점수 매기기 로직 및 선택적 전처리로 구성됩니다. 나중에 이를 사용하여 하나 이상의 평가를 실행하게 됩니다.
+
+Weave는 각 예제를 가져와 애플리케이션을 통해 전달한 다음 여러 사용자 정의 점수 매기기 함수로 출력 점수를 매깁니다. 이를 통해 애플리케이션의 성능을 볼 수 있고, 개별 출력 및 점수를 자세히 살펴볼 수 있는 풍부한 UI를 갖게 됩니다.
+
+### (선택 사항) 사용자 정의 이름 지정
+
+평가 흐름에는 두 가지 유형의 사용자 정의 가능한 이름이 있습니다:
+
+* [*평가 객체 이름* (`evaluation_name`)](#name-the-evaluation-object): 구성된 `Evaluation` 객체에 대한 영구적인 레이블입니다.
+* [*평가 실행 표시 이름* (`__weave["display_name"]`)](#name-individual-evaluation-runs): UI에 표시되는 특정 평가 실행에 대한 레이블입니다.
+
+#### 다음의 이름 지정 `Evaluation` 객체
+
+다음을 이름 지정하려면 `Evaluation` 객체 자체에, `evaluation_name` 매개변수를 `Evaluation` 클래스에 전달하세요. 이 이름은 코드와 UI 목록에서 평가를 식별하는 데 도움이 됩니다.
+
+```python
+evaluation = Evaluation(
+    dataset=examples, scorers=[match_score1], evaluation_name="My Evaluation"
+)
+```
+
+#### 개별 평가 실행 이름 지정
+
+특정 평가 실행(다음 호출 `evaluate()`)의 이름을 지정하려면 `__weave` 딕셔너리에 `display_name`를 사용하세요. 이는 해당 실행에 대해 UI에 표시되는 내용에 영향을 줍니다.
+
+```python
+evaluation = Evaluation(
+    dataset=examples, scorers=[match_score1]
+)
+evaluation.evaluate(model, __weave={"display_name": "My Evaluation Run"})
+```
+
+## 2. 테스트 예제 데이터셋 정의
+
+먼저, [Dataset](../core-types/datasets.mdx) 객체 또는 평가할 예제 모음이 있는 딕셔너리 목록을 정의합니다. 이러한 예제는 종종 테스트하려는 실패 사례로, 테스트 주도 개발(TDD)의 단위 테스트와 유사합니다.
+
+다음 예제는 딕셔너리 목록으로 정의된 데이터셋을 보여줍니다:
+
+```python
+examples = [
+    {"question": "What is the capital of France?", "expected": "Paris"},
+    {"question": "Who wrote 'To Kill a Mockingbird'?", "expected": "Harper Lee"},
+    {"question": "What is the square root of 64?", "expected": "8"},
+]
+```
+
+## 3. 점수 매기기 함수 정의
+
+그런 다음, 하나 이상의 [점수 매기기 함수](../evaluation/scorers.mdx)를 생성합니다. 이는 `Dataset`의 각 예제에 점수를 매기는 데 사용됩니다. 각 점수 매기기 함수는 반드시 `output`를 가져야 하며, 점수가 포함된 딕셔너리를 반환해야 합니다. 선택적으로 예제에서 다른 입력을 포함할 수 있습니다.
+
+점수 매기기 함수는 `output` 키워드 인수를 가져야 하지만, 다른 인수는 사용자 정의이며 데이터셋 예제에서 가져옵니다. 인수 이름을 기반으로 한 딕셔너리 키를 사용하여 필요한 키만 가져옵니다.
+
+<Tip>
+  점수 매기기가 `output` 인수를 예상하지만 받지 못하는 경우, 레거시 `model_output` 키를 사용하고 있는지 확인하세요. 이를 수정하려면 점수 매기기 함수를 업데이트하여 output을 키워드 인수로 사용하세요.
+</Tip>
+
+다음 예제 점수 매기기 함수 `match_score1`는 `expected` 값을 `examples` 딕셔너리에서 점수 매기기에 사용합니다.
+
+```python
+import weave
+
+# Collect your examples
+examples = [
+    {"question": "What is the capital of France?", "expected": "Paris"},
+    {"question": "Who wrote 'To Kill a Mockingbird'?", "expected": "Harper Lee"},
+    {"question": "What is the square root of 64?", "expected": "8"},
+]
+
+# Define any custom scoring function
+@weave.op()
+def match_score1(expected: str, output: dict) -> dict:
+    # Here is where you'd define the logic to score the model output
+    return {'match': expected == output['generated_text']}
+```
+
+### (선택 사항) 사용자 정의 `Scorer` 클래스 정의
+
+일부 애플리케이션에서는 사용자 정의 `Scorer` 클래스를 생성하고자 합니다 - 예를 들어 특정 매개변수(예: 채팅 모델, 프롬프트), 각 행의 특정 점수 매기기, 그리고 집계 점수의 특정 계산이 포함된 표준화된 `LLMJudge` 클래스를 생성해야 하는 경우가 있습니다.
+
+다음에서 `Scorer` 클래스 정의에 관한 튜토리얼을 참조하세요: [Model-Based Evaluation of RAG applications](/ko/tutorial-rag#optional-defining-a-scorer-class)에서 더 많은 정보를 확인할 수 있습니다.
+
+## 4. 평가할 `Model` 정의
+
+다음을 평가하려면 `Model`, `evaluate`를 `Evaluation`를 사용하여 호출하세요. `Models`는 실험하고 weave에 캡처하려는 매개변수가 있을 때 사용됩니다.
+
+```python
+from weave import Model, Evaluation
+import asyncio
+
+class MyModel(Model):
+    prompt: str
+
+    @weave.op()
+    def predict(self, question: str):
+        # here's where you would add your LLM call and return the output
+        return {'generated_text': 'Hello, ' + self.prompt}
+
+model = MyModel(prompt='World')
+
+evaluation = Evaluation(
+    dataset=examples, scorers=[match_score1]
+)
+weave.init('intro-example') # begin tracking results with weave
+asyncio.run(evaluation.evaluate(model))
+```
+
+이는 각 예제에 대해 `predict`를 실행하고 각 점수 매기기 함수로 출력에 점수를 매깁니다.
+
+### (선택 사항) 평가할 함수 정의
+
+또는 `@weave.op()`로 추적되는 사용자 정의 함수를 평가할 수도 있습니다.
+
+```python
+@weave.op
+def function_to_evaluate(question: str):
+    # here's where you would add your LLM call and return the output
+    return  {'generated_text': 'some response'}
+
+asyncio.run(evaluation.evaluate(function_to_evaluate))
+```
+
+## 5. 평가 실행
+
+평가를 실행하려면 평가하려는 객체에서 `.evaluate()`를 호출하세요.
+예를 들어, `Evaluation` 객체 `evaluation`와 평가할 `Model` 객체 `model`가 있다고 가정하면, 다음 코드는 평가 실행을 인스턴스화합니다.
+
+```python
+asyncio.run(evaluation.evaluate(model))
+```
+
+<Tip>
+  **평가 실행 팁**
+
+  1. 다음 `evaluate()` 메서드는 모든 예제에 대한 결과 요약을 반환합니다. 출력 및 점수를 포함한 전체 점수 행 세트에 액세스하려면 `get_eval_results()`를 사용하세요.
+  2. 다음을 호출할 때 `display_name`를 제공하지 않으면 `.evaluate()`, Weave는 날짜와 기억하기 쉬운 임의의 이름을 사용하여 자동으로 생성합니다. 자세한 내용은 [how to name individual evaluation runs](#name-individual-evaluation-runs)를 참조하세요.
+  3. 다음에 전달된 모델 `.evaluate`는 반드시 `Model` 또는 `@weave.op`로 추적된 함수여야 합니다. 일반 Python 함수는 `@weave.op`로 래핑되지 않는 한 지원되지 않습니다.
+</Tip>
+
+### (선택 사항) 여러 시도 실행
+
+다음 `trials` 매개변수를 `Evaluation` 객체에 설정하여 각 예제를 여러 번 실행할 수 있습니다.
+
+```python
+evaluation = Evaluation(dataset=examples, scorers=[match_score], trials=3)
+```
+
+각 예제는 `model`에 세 번 전달되며, 각 실행은 독립적으로 점수가 매겨지고 Weave에 표시됩니다.
+
+## 전체 평가 코드 샘플
+
+다음 코드 샘플은 처음부터 끝까지 완전한 평가 실행을 보여줍니다. `examples` 딕셔너리는 `match_score1`와 `match_score2` 점수 매기기 함수에서 `MyModel`의 값이 주어진 `prompt`를 평가하는 데 사용되며, 사용자 정의 함수 `function_to_evaluate`도 평가합니다. `Model`와 함수에 대한 평가 실행은 `asyncio.run(evaluation.evaluate()`를 통해 호출됩니다.
+
+```python
+from weave import Evaluation, Model
+import weave
+import asyncio
+weave.init('intro-example')
+examples = [
+    {"question": "What is the capital of France?", "expected": "Paris"},
+    {"question": "Who wrote 'To Kill a Mockingbird'?", "expected": "Harper Lee"},
+    {"question": "What is the square root of 64?", "expected": "8"},
+]
+
+@weave.op()
+def match_score1(expected: str, output: dict) -> dict:
+    return {'match': expected == output['generated_text']}
+
+@weave.op()
+def match_score2(expected: dict, output: dict) -> dict:
+    return {'match': expected == output['generated_text']}
+
+class MyModel(Model):
+    prompt: str
+
+    @weave.op()
+    def predict(self, question: str):
+        # here's where you would add your LLM call and return the output
+        return {'generated_text': 'Hello, ' + question + self.prompt}
+
+model = MyModel(prompt='World')
+evaluation = Evaluation(dataset=examples, scorers=[match_score1, match_score2])
+
+asyncio.run(evaluation.evaluate(model))
+
+@weave.op()
+def function_to_evaluate(question: str):
+    # here's where you would add your LLM call and return the output
+    return  {'generated_text': 'some response' + question}
+
+asyncio.run(evaluation.evaluate(function_to_evaluate("What is the capitol of France?")))
+```
+
+![Evals hero](../../images/evals-hero.png)
+
+## 고급 평가 사용법
+
+### 평가 전 데이터셋 행 형식 지정
+
+<Warning>
+  다음 `preprocess_model_input` 함수는 모델의 예측 함수에 전달하기 전에 입력에만 적용됩니다. 점수 매기기 함수는 항상 전처리가 적용되지 않은 원래 데이터셋 예제를 받습니다.
+</Warning>
+
+다음 `preprocess_model_input` 매개변수를 사용하면 평가 함수에 전달되기 전에 데이터셋 예제를 변환할 수 있습니다. 이는 다음과 같은 경우에 유용합니다:
+
+* 모델이 예상하는 입력과 일치하도록 필드 이름 변경
+* 데이터를 올바른 형식으로 변환
+* 필드 추가 또는 제거
+* 각 예제에 대한 추가 데이터 로드
+
+다음은 `preprocess_model_input`를 사용하여 필드 이름을 변경하는 방법을 보여주는 간단한 예제입니다:
+
+```python
+import weave
+from weave import Evaluation
+import asyncio
+
+# Our dataset has "input_text" but our model expects "question"
+examples = [
+    {"input_text": "What is the capital of France?", "expected": "Paris"},
+    {"input_text": "Who wrote 'To Kill a Mockingbird'?", "expected": "Harper Lee"},
+    {"input_text": "What is the square root of 64?", "expected": "8"},
+]
+
+@weave.op()
+def preprocess_example(example):
+    # Rename input_text to question
+    return {
+        "question": example["input_text"]
+    }
+
+@weave.op()
+def match_score(expected: str, output: dict) -> dict:
+    return {'match': expected == output['generated_text']}
+
+@weave.op()
+def function_to_evaluate(question: str):
+    return {'generated_text': f'Answer to: {question}'}
+
+# Create evaluation with preprocessing
+evaluation = Evaluation(
+    dataset=examples,
+    scorers=[match_score],
+    preprocess_model_input=preprocess_example
+)
+
+# Run the evaluation
+weave.init('preprocessing-example')
+asyncio.run(evaluation.evaluate(function_to_evaluate))
+```
+
+이 예제에서 데이터셋에는 `input_text` 필드가 있는 예제가 포함되어 있지만, 평가 함수는 `question` 매개변수를 예상합니다. `preprocess_example` 함수는 필드 이름을 변경하여 각 예제를 변환하므로 평가가 올바르게 작동할 수 있습니다.
+
+전처리 함수:
+
+1. 데이터셋에서 원시 예제를 받습니다
+2. 모델이 예상하는 필드가 있는 딕셔너리를 반환합니다
+3. 평가 함수에 전달되기 전에 각 예제에 적용됩니다
+
+이는 모델이 예상하는 것과 다른 필드 이름이나 구조를 가질 수 있는 외부 데이터셋으로 작업할 때 특히 유용합니다.
+
+### 평가에 HuggingFace 데이터셋 사용
+
+우리는 타사 서비스 및 라이브러리와의 통합을 지속적으로 개선하고 있습니다.
+
+더 원활한 통합을 구축하는 동안, `preprocess_model_input`를 Weave 평가에서 HuggingFace Datasets를 사용하기 위한 임시 해결책으로 사용할 수 있습니다.
+
+현재 접근 방식은 [Using HuggingFace datasets in evaluations cookbook](/ko/cookbooks/hf_dataset_evals)를 참조하세요.
+
+### Saved views
+
+Evals 테이블 구성, 필터 및 정렬을 *saved views*로 저장하여 선호하는 설정에 빠르게 접근할 수 있습니다. UI와 Python SDK를 통해 저장된 뷰를 구성하고 접근할 수 있습니다. 자세한 내용은 [Saved Views](/ko/guides/tools/saved-views)를 참조하세요.
+
+### 명령형 평가(`EvaluationLogger`)
+
+더 유연한 평가 프레임워크를 선호한다면 Weave의 [`EvaluationLogger`](../evaluation/evaluation_logger.mdx)을 확인해보세요. 명령형 접근 방식은 복잡한 워크플로우에 더 많은 유연성을 제공하는 반면, 표준 평가 프레임워크는 더 많은 구조와 지침을 제공합니다.

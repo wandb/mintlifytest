@@ -1,0 +1,158 @@
+---
+- title: LiteLLM
+- description: LiteLLM을 통해 이루어진 LLM 호출을 자동으로 추적하고 기록
+---
+
+<a target="_blank" href="https://colab.research.google.com/github/wandb/examples/blob/master/weave/docs/quickstart_litellm.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" />
+</a>
+
+Weave는 `weave.init()`가 호출된 후 LiteLLM을 통해 이루어진 LLM 호출을 자동으로 추적하고 기록합니다.
+
+## 추적
+
+개발 중이나 프로덕션 환경에서 LLM 애플리케이션의 추적을 중앙 데이터베이스에 저장하는 것이 중요합니다. 이러한 추적은 디버깅에 사용되며, 애플리케이션을 개선하는 데 도움이 되는 데이터셋으로 활용됩니다.
+
+> **Note:** LiteLLM을 사용할 때는 `import litellm`를 사용하여 라이브러리를 가져오고 `litellm.completion` 대신 `from litellm import completion`로 완성 함수를 호출하세요. 이렇게 하면 모든 함수와 매개변수가 올바르게 참조됩니다.
+
+Weave는 LiteLLM에 대한 추적을 자동으로 캡처합니다. 평소와 같이 라이브러리를 사용할 수 있으며, `weave.init()`를 호출하는 것으로 시작하세요:
+
+```python
+import litellm
+import weave
+
+# highlight-next-line
+weave.init("weave_litellm_integration")
+
+openai_response = litellm.completion(
+    model="gpt-3.5-turbo", 
+    messages=[{"role": "user", "content": "Translate 'Hello, how are you?' to French"}],
+    max_tokens=1024
+)
+print(openai_response.choices[0].message.content)
+
+claude_response = litellm.completion(
+    model="claude-3-5-sonnet-20240620", 
+    messages=[{"role": "user", "content": "Translate 'Hello, how are you?' to French"}],
+    max_tokens=1024
+)
+print(claude_response.choices[0].message.content)
+```
+
+이제 Weave는 LiteLLM을 통해 이루어진 모든 LLM 호출을 추적하고 기록합니다. Weave 웹 인터페이스에서 추적을 볼 수 있습니다.
+
+## 자신의 ops로 래핑하기
+
+Weave ops는 실험할 때 코드를 자동으로 버전 관리하여 결과를 재현 가능하게 만들고, 입력과 출력을 캡처합니다. 간단히 `@weave.op()`로 장식된 함수를 만들어 LiteLLM의 완성 함수를 호출하면 Weave가 입력과 출력을 추적합니다. 다음은 예시입니다:
+
+```python
+import litellm
+import weave
+
+# highlight-next-line
+weave.init("weave_litellm_integration")
+
+# highlight-next-line
+@weave.op()
+def translate(text: str, target_language: str, model: str) -> str:
+    response = litellm.completion(
+        model=model,
+        messages=[{"role": "user", "content": f"Translate '{text}' to {target_language}"}],
+        max_tokens=1024
+    )
+    return response.choices[0].message.content
+
+print(translate("Hello, how are you?", "French", "gpt-3.5-turbo"))
+print(translate("Hello, how are you?", "Spanish", "claude-3-5-sonnet-20240620"))
+```
+
+## 더 쉬운 실험을 위한 `Model` 만들기
+
+움직이는 부분이 많을 때 실험을 구성하기는 어렵습니다. `Model` 클래스를 사용하면 시스템 프롬프트나 사용 중인 모델과 같은 앱의 실험 세부 정보를 캡처하고 구성할 수 있습니다. 이는 앱의 다양한 반복을 구성하고 비교하는 데 도움이 됩니다.
+
+코드 버전 관리 및 입력/출력 캡처 외에도, Models는 애플리케이션의 동작을 제어하는 구조화된 매개변수를 캡처하여 어떤 매개변수가 가장 잘 작동했는지 쉽게 찾을 수 있게 합니다. Weave Models를 `serve` 및 Evaluations와 함께 사용할 수도 있습니다.
+
+아래 예제에서는 다양한 모델과 온도를 실험할 수 있습니다:
+
+```python
+import litellm
+import weave
+
+# highlight-next-line
+weave.init('weave_litellm_integration')
+
+# highlight-next-line
+class TranslatorModel(weave.Model):
+    model: str
+    temperature: float
+  
+    # highlight-next-line
+    @weave.op()
+    def predict(self, text: str, target_language: str):
+        response = litellm.completion(
+            model=self.model,
+            messages=[
+                {"role": "system", "content": f"You are a translator. Translate the given text to {target_language}."},
+                {"role": "user", "content": text}
+            ],
+            max_tokens=1024,
+            temperature=self.temperature
+        )
+        return response.choices[0].message.content
+
+# Create instances with different models
+gpt_translator = TranslatorModel(model="gpt-3.5-turbo", temperature=0.3)
+claude_translator = TranslatorModel(model="claude-3-5-sonnet-20240620", temperature=0.1)
+
+# Use different models for translation
+english_text = "Hello, how are you today?"
+
+print("GPT-3.5 Translation to French:")
+print(gpt_translator.predict(english_text, "French"))
+
+print("\nClaude-3.5 Sonnet Translation to Spanish:")
+print(claude_translator.predict(english_text, "Spanish"))
+```
+
+## 함수 호출
+
+LiteLLM은 호환되는 모델에 대한 함수 호출을 지원합니다. Weave는 이러한 함수 호출을 자동으로 추적합니다.
+
+```python
+import litellm
+import weave
+
+# highlight-next-line
+weave.init("weave_litellm_integration")
+
+response = litellm.completion(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "Translate 'Hello, how are you?' to French"}],
+    functions=[
+        {
+            "name": "translate",
+            "description": "Translate text to a specified language",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "description": "The text to translate",
+                    },
+                    "target_language": {
+                        "type": "string",
+                        "description": "The language to translate to",
+                    }
+                },
+                "required": ["text", "target_language"],
+            },
+        },
+    ],
+)
+
+print(response)
+```
+
+우리는 프롬프트에서 사용한 함수를 자동으로 캡처하고 버전 관리합니다.
+
+[![litellm\_gif.png](imgs/litellm_gif.gif)](https://wandb.ai/a-sh0ts/weave_litellm_integration/weave/calls)

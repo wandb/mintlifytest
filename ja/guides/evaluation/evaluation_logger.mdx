@@ -1,0 +1,248 @@
+---
+- title: EvaluationLogger
+- description: Pythonコードから評価データを柔軟かつ段階的にログに記録する方法
+---
+
+この `EvaluationLogger` は、Pythonコードから直接評価データを柔軟かつ段階的にログに記録する方法を提供します。Weaveの内部データ型について深い知識は必要ありません。単にロガーをインスタンス化し、そのメソッド（`log_prediction`, `log_score`, `log_summary`）を使用して評価ステップを記録します。
+
+このアプローチは、データセット全体やすべてのスコアラーが最初から定義されていない可能性がある複雑なワークフローで特に役立ちます。
+
+事前に定義された `Evaluation` オブジェクトとは対照的に、標準の `Dataset` とリストの `Scorer` オブジェクトが必要ですが、`EvaluationLogger` では、個々の予測とそれに関連するスコアを、利用可能になった時点で段階的にログに記録できます。
+
+<Info>
+  **より構造化された評価を好みますか？**
+
+  事前定義されたデータセットとスコアラーを持つより体系的な評価フレームワークを好む場合は、[Weaveの標準評価フレームワーク](../core-types/evaluations.mdx)をご覧ください。
+
+  この `EvaluationLogger` は柔軟性を提供し、標準フレームワークは構造とガイダンスを提供します。
+</Info>
+
+## 基本的なワークフロー
+
+1. *ロガーを初期化する：* `EvaluationLogger` のインスタンスを作成し、オプションで `model` と `dataset` に関するメタデータを提供します。省略した場合はデフォルトが使用されます。
+   :::important トークン使用量とコストを追跡する
+   LLM呼び出し（OpenAIなど）のトークン使用量とコストを取得するには、`EvaluationLogger` をLLM呼び出しの前に\*\*初期化してください。
+   LLMを最初に呼び出してから予測をログに記録すると、トークンとコストのデータは取得されません。
+   :::
+2. *予測をログに記録する：* システムからの各入力/出力ペアに対して `log_prediction` を呼び出します。
+3. *スコアをログに記録する：* 返された `ScoreLogger` を使用して予測の `log_score` を行います。1つの予測に対して複数のスコアがサポートされています。
+4. *予測を完了する：* 予測のスコアをログに記録した後、必ず `finish()` を呼び出して確定します。
+5. *サマリーをログに記録する：* すべての予測が処理された後、`log_summary` を呼び出してスコアを集計し、オプションでカスタムメトリクスを追加します。
+
+<Warning>
+  予測に対して `finish()` を呼び出した後は、その予測に対してスコアをログに記録することはできません。
+</Warning>
+
+説明したワークフローを示すPythonコードについては、[基本的な例](#basic-example)をご覧ください。
+
+## 基本的な例
+
+次の例は、`EvaluationLogger` を使用して既存のPythonコードに予測とスコアをインラインでログに記録する方法を示しています。
+
+この `user_model` モデル関数が定義され、入力のリストに適用されます。各例について：
+
+* 入力と出力は `log_prediction` を使用してログに記録されます。
+* 単純な正確性スコア（`correctness_score`）は `log_score` を介してログに記録されます。
+* `finish()` はその予測のログ記録を完了します。
+  最後に、`log_summary` は集計メトリクスを記録し、Weaveでの自動スコア要約をトリガーします。
+
+```python
+import weave
+from openai import OpenAI
+from weave import EvaluationLogger 
+
+weave.init('my-project')
+
+# Initialize EvaluationLogger BEFORE calling the model to ensure token tracking
+eval_logger = EvaluationLogger(
+    model="my_model",
+    dataset="my_dataset"
+)
+
+# Example input data (this can be any data structure you want)
+eval_samples = [
+    {'inputs': {'a': 1, 'b': 2}, 'expected': 3},
+    {'inputs': {'a': 2, 'b': 3}, 'expected': 5},
+    {'inputs': {'a': 3, 'b': 4}, 'expected': 7},
+]
+
+# Example model logic using OpenAI
+@weave.op
+def user_model(a: int, b: int) -> int:
+    oai = OpenAI()
+    response = oai.chat.completions.create(
+        messages=[{"role": "user", "content": f"What is {a}+{b}?"}],
+        model="gpt-4o-mini"
+    )
+    # Use the response in some way (here we just return a + b for simplicity)
+    return a + b
+
+# Iterate through examples, predict, and log
+for sample in eval_samples:
+    inputs = sample["inputs"]
+    model_output = user_model(**inputs) # Pass inputs as kwargs
+
+    # Log the prediction input and output
+    pred_logger = eval_logger.log_prediction(
+        inputs=inputs,
+        output=model_output
+    )
+
+    # Calculate and log a score for this prediction
+    expected = sample["expected"]
+    correctness_score = model_output == expected
+    pred_logger.log_score(
+        scorer="correctness", # Simple string name for the scorer
+        score=correctness_score
+    )
+
+    # Finish logging for this specific prediction
+    pred_logger.finish()
+
+# Log a final summary for the entire evaluation.
+# Weave auto-aggregates the 'correctness' scores logged above.
+summary_stats = {"subjective_overall_score": 0.8}
+eval_logger.log_summary(summary_stats)
+
+print("Evaluation logging complete. View results in the Weave UI.")
+```
+
+## 高度な使用法
+
+### ログ記録前に出力を取得する
+
+モデル出力を最初に計算し、その後で予測とスコアを別々にログに記録することができます。これにより、評価とログ記録のロジックをより適切に分離できます。
+
+```python
+# Initialize EvaluationLogger BEFORE calling the model to ensure token tracking
+ev = EvaluationLogger(
+    model="example_model", 
+    dataset="example_dataset"
+)
+
+# Model outputs (e.g. OpenAI calls) must happen after logger init for token tracking
+outputs = [your_output_generator(**inputs) for inputs in your_dataset]
+preds = [ev.log_prediction(inputs, output) for inputs, output in zip(your_dataset, outputs)]
+for pred in preds:
+    pred.log_score(scorer="greater_than_5_scorer", score=output > 5)
+    pred.log_score(scorer="greater_than_7_scorer", score=output > 7)
+    pred.finish()
+
+ev.log_summary()
+```
+
+### リッチメディアをログに記録する
+
+入力、出力、スコアには、画像、動画、音声、構造化テーブルなどのリッチメディアを含めることができます。単に辞書またはメディアオブジェクトを `log_prediction` または `log_score` methods:
+
+```python
+import io
+import wave
+import struct
+from PIL import Image
+import random
+from typing import Any
+import weave
+
+def generate_random_audio_wave_read(duration=2, sample_rate=44100):
+    n_samples = duration * sample_rate
+    amplitude = 32767  # 16-bit max amplitude
+
+    buffer = io.BytesIO()
+
+    # Write wave data to the buffer
+    with wave.open(buffer, 'wb') as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)  # 16-bit
+        wf.setframerate(sample_rate)
+
+        for _ in range(n_samples):
+            sample = random.randint(-amplitude, amplitude)
+            wf.writeframes(struct.pack('<h', sample))
+
+    # Rewind the buffer to the beginning so we can read from it
+    buffer.seek(0)
+
+    # Return a Wave_read object
+    return wave.open(buffer, 'rb')
+
+rich_media_dataset = [
+    {
+        'image': Image.new(
+            "RGB",
+            (100, 100),
+            color=(
+                random.randint(0, 255),
+                random.randint(0, 255),
+                random.randint(0, 255),
+            ),
+        ),
+        "audio": generate_random_audio_wave_read(),
+    }
+    for _ in range(5)
+]
+
+@weave.op
+def your_output_generator(image: Image.Image, audio) -> dict[str, Any]:
+    return {
+        "result": random.randint(0, 10),
+        "image": image,
+        "audio": audio,
+    }
+
+ev = EvaluationLogger(model="example_model", dataset="example_dataset")
+
+for inputs in rich_media_dataset:
+    output = your_output_generator(**inputs)
+    pred = ev.log_prediction(inputs, output)
+    pred.log_score(scorer="greater_than_5_scorer", score=output["result"] > 5)
+    pred.log_score(scorer="greater_than_7_scorer", score=output["result"] > 7)
+
+ev.log_summary()
+```
+
+### 複数の評価をログに記録して比較する
+
+`EvaluationLogger` を使用すると、複数の評価をログに記録して比較できます。
+
+1. 以下に示すコードサンプルを実行します。
+2. Weave UIで、`Evals` タブに移動します。
+3. 比較したい評価を選択します。
+4. **Compare** ボタンをクリックします。比較ビューでは、以下のことができます：
+   * 追加または削除する評価を選択する
+   * 表示または非表示にするメトリクスを選択する
+   * 特定の例をページングして、異なるモデルが同じデータセットの同じ入力に対してどのようなパフォーマンスを示したかを確認する
+   比較に関する詳細については、[Comparisons](../tools/comparison.mdx)
+
+```python
+import weave
+
+models = [
+    "model1",
+    "model2",
+     {"name": "model3", "metadata": {"coolness": 9001}}
+]
+
+for model in models:
+    # EvalLogger must be initialized before model calls to capture tokens
+    ev = EvaluationLogger(model=model, dataset="example_dataset")
+    for inputs in your_dataset:
+        output = your_output_generator(**inputs)
+        pred = ev.log_prediction(inputs=inputs, output=output)
+        pred.log_score(scorer="greater_than_3_scorer", score=output > 3)
+        pred.log_score(scorer="greater_than_5_scorer", score=output > 5)
+        pred.log_score(scorer="greater_than_7_scorer", score=output > 7)
+        pred.finish()
+
+    ev.log_summary()
+```
+
+![The Evals tab](img/evals_tab.png)
+
+![The Comparison view](img/comparison.png)
+
+## 使用上のヒント
+
+* 各予測の後、速やかに `finish()` を呼び出します。
+* `log_summary` を使用して、単一の予測に関連付けられていないメトリクス（全体的なレイテンシーなど）を取得します。
+* リッチメディアのログ記録は定性的分析に最適です。

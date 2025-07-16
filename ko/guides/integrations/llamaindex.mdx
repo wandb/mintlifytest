@@ -1,0 +1,203 @@
+# LlamaIndex
+
+Weave는 [LlamaIndex Python library](https://github.com/run-llama/llama_index)를 통해 이루어진 모든 호출의 추적 및 로깅을 단순화하도록 설계되었습니다.
+
+LLM으로 작업할 때 디버깅은 불가피합니다. 모델 호출이 실패하거나, 출력 형식이 잘못되거나, 중첩된 모델 호출이 혼란을 야기하는 경우 문제를 정확히 찾아내는 것이 어려울 수 있습니다. [LlamaIndex](https://docs.llamaindex.ai/en/stable/) 애플리케이션은 종종 여러 단계와 LLM 호출 호출로 구성되어 있어 체인과 에이전트의 내부 작동 방식을 이해하는 것이 중요합니다.
+
+Weave는 LlamaIndex 애플리케이션에 대한 추적을 자동으로 캡처하여 이 프로세스를 단순화합니다. 이를 통해 애플리케이션의 성능을 모니터링하고 분석할 수 있어 LLM 워크플로우를 디버깅하고 최적화하기가 더 쉬워집니다. Weave는 또한 평가 워크플로우에도 도움이 됩니다.
+
+## 시작하기
+
+시작하려면 스크립트 시작 부분에서 간단히 `weave.init()`를 호출하세요. `weave.init()`의 인수는 추적을 구성하는 데 도움이 되는 프로젝트 이름입니다.
+
+```python
+import weave
+from llama_index.core.chat_engine import SimpleChatEngine
+
+# Initialize Weave with your project name
+# highlight-next-line
+weave.init("llamaindex_demo")
+
+chat_engine = SimpleChatEngine.from_defaults()
+response = chat_engine.chat(
+    "Say something profound and romantic about fourth of July"
+)
+print(response)
+```
+
+위의 예에서는 내부적으로 OpenAI 호출을 수행하는 간단한 LlamaIndex 채팅 엔진을 만들고 있습니다. 아래 추적을 확인하세요:
+
+[![simple\_llamaindex.png](imgs/simple_llamaindex.png)](https://wandb.ai/wandbot/test-llamaindex-weave/weave/calls/b6b5d898-2df8-4e14-b553-66ce84661e74)
+
+## 추적
+
+LlamaIndex는 데이터를 LLM과 쉽게 연결할 수 있는 것으로 알려져 있습니다. 간단한 RAG 애플리케이션에는 임베딩 단계, 검색 단계 및 응답 합성 단계가 필요합니다. 복잡성이 증가함에 따라 개발 및 프로덕션 중에 개별 단계의 추적을 중앙 데이터베이스에 저장하는 것이 중요해집니다.
+
+이러한 추적은 애플리케이션을 디버깅하고 개선하는 데 필수적입니다. Weave는 프롬프트 템플릿, LLM 호출, 도구 및 에이전트 단계를 포함하여 LlamaIndex 라이브러리를 통해 이루어진 모든 호출을 자동으로 추적합니다. Weave 웹 인터페이스에서 추적을 볼 수 있습니다.
+
+다음은 LlamaIndex의 [Starter Tutorial (OpenAI)](https://docs.llamaindex.ai/en/stable/getting_started/starter_example/)에서 가져온 간단한 RAG 파이프라인의 예입니다:
+
+```python
+import weave
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
+
+# Initialize Weave with your project name
+# highlight-next-line
+weave.init("llamaindex_demo")
+
+# Assuming you have a `.txt` file in the `data` directory
+documents = SimpleDirectoryReader("data").load_data()
+index = VectorStoreIndex.from_documents(documents)
+
+query_engine = index.as_query_engine()
+response = query_engine.query("What did the author do growing up?")
+print(response)
+```
+
+추적 타임라인은 "이벤트"뿐만 아니라 실행 시간, 비용 및 해당되는 경우 토큰 수도 캡처합니다. 각 단계의 입력과 출력을 보려면 추적을 자세히 살펴보세요.
+
+[![llamaindex\_rag.png](imgs/llamaindex_rag.png)](https://wandb.ai/wandbot/test-llamaindex-weave/weave/calls?filter=%7B%22traceRootsOnly%22%3Atrue%7D\&peekPath=%2Fwandbot%2Ftest-llamaindex-weave%2Fcalls%2F6ac53407-1bb7-4c38-b5a3-c302bd877a11%3Ftracetree%3D1)
+
+## 원클릭 관찰 가능성 🔭
+
+LlamaIndex는 [one-click observability 🔭](https://docs.llamaindex.ai/en/stable/module_guides/observability/)를 제공하여 프로덕션 환경에서 원칙적인 LLM 애플리케이션을 구축할 수 있도록 합니다.
+
+우리의 통합은 LlamaIndex의 이 기능을 활용하고 자동으로 [`WeaveCallbackHandler()`](https://github.com/wandb/weave/blob/master/weave/integrations/llamaindex/llamaindex.py)를 `llama_index.core.global_handler`로 설정합니다. 따라서 LlamaIndex와 Weave 사용자로서 필요한 것은 Weave 실행을 초기화하는 것뿐입니다 - `weave.init(<name-of-project>)`
+
+## 더 쉬운 실험을 위한 `Model` 만들기
+
+프롬프트, 모델 구성 및 추론 매개변수와 같은 여러 구성 요소가 있는 다양한 사용 사례에 대한 애플리케이션에서 LLM을 구성하고 평가하는 것은 어렵습니다. [`weave.Model`](/ko/guides/core-types/models)를 사용하면 시스템 프롬프트나 사용하는 모델과 같은 실험 세부 정보를 캡처하고 구성하여 다양한 반복을 더 쉽게 비교할 수 있습니다.
+
+다음 예제는 `WeaveModel`에서 LlamaIndex 쿼리 엔진을 구축하는 방법을 보여주며, [weave/data](https://github.com/wandb/weave/tree/master/data) folder:
+
+```python
+import weave
+
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
+from llama_index.core.node_parser import SentenceSplitter
+from llama_index.llms.openai import OpenAI
+from llama_index.core import PromptTemplate
+
+
+PROMPT_TEMPLATE = """
+You are given with relevant information about Paul Graham. Answer the user query only based on the information provided. Don't make up stuff.
+
+User Query: {query_str}
+Context: {context_str}
+Answer:
+"""
+
+# highlight-next-line
+class SimpleRAGPipeline(weave.Model):
+    chat_llm: str = "gpt-4"
+    temperature: float = 0.1
+    similarity_top_k: int = 2
+    chunk_size: int = 256
+    chunk_overlap: int = 20
+    prompt_template: str = PROMPT_TEMPLATE
+
+    def get_llm(self):
+        return OpenAI(temperature=self.temperature, model=self.chat_llm)
+
+    def get_template(self):
+        return PromptTemplate(self.prompt_template)
+
+    def load_documents_and_chunk(self, data):
+        documents = SimpleDirectoryReader(data).load_data()
+        splitter = SentenceSplitter(
+            chunk_size=self.chunk_size,
+            chunk_overlap=self.chunk_overlap,
+        )
+        nodes = splitter.get_nodes_from_documents(documents)
+        return nodes
+
+    def get_query_engine(self, data):
+        nodes = self.load_documents_and_chunk(data)
+        index = VectorStoreIndex(nodes)
+
+        llm = self.get_llm()
+        prompt_template = self.get_template()
+
+        return index.as_query_engine(
+            similarity_top_k=self.similarity_top_k,
+            llm=llm,
+            text_qa_template=prompt_template,
+        )
+
+# highlight-next-line
+    @weave.op()
+    def predict(self, query: str):
+        query_engine = self.get_query_engine(
+            # This data can be found in the weave repo under data/paul_graham
+            "data/paul_graham",
+        )
+        response = query_engine.query(query)
+        return {"response": response.response}
+
+# highlight-next-line
+weave.init("test-llamaindex-weave")
+
+rag_pipeline = SimpleRAGPipeline()
+response = rag_pipeline.predict("What did the author do growing up?")
+print(response)
+```
+
+에서 찾을 수 있는 데이터를 사용합니다.`SimpleRAGPipeline`에서 상속된 이 `weave.Model` 클래스는 이 RAG 파이프라인에 대한 중요한 매개변수를 구성합니다. `query` 메서드를 `weave.op()` 추적을 가능하게 합니다.
+
+[![llamaindex\_model.png](imgs/llamaindex_model.png)](https://wandb.ai/wandbot/test-llamaindex-weave/weave/calls?filter=%7B%22traceRootsOnly%22%3Atrue%7D\&peekPath=%2Fwandbot%2Ftest-llamaindex-weave%2Fcalls%2Fa82afbf4-29a5-43cd-8c51-603350abeafd%3Ftracetree%3D1)
+
+## Evaluation으로 평가하기 `weave.Evaluation`
+
+Evaluations는 애플리케이션의 성능을 측정하는 데 도움이 됩니다. [`weave.Evaluation`](/ko/guides/core-types/evaluations) 클래스를 사용하면 모델이 특정 작업이나 데이터셋에서 얼마나 잘 수행하는지 캡처할 수 있어, 다양한 모델과 애플리케이션의 반복 버전을 비교하기 쉽게 만들어 줍니다. 다음 예제는 우리가 생성한 모델을 평가하는 방법을 보여줍니다:
+
+```python
+import asyncio
+from llama_index.core.evaluation import CorrectnessEvaluator
+
+eval_examples = [
+    {
+        "id": "0",
+        "query": "What programming language did Paul Graham learn to teach himself AI when he was in college?",
+        "ground_truth": "Paul Graham learned Lisp to teach himself AI when he was in college.",
+    },
+    {
+        "id": "1",
+        "query": "What was the name of the startup Paul Graham co-founded that was eventually acquired by Yahoo?",
+        "ground_truth": "The startup Paul Graham co-founded that was eventually acquired by Yahoo was called Viaweb.",
+    },
+    {
+        "id": "2",
+        "query": "What is the capital city of France?",
+        "ground_truth": "I cannot answer this question because no information was provided in the text.",
+    },
+]
+
+llm_judge = OpenAI(model="gpt-4", temperature=0.0)
+evaluator = CorrectnessEvaluator(llm=llm_judge)
+
+# highlight-next-line
+@weave.op()
+def correctness_evaluator(query: str, ground_truth: str, output: dict):
+    result = evaluator.evaluate(
+        query=query, reference=ground_truth, response=output["response"]
+    )
+    return {"correctness": float(result.score)}
+
+# highlight-next-line
+evaluation = weave.Evaluation(dataset=eval_examples, scorers=[correctness_evaluator])
+
+rag_pipeline = SimpleRAGPipeline()
+
+# highlight-next-line
+asyncio.run(evaluation.evaluate(rag_pipeline))
+```
+
+이 평가는 앞 섹션의 예제를 기반으로 합니다. `weave.Evaluation`을 사용한 평가는 평가 데이터셋, 점수 매기기 함수 및 `weave.Model`가 필요합니다. 세 가지 핵심 구성 요소에 대한 몇 가지 미묘한 차이점은 다음과 같습니다:
+
+* 평가 샘플 딕셔너리의 키가 점수 매기기 함수의 인수 및 `weave.Model`의 `predict` 메서드와 일치하는지 확인하세요.
+* `weave.Model`에는 `predict` 또는 `infer` 또는 `forward` 이름의 메서드가 있어야 합니다. 이 메서드를 `weave.op()`로 장식하여 추적합니다.
+* 점수 매기기 함수는 `weave.op()`로 장식되어야 하며 `output`를 명명된 인수로 가져야 합니다.
+
+[![llamaindex\_evaluation.png](imgs/llamaindex_evaluation.png)](https://wandb.ai/wandbot/llamaindex-weave/weave/calls?filter=%7B%22opVersionRefs%22%3A%5B%22weave%3A%2F%2F%2Fwandbot%2Fllamaindex-weave%2Fop%2FEvaluation.predict_and_score%3ANmwfShfFmgAhDGLXrF6Xn02T9MIAsCXBUcifCjyKpOM%22%5D%2C%22parentId%22%3A%2233491e66-b580-47fa-9d43-0cd6f1dc572a%22%7D\&peekPath=%2Fwandbot%2Fllamaindex-weave%2Fcalls%2F33491e66-b580-47fa-9d43-0cd6f1dc572a%3Ftracetree%3D1)
+
+Weave를 LlamaIndex와 통합함으로써 LLM 애플리케이션의 포괄적인 로깅과 모니터링을 보장하여 평가를 통한 디버깅과 성능 최적화를 더 쉽게 할 수 있습니다.

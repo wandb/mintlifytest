@@ -1,0 +1,182 @@
+---
+- title: 애플리케이션 로직 추적
+- description: LLM 애플리케이션에서 데이터 흐름과 메타데이터를 추적하는 방법 알아보기
+---
+
+In the [LLM 입력 및 출력 추적](/ko/quickstart) 튜토리얼에서는 LLM의 입력과 출력을 추적하는 기본 사항을 다루었습니다.
+
+이 튜토리얼에서는 다음 방법을 배우게 됩니다:
+
+* **데이터 추적** 애플리케이션 전체 흐름에서
+* **메타데이터 추적** 호출 시점에
+
+## 중첩된 함수 호출 추적
+
+LLM 기반 애플리케이션은 여러 LLM 호출과 모니터링이 중요한 추가 데이터 처리 및 검증 로직을 포함할 수 있습니다. 많은 앱에서 흔히 볼 수 있는 깊게 중첩된 호출 구조에서도 Weave는 `weave.op()`가 추적하고자 하는 모든 함수에 추가되는 한 중첩 함수의 부모-자식 관계를 추적합니다.
+
+우리의 [기본 추적 예제](/ko/quickstart)를 기반으로, 이제 LLM에서 반환된 항목을 계산하고 이를 모두 상위 레벨 함수로 래핑하는 추가 로직을 추가할 것입니다. 그런 다음 `weave.op()`를 추가하여 모든 함수, 호출 순서 및 부모-자식 관계를 추적합니다:
+
+<Tabs>
+  <Tab title="Python">
+    ```python
+    import weave
+    import json
+    from openai import OpenAI
+
+    client = OpenAI()
+
+    # highlight-next-line
+    @weave.op()
+    def extract_dinos(sentence: str) -> dict:
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {
+                    "role": "system",
+                    "content": """Extract any dinosaur `name`, their `common_name`, \
+    names and whether its `diet` is a herbivore or carnivore, in JSON format."""
+                },
+                {
+                    "role": "user",
+                    "content": sentence
+                }
+                ],
+                response_format={ "type": "json_object" }
+            )
+        return response.choices[0].message.content
+
+    # highlight-next-line
+    @weave.op()
+    def count_dinos(dino_data: dict) -> int:
+        # count the number of items in the returned list
+        k = list(dino_data.keys())[0]
+        return len(dino_data[k])
+
+    # highlight-next-line
+    @weave.op()
+    def dino_tracker(sentence: str) -> dict:
+        # extract dinosaurs using a LLM
+        dino_data = extract_dinos(sentence)
+
+        # count the number of dinosaurs returned
+        dino_data = json.loads(dino_data)
+        n_dinos = count_dinos(dino_data)
+        return {"n_dinosaurs": n_dinos, "dinosaurs": dino_data}
+
+    # highlight-next-line
+    weave.init('jurassic-park')
+
+    sentence = """I watched as a Tyrannosaurus rex (T. rex) chased after a Triceratops (Trike), \
+    both carnivore and herbivore locked in an ancient dance. Meanwhile, a gentle giant \
+    Brachiosaurus (Brachi) calmly munched on treetops, blissfully unaware of the chaos below."""
+
+    result = dino_tracker(sentence)
+    print(result)
+    ```
+
+    **중첩 함수**
+
+    위 코드를 실행하면 두 개의 중첩 함수(`extract_dinos`와 `count_dinos`)의 입력과 출력뿐만 아니라 자동으로 기록된 OpenAI 추적도 볼 수 있습니다.
+
+    ![Nested Weave Trace](./images/tutorial_tracing_2_nested_dinos.png)
+  </Tab>
+
+  <Tab title="TypeScript">
+    ```typescript
+    import OpenAI from 'openai';
+    import * as weave from 'weave';
+
+    const openai = new OpenAI();
+
+    const extractDinos = weave.op(async (sentence: string) => {
+      const response = await openai.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [
+          {
+            role: 'system',
+            content:
+              'Extract any dinosaur `name`, their `common_name`, names and whether its `diet` is a herbivore or carnivore, in JSON format.',
+          },
+          {role: 'user', content: sentence},
+        ],
+        response_format: {type: 'json_object'},
+      });
+      return response.choices[0].message.content;
+    });
+
+    const countDinos = weave.op(async (dinoData: string) => {
+      const parsed = JSON.parse(dinoData);
+      return Object.keys(parsed).length;
+    });
+
+    const dinoTracker = weave.op(async (sentence: string) => {
+      const dinoData = await extractDinos(sentence);
+      const nDinos = await countDinos(dinoData);
+      return {nDinos, dinoData};
+    });
+
+    async function main() {
+      await weave.init('jurassic-park');
+
+      const sentence = `I watched as a Tyrannosaurus rex (T. rex) chased after a Triceratops (Trike),
+            both carnivore and herbivore locked in an ancient dance. Meanwhile, a gentle giant
+            Brachiosaurus (Brachi) calmly munched on treetops, blissfully unaware of the chaos below.`;
+
+      const result = await dinoTracker(sentence);
+      console.log(result);
+    }
+
+    main();
+
+    ```
+
+    **중첩 함수**
+
+    위 코드를 실행하면 두 개의 중첩 함수(`extractDinos`와 `countDinos`)의 입력과 출력뿐만 아니라 자동으로 기록된 OpenAI 추적도 볼 수 있습니다.
+
+    {/* TODO: Update to TS screenshot */}
+
+    ![Nested Weave Trace](./images/tutorial_tracing_2_nested_dinos.png)
+  </Tab>
+</Tabs>
+
+## 메타데이터 추적
+
+메타데이터 추적은 `weave.attributes` 컨텍스트 관리자를 사용하고 호출 시점에 추적할 메타데이터 사전을 전달하여 쉽게 수행할 수 있습니다.
+
+위의 예제를 계속 진행하겠습니다:
+
+<Tabs>
+  <Tab title="Python">
+    ```python
+    import weave
+
+    weave.init('jurassic-park')
+
+    sentence = """I watched as a Tyrannosaurus rex (T. rex) chased after a Triceratops (Trike), \
+    both carnivore and herbivore locked in an ancient dance. Meanwhile, a gentle giant \
+    Brachiosaurus (Brachi) calmly munched on treetops, blissfully unaware of the chaos below."""
+
+    # track metadata alongside our previously defined function
+    # highlight-next-line
+    with weave.attributes({'user_id': 'lukas', 'env': 'production'}):
+        result = dino_tracker(sentence)
+    ```
+  </Tab>
+
+  <Tab title="TypeScript">
+    ```plaintext
+    This feature is not available in TypeScript yet.  Stay tuned!
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+  메타데이터 추적을 사용하여 실행 시간에 메타데이터(예: 사용자 ID 또는 호출이 개발 프로세스의 일부인지 또는 프로덕션 환경인지 여부 등)를 추적하는 것이 좋습니다.
+
+  시스템 설정(예: 시스템 프롬프트)을 추적하려면 [weave Models](guides/core-types/models)
+</Note>
+
+## 다음 단계는?
+
+* 다음 [앱 버전 관리 튜토리얼](/ko/tutorial-weave_models)을 따라 임시 프롬프트, 모델 및 애플리케이션 변경 사항을 캡처, 버전 관리 및 구성하세요.
