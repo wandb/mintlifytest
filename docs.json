@@ -30,243 +30,304 @@
     }
   },
   "navigation": {
-    "global": {},
-    "languages": [
+    "tabs": [
       {
-        "language": "en",
-        "tabs": [
+        "tab": "Documentation",
+        "groups": [
           {
-            "tab": "Home",
-            "groups": [
+            "group": "Introduction",
+            "pages": [
+              "index",
+              "quickstart"
+            ]
+          },
+          {
+            "group": "Iteration",
+            "pages": [
+              "tutorial-tracing_2",
               {
-                "group": "Home",
+                "group": "Tracing & Debugging",
                 "pages": [
-                  "index"
+                  "guides/tracking/index",
+                  "guides/tracking/tracing",
+                  "guides/tracking/costs",
+                  "guides/core-types/media",
+                  "guides/tools/playground",
+                  "guides/integrations/index",
+                  "guides/tools/saved-views",
+                  "guides/tools/comparison",
+                  "guides/tracking/trace-tree",
+                  "guides/tracking/otel",
+                  "guides/tracking/video"
+                ]
+              },
+              {
+                "group": "Version Control for Models & Prompts",
+                "pages": [
+                  "tutorial-weave_models",
+                  "guides/core-types/models",
+                  "guides/core-types/prompts",
+                  "guides/tracking/objects",
+                  "guides/tracking/ops"
                 ]
               }
             ]
           },
           {
-            "tab": "Guides",
-            "groups": [
+            "group": "Evaluation",
+            "pages": [
+              "tutorial-eval",
+              "tutorial-rag",
               {
-                "group": "Guides",
+                "group": "Evaluations",
                 "pages": [
-                  "guides/index",
-                  "guides/quickstart",
-                  {
-                    "group": "W&B Models",
-                    "pages": [
-                      "guides/models",
-                      {
-                        "group": "Experiments",
-                        "pages": [
-                          "guides/track",
-                          "guides/track/launch"
-                        ]
-                      }
-                    ]
-                  },
-                  "guides/weave"
+                  "guides/core-types/evaluations",
+                  "guides/core-types/datasets",
+                  "guides/evaluation/scorers",
+                  "guides/evaluation/builtin_scorers",
+                  "guides/evaluation/weave_local_scorers",
+                  "guides/evaluation/evaluation_logger",
+                  "guides/core-types/leaderboards"
                 ]
               }
             ]
           },
           {
-            "tab": "Tutorials",
-            "groups": [
+            "group": "Productionization",
+            "pages": [
               {
-                "group": "Tutorials",
+                "group": "Collect Feedback & Examples",
                 "pages": [
-                  "tutorials/index",
-                  "tutorials/experiments"
+                  "guides/tracking/feedback",
+                  "guides/tracking/redact-pii"
+                ]
+              },
+              {
+                "group": "Online Evaluation",
+                "pages": [
+                  "guides/evaluation/guardrails_and_monitors"
+                ]
+              },
+              {
+                "group": "Tools & Utilities",
+                "pages": [
+                  "guides/tools/index",
+                  "guides/tools/serve",
+                  "guides/tools/deploy",
+                  "guides/tracking/otel"
                 ]
               }
             ]
           },
           {
-            "tab": "Reference",
-            "groups": [
+            "group": "Integrations",
+            "pages": [
+              "guides/integrations/index",
               {
-                "group": "Reference",
+                "group": "LLM Providers",
                 "pages": [
-                  "ref/index",
-                  "ref/js/index"
+                  "guides/integrations/inference",
+                  "guides/integrations/bedrock",
+                  "guides/integrations/anthropic",
+                  "guides/integrations/cerebras",
+                  "guides/integrations/cohere",
+                  "guides/integrations/google",
+                  "guides/integrations/groq",
+                  "guides/integrations/huggingface",
+                  "guides/integrations/litellm",
+                  "guides/integrations/azure",
+                  "guides/integrations/mistral",
+                  "guides/integrations/nvidia_nim",
+                  "guides/integrations/openai",
+                  "guides/integrations/openrouter",
+                  "guides/integrations/together_ai"
+                ]
+              },
+              "guides/integrations/local_models",
+              {
+                "group": "Frameworks",
+                "pages": [
+                  "guides/integrations/openai_agents",
+                  "guides/integrations/langchain",
+                  "guides/integrations/llamaindex",
+                  "guides/integrations/dspy",
+                  "guides/integrations/instructor",
+                  "guides/integrations/crewai",
+                  "guides/integrations/smolagents",
+                  "guides/integrations/pydantic_ai",
+                  "guides/integrations/google_adk",
+                  "guides/integrations/autogen",
+                  "guides/integrations/verdict",
+                  "guides/integrations/js"
+                ]
+              },
+              {
+                "group": "Protocols",
+                "pages": [
+                  "guides/integrations/mcp"
                 ]
               }
             ]
           },
           {
-            "tab": "Support",
-            "groups": [
-              {
-                "group": "Support",
-                "pages": [
-                  "support/support",
-                  "support/index_academic"
-                ]
-              }
+            "group": "Enterprise",
+            "pages": [
+              "guides/platform/index",
+              "guides/platform/weave-self-managed"
+            ]
+          },
+          {
+            "group": "Tools & Resources",
+            "pages": [
+              "guides/core-types/env-vars",
+              "guides/troubleshooting",
+              "guides/tracking/faqs"
             ]
           }
         ]
       },
       {
-        "tabs": [
+        "tab": "Cookbooks",
+        "groups": [
           {
-            "tab": "ホーム",
-            "groups": [
-              {
-                "group": "ホーム",
-                "pages": [
-                  "ja/index"
-                ]
-              }
+            "group": "Getting Started",
+            "pages": [
+              "cookbooks/Intro_to_Weave_Hello_Trace",
+              "cookbooks/Intro_to_Weave_Hello_Eval"
             ]
           },
           {
-            "tab": "ガイド",
-            "groups": [
-              {
-                "group": "ガイド",
-                "pages": [
-                  "ja/guides/index",
-                  "ja/guides/quickstart",
-                  {
-                    "group": "W&B Models",
-                    "pages": [
-                      "ja/guides/models",
-                      {
-                        "group": "実験",
-                        "pages": [
-                          "ja/guides/track",
-                          "ja/guides/track/launch"
-                        ]
-                      }
-                    ]
-                  },
-                  "ja/guides/weave"
-                ]
-              }
+            "group": "Evaluations & Datasets",
+            "pages": [
+              "cookbooks/leaderboard_quickstart",
+              "cookbooks/hf_dataset_evals",
+              "cookbooks/import_from_csv"
             ]
           },
           {
-            "tab": "チュートリアル",
-            "groups": [
-              {
-                "group": "チュートリアル",
-                "pages": [
-                  "ja/tutorials/index",
-                  "ja/tutorials/experiments"
-                ]
-              }
+            "group": "Models & Prompts",
+            "pages": [
+              "cookbooks/Models_and_Weave_Integration_Demo",
+              "cookbooks/chain_of_density",
+              "cookbooks/dspy_prompt_optimization",
+              "cookbooks/notdiamond_custom_routing"
             ]
           },
           {
-            "tab": "リファレンス",
-            "groups": [
-              {
-                "group": "リファレンス",
-                "pages": [
-                  "ja/ref/index",
-                  "ja/ref/js/index"
-                ]
-              }
+            "group": "Advanced Topics",
+            "pages": [
+              "cookbooks/multi-agent-structured-output",
+              "cookbooks/codegen",
+              "cookbooks/ocr-pipeline",
+              "cookbooks/audio_with_weave"
             ]
           },
           {
-            "tab": "サポート",
-            "groups": [
-              {
-                "group": "サポート",
-                "pages": [
-                  "ja/support/support",
-                  "ja/support/index_academic"
-                ]
-              }
+            "group": "Production & Monitoring",
+            "pages": [
+              "cookbooks/online_monitoring",
+              "cookbooks/feedback_prod",
+              "cookbooks/scorers_as_guardrails",
+              "cookbooks/custom_model_cost",
+              "cookbooks/pii"
+            ]
+          },
+          {
+            "group": "API & Integration",
+            "pages": [
+              "cookbooks/weave_via_service_api"
             ]
           }
-        ],
-        "language": "ja"
+        ]
       },
       {
-        "language": "ko",
-        "tabs": [
+        "tab": "API Reference",
+        "groups": [
           {
-            "tab": "Home",
-            "groups": [
+            "group": "Python SDK",
+            "pages": [
+              "reference/python-sdk/weave/index",
               {
-                "group": "Home",
+                "group": "Core",
                 "pages": [
-                  "ko/index"
+                  "reference/python-sdk/weave/trace/weave_client",
+                  "reference/python-sdk/weave/trace/op",
+                  "reference/python-sdk/weave/trace/util"
+                ]
+              },
+              {
+                "group": "Trace Server",
+                "pages": [
+                  "reference/python-sdk/weave/trace_server/trace_server_interface"
                 ]
               }
             ]
           },
           {
-            "tab": "가이드",
-            "groups": [
+            "group": "TypeScript SDK",
+            "pages": [
+              "reference/typescript-sdk/weave/index",
               {
-                "group": "가이드",
+                "group": "Classes",
                 "pages": [
-                  "ko/guides/index",
-                  "ko/guides/quickstart",
-                  {
-                    "group": "W&B Models",
-                    "pages": [
-                      "ko/guides/models",
-                      {
-                        "group": "실험",
-                        "pages": [
-                          "ko/guides/track",
-                          "ko/guides/track/launch"
-                        ]
-                      }
-                    ]
-                  },
-                  "ko/guides/weave"
+                  "reference/typescript-sdk/weave/classes/Dataset",
+                  "reference/typescript-sdk/weave/classes/Evaluation",
+                  "reference/typescript-sdk/weave/classes/WeaveClient",
+                  "reference/typescript-sdk/weave/classes/WeaveObject"
+                ]
+              },
+              {
+                "group": "Functions",
+                "pages": [
+                  "reference/typescript-sdk/weave/functions/init",
+                  "reference/typescript-sdk/weave/functions/login",
+                  "reference/typescript-sdk/weave/functions/op",
+                  "reference/typescript-sdk/weave/functions/weaveAudio",
+                  "reference/typescript-sdk/weave/functions/weaveImage",
+                  "reference/typescript-sdk/weave/functions/weavePython",
+                  "reference/typescript-sdk/weave/functions/weaveVideo",
+                  "reference/typescript-sdk/weave/functions/withWeaveClient"
+                ]
+              },
+              {
+                "group": "Interfaces",
+                "pages": [
+                  "reference/typescript-sdk/weave/interfaces/CallSchema",
+                  "reference/typescript-sdk/weave/interfaces/CallsFilter"
+                ]
+              },
+              {
+                "group": "Type Aliases",
+                "pages": [
+                  "reference/typescript-sdk/weave/type-aliases/Op"
                 ]
               }
             ]
           },
           {
-            "tab": "튜토리얼",
-            "groups": [
-              {
-                "group": "튜토리얼",
-                "pages": [
-                  "ko/tutorials/index",
-                  "ko/tutorials/experiments"
-                ]
-              }
-            ]
-          },
-          {
-            "tab": "참조",
-            "groups": [
-              {
-                "group": "참조",
-                "pages": [
-                  "ko/ref/index",
-                  "ko/ref/js/index"
-                ]
-              }
-            ]
-          },
-          {
-            "tab": "지원",
-            "groups": [
-              {
-                "group": "지원",
-                "pages": [
-                  "ko/support/support",
-                  "ko/support/index_academic"
-                ]
-              }
-            ]
+            "group": "Service API",
+            "pages": [
+              "reference/service-api/index"
+            ],
+            "openapi": "/openapi.json"
           }
         ]
       }
-    ]
+    ],
+        "global": {
+      "anchors": [
+        {
+          "anchor": "GitHub",
+          "icon": "github",
+          "href": "https://github.com/wandb/weave"
+        },
+        {
+          "anchor": "Release Changelog",
+          "icon": "book-open",
+          "href": "https://github.com/wandb/weave/releases"
+        }
+      ]
+    }
   },
   "footer": {
     "socials": {

@@ -1,0 +1,45 @@
+# Ignore the Docusaurus source directory
+weave-docusaurus-src/
+
+# Ignore git directory
+.git/
+.git/**
+
+# Ignore all log files
+*.log
+**/*.log
+
+# Ignore OS files
+.DS_Store
+**/.DS_Store
+
+# Ignore Python cache
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Ignore temporary files
+*.tmp
+*.temp
+*~
+**/*~
+
+# Ignore build artifacts
+build/
+dist/
+*.egg-info/
+**/build/
+**/dist/
+**/*.egg-info/
+
+# Ignore all markdown files in specific directories
+weave-docusaurus-src/**/*.md
+weave-docusaurus-src/**/*.mdx
+
+# Ignore specific problematic files
+**/soupsieve-*/licenses/LICENSE.md
+**/site-packages/**/*.md
+**/site-packages/**/*.mdx 

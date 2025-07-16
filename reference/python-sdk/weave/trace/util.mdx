@@ -1,0 +1,138 @@
+---
+title: "Trace Utilities"
+description: "Utility functions and classes for tracing, including ThreadPoolExecutor"
+---
+
+The trace utilities module provides helper functions and classes for advanced tracing scenarios.
+
+## ThreadPoolExecutor
+
+A context-aware ThreadPoolExecutor that preserves trace context across thread boundaries.
+
+```python
+from weave import ThreadPoolExecutor
+
+@weave.op
+def process_item(item: str) -> str:
+    return item.upper()
+
+@weave.op
+def process_batch(items: List[str]) -> List[str]:
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        # Each item is processed in parallel while maintaining trace context
+        results = list(executor.map(process_item, items))
+    return results
+```
+
+### Key Features
+
+- Preserves parent-child relationships in traces
+- Maintains trace context across thread boundaries
+- Compatible with standard ThreadPoolExecutor API
+
+### Example with Nested Tracing
+
+```python
+@weave.op
+def fetch_data(url: str) -> dict:
+    # Simulated API call
+    return {"data": f"from {url}"}
+
+@weave.op
+def process_urls(urls: List[str]) -> List[dict]:
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        # All fetch_data calls will be properly nested under process_urls
+        results = list(executor.map(fetch_data, urls))
+    return results
+
+# Usage
+urls = ["http://api1.com", "http://api2.com", "http://api3.com"]
+data = process_urls(urls)
+```
+
+## attributes
+
+Context manager for adding attributes to calls.
+
+```python
+from weave import attributes
+
+@weave.op
+def my_function():
+    return "result"
+
+# Add metadata to the call
+with attributes({'environment': 'production', 'version': '1.0.0'}):
+    my_function()
+```
+
+### Nested Attributes
+
+Attributes can be nested and will merge:
+
+```python
+with attributes({'env': 'prod'}):
+    with attributes({'region': 'us-east-1'}):
+        # Call will have both attributes
+        my_function()
+```
+
+## set_tracing_enabled
+
+Context manager to temporarily disable tracing.
+
+```python
+from weave.trace.context.call_context import set_tracing_enabled
+
+@weave.op
+def traced_function():
+    return "This will be traced"
+
+# Temporarily disable tracing
+with set_tracing_enabled(False):
+    traced_function()  # This call won't be traced
+
+# Tracing is automatically re-enabled outside the context
+traced_function()  # This will be traced
+```
+
+## get_current_call
+
+Get the currently executing call within an op.
+
+```python
+from weave.trace.context import get_current_call
+
+@weave.op
+def my_function():
+    call = get_current_call()
+    if call:
+        print(f"Current call ID: {call.id}")
+        print(f"Current call inputs: {call.inputs}")
+```
+
+## Summary Utilities
+
+### add_summary
+
+Add custom summary metrics to a call.
+
+```python
+@weave.op
+def evaluate_model(prompt: str) -> str:
+    result = model.generate(prompt)
+    
+    # Add custom metrics to the call summary
+    call = get_current_call()
+    if call:
+        call.summary.update({
+            'token_count': len(result.split()),
+            'confidence': 0.95
+        })
+    
+    return result
+```
+
+<Note>
+These utilities are designed to work seamlessly with Weave's tracing system. Always ensure `weave.init()` has been called before using these features.
+</Note>

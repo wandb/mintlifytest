@@ -1,0 +1,4 @@
+Rewrite the markdown file to address the Vale readability feedback while maintaining the content's accuracy and following the Mintlify technical writing guidelines from CLAUDE.md. Use the output from the Vale tool (and stored in vale_output.txt) to guide your revisions.
+
+Focus on improving readability scores and addressing the specific issues highlighted by Vale. Keep rewriting until the readability scores meet the required standards.
+If on the tenth rewrite the readability scores are still not met, please provide a summary of the issues that need to be addressed and stop rewriting the docs.
