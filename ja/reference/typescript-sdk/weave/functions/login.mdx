@@ -1,0 +1,34 @@
+[**weave**](../README.mdx) • **ドキュメント**
+
+***
+
+[weave](../README.mdx) / login
+
+# Function: login()
+
+> **login**(`apiKey`, `host`?): `Promise`\<`void`>
+
+提供されたAPIキーを使用してWeights & Biases（W\&B）にログインします。
+この関数は将来の使用のために認証情報をnetrcファイルに保存します。
+
+## パラメータ
+
+• **apiKey**: `string`
+
+あなたのW\&B APIキー。
+
+• **host?**: `string` = `defaultHost`
+
+（オプション）ホスト名（通常はカスタムW\&Bサーバーを使用している場合にのみ必要）。
+
+## 戻り値
+
+`Promise`\<`void`>
+
+## 例外
+
+APIキーが指定されていない場合、またはweaveトレースサーバーへの接続が確認できない場合。
+
+## 定義場所
+
+[clientApi.ts:22](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/clientApi.ts#L22)

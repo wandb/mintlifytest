@@ -1,0 +1,204 @@
+---
+- title: メディアのログ記録
+- description: Weaveで動画、画像、音声をログに記録して表示する
+---
+
+Weaveは動画、画像、音声のログ記録と表示をサポートしています。
+
+## 動画
+
+Weaveは自動的に[`moviepy`](https://zulko.github.io/moviepy/)を使用して動画をログに記録します。これにより、トレース対象の関数に動画の入力と出力を渡すことができ、Weaveは自動的に動画データのアップロードと保存を処理します。
+
+<Note>
+  動画サポートは現在Pythonでのみ利用可能です。
+</Note>
+
+使用方法については、[Video Support](../tracking/video)をご覧ください。
+
+## 画像
+
+ログ記録タイプ: `PIL.Image.Image`.
+
+<Warning>
+  Base64エンコードされた画像文字列（例：`data:image/jpeg;base64,...`）は技術的にはサポートされていますが、推奨されていません。パフォーマンスの問題を引き起こす可能性があり、絶対に必要な場合（特定のAPIとの統合など）にのみ使用すべきです。
+</Warning>
+
+以下の例は、OpenAI DALL-E APIを使用して生成された画像をログに記録する方法を示しています：
+
+<Tabs>
+  <Tab title="Python">
+    ```python
+    import weave
+    from openai import OpenAI
+    import requests
+    from PIL import Image
+
+    weave.init('image-example')
+    client = OpenAI()
+
+    @weave.op
+    def generate_image(prompt: str) -> Image:
+        response = client.images.generate(
+            model="dall-e-3",
+            prompt=prompt,
+            size="1024x1024",
+            quality="standard",
+            n=1,
+        )
+        image_url = response.data[0].url
+        image_response = requests.get(image_url, stream=True)
+        image = Image.open(image_response.raw)
+
+        # return a PIL.Image.Image object to be logged as an image
+        return image
+
+    generate_image("a cat with a pumpkin hat")
+    ```
+  </Tab>
+
+  <Tab title="TypeScript">
+    ```typescript
+    import {OpenAI} from 'openai';
+    import * as weave from 'weave';
+
+    async function main() {
+        const client = await weave.init('image-example');
+        const openai = new OpenAI();
+
+        const generateImage = weave.op(async (prompt: string) => {
+            const response = await openai.images.generate({
+                model: 'dall-e-3',
+                prompt: prompt,
+                size: '1024x1024',
+                quality: 'standard',
+                n: 1,
+            });
+            const imageUrl = response.data[0].url;
+            const imgResponse = await fetch(imageUrl);
+            const data = Buffer.from(await imgResponse.arrayBuffer());
+
+            return weave.weaveImage({data});
+        });
+
+        generateImage('a cat with a pumpkin hat');
+    }
+
+    main();
+    ```
+  </Tab>
+</Tabs>
+
+この画像はWeaveにログ記録され、UIに自動的に表示されます。
+
+![Screenshot of pumpkin cat trace view](imgs/cat-pumpkin-trace.png)
+
+### 大きな画像はログ記録前にリサイズする
+
+UIのレンダリングコストとストレージへの影響を減らすために、ログ記録前に画像をリサイズすると便利です。`postprocess_output`を`@weave.op`で使用して画像をリサイズできます。
+
+```python
+from dataclasses import dataclass
+from typing import Any
+from PIL import Image
+import weave
+
+weave.init('image-resize-example')
+
+# Custom output type
+@dataclass
+class ImageResult:
+    label: str
+    image: Image.Image
+
+# Resize helper
+def resize_image(image: Image.Image, max_size=(512, 512)) -> Image.Image:
+    image = image.copy()
+    image.thumbnail(max_size, Image.ANTIALIAS)
+    return image
+
+# Postprocess output to resize image before logging
+def postprocess_output(output: ImageResult) -> ImageResult:
+    resized = resize_image(output.image)
+    return ImageResult(label=output.label, image=resized)
+
+@weave.op(postprocess_output=postprocess_output)
+def generate_large_image() -> ImageResult:
+    # Create an example image to process (e.g., 2000x2000 red square)
+    img = Image.new("RGB", (2000, 2000), color="red")
+    return ImageResult(label="big red square", image=img)
+
+generate_large_image()
+```
+
+## 音声
+
+ログ記録タイプ: `wave.Wave_read`.
+
+以下の例は、OpenAIの音声生成APIを使用して音声ファイルをログに記録する方法を示しています。
+
+<Tabs>
+  <Tab title="Python">
+    ```python
+    import weave
+    from openai import OpenAI
+    import wave
+
+    weave.init("audio-example")
+    client = OpenAI()
+
+    @weave.op
+    def make_audio_file_streaming(text: str) -> wave.Wave_read:
+        with client.audio.speech.with_streaming_response.create(
+            model="tts-1",
+            voice="alloy",
+            input=text,
+            response_format="wav",
+        ) as res:
+            res.stream_to_file("output.wav")
+
+        # return a wave.Wave_read object to be logged as audio
+        return wave.open("output.wav")
+
+    make_audio_file_streaming("Hello, how are you?")
+    ```
+  </Tab>
+
+  <Tab title="TypeScript">
+    ```typescript
+    import {OpenAI} from 'openai';
+    import * as weave from 'weave';
+
+    async function main() {
+        await weave.init('audio-example');
+        const openai = new OpenAI();
+
+        const makeAudioFileStreaming = weave.op(async function audio(text: string) {
+            const response = await openai.audio.speech.create({
+                model: 'tts-1',
+                voice: 'alloy',
+                input: text,
+                response_format: 'wav',
+            });
+
+            const chunks: Uint8Array[] = [];
+            for await (const chunk of response.body) {
+                chunks.push(chunk);
+            }
+            return weave.weaveAudio({data: Buffer.concat(chunks)});
+        });
+
+        await makeAudioFileStreaming('Hello, how are you?');
+    }
+
+    main();
+    ```
+  </Tab>
+</Tabs>
+
+この音声はWeaveにログ記録され、音声プレーヤーと共に自動的にUIに表示されます。音声プレーヤーでは、生の音声波形を表示およびダウンロードできます。
+
+![Screenshot of audio trace view](imgs/audio-trace.png)
+
+<Tip>
+  私たちのクックブックをお試しください：[Audio Logging](/ja/cookbooks/audio_with_weave)または<a href="https://colab.research.google.com/github/wandb/weave/blob/master/docs/./notebooks/audio_with_weave.ipynb" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link button button--secondary button--med margin-right--sm notebook-cta-button"><div><img src="https://upload.wikimedia.org/wikipedia/commons/archive/d/d0/20221103151430%21Google_Colaboratory_SVG_Logo.svg" alt="Open In Colab" height="20px" /><div>Open in Colab</div></div></a>。このクックブックには、Weaveと統合されたリアルタイム音声APIベースのアシスタントの高度な例も含まれています。
+</Tip>

@@ -1,0 +1,172 @@
+---
+- title: Prompts
+- description: LLM 애플리케이션을 위한 프롬프트 저장, 버전 관리 및 구성
+---
+
+<Warning>
+  이 기능은 Python SDK를 통해서만 접근할 수 있습니다. 이 페이지의 모든 코드 예제는 Python으로 제공됩니다.
+</Warning>
+
+프롬프트를 생성, 평가 및 개선하는 것은 AI 엔지니어의 핵심 활동입니다.
+프롬프트의 작은 변화가 애플리케이션 동작에 큰 영향을 미칠 수 있습니다.
+Weave를 사용하면 프롬프트를 생성하고, 저장 및 검색하며, 시간이 지남에 따라 발전시킬 수 있습니다.
+
+Weave는 Prompt가 어떻게 구성되는지에 대해 특별한 의견을 갖지 않습니다. 간단한 요구 사항이라면 내장된 `weave.StringPrompt` 또는 `weave.MessagesPrompt` 클래스. 더 복잡한 요구 사항이 있다면 이러한 클래스를 상속하거나 기본 클래스를 `weave.Prompt` 그리고 오버라이드하세요
+
+`format` 메서드.
+
+이러한 객체 중 하나를 `weave.publish`로 게시하면, Weave 프로젝트의 "Prompts" 페이지에 표시됩니다.
+
+## StringPrompt
+
+```python
+import weave
+weave.init('intro-example')
+
+# highlight-next-line
+system_prompt = weave.StringPrompt("You are a pirate")
+# highlight-next-line
+weave.publish(system_prompt, name="pirate_prompt")
+
+from openai import OpenAI
+client = OpenAI()
+
+response = client.chat.completions.create(
+  model="gpt-4o",
+  messages=[
+    {
+      "role": "system",
+      # highlight-next-line
+      "content": system_prompt.format()
+    },
+    {
+      "role": "user",
+      "content": "Explain general relativity in one paragraph."
+    }
+  ],
+)
+```
+
+아마도 이 프롬프트가 원하는 효과를 내지 못할 수 있으므로, 더 명확한 지시를 주도록 프롬프트를 수정합니다.
+
+```python
+import weave
+weave.init('intro-example')
+
+# highlight-next-line
+system_prompt = weave.StringPrompt("Talk like a pirate. I need to know I'm listening to a pirate.")
+weave.publish(system_prompt, name="pirate_prompt")
+
+from openai import OpenAI
+client = OpenAI()
+
+response = client.chat.completions.create(
+  model="gpt-4o",
+  messages=[
+    {
+      "role": "system",
+      # highlight-next-line
+      "content": system_prompt.format()
+    },
+    {
+      "role": "user",
+      "content": "Explain general relativity in one paragraph."
+    }
+  ],
+)
+```
+
+이 프롬프트 객체를 볼 때, 두 가지 버전이 있는 것을 확인할 수 있습니다.
+
+![Screenshot of viewing a prompt object](imgs/prompt-object.png)
+
+또한 비교를 위해 이들을 선택하여 정확히 무엇이 변경되었는지 확인할 수 있습니다.
+
+![Screenshot of prompt comparison](imgs/prompt-comparison.png)
+
+## MessagesPrompt
+
+The `MessagesPrompt` Message 객체 배열을 대체하는 데 사용할 수 있습니다.
+
+```python
+import weave
+weave.init('intro-example')
+
+# highlight-next-line
+prompt = weave.MessagesPrompt([
+    {
+        "role": "system",
+        "content": "You are a stegosaurus, but don't be too obvious about it."
+    },
+    {
+        "role": "user",
+        "content": "What's good to eat around here?"
+    }
+])
+weave.publish(prompt, name="dino_prompt")
+
+from openai import OpenAI
+client = OpenAI()
+
+response = client.chat.completions.create(
+  model="gpt-4o",
+  # highlight-next-line
+  messages=prompt.format(),
+)
+```
+
+## 프롬프트 매개변수화
+
+As the `format` 메서드의 이름이 제안하듯이, 콘텐츠 문자열의 템플릿 자리 표시자를 채우기 위해 인수를 전달할 수 있습니다.
+
+```python
+import weave
+weave.init('intro-example')
+
+# highlight-next-line
+prompt = weave.StringPrompt("Solve the equation {equation}")
+weave.publish(prompt, name="calculator_prompt")
+
+from openai import OpenAI
+client = OpenAI()
+
+response = client.chat.completions.create(
+  model="gpt-4o",
+  messages=[
+    {
+      "role": "user",
+      # highlight-next-line
+      "content": prompt.format(equation="1 + 1 = ?")
+    }
+  ],
+)
+```
+
+이것은 `MessagesPrompt`에서도 작동합니다.
+
+```python
+import weave
+weave.init('intro-example')
+
+# highlight-next-line
+prompt = weave.MessagesPrompt([
+{
+    "role": "system",
+    "content": "You will be provided with a description of a scene and your task is to provide a single word that best describes an associated emotion."
+},
+{
+    "role": "user",
+    "content": "{scene}"
+}
+])
+weave.publish(prompt, name="emotion_prompt")
+
+from openai import OpenAI
+client = OpenAI()
+
+response = client.chat.completions.create(
+  model="gpt-4o",
+  # highlight-next-line
+  messages=prompt.format(scene="A dog is lying on a dock next to a fisherman."),
+)
+```

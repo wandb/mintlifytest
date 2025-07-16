@@ -1,0 +1,226 @@
+# Weave with TypeScript クイックスタートガイド
+
+W\&B WeaveをTypeScriptで使用して以下のことができます：
+
+* 言語モデルの入力、出力、トレースのログ記録とデバッグ
+* 言語モデルのユースケースに対する厳密な同条件での評価の構築
+* 実験から評価、本番環境まで、LLMワークフロー全体で生成されるすべての情報を整理
+
+詳細については、[Weave documentation](/)をご覧ください。
+
+## 関数トラッキング
+
+TypeScriptコードでWeaveを使用するには、新しいWeaveプロジェクトを初期化し、`weave.op`ラッパーをトラッキングしたい関数に追加します。
+
+追加後`weave.op`と関数を呼び出した後、W\&Bダッシュボードにアクセスすると、プロジェクト内でトラッキングされていることが確認できます。
+
+コードは自動的にトラッキングされます - UIのコードタブをチェックしてください！
+
+```typescript
+async function initializeWeaveProject() {
+    const PROJECT = 'weave-examples';
+    await weave.init(PROJECT);
+}
+```
+
+```typescript
+const stripUserInput = weave.op(function stripUserInput(userInput: string): string {
+    return userInput.trim();
+});
+```
+
+以下の例は、基本的な関数トラッキングの仕組みを示しています。
+
+```typescript
+async function demonstrateBasicTracking() {
+    const result = await stripUserInput("    hello    ");
+    console.log('Basic tracking result:', result);
+}
+```
+
+## OpenAI統合
+
+Weaveは以下を含むすべてのOpenAI呼び出しを自動的にトラッキングします：
+
+* トークン使用量
+* APIコスト
+* リクエスト/レスポンスのペア
+* モデル設定
+
+:::note
+OpenAIに加えて、WeaveはAnthropic、Mistralなどの他のLLMプロバイダーの自動ログ記録もサポートしています。完全なリストについては、[LLM Providers in the Integrations documentation](../../guides/integrations/index.md#llm-providers)をご覧ください。
+:::
+
+```typescript
+function initializeOpenAIClient() {
+    return weave.wrapOpenAI(new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY
+    }));
+}
+```
+
+```typescript
+async function demonstrateOpenAITracking() {
+    const client = initializeOpenAIClient();
+    const result = await client.chat.completions.create({
+        model: "gpt-4-turbo",
+        messages: [{ role: "user", content: "Hello, how are you?" }],
+    });
+    console.log('OpenAI tracking result:', result);
+}
+```
+
+## ネストされた関数トラッキング
+
+Weaveでは、複数のトラッキング関数とLLM呼び出しを組み合わせて、実行トレース全体を保持しながら複雑なワークフローをトラッキングできます。これには以下のような利点があります：
+
+* アプリケーションのロジックフローの完全な可視性
+* 複雑な操作チェーンの簡単なデバッグ
+* パフォーマンス最適化の機会
+
+```typescript
+async function demonstrateNestedTracking() {
+    const client = initializeOpenAIClient();
+    
+    const correctGrammar = weave.op(async function correctGrammar(userInput: string): Promise<string> {
+        const stripped = await stripUserInput(userInput);
+        const response = await client.chat.completions.create({
+            model: "gpt-4-turbo",
+            messages: [
+                {
+                    role: "system",
+                    content: "You are a grammar checker, correct the following user input."
+                },
+                { role: "user", content: stripped }
+            ],
+            temperature: 0,
+        });
+        return response.choices[0].message.content ?? '';
+    });
+
+    const grammarResult = await correctGrammar("That was so easy, it was a piece of pie!");
+    console.log('Nested tracking result:', grammarResult);
+}
+```
+
+## データセット管理
+
+Weaveを使用してデータセットを作成および管理できます：[`weave.Dataset`](../../guides/core-types/datasets.mdx)クラスを使用します。[Weave `Models`](../../guides/core-types/models.mdx)と同様に、`weave.Dataset` helps:
+
+* データのトラッキングとバージョン管理
+* テストケースの整理
+* チームメンバー間でのデータセット共有
+* 体系的な評価の実現
+
+```typescript
+interface GrammarExample {
+    userInput: string;
+    expected: string;
+}
+```
+
+```typescript
+function createGrammarDataset(): weave.Dataset<GrammarExample> {
+    return new weave.Dataset<GrammarExample>({
+        id: 'grammar-correction',
+        rows: [
+            {
+                userInput: "That was so easy, it was a piece of pie!",
+                expected: "That was so easy, it was a piece of cake!"
+            },
+            {
+                userInput: "I write good",
+                expected: "I write well"
+            },
+            {
+                userInput: "LLM's are best",
+                expected: "LLM's are the best"
+            }
+        ]
+    });
+}
+```
+
+## 評価フレームワーク
+
+Weaveは[`Evaluation`クラス](../../guides/core-types/evaluations.mdx)で評価駆動開発をサポートします。評価はGenAIアプリケーションを確実に反復するのに役立ちます。`Evaluation`クラスは以下を行います：
+
+* 評価`Model`のパフォーマンスを`Dataset`
+* カスタムスコアリング関数の適用
+* 詳細なパフォーマンスレポートの生成
+* モデルバージョン間の比較を可能にする
+
+完全な評価チュートリアルは[http://wandb.me/weave\_eval\_tut](http://wandb.me/weave_eval_tut)
+
+```typescript
+class OpenAIGrammarCorrector {
+    private oaiClient: ReturnType<typeof weave.wrapOpenAI>;
+    
+    constructor() {
+        this.oaiClient = weave.wrapOpenAI(new OpenAI({
+            apiKey: process.env.OPENAI_API_KEY
+        }));
+        this.predict = weave.op(this, this.predict);
+    }
+
+    async predict(userInput: string): Promise<string> {
+        const response = await this.oaiClient.chat.completions.create({
+            model: 'gpt-4-turbo',
+            messages: [
+                { 
+                    role: "system", 
+                    content: "You are a grammar checker, correct the following user input." 
+                },
+                { role: "user", content: userInput }
+            ],
+            temperature: 0
+        });
+        return response.choices[0].message.content ?? '';
+    }
+}
+```
+
+```typescript
+async function runEvaluation() {
+    const corrector = new OpenAIGrammarCorrector();
+    const dataset = createGrammarDataset();
+    
+    const exactMatch = weave.op(
+        function exactMatch({ modelOutput, datasetRow }: { 
+            modelOutput: string; 
+            datasetRow: GrammarExample 
+        }): { match: boolean } {
+            return { match: datasetRow.expected === modelOutput };
+        },
+        { name: 'exactMatch' }
+    );
+
+    const evaluation = new weave.Evaluation({
+        dataset,
+        scorers: [exactMatch],
+    });
+
+    const summary = await evaluation.evaluate({
+        model: weave.op((args: { datasetRow: GrammarExample }) => 
+            corrector.predict(args.datasetRow.userInput)
+        )
+    });
+    console.log('Evaluation summary:', summary);
+}
+```
+
+以下の`main`関数はすべてのデモを実行します：
+
+```typescript
+async function main() {
+    try {
+        await initializeWeaveProject();
+        await demonstrateBasicTracking();
+        await demonstrateOpenAITracking();
+        await demonstrateNestedTracking();
+        await runEvaluation();
+    } catch (error) {
+        console.error('Error running demonstrations:', error);
+    }
+}
+```

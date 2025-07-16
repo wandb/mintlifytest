@@ -1,0 +1,123 @@
+# MistralAI
+
+<a target="_blank" href="https://colab.research.google.com/github/wandb/examples/blob/master/weave/docs/quickstart_mistral.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" />
+</a>
+
+Weave는 [MistralAI Python library](https://github.com/mistralai/client-python)를 통해 이루어진 LLM 호출을 자동으로 추적하고 기록합니다.
+
+> 새로운 Mistral v1.0 SDK를 지원합니다. 마이그레이션 가이드는 [here](https://github.com/mistralai/client-python/blob/main/MIGRATION.mdx)
+
+## Traces
+
+LLM 애플리케이션의 추적을 중앙 데이터베이스에 저장하는 것은 개발 중이나 프로덕션 환경에서 모두 중요합니다. 이러한 추적은 디버깅에 사용되며, 애플리케이션을 개선하는 데 도움이 되는 데이터셋으로 활용됩니다.
+
+Weave는 자동으로 다음에 대한 추적을 캡처합니다 [mistralai](https://github.com/mistralai/client-python). 라이브러리를 평소와 같이 사용할 수 있으며, 다음을 호출하여 시작하세요 `weave.init()`:
+
+```python
+import weave
+weave.init("cheese_recommender")
+
+# then use mistralai library as usual
+import os
+from mistralai import Mistral
+
+api_key = os.environ["MISTRAL_API_KEY"]
+model = "mistral-large-latest"
+
+client = Mistral(api_key=api_key)
+
+messages = [
+    {
+        "role": "user",
+        "content": "What is the best French cheese?",
+    },
+]
+
+chat_response = client.chat.complete(
+    model=model,
+    messages=messages,
+)
+```
+
+이제 Weave는 MistralAI 라이브러리를 통해 이루어진 모든 LLM 호출을 추적하고 기록합니다. Weave 웹 인터페이스에서 추적을 볼 수 있습니다.
+
+[![mistral\_trace.png](imgs/mistral_trace.png)](https://wandb.ai/capecape/mistralai_project/weave/calls)
+
+## 자체 ops로 래핑하기
+
+Weave ops는 결과를 *reproducible*하게 만들어 실험할 때 코드를 자동으로 버전 관리하고, 입력과 출력을 캡처합니다. 간단히 [`@weave.op()`](/ko/guides/tracking/ops)로 장식된 함수를 만들어 [`mistralai.client.MistralClient.chat()`](https://docs.mistral.ai/capabilities/completion/)를 호출하면 Weave가 입력과 출력을 추적합니다. 치즈 추천기에 이를 어떻게 적용할 수 있는지 살펴보겠습니다:
+
+```python
+# highlight-next-line
+@weave.op()
+def cheese_recommender(region:str, model:str) -> str:
+    "Recommend the best cheese in a given region"
+    
+    messages = [
+        {
+            "role": "user",
+            "content": f"What is the best cheese in {region}?",
+        },
+    ]
+
+    chat_response = client.chat.complete(
+        model=model,
+        messages=messages,
+    )
+    return chat_response.choices[0].message.content
+
+cheese_recommender(region="France", model="mistral-large-latest")
+cheese_recommender(region="Spain", model="mistral-large-latest")
+cheese_recommender(region="Netherlands", model="mistral-large-latest")
+```
+
+[![mistral\_ops.png](imgs/mistral_ops.png)](https://wandb.ai/capecape/mistralai_project/weave/calls)
+
+## 쉬운 실험을 위한 `Model` 만들기
+
+여러 요소가 있을 때 실험을 체계화하기는 어렵습니다. [`Model`](/ko/guides/core-types/models) 클래스를 사용하면 시스템 프롬프트나 사용 중인 모델과 같은 앱의 실험 세부 정보를 캡처하고 구성할 수 있습니다. 이는 앱의 다양한 반복을 구성하고 비교하는 데 도움이 됩니다.
+
+코드 버전 관리 및 입력/출력 캡처 외에도, [`Model`](/ko/guides/core-types/models)는 애플리케이션의 동작을 제어하는 구조화된 매개변수를 캡처하여 어떤 매개변수가 가장 효과적인지 쉽게 찾을 수 있게 합니다. Weave Models를 `serve`, 및 [`Evaluation`](/ko/guides/core-types/evaluations)와 함께 사용할 수도 있습니다.
+
+아래 예시에서는 `model`와 `country`로 실험할 수 있습니다. 이 중 하나를 변경할 때마다 새로운 *version*의 `CheeseRecommender`를 얻게 됩니다.
+
+```python
+import weave
+from mistralai import Mistral
+
+weave.init("mistralai_project")
+
+class CheeseRecommender(weave.Model): # Change to `weave.Model`
+    model: str
+    temperature: float
+
+    @weave.op()
+    def predict(self, region:str) -> str: # Change to `predict`
+        "Recommend the best cheese in a given region"
+        
+        client = Mistral(api_key=api_key)
+
+        messages = [
+            {
+                "role": "user",
+                "content": f"What is the best cheese in {region}?",
+            },
+        ]
+
+        chat_response = client.chat.complete(
+            model=model,
+            messages=messages,
+            temperature=self.temperature
+        )
+        return chat_response.choices[0].message.content
+
+cheese_model = CheeseRecommender(
+    model="mistral-medium-latest",
+    temperature=0.0
+    )
+result = cheese_model.predict(region="France")
+print(result)
+```
+
+[![mistral\_model.png](imgs/mistral_model.png)](https://wandb.ai/capecape/mistralai_project/weave/models)

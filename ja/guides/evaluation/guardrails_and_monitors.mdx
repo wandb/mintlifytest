@@ -1,0 +1,705 @@
+---
+- title: オンライン評価：ガードレールとモニター
+- description: 本番アプリケーションでLLMの安全性を確保し、出力品質を測定する
+---
+
+![Feedback](../../images/guardrails_scorers.png)
+
+## はじめに
+
+本番環境でLLMアプリケーションを構築していますか？次の2つの質問が夜も眠れないほど気になっているでしょう：
+
+1. LLMが安全で適切なコンテンツを生成することをどのように確保しますか？
+2. 出力品質をどのように測定し、時間とともに改善しますか？
+
+Weaveの統合スコアリングシステムは、シンプルながらも強力なフレームワークを通じて両方の質問に答えます。アクティブな安全制御（ガードレール）が必要な場合でも、パッシブな品質モニタリングが必要な場合でも、このガイドではLLMアプリケーション用の堅牢な評価システムを実装する方法を紹介します。
+
+Weaveの評価システムの基盤は[**Scorer**](./scorers.mdx)- 関数の入力と出力を評価して、品質、安全性、またはその他の気になる指標を測定するコンポーネントです。Scorerは汎用性があり、次の2つの方法で使用できます：
+
+* **ガードレールとして**：安全でないコンテンツがユーザーに届く前にブロックまたは修正する
+* **モニターとして**：時間の経過とともに品質指標を追跡し、傾向や改善点を特定する
+
+<Note>
+  **用語**
+  このガイド全体を通して、`@weave.op`でデコレートされた関数を「ops」と呼びます。これらは、Weaveのトラッキング機能で強化された通常のPython関数です。
+</Note>
+
+#### すぐに使えるScorer
+
+このガイドではカスタムScorerの作成方法を示していますが、Weaveには様々な[事前定義されたScorer](./builtin_scorers.mdx)が付属しており、すぐに使用できます。以下のようなものがあります：
+
+* [幻覚検出](./builtin_scorers.mdx#hallucinationfreescorer)
+* [要約の品質](./builtin_scorers.mdx#summarizationscorer)
+* [埋め込み類似性](./builtin_scorers.mdx#embeddingsimilarityscorer)
+* [関連性評価](./builtin_scorers.mdx#ragas---contextrelevancyscorer)
+* その他多数！
+
+### ガードレールとモニター：それぞれの使用タイミング
+
+Scorerはガードレールとモニターの両方を強化しますが、それぞれ異なる目的を果たします：
+
+| 側面          | ガードレール              | モニター                    |
+| ----------- | ------------------- | ----------------------- |
+| **目的**      | 問題を防ぐための積極的な介入      | 分析のための受動的な観察            |
+| **タイミング**   | 出力がユーザーに届く前のリアルタイム  | 非同期またはバッチ処理が可能          |
+| **パフォーマンス** | 高速である必要がある（応答時間に影響） | より遅くても良く、バックグラウンドで実行可能  |
+| **サンプリング**  | 通常はすべてのリクエスト        | 多くの場合サンプリング（例：呼び出しの10％） |
+| **制御フロー**   | 出力をブロック/修正可能        | アプリケーションフローへの影響なし       |
+| **リソース使用量** | 効率的である必要がある         | 必要に応じてより多くのリソースを使用可能    |
+
+例えば、有害性を評価するScorerは以下のように使用できます：
+
+* **ガードレールとして**：有害なコンテンツを即座にブロック
+* **モニターとして**：時間の経過とともに有害性レベルを追跡
+
+<Note>
+  すべてのScorer結果は自動的にWeaveのデータベースに保存されます。つまり、ガードレールは追加作業なしでモニターとしても機能します！元々どのように使用されていたかに関わらず、Scorerの過去の結果を常に分析できます。
+</Note>
+
+### メソッドの使用`.call()`
+
+WeaveのopsでScorerを使用するには、操作の結果とそのトラッキング情報の両方にアクセスする必要があります。`.call()`メソッドは両方を提供します：
+
+```python
+# Instead of calling the op directly:
+result = generate_text(input)  # Primary way to call the op but doesn't give access to the Call object
+
+# Use the .call() method to get both result and Call object:
+result, call = generate_text.call(input)  # Now you can use the call object with scorers
+```
+
+<Tip>
+  **なぜ`.call()`を使用するのか？**
+  Callオブジェクトは、スコアをデータベース内の呼び出しに関連付けるために不可欠です。スコアリング関数を直接呼び出すこともできますが、これでは呼び出しに関連付けられず、後の分析のために検索、フィルタリング、またはエクスポートできなくなります。
+
+  Callオブジェクトの詳細については、[CallオブジェクトについてのCallsガイドセクション](../tracking/tracing.mdx#getting-a-handle-to-the-call-object-during-execution)を参照してください。
+</Tip>
+
+## Scorerの使用を始める
+
+### 基本的な例
+
+以下はScorerで`.call()`を使用する簡単な例です：
+
+```python
+import weave
+from weave import Scorer
+
+class LengthScorer(Scorer):
+    @weave.op
+    def score(self, output: str) -> dict:
+        """A simple scorer that checks output length."""
+        return {
+            "length": len(output),
+            "is_short": len(output) < 100
+        }
+
+@weave.op
+def generate_text(prompt: str) -> str:
+    return "Hello, world!"
+
+# Get both result and Call object
+result, call = generate_text.call("Say hello")
+
+# Now you can apply scorers
+await call.apply_scorer(LengthScorer())
+```
+
+## ガードレールとしてのScorerの使用
+
+ガードレールは、LLM出力がユーザーに届く前に実行される安全チェックとして機能します。以下は実用的な例です：
+
+```python
+import weave
+from weave import Scorer
+
+@weave.op
+def generate_text(prompt: str) -> str:
+    """Generate text using an LLM."""
+    # Your LLM generation logic here
+    return "Generated response..."
+
+class ToxicityScorer(Scorer):
+    @weave.op
+    def score(self, output: str) -> dict:
+        """
+        Evaluate content for toxic language.
+        """
+        # Your toxicity detection logic here
+        return {
+            "flagged": False,  # True if content is toxic
+            "reason": None     # Optional explanation if flagged
+        }
+
+async def generate_safe_response(prompt: str) -> str:
+    # Get result and Call object
+    result, call = generate_text.call(prompt)
+    
+    # Check safety
+    safety = await call.apply_scorer(ToxicityScorer())
+    if safety.result["flagged"]:
+        return f"I cannot generate that content: {safety.result['reason']}"
+    
+    return result
+```
+
+<Note>
+  **Scorerのタイミング**
+  Scorerを適用する際：
+
+  * メイン操作（`generate_text`）が完了し、UIで完了としてマークされる
+  * Scorerはメイン操作の後に非同期で実行される
+  * Scorerの結果は完了後に呼び出しに添付される
+  * UIでScorer結果を表示したり、APIを通じてクエリしたりできる
+</Note>
+
+## モニターとしてのScorerの使用
+
+<Warning>
+  この機能はマルチテナント（MT）SaaSデプロイメントでのみ利用可能です。
+</Warning>
+
+スコアリングロジックをアプリに書き込まずに品質指標を追跡したい場合は、*monitors*を使用できます。
+
+モニターは以下を行うバックグラウンドプロセスです：
+
+* でデコレートされた1つ以上の指定された関数を監視する`weave.op`
+* を使用して呼び出しのサブセットをスコアリングする*LLM-as-a-judge*スコアラー。これは、スコアリングしたいopsに合わせた特定のプロンプトを持つLLMモデルです
+* 指定された`weave.op`が呼び出されるたびに自動的に実行され、手動で`.apply_scorer()`
+
+モニターは以下に最適です：
+
+* 本番環境の動作を評価および追跡する
+* 回帰やドリフトを検出する
+* 時間の経過とともに実世界のパフォーマンスデータを収集する
+
+方法を学ぶ：[一般的なモニターの作成](#create-a-monitor)または[真実性モニターを作成するエンドツーエンドの例](#example-create-a-truthfulness-monitor)を試してみてください。
+
+### モニターを作成する
+
+1. 左側のメニューから**Monitors**タブを選択します。
+2. モニターページから**New Monitor**をクリックします。
+3. ドロワーでモニターを設定します：
+   * **Name**：有効なモニター名は文字または数字で始まり、文字、数字、ハイフン、アンダースコアのみを含むことができます。
+   * **Description** *(オプション)*：モニターの機能を説明します。
+   * **Active monitor** toggle: Turn the monitor on or off.
+   * **Calls to monitor**：
+     * **Operations**：モニターする1つ以上の`@weave.op`を選択します。
+       <Warning>
+         Opが利用可能な操作のリストに表示されるには、少なくとも1つのトレースをログに記録する必要があります。
+       </Warning>
+     * **Filter** *(オプション)*：モニタリングの対象となるop列を絞り込みます（例：`max_tokens`または`top_p`）
+     * **Sampling rate**：スコアリングされる呼び出しの割合（0％〜100％、例：10％）
+       <Tip>
+         サンプリングレートを低くすると、各スコアリングコールにはコストが関連付けられているため、コストを管理するのに役立ちます。
+       </Tip>
+   * **LLM-as-a-Judgeの設定**:
+     * **スコアラー名**: 有効なスコアラー名は文字または数字で始まり、文字、数字、ハイフン、アンダースコアのみを含むことができます。
+     * **ジャッジモデル**: オペレーションをスコアリングするモデルを選択します。以下の3種類のモデルが利用可能です：
+       * [保存されたモデル](../tools/playground.md#saved-models)
+       * W\&B管理者によって設定されたプロバイダーからのモデル
+       * [W\&B Inferenceモデル](../integrations/inference.mdx)
+     選択したモデルに対して、以下の設定を構成します：
+     * **設定名**
+     * **システムプロンプト**
+     * **レスポンス形式**
+     * **スコアリングプロンプト**: LLM-as-a-judgeがオペレーションをスコアリングするために使用するプロンプトです。「参照できるのは`{output}`、個々の入力（`{foo}`など）、および`{inputs}`を辞書として。[詳細については、プロンプト変数を参照してください](#prompt-variables)。"
+4. クリック**モニターを作成**。Weaveは指定された条件に一致する呼び出しの監視とスコアリングを自動的に開始します。モニターの詳細は**モニター**タブで確認できます。
+
+### Example: Create a truthfulness monitor
+
+次の例では、以下を作成します：
+
+* 監視対象となる`weave.op`、`generate_statement`。この関数は、入力`ground_truth`ステートメントを返す（例：`"The Earth revolves around the Sun."`）、または`ground_truth`に基づいて不正確なステートメントを生成する（例：`"The Earth revolves around Saturn."`）
+* モニター、`truthfulness-monitor`、生成されたステートメントの真実性を評価するため。
+
+1. 定義`generate_statement`:
+   ```python
+    import weave
+    import random
+    import openai
+
+    # Replace my-team/my-weave-project with your Weave team and project name 
+    weave.init("my-team/my-weave-project")
+
+    client = openai.OpenAI() 
+
+    @weave.op()
+    def generate_statement(ground_truth: str) -> str:
+        if random.random() < 0.5:
+            response = openai.ChatCompletion.create(
+                model="gpt-4.1",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": f"Generate a statement that is incorrect based on this fact: {ground_truth}"
+                    }
+                ]
+            )
+            return response.choices[0].message["content"]
+        else:
+            return ground_truth
+   ```
+2. コードを実行して`generate_statement`のトレースをログに記録します。`generate_statement`オペレーションは、少なくとも1回ログに記録されない限り、Opドロップダウンに表示されません。
+3. Weave UIで、**モニター**に移動します。
+4. モニターページから、**新規モニター**をクリックします。
+5. モニターを次のように設定します：
+   * **名前**: `truthfulness-monitor`
+   * **説明**:\
+     `A monitor to evaluate the truthfulness of statements generated by an LLM.`
+   * **アクティブモニター** toggle:\
+     トグルを**オン**にして、モニターが作成されるとすぐにコールのスコアリングを開始します。
+
+     ![Creating a monitor part 1](img/monitors-ui-1.png)
+   * **監視するコール**:
+     * **オペレーション**: `generate_statement`。
+     * **フィルター** *（オプション）*: この例では適用されていませんが、`temperature`や`max_tokens`などの引数によって監視範囲を限定するために使用できます。
+     * **サンプリングレート**:\
+       設定を`100%`にして、すべてのコールをスコアリングします。
+
+       ![Creating a monitor part 2](img/monitors-ui-2.png)
+   * **LLM-as-a-Judge設定**:
+     * **スコアラー名**: `truthfulness-scorer`
+     * **ジャッジモデル**:\
+       `o3-mini-2025-01-31`
+     * **モデル設定**:
+     * **LLM ID**: `o3-mini-2025-01-31`
+     * **設定名**: `truthfulness-scorer-judge-model`
+     * **システムプロンプト**:\
+       `You are an impartial AI judge. Your task is to evaluate the truthfulness of statements.`
+     * **レスポンス形式**: `json_object`
+     * **スコアリングプロンプト**:
+       ```text
+       Evaluate whether the output statement is accurate based on the input statement.
+
+       This is the input statement: {ground_truth}
+
+       This is the output statement: {output}
+
+       The response should be a JSON object with the following fields:
+       - is_true: a boolean stating whether the output statement is true or false based on the input statement.
+       - reasoning: your reasoning as to why the statement is true or false.
+       ```
+       ![Creating a monitor part 3](img/monitors-ui-3.png)
+6. クリック**モニターを作成**。`truthfulness-monitor`は監視を開始する準備ができています。
+7. モニターによる評価のために、真実で簡単に検証できる`ground_truth`ステートメント（`"Water freezes at 0 degrees Celsius."`など）でステートメントを生成します。
+   ```python
+   generate_statement("The Earth revolves around the Sun.")
+   generate_statement("Water freezes at 0 degrees Celsius.")
+   generate_statement("The Great Wall of China was built over several centuries, with construction beginning as early as the 7th century BCE.")
+   ```
+8. Weave UIで、**トレース**タブに移動します。
+9. 利用可能なトレースのリストから、**LLMAsAJudgeScorer.score**のトレースを選択します。
+10. トレースを調査して、モニターの動作を確認します。この例では、モニターは`output`（この場合、`ground_truth`と同等）を`true`として正しく評価し、適切な`reasoning`を提供しました。
+
+    ![Monitor trace](img/monitors-4.png)
+
+### プロンプト変数
+
+スコアリングプロンプトでは、オペレーションからの複数の変数を参照できます。これらの値は、スコアラーが実行されるときに関数呼び出しから自動的に抽出されます。次の関数例を考えてみましょう：
+
+```python
+@weave.op
+def my_function(foo: str, bar: str) -> str:
+    return f"{foo} and {bar}"
+```
+
+この場合、以下の変数にアクセスできます：
+
+| 変数         | 説明              |
+| ---------- | --------------- |
+| `{foo}`    | 入力引数の値`foo`     |
+| `{bar}`    | 入力引数の値`bar`     |
+| `{inputs}` | すべての入力引数のJSON辞書 |
+| `{output}` | オペレーションから返された結果 |
+
+例えば：
+
+```text
+Input foo: {foo}
+Input bar: {bar}
+Output: {output}
+```
+
+オペレーションに他の引数がある場合、それらはすべて名前で利用可能になります。
+
+## AWS Bedrock Guardrails
+
+`BedrockGuardrailScorer`はAWS Bedrockのガードレール機能を使用して、設定されたポリシーに基づいてコンテンツを検出およびフィルタリングします。`apply_guardrail`APIを呼び出してコンテンツにガードレールを適用します。
+
+`BedrockGuardrailScorer`を使用するには、以下が必要です：
+
+* Bedrockアクセス権を持つAWSアカウント
+* Bedrockへのアクセス権を持つAWSアカウント
+* AWS Bedrockコンソールで設定されたガードレール
+* `boto3`Pythonパッケージ
+
+<Tip>
+  独自のBedrockクライアントを作成する必要はありません—Weaveがそれを作成します。リージョンを指定するには、`bedrock_runtime_kwargs`パラメータをスコアラーに渡します。
+</Tip>
+
+ガードレールの作成の詳細については、[Bedrockガードレールノートブック](https://github.com/aws-samples/amazon-bedrock-samples/blob/main/responsible_ai/bedrock-guardrails/guardrails-api.ipynb)を参照してください。
+
+```python
+import weave
+import boto3
+from weave.scorers.bedrock_guardrails import BedrockGuardrailScorer
+
+# Initialize Weave
+weave.init("my_app")
+
+# Create a guardrail scorer
+guardrail_scorer = BedrockGuardrailScorer(
+    guardrail_id="your-guardrail-id",  # Replace "your-guardrail-id" with your guardrail ID
+    guardrail_version="DRAFT",          # Use guardrail_version to use a specific guardrail version
+    source="INPUT",                             # Can be "INPUT" or "OUTPUT"
+    bedrock_runtime_kwargs={"region_name": "us-east-1"}  # AWS region
+)
+
+@weave.op
+def generate_text(prompt: str) -> str:
+    # Add your text generation logic here
+    return "Generated text..."
+
+# Use the guardrail as a safety check
+async def generate_safe_text(prompt: str) -> str:
+    result, call = generate_text.call(prompt)
+    
+    # Apply the guardrail
+    score = await call.apply_scorer(guardrail_scorer)
+    
+    # Check if the content passed the guardrail
+    if not score.result.passed:
+        # Use the modified output if available
+        if score.result.metadata.get("modified_output"):
+            return score.result.metadata["modified_output"]
+        return "I cannot generate that content due to content policy restrictions."
+    
+    return result
+```
+
+## 実装の詳細
+
+### スコアラーインターフェース
+
+スコアラーは`Scorer`を継承し、`score`メソッドを実装するクラスです。このメソッドは以下を受け取ります：
+
+* `output`：関数からの結果
+* 関数のパラメータに一致する入力パラメータ
+
+以下は包括的な例です：
+
+```python
+@weave.op
+def generate_styled_text(prompt: str, style: str, temperature: float) -> str:
+    """Generate text in a specific style."""
+    return "Generated text in requested style..."
+
+class StyleScorer(Scorer):
+    @weave.op
+    def score(self, output: str, prompt: str, style: str) -> dict:
+        """
+        Evaluate if the output matches the requested style.
+        
+        Args:
+            output: The generated text (automatically provided)
+            prompt: Original prompt (matched from function input)
+            style: Requested style (matched from function input)
+        """
+        return {
+            "style_match": 0.9,  # How well it matches requested style
+            "prompt_relevance": 0.8  # How relevant to the prompt
+        }
+
+# Example usage
+async def generate_and_score():
+    # Generate text with style
+    result, call = generate_styled_text.call(
+        prompt="Write a story",
+        style="noir",
+        temperature=0.7
+    )
+    
+    # Score the result
+    score = await call.apply_scorer(StyleScorer())
+    print(f"Style match score: {score.result['style_match']}")
+```
+
+### スコアパラメータ
+
+#### パラメータマッチングルール
+
+* `output`パラメータは特別で、常に関数の結果を含みます
+* その他のパラメータは関数のパラメータ名と完全に一致する必要があります
+* スコアラーは関数のパラメータのサブセットを使用できます
+* パラメータの型は関数の型ヒントと一致する必要があります
+
+#### パラメータ名の不一致の処理
+
+スコアラーのパラメータ名が関数のパラメータ名と完全に一致しない場合があります。例えば：
+
+```python
+@weave.op
+def generate_text(user_input: str):  # Uses 'user_input'
+    return process(user_input)
+
+class QualityScorer(Scorer):
+    @weave.op
+    def score(self, output: str, prompt: str):  # Expects 'prompt'
+        """Evaluate response quality."""
+        return {"quality_score": evaluate_quality(prompt, output)}
+
+result, call = generate_text.call(user_input="Say hello")
+
+# Map 'prompt' parameter to 'user_input'
+scorer = QualityScorer(column_map={"prompt": "user_input"})
+await call.apply_scorer(scorer)
+```
+
+一般的なユースケース`column_map`：
+
+* 関数とスコアラー間の命名規則の違い
+* 異なる関数間でのスコアラーの再利用
+* サードパーティのスコアラーを自分の関数名で使用する
+
+#### 追加パラメータの追加
+
+スコアラーが関数の一部ではない追加パラメータを必要とする場合があります。これらは次のように提供できます`additional_scorer_kwargs`：
+
+```python
+class ReferenceScorer(Scorer):
+    @weave.op
+    def score(self, output: str, reference_answer: str):
+        """Compare output to a reference answer."""
+        similarity = compute_similarity(output, reference_answer)
+        return {"matches_reference": similarity > 0.8}
+
+# Provide the reference answer as an additional parameter
+await call.apply_scorer(
+    ReferenceScorer(),
+    additional_scorer_kwargs={
+        "reference_answer": "The Earth orbits around the Sun."
+    }
+)
+```
+
+これは、スコアラーが元の関数呼び出しの一部ではないコンテキストや設定を必要とする場合に役立ちます。
+
+### スコアラーの使用：2つのアプローチ
+
+1. **Weaveのオプシステムを使用**（推奨）
+
+```python
+result, call = generate_text.call(input)
+score = await call.apply_scorer(MyScorer())
+```
+
+2. **直接使用**（クイック実験用）
+
+```python
+scorer = MyScorer()
+score = scorer.score(output="some text")
+```
+
+**それぞれの使用タイミング：**
+
+* 本番環境、トラッキング、分析にはオプシステムを使用
+* クイック実験や一回限りの評価には直接スコアリングを使用
+
+**直接使用のトレードオフ：**
+
+* **メリット**：クイックテストがより簡単
+* **メリット**：Opが不要
+* **デメリット**：LLM/Op呼び出しとの関連付けがない
+
+### スコア分析
+
+呼び出しとそのスコアラー結果の照会に関する詳細情報については、[スコア分析ガイド](./scorers.md#score-analysis)および[データアクセスガイド](/ja/guides/tracking/tracing#querying--exporting-calls)をご覧ください。
+
+## 本番環境のベストプラクティス
+
+### 1. 適切なサンプリングレートを設定する
+
+```python
+@weave.op
+def generate_text(prompt: str) -> str:
+    return generate_response(prompt)
+
+async def generate_with_sampling(prompt: str) -> str:
+    result, call = generate_text.call(prompt)
+    
+    # Only monitor 10% of calls
+    if random.random() < 0.1:
+        await call.apply_scorer(ToxicityScorer())
+        await call.apply_scorer(QualityScorer())
+    
+    return result
+```
+
+### 2. 複数の側面をモニタリングする
+
+```python
+async def evaluate_comprehensively(call):
+    await call.apply_scorer(ToxicityScorer())
+    await call.apply_scorer(QualityScorer())
+    await call.apply_scorer(LatencyScorer())
+```
+
+### 3. 分析と改善
+
+* Weaveダッシュボードでトレンドを確認する
+* 低スコア出力のパターンを探す
+* 洞察を使用してLLMシステムを改善する
+* 懸念されるパターンのアラートを設定する（近日公開）
+
+### 4. 履歴データへのアクセス
+
+スコアラーの結果は関連する呼び出しと共に保存され、以下を通じてアクセスできます：
+
+* Callオブジェクトの`feedback`フィールド
+* Weaveダッシュボード
+* クエリAPI
+
+### 5. ガードを効率的に初期化する
+
+最適なパフォーマンスを得るため、特にローカルで実行されるモデルでは、メイン関数の外部でガードを初期化してください。このパターンは特に以下の場合に重要です：
+
+* スコアラーがMLモデルをロードする場合
+* レイテンシーが重要なローカルLLMを使用している場合
+* スコアラーがネットワーク接続を維持する場合
+* トラフィックの多いアプリケーションがある場合
+
+このパターンのデモンストレーションについては、以下の完全な例のセクションを参照してください。
+
+<Warning>
+  **パフォーマンスのヒント**
+  ガードレールの場合：
+
+  * ロジックをシンプルかつ高速に保つ
+  * 一般的な結果のキャッシュを検討する
+  * 重い外部API呼び出しを避ける
+  * 繰り返しの初期化コストを避けるため、メイン関数の外部でガードを初期化する
+
+  モニターの場合：
+
+  * 負荷を減らすためにサンプリングを使用する
+  * より複雑なロジックを使用できる
+  * 外部API呼び出しを行うことができる
+</Warning>
+
+## 完全な例
+
+これまで説明したすべての概念をまとめた包括的な例を以下に示します：
+
+```python
+import weave
+from weave import Scorer
+import asyncio
+import random
+from typing import Optional
+
+class ToxicityScorer(Scorer):
+    def __init__(self):
+        # Initialize any expensive resources here
+        self.model = load_toxicity_model()
+    
+    @weave.op
+    async def score(self, output: str) -> dict:
+        """Check content for toxic language."""
+        try:
+            result = await self.model.evaluate(output)
+            return {
+                "flagged": result.is_toxic,
+                "reason": result.explanation if result.is_toxic else None
+            }
+        except Exception as e:
+            # Log error and default to conservative behavior
+            print(f"Toxicity check failed: {e}")
+            return {"flagged": True, "reason": "Safety check unavailable"}
+
+class QualityScorer(Scorer):
+    @weave.op
+    async def score(self, output: str, prompt: str) -> dict:
+        """Evaluate response quality and relevance."""
+        return {
+            "coherence": evaluate_coherence(output),
+            "relevance": evaluate_relevance(output, prompt),
+            "grammar": evaluate_grammar(output)
+        }
+
+# Initialize scorers at module level (optional optimization)
+toxicity_guard = ToxicityScorer()
+quality_monitor = QualityScorer()
+relevance_monitor = RelevanceScorer()
+
+@weave.op
+def generate_text(
+    prompt: str,
+    style: Optional[str] = None,
+    temperature: float = 0.7
+) -> str:
+    """Generate an LLM response."""
+    # Your LLM generation logic here
+    return "Generated response..."
+
+async def generate_safe_response(
+    prompt: str,
+    style: Optional[str] = None,
+    temperature: float = 0.7
+) -> str:
+    """Generate a response with safety checks and quality monitoring."""
+    try:
+        # Generate initial response
+        result, call = generate_text.call(
+            prompt=prompt,
+            style=style,
+            temperature=temperature
+        )
+
+        # Apply safety check (guardrail)
+        safety = await call.apply_scorer(toxicity_guard)
+        if safety.result["flagged"]:
+            return f"I cannot generate that content: {safety.result['reason']}"
+
+        # Sample quality monitoring (10% of requests)
+        if random.random() < 0.1:
+            # Run quality checks in parallel
+            await asyncio.gather(
+                call.apply_scorer(quality_monitor),
+                call.apply_scorer(relevance_monitor)
+            )
+        
+        return result
+
+    except Exception as e:
+        # Log error and return user-friendly message
+        print(f"Generation failed: {e}")
+        return "I'm sorry, I encountered an error. Please try again."
+
+# Example usage
+async def main():
+    # Basic usage
+    response = await generate_safe_response("Tell me a story")
+    print(f"Basic response: {response}")
+    
+    # Advanced usage with all parameters
+    response = await generate_safe_response(
+        prompt="Tell me a story",
+        style="noir",
+        temperature=0.8
+    )
+    print(f"Styled response: {response}")
+
+```
+
+この例では以下を示しています：
+
+* 適切なスコアラーの初期化とエラー処理
+* ガードレールとモニターの組み合わせ使用
+* 並列スコアリングによる非同期操作
+* 本番環境に対応したエラー処理とロギング
+
+## 次のステップ
+
+* 探索[利用可能なスコアラー](./scorers.mdx)
+* 学習[Weave Ops](../../guides/tracking/ops.mdx)

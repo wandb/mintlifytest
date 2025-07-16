@@ -1,0 +1,98 @@
+---
+- title: オブジェクト
+- description: WeaveでJSON-シリアライズ可能なオブジェクトを追跡・バージョン管理する
+---
+
+## オブジェクトの公開
+
+Weaveのシリアル化レイヤーはオブジェクトを保存しバージョン管理します。
+
+<Tabs>
+  <Tab title="Python">
+    ```python
+    import weave
+    # Initialize tracking to the project 'intro-example'
+    weave.init('intro-example')
+    # Save a list, giving it the name 'cat-names'
+    weave.publish(['felix', 'jimbo', 'billie'], 'cat-names')
+    ```
+  </Tab>
+
+  <Tab title="TypeScript">
+    TypeScriptでの公開はまだ初期段階なので、すべてのオブジェクトが完全にサポートされているわけではありません。
+
+    ```typescript
+    import * as weave from 'weave'
+
+    // Initialize tracking to the project 'intro-example'
+    const client = await weave.init('intro-example')
+
+    // Save an array, giving it the name 'cat-names'
+    client.publish(['felix', 'jimbo', 'billie'], 'cat-names')
+    ```
+  </Tab>
+</Tabs>
+
+名前を付けてオブジェクトを保存すると、そのオブジェクトが存在しない場合は最初のバージョンが作成されます。
+
+## オブジェクトの取得
+
+<Tabs>
+  <Tab title="Python">
+    `weave.publish` はRefを返します。任意のRefに対して `.get()` を呼び出すことでオブジェクトを取得できます。
+
+    refを構築してからオブジェクトを取得することができます。
+
+    ```python
+    weave.init('intro-example')
+    cat_names = weave.ref('cat-names').get()
+    ```
+  </Tab>
+
+  <Tab title="TypeScript">
+    ```plaintext
+    This feature is not available in TypeScript yet.  Stay tuned!
+    ```
+  </Tab>
+</Tabs>
+
+## オブジェクトの削除
+
+<Tabs>
+  <Tab title="Python">
+    オブジェクトのバージョンを削除するには、オブジェクトrefに対して `.delete()` を呼び出します。
+
+    ```python
+    weave.init('intro-example')
+    cat_names_ref = weave.ref('cat-names:v1')
+    cat_names_ref.delete()
+    ```
+
+    削除されたオブジェクトにアクセスしようとするとエラーが発生します。削除されたオブジェクトへの参照を持つオブジェクトを解決すると、削除されたオブジェクトの代わりに `DeletedRef` オブジェクトが返されます。
+  </Tab>
+
+  <Tab title="TypeScript">
+    ```plaintext
+    This feature is not available in TypeScript yet.  Stay tuned!
+    ```
+  </Tab>
+</Tabs>
+
+## Refのスタイル
+
+完全修飾されたweaveオブジェクトref uriは次のようになります：
+
+```
+weave:///<entity>/<project>/object/<object_name>:<object_version>
+```
+
+* *entity*：wandbエンティティ（ユーザー名またはチーム）
+* *project*：wandbプロジェクト
+* *object\_name*：オブジェクト名
+* *object\_version*：バージョンハッシュ、v0、v1...などの文字列、または":latest"などのエイリアスのいずれか。すべてのオブジェクトには":latest"エイリアスがあります。
+
+Refはいくつかの異なるスタイルで構築できます
+
+* `weave.ref(<name>)`： `weave.init(<project>)` が呼び出されている必要があります。":latest"バージョンを参照します
+* `weave.ref(<name>:<version>)`： `weave.init(<project>)` が呼び出されている必要があります。
+* `weave.ref(<fully_qualified_ref_uri>)`：weave.initを呼び出さなくても構築できます

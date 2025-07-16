@@ -1,0 +1,112 @@
+---
+- title: カスタムモデルコスト
+- description: W&B Weaveでカスタムモデルコストを使用する方法を学ぶ
+---
+
+<Note>
+  これはインタラクティブなノートブックです。ローカルで実行するか、以下のリンクを使用できます：
+
+  * [Google Colabで開く](https://colab.research.google.com/github/wandb/weave/blob/master/docs/notebooks/custom_model_cost.ipynb)
+  * [GitHubでソースを表示](https://github.com/wandb/weave/blob/master/docs/notebooks/custom_model_cost.ipynb)
+</Note>
+
+# カスタムコストモデルの設定
+
+Weaveは使用されたトークン数とモデルに基づいてコストを計算します。
+Weaveはこの使用量とモデルを出力から取得し、それらを呼び出しに関連付けます。
+
+独自のトークン使用量を計算し、それをweaveに保存する単純なカスタムモデルを設定してみましょう。
+
+## 環境のセットアップ
+
+必要なすべてのパッケージをインストールしてインポートします。
+環境に`WANDB_API_KEY`を設定して、`wandb.login()`で簡単にログインできるようにします（これはシークレットとしてcolabに提供されるべきです）。
+
+ログを記録したいW\&Bのプロジェクトを`name_of_wandb_project`に設定します。
+
+***NOTE:*** `name_of_wandb_project`は`{team_name}/{project_name}`の形式でもよく、トレースをログに記録するチームを指定します。
+
+次に`weave.init()`
+
+```python
+%pip install wandb weave datetime --quiet
+python
+import os
+
+import wandb
+from google.colab import userdata
+
+import weave
+
+os.environ["WANDB_API_KEY"] = userdata.get("WANDB_API_KEY")
+name_of_wandb_project = "custom-cost-model"
+
+wandb.login()
+python
+weave_client = weave.init(name_of_wandb_project)
+```
+
+## weaveでモデルを設定する
+
+```python
+from weave import Model
+
+class YourModel(Model):
+    attribute1: str
+    attribute2: int
+
+    def simple_token_count(self, text: str) -> int:
+        return len(text) // 3
+
+    # This is a custom op that we are defining
+    # It takes in a string, and outputs a dict with the usage counts, model name, and the output
+    @weave.op()
+    def custom_model_generate(self, input_data: str) -> dict:
+        # Model logic goes here
+        # Here is where you would have a custom generate function
+        prediction = self.attribute1 + " " + input_data
+
+        # Usage counts
+        prompt_tokens = self.simple_token_count(input_data)
+        completion_tokens = self.simple_token_count(prediction)
+
+        # We return a dictionary with the usage counts, model name, and the output
+        # Weave will automatically associate this with the trace
+        # This object {usage, model, output} matches the output of a OpenAI Call
+        return {
+            "usage": {
+                "input_tokens": prompt_tokens,
+                "output_tokens": completion_tokens,
+                "total_tokens": prompt_tokens + completion_tokens,
+            },
+            "model": "your_model_name",
+            "output": prediction,
+        }
+
+    # In our predict function we call our custom generate function, and return the output.
+    @weave.op()
+    def predict(self, input_data: str) -> dict:
+        # Here is where you would do any post processing of the data
+        outputs = self.custom_model_generate(input_data)
+        return outputs["output"]
+```
+
+## カスタムコストを追加する
+
+ここでカスタムコストを追加し、カスタムコストと使用量を持つ呼び出しができたので、`include_cost`で呼び出しを取得でき、呼び出しには`summary.weave.costs`の下にコストが表示されます。
+
+```python
+model = YourModel(attribute1="Hello", attribute2=1)
+model.predict("world")
+
+# We then add a custom cost to our project
+weave_client.add_cost(
+    llm_id="your_model_name", prompt_token_cost=0.1, completion_token_cost=0.2
+)
+
+# We can then query for the calls, and with include_costs=True
+# we receive the costs back attached to the calls
+calls = weave_client.get_calls(filter={"trace_roots_only": True}, include_costs=True)
+
+list(calls)
+```

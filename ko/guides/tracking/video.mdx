@@ -1,0 +1,96 @@
+---
+- title: 비디오 지원
+- description: Weave에서 moviepy를 사용하여 자동으로 비디오 로깅하기
+---
+
+Weave는 자동으로 다음을 사용하여 비디오를 로깅합니다 [`moviepy`](https://zulko.github.io/moviepy/). 이를 통해 추적된 함수에 비디오 입력과 출력을 전달할 수 있으며, Weave가 자동으로 비디오 데이터 업로드 및 저장을 처리합니다.
+
+<Note>
+  비디오 지원은 현재 Python에서만 사용 가능합니다.
+</Note>
+
+## 사용 전제 조건
+
+1. 설치 `weave` 및 `moviepy==1.0.3`.
+2. W\&B 계정 생성.
+
+## 지원되는 비디오 유형
+
+Weave는 다음을 인식합니다 `moviepy` 비디오 클립 객체, 예를 들면:
+
+* 비디오 파일에서 로드된 `VideoFileClip`
+* 메모리 내 클립(예: `ImageClip`, `ColorClip`, 및 `TextClip`
+
+### 파일 기반 클립의 직접 업로드
+
+클립이 `VideoFileClip`이고 지원되는 확장자를 가진 유효한 파일 이름이 있는 경우, Weave는 파일을 직접 업로드합니다.
+
+**지원되는 파일 확장자:**
+
+* `.mp4`
+* `.webm`
+* `.gif`
+
+### 메모리 내 클립 지원
+
+비디오 객체가 메모리에 있는 경우(디스크에 파일이 없음), Weave는 이를 `.mp4` 파일로 인코딩하고 자동으로 업로드를 처리합니다. 이는 다음 유형의 클립에 적용됩니다:
+
+* `ImageClip`
+* `ColorClip`
+* `TextClip`
+
+## Example: Trace a video function
+
+다음 코드 샘플은 Weave에서 비디오 처리 함수를 추적하는 방법을 보여줍니다. 코드 샘플은 다음과 같습니다:
+
+1. Weave 프로젝트 초기화 `video-test`.
+2. 다음을 정의합니다 `get_video` 함수를 `weave.op`로 추적하여 로드된 `VideoFileClip`에서 1초 서브클립을 `VideoClip`로 추출합니다.
+3. Weave에서 클립을 업로드하고 추적합니다.
+4. MP4 비디오가 없는 경우 자동으로 더미 MP4 비디오를 생성합니다.
+
+<Warning>
+  스레드 안전성 문제를 방지하기 위해 항상 `VideoFileClip` 객체의 경로를 전달하고 Weave `op` 외부에서 생성하지 마세요.
+</Warning>
+
+다음 코드 스니펫을 사용하기 전에 [사용 전제 조건](#usage-prerequisites)을 완료하세요.
+
+```python
+import os
+import weave
+from moviepy.editor import VideoFileClip, ColorClip, VideoClip
+
+# Update to your project name, or create a new project named 'video-test'
+weave.init('video-test')
+
+@weave.op
+def get_video(clip: VideoFileClip) -> VideoClip:
+    """Process a video by path rather than by passing the clip directly.
+
+    This ensures that the VideoFileClip is created and managed within the
+    Weave op's thread context, avoiding thread-safety issues.
+    """
+    new_clip = clip.subclip(0, 1)
+    return new_clip
+
+if __name__ == "__main__":
+    os.makedirs("videos", exist_ok=True)
+
+    # Update the path to point to your MP4 file
+    video_path = './videos/example.mp4'
+
+    # Generate a dummy video if it doesn't exist
+    # Dummy video contents: A red square that displays for 5 seconds
+    if not os.path.isfile(video_path):
+        print("No video found. Creating dummy video...")
+        dummy_clip = ColorClip(size=(640, 480), color=(255, 0, 0), duration=5)
+        dummy_clip.write_videofile(video_path, fps=24)
+
+    clip = VideoFileClip(video_path, has_mask=False, audio=True)
+    get_video(clip) 
+```
+
+코드 샘플이 성공적으로 실행되면 프로젝트의 **Traces** 테이블에서 링크를 클릭하여 비디오를 볼 수 있습니다.
+
+![A trace of a video processing function in the Traces table.](imgs/video-trace.png)
+
+![An MP4 video uploaded to Weave, viewed in the Traces popout.](imgs/video-trace-popout.png)

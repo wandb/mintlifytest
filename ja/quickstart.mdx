@@ -1,0 +1,152 @@
+---
+- title: LLMの入力と出力を追跡する
+- description: 最初の呼び出しを追跡するには、次の手順に従ってください
+---
+
+<Info>
+  新しいW\&B Inferenceサービスを無料でお試しください。APIとWeave Playgroundを通じてAIモデルにアクセスできます。
+
+  * [開発者ドキュメント](./guides/integrations/inference)
+  * [製品ページ](https://wandb.ai/site/inference)
+</Info>
+
+最初の呼び出しを追跡するには、次の手順に従ってください。また、<a className="inline-flex items-center" target="_blank" href="http://wandb.me/weave_colab"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a>
+
+## 1. WeaveをインストールしてAPIキーを取得する
+
+**weaveをインストールする**
+
+まず、weaveライブラリをインストールします：
+
+<CodeGroup>
+  ```bash Python
+  pip install weave
+  ```
+
+  ```bash TypeScript
+  pnpm install weave
+  ```
+</CodeGroup>
+
+**APIキーを取得する**
+
+[https://wandb.ai](https://wandb.ai)でW\&Bアカウントを作成します。次に[https://wandb.ai/authorize](https://wandb.ai/authorize)からAPIキーをコピーします。
+
+## 2. 新しいプロジェクトにトレースをログに記録する
+
+最初のプロジェクトを追跡するには、次の手順に従ってください：
+
+* `weave`ライブラリをインポートする
+* `weave.init('project-name')`を呼び出して追跡を開始する
+  * まだログインしていない場合、システムはAPIキーを要求します
+  * チームにログを記録するには、`team-name/project-name`
+  * `WANDB_API_KEY`環境変数を設定してログインプロンプトをスキップする
+* `@weave.op()`を追跡したい関数に追加する
+
+*この例ではOpenAIを使用しています。OpenAIの[API key](https://platform.openai.com/docs/quickstart/step-2-setup-your-api-key)が必要です。*
+
+<CodeGroup>
+  ```python Python
+  import weave
+  from openai import OpenAI
+
+  client = OpenAI()
+
+  # Weave tracks the inputs, outputs and code of this function
+  @weave.op()
+  def extract_dinos(sentence):
+      response = client.chat.completions.create(
+          model="gpt-4o",
+          messages=[
+              {
+                  "role": "system",
+                  "content": """Extract dinosaurs from the text. Return JSON with:
+  - dinosaurs: list of dinosaurs
+  - name: scientific name  
+  - common_name: nickname
+  - diet: herbivore or carnivore."""
+              },
+              {
+                  "role": "user",
+                  "content": sentence
+              }
+          ],
+          response_format={ "type": "json_object" }
+      )
+      return response.choices[0].message.content
+
+
+  # Start the weave project
+  weave.init('jurassic-park')
+
+  sentence = """I saw a T. rex chase a Triceratops. 
+  The T. rex eats meat. The Triceratops eats plants.
+  A Brachiosaurus ate leaves from tall trees nearby."""
+
+  result = extract_dinos(sentence)
+  print(result)
+  ```
+
+  ```typescript TypeScript
+  import OpenAI from 'openai';
+  import * as weave from 'weave';
+
+  const openai = new OpenAI();
+
+  async function extractDinos(input) {
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4o',
+      messages: [
+        {
+          role: 'user',
+          content: `Extract dinosaurs from this text. Return JSON with name, common_name, and diet: ${input}`,
+        },
+      ],
+    });
+    return response.choices[0].message.content;
+  }
+
+  const extractDinosOp = weave.op(extractDinos);
+
+  async function main() {
+    await weave.init('examples');
+    const result = await extractDinosOp(
+      'I saw a T. rex chase a Triceratops. The T. rex eats meat. The Triceratops eats plants. A Brachiosaurus ate leaves from tall trees nearby.'
+    );
+    console.log(result);
+  }
+
+  main();
+  ```
+</CodeGroup>
+
+`extract_dinos`を呼び出すと、Weaveはトレースを表示するためのリンクを表示します。
+
+## 3. 自動AIライブラリログ記録
+
+Weaveは多くのAIサービスへの呼び出しを追跡します：
+
+* OpenAI
+* Anthropic
+* [その他多くのAIライブラリ](./guides/integrations/index)
+
+Weaveは以下をログに記録します：
+
+* AIモデル情報
+* トークン使用量
+* コスト
+
+他のAIツールを追跡するには、`@weave.op()`でラップします。
+
+## 4. プロジェクト内のトレースを確認する
+
+素晴らしい。これでWeaveは関数を呼び出すたびにデータをキャプチャします。コードの変更も追跡します。
+
+![Weave Trace Outputs 1](./images/tutorial_trace_1.png)
+
+## 次のステップ
+
+* [データフローの追跡](./tutorial-tracing_2)方法を学ぶ
+* [トレーシング](./guides/tracking/tracing)についての詳細を読んでWeaveの仕組みを理解する
+* [インテグレーション](./guides/integrations/index)をチェックしてすべてのAIプロバイダーを確認する
+* [Playground](./guides/tools/playground)を試して異なるモデルをテストする

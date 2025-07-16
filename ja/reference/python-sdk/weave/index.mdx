@@ -1,0 +1,1249 @@
+---
+- title: Python SDK リファレンス
+- description: Weave Python SDKの完全なAPIリファレンス
+---
+
+# API概要
+
+## クラス[​](/reference/python-sdk/weave/#classes)
+
+* [`obj.Object`](/reference/python-sdk/weave/#class-object)
+
+* [`dataset.Dataset`](/reference/python-sdk/weave/#class-dataset): 簡単な保存と自動バージョン管理機能を持つDatasetオブジェクト
+
+* [`model.Model`](/reference/python-sdk/weave/#class-model): 入力に対して動作するコードとデータの組み合わせをキャプチャすることを目的としています。
+
+* [`prompt.Prompt`](/reference/python-sdk/weave/#class-prompt)
+
+* [`prompt.StringPrompt`](/reference/python-sdk/weave/#class-stringprompt)
+
+* [`prompt.MessagesPrompt`](/reference/python-sdk/weave/#class-messagesprompt)
+
+* [`eval.Evaluation`](/reference/python-sdk/weave/#class-evaluation): 一連のスコアラーとデータセットを含む評価をセットアップします。
+
+* [`eval_imperative.EvaluationLogger`](/reference/python-sdk/weave/#class-evaluationlogger): このクラスは評価をログに記録するための命令型インターフェースを提供します。
+
+* [`scorer.Scorer`](/reference/python-sdk/weave/#class-scorer)
+
+* [`annotation_spec.AnnotationSpec`](/reference/python-sdk/weave/#class-annotationspec)
+
+* [`file.File`](/reference/python-sdk/weave/#class-file): パス、MIMEタイプ、サイズ情報を持つファイルを表すクラス。
+
+* [`markdown.Markdown`](/reference/python-sdk/weave/#class-markdown): Markdownでレンダリング可能なオブジェクト。
+
+* [`monitor.Monitor`](/reference/python-sdk/weave/#class-monitor): 着信呼び出しを自動的にスコアリングするモニターをセットアップします。
+
+* [`saved_view.SavedView`](/reference/python-sdk/weave/#class-savedview): SavedViewオブジェクトを操作するためのフルエントスタイルのクラス。
+
+* [`audio.Audio`](/reference/python-sdk/weave/#class-audio): サポートされている形式（wavまたはmp3）のオーディオデータを表すクラス。
+
+## 関数[​](/reference/python-sdk/weave/#functions)
+
+* [`api.init`](/reference/python-sdk/weave/#function-init): wandbプロジェクトへのログ記録を行うweaveトラッキングを初期化します。
+
+* [`api.publish`](/reference/python-sdk/weave/#function-publish): Pythonオブジェクトを保存してバージョン管理します。
+
+* [`api.ref`](/reference/python-sdk/weave/#function-ref): Weaveオブジェクトへの参照（Ref）を構築します。
+
+* [`api.get`](/reference/python-sdk/weave/#function-get): URIからオブジェクトを取得するための便利な関数。
+
+* [`call_context.require_current_call`](/reference/python-sdk/weave/#function-require_current_call): 現在実行中のOp内で、そのOpのCallオブジェクトを取得します。
+
+* [`call_context.get_current_call`](/reference/python-sdk/weave/#function-get_current_call): 現在実行中のOp内で、そのOpのCallオブジェクトを取得します。
+
+* [`api.finish`](/reference/python-sdk/weave/#function-finish): weaveへのログ記録を停止します。
+
+* [`op.op`](/reference/python-sdk/weave/#function-op): 関数またはメソッドをweave op化するデコレータ。同期と非同期の両方で動作します。
+
+* [`api.attributes`](/reference/python-sdk/weave/#function-attributes): 呼び出しに属性を設定するためのコンテキストマネージャ。
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/api.py#L37)
+
+### function `init`[​](/reference/python-sdk/weave/#function-init)
+
+```
+init( project_name: 'str', settings: 'UserSettings | dict[str, Any] | None' = None, autopatch_settings: 'AutopatchSettings | None' = None, global_postprocess_inputs: 'PostprocessInputsFunc | None' = None, global_postprocess_output: 'PostprocessOutputFunc | None' = None, global_attributes: 'dict[str, Any] | None' = None) → WeaveClient
+```
+
+wandbプロジェクトへのログ記録を行うweaveトラッキングを初期化します。
+
+ログ記録はグローバルに初期化されるため、initの戻り値への参照を保持する必要はありません。
+
+init後、weave.op()でデコレートされた関数の呼び出しは指定されたプロジェクトにログ記録されます。
+
+**Args:**
+
+* `project_name`\*\*: ログを記録するWeights & Biasesプロジェクトの名前。
+
+* **`settings`**: Weaveクライアント全般の設定。
+
+* **`autopatch_settings`**: openaiなどの自動パッチ統合の設定
+
+* **`global_postprocess_inputs`**: すべてのopのすべての入力に適用される関数。
+
+* **`global_postprocess_output`**: すべてのopのすべての出力に適用される関数。
+
+* **`global_attributes`**: すべてのトレースに適用される属性の辞書。
+
+NOTE: Global postprocessing settings are applied to all ops after each op's own postprocessing. The order is always: 1. Op-specific postprocessing 2. Global postprocessing
+
+**Returns:**&#x57;eaveクライアント。
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/api.py#L116)
+
+### function `publish`[​](/reference/python-sdk/weave/#function-publish)
+
+```
+publish(obj: 'Any', name: 'str | None' = None) → ObjectRef
+```
+
+Pythonオブジェクトを保存してバージョン管理します。
+
+nameという名前のオブジェクトが既に存在し、objのコンテンツハッシュがそのオブジェクトの最新バージョンと一致しない場合、新しいバージョンが作成されます。
+
+TODO: Need to document how name works with this change.
+
+**Args:**
+
+* `obj`\*\*: 保存してバージョン管理するオブジェクト。
+
+* **`name`**: オブジェクトを保存する名前。
+
+**Returns:**&#x4FDD;存されたオブジェクトへのweave Ref。
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/api.py#L170)
+
+### function `ref`[​](/reference/python-sdk/weave/#function-ref)
+
+```
+ref(location: 'str') → ObjectRef
+```
+
+Weaveオブジェクトへの参照（Ref）を構築します。
+
+TODO: what happens if obj does not exist
+
+**Args:**
+
+* `location`\*\*: 完全修飾されたweave参照URI、またはweave.init()が呼び出されている場合は「name:version」または単に「name」（この場合、バージョンには「latest」が使用されます）。
+
+**Returns:**&#x30AA;ブジェクトへのweave Ref。
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/api.py#L201)
+
+### function `get`[​](/reference/python-sdk/weave/#function-get)
+
+```
+get(uri: 'str | ObjectRef') → Any
+```
+
+URIからオブジェクトを取得するための便利な関数。
+
+Weaveによってログ記録されたオブジェクトの多くは、自動的にWeaveサーバーに登録されます。この関数を使用すると、URIでそれらのオブジェクトを取得できます。
+
+**Args:**
+
+* `uri`\*\*: 完全修飾されたweave参照URI。
+
+**Returns:**&#x30AA;ブジェクト。
+
+**Example:**
+
+```
+weave.init("weave_get_example")dataset = weave.Dataset(rows=[{"a": 1, "b": 2}])ref = weave.publish(dataset)dataset2 = weave.get(ref) # same as dataset!
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/context/call_context.py#L65)
+
+### function `require_current_call`[​](/reference/python-sdk/weave/#function-require_current_call)
+
+```
+require_current_call() → Call
+```
+
+現在実行中のOp内で、そのOpのCallオブジェクトを取得します。
+
+これにより、実行中のCallのIDやフィードバックなどの属性にアクセスできます。
+
+```
+@weave.opdef hello(name: str) -> None: print(f"Hello {name}!") current_call = weave.require_current_call() print(current_call.id)
+```
+
+Opが戻った後にCallにアクセスすることも可能です。
+
+CallのID（おそらくUIから）がある場合は、`get_call`メソッドを`WeaveClient`から返された`weave.init`で使用してCallオブジェクトを取得できます。
+
+```
+client = weave.init("
+")mycall = client.get_call("")
+```
+
+あるいは、Opを定義した後、その`call`メソッドを使用できます。例えば：
+
+```
+@weave.opdef add(a: int, b: int) -> int: return a + bresult, call = add.call(1, 2)print(call.id)
+```
+
+**Returns:**&#x73FE;在実行中のOpのCallオブジェクト
+
+**Raises:**
+
+* `NoCurrentCallError`\*\*: トラッキングが初期化されていない場合、またはこのメソッドがOp外で呼び出された場合。
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/context/call_context.py#L114)
+
+### function `get_current_call`[​](/reference/python-sdk/weave/#function-get_current_call)
+
+```
+get_current_call() → Call | None
+```
+
+現在実行中のOp内で、そのOpのCallオブジェクトを取得します。
+
+**Returns:**&#x73FE;在実行中のOpのCallオブジェクト、またはトラッキングが初期化されていない場合やこのメソッドがOp外で呼び出された場合はNone。
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/api.py#L264)
+
+### function `finish`[​](/reference/python-sdk/weave/#function-finish)
+
+```
+finish() → None
+```
+
+weaveへのログ記録を停止します。
+
+finish後、weave.op()でデコレートされた関数の呼び出しはログに記録されなくなります。ログ記録を再開するには、weave.init()を再度実行する必要があります。
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/op.py#L1191)
+
+### function `op`[​](/reference/python-sdk/weave/#function-op)
+
+```
+op( func: 'Callable[P, R] | None' = None, name: 'str | None' = None, call_display_name: 'str | CallDisplayNameFunc | None' = None, postprocess_inputs: 'PostprocessInputsFunc | None' = None, postprocess_output: 'PostprocessOutputFunc | None' = None, tracing_sample_rate: 'float' = 1.0, enable_code_capture: 'bool' = True, accumulator: 'Callable[[Any | None, Any], Any] | None' = None) → Callable[[Callable[P, R]], Op[P, R]] | Op[P, R]
+```
+
+関数またはメソッドをweave op化するデコレータ。同期と非同期の両方で動作します。イテレータ関数を自動的に検出し、適切な動作を適用します。
+
+[](https://github.com/wandb/weave/blob/master/../../../../../../develop/core/services/weave-python/weave-public/docs/weave/trace/api/attributes#L242)
+
+### function `attributes`[​](/reference/python-sdk/weave/#function-attributes)
+
+```
+attributes(attributes: 'dict[str, Any]') → Iterator
+```
+
+呼び出しに属性を設定するためのコンテキストマネージャ。
+
+属性は呼び出しの実行が開始されると不変になります。このコンテキストマネージャを使用して、呼び出しが開始される前にメタデータを提供します。
+
+**Example:**
+
+```
+with weave.attributes({'env': 'production'}): print(my_function.call("World"))
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/obj.py#L42)
+
+## class `Object`[​](/reference/python-sdk/weave/#class-object)
+
+**Pydanticフィールド：**
+
+* `name`: `typing.Optional[str]`
+
+* `description`: `typing.Optional[str]`
+
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/obj.py#L59)
+
+### classmethod `from_uri`[​](/reference/python-sdk/weave/#classmethod-from_uri)
+
+```
+from_uri(uri: str, objectify: bool = True) → Self
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/obj.py#L69)
+
+### classmethod `handle_relocatable_object`[​](/reference/python-sdk/weave/#classmethod-handle_relocatable_object)
+
+```
+handle_relocatable_object( v: Any, handler: ValidatorFunctionWrapHandler, info: ValidationInfo) → Any
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L23)
+
+## class `Dataset`[​](/reference/python-sdk/weave/#class-dataset)
+
+簡単な保存と自動バージョン管理機能を持つDatasetオブジェクト
+
+**Examples:**
+
+```
+# Create a datasetdataset = Dataset(name='grammar', rows=[ {'id': '0', 'sentence': "He no likes ice cream.", 'correction': "He doesn't like ice cream."}, {'id': '1', 'sentence': "She goed to the store.", 'correction': "She went to the store."}, {'id': '2', 'sentence': "They plays video games all day.", 'correction': "They play video games all day."}])# Publish the datasetweave.publish(dataset)# Retrieve the datasetdataset_ref = weave.ref('grammar').get()# Access a specific exampleexample_label = dataset_ref.rows[2]['sentence']
+```
+
+**Pydanticフィールド：**
+
+* `name`: `typing.Optional[str]`
+
+* `description`: `typing.Optional[str]`
+
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+
+* `rows`: `typing.Union[trace.table.Table, trace.vals.WeaveTable]`
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L78)
+
+### method `add_rows`[​](/reference/python-sdk/weave/#method-add_rows)
+
+```
+add_rows(rows: Iterable[dict]) → Dataset
+```
+
+既存のデータセットに行を追加して新しいデータセットバージョンを作成します。
+
+これは、データセット全体をメモリにロードすることなく、大規模なデータセットに例を追加するのに役立ちます。
+
+**Args:**
+
+* `rows`\*\*: データセットに追加する行。
+
+**Returns:**&#x66F4;新されたデータセット。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L120)
+
+### classmethod `convert_to_table`[​](/reference/python-sdk/weave/#classmethod-convert_to_table)
+
+```
+convert_to_table(rows: Any) → Union[Table, WeaveTable]
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L60)
+
+### classmethod `from_calls`[​](/reference/python-sdk/weave/#classmethod-from_calls)
+
+```
+from_calls(calls: Iterable[Call]) → Self
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L51)
+
+### classmethod `from_obj`[​](/reference/python-sdk/weave/#classmethod-from_obj)
+
+```
+from_obj(obj: WeaveObject) → Self
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L65)
+
+### classmethod `from_pandas`[​](/reference/python-sdk/weave/#classmethod-from_pandas)
+
+```
+from_pandas(df: 'DataFrame') → Self
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L167)
+
+### method `select`[​](/reference/python-sdk/weave/#method-select)
+
+```
+select(indices: Iterable[int]) → Self
+```
+
+提供されたインデックスに基づいてデータセットから行を選択します。
+
+**Args:**
+
+* `indices`\*\*: 選択する行を指定する整数インデックスの反復可能オブジェクト。
+
+**Returns:**&#x9078;択された行のみを含む新しいDatasetオブジェクト。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L70)
+
+### method `to_pandas`[​](/reference/python-sdk/weave/#method-to_pandas)
+
+```
+to_pandas() → DataFrame
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/model.py#L23)
+
+## class `Model`[​](/reference/python-sdk/weave/#class-model)
+
+入力に対して動作するコードとデータの組み合わせをキャプチャすることを目的としています。例えば、予測やテキスト生成を行うためにプロンプトを使用してLLMを呼び出すことがあります。
+
+モデルの属性や定義するコードを変更すると、これらの変更がログに記録され、バージョンが更新されます。これにより、異なるバージョンのモデル間で予測を比較することができます。これを使用してプロンプトを反復的に改善したり、最新のLLMを試して異なる設定間で予測を比較したりすることができます
+
+**Examples:**
+
+```
+class YourModel(Model): attribute1: str attribute2: int @weave.op() def predict(self, input_data: str) -> dict: # Model logic goes here prediction = self.attribute1 + ' ' + input_data return {'pred': prediction}
+```
+
+**Pydantic Fields:**
+
+* `name`: `typing.Optional[str]`
+
+* `description`: `typing.Optional[str]`
+
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/model.py#L51)
+
+### method `get_infer_method`[​](/reference/python-sdk/weave/#method-get_infer_method)
+
+```
+get_infer_method() → Callable
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L77)
+
+## class `Prompt`[​](/reference/python-sdk/weave/#class-prompt)
+
+**Pydantic Fields:**
+
+* `name`: `typing.Optional[str]`
+
+* `description`: `typing.Optional[str]`
+
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L78)
+
+### method `format`[​](/reference/python-sdk/weave/#method-format)
+
+```
+format(**kwargs: Any) → Any
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L82)
+
+## class `StringPrompt`[​](/reference/python-sdk/weave/#class-stringprompt)
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L86)
+
+### method `__init__`[​](/reference/python-sdk/weave/#method-__init__)
+
+```
+__init__(content: str)
+```
+
+**Pydantic Fields:**
+
+* `name`: `typing.Optional[str]`
+
+* `description`: `typing.Optional[str]`
+
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+
+* `content`: \`\`
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L90)
+
+### method `format`[​](/reference/python-sdk/weave/#method-format-1)
+
+```
+format(**kwargs: Any) → str
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L93)
+
+### classmethod `from_obj`[​](/reference/python-sdk/weave/#classmethod-from_obj-1)
+
+```
+from_obj(obj: WeaveObject) → Self
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L102)
+
+## class `MessagesPrompt`[​](/reference/python-sdk/weave/#class-messagesprompt)
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L106)
+
+### method `__init__`[​](/reference/python-sdk/weave/#method-__init__-1)
+
+```
+__init__(messages: list[dict])
+```
+
+**Pydantic Fields:**
+
+* `name`: `typing.Optional[str]`
+
+* `description`: `typing.Optional[str]`
+
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+
+* `messages`: `list[dict]`
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L119)
+
+### method `format`[​](/reference/python-sdk/weave/#method-format-2)
+
+```
+format(**kwargs: Any) → list
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L110)
+
+### method `format_message`[​](/reference/python-sdk/weave/#method-format_message)
+
+```
+format_message(message: dict, **kwargs: Any) → dict
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L122)
+
+### classmethod `from_obj`[​](/reference/python-sdk/weave/#classmethod-from_obj-2)
+
+```
+from_obj(obj: WeaveObject) → Self
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/eval.py#L56)
+
+## class `Evaluation`[​](/reference/python-sdk/weave/#class-evaluation)
+
+スコアラーとデータセットのセットを含む評価をセットアップします。
+
+evaluation.evaluate(model)を呼び出すと、データセットの列の名前をmodel.predictの引数名に一致させてデータセットから行をモデルに渡します。
+
+その後、すべてのスコアラーを呼び出し、結果をweaveに保存します。
+
+データセットからの行を前処理したい場合は、preprocess\_model\_inputに関数を渡すことができます。
+
+**Examples:**
+
+```
+# Collect your examplesexamples = [ {"question": "What is the capital of France?", "expected": "Paris"}, {"question": "Who wrote 'To Kill a Mockingbird'?", "expected": "Harper Lee"}, {"question": "What is the square root of 64?", "expected": "8"},]# Define any custom scoring function@weave.op()def match_score1(expected: str, model_output: dict) -> dict: # Here is where you'd define the logic to score the model output return {'match': expected == model_output['generated_text']}@weave.op()def function_to_evaluate(question: str): # here's where you would add your LLM call and return the output return {'generated_text': 'Paris'}# Score your examples using scoring functionsevaluation = Evaluation( dataset=examples, scorers=[match_score1])# Start tracking the evaluationweave.init('intro-example')# Run the evaluationasyncio.run(evaluation.evaluate(function_to_evaluate))
+```
+
+**Pydantic Fields:**
+
+* `name`: `typing.Optional[str]`
+
+* `description`: `typing.Optional[str]`
+
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+
+* `dataset`: \`\`
+
+* `scorers`: `typing.Optional[list[typing.Annotated[typing.Union[trace.op.Op, flow.scorer.Scorer], BeforeValidator(func=)]]]`
+
+* `preprocess_model_input`: `typing.Optional[typing.Callable[[dict], dict]]`
+
+* `trials`: \`\`
+
+* `evaluation_name`: `typing.Union[str, typing.Callable[[trace.weave_client.Call], str], NoneType]`
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/op.py#L237)
+
+### method `evaluate`[​](/reference/python-sdk/weave/#method-evaluate)
+
+```
+evaluate(model: Union[Op, Model]) → dict
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/eval.py#L114)
+
+### classmethod `from_obj`[​](/reference/python-sdk/weave/#classmethod-from_obj-3)
+
+```
+from_obj(obj: WeaveObject) → Self
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/eval.py#L195)
+
+### method `get_eval_results`[​](/reference/python-sdk/weave/#method-get_eval_results)
+
+```
+get_eval_results(model: Union[Op, Model]) → EvaluationResults
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/op.py#L140)
+
+### method `predict_and_score`[​](/reference/python-sdk/weave/#method-predict_and_score)
+
+```
+predict_and_score(model: Union[Op, Model], example: dict) → dict
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/op.py#L172)
+
+### method `summarize`[​](/reference/python-sdk/weave/#method-summarize)
+
+```
+summarize(eval_table: EvaluationResults) → dict
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/eval_imperative.py#L306)
+
+## class `EvaluationLogger`[​](/reference/python-sdk/weave/#class-evaluationlogger)
+
+このクラスは評価をログに記録するための命令型インターフェースを提供します。
+
+評価は、最初の予測が`log_prediction`メソッドを使用してログに記録されると自動的に開始され、`log_summary`メソッドが呼び出されると終了します。
+
+予測をログに記録するたびに、`ScoreLogger`オブジェクトが返されます。このオブジェクトを使用して、その特定の予測のスコアとメタデータをログに記録できます。詳細については、`ScoreLogger`クラスを参照してください。
+
+**Example:**
+
+```
+ ev = EvaluationLogger() pred = ev.log_prediction(inputs, output) pred.log_score(scorer_name, score) ev.log_summary(summary)
+```
+
+**Pydantic Fields:**
+
+* `name`: `str | None`
+
+* `model`: `flow.model.Model | dict | str`
+
+* `dataset`: `flow.dataset.Dataset | list[dict] | str`
+
+#### property ui\_url[​](/reference/python-sdk/weave/#property-ui_url)
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/eval_imperative.py#L567)
+
+### method `finish`[​](/reference/python-sdk/weave/#method-finish)
+
+```
+finish() → None
+```
+
+サマリーをログに記録せずに評価リソースを明示的にクリーンアップします。
+
+すべての予測呼び出しとメイン評価呼び出しが確実に終了します。これはロガーがコンテキストマネージャーとして使用される場合に自動的に呼び出されます。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/eval_imperative.py#L490)
+
+### method `log_prediction`[​](/reference/python-sdk/weave/#method-log_prediction)
+
+```
+log_prediction(inputs: 'dict', output: 'Any') → ScoreLogger
+```
+
+予測を評価にログに記録し、参照を返します。
+
+この参照を使用して、特定の予測インスタンスに添付されるスコアをログに記録できます。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/eval_imperative.py#L521)
+
+### method `log_summary`[​](/reference/python-sdk/weave/#method-log_summary)
+
+```
+log_summary(summary: 'dict | None' = None, auto_summarize: 'bool' = True) → None
+```
+
+サマリー辞書を評価にログに記録します。
+
+これはサマリーを計算し、summarize操作を呼び出し、その後評価を終了します。つまり、これ以上の予測やスコアをログに記録することはできません。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/scorer.py#L19)
+
+## class `Scorer`[​](/reference/python-sdk/weave/#class-scorer)
+
+**Pydantic Fields:**
+
+* `name`: `typing.Optional[str]`
+
+* `description`: `typing.Optional[str]`
+
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+
+* `column_map`: `typing.Optional[dict[str, str]]`
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/scorer.py#L25)
+
+### method `model_post_init`[​](/reference/python-sdk/weave/#method-model_post_init)
+
+```
+model_post_init(_Scorer__context: Any) → None
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/op.py#L29)
+
+### method `score`[​](/reference/python-sdk/weave/#method-score)
+
+```
+score(output: Any, **kwargs: Any) → Any
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/trace/op.py#L33)
+
+### method `summarize`[​](/reference/python-sdk/weave/#method-summarize-1)
+
+```
+summarize(score_rows: list) → Optional[dict]
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L12)
+
+## class `AnnotationSpec`[​](/reference/python-sdk/weave/#class-annotationspec)
+
+**Pydantic Fields:**
+
+* `name`: `typing.Optional[str]`
+
+* `description`: `typing.Optional[str]`
+
+* `field_schema`: `dict[str, typing.Any]`
+
+* `unique_among_creators`: \`\`
+
+* `op_scope`: `typing.Optional[list[str]]`
+
+[](https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L47)
+
+### classmethod `preprocess_field_schema`[​](/reference/python-sdk/weave/#classmethod-preprocess_field_schema)
+
+```
+preprocess_field_schema(data: dict[str, Any]) → dict[str, Any]
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L92)
+
+### classmethod `validate_field_schema`[​](/reference/python-sdk/weave/#classmethod-validate_field_schema)
+
+```
+validate_field_schema(schema: dict[str, Any]) → dict[str, Any]
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L103)
+
+### method `value_is_valid`[​](/reference/python-sdk/weave/#method-value_is_valid)
+
+```
+value_is_valid(payload: Any) → bool
+```
+
+ペイロードをこのアノテーション仕様のスキーマに対して検証します。
+
+**Args:**
+
+* `payload`\*\*: スキーマに対して検証するデータ
+
+**Returns:**
+
+* **`bool`**: 検証が成功した場合はTrue、そうでない場合はFalse
+
+[](https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L20)
+
+## class `File`[​](/reference/python-sdk/weave/#class-file)
+
+パス、MIMEタイプ、サイズ情報を持つファイルを表すクラス。
+
+[](https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L23)
+
+### method `__init__`[​](/reference/python-sdk/weave/#method-__init__-2)
+
+```
+__init__(path: 'str | Path', mimetype: 'str | None' = None)
+```
+
+Fileオブジェクトを初期化します。
+
+**Args:**
+
+* `path`\*\*: ファイルへのパス（文字列またはpathlib.Path）
+
+* **`mimetype`**: ファイルのオプションのMIMEタイプ - 提供されない場合は拡張子から推測されます
+
+#### property filename[​](/reference/python-sdk/weave/#property-filename)
+
+ファイルのファイル名を取得します。
+
+**Returns:**
+
+* **`str`**: ディレクトリパスを除いたファイルの名前。
+
+[](https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L49)
+
+### method `open`[​](/reference/python-sdk/weave/#method-open)
+
+```
+open() → bool
+```
+
+オペレーティングシステムのデフォルトアプリケーションを使用してファイルを開きます。
+
+このメソッドは、プラットフォーム固有のメカニズムを使用して、ファイルの種類に関連付けられたデフォルトアプリケーションでファイルを開きます。
+
+**Returns:**
+
+* `bool`\*\*: ファイルが正常に開かれた場合はTrue、そうでない場合はFalse。
+
+[](https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L70)
+
+### method `save`[​](/reference/python-sdk/weave/#method-save)
+
+```
+save(dest: 'str | Path') → None
+```
+
+ファイルを指定された宛先パスにコピーします。
+
+**Args:**
+
+* `dest`\*\*: ファイルがコピーされる宛先パス（文字列またはpathlib.Path）。宛先パスはファイルまたはディレクトリにすることができます。
+
+[](https://github.com/wandb/weave/blob/master/rich/markdown.py#L519)
+
+## class `Markdown`[​](/reference/python-sdk/weave/#class-markdown)
+
+Markdownレンダリング可能。
+
+**Args:**
+
+* **`markup`** (str): マークダウンを含む文字列。
+
+* **`code_theme`** (str, optional): コードブロック用のPygmentsテーマ。デフォルトは「monokai」。
+
+* **`justify`** (JustifyMethod, optional): 段落の揃え値。デフォルトはNone。
+
+* **`style`** (Union\[str, Style], optional): マークダウンに適用するオプションのスタイル。
+
+* **`hyperlinks`** (bool, optional): ハイパーリンクを有効にします。デフォルトは`True`。
+
+* **`inline_code_lexer`**: (str, optional): インラインコードハイライトが有効な場合に使用するレクサー。デフォルトはNone。
+
+* **`inline_code_theme`**: (Optional\[str], optional): インラインコードのハイライト表示用のPygmentsテーマ、またはハイライト表示なしの場合はNone。デフォルトはNone。
+
+[](https://github.com/wandb/weave/blob/master/rich/markdown.py#L555)
+
+### method `__init__`[​](/reference/python-sdk/weave/#method-__init__-3)
+
+```
+__init__( markup: 'str', code_theme: 'str' = 'monokai', justify: 'Optional[JustifyMethod]' = None, style: 'Union[str, Style]' = 'none', hyperlinks: 'bool' = True, inline_code_lexer: 'Optional[str]' = None, inline_code_theme: 'Optional[str]' = None) → None
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L14)
+
+## class `Monitor`[​](/reference/python-sdk/weave/#class-monitor)
+
+着信コールを自動的にスコアリングするモニターをセットアップします。
+
+**Examples:**
+
+```
+import weavefrom weave.scorers import ValidJSONScorerjson_scorer = ValidJSONScorer()my_monitor = weave.Monitor( name="my-monitor", description="This is a test monitor", sampling_rate=0.5, op_names=["my_op"], query={ "$expr": { "$gt": [ { "$getField": "started_at" }, { "$literal": 1742540400 } ] } } }, scorers=[json_scorer],)my_monitor.activate()
+```
+
+**Pydantic Fields:**
+
+* `name`: `typing.Optional[str]`
+
+* `description`: `typing.Optional[str]`
+
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+
+* `sampling_rate`: \`\`
+
+* `scorers`: `list[flow.scorer.Scorer]`
+
+* `op_names`: `list[str]`
+
+* `query`: `typing.Optional[trace_server.interface.query.Query]`
+
+* `active`: \`\`
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L58)
+
+### method `activate`[​](/reference/python-sdk/weave/#method-activate)
+
+```
+activate() → ObjectRef
+```
+
+モニターをアクティブにします。
+
+**Returns:**
+モニターへの参照。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L68)
+
+### method `deactivate`[​](/reference/python-sdk/weave/#method-deactivate)
+
+```
+deactivate() → ObjectRef
+```
+
+モニターを非アクティブにします。
+
+**Returns:**
+モニターへの参照。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L78)
+
+### classmethod `from_obj`[​](/reference/python-sdk/weave/#classmethod-from_obj-4)
+
+```
+from_obj(obj: WeaveObject) → Self
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L493)
+
+## class `SavedView`[​](/reference/python-sdk/weave/#class-savedview)
+
+SavedViewオブジェクトを操作するためのフルエントスタイルのクラス。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L499)
+
+### method `__init__`[​](/reference/python-sdk/weave/#method-__init__-4)
+
+```
+__init__(view_type: 'str' = 'traces', label: 'str' = 'SavedView') → None
+```
+
+#### property entity[​](/reference/python-sdk/weave/#property-entity)
+
+#### property label[​](/reference/python-sdk/weave/#property-label)
+
+#### property project[​](/reference/python-sdk/weave/#property-project)
+
+#### property view\_type[​](/reference/python-sdk/weave/#property-view_type)
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L623)
+
+### method `add_column`[​](/reference/python-sdk/weave/#method-add_column)
+
+```
+add_column(path: 'str | ObjectPath', label: 'str | None' = None) → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L632)
+
+### method `add_columns`[​](/reference/python-sdk/weave/#method-add_columns)
+
+```
+add_columns(*columns: 'str') → SavedView
+```
+
+グリッドに複数の列を追加するための便利なメソッド。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L524)
+
+### method `add_filter`[​](/reference/python-sdk/weave/#method-add_filter)
+
+```
+add_filter( field: 'str', operator: 'str', value: 'Any | None' = None) → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L598)
+
+### method `add_sort`[​](/reference/python-sdk/weave/#method-add_sort)
+
+```
+add_sort(field: 'str', direction: 'SortDirection') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L663)
+
+### method `column_index`[​](/reference/python-sdk/weave/#method-column_index)
+
+```
+column_index(path: 'int | str | ObjectPath') → int
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L578)
+
+### method `filter_op`[​](/reference/python-sdk/weave/#method-filter_op)
+
+```
+filter_op(op_name: 'str | None') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L847)
+
+### method `get_calls`[​](/reference/python-sdk/weave/#method-get_calls)
+
+```
+get_calls( limit: 'int | None' = None, offset: 'int | None' = None, include_costs: 'bool' = False, include_feedback: 'bool' = False, all_columns: 'bool' = False) → CallsIter
+```
+
+この保存されたビューのフィルターと設定に一致するコールを取得します。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L905)
+
+### method `get_known_columns`[​](/reference/python-sdk/weave/#method-get_known_columns)
+
+```
+get_known_columns(num_calls_to_query: 'int | None' = None) → list[str]
+```
+
+存在することが分かっている列のセットを取得します。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L915)
+
+### method `get_table_columns`[​](/reference/python-sdk/weave/#method-get_table_columns)
+
+```
+get_table_columns() → list[TableColumn]
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L617)
+
+### method `hide_column`[​](/reference/python-sdk/weave/#method-hide_column)
+
+```
+hide_column(col_name: 'str') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L638)
+
+### method `insert_column`[​](/reference/python-sdk/weave/#method-insert_column)
+
+```
+insert_column( idx: 'int', path: 'str | ObjectPath', label: 'str | None' = None) → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L972)
+
+### classmethod `load`[​](/reference/python-sdk/weave/#classmethod-load)
+
+```
+load(ref: 'str') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L741)
+
+### method `page_size`[​](/reference/python-sdk/weave/#method-page_size)
+
+```
+page_size(page_size: 'int') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L711)
+
+### method `pin_column_left`[​](/reference/python-sdk/weave/#method-pin_column_left)
+
+```
+pin_column_left(col_name: 'str') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L721)
+
+### method `pin_column_right`[​](/reference/python-sdk/weave/#method-pin_column_right)
+
+```
+pin_column_right(col_name: 'str') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L683)
+
+### method `remove_column`[​](/reference/python-sdk/weave/#method-remove_column)
+
+```
+remove_column(path: 'int | str | ObjectPath') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L702)
+
+### method `remove_columns`[​](/reference/python-sdk/weave/#method-remove_columns)
+
+```
+remove_columns(*columns: 'str') → SavedView
+```
+
+保存されたビューから列を削除します。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L547)
+
+### method `remove_filter`[​](/reference/python-sdk/weave/#method-remove_filter)
+
+```
+remove_filter(index_or_field: 'int | str') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L562)
+
+### method `remove_filters`[​](/reference/python-sdk/weave/#method-remove_filters)
+
+```
+remove_filters() → SavedView
+```
+
+保存されたビューからすべてのフィルターを削除します。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L520)
+
+### method `rename`[​](/reference/python-sdk/weave/#method-rename)
+
+```
+rename(label: 'str') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L677)
+
+### method `rename_column`[​](/reference/python-sdk/weave/#method-rename_column)
+
+```
+rename_column(path: 'int | str | ObjectPath', label: 'str') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L832)
+
+### method `save`[​](/reference/python-sdk/weave/#method-save-1)
+
+```
+save() → SavedView
+```
+
+保存されたビューをサーバーに公開します。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L657)
+
+### method `set_columns`[​](/reference/python-sdk/weave/#method-set_columns)
+
+```
+set_columns(*columns: 'str') → SavedView
+```
+
+グリッドに表示する列を設定します。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L611)
+
+### method `show_column`[​](/reference/python-sdk/weave/#method-show_column)
+
+```
+show_column(col_name: 'str') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L605)
+
+### method `sort_by`[​](/reference/python-sdk/weave/#method-sort_by)
+
+```
+sort_by(field: 'str', direction: 'SortDirection') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L888)
+
+### method `to_grid`[​](/reference/python-sdk/weave/#method-to_grid)
+
+```
+to_grid(limit: 'int | None' = None) → Grid
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L769)
+
+### method `to_rich_table_str`[​](/reference/python-sdk/weave/#method-to_rich_table_str)
+
+```
+to_rich_table_str() → str
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L753)
+
+### method `ui_url`[​](/reference/python-sdk/weave/#method-ui_url)
+
+```
+ui_url() → str | None
+```
+
+UIでこの保存されたビューを表示するURL。
+
+これはトレースなどを含む「結果」ページであり、ビューオブジェクト自体のURLではありません。
+
+[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L731)
+
+### method `unpin_column`[​](/reference/python-sdk/weave/#method-unpin_column)
+
+```
+unpin_column(col_name: 'str') → SavedView
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L83)
+
+## class `Audio`[​](/reference/python-sdk/weave/#class-audio)
+
+サポートされている形式（wavまたはmp3）のオーディオデータを表すクラス。
+
+このクラスはオーディオデータの保存を処理し、さまざまなソースからの読み込みやファイルへのエクスポートのためのメソッドを提供します。
+
+**Attributes:**
+
+* `format`\*\*: オーディオ形式（現在は「wav」または「mp3」をサポート）
+
+* **`data`**: 生のオーディオデータ（バイト形式）
+
+**Args:**
+
+* **`data`**: オーディオデータ（バイトまたはbase64エンコードされた文字列）
+
+* **`format`**: オーディオ形式（「wav」または「mp3」）
+
+* **`validate_base64`**: 入力データのbase64デコードを試みるかどうか
+
+**Raises:**
+
+* **`ValueError`**: オーディオデータが空または形式がサポートされていない場合
+
+[](https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L108)
+
+### method `__init__`[​](/reference/python-sdk/weave/#method-__init__-5)
+
+```
+__init__( data: 'bytes', format: 'SUPPORTED_FORMATS_TYPE', validate_base64: 'bool' = True) → None
+```
+
+[](https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L176)
+
+### method `export`[​](/reference/python-sdk/weave/#method-export)
+
+```
+export(path: 'str | bytes | Path | PathLike') → None
+```
+
+オーディオデータをファイルにエクスポートします。
+
+**Args:**
+
+* `path`\*\*: オーディオファイルを書き込むパス
+
+[](https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L123)
+
+### classmethod `from_data`[​](/reference/python-sdk/weave/#classmethod-from_data)
+
+```
+from_data(data: 'str | bytes', format: 'str') → Audio
+```
+
+生データと指定された形式からAudioオブジェクトを作成します。
+
+**Args:**
+
+* `data`\*\*: バイトまたはbase64エンコードされた文字列としてのオーディオデータ
+
+* **`format`**: オーディオ形式（「wav」または「mp3」）
+
+**Returns:**
+
+* **`Audio`**: 新しいAudioインスタンス
+
+**Raises:**
+
+* **`ValueError`**: 形式がサポートされていない場合
+
+[](https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L148)
+
+### classmethod `from_path`[​](/reference/python-sdk/weave/#classmethod-from_path)
+
+```
+from_path(path: 'str | bytes | Path | PathLike') → Audio
+```
+
+ファイルパスからAudioオブジェクトを作成します。
+
+**Args:**
+
+* `path`\*\*: オーディオファイルへのパス（.wavまたは.mp3拡張子が必要）
+
+**Returns:**
+
+* **`Audio`**: ファイルから読み込まれた新しいAudioインスタンス
+
+**Raises:**
+
+* **`ValueError`**: ファイルが存在しないか、サポートされていない拡張子を持つ場合
+
+[このページを編集](https://github.com/wandb/weave/blob/master/docs/docs/reference/python-sdk/weave/index.mdx)最終更新日: **Jul 14, 2025**

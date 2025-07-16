@@ -1,0 +1,88 @@
+---
+- title: サービスAPI リファレンス
+- description: WeaveサービスのためのRESTエンドポイント
+---
+
+# サービスAPI リファレンス
+
+Weave Service APIは、Weave機能へのプログラムによるアクセスのためのRESTエンドポイントを提供します。
+
+## ベースURL
+
+```
+https://trace.wandb.ai
+```
+
+## 認証
+
+リクエストヘッダーにW\&B APIキーを含めてください：
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" https://trace.wandb.ai/...
+```
+
+## 利用可能なエンドポイント
+
+### コール
+
+* **POST /call/start** - コール開始
+* **POST /call/end** - コール終了
+* **POST /call/upsert\_batch** - コール開始バッチ
+* **POST /calls/delete** - コール削除
+* **POST /call/update** - コール更新
+* **POST /call/read** - コール読み取り
+* **POST /calls/query\_stats** - コールクエリ統計
+* **POST /calls/stream\_query** - コールクエリストリーム
+
+### コスト
+
+* **POST /cost/create** - コスト作成
+* **POST /cost/query** - コストクエリ
+* **POST /cost/purge** - コスト削除
+
+### フィードバック
+
+* **POST /feedback/create** - フィードバック作成
+* **POST /feedback/query** - フィードバッククエリ
+* **POST /feedback/purge** - フィードバック削除
+* **POST /feedback/replace** - フィードバック置換
+
+### ファイル
+
+* **POST /file/create** - ファイル作成
+* **POST /file/content** - ファイルコンテンツ
+* **POST /files/query\_stats** - ファイル統計
+
+### オブジェクト
+
+* **POST /obj/create** - オブジェクト作成
+* **POST /obj/read** - オブジェクト読み取り
+* **POST /objs/query** - オブジェクトクエリ
+* **POST /obj/delete** - オブジェクト削除
+
+### OpenTelemetry
+
+* **POST /otel/v1/traces** - トレースエクスポート
+
+### 参照
+
+* **POST /refs/read\_batch** - 参照バッチ読み取り
+
+### サービス
+
+* **GET /health** - ルート読み取り
+* **GET /version** - バージョン読み取り
+* **GET /geolocate** - 呼び出し元の位置情報取得
+* **GET /server\_info** - サーバー情報
+
+### テーブル
+
+* **POST /table/create** - テーブル作成
+* **POST /table/update** - テーブル更新
+* **POST /table/query** - テーブルクエリ
+* **POST /table/query\_stats** - テーブルクエリ統計
+* **POST /table/query\_stats\_batch** - テーブルクエリ統計バッチ
+
+### スレッド
+
+* **POST /threads/stream\_query** - スレッドクエリストリーム

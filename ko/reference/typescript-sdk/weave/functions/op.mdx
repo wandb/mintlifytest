@@ -1,0 +1,109 @@
+[**weave**](../README.mdx) • **Docs**
+
+***
+
+[weave](../README.mdx) / op
+
+# Function: op()
+
+## op(fn, options)
+
+> **op**\<`T`>(`fn`, `options`?): [`Op`](../type-aliases/Op.mdx)\<(...`args`) => `Promise`\<`Awaited`\<`ReturnType`\<`T`>>>>
+
+동기 및 비동기 함수에서 작동하는 함수나 메서드를 weave op화하는 래퍼입니다.
+
+래핑된 함수:
+
+1. 원래 함수와 동일한 입력을 받고 동일한 출력을 반환합니다.
+2. Weave UI에서 호출을 자동으로 추적합니다.
+
+만약 `weave.init`를 호출하지 않으면 함수는 래핑되지 않은 것처럼 동작합니다.
+
+### 타입 매개변수
+
+• **T** *extends* (...`args`) => `any`
+
+### 매개변수
+
+• **fn**: `T`
+
+래핑할 함수
+
+• **options?**: `OpOptions`\<`T`>
+
+호출 및 매개변수 이름 지정과 같은 선택적 구성
+
+### 반환
+
+[`Op`](../type-aliases/Op.mdx)\<(...`args`) => `Promise`\<`Awaited`\<`ReturnType`\<`T`>>>>
+
+래핑된 함수
+
+### 예시
+
+```ts
+// Basic usage
+import OpenAI from 'openai';
+import * as weave from 'weave';
+
+const client = await weave.init({ project: 'my-project' });
+const oaiClient = new OpenAI();
+
+const extract = weave.op(async function extract() {
+  return await oaiClient.chat.completions.create({
+    model: 'gpt-4-turbo',
+    messages: [{ role: 'user', content: 'Create a user as JSON' }],
+  });
+});
+
+await extract();
+
+// You can also wrap methods by passing the object as the first argument.
+// This will bind the method to the object and wrap it with op.
+class MyModel {
+  private oaiClient: OpenAI;
+
+  constructor() {
+    this.oaiClient = new OpenAI();
+    this.invoke = weave.op(this, this.invoke);
+  }
+
+  async invoke() {
+    return await this.oaiClient.chat.completions.create({
+      model: 'gpt-4-turbo',
+      messages: [{ role: 'user', content: 'Create a user as JSON' }],
+    });
+  }
+}
+
+const model = new MyModel();
+const res = await model.invoke();
+```
+
+### 정의된 곳
+
+[op.ts:58](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/op.ts#L58)
+
+## op(thisArg, fn, options)
+
+> **op**\<`T`>(`thisArg`, `fn`, `options`?): [`Op`](../type-aliases/Op.mdx)\<(...`args`) => `Promise`\<`Awaited`\<`ReturnType`\<`T`>>>>
+
+### 타입 매개변수
+
+• **T** *extends* (...`args`) => `any`
+
+### 매개변수
+
+• **thisArg**: `any`
+
+• **fn**: `T`
+
+• **options?**: `OpOptions`\<`T`>
+
+### 반환
+
+[`Op`](../type-aliases/Op.mdx)\<(...`args`) => `Promise`\<`Awaited`\<`ReturnType`\<`T`>>>>
+
+### 정의된 곳
+
+[op.ts:62](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/op.ts#L62)

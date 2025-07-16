@@ -1,0 +1,143 @@
+---
+- title: トレースサーバーインターフェース
+- description: トレースサーバーのインターフェース定義とスキーマ
+---
+
+このモジュールは、Weaveトレースサーバーで使用されるスキーマとインターフェースを定義します。
+
+## CallSchema
+
+WeaveにおけるCallオブジェクトのスキーマです。
+
+```python
+class CallSchema:
+    id: str                          # Unique identifier for the call
+    project_id: Optional[str]        # Associated project identifier
+    op_name: str                     # Name of the operation
+    display_name: Optional[str]      # User-friendly display name
+    trace_id: str                    # Trace this call belongs to
+    parent_id: Optional[str]         # Parent call ID (for nested calls)
+    started_at: datetime             # When the call started
+    ended_at: Optional[datetime]     # When the call ended
+    exception: Optional[str]         # Exception message if failed
+    attributes: Dict[str, Any]       # Custom attributes
+    inputs: Dict[str, Any]          # Input parameters
+    output: Optional[Any]           # Return value
+    summary: Optional[Dict[str, Any]] # Summary metrics
+    wb_user_id: Optional[str]       # W&B user ID
+    wb_run_id: Optional[str]        # W&B run ID
+    deleted_at: Optional[datetime]   # Soft deletion timestamp
+```
+
+### フィールドの説明
+
+#### コアフィールド
+
+* **id**：この呼び出しを一意に識別するUUID
+* **project\_id**：この呼び出しが属するW\&Bプロジェクト（形式：「entity/project」）
+* **op\_name**：呼び出される操作の名前（参照可能）
+* **display\_name**：呼び出しのオプションの人間が読める名前
+
+#### トレース階層
+
+* **trace\_id**：関連する呼び出しを単一のトレースにグループ化
+* **parent\_id**：子呼び出しを親にリンクし、ツリー構造を形成
+
+#### タイミング
+
+* **started\_at**：実行が開始されたISO 8601タイムスタンプ
+* **ended\_at**：実行が完了したISO 8601タイムスタンプ
+* **deleted\_at**：設定されている場合、呼び出しがソフト削除されたことを示す
+
+#### データ
+
+* **inputs**：関数に渡された入力パラメータの辞書
+* **output**：関数の戻り値（成功した場合）
+* **exception**：呼び出しが失敗した場合のエラーメッセージ
+* **attributes**：ユーザー定義のメタデータ（実行中は読み取り専用）
+* **summary**：実行後のメトリクスと計算値
+
+#### 統合
+
+* **wb\_user\_id**：呼び出しを開始したW\&Bユーザーへのリンク
+* **wb\_run\_id**：実験追跡用のW\&B実行へのリンク
+
+## CallsFilter
+
+呼び出しを照会するためのフィルター条件。
+
+```python
+class CallsFilter:
+    op_names: Optional[List[str]]      # Filter by operation names
+    input_refs: Optional[List[str]]    # Filter by input references
+    output_refs: Optional[List[str]]   # Filter by output references
+    parent_ids: Optional[List[str]]    # Filter by parent call IDs
+    trace_ids: Optional[List[str]]     # Filter by trace IDs
+    call_ids: Optional[List[str]]      # Filter by specific call IDs
+    trace_roots_only: Optional[bool]   # Only return root calls
+    wb_user_ids: Optional[List[str]]   # Filter by W&B user IDs
+    wb_run_ids: Optional[List[str]]    # Filter by W&B run IDs
+```
+
+### 使用例
+
+```python
+from weave import WeaveClient
+
+client = WeaveClient("my-entity/my-project")
+
+# Find all calls to a specific operation
+filter = CallsFilter(
+    op_names=["process_document"],
+    trace_roots_only=True
+)
+
+calls = client.get_calls(filter=filter)
+```
+
+## クエリ式
+
+クエリ式を使用した高度なフィルタリング：
+
+```python
+# Find calls with specific input values
+calls = client.get_calls(
+    filter=CallsFilter(),
+    query={
+        "$expr": {
+            "$and": [
+                {"$eq": [{"$getField": "inputs.model"}, "gpt-4"]},
+                {"$gt": [{"$getField": "summary.total_tokens"}, 1000]}
+            ]
+        }
+    }
+)
+```
+
+## 計算フィールド
+
+以下のフィールドはサーバーによって計算されます：
+
+### ステータス
+
+以下の存在から導出されます：`exception`と`ended_at`：
+
+* `"running"`：呼び出しが開始されたが終了していない
+* `"success"`：例外なしで呼び出しが終了
+* `"error"`：例外で呼び出しが終了
+
+### 期間
+
+以下の差として計算されます：`ended_at`と`started_at`（秒単位）。
+
+### コスト
+
+コスト追跡呼び出しから集計されます。以下を含みます：
+
+* トークン使用量
+* APIコスト
+* カスタムコストメトリクス
+
+<Note>
+  トレースサーバーインターフェースは柔軟で拡張可能に設計されています。カスタムフィールドは`attributes`や`summary`にスキーマ変更なしで追加できます。
+</Note>

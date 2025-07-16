@@ -1,0 +1,124 @@
+---
+- title: PIIの編集
+- description: トレースから個人を特定できる情報を自動的に編集する
+---
+
+<Warning>
+  この機能はPython SDKからのみアクセス可能です。
+</Warning>
+
+一部の組織では、大規模言語モデル（LLM）ワークフローで名前、電話番号、メールアドレスなどの個人を特定できる情報（PII）を処理しています。このデータをWeights & Biases（W\&B）Weaveに保存すると、コンプライアンスとセキュリティのリスクが生じます。
+
+この*機密データ保護*機能を使用すると、個人を特定できる情報（PII）を[trace](../tracking/index.mdx)からWeaveサーバーに送信される前に自動的に編集できます。この機能は[Microsoft Presidio](https://microsoft.github.io/presidio/)をWeave Python SDKに統合しており、SDK レベルで編集設定を制御できます。
+
+機密データ保護機能は、Python SDKに以下の機能を導入します：
+
+* PII編集を有効にするための`redact_pii`設定。これは`weave.init`呼び出しでオンまたはオフに切り替えることができます。
+* 以下の場合の[一般的なエンティティ](#entities-redacted-by-default)の自動編集：`redact_pii = True`。
+* 設定可能な`redact_pii_fields`設定を使用したカスタマイズ可能な編集フィールド。
+
+## PII編集を有効にする
+
+WeaveでPII保護機能を使い始めるには、以下の手順を完了してください：
+
+1. 必要な依存関係をインストールします：
+
+   ```bash
+   pip install presidio-analyzer presidio-anonymizer
+   ```
+
+2. 編集を有効にするために`weave.init`呼び出しを変更します。`redact_pii=True`の場合、[一般的なエンティティはデフォルトで編集されます](#entities-redacted-by-default):
+
+   ```python
+   import weave
+
+   weave.init("my-project", settings={"redact_pii": True})
+   ```
+
+3. (オプション) 以下を使用して編集フィールドをカスタマイズ `redact_pii_fields` parameter:
+
+   ```python
+   weave.init("my-project", settings={"redact_pii": True, "redact_pii_fields":["CREDIT_CARD", "US_SSN"]})
+   ```
+
+   検出および編集できるエンティティの完全なリストについては、以下を参照してください [PresidioでサポートされているPIIエンティティ](https://microsoft.github.io/presidio/supported_entities/).
+
+## デフォルトで編集されるエンティティ
+
+PII編集が有効になっている場合、以下のエンティティは自動的に編集されます：
+
+* `CREDIT_CARD`
+* `CRYPTO`
+* `EMAIL_ADDRESS`
+* `ES_NIF`
+* `FI_PERSONAL_IDENTITY_CODE`
+* `IBAN_CODE`
+* `IN_AADHAAR`
+* `IN_PAN`
+* `IP_ADDRESS`
+* `LOCATION`
+* `PERSON`
+* `PHONE_NUMBER`
+* `UK_NHS`
+* `UK_NINO`
+* `US_BANK_NUMBER`
+* `US_DRIVER_LICENSE`
+* `US_PASSPORT`
+* `US_SSN`
+
+## 以下を使用した機密キーの編集 `REDACT_KEYS`
+
+PII編集に加えて、Weave SDKは `REDACT_KEYS` を使用したカスタムキーの編集もサポートしています。これは、PIIカテゴリには該当しないが、プライベートに保持する必要がある追加の機密データを保護したい場合に役立ちます。例えば：
+
+* APIキー
+* 認証ヘッダー
+* トークン
+* 内部ID
+* 設定値
+
+### 事前定義された `REDACT_KEYS`
+
+Weaveは、デフォルトで以下の機密キーを自動的に編集します：
+
+```json
+[
+  "api_key",
+  "auth_headers",
+  "authorization"
+]
+```
+
+### 独自のキーを追加する
+
+トレースから編集したい独自のカスタムキーでこのリストを拡張できます：
+
+```python
+import weave
+
+client = weave.init("my-project")
+
+# Add custom keys to redact
+weave.trace.sanitize.REDACT_KEYS.add("client_id")
+weave.trace.sanitize.REDACT_KEYS.add("whatever_else")
+
+client_id = "123"
+whatever_else = "456"
+
+@weave.op()
+def test():
+    a = client_id
+    b = whatever_else
+    return 1
+```
+
+Weave UIで表示すると、`client_id` と `whatever_else` の値は `"REDACTED"`：
+
+```python
+client_id = "REDACTED"
+whatever_else = "REDACTED"
+```
+
+## 使用情報
+
+* この機能はPython SDKでのみ利用可能です。
+* 編集を有効にすると、Presidioの依存関係により処理時間が増加します。

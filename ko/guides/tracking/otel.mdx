@@ -1,0 +1,269 @@
+---
+- title: OpenTelemetry 트레이스 보내기
+- description: 전용 엔드포인트를 통해 OpenTelemetry 호환 트레이스 데이터 수집
+---
+
+## 개요
+
+Weave는 전용 엔드포인트를 통해 OpenTelemetry 호환 트레이스 데이터의 수집을 지원합니다. 이 엔드포인트를 통해 OTLP(OpenTelemetry Protocol) 형식의 트레이스 데이터를 Weave 프로젝트로 직접 전송할 수 있습니다.
+
+## 엔드포인트 세부 정보
+
+**경로**: `/otel/v1/traces`
+**Method**: POST
+**Content-Type**: `application/x-protobuf`
+
+## Authentication
+
+표준 W\&B 인증이 사용됩니다. 트레이스 데이터를 보내는 프로젝트에 대한 쓰기 권한이 있어야 합니다.
+
+## 필수 헤더
+
+* `project_id: <your_entity>/<your_project_name>`
+* `Authorization=Basic <Base64 Encoding of api:$WANDB_API_KEY>`
+
+## Examples:
+
+아래 코드 샘플을 실행하기 전에 다음 필드를 수정해야 합니다:
+
+1. `WANDB_API_KEY`: 다음에서 얻을 수 있습니다 [https://wandb.ai/authorize](https://wandb.ai/authorize).
+2. Entity: You can only log traces to the project under an entity that you have access to. You can find your entity name by visiting your W\&N dashboard at \[[https://wandb.ai/home](https://wandb.ai/home)], 그리고 **Teams** 왼쪽 사이드바의 필드를 확인하세요.
+3. 프로젝트 이름: 재미있는 이름을 선택하세요!
+4. `OPENAI_API_KEY`: 다음에서 얻을 수 있습니다 [OpenAI dashboard](https://platform.openai.com/api-keys).
+
+### OpenInference 계측:
+
+이 예제는 OpenAI 계측을 사용하는 방법을 보여줍니다. 공식 저장소에서 찾을 수 있는 더 많은 계측이 있습니다: [https://github.com/Arize-ai/openinference](https://github.com/Arize-ai/openinference)
+
+먼저, 필요한 종속성을 설치하세요:
+
+```bash
+pip install openai openinference-instrumentation-openai opentelemetry-exporter-otlp-proto-http
+```
+
+다음으로, 아래 코드를 `openinference_example.py`
+
+```python
+import base64
+import openai
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk import trace as trace_sdk
+from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor
+from openinference.instrumentation.openai import OpenAIInstrumentor
+
+OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
+WANDB_BASE_URL = "https://trace.wandb.ai"
+PROJECT_ID = "<your-entity>/<your-project>"
+
+OTEL_EXPORTER_OTLP_ENDPOINT = f"{WANDB_BASE_URL}/otel/v1/traces"
+
+# Can be found at https://wandb.ai/authorize
+WANDB_API_KEY = "<your-wandb-api-key>"
+AUTH = base64.b64encode(f"api:{WANDB_API_KEY}".encode()).decode()
+
+OTEL_EXPORTER_OTLP_HEADERS = {
+    "Authorization": f"Basic {AUTH}",
+    "project_id": PROJECT_ID,
+}
+
+tracer_provider = trace_sdk.TracerProvider()
+
+# Configure the OTLP exporter
+exporter = OTLPSpanExporter(
+    endpoint=OTEL_EXPORTER_OTLP_ENDPOINT,
+    headers=OTEL_EXPORTER_OTLP_HEADERS,
+)
+
+# Add the exporter to the tracer provider
+tracer_provider.add_span_processor(SimpleSpanProcessor(exporter))
+
+# Optionally, print the spans to the console.
+tracer_provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
+
+OpenAIInstrumentor().instrument(tracer_provider=tracer_provider)
+
+def main():
+    client = openai.OpenAI(api_key=OPENAI_API_KEY)
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": "Describe OTEL in a single sentence."}],
+        max_tokens=20,
+        stream=True,
+        stream_options={"include_usage": True},
+    )
+    for chunk in response:
+        if chunk.choices and (content := chunk.choices[0].delta.content):
+            print(content, end="")
+
+if __name__ == "__main__":
+    main()
+```
+
+마지막으로, 위에 지정된 필드를 올바른 값으로 설정한 후 코드를 실행하세요:
+
+```bash
+python openinference_example.py
+```
+
+### OpenLLMetry 계측:
+
+다음 예제는 OpenAI 계측을 사용하는 방법을 보여줍니다. 추가 예제는 다음에서 확인할 수 있습니다 [https://github.com/traceloop/openllmetry/tree/main/packages](https://github.com/traceloop/openllmetry/tree/main/packages).
+
+먼저 필요한 종속성을 설치하세요:
+
+```bash
+pip install openai opentelemetry-instrumentation-openai opentelemetry-exporter-otlp-proto-http
+```
+
+다음으로, 아래 코드를 `openllmetry_example.py` 같은 Python 파일에 붙여넣으세요. 이는 위의 코드와 동일하지만 `OpenAIInstrumentor`가 `opentelemetry.instrumentation.openai` 대신 `openinference.instrumentation.openai`
+
+```python
+import base64
+import openai
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk import trace as trace_sdk
+from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor
+from opentelemetry.instrumentation.openai import OpenAIInstrumentor
+
+OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
+WANDB_BASE_URL = "https://trace.wandb.ai"
+PROJECT_ID = "<your-entity>/<your-project>"
+
+OTEL_EXPORTER_OTLP_ENDPOINT = f"{WANDB_BASE_URL}/otel/v1/traces"
+
+# Can be found at https://wandb.ai/authorize
+WANDB_API_KEY = "<your-wandb-api-key>"
+AUTH = base64.b64encode(f"api:{WANDB_API_KEY}".encode()).decode()
+
+OTEL_EXPORTER_OTLP_HEADERS = {
+    "Authorization": f"Basic {AUTH}",
+    "project_id": PROJECT_ID,
+}
+
+tracer_provider = trace_sdk.TracerProvider()
+
+# Configure the OTLP exporter
+exporter = OTLPSpanExporter(
+    endpoint=OTEL_EXPORTER_OTLP_ENDPOINT,
+    headers=OTEL_EXPORTER_OTLP_HEADERS,
+)
+
+# Add the exporter to the tracer provider
+tracer_provider.add_span_processor(SimpleSpanProcessor(exporter))
+
+# Optionally, print the spans to the console.
+tracer_provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
+
+OpenAIInstrumentor().instrument(tracer_provider=tracer_provider)
+
+def main():
+    client = openai.OpenAI(api_key=OPENAI_API_KEY)
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": "Describe OTEL in a single sentence."}],
+        max_tokens=20,
+        stream=True,
+        stream_options={"include_usage": True},
+    )
+    for chunk in response:
+        if chunk.choices and (content := chunk.choices[0].delta.content):
+            print(content, end="")
+
+if __name__ == "__main__":
+    main()
+```
+
+마지막으로, 위에 지정된 필드를 올바른 값으로 설정한 후 코드를 실행하세요:
+
+```bash
+python openllmetry_example.py
+```
+
+### 계측 없이
+
+계측 패키지 대신 OTEL을 직접 사용하고 싶다면 그렇게 할 수 있습니다. 스팬 속성은 다음에 설명된 OpenTelemetry 시맨틱 규칙에 따라 파싱됩니다 [https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/).
+
+먼저, 필요한 종속성을 설치하세요:
+
+```bash
+pip install openai opentelemetry-sdk opentelemetry-api opentelemetry-exporter-otlp-proto-http
+```
+
+다음으로, 아래 코드를 `opentelemetry_example.py`
+
+```python
+import json
+import base64
+import openai
+from opentelemetry import trace
+from opentelemetry.sdk import trace as trace_sdk
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor
+
+OPENAI_API_KEY = "YOUR_OPENAI_API_KEY"
+WANDB_BASE_URL = "https://trace.wandb.ai"
+PROJECT_ID = "<your-entity>/<your-project>"
+
+OTEL_EXPORTER_OTLP_ENDPOINT = f"{WANDB_BASE_URL}/otel/v1/traces"
+
+# Can be found at https://wandb.ai/authorize
+WANDB_API_KEY = "<your-wandb-api-key>"
+AUTH = base64.b64encode(f"api:{WANDB_API_KEY}".encode()).decode()
+
+OTEL_EXPORTER_OTLP_HEADERS = {
+    "Authorization": f"Basic {AUTH}",
+    "project_id": PROJECT_ID,
+}
+
+tracer_provider = trace_sdk.TracerProvider()
+
+# Configure the OTLP exporter
+exporter = OTLPSpanExporter(
+    endpoint=OTEL_EXPORTER_OTLP_ENDPOINT,
+    headers=OTEL_EXPORTER_OTLP_HEADERS,
+)
+
+# Add the exporter to the tracer provider
+tracer_provider.add_span_processor(SimpleSpanProcessor(exporter))
+
+# Optionally, print the spans to the console.
+tracer_provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
+
+trace.set_tracer_provider(tracer_provider)
+# Creates a tracer from the global tracer provider
+tracer = trace.get_tracer(__name__)
+tracer.start_span('name=standard-span')
+
+def my_function():
+    with tracer.start_as_current_span("outer_span") as outer_span:
+        client = openai.OpenAI()
+        input_messages=[{"role": "user", "content": "Describe OTEL in a single sentence."}]
+        # This will only appear in the side panel
+        outer_span.set_attribute("input.value", json.dumps(input_messages))
+        # This follows conventions and will appear in the dashboard
+        outer_span.set_attribute("gen_ai.system", 'openai')
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=input_messages,
+            max_tokens=20,
+            stream=True,
+            stream_options={"include_usage": True},
+        )
+        out = ""
+        for chunk in response:
+            if chunk.choices and (content := chunk.choices[0].delta.content):
+                out += content
+        # This will only appear in the side panel
+        outer_span.set_attribute("output.value", json.dumps({"content": out}))
+
+if __name__ == "__main__":
+    my_function()
+```
+
+마지막으로, 위에 지정된 필드를 올바른 값으로 설정한 후 코드를 실행하세요:
+
+```bash
+python opentelemetry_example.py
+```
+
+스팬 속성 접두사 `gen_ai` 및 `openinference`는 트레이스를 해석할 때 어떤 규칙을 사용할지 결정하는 데 사용됩니다. 두 키 중 어느 것도 감지되지 않으면 모든 스팬 속성이 트레이스 뷰에 표시됩니다. 트레이스를 선택하면 전체 스팬을 사이드 패널에서 확인할 수 있습니다.

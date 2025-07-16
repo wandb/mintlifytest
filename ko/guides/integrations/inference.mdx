@@ -1,0 +1,472 @@
+# W\&B Inference
+
+*W\&B Inference*W\&B Weave 및 OpenAI 호환 API를 통해 주요 오픈소스 기반 모델에 접근할 수 있습니다. W\&B Inference를 사용하면 다음과 같은 작업이 가능합니다:
+
+* 호스팅 제공업체에 가입하거나 모델을 자체 호스팅하지 않고도 AI 애플리케이션 및 에이전트를 개발할 수 있습니다.
+* W\&B Weave Playground에서 지원되는 모델을 시도해볼 수 있습니다.
+
+<Warning>
+  W\&B Inference 크레딧은 무료, 프로, 학술 플랜에 한시적으로 포함되어 있습니다. 엔터프라이즈의 경우 가용성이 다를 수 있습니다. 크레딧이 소진되면:
+
+  * 무료 계정은 Inference를 계속 사용하려면 프로 플랜으로 업그레이드해야 합니다.
+  * 프로 플랜 사용자는 모델별 가격에 따라 매월 Inference 초과 사용량에 대해 청구됩니다.
+
+  자세한 내용은 [가격 페이지](https://wandb.ai/site/pricing/) 및 [W\&B Inference 모델 비용](https://wandb.ai/site/pricing/inference)을 참조하세요.
+</Warning>
+
+Weave를 사용하면 W\&B Inference 기반 애플리케이션을 추적, 평가, 모니터링 및 반복할 수 있습니다.
+
+| 모델               | 모델 ID (API 사용용)                           | 유형      | 컨텍스트 윈도우 | 파라미터                | 설명                                                             |
+| ---------------- | ----------------------------------------- | ------- | -------- | ------------------- | -------------------------------------------------------------- |
+| DeepSeek R1-0528 | deepseek-ai/DeepSeek-R1-0528              | 텍스트     | 161K     | 37B - 680B (활성 - 총) | 복잡한 코딩, 수학 및 구조화된 문서 분석을 포함한 정밀한 추론 작업에 최적화되었습니다.              |
+| DeepSeek V3-0324 | deepseek-ai/DeepSeek-V3-0324              | 텍스트     | 161K     | 37B - 680B (활성 - 총) | 고복잡성 언어 처리 및 포괄적인 문서 분석을 위해 맞춤화된 강력한 Mixture-of-Experts 모델입니다. |
+| Llama 3.1 8B     | meta-llama/Llama-3.1-8B-Instruct          | 텍스트     | 128K     | 8B (총)              | 반응성 있는 다국어 챗봇 상호작용에 최적화된 효율적인 대화 모델입니다.                        |
+| Llama 3.3 70B    | meta-llama/Llama-3.3-70B-Instruct         | 텍스트     | 128K     | 70B (총)             | 대화 작업, 상세한 지시 따르기 및 코딩에 뛰어난 다국어 모델입니다.                         |
+| Llama 4 Scout    | meta-llama/Llama-4-Scout-17B-16E-Instruct | 텍스트, 비전 | 64K      | 17B - 109B (활성 - 총) | 텍스트와 이미지 이해를 통합한 멀티모달 모델로, 시각적 작업과 복합 분석에 이상적입니다.              |
+| Phi 4 Mini       | microsoft/Phi-4-mini-instruct             | 텍스트     | 128K     | 3.8B (활성 - 총)       | 자원이 제한된 환경에서 빠른 응답에 이상적인 컴팩트하고 효율적인 모델입니다.                     |
+
+이 가이드는 다음 정보를 제공합니다:
+
+* [전제 조건](#prerequisites)
+  * [Python을 통한 API 사용을 위한 추가 전제 조건](#additional-prerequisites-for-using-the-api-via-python)
+* [API 명세](#api-specification)
+  * [엔드포인트](#endpoint)
+  * [사용 가능한 메서드](#available-methods)
+    * [채팅 완성](#chat-completions)
+    * [지원되는 모델 목록](#list-supported-models)
+* [사용 예시](#usage-examples)
+* [UI](#ui)
+  * [Inference 서비스 접근](#access-the-inference-service)
+  * [Playground에서 모델 시도하기](#try-a-model-in-the-playground)
+  * [여러 모델 비교하기](#compare-multiple-models)
+  * [결제 및 사용 정보 보기](#view-billing-and-usage-information)
+* [사용 정보 및 제한](#usage-information-and-limits)
+* [API 오류](#api-errors)
+
+## 전제 조건
+
+API 또는 W\&B Weave UI를 통해 W\&B Inference 서비스에 접근하려면 다음 전제 조건이 필요합니다.
+
+1. W\&B 계정. [여기](https://app.wandb.ai/login?signup=true&_gl=1*1yze8dp*_ga*ODIxMjU5MTk3LjE3NDk0OTE2NDM.*_ga_GMYDGNGKDT*czE3NDk4NDYxMzgkbzEyJGcwJHQxNzQ5ODQ2MTM4JGo2MCRsMCRoMA..*_ga_JH1SJHJQXJ*czE3NDk4NDU2NTMkbzI1JGcxJHQxNzQ5ODQ2MTQ2JGo0NyRsMCRoMA..*_gcl_au*MTE4ODk1MzY1OC4xNzQ5NDkxNjQzLjk1ODA2MjQwNC4xNzQ5NTgyMTUzLjE3NDk1ODIxNTM.)에서 가입하세요.
+2. W\&B API 키. [https://wandb.ai/authorize](https://wandb.ai/authorize)에서 API 키를 얻으세요.
+3. W\&B 프로젝트.
+4. Python을 통해 Inference 서비스를 사용하는 경우 [Python을 통한 API 사용을 위한 추가 전제 조건](#additional-prerequisites-for-using-the-api-via-python)을 참조하세요.
+
+### Python을 통한 API 사용을 위한 추가 전제 조건
+
+Python을 통해 Inference API를 사용하려면 먼저 일반 전제 조건을 완료하세요. 그런 다음 로컬 환경에 `openai` 및 `weave` 라이브러리를 설치하세요:
+
+```bash
+pip install openai weave
+```
+
+<Note>
+  The `weave` 라이브러리는 Weave를 사용하여 LLM 애플리케이션을 추적하는 경우에만 필요합니다. Weave 시작하기에 대한 정보는 [Weave 퀵스타트](../../quickstart.mdx)를 참조하세요.
+
+  Weave와 함께 W\&B Inference 서비스를 사용하는 방법을 보여주는 사용 예시는 [API 사용 예시](#usage-examples)를 참조하세요.
+</Note>
+
+## API 명세
+
+다음 섹션에서는 API 명세 정보와 API 사용 예시를 제공합니다.
+
+* [엔드포인트](#endpoint)
+* [사용 가능한 메서드](#available-methods)
+* [사용 예시](#usage-examples)
+
+### 엔드포인트
+
+Inference 서비스는 다음 엔드포인트를 통해 접근할 수 있습니다:
+
+```plaintext
+https://api.inference.wandb.ai/v1
+```
+
+<Warning>
+  이 엔드포인트에 접근하려면 Inference 서비스 크레딧이 할당된 W\&B 계정, 유효한 W\&B API 키, 그리고 W\&B 엔티티(팀이라고도 함)와 프로젝트가 있어야 합니다. 이 가이드의 코드 샘플에서 엔티티(팀)와 프로젝트는 `<your-team>\<your-project>`로 참조됩니다.
+</Warning>
+
+### 사용 가능한 메서드
+
+Inference 서비스는 다음 API 메서드를 지원합니다:
+
+* [채팅 완성](#chat-completions)
+* [지원되는 모델 목록](#list-supported-models)
+
+#### 채팅 완성
+
+사용 가능한 주요 API 메서드는 `/chat/completions`로, 지원되는 모델에 메시지를 보내고 완성된 응답을 받기 위한 OpenAI 호환 요청 형식을 지원합니다. Weave와 함께 W\&B Inference 서비스를 사용하는 방법을 보여주는 사용 예시는 [API 사용 예시](#usage-examples)를 참조하세요.
+
+채팅 완성을 생성하려면 다음이 필요합니다:
+
+* Inference 서비스 기본 URL `https://api.inference.wandb.ai/v1`
+* W\&B API 키 `<your-api-key>`
+* W\&B 엔티티 및 프로젝트 이름 `<your-team>/<your-project>`
+* 사용하려는 모델의 ID, 다음 중 하나:
+  * `meta-llama/Llama-3.1-8B-Instruct`
+  * `deepseek-ai/DeepSeek-V3-0324`
+  * `meta-llama/Llama-3.3-70B-Instruct`
+  * `deepseek-ai/DeepSeek-R1-0528`
+  * `meta-llama/Llama-4-Scout-17B-16E-Instruct`
+  * `microsoft/Phi-4-mini-instruct`
+
+<Tabs>
+  <Tab title="Bash">
+    ```bash
+    curl https://api.inference.wandb.ai/v1/chat/completions \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer <your-api-key>" \
+      -H "OpenAI-Project: <your-team>/<your-project>" \
+      -d '{
+        "model": "<model-id>",
+        "messages": [
+          { "role": "system", "content": "You are a helpful assistant." },
+          { "role": "user", "content": "Tell me a joke." }
+        ]
+      }'
+    ```
+  </Tab>
+
+  <Tab title="Python">
+    ```python
+    import openai
+
+    client = openai.OpenAI(
+        # The custom base URL points to W&B Inference
+        base_url='https://api.inference.wandb.ai/v1',
+
+        # Get your API key from https://wandb.ai/authorize
+        # Consider setting it in the environment as OPENAI_API_KEY instead for safety
+        api_key="<your-api-key>",
+
+        # Team and project are required for usage tracking
+        project="<your-team>/<your-project>",
+    )
+
+    # Replace <model-id> with any of the following values:
+    # meta-llama/Llama-3.1-8B-Instruct
+    # deepseek-ai/DeepSeek-V3-0324
+    # meta-llama/Llama-3.3-70B-Instruct
+    # deepseek-ai/DeepSeek-R1-0528
+    # meta-llama/Llama-4-Scout-17B-16E-Instruct
+    # microsoft/Phi-4-mini-instruct
+
+    response = client.chat.completions.create(
+        model="<model-id>",
+        messages=[
+            {"role": "system", "content": "<your-system-prompt>"},
+            {"role": "user", "content": "<your-prompt>"}
+        ],
+    )
+
+    print(response.choices[0].message.content)
+    ```
+  </Tab>
+</Tabs>
+
+#### 지원되는 모델 목록
+
+API를 사용하여 현재 사용 가능한 모든 모델과 해당 ID를 쿼리합니다. 이는 동적으로 모델을 선택하거나 환경에서 사용 가능한 항목을 검사하는 데 유용합니다.
+
+<Tabs>
+  <Tab title="Bash">
+    ```bash
+    curl https://api.inference.wandb.ai/v1/models \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer <your-api-key>" \
+      -H "OpenAI-Project: <your-team>/<your-project>" \
+    ```
+  </Tab>
+
+  <Tab title="Python">
+    ```python
+    import openai
+
+    client = openai.OpenAI(
+        base_url="https://api.inference.wandb.ai/v1",
+        api_key="<your-api-key>",
+        project="<your-team>/<your-project>"
+    )
+
+    response = client.models.list()
+
+    for model in response.data:
+        print(model.id)
+    ```
+  </Tab>
+</Tabs>
+
+## 사용 예시
+
+이 섹션에서는 Weave와 함께 W\&B Inference를 사용하는 방법을 보여주는 여러 예시를 제공합니다:
+
+* [기본 예시: Weave로 Llama 3.1 8B 추적하기](#basic-example-trace-llama-31-8b-with-weave)
+* [고급 예시: 추론 서비스와 함께 Weave 평가 및 리더보드 사용하기](#advanced-example-use-weave-evaluations-and-leaderboards-with-the-inference-service)
+
+### 기본 예시: Weave로 Llama 3.1 8B 추적하기
+
+다음 Python 코드 샘플은 **Llama 3.1 8B** 모델에 W\&B Inference API를 사용하여 프롬프트를 보내고 Weave에서 호출을 추적하는 방법을 보여줍니다. 추적을 통해 LLM 호출의 전체 입력/출력을 캡처하고, 성능을 모니터링하며, Weave UI에서 결과를 분석할 수 있습니다.
+
+<Tip>
+  자세한 내용은 [tracing in Weave](../tracking/tracing.mdx).
+</Tip>
+
+이 예제에서:
+
+* 당신은 `@weave.op()`-decorated function, `run_chat`, OpenAI 호환 클라이언트를 사용하여 채팅 완성 요청을 수행하는 함수를 정의합니다.
+* 추적은 기록되어 W\&B 엔티티 및 프로젝트와 연결됩니다 `project="<your-team>/<your-project>`
+* 이 함수는 Weave에 의해 자동으로 추적되므로 입력, 출력, 지연 시간 및 메타데이터(모델 ID와 같은)가 기록됩니다.
+* 결과는 터미널에 출력되고, 추적은 **Traces** 탭의 [https://wandb.ai](https://wandb.ai) 지정된 프로젝트 아래에 나타납니다.
+
+이 예제를 사용하려면 [general prerequisites](#prerequisites)와 [Additional prerequisites for using the API via Python](#additional-prerequisites-for-using-the-api-via-python)을 완료해야 합니다.
+
+```python
+import weave
+import openai
+
+# Set the Weave team and project for tracing
+weave.init("<your-team>/<your-project>")
+
+client = openai.OpenAI(
+    base_url='https://api.inference.wandb.ai/v1',
+
+    # Get your API key from https://wandb.ai/authorize
+    api_key="<your-api-key>",
+
+    # Required for W&B inference usage tracking
+    project="wandb/inference-demo",
+)
+
+# Trace the model call in Weave
+@weave.op()
+def run_chat():
+    response = client.chat.completions.create(
+        model="meta-llama/Llama-3.1-8B-Instruct",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": "Tell me a joke."}
+        ],
+    )
+    return response.choices[0].message.content
+
+# Run and log the traced call
+output = run_chat()
+print(output)
+```
+
+코드 샘플을 실행한 후, 터미널에 출력된 링크(예: `https://wandb.ai/<your-team>/<your-project>/r/call/01977f8f-839d-7dda-b0c2-27292ef0e04g`)를 클릭하거나 다음과 같이 Weave에서 추적을 볼 수 있습니다:
+
+1. 다음으로 이동합니다 [https://wandb.ai](https://wandb.ai).
+2. Weave 추적을 보려면 **Traces** 탭을 선택합니다.
+
+다음으로 [advanced example](#advanced-example-use-weave-evaluations-and-leaderboards-with-the-inference-service)을 시도해보세요.
+
+![Traces display](imgs/image.png)
+
+### 고급 예제: 추론 서비스와 함께 Weave Evaluations 및 Leaderboards 사용하기
+
+Inference 서비스와 함께 Weave를 사용하여 [trace model calls](../tracking/tracing.mdx)하는 것 외에도, [evaluate performance](../core-types/evaluations.mdx)하고, [publish a leaderboard](../core-types/leaderboards.mdx)할 수 있습니다. 다음 Python 코드 샘플은 간단한 질문-답변 데이터셋에서 두 모델을 비교합니다.
+
+이 예제를 사용하려면 [general prerequisites](#prerequisites)와 [Additional prerequisites for using the API via Python](#additional-prerequisites-for-using-the-api-via-python)을 완료해야 합니다.
+
+```python
+import os
+import asyncio
+import openai
+import weave
+from weave.flow import leaderboard
+from weave.trace.ref_util import get_ref
+
+# Set the Weave team and project for tracing
+weave.init("<your-team>/<your-project>")
+
+dataset = [
+    {"input": "What is 2 + 2?", "target": "4"},
+    {"input": "Name a primary color.", "target": "red"},
+]
+
+@weave.op
+def exact_match(target: str, output: str) -> float:
+    return float(target.strip().lower() == output.strip().lower())
+
+class WBInferenceModel(weave.Model):
+    model: str
+
+    @weave.op
+    def predict(self, prompt: str) -> str:
+        client = openai.OpenAI(
+            base_url="https://api.inference.wandb.ai/v1",
+            # Get your API key from https://wandb.ai/authorize
+            api_key="<your-api-key>",
+            # Required for W&B inference usage tracking
+            project="<your-team>/<your-project>",
+        )
+        resp = client.chat.completions.create(
+            model=self.model,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        return resp.choices[0].message.content
+
+llama = WBInferenceModel(model="meta-llama/Llama-3.1-8B-Instruct")
+deepseek = WBInferenceModel(model="deepseek-ai/DeepSeek-V3-0324")
+
+def preprocess_model_input(example):
+    return {"prompt": example["input"]}
+
+evaluation = weave.Evaluation(
+    name="QA",
+    dataset=dataset,
+    scorers=[exact_match],
+    preprocess_model_input=preprocess_model_input,
+)
+
+async def run_eval():
+    await evaluation.evaluate(llama)
+    await evaluation.evaluate(deepseek)
+
+asyncio.run(run_eval())
+
+spec = leaderboard.Leaderboard(
+    name="Inference Leaderboard",
+    description="Compare models on a QA dataset",
+    columns=[
+        leaderboard.LeaderboardColumn(
+            evaluation_object_ref=get_ref(evaluation).uri(),
+            scorer_name="exact_match",
+            summary_metric_path="mean",
+        )
+    ],
+)
+
+weave.publish(spec)
+```
+
+다음 코드 샘플을 실행한 후, W\&B 계정으로 이동하세요 [https://wandb.ai/](https://wandb.ai/) and:
+
+* 다음으로 이동하세요 **Traces** 탭으로 [view your traces](../tracking/tracing.mdx)
+* 다음으로 이동하세요 **Evals** 탭으로 [view your model evaluations](../core-types/evaluations.mdx)
+* 다음으로 이동하세요 **Leaders** 탭으로 [view the generated leaderboard](../core-types/leaderboards.mdx)
+
+![View your model evaluations](imgs/inference-advanced-evals.png)
+
+![View your traces](imgs/inference-advanced-leaderboard.png)
+
+## UI
+
+다음 섹션에서는 W\&B UI에서 Inference 서비스를 사용하는 방법을 설명합니다. UI를 통해 Inference 서비스에 액세스하기 전에 [prerequisites](#prerequisites)를 완료하세요.
+
+### Inference 서비스 액세스하기
+
+Weave UI를 통해 두 가지 다른 위치에서 Inference 서비스에 액세스할 수 있습니다:
+
+* [직접 링크](#direct-link)
+* [Inference 탭에서](#from-the-inference-tab)
+* [Playground 탭에서](#from-the-playground-tab)
+
+#### 직접 링크
+
+다음으로 이동하세요 [https://wandb.ai/inference](https://wandb.ai/inference).
+
+#### Inference 탭에서
+
+1. W\&B 계정으로 이동하세요 [https://wandb.ai/](https://wandb.ai/).
+2. 왼쪽 사이드바에서 **Inference**를 선택하세요. 사용 가능한 모델과 모델 정보가 표시된 페이지가 나타납니다.
+
+![The Inference tab](imgs/inference-ui.png)
+
+#### Playground 탭에서
+
+1. 왼쪽 사이드바에서 **Playground**를 선택하세요. Playground 채팅 UI가 표시됩니다.
+2. LLM 드롭다운 목록에서 **W\&B Inference**에 마우스를 올리세요. 사용 가능한 W\&B Inference 모델이 오른쪽에 드롭다운으로 표시됩니다.
+3. W\&B Inference 모델 드롭다운에서 다음을 수행할 수 있습니다:
+   * 사용 가능한 모델의 이름을 클릭하여 [try it in the Playground](#try-a-model-in-the-playground).
+   * [Playground에서 하나 이상의 모델 비교하기](#compare-multiple-models)
+
+![The Inference models dropdown in Playground](imgs/inference-playground.png)
+
+### Playground에서 모델 시도하기
+
+일단 [selected a model using one of the access options](#access-the-inference-service)하면, Playground에서 모델을 시도할 수 있습니다. 다음과 같은 작업이 가능합니다:
+
+* [모델 설정 및 매개변수 사용자 정의](../tools/playground.md#customize-settings)
+* [메시지 추가, 재시도, 편집 및 삭제](../tools/playground.md#message-controls)
+* [사용자 정의 설정으로 모델 저장 및 재사용](../tools/playground.md#saved-models)
+* [여러 모델 비교](#compare-multiple-models)
+
+![Using an Inference model in the Playground](imgs/inference-playground-single.png)
+
+### 여러 모델 비교
+
+Playground에서 여러 Inference 모델을 비교할 수 있습니다. 비교 보기는 두 가지 다른 위치에서 액세스할 수 있습니다:
+
+* [Inference 탭에서 비교 보기 액세스 ](#access-the-compare-view-from-the-inference-tab)
+* [Playground 탭에서 비교 보기 액세스](#access-the-compare-view-from-the-playground-tab)
+
+#### Inference 탭에서 비교 보기 액세스
+
+1. 왼쪽 사이드바에서 **Inference**를 선택하세요. 사용 가능한 모델과 모델 정보가 표시된 페이지가 나타납니다.
+2. 비교할 모델을 선택하려면 모델 카드의 아무 곳이나 클릭하세요(모델 이름 제외). 모델 카드의 테두리가 파란색으로 강조 표시되어 선택을 나타냅니다.
+3. 비교하려는 각 모델에 대해 2단계를 반복하세요.
+4. 선택한 카드 중 하나에서 **Compare N models in the Playground** 버튼(`N`은 비교하는 모델 수입니다. 예를 들어, 3개의 모델을 선택하면 버튼이 **Compare 3 models in the Playground**로 표시됩니다)을 클릭하세요. 비교 보기가 열립니다.
+
+이제 Playground에서 모델을 비교하고 [Try a model in the Playground](#try-a-model-in-the-playground)에 설명된 기능을 사용할 수 있습니다.
+
+![Select multiple models to compare in Playground](imgs/inference-playground-compare.png)
+
+#### Playground 탭에서 비교 보기 액세스
+
+1. 왼쪽 사이드바에서 **Playground**를 선택하세요. Playground 채팅 UI가 표시됩니다.
+2. LLM 드롭다운 목록에서 **W\&B Inference**에 마우스를 올리세요. 사용 가능한 W\&B Inference 모델이 오른쪽에 드롭다운으로 표시됩니다.
+3. 드롭다운에서 **Compare**를 선택하세요. **Inference** 탭이 표시됩니다.
+4. 비교할 모델을 선택하려면 모델 카드의 아무 곳이나 클릭하세요(모델 이름 제외). 모델 카드의 테두리가 파란색으로 강조 표시되어 선택을 나타냅니다.
+5. 비교하려는 각 모델에 대해 4단계를 반복하세요.
+6. 선택한 카드 중 하나에서 **Compare N models in the Playground** button (`N` is the number of models you are comparing. For example, when 3 models are selected, the button displays as **Compare 3 models in the Playground**). The comparison view opens.
+
+이제 Playground에서 모델을 비교하고, [Try a model in the Playground](#try-a-model-in-the-playground)에 설명된 기능을 사용할 수 있습니다.
+
+### 결제 및 사용 정보 보기
+
+조직 관리자는 W\&B UI에서 직접 현재 Inference 크레딧 잔액, 사용 기록 및 예정된 결제(해당되는 경우)를 추적할 수 있습니다:
+
+1. W\&B UI에서 W\&B **Billing** 페이지로 이동합니다.
+2. 오른쪽 하단 모서리에 Inference 결제 정보 카드가 표시됩니다. 여기에서 다음을 수행할 수 있습니다:
+
+* Inference 결제 정보 카드에서 **View usage** 버튼을 클릭하여 시간 경과에 따른 사용량을 확인합니다.
+* 유료 플랜을 사용 중인 경우, 예정된 inference 요금을 확인합니다.
+
+<Tip>
+  [Inference pricing page for a breakdown of per-model pricing](https://wandb.ai/site/pricing/inference)
+</Tip>
+
+## 사용 정보 및 제한 사항
+
+다음 섹션에서는 중요한 사용 정보와 제한 사항을 설명합니다. 서비스를 사용하기 전에 이 정보를 숙지하세요.
+
+### 지리적 제한
+
+Inference 서비스는 지원되는 지리적 위치에서만 접근할 수 있습니다. 자세한 내용은 [Terms of Service](https://docs.coreweave.com/docs/policies/terms-of-service/terms-of-use#geographic-restrictions)를 참조하세요.
+
+### 동시성 제한
+
+공정한 사용과 안정적인 성능을 보장하기 위해 W\&B Inference API는 사용자 및 프로젝트 수준에서 속도 제한을 적용합니다. 이러한 제한은 다음과 같은 도움을 줍니다:
+
+* 오용 방지 및 API 안정성 보호
+* 모든 사용자의 접근 보장
+* 인프라 부하 효과적으로 관리
+
+속도 제한을 초과하면 API는 `429 Concurrency limit reached for requests` 응답을 반환합니다. 이 오류를 해결하려면 동시 요청 수를 줄이세요.
+
+### 가격 책정
+
+모델 가격 정보는 [https://wandb.ai/site/pricing/inference](https://wandb.ai/site/pricing/inference)를 방문하세요.
+
+## API 오류
+
+| 오류 코드 | 메시지                                                                         | 원인                                                 | 해결책                                                     |
+| ----- | --------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------- |
+| 401   | Invalid Authentication                                                      | 인증 자격 증명이 잘못되었거나 W\&B 프로젝트 엔티티 및/또는 이름이 올바르지 않습니다. | 올바른 API 키를 사용하고 있는지 및/또는 W\&B 프로젝트 이름과 엔티티가 올바른지 확인하세요. |
+| 403   | Country, region, or territory not supported                                 | 지원되지 않는 위치에서 API에 접근하고 있습니다.                       | [Geographic restrictions](#geographic-restrictions)     |
+| 429   | Concurrency limit reached for requests                                      | 너무 많은 동시 요청이 있습니다.                                 | 동시 요청 수를 줄이세요.                                          |
+| 429   | You exceeded your current quota, please check your plan and billing details | 크레딧이 부족하거나 월별 지출 한도에 도달했습니다.                       | 더 많은 크레딧을 구매하거나 한도를 늘리세요.                               |
+| 500   | The server had an error while processing your request                       | 내부 서버 오류입니다.                                       | 잠시 후 다시 시도하고 문제가 지속되면 지원팀에 문의하세요.                       |
+| 503   | The engine is currently overloaded, please try again later                  | 서버가 높은 트래픽을 경험하고 있습니다.                             | 잠시 후 요청을 다시 시도하세요.                                      |

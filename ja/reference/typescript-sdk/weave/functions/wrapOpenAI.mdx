@@ -1,0 +1,37 @@
+[**weave**](../README.mdx) • **Docs**
+
+***
+
+[weave](../README.mdx) / wrapOpenAI
+
+# Function: wrapOpenAI()
+
+> **wrapOpenAI**\<`T`>(`openai`): `T`
+
+OpenAI APIをラップして、OpenAI呼び出しの関数トレースを有効にします。
+
+## 型パラメータ
+
+• **T** *extends* `OpenAIAPI`
+
+## パラメータ
+
+• **openai**: `T`
+
+## 戻り値
+
+`T`
+
+## 例
+
+```ts
+const openai = wrapOpenAI(new OpenAI());
+const result = await openai.chat.completions.create({
+  model: 'gpt-3.5-turbo',
+  messages: [{ role: 'user', content: 'Hello, world!' }]
+});
+```
+
+## 定義場所
+
+[integrations/openai.ts:159](https://github.com/wandb/weave/blob/e2313369cb35bc1b6f97c70539926dd951ead21e/sdks/node/src/integrations/openai.ts#L159)

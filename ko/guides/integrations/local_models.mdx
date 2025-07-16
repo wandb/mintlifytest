@@ -1,0 +1,31 @@
+# 로컬 모델
+
+많은 개발자들이 LLama-3, Mixtral, Gemma, Phi 등과 같은 오픈 소스 모델을 다운로드하여 로컬에서 실행합니다. 이러한 모델을 로컬에서 실행하는 방법은 여러 가지가 있으며, Weave는 OpenAI SDK 호환성을 지원하는 한 이 중 일부를 기본적으로 지원합니다.
+
+## 로컬 모델 함수를 `@weave.op()`
+
+Weave를 `weave.init('<your-project-name>')`로 초기화한 다음 LLM 호출을 `weave.op()`로 래핑하여 어떤 LLM과도 쉽게 통합할 수 있습니다. 자세한 내용은 [tracing](/ko/guides/tracking/tracing)에 관한 가이드를 참조하세요.
+
+## 로컬 모델을 사용하기 위한 OpenAI SDK 코드 업데이트
+
+OpenAI SDK 호환성을 지원하는 모든 프레임워크나 서비스는 몇 가지 사소한 변경이 필요합니다.
+
+가장 중요한 것은 `base_url` 초기화 중에 `openai.OpenAI()` 변경입니다.
+
+```python
+client = openai.OpenAI(
+    base_url="http://localhost:1234",
+)
+```
+
+로컬 모델의 경우, `api_key`는 어떤 문자열이든 될 수 있지만 재정의해야 합니다. 그렇지 않으면 OpenAI가 환경 변수에서 이를 사용하려고 시도하고 오류를 표시합니다.
+
+## OpenAI SDK를 지원하는 로컬 모델 실행기
+
+다음은 OpenAI SDK 호환성을 지원하는, Hugging Face에서 모델을 다운로드하여 컴퓨터에서 실행할 수 있게 해주는 앱 목록입니다.
+
+1. Nomic [GPT4All](https://www.nomic.ai/gpt4all) - 설정의 로컬 서버를 통한 지원 ([FAQ](https://docs.gpt4all.io/gpt4all_help/faq.html))
+2. [LMStudio](https://lmstudio.ai/) - 로컬 서버 OpenAI SDK 지원 [docs](https://lmstudio.ai/docs/local-server)
+3. [Ollama](https://ollama.com/) - [실험적 지원](https://github.com/ollama/ollama/blob/main/docs/openai.mdx) OpenAI SDK용
+4. llama.cpp via [llama-cpp-python](https://llama-cpp-python.readthedocs.io/en/latest/server/) 파이썬 패키지
+5. [llamafile](https://github.com/Mozilla-Ocho/llamafile#other-example-llamafiles) - `http://localhost:8080/v1` Llamafile 실행 시 자동으로 OpenAI SDK 지원
