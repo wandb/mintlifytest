@@ -7,9 +7,6 @@
     "light": "#ffb633",
     "dark": "#ffb633"
   },
-  "styling": {
-    "eyebrows": "breadcrumbs"
-  },
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg",
@@ -18,14 +15,6 @@
   "favicon": "/favicon.png",
   "background": {
     "decoration": "gradient"
-  },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude"
-    ]
   },
   "navbar": {
     "links": [
@@ -341,6 +330,7 @@
         ]
       },
       {
+        "language": "ja",
         "tabs": [
           {
             "tab": "Documentation",
@@ -357,7 +347,7 @@
                 "pages": [
                   "ja/tutorial-tracing_2",
                   {
-                    "group": "トレーシングとデバッグ",
+                    "group": "トレーシング＆デバッグ",
                     "pages": [
                       "ja/guides/tracking/index",
                       "ja/guides/tracking/tracing",
@@ -373,7 +363,7 @@
                     ]
                   },
                   {
-                    "group": "モデルとプロンプトのバージョン管理",
+                    "group": "モデル＆プロンプトのバージョン管理",
                     "pages": [
                       "ja/tutorial-weave_models",
                       "ja/guides/core-types/models",
@@ -407,7 +397,7 @@
                 "group": "本番化",
                 "pages": [
                   {
-                    "group": "フィードバックと例の収集",
+                    "group": "フィードバック＆例の収集",
                     "pages": [
                       "ja/guides/tracking/feedback",
                       "ja/guides/tracking/redact-pii"
@@ -420,7 +410,7 @@
                     ]
                   },
                   {
-                    "group": "ツールとユーティリティ",
+                    "group": "ツール＆ユーティリティ",
                     "pages": [
                       "ja/guides/tools/index",
                       "ja/guides/tools/serve",
@@ -488,7 +478,7 @@
                 ]
               },
               {
-                "group": "ツールとリソース",
+                "group": "ツール＆リソース",
                 "pages": [
                   "ja/guides/core-types/env-vars",
                   "ja/guides/troubleshooting",
@@ -508,7 +498,7 @@
                 ]
               },
               {
-                "group": "評価とデータセット",
+                "group": "評価＆データセット",
                 "pages": [
                   "ja/cookbooks/leaderboard_quickstart",
                   "ja/cookbooks/hf_dataset_evals",
@@ -516,7 +506,7 @@
                 ]
               },
               {
-                "group": "モデルとプロンプト",
+                "group": "モデル＆プロンプト",
                 "pages": [
                   "ja/cookbooks/Models_and_Weave_Integration_Demo",
                   "ja/cookbooks/chain_of_density",
@@ -534,7 +524,7 @@
                 ]
               },
               {
-                "group": "本番環境とモニタリング",
+                "group": "本番環境＆モニタリング",
                 "pages": [
                   "ja/cookbooks/online_monitoring",
                   "ja/cookbooks/feedback_prod",
@@ -544,7 +534,7 @@
                 ]
               },
               {
-                "group": "APIとインテグレーション",
+                "group": "API＆インテグレーション",
                 "pages": [
                   "ja/cookbooks/weave_via_service_api"
                 ]
@@ -621,8 +611,7 @@
               }
             ]
           }
-        ],
-        "language": "ja"
+        ]
       },
       {
         "language": "ko",
@@ -786,14 +775,14 @@
             "tab": "Cookbooks",
             "groups": [
               {
-                "group": "Getting Started",
+                "group": "시작하기",
                 "pages": [
                   "ko/cookbooks/Intro_to_Weave_Hello_Trace",
                   "ko/cookbooks/Intro_to_Weave_Hello_Eval"
                 ]
               },
               {
-                "group": "Evaluations & Datasets",
+                "group": "평가 & 데이터셋",
                 "pages": [
                   "ko/cookbooks/leaderboard_quickstart",
                   "ko/cookbooks/hf_dataset_evals",
@@ -801,7 +790,7 @@
                 ]
               },
               {
-                "group": "Models & Prompts",
+                "group": "모델 & 프롬프트",
                 "pages": [
                   "ko/cookbooks/Models_and_Weave_Integration_Demo",
                   "ko/cookbooks/chain_of_density",
@@ -810,7 +799,7 @@
                 ]
               },
               {
-                "group": "Advanced Topics",
+                "group": "고급 주제",
                 "pages": [
                   "ko/cookbooks/multi-agent-structured-output",
                   "ko/cookbooks/codegen",
@@ -819,7 +808,7 @@
                 ]
               },
               {
-                "group": "Production & Monitoring",
+                "group": "프로덕션 & 모니터링",
                 "pages": [
                   "ko/cookbooks/online_monitoring",
                   "ko/cookbooks/feedback_prod",
@@ -829,7 +818,7 @@
                 ]
               },
               {
-                "group": "API & Integration",
+                "group": "API & 통합",
                 "pages": [
                   "ko/cookbooks/weave_via_service_api"
                 ]
@@ -837,7 +826,7 @@
             ]
           },
           {
-            "tab": "API Reference",
+            "tab": "API 참조",
             "groups": [
               {
                 "group": "Python SDK",
@@ -925,5 +914,16 @@
       "weight": 600,
       "format": "woff2"
     }
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs"
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude"
+    ]
   }
 }
