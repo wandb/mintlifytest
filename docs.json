@@ -7,6 +7,9 @@
     "light": "#ffb633",
     "dark": "#ffb633"
   },
+  "styling": {
+    "eyebrows": "breadcrumbs"
+  },
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg",
