@@ -33,3 +33,35 @@ yarn-error.log*
 venv/
 __pycache__/
 *.pyc
+
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Generated documentation cache
+scripts/.cache/
+
+# TypeDoc configuration (generated)
+weave-source/sdks/node/typedoc.json
+
+# OS files
+.DS_Store
+Thumbs.db
