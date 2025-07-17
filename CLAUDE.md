@@ -294,11 +294,11 @@ Complete user object with all associated data.
 Wrap all images in frames:
 
 <Frame>
-<!-- Image placeholder: Main dashboard showing analytics overview -->
+{/* Image placeholder: Main dashboard showing analytics overview */}
 </Frame>
 
 <Frame caption="The analytics dashboard provides real-time insights">
-<!-- Image placeholder: Analytics dashboard with charts -->
+{/* Image placeholder: Analytics dashboard with charts */}
 </Frame>
 
 #### Videos
