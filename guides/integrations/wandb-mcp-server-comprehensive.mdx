@@ -1,0 +1,406 @@
+---
+title: "W&B MCP Server"
+description: "Enable AI assistants to analyze and interact with your Weights & Biases data"
+---
+
+# W&B MCP Server
+
+The W&B MCP Server empowers AI assistants like Claude, Cursor, and Windsurf to directly query and analyze your Weights & Biases experiments and Weave traces. This integration transforms your AI coding assistant into a powerful data analysis tool that understands your ML experiments.
+
+<CardGroup cols={2}>
+<Card title="Quick Setup" icon="rocket" href="#quick-setup">
+  Get started in under 5 minutes with pre-configured commands
+</Card>
+<Card title="GitHub Repository" icon="github" href="https://github.com/wandb/wandb-mcp-server">
+  View source code and detailed documentation
+</Card>
+</CardGroup>
+
+## Introduction
+
+The W&B MCP (Model Context Protocol) Server provides AI assistants with direct access to your experiment tracking and Weave trace data. Your AI assistant can analyze training runs, compare hyperparameters, debug LLM applications, and generate insights without manual data extraction.
+
+### Why use the W&B MCP Server?
+
+<Tabs>
+<Tab title="For ML Engineers">
+- **Automated analysis**: Ask your AI to find the best performing models across experiments
+- **Hyperparameter insights**: Compare configurations and identify optimal settings
+- **Visualization generation**: Create charts and reports directly from conversation
+- **Debugging assistance**: Analyze failed runs and suggest fixes
+</Tab>
+
+<Tab title="For LLM Developers">
+- **Trace analysis**: Debug complex LLM workflows by examining execution traces
+- **Performance monitoring**: Track latency, token usage, and error rates
+- **Evaluation insights**: Analyze Weave evaluations to improve model quality
+- **Cost optimization**: Identify expensive operations in your LLM pipeline
+</Tab>
+</Tabs>
+
+## Prerequisites
+
+Before installing the W&B MCP Server, ensure you have:
+
+<Steps>
+<Step title="W&B Account">
+Create a free account at [wandb.ai](https://wandb.ai) if you don't have one
+</Step>
+
+<Step title="W&B API Key">
+Get your API key from [wandb.ai/authorize](https://wandb.ai/authorize)
+</Step>
+
+<Step title="AI Assistant">
+Install one of the supported AI assistants:
+- [Claude Desktop](https://claude.ai/download)
+- [Cursor](https://cursor.sh)
+- [Windsurf](https://codeium.com/windsurf)
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
+</Step>
+</Steps>
+
+## Installation
+
+### Quick setup with `uv`
+
+The fastest way to install is using the `uv` package manager:
+
+```bash
+# Install uv if you haven't already
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# The MCP server will be installed automatically when configured
+```
+
+<Note>
+The MCP server is installed on-demand when your AI assistant starts. No manual installation required!
+</Note>
+
+### Alternative: Manual installation
+
+<AccordionGroup>
+<Accordion title="Install with pip">
+```bash
+pip install wandb-mcp-server
+```
+</Accordion>
+
+<Accordion title="Install from source">
+```bash
+git clone https://github.com/wandb/wandb-mcp-server
+cd wandb-mcp-server
+pip install -e .
+```
+</Accordion>
+</AccordionGroup>
+
+## Configuration
+
+Configure your AI assistant to use the W&B MCP Server by modifying its settings file:
+
+<Tabs>
+<Tab title="Claude Desktop">
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+```json claude_desktop_config.json
+{
+  "mcpServers": {
+    "wandb": {
+      "command": "uvx",
+      "args": ["wandb-mcp-server"],
+      "env": {
+        "WANDB_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+</Tab>
+
+<Tab title="Cursor">
+Add to `.cursor/mcp.json` in your project:
+
+```json mcp.json
+{
+  "mcpServers": {
+    "wandb": {
+      "command": "uvx",
+      "args": ["wandb-mcp-server"],
+      "env": {
+        "WANDB_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+</Tab>
+
+<Tab title="Windsurf">
+Add to `.windsurf/mcp.json` in your project:
+
+```json mcp.json
+{
+  "mcpServers": {
+    "wandb": {
+      "command": "uvx",
+      "args": ["wandb-mcp-server"],
+      "env": {
+        "WANDB_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+</Tab>
+
+<Tab title="Claude Code">
+Add to `.claude/settings.json` in your project:
+
+```json settings.json
+{
+  "mcpServers": {
+    "wandb": {
+      "command": "uvx",
+      "args": ["wandb-mcp-server"],
+      "env": {
+        "WANDB_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+</Tab>
+</Tabs>
+
+<Warning>
+Replace `your-api-key-here` with your actual W&B API key from [wandb.ai/authorize](https://wandb.ai/authorize)
+</Warning>
+
+### Configuration options
+
+<ParamField body="WANDB_API_KEY" type="string" required>
+Your W&B API key for authentication
+</ParamField>
+
+<ParamField body="WANDB_BASE_URL" type="string">
+Custom W&B instance URL (for private deployments)
+</ParamField>
+
+<ParamField body="E2B_API_KEY" type="string">
+API key for cloud sandbox execution (optional)
+</ParamField>
+
+## Usage
+
+Once configured, your AI assistant gains access to powerful W&B analysis tools:
+
+### Available tools
+
+<AccordionGroup>
+<Accordion title="query_wandb_tool" icon="search">
+Query W&B experiment tracking data including runs, sweeps, and metrics.
+
+**Example prompts:**
+- "Show me the top 5 runs by validation accuracy in project X"
+- "Compare learning rates across all successful runs"
+- "Find runs where loss didn't converge"
+
+**Capabilities:**
+- Filter runs by status, tags, or config values
+- Access metrics, system metrics, and metadata
+- Analyze sweep results and hyperparameter importance
+</Accordion>
+
+<Accordion title="query_weave_traces_tool" icon="code-branch">
+Access and analyze Weave traces for debugging LLM applications.
+
+**Example prompts:**
+- "Show all traces where latency exceeded 2 seconds"
+- "Analyze token usage patterns in the last hour"
+- "Find error traces in my RAG pipeline"
+
+**Capabilities:**
+- Filter traces by time, status, or custom attributes
+- Examine nested call structures
+- Analyze costs and performance metrics
+</Accordion>
+
+<Accordion title="execute_sandbox_code_tool" icon="terminal">
+Run Python code in secure sandboxes for custom analysis.
+
+**Example prompts:**
+- "Create a scatter plot of learning rate vs final accuracy"
+- "Generate a correlation matrix of hyperparameters"
+- "Plot training curves for the top 5 models"
+
+**Capabilities:**
+- Full Python environment with data science libraries
+- Access to matplotlib, pandas, numpy, and more
+- Cloud (E2B) or local (Pyodide) execution options
+</Accordion>
+
+<Accordion title="create_wandb_report_tool" icon="file-lines">
+Generate shareable W&B Reports with visualizations and insights.
+
+**Example prompts:**
+- "Create a report summarizing this week's experiments"
+- "Generate a comparison report for different model architectures"
+- "Build a report showing training efficiency metrics"
+
+**Capabilities:**
+- Automated report generation with charts
+- Markdown formatting with insights
+- Shareable links for team collaboration
+</Accordion>
+</AccordionGroup>
+
+### Example workflows
+
+<Tabs>
+<Tab title="Find Best Model">
+```text
+You: What's the best performing model in my image-classification project?
+
+AI: I'll analyze your image-classification project to find the best performing model.
+
+[AI queries runs and analyzes metrics]
+
+Based on my analysis, run "resnet50-final" achieved the highest validation accuracy of 94.3% with:
+- Learning rate: 0.001
+- Batch size: 32
+- Training epochs: 50
+
+The model converged smoothly and showed no signs of overfitting. Would you like me to create a detailed comparison chart?
+```
+</Tab>
+
+<Tab title="Debug LLM Pipeline">
+```text
+You: I'm seeing high latency in my RAG pipeline. Can you help identify the bottleneck?
+
+AI: I'll analyze your Weave traces to identify performance bottlenecks.
+
+[AI examines trace data]
+
+Found the issue: The embedding generation step is taking 85% of total execution time (avg 2.3s per request). 
+The vector database query is actually fast (120ms). 
+
+Recommendations:
+1. Consider batch embedding generation
+2. Cache frequently used embeddings
+3. Use a faster embedding model
+
+Should I create a visualization of the latency breakdown?
+```
+</Tab>
+
+<Tab title="Generate Report">
+```text
+You: Create a report comparing this week's model experiments
+
+AI: I'll generate a comprehensive report comparing your recent experiments.
+
+[AI creates W&B report]
+
+Report created: https://wandb.ai/your-team/project/reports/weekly-comparison
+
+The report includes:
+- Performance metrics comparison table
+- Training curves for all runs
+- Hyperparameter correlation analysis
+- Cost and training time analysis
+
+Key finding: Models with dropout=0.3 consistently outperformed others.
+```
+</Tab>
+</Tabs>
+
+## Troubleshooting
+
+### Common issues and solutions
+
+<AccordionGroup>
+<Accordion title="API Key not working">
+**Problem:** Authentication errors when using the MCP server
+
+**Solutions:**
+1. Verify your API key is correct: `echo $WANDB_API_KEY`
+2. Ensure the key has proper permissions for your projects
+3. Try regenerating your API key at [wandb.ai/authorize](https://wandb.ai/authorize)
+4. Check if you're using the correct W&B instance URL
+</Accordion>
+
+<Accordion title="MCP server not found">
+**Problem:** AI assistant can't find or start the MCP server
+
+**Solutions:**
+1. Ensure `uv` is installed: `which uvx`
+2. Try manual installation: `pip install wandb-mcp-server`
+3. Check your AI assistant's config file syntax
+4. Restart your AI assistant after configuration changes
+</Accordion>
+
+<Accordion title="No data returned">
+**Problem:** Queries return empty results
+
+**Solutions:**
+1. Verify you have runs in the specified project
+2. Check project visibility settings (public/private)
+3. Ensure your API key has access to the project
+4. Try using the full entity/project path
+</Accordion>
+
+<Accordion title="Sandbox execution fails">
+**Problem:** Code execution in sandbox doesn't work
+
+**Solutions:**
+1. For cloud execution: Verify E2B_API_KEY is set
+2. For local execution: Ensure Python environment is properly configured
+3. Check for syntax errors in generated code
+4. Try simpler code examples first
+</Accordion>
+</AccordionGroup>
+
+### Debug mode
+
+Enable verbose logging for troubleshooting:
+
+```json
+{
+  "mcpServers": {
+    "wandb": {
+      "command": "uvx",
+      "args": ["wandb-mcp-server", "--verbose"],
+      "env": {
+        "WANDB_API_KEY": "your-api-key-here",
+        "WANDB_LOG_LEVEL": "debug"
+      }
+    }
+  }
+}
+```
+
+## Conclusion
+
+The W&B MCP Server transforms your AI assistant into a powerful ML research companion. With direct access to experiment data and analysis tools, you can accelerate your development workflow and gain deeper insights from your runs.
+
+### Next steps
+
+<Steps>
+<Step title="Explore examples">
+Visit the [GitHub repository](https://github.com/wandb/wandb-mcp-server) for advanced examples and use cases
+</Step>
+
+<Step title="Join the community">
+Share your experiences and get help in the [W&B Discord](https://discord.com/invite/RgB8CPk2ce)
+</Step>
+
+<Step title="Contribute">
+The MCP server is open source - contributions and feedback are welcome!
+</Step>
+</Steps>
+
+<Info>
+For the latest updates and advanced configuration options, refer to the [official documentation](https://github.com/wandb/wandb-mcp-server/blob/main/README.md).
+</Info>

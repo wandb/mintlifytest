@@ -193,7 +193,8 @@
                     "group": "Protocols",
                     "pages": [
                       "guides/integrations/mcp",
-                      "guides/integrations/wandb-mcp-server"
+                      "guides/integrations/wandb-mcp-server",
+                      "/guides/integrations/wandb-mcp-server-comprehensive"
                     ]
                   }
                 ]
