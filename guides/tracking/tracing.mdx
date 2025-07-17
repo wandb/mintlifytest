@@ -276,7 +276,7 @@ However, often LLM applications have additional logic (such as pre/post processi
     Using the `__weave` dictionary sets the call display name which will take precedence over the Op display name.
 
     </Note>
-    2. Change the display name on a per-call basis. This uses the [`Op.call`](../../reference/python-sdk/weave/trace/weave.trace.op.md#function-call) method to return a `Call` object, which you can then use to set the display name using [`Call.set_display_name`](../../reference/python-sdk/weave/trace/weave.trace.weave_client.md#method-set_display_name).
+    2. Change the display name on a per-call basis. This uses the [`Op.call`](../../reference/python-sdk/weave/trace/op.mdx#function-call) method to return a `Call` object, which you can then use to set the display name using [`Call.set_display_name`](../../reference/python-sdk/weave/trace/weave_client.mdx#method-set_display_name).
     ```python showLineNumbers
     result, call = my_function.call("World")
     call.set_display_name("My Custom Display Name")
@@ -680,7 +680,7 @@ All of these mutations can be performed from the UI by navigating to the call de
 
 <Tabs>
     <Tab title="Python">
-    In order to set the display name of a call, you can use the [`Call.set_display_name`](../../reference/python-sdk/weave/trace/weave.trace.weave_client.md#method-set_display_name) method.
+    In order to set the display name of a call, you can use the [`Call.set_display_name`](../../reference/python-sdk/weave/trace/weave_client.mdx#method-set_display_name) method.
 
     ```python showLineNumbers
     import weave
@@ -724,7 +724,7 @@ Please see the [Feedback Documentation](./feedback.mdx) for more details.
 
 <Tabs>
     <Tab title="Python">
-    To delete a Call using the Python API, you can use the [`Call.delete`](../../reference/python-sdk/weave/trace/weave.trace.weave_client.md#method-delete) method.
+    To delete a Call using the Python API, you can use the [`Call.delete`](../../reference/python-sdk/weave/trace/weave_client.mdx#method-delete) method.
 
     ```python showLineNumbers
     import weave
@@ -816,7 +816,7 @@ The easiest way to get started is to construct a view in the UI, then learn more
 
 <Tabs>
     <Tab title="Python">
-    To fetch calls using the Python API, you can use the [`client.get_calls`](../../reference/python-sdk/weave/trace/weave.trace.weave_client.md#method-get_calls) method:
+    To fetch calls using the Python API, you can use the [`client.get_calls`](../../reference/python-sdk/weave/trace/weave_client.mdx#method-get_calls) method:
 
     ```python
     import weave
