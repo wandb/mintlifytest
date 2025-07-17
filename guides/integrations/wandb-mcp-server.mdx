@@ -1,0 +1,439 @@
+---
+title: "W&B MCP Server"
+description: "Set up and use the Weights & Biases MCP server for AI-assisted experiment tracking"
+---
+
+The W&B MCP (Model Context Protocol) server enables AI assistants to interact with your Weights & Biases projects, runs, and artifacts. This integration allows language models to track experiments, analyze results, and manage ML workflows through natural language interactions.
+
+## Introduction
+
+The W&B MCP server provides a standardized interface for AI applications to access Weights & Biases functionality. With this server, you can use AI assistants to:
+
+- Track and monitor ML experiments
+- Query run history and metrics
+- Manage artifacts and model versions
+- Analyze experiment results
+- Generate reports from training data
+
+## Prerequisites
+
+Before setting up the W&B MCP server, ensure you have:
+
+- **Python 3.8 or higher** installed on your system
+- **A Weights & Biases account** with an active API key
+- **MCP SDK** installed (`pip install mcp`)
+- **Basic familiarity** with W&B concepts (projects, runs, artifacts)
+
+<Note>
+You can find your W&B API key at [wandb.ai/authorize](https://wandb.ai/authorize).
+</Note>
+
+## Installation
+
+Install the W&B MCP server using pip:
+
+<Tabs>
+<Tab title="pip">
+```bash
+pip install wandb-mcp-server
+```
+</Tab>
+
+<Tab title="uv">
+```bash
+uv pip install wandb-mcp-server
+```
+</Tab>
+
+<Tab title="poetry">
+```bash
+poetry add wandb-mcp-server
+```
+</Tab>
+</Tabs>
+
+## Configuration
+
+Configure the W&B MCP server by setting up your environment and authentication.
+
+<Steps>
+<Step title="Set your W&B API key">
+Export your API key as an environment variable:
+
+```bash
+export WANDB_API_KEY=your-api-key-here
+```
+
+<Warning>
+Never commit your API key to version control. Use environment variables or secure credential storage.
+</Warning>
+</Step>
+
+<Step title="Create a configuration file">
+Create a `.mcp/config.json` file in your project directory:
+
+```json config.json
+{
+  "mcpServers": {
+    "wandb": {
+      "command": "wandb-mcp-server",
+      "args": [],
+      "env": {
+        "WANDB_API_KEY": "${WANDB_API_KEY}"
+      }
+    }
+  }
+}
+```
+</Step>
+
+<Step title="Verify the installation">
+Test the server connection:
+
+```bash
+mcp list wandb
+```
+
+You should see a list of available W&B tools and resources.
+</Step>
+</Steps>
+
+### Advanced configuration
+
+You can customize the server behavior with additional environment variables:
+
+<ParamField path="WANDB_BASE_URL" type="string">
+Custom W&B instance URL for enterprise deployments. Default: `https://api.wandb.ai`
+</ParamField>
+
+<ParamField path="WANDB_PROJECT" type="string">
+Default project name for operations. Can be overridden per request.
+</ParamField>
+
+<ParamField path="WANDB_ENTITY" type="string">
+Default entity (team or user) for operations. Can be overridden per request.
+</ParamField>
+
+<ParamField path="MCP_LOG_LEVEL" type="string">
+Logging verbosity level. Options: `DEBUG`, `INFO`, `WARNING`, `ERROR`. Default: `INFO`
+</ParamField>
+
+## Usage
+
+The W&B MCP server exposes tools and resources that AI assistants can use to interact with your ML experiments.
+
+### Available tools
+
+The server provides the following tools:
+
+<AccordionGroup>
+<Accordion title="create_run">
+Start a new W&B run for experiment tracking.
+
+```python
+# Tool parameters
+{
+  "project": "my-project",
+  "name": "experiment-1",
+  "config": {
+    "learning_rate": 0.001,
+    "batch_size": 32
+  },
+  "tags": ["baseline", "v1.0"]
+}
+```
+</Accordion>
+
+<Accordion title="log_metrics">
+Log metrics to an active run.
+
+```python
+# Tool parameters
+{
+  "run_id": "abc123",
+  "metrics": {
+    "loss": 0.523,
+    "accuracy": 0.912,
+    "val_loss": 0.634
+  },
+  "step": 100
+}
+```
+</Accordion>
+
+<Accordion title="query_runs">
+Search and filter runs in a project.
+
+```python
+# Tool parameters
+{
+  "project": "my-project",
+  "filters": {
+    "state": "finished",
+    "config.learning_rate": {"$gte": 0.001}
+  },
+  "order": "-created_at",
+  "limit": 10
+}
+```
+</Accordion>
+
+<Accordion title="get_artifact">
+Retrieve artifact information and download URLs.
+
+```python
+# Tool parameters
+{
+  "artifact": "model-weights:v3",
+  "project": "my-project"
+}
+```
+</Accordion>
+
+<Accordion title="create_artifact">
+Create and upload a new artifact.
+
+```python
+# Tool parameters
+{
+  "name": "dataset",
+  "type": "dataset",
+  "description": "Preprocessed training data",
+  "metadata": {
+    "version": "1.0",
+    "size": "2.3GB"
+  }
+}
+```
+</Accordion>
+</AccordionGroup>
+
+### Example workflows
+
+Here are common workflows using the W&B MCP server:
+
+<CodeGroup>
+```python "Track an experiment"
+# Start a new run
+run = create_run(
+    project="image-classification",
+    config={
+        "architecture": "resnet50",
+        "optimizer": "adam",
+        "learning_rate": 0.001
+    }
+)
+
+# Log training metrics
+for epoch in range(10):
+    log_metrics(
+        run_id=run.id,
+        metrics={
+            "train_loss": train_loss,
+            "val_loss": val_loss,
+            "accuracy": accuracy
+        },
+        step=epoch
+    )
+
+# Finish the run
+finish_run(run_id=run.id)
+```
+
+```python "Compare experiments"
+# Query recent runs
+runs = query_runs(
+    project="image-classification",
+    filters={"state": "finished"},
+    order="-accuracy",
+    limit=5
+)
+
+# Analyze results
+for run in runs:
+    print(f"{run.name}: {run.summary.accuracy}")
+```
+
+```python "Manage model artifacts"
+# Create a model artifact
+artifact = create_artifact(
+    name="trained-model",
+    type="model",
+    metadata={
+        "accuracy": 0.95,
+        "framework": "pytorch"
+    }
+)
+
+# Link to a run
+link_artifact(
+    run_id=run.id,
+    artifact_id=artifact.id,
+    alias="best"
+)
+```
+</CodeGroup>
+
+### Integration with AI assistants
+
+The W&B MCP server works with various AI assistants that support the Model Context Protocol:
+
+<Tabs>
+<Tab title="Claude Desktop">
+Add the W&B server to your Claude Desktop configuration:
+
+```json claude_desktop_config.json
+{
+  "mcpServers": {
+    "wandb": {
+      "command": "wandb-mcp-server",
+      "env": {
+        "WANDB_API_KEY": "${WANDB_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+Then ask Claude to help with your ML experiments:
+- "Show me the best performing runs from yesterday"
+- "Create a new run to test a higher learning rate"
+- "Compare the validation loss across my recent experiments"
+</Tab>
+
+<Tab title="Continue.dev">
+Configure Continue to use the W&B MCP server:
+
+```json .continue/config.json
+{
+  "models": [...],
+  "mcpServers": {
+    "wandb": {
+      "command": "wandb-mcp-server",
+      "env": {
+        "WANDB_API_KEY": "${WANDB_API_KEY}"
+      }
+    }
+  }
+}
+```
+</Tab>
+
+<Tab title="Custom Integration">
+Build your own integration using the MCP client:
+
+```python
+from mcp import ClientSession
+import asyncio
+
+async def use_wandb_server():
+    async with ClientSession(
+        server_params={"command": "wandb-mcp-server"}
+    ) as session:
+        # List available tools
+        tools = await session.list_tools()
+        
+        # Call a tool
+        result = await session.call_tool(
+            "query_runs",
+            arguments={
+                "project": "my-project",
+                "limit": 5
+            }
+        )
+```
+</Tab>
+</Tabs>
+
+## Troubleshooting
+
+Common issues and solutions when using the W&B MCP server.
+
+<AccordionGroup>
+<Accordion title="Authentication errors">
+**Problem**: Server returns authentication errors
+
+**Solution**: 
+1. Verify your API key is correct: `echo $WANDB_API_KEY`
+2. Check the key is valid at [wandb.ai/authorize](https://wandb.ai/authorize)
+3. Ensure the key has proper permissions for your entity/project
+4. Try regenerating your API key if issues persist
+</Accordion>
+
+<Accordion title="Connection timeouts">
+**Problem**: Server fails to connect or times out
+
+**Solution**:
+1. Check your internet connection
+2. Verify W&B API is accessible: `curl https://api.wandb.ai/health`
+3. Check for proxy settings that might block connections
+4. Increase timeout in server configuration:
+   ```json
+   {
+     "timeout": 30000  // 30 seconds
+   }
+   ```
+</Accordion>
+
+<Accordion title="Missing tools or resources">
+**Problem**: Expected tools don't appear in the list
+
+**Solution**:
+1. Update to the latest server version: `pip install --upgrade wandb-mcp-server`
+2. Check server logs for initialization errors
+3. Verify MCP SDK compatibility
+4. Restart the server after configuration changes
+</Accordion>
+
+<Accordion title="Rate limiting">
+**Problem**: Requests fail with rate limit errors
+
+**Solution**:
+1. Implement exponential backoff in your requests
+2. Batch operations when possible
+3. Check your W&B subscription limits
+4. Contact W&B support for rate limit increases
+</Accordion>
+</AccordionGroup>
+
+### Debug logging
+
+Enable debug logging to troubleshoot issues:
+
+```bash
+export MCP_LOG_LEVEL=DEBUG
+export WANDB_DEBUG=true
+wandb-mcp-server
+```
+
+Check logs in:
+- Server output: `~/.mcp/logs/wandb-server.log`
+- W&B client logs: `~/.wandb/debug.log`
+
+## Conclusion
+
+The W&B MCP server bridges the gap between AI assistants and ML experiment tracking. By providing a standardized interface to W&B functionality, it enables natural language interactions with your ML workflows.
+
+### Next steps
+
+<CardGroup cols={2}>
+<Card title="Explore MCP concepts" icon="book" href="/guides/integrations/mcp">
+  Learn more about the Model Context Protocol and its capabilities
+</Card>
+
+<Card title="W&B documentation" icon="graduation-cap" href="https://docs.wandb.ai">
+  Deep dive into Weights & Biases features and best practices
+</Card>
+
+<Card title="Join the community" icon="discord" href="https://wandb.me/discord">
+  Get help and share experiences with other W&B users
+</Card>
+
+<Card title="View examples" icon="github" href="https://github.com/wandb/wandb-mcp-server/examples">
+  Browse example implementations and use cases
+</Card>
+</CardGroup>
+
+<Info>
+For additional support, visit the [W&B support portal](https://wandb.ai/support) or reach out to your account team.
+</Info>
