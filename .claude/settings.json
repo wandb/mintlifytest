@@ -7,6 +7,5 @@
             "Edit(**/*)",
             "MultiEdit(**/*)"
         ]
-    },
-    "autonomousMode": true
+    }
 }
