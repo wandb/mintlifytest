@@ -179,7 +179,7 @@ Example: `mintlify`
 </ResponseField>
 
 <ResponseField name="api" type="API">
-  Configuration for API settings. Learn more about API pages at [API Components](/api-playground/demo).
+  Configuration for API settings.
   <Expandable title="API">
     <ResponseField name="baseUrl" type="string">
       The base url for all API endpoints. If `baseUrl` is an array, it will enable for multiple base url
@@ -211,7 +211,7 @@ Example: `mintlify`
         <ResponseField name="mode" default="show" type='"show" | "simple" | "hide"'>
           Whether the playground is showing, hidden, or only displaying the endpoint with no added user interactivity `simple`
 
-          Learn more at the [playground guides](/api-playground/demo)
+          Configure the API playground settings
         </ResponseField>
       </Expandable>
     </ResponseField>
@@ -225,9 +225,8 @@ Example: `mintlify`
   </Expandable>
 </ResponseField>
 
-<ResponseField name="openapi" type="string | string[]">
-  A string or an array of strings of URL(s) or relative path(s) pointing to your
-  OpenAPI file.
+<ResponseField name="openapi" type="OpenApiSettings">
+  Configuration for API settings.
   
   Examples:
   <CodeGroup>
