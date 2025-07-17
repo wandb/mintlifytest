@@ -1,0 +1,232 @@
+
+[0;34mFetching issue DOCS-1474...[0m
+{
+  "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+  "id": "60289",
+  "self": "https://wandb.atlassian.net/rest/api/3/issue/60289",
+  "key": "DOCS-1474",
+  "fields": {
+    "statuscategorychangedate": "2025-04-30T11:47:54.080-0700",
+    "issuetype": {
+      "self": "https://wandb.atlassian.net/rest/api/3/issuetype/10047",
+      "id": "10047",
+      "description": "Tasks track small, distinct pieces of work.",
+      "iconUrl": "https://wandb.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+      "name": "Task",
+      "subtask": false,
+      "avatarId": 10318,
+      "entityId": "67d1cec9-fd03-4547-a974-5c7e9313acbd",
+      "hierarchyLevel": 0
+    },
+    "timespent": null,
+    "project": {
+      "self": "https://wandb.atlassian.net/rest/api/3/project/10026",
+      "id": "10026",
+      "key": "DOCS",
+      "name": "Docs",
+      "projectTypeKey": "software",
+      "simplified": true,
+      "avatarUrls": {
+        "48x48": "https://wandb.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10414",
+        "24x24": "https://wandb.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10414?size=small",
+        "16x16": "https://wandb.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10414?size=xsmall",
+        "32x32": "https://wandb.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10414?size=medium"
+      }
+    },
+    "fixVersions": [],
+    "aggregatetimespent": null,
+    "statusCategory": {
+      "self": "https://wandb.atlassian.net/rest/api/3/statuscategory/2",
+      "id": 2,
+      "key": "new",
+      "colorName": "blue-gray",
+      "name": "To Do"
+    },
+    "resolution": null,
+    "resolutiondate": null,
+    "workratio": -1,
+    "issuerestriction": {
+      "issuerestrictions": {},
+      "shouldDisplay": true
+    },
+    "watches": {
+      "self": "https://wandb.atlassian.net/rest/api/3/issue/DOCS-1474/watchers",
+      "watchCount": 1,
+      "isWatching": false
+    },
+    "lastViewed": "2025-07-17T13:11:34.721-0700",
+    "created": "2025-04-30T11:47:51.473-0700",
+    "customfield_10183": null,
+    "customfield_10020": null,
+    "customfield_10021": null,
+    "priority": {
+      "self": "https://wandb.atlassian.net/rest/api/3/priority/3",
+      "iconUrl": "https://wandb.atlassian.net/images/icons/priorities/medium.svg",
+      "name": "P2",
+      "id": "3"
+    },
+    "labels": [],
+    "customfield_10016": null,
+    "customfield_10019": "1|i04j6x:",
+    "timeestimate": null,
+    "aggregatetimeoriginalestimate": null,
+    "versions": [],
+    "issuelinks": [],
+    "assignee": {
+      "self": "https://wandb.atlassian.net/rest/api/3/user?accountId=712020%3A2d688880-d76f-4ba0-87b0-2b09acd1193e",
+      "accountId": "712020:2d688880-d76f-4ba0-87b0-2b09acd1193e",
+      "emailAddress": "james.sanchez@wandb.com",
+      "avatarUrls": {
+        "48x48": "https://secure.gravatar.com/avatar/9dd9aadf68f50032807fc4bd514c8740?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FJ-1.png",
+        "24x24": "https://secure.gravatar.com/avatar/9dd9aadf68f50032807fc4bd514c8740?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FJ-1.png",
+        "16x16": "https://secure.gravatar.com/avatar/9dd9aadf68f50032807fc4bd514c8740?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FJ-1.png",
+        "32x32": "https://secure.gravatar.com/avatar/9dd9aadf68f50032807fc4bd514c8740?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FJ-1.png"
+      },
+      "displayName": "james.sanchez",
+      "active": true,
+      "timeZone": "America/Los_Angeles",
+      "accountType": "atlassian"
+    },
+    "updated": "2025-04-30T12:16:05.607-0700",
+    "status": {
+      "self": "https://wandb.atlassian.net/rest/api/3/status/10076",
+      "description": "",
+      "iconUrl": "https://wandb.atlassian.net/",
+      "name": "Backlog",
+      "id": "10076",
+      "statusCategory": {
+        "self": "https://wandb.atlassian.net/rest/api/3/statuscategory/2",
+        "id": 2,
+        "key": "new",
+        "colorName": "blue-gray",
+        "name": "To Do"
+      }
+    },
+    "components": [],
+    "timeoriginalestimate": null,
+    "description": {
+      "type": "doc",
+      "version": 1,
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "inlineCard",
+              "attrs": {
+                "url": "https://weave-docs.wandb.ai/guides/tracking/ops#control-call-link-output"
+              }
+            },
+            {
+              "type": "text",
+              "text": " "
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Current docs only discuss environment variable method but I understand there to be a "
+            },
+            {
+              "type": "text",
+              "text": "weave.init",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "text": " variant"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "inlineCard",
+              "attrs": {
+                "url": "https://weightsandbiases.slack.com/archives/C082KBPK01L/p1745948080976459?thread_ts=1745947152.942829&cid=C082KBPK01L"
+              }
+            },
+            {
+              "type": "text",
+              "text": " "
+            }
+          ]
+        }
+      ]
+    },
+    "timetracking": {},
+    "security": null,
+    "attachment": [],
+    "aggregatetimeestimate": null,
+    "summary": "[Weave] note wandb.init option for disabling donuts",
+    "creator": {
+      "self": "https://wandb.atlassian.net/rest/api/3/user?accountId=6317471d62fe1e6eac6d782f",
+      "accountId": "6317471d62fe1e6eac6d782f",
+      "emailAddress": "jamie.rasmussen@wandb.com",
+      "avatarUrls": {
+        "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/6317471d62fe1e6eac6d782f/c22be4e9-f5e3-4555-8b1f-c553dc5e33ce/48",
+        "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/6317471d62fe1e6eac6d782f/c22be4e9-f5e3-4555-8b1f-c553dc5e33ce/24",
+        "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/6317471d62fe1e6eac6d782f/c22be4e9-f5e3-4555-8b1f-c553dc5e33ce/16",
+        "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/6317471d62fe1e6eac6d782f/c22be4e9-f5e3-4555-8b1f-c553dc5e33ce/32"
+      },
+      "displayName": "Jamie Rasmussen",
+      "active": true,
+      "timeZone": "America/Chicago",
+      "accountType": "atlassian"
+    },
+    "subtasks": [],
+    "reporter": {
+      "self": "https://wandb.atlassian.net/rest/api/3/user?accountId=6317471d62fe1e6eac6d782f",
+      "accountId": "6317471d62fe1e6eac6d782f",
+      "emailAddress": "jamie.rasmussen@wandb.com",
+      "avatarUrls": {
+        "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/6317471d62fe1e6eac6d782f/c22be4e9-f5e3-4555-8b1f-c553dc5e33ce/48",
+        "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/6317471d62fe1e6eac6d782f/c22be4e9-f5e3-4555-8b1f-c553dc5e33ce/24",
+        "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/6317471d62fe1e6eac6d782f/c22be4e9-f5e3-4555-8b1f-c553dc5e33ce/16",
+        "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/6317471d62fe1e6eac6d782f/c22be4e9-f5e3-4555-8b1f-c553dc5e33ce/32"
+      },
+      "displayName": "Jamie Rasmussen",
+      "active": true,
+      "timeZone": "America/Chicago",
+      "accountType": "atlassian"
+    },
+    "customfield_10087": null,
+    "aggregateprogress": {
+      "progress": 0,
+      "total": 0
+    },
+    "customfield_10000": "{}",
+    "environment": null,
+    "duedate": null,
+    "progress": {
+      "progress": 0,
+      "total": 0
+    },
+    "votes": {
+      "self": "https://wandb.atlassian.net/rest/api/3/issue/DOCS-1474/votes",
+      "votes": 0,
+      "hasVoted": false
+    },
+    "comment": {
+      "comments": [],
+      "self": "https://wandb.atlassian.net/rest/api/3/issue/60289/comment",
+      "maxResults": 0,
+      "total": 0,
+      "startAt": 0
+    },
+    "worklog": {
+      "startAt": 0,
+      "maxResults": 20,
+      "total": 0,
+      "worklogs": []
+    }
+  }
+}
