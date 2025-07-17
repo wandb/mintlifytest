@@ -86,10 +86,14 @@ jobs:
       
       - name: Generate Python SDK documentation
         env:
-          WEAVE_VERSION: ${{ github.event.inputs.weave_version || 'main' }}
+          WEAVE_VERSION: ${{ github.event.inputs.weave_version || 'latest' }}
         run: |
           source .venv/bin/activate
-          python scripts/generate_python_sdk_docs.py
+          python scripts/generate_python_sdk_docs.py || {
+            echo "Python SDK generation failed with exit code $?"
+            echo "Attempting with latest PyPI version..."
+            WEAVE_VERSION=latest python scripts/generate_python_sdk_docs.py
+          }
           echo "Python SDK documentation generated"
       
       - name: Install pnpm
@@ -97,7 +101,7 @@ jobs:
       
       - name: Generate TypeScript SDK documentation
         env:
-          WEAVE_VERSION: ${{ github.event.inputs.weave_version || 'main' }}
+          WEAVE_VERSION: ${{ github.event.inputs.weave_version || 'latest' }}
         run: |
           source .venv/bin/activate
           python scripts/generate_typescript_sdk_docs.py

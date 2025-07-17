@@ -43,6 +43,18 @@ def download_weave_source(version="main"):
     """Download Weave source code for a specific version."""
     print(f"Downloading Weave source code for version: {version}")
     
+    # Handle "latest" by fetching the latest release tag
+    if version == "latest":
+        try:
+            api_url = "https://api.github.com/repos/wandb/weave/releases/latest"
+            response = requests.get(api_url)
+            response.raise_for_status()
+            version = response.json()["tag_name"]
+            print(f"  Using latest release: {version}")
+        except Exception as e:
+            print(f"  Warning: Could not fetch latest release, using main branch: {e}")
+            version = "main"
+    
     # Create temporary directory
     temp_dir = tempfile.mkdtemp()
     

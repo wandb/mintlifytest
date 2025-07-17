@@ -31,6 +31,7 @@ def install_weave(version="latest"):
             cmd = [sys.executable, "-m", "pip", "install", 
                    f"git+https://github.com/wandb/weave.git@{version}"]
         
+        print(f"Running: {' '.join(cmd)}")
         subprocess.run(cmd, check=True)
         print("✓ Weave installed successfully")
         
@@ -49,6 +50,22 @@ def install_weave(version="latest"):
         sys.exit(1)
 
 
+def test_module_imports(modules):
+    """Test if modules can be imported."""
+    print("\nTesting module imports...")
+    available_modules = []
+    
+    for module in modules:
+        try:
+            __import__(module)
+            print(f"  ✓ {module} - available")
+            available_modules.append(module)
+        except ImportError as e:
+            print(f"  ✗ {module} - not available: {e}")
+    
+    return available_modules
+
+
 def generate_docs_with_lazydocs(output_dir):
     """Generate documentation using lazydocs."""
     output_path = Path(output_dir)
@@ -63,8 +80,17 @@ def generate_docs_with_lazydocs(output_dir):
         "weave.trace_server.trace_server_interface",
     ]
     
-    for module in modules_to_document:
-        print(f"Generating documentation for {module}...")
+    # Test which modules are available
+    available_modules = test_module_imports(modules_to_document)
+    
+    if not available_modules:
+        print("No modules available to document!", file=sys.stderr)
+        sys.exit(1)
+    
+    print(f"\nGenerating documentation for {len(available_modules)} modules...")
+    
+    for module in available_modules:
+        print(f"\nGenerating documentation for {module}...")
         
         # Use lazydocs command line interface for cleaner output
         cmd = [
@@ -76,17 +102,28 @@ def generate_docs_with_lazydocs(output_dir):
         ]
         
         try:
-            subprocess.run(cmd, check=True, capture_output=True, text=True)
+            result = subprocess.run(cmd, check=True, capture_output=True, text=True)
             print(f"  ✓ Generated docs for {module}")
+            if result.stdout:
+                print(f"    Output: {result.stdout}")
         except subprocess.CalledProcessError as e:
             print(f"  ✗ Error generating docs for {module}: {e.stderr}")
+            # Continue with other modules instead of exiting
 
 
 def post_process_docs(docs_dir):
     """Post-process the generated documentation for Mintlify."""
     docs_path = Path(docs_dir)
     
-    for md_file in docs_path.rglob("*.md"):
+    # Check if any files were generated
+    md_files = list(docs_path.rglob("*.md"))
+    if not md_files:
+        print(f"Warning: No .md files found in {docs_dir}")
+        return
+    
+    print(f"\nPost-processing {len(md_files)} documentation files...")
+    
+    for md_file in md_files:
         content = md_file.read_text()
         
         # Add Mintlify frontmatter
