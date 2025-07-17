@@ -35,7 +35,7 @@ print(response.text)
 ```
 A powerful feature of cohere models is using [connectors](https://docs.cohere.com/docs/overview-rag-connectors#using-connectors-to-create-grounded-generations) enabling you to make requests to other API on the endpoint side. The response will then contain the generated text with citation elements that link to the documents returned from the connector. 
 
-[![cohere_trace.png](imgs/cohere_trace.png)](https://wandb.ai/capecape/cohere_dev/weave/calls)
+[![cohere_trace.png](/guides/integrations/imgs/cohere_trace.png)](https://wandb.ai/capecape/cohere_dev/weave/calls)
 
 <Note>
 We patch the Cohere `Client.chat`, `AsyncClient.chat`, `Client.chat_stream`, and `AsyncClient.chat_stream` methods for you to keep track of your LLM calls.
@@ -68,7 +68,7 @@ def weather(location: str, model: str) -> str:
 print(weather("Boston", "command"))
 ```
 
-[![cohere_ops.png](imgs/cohere_ops.png)](https://wandb.ai/capecape/cohere_dev/weave/calls)
+[![cohere_ops.png](/guides/integrations/imgs/cohere_ops.png)](https://wandb.ai/capecape/cohere_dev/weave/calls)
 
 ## Create a `Model` for easier experimentation
 
@@ -108,4 +108,4 @@ result = weather_model.predict("Boston")
 print(result)
 ```
 
-[![cohere_model.png](imgs/cohere_model.png)](https://wandb.ai/capecape/cohere_dev/weave/models)
+[![cohere_model.png](/guides/integrations/imgs/cohere_model.png)](https://wandb.ai/capecape/cohere_dev/weave/models)

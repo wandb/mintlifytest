@@ -1,0 +1,263 @@
+(node:26131) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Encountered two children with the same key, `Dataset.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `Evaluation.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveClient.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[GEncountered two children with the same key, `WeaveObject.mdx`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[2K[1A[2K[Gfound 152 broken links in 34 files
+
+cookbooks/dspy_prompt_optimization.mdx
+ ⎿  ../../guides/tracking/objects.mdx
+
+cookbooks/multi-agent-structured-output.mdx
+ ⎿  ../../introduction.mdx
+ ⎿  /media/multi-agent-structured-output/1-1.png
+
+guides/core-types/leaderboards.mdx
+ ⎿  imgs/leaderboard-example.png
+
+guides/core-types/media.mdx
+ ⎿  imgs/cat-pumpkin-trace.png
+ ⎿  imgs/audio-trace.png
+
+guides/core-types/prompts.mdx
+ ⎿  imgs/prompt-object.png
+ ⎿  imgs/prompt-comparison.png
+
+guides/evaluation/evaluation_logger.mdx
+ ⎿  img/evals_tab.png
+ ⎿  img/comparison.png
+
+guides/evaluation/guardrails_and_monitors.mdx
+ ⎿  img/monitors-ui-1.png
+ ⎿  img/monitors-ui-2.png
+ ⎿  img/monitors-ui-3.png
+ ⎿  img/monitors-4.png
+
+guides/evaluation/weave_local_scorers.mdx
+ ⎿  scorers.mdx#function-based-scorers
+
+guides/integrations/anthropic.mdx
+ ⎿  imgs/anthropic_trace.png
+ ⎿  imgs/anthropic_ops.png
+ ⎿  imgs/anthropic_model.png
+ ⎿  imgs/anthropic_tool.png
+
+guides/integrations/autogen.mdx
+ ⎿  imgs/autogen/autogen-simple-client.png
+ ⎿  imgs/autogen/autogen-streaming-client.png
+ ⎿  imgs/autogen/autogen-cached-client.png
+ ⎿  imgs/autogen/autogen-agent-tools.png
+ ⎿  imgs/autogen/round_robin_group_chat.png
+ ⎿  imgs/autogen/autogen-memory.png
+ ⎿  imgs/autogen/autogen-rag.png
+ ⎿  imgs/autogen/autogen-runtime.png
+ ⎿  imgs/autogen/autogen-sequential-workflow.png
+ ⎿  imgs/autogen/autogen-codegen.png
+
+guides/integrations/cerebras.mdx
+ ⎿  imgs/cerebras_calls.png
+ ⎿  imgs/cerebras_model.png
+
+guides/integrations/cohere.mdx
+ ⎿  imgs/cohere_trace.png
+ ⎿  imgs/cohere_ops.png
+ ⎿  imgs/cohere_model.png
+
+guides/integrations/crewai.mdx
+ ⎿  imgs/crewai/crew.png
+ ⎿  imgs/crewai/crew_with_tool.png
+ ⎿  imgs/crewai/flow.png
+ ⎿  imgs/crewai/crew_with_guardrail.png
+
+guides/integrations/dspy.mdx
+ ⎿  imgs/dspy/dspy_trace.png
+ ⎿  imgs/dspy/dspy_custom_module.png
+ ⎿  imgs/dspy/dspy_optimizer.png
+
+guides/integrations/google.mdx
+ ⎿  imgs/google-genai-trace.png
+ ⎿  imgs/google-genai-ops.png
+
+guides/integrations/inference.mdx
+ ⎿  imgs/image.png
+ ⎿  imgs/inference-advanced-evals.png
+ ⎿  imgs/inference-advanced-leaderboard.png
+ ⎿  imgs/inference-ui.png
+ ⎿  imgs/inference-playground.png
+ ⎿  imgs/inference-playground-single.png
+ ⎿  imgs/inference-playground-compare.png
+
+guides/integrations/langchain.mdx
+ ⎿  imgs/langchain_attributes.png
+ ⎿  imgs/langchain_trace.png
+ ⎿  imgs/langchain_model.png
+ ⎿  imgs/langchain_eval.png
+
+guides/integrations/litellm.mdx
+ ⎿  imgs/litellm_gif.gif
+
+guides/integrations/llamaindex.mdx
+ ⎿  imgs/simple_llamaindex.png
+ ⎿  imgs/llamaindex_rag.png
+ ⎿  imgs/llamaindex_model.png
+ ⎿  imgs/llamaindex_evaluation.png
+
+guides/integrations/mcp.mdx
+ ⎿  imgs/mcp/mcp_trace_timeline.png
+
+guides/integrations/mistral.mdx
+ ⎿  imgs/mistral_trace.png
+ ⎿  imgs/mistral_ops.png
+ ⎿  imgs/mistral_model.png
+
+guides/integrations/notdiamond.mdx
+ ⎿  imgs/notdiamond/api-keys.png
+
+guides/integrations/nvidia_nim.mdx
+ ⎿  imgs/chatnvidia_trace.png
+ ⎿  imgs/nvidia_pokedex.png
+ ⎿  imgs/chatnvidia_model.png
+
+guides/tools/comparison.mdx
+ ⎿  imgs/comparison-2objs-sidebyside.png
+ ⎿  imgs/comparison-2objs-unified.png
+ ⎿  imgs/comparison-2objs-baseline.png
+ ⎿  imgs/comparison-2objs-baseline-set.png
+ ⎿  imgs/comparison-2objs-reorder.png
+ ⎿  imgs/comparison-2objs-numericdiffformat.png
+ ⎿  imgs/comparison-2objs-numericdiffformat-updated.png
+ ⎿  imgs/comparsion-7objs-diffonly-subset.png
+
+guides/tools/playground.mdx
+ ⎿  imgs/open_chat_in_playground.png
+ ⎿  imgs/playground_settings.png
+ ⎿  imgs/playground_message_buttons.png
+ ⎿  imgs/playground_message_editor.png
+ ⎿  imgs/playground_chat_input.png
+ ⎿  imgs/saved-model.png
+ ⎿  imgs/saved-models-dropdown.png
+
+guides/tracking/feedback.mdx
+ ⎿  imgs/feedback_tab.png
+ ⎿  imgs/feedback_calls.png
+
+guides/tracking/trace-tree.mdx
+ ⎿  imgs/trace-tree-full.png
+ ⎿  imgs/trace-tree-filter.png
+ ⎿  imgs/trace-tree-scrubbers.png
+ ⎿  imgs/trace-tree-code-view.png
+ ⎿  imgs/trace-tree-flame-view.png
+
+guides/tracking/tracing.mdx
+ ⎿  imgs/generators.png
+ ⎿  ../../reference/python-sdk/weave/trace/weave.trace.util/#class-contextawaret
+hreadpoolexecutor
+ ⎿  imgs/threadpoolexecutor.png
+ ⎿  ../../reference/python-sdk/weave/trace/weave.trace.weave_client#method-get_c
+all
+ ⎿  imgs/md-call-render.png
+ ⎿  ../../reference/python-sdk/weave/trace_server/weave.trace_server.trace_serve
+r_interface#class-callschema
+
+guides/tracking/video.mdx
+ ⎿  imgs/video-trace.png
+ ⎿  imgs/video-trace-popout.png
+
+reference/typescript-sdk/weave/classes/Dataset.mdx
+ ⎿  WeaveObject.mdx
+ ⎿  Dataset.mdx
+ ⎿  Dataset.mdx
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#constructors
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#__savedref
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#_baseparameters
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#description
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#id
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#classname
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#saveattrs
+
+reference/typescript-sdk/weave/classes/Evaluation.mdx
+ ⎿  WeaveObject.mdx
+ ⎿  Evaluation.mdx
+ ⎿  Evaluation.mdx
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#constructors
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#__savedref
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#_baseparameters
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#description
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#id
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#classname
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx#saveattrs
+
+reference/typescript-sdk/weave/classes/WeaveClient.mdx
+ ⎿  WeaveClient.mdx
+ ⎿  WeaveClient.mdx
+
+reference/typescript-sdk/weave/classes/WeaveObject.mdx
+ ⎿  Dataset.mdx
+ ⎿  Evaluation.mdx
+ ⎿  WeaveObject.mdx
+ ⎿  WeaveObject.mdx
+
+reference/typescript-sdk/weave/index.mdx
+ ⎿  classes/Dataset.mdx
+ ⎿  classes/Evaluation.mdx
+ ⎿  classes/WeaveClient.mdx
+ ⎿  classes/WeaveObject.mdx
+ ⎿  interfaces/CallSchema.mdx
+ ⎿  interfaces/CallsFilter.mdx
+ ⎿  type-aliases/Op.mdx
+ ⎿  functions/init.mdx
+ ⎿  functions/login.mdx
+ ⎿  functions/op.mdx
+ ⎿  functions/requireCurrentCallStackEntry.mdx
+ ⎿  functions/requireCurrentChildSummary.mdx
+ ⎿  functions/weaveAudio.mdx
+ ⎿  functions/weaveImage.mdx
+ ⎿  functions/wrapOpenAI.mdx
+
