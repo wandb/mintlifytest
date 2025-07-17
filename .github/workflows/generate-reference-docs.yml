@@ -14,6 +14,14 @@ on:
         default: true
         type: boolean
   
+  # Temporary trigger for testing - REMOVE BEFORE MERGING
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/generate-reference-docs.yml'
+      - 'scripts/generate_*.py'
+      - 'scripts/requirements.txt'
+  
   schedule:
     # Run weekly on Mondays at 00:00 UTC
     - cron: '0 0 * * 1'
@@ -108,8 +116,24 @@ jobs:
             echo "No changes detected"
           fi
       
+      # For PR testing, just report what would happen
+      - name: Report Results (PR Test Mode)
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "This is a test run on a PR. In production, this would:"
+          if [[ "${{ steps.check_changes.outputs.changes }}" == "true" ]]; then
+            echo "✅ Create a PR with the generated documentation changes"
+            echo ""
+            echo "Changed files:"
+            git status --porcelain
+          else
+            echo "ℹ️ Skip PR creation (no changes detected)"
+          fi
+          echo ""
+          echo "Weave version used: ${{ github.event.inputs.weave_version || 'main' }}"
+      
       - name: Create Pull Request
-        if: steps.check_changes.outputs.changes == 'true' && (github.event.inputs.create_pr == 'true' || github.event_name == 'schedule')
+        if: steps.check_changes.outputs.changes == 'true' && github.event_name != 'pull_request' && (github.event.inputs.create_pr == 'true' || github.event_name == 'schedule')
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
