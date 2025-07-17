@@ -192,7 +192,8 @@
                   {
                     "group": "Protocols",
                     "pages": [
-                      "guides/integrations/mcp"
+                      "guides/integrations/mcp",
+                      "guides/integrations/wandb-mcp-server"
                     ]
                   }
                 ]
@@ -475,7 +476,8 @@
                   {
                     "group": "プロトコル",
                     "pages": [
-                      "ja/guides/integrations/mcp"
+                      "ja/guides/integrations/mcp",
+                      "ja/guides/integrations/wandb-mcp-server"
                     ]
                   }
                 ]
@@ -760,7 +762,8 @@
                   {
                     "group": "Protocols",
                     "pages": [
-                      "ko/guides/integrations/mcp"
+                      "ko/guides/integrations/mcp",
+                      "ko/guides/integrations/wandb-mcp-server"
                     ]
                   }
                 ]
