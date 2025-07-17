@@ -18,15 +18,9 @@ if [ ! -f "$PROMPT_FILE" ]; then
   exit 1
 fi
 
-# # --- Logging setup ---
-# mkdir -p logs
-# TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-# BASENAME=$(basename "$PROMPT_FILE" .txt)
-# LOG_FILE="logs/${BASENAME}_${TIMESTAMP}.log"
 
 # --- Run Claude and log output ---
 echo "Sending prompt from '$PROMPT_FILE' to Claude..."
-# echo "Logging response to '$LOG_FILE'"
 
 # cat "$PROMPT_FILE" | claude | tee "$LOG_FILE"
 cat "$PROMPT_FILE" | claude 

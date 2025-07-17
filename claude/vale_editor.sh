@@ -23,7 +23,6 @@ fi
 # --- Prepare output filename ---
 OUTPUT_FILE="vale_output.txt"
 
-
 # --- Run Vale and strip ANSI escape sequences ---
 echo "Running Vale on '$INPUT_FILE'..."
 vale "$INPUT_FILE" | sed -r "s/\x1B\[[0-9;]*[mK]//g" > "$OUTPUT_FILE"
