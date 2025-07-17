@@ -48,7 +48,7 @@ print(message.content)
 
 Weave will now track and log all LLM calls made through the Anthropic library. You can view the traces in the Weave web interface.
 
-[![anthropic_trace.png](imgs/anthropic_trace.png)](https://wandb.ai/capecape/anthropic_project/weave/calls)
+[![anthropic_trace.png](/guides/integrations/imgs/anthropic_trace.png)](https://wandb.ai/capecape/anthropic_project/weave/calls)
 
 <Note>
 We patch the anthropic `Messages.create` method for you to keep track of your LLM calls.
@@ -96,7 +96,7 @@ print(generate_joke("chickens"))
 print(generate_joke("cars"))
 ```
 
-[![anthropic_ops.png](imgs/anthropic_ops.png)](https://wandb.github.io/weave/guides/tracking/ops)
+[![anthropic_ops.png](/guides/integrations/imgs/anthropic_ops.png)](https://wandb.github.io/weave/guides/tracking/ops)
 
 ## Create a `Model` for easier experimentation
 
@@ -141,7 +141,7 @@ result = joker.predict("Chickens and Robots")
 print(result)
 ```
 
-[![anthropic_model.png](imgs/anthropic_model.png)](https://wandb.ai/capecape/anthropic_project/weave/calls)
+[![anthropic_model.png](/guides/integrations/imgs/anthropic_model.png)](https://wandb.ai/capecape/anthropic_project/weave/calls)
 
 ## Tools (function calling)
 
@@ -180,4 +180,4 @@ print(message)
 
 We automatically capture the tools you used on the prompt and keep them versioned.
 
-[![anthropic_tool.png](imgs/anthropic_tool.png)](https://wandb.ai/capecape/anthropic_project/weave/calls)
+[![anthropic_tool.png](/guides/integrations/imgs/anthropic_tool.png)](https://wandb.ai/capecape/anthropic_project/weave/calls)
