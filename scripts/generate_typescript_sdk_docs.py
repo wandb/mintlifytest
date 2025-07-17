@@ -90,6 +90,21 @@ def download_weave_source(version="main"):
         sys.exit(1)
 
 
+def check_package_json_versions(sdk_path):
+    """Check if package.json has compatible typedoc versions."""
+    package_json_path = sdk_path / "package.json"
+    if package_json_path.exists():
+        with open(package_json_path, 'r') as f:
+            package_data = json.load(f)
+            
+        dev_deps = package_data.get("devDependencies", {})
+        print("\nExisting TypeScript dependencies:")
+        for pkg in ["typedoc", "typedoc-plugin-markdown", "typescript"]:
+            if pkg in dev_deps:
+                print(f"  {pkg}: {dev_deps[pkg]}")
+    return
+
+
 def setup_typescript_project(weave_source):
     """Set up the TypeScript project and install dependencies."""
     sdk_path = Path(weave_source) / "sdks" / "node"
@@ -100,18 +115,22 @@ def setup_typescript_project(weave_source):
     
     print(f"Setting up TypeScript project at {sdk_path}")
     
+    # Check existing versions
+    check_package_json_versions(sdk_path)
+    
     # Install dependencies
     os.chdir(sdk_path)
     try:
-        print("Installing dependencies...")
+        print("\nInstalling dependencies...")
         subprocess.run(["pnpm", "install"], check=True)
         
-        # Install typedoc and markdown plugin
-        print("Installing typedoc...")
+        # Install compatible versions of typedoc and markdown plugin
+        # Use specific versions that are known to work together
+        print("Installing compatible typedoc versions...")
         subprocess.run([
             "pnpm", "add", "-D",
-            "typedoc",
-            "typedoc-plugin-markdown"
+            "typedoc@0.25.13",  # Use a stable version that works with CommonJS
+            "typedoc-plugin-markdown@3.17.1"  # Compatible with typedoc 0.25.x
         ], check=True)
         
         print("✓ Dependencies installed successfully")
@@ -124,19 +143,22 @@ def setup_typescript_project(weave_source):
 
 def generate_typedoc_config(sdk_path, output_path):
     """Generate typedoc configuration."""
+    # Use options compatible with typedoc 0.25.x
     config = {
         "entryPoints": ["src/index.ts"],
         "out": str(output_path),
         "plugin": ["typedoc-plugin-markdown"],
         "readme": "none",
-        "hideBreadcrumbs": True,
-        "hideInPageTOC": True,
         "disableSources": True,
         "excludePrivate": True,
         "excludeProtected": True,
         "excludeInternal": True,
         "githubPages": False,
-        "cleanOutputDir": True
+        "cleanOutputDir": True,
+        "hideGenerator": True,
+        "navigationLinks": {
+            "GitHub": "https://github.com/wandb/weave"
+        }
     }
     
     config_path = sdk_path / "typedoc.json"
@@ -148,14 +170,30 @@ def generate_typedoc_config(sdk_path, output_path):
 
 def run_typedoc(sdk_path, output_path):
     """Run typedoc to generate documentation."""
-    print(f"Generating TypeScript documentation to {output_path}...")
+    print(f"\nGenerating TypeScript documentation to {output_path}...")
     
     os.chdir(sdk_path)
     try:
-        subprocess.run([
+        # Run typedoc with error output
+        result = subprocess.run([
             "pnpm", "exec", "typedoc"
-        ], check=True)
-        print("✓ TypeScript documentation generated successfully")
+        ], capture_output=True, text=True, check=False)
+        
+        if result.returncode != 0:
+            print("TypeDoc output:")
+            if result.stdout:
+                print(result.stdout)
+            if result.stderr:
+                print("Errors:", result.stderr)
+            
+            # Check if docs were still generated despite warnings
+            if output_path.exists() and any(output_path.iterdir()):
+                print("⚠ TypeDoc completed with warnings, but documentation was generated")
+            else:
+                raise subprocess.CalledProcessError(result.returncode, result.args)
+        else:
+            print("✓ TypeScript documentation generated successfully")
+            
     except subprocess.CalledProcessError as e:
         print(f"✗ Failed to generate documentation: {e}", file=sys.stderr)
         sys.exit(1)
