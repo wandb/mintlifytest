@@ -450,8 +450,8 @@ You can also manually create Calls using the API directly.
     </Tab>
 
     <Tab title="HTTP API">
-    * Start a call: [POST `/call/start`](../../reference/service-api/call-start-call-start-post.api.mdx)
-    * End a call: [POST `/call/end`](../../reference/service-api/call-end-call-end-post.api.mdx)
+    * Start a call: [POST `/call/start`](../../reference/service-api/index.mdx)
+    * End a call: [POST `/call/end`](../../reference/service-api/index.mdx)
     ```bash
     curl -L 'https://trace.wandb.ai/call/start' \
     -H 'Content-Type: application/json' \
@@ -651,7 +651,7 @@ You can also track class and object methods.
     </Tab>
 
     <Tab title="HTTP API">
-    To view a call using the Service API, you can make a request to the [`/call/read`](../../reference/service-api/call-read-call-read-post.api.mdx) endpoint.
+    To view a call using the Service API, you can make a request to the [`/call/read`](../../reference/service-api/index.mdx) endpoint.
 
     ```bash
     curl -L 'https://trace.wandb.ai/call/read' \
@@ -701,7 +701,7 @@ All of these mutations can be performed from the UI by navigating to the call de
     ```
     </Tab>
     <Tab title="HTTP API">
-    To set the display name of a call using the Service API, you can make a request to the [`/call/update`](../../reference/service-api/call-update-call-update-post.api.mdx) endpoint.
+    To set the display name of a call using the Service API, you can make a request to the [`/call/update`](../../reference/service-api/index.mdx) endpoint.
 
     ```bash
     curl -L 'https://trace.wandb.ai/call/update' \
@@ -746,7 +746,7 @@ Please see the [Feedback Documentation](./feedback.mdx) for more details.
     ```
     </Tab>
     <Tab title="HTTP API">
-    To delete a call using the Service API, you can make a request to the [`/calls/delete`](../../reference/service-api/calls-delete-calls-delete-post.api.mdx) endpoint.
+    To delete a call using the Service API, you can make a request to the [`/calls/delete`](../../reference/service-api/index.mdx) endpoint.
 
     ```bash
     curl -L 'https://trace.wandb.ai/calls/delete' \
@@ -842,7 +842,7 @@ The easiest way to get started is to construct a view in the UI, then learn more
     ```
     </Tab>
     <Tab title="HTTP API">
-    The most powerful query layer is at the Service API. To fetch calls using the Service API, you can make a request to the [`/calls/stream_query`](../../reference/service-api/calls-query-stream-calls-stream-query-post.api.mdx) endpoint.
+    The most powerful query layer is at the Service API. To fetch calls using the Service API, you can make a request to the [`/calls/stream_query`](../../reference/service-api/index.mdx) endpoint.
 
     ```bash
     curl -L 'https://trace.wandb.ai/calls/stream_query' \
