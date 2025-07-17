@@ -14,19 +14,38 @@ import sys
 from pathlib import Path
 
 
-def install_weave_from_source(weave_path):
-    """Install Weave from source for documentation generation."""
-    print(f"Installing Weave from source: {weave_path}")
+def install_weave(version="latest"):
+    """Install Weave package for documentation generation."""
+    print(f"Installing Weave version: {version}")
+    
     try:
-        subprocess.run(
-            [sys.executable, "-m", "pip", "install", "-e", weave_path],
-            check=True,
-            capture_output=True,
-            text=True
+        if version == "latest":
+            # Install latest from PyPI
+            cmd = [sys.executable, "-m", "pip", "install", "weave"]
+        elif version.startswith("v") or "." in version:
+            # Looks like a version number (e.g., v0.50.0 or 0.50.0)
+            version_num = version.lstrip("v")
+            cmd = [sys.executable, "-m", "pip", "install", f"weave=={version_num}"]
+        else:
+            # Assume it's a commit hash or branch name
+            cmd = [sys.executable, "-m", "pip", "install", 
+                   f"git+https://github.com/wandb/weave.git@{version}"]
+        
+        subprocess.run(cmd, check=True)
+        print("✓ Weave installed successfully")
+        
+        # Get installed version
+        result = subprocess.run(
+            [sys.executable, "-m", "pip", "show", "weave"],
+            capture_output=True, text=True, check=True
         )
-        print("Weave installed successfully")
+        for line in result.stdout.split('\n'):
+            if line.startswith('Version:'):
+                print(f"  Installed version: {line.split(':')[1].strip()}")
+                break
+                
     except subprocess.CalledProcessError as e:
-        print(f"Error installing Weave: {e.stderr}", file=sys.stderr)
+        print(f"Error installing Weave: {e}", file=sys.stderr)
         sys.exit(1)
 
 
@@ -98,16 +117,11 @@ description: 'Python SDK reference for {module_name}'
 
 def main():
     """Main function."""
-    # Check if we're in the Weave repo or need to use a separate source
-    weave_source = os.environ.get("WEAVE_SOURCE_PATH", "../weave-source")
+    # Get Weave version from environment or use latest
+    weave_version = os.environ.get("WEAVE_VERSION", "latest")
     
-    if not Path(weave_source).exists():
-        print(f"Weave source not found at {weave_source}")
-        print("Please set WEAVE_SOURCE_PATH environment variable or ensure weave-source exists")
-        sys.exit(1)
-    
-    # Install Weave from source
-    install_weave_from_source(weave_source)
+    # Install Weave
+    install_weave(weave_version)
     
     # Generate documentation
     output_dir = "reference/python-sdk/weave"

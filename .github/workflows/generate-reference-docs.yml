@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       weave_version:
-        description: 'Weave version (commit SHA, tag, or branch)'
+        description: 'Weave version (tag like v0.50.0, commit SHA, or branch name)'
         required: false
         default: 'main'
         type: string
@@ -36,14 +36,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Checkout Weave source repository
-        uses: actions/checkout@v4
-        with:
-          repository: wandb/weave
-          ref: ${{ github.event.inputs.weave_version || 'main' }}
-          path: weave-source
-          token: ${{ secrets.GITHUB_TOKEN }}
-      
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -64,13 +56,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
       
-      - name: Cache Node dependencies
+      - name: Cache pnpm store
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.pnpm-store
-            weave-source/sdks/node/node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('weave-source/sdks/node/pnpm-lock.yaml') }}
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ github.event.inputs.weave_version || 'main' }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
       
@@ -88,7 +78,7 @@ jobs:
       
       - name: Generate Python SDK documentation
         env:
-          WEAVE_SOURCE_PATH: ./weave-source
+          WEAVE_VERSION: ${{ github.event.inputs.weave_version || 'main' }}
         run: |
           source .venv/bin/activate
           python scripts/generate_python_sdk_docs.py
@@ -99,7 +89,7 @@ jobs:
       
       - name: Generate TypeScript SDK documentation
         env:
-          WEAVE_SOURCE_PATH: ./weave-source
+          WEAVE_VERSION: ${{ github.event.inputs.weave_version || 'main' }}
         run: |
           source .venv/bin/activate
           python scripts/generate_typescript_sdk_docs.py

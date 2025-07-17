@@ -11,7 +11,10 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
+import tarfile
 from pathlib import Path
+import requests
 
 
 def check_node_dependencies():
@@ -34,6 +37,45 @@ def check_node_dependencies():
         except subprocess.CalledProcessError as e:
             print(f"✗ Failed to install pnpm: {e}", file=sys.stderr)
             sys.exit(1)
+
+
+def download_weave_source(version="main"):
+    """Download Weave source code for a specific version."""
+    print(f"Downloading Weave source code for version: {version}")
+    
+    # Create temporary directory
+    temp_dir = tempfile.mkdtemp()
+    
+    try:
+        # Download tarball from GitHub
+        url = f"https://github.com/wandb/weave/archive/{version}.tar.gz"
+        response = requests.get(url, stream=True)
+        response.raise_for_status()
+        
+        # Save and extract tarball
+        tarball_path = Path(temp_dir) / "weave.tar.gz"
+        with open(tarball_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        
+        # Extract
+        with tarfile.open(tarball_path, 'r:gz') as tar:
+            tar.extractall(temp_dir)
+        
+        # Find the extracted directory
+        extracted_dirs = [d for d in Path(temp_dir).iterdir() if d.is_dir() and d.name.startswith('weave-')]
+        if not extracted_dirs:
+            raise Exception("Could not find extracted Weave directory")
+        
+        weave_dir = extracted_dirs[0]
+        print(f"✓ Downloaded and extracted Weave source to {weave_dir}")
+        
+        return weave_dir
+        
+    except Exception as e:
+        print(f"Error downloading Weave source: {e}", file=sys.stderr)
+        shutil.rmtree(temp_dir, ignore_errors=True)
+        sys.exit(1)
 
 
 def setup_typescript_project(weave_source):
@@ -154,39 +196,44 @@ def main():
     # Check Node.js dependencies
     check_node_dependencies()
     
-    # Get Weave source path
-    weave_source = os.environ.get("WEAVE_SOURCE_PATH", "../weave-source")
+    # Get Weave version from environment or use main
+    weave_version = os.environ.get("WEAVE_VERSION", "main")
     
-    if not Path(weave_source).exists():
-        print(f"Weave source not found at {weave_source}")
-        print("Please set WEAVE_SOURCE_PATH environment variable")
-        sys.exit(1)
+    # Download Weave source
+    weave_source = download_weave_source(weave_version)
     
-    # Setup TypeScript project
-    sdk_path = setup_typescript_project(weave_source)
-    
-    # Output directory
-    current_dir = Path.cwd()
-    output_dir = current_dir / "reference" / "typescript-sdk" / "weave"
-    
-    # Clean existing docs
-    if output_dir.exists():
-        shutil.rmtree(output_dir)
-    
-    # Generate typedoc config
-    generate_typedoc_config(sdk_path, output_dir)
-    
-    # Run typedoc
-    run_typedoc(sdk_path, output_dir)
-    
-    # Change back to original directory
-    os.chdir(current_dir)
-    
-    # Post-process for Mintlify
-    print("\nPost-processing documentation for Mintlify...")
-    post_process_typescript_docs(output_dir)
-    
-    print("\nTypeScript SDK documentation generation complete!")
+    try:
+        # Setup TypeScript project
+        sdk_path = setup_typescript_project(weave_source)
+        
+        # Output directory
+        current_dir = Path.cwd()
+        output_dir = current_dir / "reference" / "typescript-sdk" / "weave"
+        
+        # Clean existing docs
+        if output_dir.exists():
+            shutil.rmtree(output_dir)
+        
+        # Generate typedoc config
+        generate_typedoc_config(sdk_path, output_dir)
+        
+        # Run typedoc
+        run_typedoc(sdk_path, output_dir)
+        
+        # Change back to original directory
+        os.chdir(current_dir)
+        
+        # Post-process for Mintlify
+        print("\nPost-processing documentation for Mintlify...")
+        post_process_typescript_docs(output_dir)
+        
+        print("\nTypeScript SDK documentation generation complete!")
+        
+    finally:
+        # Clean up temporary directory
+        if weave_source:
+            temp_dir = weave_source.parent
+            shutil.rmtree(temp_dir, ignore_errors=True)
 
 
 if __name__ == "__main__":
