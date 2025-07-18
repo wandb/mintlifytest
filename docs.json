@@ -192,7 +192,8 @@
                   {
                     "group": "Protocols",
                     "pages": [
-                      "guides/integrations/mcp"
+                      "guides/integrations/mcp",
+                      "guides/integrations/wandb_mcp_server"
                     ]
                   }
                 ]

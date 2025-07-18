@@ -1,0 +1,224 @@
+---
+title: "W&B MCP Server"
+description: "Query and analyze your Weights & Biases data directly from AI assistants"
+---
+
+<Info>
+The W&B MCP Server enables AI assistants like Cursor, Windsurf, Claude Code, and Claude Desktop to directly query and analyze your Weights & Biases data through the Model Context Protocol.
+</Info>
+
+The W&B MCP Server provides powerful capabilities to help you understand experiments, debug issues, and generate insights from your W&B Models and W&B Weave data directly within your AI coding assistant.
+
+## Prerequisites
+
+<Steps>
+<Step title="Install uv package manager">
+  Install the `uv` package manager for Python:
+  
+  ```bash
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+  ```
+</Step>
+
+<Step title="Get your W&B API key">
+  Retrieve your API key from [wandb.ai/authorize](https://wandb.ai/authorize)
+  
+  <Note>
+  Keep your API key secure. Never commit it to version control.
+  </Note>
+</Step>
+</Steps>
+
+## Installation
+
+Add the W&B MCP server to your AI assistant's configuration file:
+
+<CodeGroup>
+```json Cursor/Windsurf
+{
+  "mcpServers": {
+    "wandb": {
+      "command": "uvx",
+      "args": ["wandb-mcp-server"],
+      "env": {
+        "WANDB_API_KEY": "your-api-key"
+      }
+    }
+  }
+}
+```
+
+```json Claude Desktop
+{
+  "mcpServers": {
+    "wandb": {
+      "command": "uvx",
+      "args": ["wandb-mcp-server"],
+      "env": {
+        "WANDB_API_KEY": "your-api-key"
+      }
+    }
+  }
+}
+```
+</CodeGroup>
+
+<Warning>
+After updating the configuration, restart your AI assistant to load the server.
+</Warning>
+
+## Configuration
+
+### Optional sandbox environments
+
+The MCP server supports code execution in secure sandboxes for custom analysis and visualizations:
+
+<Tabs>
+<Tab title="Cloud Sandbox (E2B)">
+  For cloud-based code execution:
+  
+  ```json
+  {
+    "mcpServers": {
+      "wandb": {
+        "command": "uvx",
+        "args": ["wandb-mcp-server"],
+        "env": {
+          "WANDB_API_KEY": "your-api-key",
+          "E2B_API_KEY": "your-e2b-api-key"
+        }
+      }
+    }
+  }
+  ```
+  
+  <Tip>
+  Get your E2B API key from [e2b.dev](https://e2b.dev).
+  </Tip>
+</Tab>
+
+<Tab title="Local Sandbox">
+  For browser-based code execution:
+  
+  ```json
+  {
+    "mcpServers": {
+      "wandb": {
+        "command": "uvx",
+        "args": ["wandb-mcp-server"],
+        "env": {
+          "WANDB_API_KEY": "your-api-key",
+          "USE_LOCAL_SANDBOX": "true"
+        }
+      }
+    }
+  }
+  ```
+  
+  <Note>
+  Local sandbox runs Python code in your browser using Pyodide.
+  </Note>
+</Tab>
+</Tabs>
+
+## Usage
+
+Once configured, you can interact with your W&B data through natural language queries. The server provides four main tools:
+
+### Available tools
+
+<AccordionGroup>
+<Accordion title="query_wandb_tool">
+  Query W&B experiment tracking data including runs, sweeps, and metrics.
+  
+  **Example queries:**
+  - "What are the top 5 runs by validation accuracy in my `dog-labs/pug-classification` project?"
+  - "Compare learning rates across all runs in my latest sweep"
+  - "Show me runs where loss decreased by more than 50%"
+</Accordion>
+
+<Accordion title="query_weave_traces_tool">
+  Access Weave traces and evaluations for debugging LLM applications.
+  
+  **Example queries:**
+  - "Show me all Weave traces where latency exceeded 2 seconds in the last hour"
+  - "Analyze token usage patterns in my GPT-4 calls"
+  - "Find traces with errors in my agent workflow"
+</Accordion>
+
+<Accordion title="execute_sandbox_code_tool">
+  Run Python code in secure sandboxes for custom analysis and visualizations.
+  
+  **Example queries:**
+  - "Create a scatter plot comparing learning rate vs final loss for all runs"
+  - "Generate a heatmap of hyperparameter correlations"
+  - "Build a custom dashboard showing model performance trends"
+</Accordion>
+
+<Accordion title="create_wandb_report_tool">
+  Generate shareable W&B Reports with visualizations and analysis.
+  
+  **Example queries:**
+  - "Generate a report summarizing the performance of different model architectures"
+  - "Create a report comparing this week's experiments to last week's"
+  - "Build an executive summary of our latest model improvements"
+</Accordion>
+</AccordionGroup>
+
+### Example workflow
+
+<Steps>
+<Step title="Query your experiments">
+  Ask your AI assistant to find specific runs:
+  
+  ```
+  "Show me the best performing runs from my image classification project"
+  ```
+</Step>
+
+<Step title="Analyze the results">
+  Request deeper analysis:
+  
+  ```
+  "Create a visualization comparing the training curves of the top 3 models"
+  ```
+</Step>
+
+<Step title="Generate insights">
+  Create a shareable report:
+  
+  ```
+  "Generate a report summarizing what hyperparameters led to the best results"
+  ```
+</Step>
+</Steps>
+
+## Troubleshooting
+
+<AccordionGroup>
+<Accordion title="Server not connecting">
+  - Verify your API key is correct
+  - Ensure you've restarted your AI assistant after configuration
+  - Check that `uvx` is properly installed and in your PATH
+</Accordion>
+
+<Accordion title="Authentication errors">
+  - Confirm your W&B API key has the necessary permissions
+  - Try regenerating your API key from [wandb.ai/authorize](https://wandb.ai/authorize)
+  - Ensure the API key is properly quoted in your configuration
+</Accordion>
+
+<Accordion title="Sandbox execution issues">
+  - For E2B: Verify your E2B API key is valid
+  - For local sandbox: Ensure your browser supports WebAssembly
+  - Try switching between cloud and local sandbox modes
+</Accordion>
+</AccordionGroup>
+
+## Conclusion
+
+The W&B MCP Server transforms how you interact with your experiment data by bringing powerful query and analysis capabilities directly into your development environment. Whether you're debugging model performance, comparing hyperparameters, or generating reports, your AI assistant can now help you make data-driven decisions faster.
+
+<Card title="Full documentation" icon="book" href="https://github.com/wandb/wandb-mcp-server">
+  For advanced configuration options and detailed examples, see the complete documentation on GitHub.
+</Card>
