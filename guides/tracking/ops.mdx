@@ -1,13 +1,19 @@
 ---
 title: "Ops"
-description: "Versioned functions that automatically log all calls in Weave"
+description: "Track and version your functions automatically with Weave"
 ---
 
-A Weave op is a versioned function that automatically logs all calls.
+A Weave op is a versioned function that automatically logs all calls. When you decorate a function with `@weave.op()`, Weave tracks inputs, outputs, and execution details for observability and debugging.
+
+<Note>
+Functions decorated with `@weave.op()` behave normally without tracking if you haven't called `weave.init('your-project-name')`.
+</Note>
+
+## Getting started
 
 <Tabs>
   <Tab title="Python">
-    To create an op, decorate a python function with `weave.op()`
+    Decorate any Python function with `@weave.op()` to start tracking:
 
     ```python showLineNumbers
     import weave
@@ -17,20 +23,15 @@ A Weave op is a versioned function that automatically logs all calls.
         return v + 5
 
     weave.init('intro-example')
-    track_me(15)
+    track_me(15)  # Automatically logged to Weave
     ```
 
-    Calling an op will create a new op version if the code has changed from the last call, and log the inputs and outputs of the function.
-
-    :::note
-    Functions decorated with `@weave.op()` will behave normally (without code versioning and tracking), if you don't call `weave.init('your-project-name')` before calling them.
-    :::
-
-    Ops can be [served](/guides/tools/serve) or [deployed](/guides/tools/deploy) using the Weave toolbelt.
-
+    <Check>
+    Each call creates a new op version if the code changes and logs all inputs and outputs.
+    </Check>
   </Tab>
   <Tab title="TypeScript">
-    To create an op, wrap a typescript function with `weave.op`
+    Wrap any TypeScript function with `weave.op`:
 
     ```typescript showLineNumbers
     import * as weave from 'weave'
@@ -40,140 +41,494 @@ A Weave op is a versioned function that automatically logs all calls.
     }
 
     const trackMeOp = weave.op(trackMe)
-    trackMeOp(15)
+    
+    await weave.init('intro-example')
+    trackMeOp(15)  // Automatically logged to Weave
 
-    // You can also do this inline, which may be more convenient
+    // Or inline for convenience
     const trackMeInline = weave.op((v: number) => v + 5)
     trackMeInline(15)
     ```
-
   </Tab>
 </Tabs>
 
-## Customize display names
+## Key features
+
+### Automatic versioning
+
+Weave creates a new version when your function code changes:
+
+<Steps>
+<Step title="Write your function">
+  ```python
+  @weave.op()
+  def process_data(data):
+      return data.upper()
+  ```
+</Step>
+
+<Step title="Make changes">
+  ```python
+  @weave.op()
+  def process_data(data):
+      # Code changed - new version created
+      return data.upper().strip()
+  ```
+</Step>
+
+<Step title="Track versions">
+  View all versions in the Weave UI with full code history.
+</Step>
+</Steps>
+
+### Nested function tracking
+
+Track complex workflows by decorating multiple functions:
 
 <Tabs>
   <Tab title="Python">
-    You can customize the op's display name by setting the `name` parameter in the `@weave.op` decorator:
-
     ```python
-    @weave.op(name="custom_name")
-    def func():
-        ...
+    @weave.op()
+    def extract_features(text):
+        # Processing logic
+        return features
+
+    @weave.op()
+    def classify_text(features):
+        # Classification logic
+        return classification
+
+    @weave.op()
+    def analyze_document(text):
+        features = extract_features(text)
+        result = classify_text(features)
+        return result
     ```
 
+    <Info>
+    Weave automatically tracks parent-child relationships between nested calls.
+    </Info>
+  </Tab>
+  <Tab title="TypeScript">
+    ```typescript
+    const extractFeatures = weave.op((text: string) => {
+        // Processing logic
+        return features
+    })
+
+    const classifyText = weave.op((features: any) => {
+        // Classification logic
+        return classification
+    })
+
+    const analyzeDocument = weave.op((text: string) => {
+        const features = extractFeatures(text)
+        const result = classifyText(features)
+        return result
+    })
+    ```
+  </Tab>
+</Tabs>
+
+## Customization
+
+### Display names
+
+Customize how your ops appear in the Weave UI:
+
+<Tabs>
+  <Tab title="Python">
+    ```python
+    @weave.op(name="sentiment_analyzer")
+    def analyze(text):
+        return sentiment_score
+    ```
+
+    You can also set dynamic display names per call:
+
+    ```python
+    @weave.op()
+    def process_batch(items):
+        return results
+
+    # Option 1: Using __weave
+    process_batch(items, __weave={"display_name": "batch_123"})
+
+    # Option 2: Using call method
+    call = process_batch.call(items)
+    call.set_display_name("batch_123")
+    ```
   </Tab>
   <Tab title="TypeScript">
     ```plaintext
-    This feature is not available in TypeScript yet.  Stay tuned!
+    Custom display names are not yet available in TypeScript.
     ```
   </Tab>
 </Tabs>
 
-## Customize logged inputs and outputs
+### Input and output processing
+
+Protect sensitive data or transform logged values:
 
 <Tabs>
   <Tab title="Python">
-    If you want to change the data that is logged to weave without modifying the original function (e.g. to hide sensitive data), you can pass `postprocess_inputs` and `postprocess_output` to the op decorator.
-
-    `postprocess_inputs` takes in a dict where the keys are the argument names and the values are the argument values, and returns a dict with the transformed inputs.
-
-    `postprocess_output` takes in any value which would normally be returned by the function and returns the transformed output.
-
-    ```py
-    from dataclasses import dataclass
+    ```python
     from typing import Any
-    import weave
 
-    @dataclass
-    class CustomObject:
-        x: int
-        secret_password: str
+    def hide_secrets(inputs: dict[str, Any]) -> dict[str, Any]:
+        # Remove sensitive fields
+        return {k: v for k, v in inputs.items() if k != "api_key"}
 
-    def postprocess_inputs(inputs: dict[str, Any]) -> dict[str, Any]:
-        return {k:v for k,v in inputs.items() if k != "hide_me"}
-
-    def postprocess_output(output: CustomObject) -> CustomObject:
-        return CustomObject(x=output.x, secret_password="REDACTED")
+    def mask_output(output: dict) -> dict:
+        # Redact sensitive data
+        output_copy = output.copy()
+        if "password" in output_copy:
+            output_copy["password"] = "***"
+        return output_copy
 
     @weave.op(
-        postprocess_inputs=postprocess_inputs,
-        postprocess_output=postprocess_output,
+        postprocess_inputs=hide_secrets,
+        postprocess_output=mask_output
     )
-    def func(a: int, hide_me: str) -> CustomObject:
-        return CustomObject(x=a, secret_password=hide_me)
-
-    weave.init('hide-data-example') # 🐝
-    func(a=1, hide_me="password123")
+    def call_api(endpoint: str, api_key: str) -> dict:
+        # Your API call logic
+        return response
     ```
 
+    <Warning>
+    Always use postprocessing to prevent logging sensitive information like API keys or passwords.
+    </Warning>
   </Tab>
   <Tab title="TypeScript">
     ```plaintext
-    This feature is not available in TypeScript yet.  Stay tuned!
+    Input/output processing is not yet available in TypeScript.
     ```
   </Tab>
 </Tabs>
 
-## Control sampling rate
+### Sampling for high-frequency ops
+
+Control how often calls are traced to manage costs:
 
 <Tabs>
   <Tab title="Python">
-    You can control how frequently an op's calls are traced by setting the `tracing_sample_rate` parameter in the `@weave.op` decorator. This is useful for high-frequency ops where you only need to trace a subset of calls.
-
-     Note that sampling rates are only applied to root calls. If an op has a sample rate, but is called by another op first, then that sampling rate will be ignored.
-
     ```python
-    @weave.op(tracing_sample_rate=0.1)  # Only trace ~10% of calls
+    @weave.op(tracing_sample_rate=0.1)  # Trace 10% of calls
     def high_frequency_op(x: int) -> int:
         return x + 1
 
     @weave.op(tracing_sample_rate=1.0)  # Always trace (default)
-    def always_traced_op(x: int) -> int:
-        return x + 1
+    def critical_op(data: str) -> str:
+        return process(data)
     ```
 
-    When an op's call is not sampled:
-    - The function executes normally
-    - No trace data is sent to Weave
-    - Child ops are also not traced for that call
-
-    The sampling rate must be between 0.0 and 1.0 inclusive.
-
+    <Note>
+    Sampling only applies to root calls. If a sampled op calls other ops, those child calls follow the parent's sampling decision.
+    </Note>
   </Tab>
   <Tab title="TypeScript">
     ```plaintext
-    This feature is not available in TypeScript yet. Stay tuned!
+    Sampling rates are not yet available in TypeScript.
     ```
   </Tab>
 </Tabs>
 
-## Control call link output
+### Adding metadata with attributes
 
-If you want to suppress the printing of call links during logging, you can set the `WEAVE_PRINT_CALL_LINK` environment variable to `false`. This can be useful if you want to reduce output verbosity and reduce clutter in your logs.
-
-```bash
-export WEAVE_PRINT_CALL_LINK=false
-```
-
-## Deleting an op
+Attach additional context to your calls:
 
 <Tabs>
   <Tab title="Python">
-    To delete a version of an op, call `.delete()` on the op ref.
-
     ```python
-    weave.init('intro-example')
-    my_op_ref = weave.ref('track_me:v1')
-    my_op_ref.delete()
+    import weave
+
+    @weave.op()
+    def process_request(data):
+        return result
+
+    # Add metadata to specific calls
+    with weave.attributes({'env': 'production', 'region': 'us-west'}):
+        process_request(user_data)
     ```
 
-    Trying to access a deleted op will result in an error.
-
+    <Tip>
+    Use attributes to filter and group calls in the Weave UI for better analysis.
+    </Tip>
   </Tab>
   <Tab title="TypeScript">
     ```plaintext
-    This feature is not available in TypeScript yet.  Stay tuned!
+    Attributes are not yet available in TypeScript.
     ```
   </Tab>
 </Tabs>
+
+## Advanced usage
+
+### Async and generator functions
+
+Weave supports async functions and generators:
+
+<Tabs>
+  <Tab title="Python">
+    ```python
+    # Async functions
+    @weave.op()
+    async def fetch_data(url: str):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as response:
+                return await response.json()
+
+    # Generator functions
+    @weave.op()
+    def process_stream(items):
+        for item in items:
+            yield transform(item)
+
+    # Async generators
+    @weave.op()
+    async def async_process_stream(items):
+        for item in items:
+            await asyncio.sleep(0.1)
+            yield transform(item)
+    ```
+
+    <Info>
+    Generator outputs are logged when fully consumed. Use `list()` to ensure complete tracing.
+    </Info>
+  </Tab>
+  <Tab title="TypeScript">
+    ```typescript
+    // Async functions
+    const fetchData = weave.op(async (url: string) => {
+        const response = await fetch(url)
+        return response.json()
+    })
+
+    // Regular usage
+    await fetchData('https://api.example.com/data')
+    ```
+  </Tab>
+</Tabs>
+
+### Global configuration
+
+Configure behavior for all ops in your application:
+
+<Tabs>
+  <Tab title="Python">
+    ```python
+    def global_redact_keys(inputs: dict) -> dict:
+        # Remove common sensitive keys from all ops
+        sensitive_keys = {'password', 'token', 'secret'}
+        return {k: v for k, v in inputs.items() if k not in sensitive_keys}
+
+    weave.init(
+        'my-project',
+        settings={
+            'print_call_link': False  # Disable call links in logs
+        },
+        global_postprocess_inputs=global_redact_keys,
+        global_attributes={'version': '1.2.3'}
+    )
+    ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```typescript
+    await weave.init('my-project', {
+        printCallLink: false  // Disable call links in logs
+    })
+    ```
+  </Tab>
+</Tabs>
+
+### Control call link output
+
+Reduce log noise by disabling call links:
+
+<CodeGroup>
+```bash Environment Variable
+export WEAVE_PRINT_CALL_LINK=false
+```
+
+```python Python
+weave.init('my-project', settings={'print_call_link': False})
+```
+
+```typescript TypeScript
+await weave.init('my-project', { printCallLink: false })
+```
+</CodeGroup>
+
+## Managing ops
+
+### Retrieve and call existing ops
+
+<Tabs>
+  <Tab title="Python">
+    ```python
+    # Get a specific version
+    my_op = weave.ref('my_function:v3').get()
+    result = my_op(input_data)
+
+    # Get the latest version
+    latest_op = weave.ref('my_function:latest').get()
+    ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```plaintext
+    Op retrieval is not yet available in TypeScript.
+    ```
+  </Tab>
+</Tabs>
+
+### Delete ops
+
+<Tabs>
+  <Tab title="Python">
+    ```python
+    # Delete a specific version
+    weave.ref('my_function:v1').delete()
+
+    # Delete will fail if the op is referenced elsewhere
+    ```
+
+    <Warning>
+    Deleted ops cannot be recovered. Ensure the op isn't referenced by other artifacts.
+    </Warning>
+  </Tab>
+  <Tab title="TypeScript">
+    ```plaintext
+    Op deletion is not yet available in TypeScript.
+    ```
+  </Tab>
+</Tabs>
+
+## Integration with Weave tools
+
+Ops integrate seamlessly with other Weave features:
+
+<CardGroup cols={2}>
+<Card title="Serve ops" icon="server" href="/guides/tools/serve">
+  Deploy ops as HTTP endpoints for production use.
+</Card>
+
+<Card title="Deploy ops" icon="rocket" href="/guides/tools/deploy">
+  Package and deploy ops to various environments.
+</Card>
+
+<Card title="Evaluate with ops" icon="chart-line" href="/guides/evaluation">
+  Use ops in evaluation pipelines for model testing.
+</Card>
+
+<Card title="Build with Models" icon="cube" href="/guides/models">
+  Combine ops with Weave Models for complete ML workflows.
+</Card>
+</CardGroup>
+
+## Best practices
+
+<AccordionGroup>
+<Accordion title="Use descriptive op names">
+  Choose clear, specific names that describe what the function does:
+  
+  ```python
+  # Good
+  @weave.op(name="extract_customer_sentiment")
+  def analyze(text): ...
+
+  # Avoid
+  @weave.op(name="process")
+  def func(data): ...
+  ```
+</Accordion>
+
+<Accordion title="Handle errors gracefully">
+  Weave automatically captures exceptions, but add context when possible:
+  
+  ```python
+  @weave.op()
+  def safe_divide(a, b):
+      if b == 0:
+          raise ValueError(f"Division by zero: {a}/{b}")
+      return a / b
+  ```
+</Accordion>
+
+<Accordion title="Keep ops focused">
+  Create small, single-purpose ops that are easy to test and reuse:
+  
+  ```python
+  # Good: Focused ops
+  @weave.op()
+  def validate_email(email): ...
+
+  @weave.op()
+  def send_notification(email, message): ...
+
+  # Avoid: Doing too much
+  @weave.op()
+  def validate_and_send_and_log(data): ...
+  ```
+</Accordion>
+
+<Accordion title="Use sampling wisely">
+  Apply sampling to high-frequency, low-value ops while always tracing critical paths:
+  
+  ```python
+  @weave.op(tracing_sample_rate=0.01)  # 1% sampling
+  def log_metric(name, value): ...
+
+  @weave.op()  # Always trace
+  def process_payment(amount): ...
+  ```
+</Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<Tabs>
+  <Tab title="Common issues">
+    **Ops not logging**
+    - Ensure `weave.init()` is called before any ops
+    - Check your project name is correct
+    - Verify network connectivity to Weights & Biases
+
+    **Version not updating**
+    - Code must actually change for new version
+    - Check that saved file reflects changes
+    - Restart Python kernel if using notebooks
+
+    **Performance impact**
+    - Use sampling for high-frequency ops
+    - Minimize logged data size
+    - Consider async ops for I/O operations
+  </Tab>
+  <Tab title="Debug mode">
+    Enable debug logging to troubleshoot:
+    
+    ```python
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
+    
+    # Now ops will print detailed trace information
+    ```
+  </Tab>
+</Tabs>
+
+## Next steps
+
+Ready to build more with Weave ops?
+
+<Steps>
+<Step title="Explore the tutorial">
+  Follow our [complete tutorial](/tutorial) for hands-on examples.
+</Step>
+
+<Step title="Learn about Models">
+  See how [Weave Models](/guides/models) work with ops for ML workflows.
+</Step>
+
+<Step title="Try Evaluations">
+  Use ops in [Evaluations](/guides/evaluation) to test model performance.
+</Step>
+</Steps>
