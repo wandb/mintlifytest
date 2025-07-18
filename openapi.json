@@ -16,6 +16,7 @@
           "Service"
         ],
         "summary": "Server Info",
+        "description": "Get information about the Weave server including version details, authentication status, and deployment configuration. This endpoint is useful for verifying server connectivity and compatibility with client applications.",
         "operationId": "server_info_server_info_get",
         "responses": {
           "200": {
@@ -52,6 +53,7 @@
           "Service"
         ],
         "summary": "Read Root",
+        "description": "Health check endpoint to verify that the Weave service is running and accessible. Returns a simple status response indicating the service is operational. Use this endpoint for monitoring and load balancer health checks.",
         "operationId": "read_root_health_get",
         "responses": {
           "200": {
@@ -92,6 +94,7 @@
           "Calls"
         ],
         "summary": "Call Start",
+        "description": "Begin tracking a new function call or operation in Weave. This creates a trace entry that captures the start of an execution, including inputs, metadata, and parent-child relationships for nested calls. Use this to track LLM invocations, function executions, or any operation you want to monitor in your AI application.",
         "operationId": "call_start_call_start_post",
         "requestBody": {
           "content": {
@@ -138,6 +141,7 @@
           "Calls"
         ],
         "summary": "Call End",
+        "description": "Complete a previously started call and record its outputs, exceptions, and final state. This endpoint should be called when an operation finishes, whether successfully or with an error. It captures the result, duration, and any exception details, completing the trace for analysis and debugging.",
         "operationId": "call_end_call_end_post",
         "requestBody": {
           "content": {
@@ -184,6 +188,7 @@
           "Calls"
         ],
         "summary": "Call Start Batch",
+        "description": "Create or update multiple calls in a single request. This batch endpoint is optimized for high-throughput scenarios where you need to log many calls efficiently. It supports both starting new calls and updating existing ones, making it ideal for bulk imports or high-frequency tracking applications.",
         "operationId": "call_start_batch_call_upsert_batch_post",
         "requestBody": {
           "content": {
@@ -230,6 +235,7 @@
           "Calls"
         ],
         "summary": "Calls Delete",
+        "description": "Delete one or more calls from your project. This permanently removes the specified calls and their associated data from Weave. Use with caution as this operation cannot be undone. Useful for data cleanup, privacy compliance, or removing test data from production projects.",
         "operationId": "calls_delete_calls_delete_post",
         "requestBody": {
           "content": {
@@ -276,6 +282,7 @@
           "Calls"
         ],
         "summary": "Call Update",
+        "description": "Modify attributes of an existing call after it has been created. This endpoint allows you to update metadata, add custom attributes, or correct information for a call without affecting its core trace data. Common uses include adding tags, updating display names, or enriching calls with additional context.",
         "operationId": "call_update_call_update_post",
         "requestBody": {
           "content": {
@@ -322,6 +329,7 @@
           "Calls"
         ],
         "summary": "Call Read",
+        "description": "Retrieve detailed information about a specific call by its ID. Returns the complete call data including inputs, outputs, metadata, timing information, and any associated costs or feedback. This is useful for inspecting individual traces, debugging specific executions, or building custom analysis tools.",
         "operationId": "call_read_call_read_post",
         "requestBody": {
           "content": {
@@ -368,6 +376,7 @@
           "Calls"
         ],
         "summary": "Calls Query Stats",
+        "description": "Get aggregated statistics for calls matching specified criteria. Returns metrics such as count, latency percentiles, success rates, and cost summaries. This endpoint is optimized for building dashboards, monitoring system health, and analyzing performance trends without retrieving full call data.",
         "operationId": "calls_query_stats_calls_query_stats_post",
         "requestBody": {
           "content": {
@@ -414,6 +423,7 @@
           "Calls"
         ],
         "summary": "Calls Query Stream",
+        "description": "Stream call data matching your query criteria in real-time using JSONL format. This endpoint is ideal for processing large datasets, building data pipelines, or creating real-time monitoring tools. Results are streamed as newline-delimited JSON, allowing you to process calls incrementally without loading everything into memory.",
         "operationId": "calls_query_stream_calls_stream_query_post",
         "security": [
           {
@@ -475,6 +485,7 @@
           "Objects"
         ],
         "summary": "Obj Create",
+        "description": "Create a new Weave object to store structured data, models, datasets, or custom artifacts. Objects are versioned automatically and can contain any JSON-serializable data. This is the foundation for building reusable components like evaluation datasets, model configurations, or any custom data structures you want to track and version.",
         "operationId": "obj_create_obj_create_post",
         "requestBody": {
           "content": {
@@ -521,6 +532,7 @@
           "Objects"
         ],
         "summary": "Obj Read",
+        "description": "Retrieve a specific object by its ID, including its data, metadata, and version information. This endpoint returns the complete object contents, making it suitable for loading datasets, model configurations, or any other structured data previously stored in Weave.",
         "operationId": "obj_read_obj_read_post",
         "requestBody": {
           "content": {
@@ -567,6 +579,7 @@
           "Objects"
         ],
         "summary": "Objs Query",
+        "description": "Search and filter objects within a project based on various criteria such as object type, creation time, or custom attributes. This endpoint supports pagination and is useful for discovering available datasets, models, or browsing versioned artifacts in your project.",
         "operationId": "objs_query_objs_query_post",
         "requestBody": {
           "content": {
@@ -613,6 +626,7 @@
           "Objects"
         ],
         "summary": "Obj Delete",
+        "description": "Delete an object and optionally its associated data from your project. This operation can remove specific object versions or entire object histories. Use caution as deletion is permanent. Commonly used for cleaning up test data or removing outdated models and datasets.",
         "operationId": "obj_delete_obj_delete_post",
         "requestBody": {
           "content": {
@@ -659,6 +673,7 @@
           "Tables"
         ],
         "summary": "Table Create",
+        "description": "Create a new table object for storing structured tabular data with schema validation. Tables in Weave are ideal for evaluation results, metrics comparisons, or any data that benefits from a columnar format. Each table is versioned and can be queried, visualized, and analyzed in the Weave UI.",
         "operationId": "table_create_table_create_post",
         "requestBody": {
           "content": {
@@ -705,6 +720,7 @@
           "Tables"
         ],
         "summary": "Table Update",
+        "description": "Update an existing table by appending new rows, modifying metadata, or changing table properties. This endpoint supports incremental updates for building tables over time, such as accumulating evaluation results or tracking metrics across multiple runs.",
         "operationId": "table_update_table_update_post",
         "requestBody": {
           "content": {
@@ -751,6 +767,7 @@
           "Tables"
         ],
         "summary": "Table Query",
+        "description": "Query table data with filtering, sorting, and pagination capabilities. Retrieve specific rows, columns, or aggregated results from your tables. This endpoint is optimized for interactive data exploration and building custom analytics dashboards on top of your Weave tables.",
         "operationId": "table_query_table_query_post",
         "requestBody": {
           "content": {
@@ -794,6 +811,7 @@
     "/table/query_stream": {
       "post": {
         "summary": "Table Query Stream",
+        "description": "Stream table query results in JSONL format for efficient processing of large datasets. This endpoint is ideal for exporting table data, building data pipelines, or processing results row-by-row without loading the entire table into memory.",
         "operationId": "table_query_stream_table_query_stream_post",
         "security": [
           {
@@ -855,6 +873,7 @@
           "Tables"
         ],
         "summary": "Table Query Stats",
+        "description": "Get statistical summaries and aggregations for table data without retrieving individual rows. Returns metrics like count, min, max, mean, and percentiles for numeric columns. Perfect for building summary dashboards or understanding data distributions in your evaluation results.",
         "operationId": "table_query_stats_table_query_stats_post",
         "requestBody": {
           "content": {
@@ -901,6 +920,7 @@
           "Refs"
         ],
         "summary": "Refs Read Batch",
+        "description": "Resolve multiple object references in a single request. This batch endpoint efficiently fetches data for multiple referenced objects, following Weave's reference system. Useful when you need to resolve many object references at once, such as loading all models referenced in an evaluation result.",
         "operationId": "refs_read_batch_refs_read_batch_post",
         "requestBody": {
           "content": {
@@ -947,6 +967,7 @@
           "Files"
         ],
         "summary": "File Create",
+        "description": "Upload and store files as part of your Weave objects. This endpoint accepts multipart/form-data uploads and returns a digest that can be referenced in object data. Commonly used for storing model weights, datasets in binary formats, images for vision tasks, or any artifacts associated with your AI workflows.",
         "operationId": "file_create_file_create_post",
         "requestBody": {
           "content": {
@@ -993,6 +1014,7 @@
           "Files"
         ],
         "summary": "File Content",
+        "description": "Download file content by its digest reference. Returns the raw binary content of files previously uploaded to Weave. This endpoint streams the file data, making it suitable for downloading large files like model weights or datasets without loading them entirely into memory.",
         "operationId": "file_content_file_content_post",
         "requestBody": {
           "content": {
@@ -1035,6 +1057,7 @@
           "Costs"
         ],
         "summary": "Cost Create",
+        "description": "Record cost information for LLM API calls and model usage. This endpoint allows you to track token counts, pricing, and custom cost metrics for your AI operations. Essential for monitoring spending, optimizing model selection, and understanding the economics of your AI applications.",
         "operationId": "cost_create_cost_create_post",
         "requestBody": {
           "content": {
@@ -1081,6 +1104,7 @@
           "Costs"
         ],
         "summary": "Cost Query",
+        "description": "Query and analyze cost data across your project with filtering and aggregation options. Retrieve detailed breakdowns by model, time period, or custom dimensions. This endpoint helps you understand spending patterns, compare model costs, and build cost monitoring dashboards.",
         "operationId": "cost_query_cost_query_post",
         "requestBody": {
           "content": {
@@ -1127,6 +1151,7 @@
           "Costs"
         ],
         "summary": "Cost Purge",
+        "description": "Remove cost records from your project based on specified criteria. This endpoint allows bulk deletion of cost data for data cleanup, privacy compliance, or removing test data. Use with caution as this operation permanently deletes cost tracking information.",
         "operationId": "cost_purge_cost_purge_post",
         "requestBody": {
           "content": {
@@ -1173,7 +1198,7 @@
           "Feedback"
         ],
         "summary": "Feedback Create",
-        "description": "Add feedback to a call or object.",
+        "description": "Add human feedback, annotations, or quality ratings to calls or objects. This endpoint enables you to capture user reactions, expert evaluations, or automated quality assessments. Feedback is essential for improving models through RLHF, building evaluation datasets, and tracking system performance over time.",
         "operationId": "feedback_create_feedback_create_post",
         "requestBody": {
           "content": {
@@ -1220,7 +1245,7 @@
           "Feedback"
         ],
         "summary": "Feedback Query",
-        "description": "Query for feedback.",
+        "description": "Search and retrieve feedback data with filtering by creator, type, score range, or associated objects. This endpoint supports building feedback analytics, finding examples for fine-tuning, or analyzing user satisfaction patterns. Results can be filtered by time range, feedback type, or custom attributes.",
         "operationId": "feedback_query_feedback_query_post",
         "requestBody": {
           "content": {
@@ -1267,7 +1292,7 @@
           "Feedback"
         ],
         "summary": "Feedback Purge",
-        "description": "Permanently delete feedback.",
+        "description": "Permanently delete feedback records based on specified criteria. Use this endpoint for data cleanup, privacy compliance, or removing outdated annotations. This operation is irreversible, so use with caution. Supports bulk deletion by feedback ID, creator, or time range.",
         "operationId": "feedback_purge_feedback_purge_post",
         "requestBody": {
           "content": {
@@ -1314,6 +1339,7 @@
           "Feedback"
         ],
         "summary": "Feedback Replace",
+        "description": "Replace or update existing feedback with new values. This endpoint allows you to correct annotations, update scores, or modify feedback metadata without creating duplicate entries. Useful for iterative labeling workflows or correcting human errors in feedback data.",
         "operationId": "feedback_replace_feedback_replace_post",
         "requestBody": {
           "content": {
