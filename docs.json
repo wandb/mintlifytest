@@ -218,6 +218,12 @@
             "tab": "Cookbooks",
             "groups": [
               {
+                "group": "Cookbooks",
+                "pages": [
+                  "cookbooks/index"
+                ]
+              },
+              {
                 "group": "Getting Started",
                 "pages": [
                   "cookbooks/Intro_to_Weave_Hello_Trace",
@@ -269,8 +275,14 @@
             ]
           },
           {
-            "tab": "API Reference",
+            "tab": "Reference",
             "groups": [
+              {
+                "group": "Reference",
+                "pages": [
+                  "reference/index"
+                ]
+              },
               {
                 "group": "Python SDK",
                 "pages": [
