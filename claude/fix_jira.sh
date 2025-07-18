@@ -13,7 +13,7 @@ fi
 PROMPT_FILE="$1"
 JIRA_TICKET_NUMBER="$2"
 
-bash jira-api.sh get-issue "$JIRA_TICKET_NUMBER" > jira_ticket_info.txt
+bash ./scripts/jira-api.sh get-issue $JIRA_TICKET_NUMBER > jira_ticket_info.txt
 
 # -- Cat the prompt file and pipe it to Claude
 echo -e "$(cat "$PROMPT_FILE")\n\n$(cat jira_ticket_info.txt)" | claude 

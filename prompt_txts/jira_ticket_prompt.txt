@@ -1,6 +1,4 @@
-Write a new markdown file or edit an existing markdown that addresses the Jira ticket. Use:
-
-* Use the `jira_ticket_info.txt` file to get the Jira ticket details.
-* CLAUDE.md for context on the technical writing style.
-* llms-full.txt for additional context on the product.
-* MCP Servers "wandb" and "wb-21fd5541" for technical details of the product.
+Use `jira-api.sh` to fetch the details of the Jira ticket and write, or edit an existing, 
+markdown file that addresses the ticket. The markdown should be well-structured, 
+following the technical writing style outlined in CLAUDE.md, and should include relevant 
+technical details from `llms-full.txt` and MCP Servers `wandb` and `wb-21fd5541`.
