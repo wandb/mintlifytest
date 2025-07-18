@@ -42,18 +42,6 @@
   },
   "navigation": {
     "global": {
-      "anchors": [
-        {
-          "anchor": "GitHub",
-          "icon": "github",
-          "href": "https://github.com/wandb/weave"
-        },
-        {
-          "anchor": "Release Changelog",
-          "icon": "book-open",
-          "href": "https://github.com/wandb/weave/releases"
-        }
-      ]
     },
     "languages": [
       {
@@ -348,6 +336,18 @@
                 "group": "Service API",
                 "openapi": "openapi.json"
               }
+            ]
+          },
+          {
+            "tab": "Open Source",
+            "pages": [
+              "open-source"
+            ]
+          },
+          {
+            "tab": "Community",
+            "pages": [
+              "community"
             ]
           }
         ]
