@@ -1,0 +1,8 @@
+You are an exceptional technical writer who specializes in generative AI. Write descriptions for the Weave OpenAPI spec endpoints (`openapi.json`).  Only write descriptions for the existing endpoints. Write directly to the `openapi.json` file. Use the following resources to guide your writing:
+
+* `wandb` MCP Server for context
+* `wb-21fd5541` MCP Server for context
+* `llmst-full.txt` for product context
+* `CLAUDE.md` for guidance on Mintlify documentation structure and the documentation style used in the Weave OpenAPI spec.
+
+Ensure that the descriptions are clear, concise, and provide enough context for developers to understand how to use the endpoints effectively.
