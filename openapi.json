@@ -1398,25 +1398,29 @@
               ]
             },
             "type": "array",
-            "title": "$And"
+            "title": "$And",
+            "description": "Array of operations that must all evaluate to true for the AND operation to succeed"
           }
         },
         "type": "object",
         "required": [
           "$and"
         ],
-        "title": "AndOperation"
+        "title": "AndOperation",
+        "description": "Logical AND operation for combining multiple query conditions. All nested operations must return true for the AND to succeed."
       },
       "Body_file_create_file_create_post": {
         "properties": {
           "project_id": {
             "type": "string",
-            "title": "Project Id"
+            "title": "Project Id",
+            "description": "Unique identifier for the project where the file will be created"
           },
           "file": {
             "type": "string",
             "format": "binary",
-            "title": "File"
+            "title": "File",
+            "description": "Binary file content to be uploaded and stored"
           }
         },
         "type": "object",
@@ -1424,41 +1428,48 @@
           "project_id",
           "file"
         ],
-        "title": "Body_file_create_file_create_post"
+        "title": "Body_file_create_file_create_post",
+        "description": "Request body for creating a new file in a project. Contains the project identifier and file content."
       },
       "CallBatchEndMode": {
         "properties": {
           "mode": {
             "type": "string",
             "title": "Mode",
-            "default": "end"
+            "default": "end",
+            "description": "Operation mode for batch processing, set to 'end' to terminate call batches"
           },
           "req": {
-            "$ref": "#/components/schemas/CallEndReq"
+            "$ref": "#/components/schemas/CallEndReq",
+            "description": "Call end request containing the details needed to terminate the call"
           }
         },
         "type": "object",
         "required": [
           "req"
         ],
-        "title": "CallBatchEndMode"
+        "title": "CallBatchEndMode",
+        "description": "Configuration for ending a batch of calls in the tracing system. Used to terminate multiple calls simultaneously."
       },
       "CallBatchStartMode": {
         "properties": {
           "mode": {
             "type": "string",
             "title": "Mode",
-            "default": "start"
+            "default": "start",
+            "description": "Operation mode for batch processing, set to 'start' to initiate call batches"
           },
           "req": {
-            "$ref": "#/components/schemas/CallStartReq"
+            "$ref": "#/components/schemas/CallStartReq",
+            "description": "Call start request containing the details needed to initiate the call"
           }
         },
         "type": "object",
         "required": [
           "req"
         ],
-        "title": "CallBatchStartMode"
+        "title": "CallBatchStartMode",
+        "description": "Configuration for starting a batch of calls in the tracing system. Used to initiate multiple calls simultaneously."
       },
       "CallCreateBatchReq": {
         "properties": {
@@ -1474,14 +1485,16 @@
               ]
             },
             "type": "array",
-            "title": "Batch"
+            "title": "Batch",
+            "description": "Array of batch operations to create, containing either start or end operations for calls"
           }
         },
         "type": "object",
         "required": [
           "batch"
         ],
-        "title": "CallCreateBatchReq"
+        "title": "CallCreateBatchReq",
+        "description": "Request to create a batch of call operations. Allows for efficient processing of multiple call start/end operations."
       },
       "CallCreateBatchRes": {
         "properties": {
@@ -1497,14 +1510,16 @@
               ]
             },
             "type": "array",
-            "title": "Res"
+            "title": "Res",
+            "description": "Array of responses corresponding to each batch operation, containing either start or end results"
           }
         },
         "type": "object",
         "required": [
           "res"
         ],
-        "title": "CallCreateBatchRes"
+        "title": "CallCreateBatchRes",
+        "description": "Response from creating a batch of call operations. Contains results for each operation in the batch."
       },
       "CallEndReq": {
         "properties": {
@@ -1710,24 +1725,28 @@
       "CallStartReq": {
         "properties": {
           "start": {
-            "$ref": "#/components/schemas/StartedCallSchemaForInsert"
+            "$ref": "#/components/schemas/StartedCallSchemaForInsert",
+            "description": "Schema containing all the information needed to start a new call in the tracing system"
           }
         },
         "type": "object",
         "required": [
           "start"
         ],
-        "title": "CallStartReq"
+        "title": "CallStartReq",
+        "description": "Request to start a new call in the tracing system. Contains call metadata and initial state information."
       },
       "CallStartRes": {
         "properties": {
           "id": {
             "type": "string",
-            "title": "Id"
+            "title": "Id",
+            "description": "Unique identifier assigned to the newly started call"
           },
           "trace_id": {
             "type": "string",
-            "title": "Trace Id"
+            "title": "Trace Id",
+            "description": "Unique identifier for the trace that this call belongs to"
           }
         },
         "type": "object",
@@ -1735,7 +1754,8 @@
           "id",
           "trace_id"
         ],
-        "title": "CallStartRes"
+        "title": "CallStartRes",
+        "description": "Response returned when successfully starting a new call. Contains the call ID and trace ID for future reference."
       },
       "CallUpdateReq": {
         "properties": {
