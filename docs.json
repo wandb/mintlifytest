@@ -77,6 +77,7 @@
                     "group": "Tracing & Debugging",
                     "pages": [
                       "guides/tracking/index",
+                      "guides/tracking/create-an-experiment",
                       "guides/tracking/tracing",
                       "guides/tracking/costs",
                       "guides/core-types/media",
