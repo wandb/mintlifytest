@@ -1,0 +1,4 @@
+# Core dependencies for documentation generation
+requests>=2.31.0
+lazydocs>=0.4.8
+pyyaml>=6.0 

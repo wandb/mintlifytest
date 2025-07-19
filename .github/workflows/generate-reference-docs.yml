@@ -1,0 +1,162 @@
+name: Generate Reference Documentation
+
+on:
+  workflow_dispatch:
+    inputs:
+      weave_version:
+        description: 'Weave version (tag like v0.50.0, commit SHA, or branch name)'
+        required: false
+        default: 'main'
+        type: string
+      create_pr:
+        description: 'Create a pull request with changes'
+        required: false
+        default: true
+        type: boolean
+  
+  # Temporary trigger for testing - REMOVE BEFORE MERGING
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/generate-reference-docs.yml'
+      - 'scripts/generate_*.py'
+      - 'scripts/requirements.txt'
+  
+  schedule:
+    # Run weekly on Mondays at 00:00 UTC
+    - cron: '0 0 * * 1'
+
+# Prevent multiple runs for the same PR/branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout documentation repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Cache Python dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            .venv
+          key: ${{ runner.os }}-pip-${{ hashFiles('scripts/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ github.event.inputs.weave_version || 'main' }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+      
+      - name: Install Python dependencies
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install -r scripts/requirements.txt
+      
+      - name: Generate Service API documentation
+        run: |
+          source .venv/bin/activate
+          python scripts/generate_service_api_spec.py
+          echo "Service API documentation generated"
+      
+      - name: Generate Python SDK documentation
+        env:
+          WEAVE_VERSION: ${{ github.event.inputs.weave_version || 'latest' }}
+        run: |
+          source .venv/bin/activate
+          python scripts/generate_python_sdk_docs.py || {
+            echo "Python SDK generation failed with exit code $?"
+            echo "Attempting with latest PyPI version..."
+            WEAVE_VERSION=latest python scripts/generate_python_sdk_docs.py
+          }
+          echo "Python SDK documentation generated"
+      
+      - name: Install pnpm
+        run: npm install -g pnpm
+      
+      - name: Generate TypeScript SDK documentation
+        env:
+          WEAVE_VERSION: ${{ github.event.inputs.weave_version || 'latest' }}
+        run: |
+          source .venv/bin/activate
+          python scripts/generate_typescript_sdk_docs.py
+          echo "TypeScript SDK documentation generated"
+      
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git add .
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Found changes in documentation"
+            git status
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          fi
+      
+      # For PR testing, just report what would happen
+      - name: Report Results (PR Test Mode)
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "This is a test run on a PR. In production, this would:"
+          if [[ "${{ steps.check_changes.outputs.changes }}" == "true" ]]; then
+            echo "✅ Create a PR with the generated documentation changes"
+            echo ""
+            echo "Changed files:"
+            git status --porcelain
+          else
+            echo "ℹ️ Skip PR creation (no changes detected)"
+          fi
+          echo ""
+          echo "Weave version used: ${{ github.event.inputs.weave_version || 'main' }}"
+      
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.changes == 'true' && github.event_name != 'pull_request' && (github.event.inputs.create_pr == 'true' || github.event_name == 'schedule')
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: Update reference documentation from Weave ${{ github.event.inputs.weave_version || 'main' }}"
+          title: "chore: Update reference documentation"
+          body: |
+            This PR updates the reference documentation generated from Weave source code.
+            
+            **Weave version**: ${{ github.event.inputs.weave_version || 'main' }}
+            **Generated on**: ${{ github.event.repository.updated_at }}
+            
+            ## Changes
+            - Service API documentation (from OpenAPI spec)
+            - Python SDK documentation (using lazydocs)
+            - TypeScript SDK documentation (using typedoc)
+            
+            Please review the changes carefully before merging.
+          branch: update-reference-docs-${{ github.run_number }}
+          delete-branch: true
+          labels: |
+            documentation
+            automated 
