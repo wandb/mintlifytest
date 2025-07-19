@@ -5,8 +5,8 @@ description: "Build and evaluate RAG applications using Weave with LLM judges"
 
 Retrieval Augmented Generation (RAG) is a common way of building Generative AI applications that have access to custom knowledge bases.
 
-In this example, we'll show an example that has a retrieval step to get documents. By tracking this, you can debug your app and see what documents were pulled into the LLM context.
-We'll also show how to evaluate it using an LLM judge.
+In this example, this tutorial shows an example that has a retrieval step to get documents. By tracking this, you can debug your app and see what documents were pulled into the LLM context.
+This tutorial also shows how to evaluate it using an LLM judge.
 
 ![Evals hero](./images/evals-hero.png)
 
@@ -14,7 +14,7 @@ Check out the [RAG++ course](https://www.wandb.courses/courses/rag-in-production
 
 ## 1. Build a knowledge base
 
-First, we compute the embeddings for our articles. You would typically do this once with your articles and put the embeddings & metadata in a database, but here we're doing it every time we run our script for simplicity.
+First, compute the embeddings for your articles. You would typically do this once with your articles and put the embeddings & metadata in a database, but here the code does it every time the script runs for simplicity.
 
 <Tabs>
   <Tab title="Python">
@@ -102,7 +102,7 @@ First, we compute the embeddings for our articles. You would typically do this o
 
 ## 2. Create a RAG app
 
-Next, we wrap our retrieval function `get_most_relevant_document` with a `weave.op()` decorator and we create our `Model` class. We call `weave.init('rag-qa')` to begin tracking all the inputs and outputs of our functions for later inspection.
+Next, wrap the retrieval function `get_most_relevant_document` with a `weave.op()` decorator and create the `Model` class. Call `weave.init('rag-qa')` to begin tracking all the inputs and outputs of the functions for later inspection.
 
 <Tabs>
   <Tab title="Python">
@@ -225,7 +225,7 @@ When there aren't simple ways to evaluate your application, one approach is to u
 
 ### Defining a scoring function
 
-As we did in the [Build an Evaluation pipeline tutorial](/tutorial-eval), we'll define a set of example rows to test our app against and a scoring function. Our scoring function will take one row and evaluate it. The input arguments should match with the corresponding keys in our row, so `question` here will be taken from the row dictionary. `output` is the output of the model. The input to the model will be taken from the example based on its input argument, so `question` here too. We're using `async` functions so they run fast in parallel. If you need a quick introduction to async, you can find one [here](https://docs.python.org/3/library/asyncio.html).
+As shown in the [Build an Evaluation pipeline tutorial](/tutorial-eval), you'll define a set of example rows to test your app against and a scoring function. The scoring function will take one row and evaluate it. The input arguments should match with the corresponding keys in the row, so `question` here will be taken from the row dictionary. `output` is the output of the model. The input to the model will be taken from the example based on its input argument, so `question` here too. The example uses `async` functions so they run fast in parallel. If you need a quick introduction to async, you can find one [here](https://docs.python.org/3/library/asyncio.html).
 
 <Tabs>
   <Tab title="Python">
@@ -317,13 +317,13 @@ As we did in the [Build an Evaluation pipeline tutorial](/tutorial-eval), we'll 
 
 ### Optional: Defining a `Scorer` class
 
-In some applications we want to create custom evaluation classes - where for example a standardized `LLMJudge` class should be created with specific parameters (e.g. chat model, prompt), specific scoring of each row, and specific calculation of an aggregate score. In order to do that Weave defines a list of ready-to-use `Scorer` classes and also makes it easy to create a custom `Scorer` - in the following we'll see how to create a custom `class CorrectnessLLMJudge(Scorer)`.
+In some applications you might want to create custom evaluation classes - where for example a standardized `LLMJudge` class should be created with specific parameters (e.g. chat model, prompt), specific scoring of each row, and specific calculation of an aggregate score. In order to do that Weave defines a list of ready-to-use `Scorer` classes and also makes it easy to create a custom `Scorer` - in the following you'll see how to create a custom `class CorrectnessLLMJudge(Scorer)`.
 
 On a high-level the steps to create custom Scorer are quite simple:
 
 1. Define a custom class that inherits from `weave.flow.scorer.Scorer`
 2. Overwrite the `score` function and add a `@weave.op()` if you want to track each call of the function
-   - this function has to define an `output` argument where the prediction of the model will be passed to. We define it as type `Optional[dict]` in case the mode might return "None".
+   - this function has to define an `output` argument where the prediction of the model will be passed to. Define it as type `Optional[dict]` in case the mode might return "None".
    - the rest of the arguments can either be a general `Any` or `dict` or can select specific columns from the dataset that is used to evaluate the model using the `weave.Evaluate` class - they have to have the exact same names as the column names or keys of a single row after being passed to `preprocess_model_input` if that is used.
 3. _Optional:_ Overwrite the `summarize` function to customize the calculation of the aggregate score. By default Weave uses the `weave.flow.scorer.auto_summarize` function if you don't define a custom function.
    - this function has to have a `@weave.op()` decorator.
@@ -432,7 +432,7 @@ To get the same result for your RAG apps:
 
 **NOTE:** Sometimes the async execution of Evaluations will trigger a rate limit on the models of OpenAI, Anthropic, etc. To prevent that you can set an environment variable to limit the amount of parallel workers e.g. `WEAVE_PARALLELISM=3`.
 
-Here, we show the code in it's entirety.
+Here is the code in its entirety.
 
 <Tabs>
   <Tab title="Python">
@@ -761,5 +761,5 @@ Here, we show the code in it's entirety.
 
 ## Conclusion
 
-We've learned how to build observability into different steps of our applications, like the retrieval step in this example.
-We've also learned how to build more complex scoring functions, like an LLM judge, for doing automatic evaluation of application responses.
+You've learned how to build observability into different steps of your applications, like the retrieval step in this example.
+You've also learned how to build more complex scoring functions, like an LLM judge, for doing automatic evaluation of application responses.
