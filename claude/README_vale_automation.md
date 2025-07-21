@@ -114,10 +114,11 @@ If Claude CLI is not available, the script provides a manual workflow:
 ### Prerequisites
 
 - **Vale CLI**: Must be installed and accessible (`vale --version`)
-- **Claude API CLI** (optional): For automated AI-guided fixes (`claude` command)
-  - Note: No official Claude API CLI exists. Consider third-party tools or manual workflow
-  - Anthropic's "Claude Code" is a development environment, not an API CLI
-  - If not available, script provides manual workflow
+- **Claude Code** (optional): For automated AI-guided fixes
+  - Install: `npm install -g @anthropic-ai/claude-code`
+  - Requires `ANTHROPIC_API_KEY` environment variable
+  - Get API key from [Anthropic Console](https://console.anthropic.com)
+  - If not available, script provides comprehensive manual workflow
 - **Git**: For commits and pushes to current branch
 
 ### Environment
@@ -126,6 +127,7 @@ If Claude CLI is not available, the script provides a manual workflow:
 - Must be run from repository root directory
 - Requires write access to commit and push changes
 - `vale_analysis/` directory is auto-generated (added to .gitignore)
+- **Optional**: Set `ANTHROPIC_API_KEY` for automated Claude Code fixes
 
 ## Supported Vale Tests
 
@@ -203,15 +205,43 @@ Available tests: [list shown]
 - Verify test name spelling and case
 - Check Vale configuration files
 
-**Claude CLI not available:**
+**Claude Code API key not configured:**
+```bash
+Error: ANTHROPIC_API_KEY environment variable not set.
+Claude Code requires an API key for automation.
+
+Setup instructions:
+1. Get an API key:
+   - Visit: https://console.anthropic.com
+   - Create account or sign in
+   - Navigate to API Keys section
+   - Create a new API key
+
+2. Set the environment variable:
+   export ANTHROPIC_API_KEY='your-api-key-here'
+
+3. Add to your shell profile for persistence:
+   echo 'export ANTHROPIC_API_KEY="your-api-key-here"' >> ~/.bashrc
+   # or ~/.zshrc for zsh users
+```
+- **API Key Setup**: Requires Anthropic Console account and API key
+- **Security**: Never commit API keys to version control
+- Falls back to manual workflow if not configured
+
+**Claude Code detected (not suitable for automation):**
+```bash
+Error: Claude Code detected but not suitable for automation.
+Claude Code is an interactive development environment.
+It cannot be used for automated scripting due to terminal requirements.
+```
+- **Claude Code limitation**: Designed for interactive use, not scriptable automation
+- Generates detailed prompt and analysis files for manual workflow
+- All analysis preserved for review and manual processing
+
+**No Claude CLI available:**
 ```bash
 Error: 'claude' command not found
-A Claude API CLI tool is required for automated fixing.
-
-Options:
-1. Install a Claude API CLI: Consider tools like 'claudia' or 'claude-cli' from npm/pip
-2. Manual fixing: Review violations and fix manually
-3. Use alternative AI: Copy prompt to your preferred AI tool
+No suitable Claude API CLI tool available for automated fixing.
 ```
 - **Note**: No official Claude API CLI exists from Anthropic
 - Script provides comprehensive manual workflow with detailed instructions

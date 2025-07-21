@@ -117,24 +117,77 @@ export TOTAL_FILES="$TOTAL_FILES"
 # Call Claude with the prompt
 echo -e "${BLUE}=== Step 3: Calling Claude to fix violations ===${NC}"
 
-# Check if Claude CLI is available
-if ! command -v claude &> /dev/null; then
-    echo -e "${RED}Error: 'claude' command not found.${NC}"
-    echo -e "${YELLOW}A Claude API CLI tool is required for automated fixing.${NC}"
-    echo ""
-    echo -e "${BLUE}Options:${NC}"
-    echo -e "1. ${YELLOW}Install a Claude API tool:${NC} No official CLI exists, but you can:"
-    echo -e "   - Use Claude Code (development environment): ${YELLOW}npm install -g @anthropic-ai/claude-code${NC}"
-    echo -e "   - Build custom CLI using Anthropic API"
-    echo -e "2. ${YELLOW}Manual fixing:${NC} Review violations and fix manually:"
+# Check if Claude CLI is available and properly configured
+# Check if claude command exists and if it's Claude Code (interactive tool)
+if command -v claude &> /dev/null; then
+    # Check if API key is configured
+    if [ -z "$ANTHROPIC_API_KEY" ]; then
+        echo -e "${RED}Error: ANTHROPIC_API_KEY environment variable not set.${NC}"
+        echo -e "${YELLOW}Claude Code requires an API key for automation.${NC}"
+        echo ""
+        echo -e "${BLUE}Setup instructions:${NC}"
+        echo -e "1. ${YELLOW}Get an API key:${NC}"
+        echo -e "   - Visit: ${YELLOW}https://console.anthropic.com${NC}"
+        echo -e "   - Create account or sign in"
+        echo -e "   - Navigate to API Keys section"
+        echo -e "   - Create a new API key"
+        echo ""
+        echo -e "2. ${YELLOW}Set the environment variable:${NC}"
+        echo -e "   ${YELLOW}export ANTHROPIC_API_KEY='your-api-key-here'${NC}"
+        echo ""
+        echo -e "3. ${YELLOW}Add to your shell profile for persistence:${NC}"
+        echo -e "   ${YELLOW}echo 'export ANTHROPIC_API_KEY=\"your-api-key-here\"' >> ~/.bashrc${NC}"
+        echo -e "   ${YELLOW}# or ~/.zshrc for zsh users${NC}"
+        echo ""
+        
+        # Continue with manual workflow
+        echo -e "${YELLOW}Continuing with manual workflow...${NC}"
+        automated_fix=false
+    else
+        # Test if Claude can work in automated mode
+        echo -e "${YELLOW}Testing Claude Code for automation compatibility...${NC}"
+        claude_test_output=$(echo "test" | claude 2>&1 || echo "")
+        if echo "$claude_test_output" | grep -q "Raw mode is not supported\|Welcome to Claude Code"; then
+            echo -e "${RED}Error: Claude Code detected but not suitable for automation.${NC}"
+            echo -e "${YELLOW}Claude Code is an interactive development environment.${NC}"
+            echo -e "${YELLOW}It cannot be used for automated scripting due to terminal requirements.${NC}"
+            automated_fix=false
+        else
+            # Claude appears to be working for automation
+            echo -e "${GREEN}Claude CLI configured and ready for automation.${NC}"
+                         automated_fix=true
+         fi
+     fi
+else
+    # No claude command found
+    automated_fix=false
+fi
+
+# Handle cases where automated fixing is not available
+if [ "$automated_fix" = "false" ]; then
+    if ! command -v claude &> /dev/null; then
+        echo -e "${RED}Error: 'claude' command not found.${NC}"
+        echo -e "${YELLOW}No suitable Claude API CLI tool available for automated fixing.${NC}"
+        echo ""
+        echo -e "${BLUE}Why Claude Code doesn't work for this:${NC}"
+        echo -e "Claude Code is an interactive development environment, not designed for"
+        echo -e "automated scripting. It requires interactive terminal control (raw mode)."
+        echo ""
+    else
+        echo -e "${YELLOW}Automated fixing not available.${NC}"
+        echo ""
+    fi
+    
+    echo -e "${BLUE}Alternative options:${NC}"
+    echo -e "1. ${YELLOW}Manual fixing:${NC} Review violations and fix manually:"
     echo -e "   - Check violations: ${YELLOW}vale --filter='.Name == \"$VALE_TEST\"' '$HIGH_IMPACT_FILE'${NC}"
     echo -e "   - Edit file: ${YELLOW}$HIGH_IMPACT_FILE${NC}"
     echo -e "   - Test fixes: ${YELLOW}vale --filter='.Name == \"$VALE_TEST\"' '$HIGH_IMPACT_FILE'${NC}"
-    echo -e "3. ${YELLOW}Use alternative AI:${NC} Copy prompt to your preferred AI tool"
+    echo -e "2. ${YELLOW}Use AI web interfaces:${NC} Copy prompt to your preferred AI tool:"
     echo -e "   - Claude web interface: ${YELLOW}https://claude.ai${NC}"
     echo -e "   - ChatGPT, Gemini, or other AI assistants"
+    echo -e "3. ${YELLOW}Build custom solution:${NC} Use Anthropic API directly"
     echo ""
-    echo -e "${BLUE}Generated prompt saved to:${NC} ${YELLOW}vale_analysis/current_prompt.txt${NC}"
     
     # Create the prompt file anyway for manual use
     if [ ! -f "$PROMPT_FILE" ]; then
@@ -185,7 +238,7 @@ EOF
     exit 0
 fi
 
-echo -e "${YELLOW}Sending analysis to Claude for automated fixing...${NC}"
+echo -e "${YELLOW}Proceeding with automated Claude fixing...${NC}"
 
 if [ ! -f "$PROMPT_FILE" ]; then
     echo -e "${RED}Error: Prompt file '$PROMPT_FILE' not found.${NC}"
