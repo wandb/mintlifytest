@@ -114,8 +114,9 @@ If Claude CLI is not available, the script provides a manual workflow:
 ### Prerequisites
 
 - **Vale CLI**: Must be installed and accessible (`vale --version`)
-- **Claude CLI** (optional): For automated AI-guided fixes (`claude` command)
-  - Install from: https://claude.ai/cli
+- **Claude API CLI** (optional): For automated AI-guided fixes (`claude` command)
+  - Note: No official Claude API CLI exists. Consider third-party tools or manual workflow
+  - Anthropic's "Claude Code" is a development environment, not an API CLI
   - If not available, script provides manual workflow
 - **Git**: For branch management and commits
 - **GitHub CLI** (optional): For automated PR creation (`gh` command)
@@ -205,15 +206,16 @@ Available tests: [list shown]
 **Claude CLI not available:**
 ```bash
 Error: 'claude' command not found
-The Claude CLI is required for automated fixing.
+A Claude API CLI tool is required for automated fixing.
 
 Options:
-1. Install Claude CLI: Follow instructions at https://claude.ai/cli
+1. Install a Claude API CLI: Consider tools like 'claudia' or 'claude-cli' from npm/pip
 2. Manual fixing: Review violations and fix manually
 3. Use alternative AI: Copy prompt to your preferred AI tool
 ```
-- Script provides manual workflow with detailed instructions
-- Generated prompt can be used with any AI tool (ChatGPT, etc.)
+- **Note**: No official Claude API CLI exists from Anthropic
+- Script provides comprehensive manual workflow with detailed instructions
+- Generated prompt can be used with any AI tool (ChatGPT, Claude web interface, etc.)
 - Analysis files preserved for manual review
 
 ## Best Practices
