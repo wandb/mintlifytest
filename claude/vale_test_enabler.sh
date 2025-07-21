@@ -47,7 +47,7 @@ echo -e "${BLUE}=== Step 1: Analyzing current Vale violations ===${NC}"
 find . -name "*.mdx" -not -path "./node_modules/*" -not -path "./.venv/*" > vale_analysis/all_files.txt
 
 # Count total files
-TOTAL_FILES=$(wc -l < vale_analysis/all_files.txt)
+TOTAL_FILES=$(wc -l < vale_analysis/all_files.txt | tr -d ' ')
 echo -e "${GREEN}Found $TOTAL_FILES MDX files to analyze${NC}"
 
 # Analyze violations per file
@@ -57,7 +57,10 @@ echo -e "${YELLOW}Analyzing '$VALE_TEST' violations per file...${NC}"
 while IFS= read -r file; do
     if [ -f "$file" ]; then
         # Properly quote the test name in the filter
-        violation_count=$(vale --filter=".Name == \"$VALE_TEST\"" "$file" 2>/dev/null | grep -c "$VALE_TEST" || echo "0")
+        violation_count=$(vale --filter=".Name == \"$VALE_TEST\"" "$file" 2>/dev/null | grep -c "$VALE_TEST" 2>/dev/null || echo "0")
+        # Ensure violation_count is a clean integer
+        violation_count=$(echo "$violation_count" | tr -d '\n\r' | grep -o '[0-9]*' | head -1)
+        violation_count=${violation_count:-0}
         if [ "$violation_count" -gt 0 ]; then
             echo "$file: $violation_count violations" >> vale_analysis/violations_by_file.txt
         fi
@@ -68,7 +71,9 @@ done < vale_analysis/all_files.txt
 sort -t: -k2 -nr vale_analysis/violations_by_file.txt > vale_analysis/violations_sorted.txt
 
 # Get total violation count
-TOTAL_VIOLATIONS=$(awk -F: '{sum += $2} END {print sum}' vale_analysis/violations_sorted.txt || echo "0")
+TOTAL_VIOLATIONS=$(awk -F: '{sum += $2} END {print sum+0}' vale_analysis/violations_sorted.txt 2>/dev/null)
+# Ensure TOTAL_VIOLATIONS is always a valid integer
+TOTAL_VIOLATIONS=${TOTAL_VIOLATIONS:-0}
 
 echo -e "${GREEN}=== Analysis Results ===${NC}"
 echo -e "${YELLOW}Total violations found: $TOTAL_VIOLATIONS${NC}"
@@ -171,14 +176,19 @@ if [ "$2" = "--phase2" ]; then
     while IFS= read -r file; do
         if [ -f "$file" ] && [ "$file" != "$HIGH_IMPACT_FILE" ]; then
             # Properly quote the test name in the filter
-            violation_count=$(vale --filter=".Name == \"$VALE_TEST\"" "$file" 2>/dev/null | grep -c "$VALE_TEST" || echo "0")
+            violation_count=$(vale --filter=".Name == \"$VALE_TEST\"" "$file" 2>/dev/null | grep -c "$VALE_TEST" 2>/dev/null || echo "0")
+            # Ensure violation_count is a clean integer
+            violation_count=$(echo "$violation_count" | tr -d '\n\r' | grep -o '[0-9]*' | head -1)
+            violation_count=${violation_count:-0}
             if [ "$violation_count" -gt 0 ]; then
                 echo "$file: $violation_count violations" >> vale_analysis/remaining_violations.txt
             fi
         fi
     done < vale_analysis/all_files.txt
     
-    REMAINING_VIOLATIONS=$(awk -F: '{sum += $2} END {print sum}' vale_analysis/remaining_violations.txt || echo "0")
+    REMAINING_VIOLATIONS=$(awk -F: '{sum += $2} END {print sum+0}' vale_analysis/remaining_violations.txt 2>/dev/null)
+    # Ensure REMAINING_VIOLATIONS is always a valid integer
+    REMAINING_VIOLATIONS=${REMAINING_VIOLATIONS:-0}
     
     if [ "$REMAINING_VIOLATIONS" -eq 0 ]; then
         echo -e "${GREEN}No remaining violations found! All files are now compliant.${NC}"
