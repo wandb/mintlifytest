@@ -13,21 +13,21 @@ This is an interactive notebook. You can run it locally or use the links below:
 
 The [BIG-bench (Beyond the Imitation Game Benchmark)](https://github.com/google/BIG-bench) is a collaborative benchmark intended to probe large language models and extrapolate their future capabilities consisting of more than 200 tasks. The [BIG-Bench Hard (BBH)](https://github.com/suzgunmirac/BIG-Bench-Hard) is a suite of 23 most challenging BIG-Bench tasks that can be quite difficult to be solved using the current generation of language models.
 
-This tutorial demonstrates how we can improve the performance of our LLM workflow implemented  on the **causal judgement task** from the BIG-bench Hard benchmark and evaluate our prompting strategies. We will use [DSPy](https://dspy-docs.vercel.app/) for implementing our LLM workflow and optimizing our prompting strategy. We will also use [Weave](https://docs.wandb.ai/guides/weave) to track our LLM workflow and evaluate our prompting strategies.
+This tutorial demonstrates how you can improve the performance of your LLM workflow implemented on the **causal judgement task** from the BIG-bench Hard benchmark and evaluate your prompting strategies. You will use [DSPy](https://dspy-docs.vercel.app/) for implementing your LLM workflow and optimizing your prompting strategy. You will also use [Weave](https://docs.wandb.ai/guides/weave) to track your LLM workflow and evaluate your prompting strategies.
 
 ## Installing the Dependencies
 
-We need the following libraries for this tutorial:
+This tutorial requires the following libraries:
 
 - [DSPy](https://dspy-docs.vercel.app/) for building the LLM workflow and optimizing it.
-- [Weave](https://docs.wandb.ai/guides/weave) to track our LLM workflow and evaluate our prompting strategies.
+- [Weave](https://docs.wandb.ai/guides/weave) to track the LLM workflow and evaluate the prompting strategies.
 - [datasets](https://huggingface.co/docs/datasets/index) to access the Big-Bench Hard dataset from HuggingFace Hub.
 
 ```python
 !pip install -qU dspy-ai weave datasets
 ```
 
-Since we'll be using [OpenAI API](https://openai.com/index/openai-api/) as the LLM Vendor, we will also need an OpenAI API key. You can [sign up](https://platform.openai.com/signup) on the OpenAI platform to get your own API key.
+Since this tutorial uses [OpenAI API](https://openai.com/index/openai-api/) as the LLM Vendor, you will also need an OpenAI API key. You can [sign up](https://platform.openai.com/signup) on the OpenAI platform to get your own API key.
 
 ```python
 import os
@@ -39,7 +39,7 @@ os.environ["OPENAI_API_KEY"] = api_key
 
 ## Enable Tracking using Weave
 
-Weave is currently integrated with DSPy, and including [`weave.init`](https://docs.wandb.ai/guides/weave/tracking) at the start of our code lets us automatically trace our DSPy functions which can be explored in the Weave UI. Check out the [Weave integration docs for DSPy](https://docs.wandb.ai/guides/weave/integrations/dspy) to learn more.
+Weave is currently integrated with DSPy, and including [`weave.init`](https://docs.wandb.ai/guides/weave/tracking) at the start of your code lets you automatically trace your DSPy functions which can be explored in the Weave UI. Check out the [Weave integration docs for DSPy](https://docs.wandb.ai/guides/weave/integrations/dspy) to learn more.
 
 ```python
 import weave
@@ -47,7 +47,7 @@ import weave
 weave.init(project_name="dspy-bigbench-hard")
 ```
 
-In this tutorial, we use a metadata class inherited from [`weave.Object`](/guides/tracking/objects) to manage our metadata.
+In this tutorial, you use a metadata class inherited from [`weave.Object`](/guides/tracking/objects) to manage the metadata.
 
 ```python
 class Metadata(weave.Object):
@@ -68,7 +68,7 @@ metadata = Metadata()
 
 ## Load the BIG-Bench Hard Dataset
 
-We will load this dataset from HuggingFace Hub, split into training and validation sets, and [publish](https://docs.wandb.ai/guides/weave/core-types/datasets) them on Weave, this will let us version the datasets, and also use [`weave.Evaluation`](https://docs.wandb.ai/guides/weave/core-types/evaluations) to evaluate our prompting strategy.
+This tutorial loads the dataset from HuggingFace Hub, splits it into training and validation sets, and [publishes](https://docs.wandb.ai/guides/weave/core-types/datasets) them on Weave, which lets you version the datasets, and also use [`weave.Evaluation`](https://docs.wandb.ai/guides/weave/core-types/evaluations) to evaluate your prompting strategy.
 
 ```python
 import dspy
@@ -115,7 +115,7 @@ dspy_train_examples, dspy_val_examples = get_dataset(metadata)
 
 [DSPy](https://dspy-docs.vercel.app) is a framework that pushes building new LM pipelines away from manipulating free-form strings and closer to programming (composing modular operators to build text transformation graphs) where a compiler automatically generates optimized LM invocation strategies and prompts from a program.
 
-We will use the [`dspy.OpenAI`](https://dspy-docs.vercel.app/api/language_model_clients/OpenAI) abstraction to make LLM calls to [GPT3.5 Turbo](https://platform.openai.com/docs/models/gpt-3-5-turbo).
+This tutorial uses the [`dspy.OpenAI`](https://dspy-docs.vercel.app/api/language_model_clients/OpenAI) abstraction to make LLM calls to [GPT3.5 Turbo](https://platform.openai.com/docs/models/gpt-3-5-turbo).
 
 ```python
 system_prompt = """
@@ -157,7 +157,7 @@ class CausalReasoningModule(dspy.Module):
         return self.prog(input=Input(query=question)).output.dict()
 ```
 
-Let's test our LLM workflow, i.e., the `CausalReasoningModule` on an example from the causal reasoning subset of Big-Bench Hard.
+This section tests the LLM workflow, i.e., the `CausalReasoningModule` on an example from the causal reasoning subset of Big-Bench Hard.
 
 ```python
 import rich
@@ -170,11 +170,11 @@ rich.print(prediction)
 
 ![](/images/cookbooks/../../media/dspy_optimization/2.png)
 
-## Evaluating our DSPy Program
+## Evaluating the DSPy Program
 
-Now that we have a baseline prompting strategy, let's evaluate it on our validation set using [`weave.Evaluation`](https://docs.wandb.ai/guides/weave/core-types/evaluations) on a simple metric that matches the predicted answer with the ground truth. Weave will take each example, pass it through your application and score the output on multiple custom scoring functions. By doing this, you'll have a view of the performance of your application, and a rich UI to drill into individual outputs and scores.
+Now that you have a baseline prompting strategy, this tutorial evaluates it on the validation set using [`weave.Evaluation`](https://docs.wandb.ai/guides/weave/core-types/evaluations) on a simple metric that matches the predicted answer with the ground truth. Weave will take each example, pass it through your application and score the output on multiple custom scoring functions. By doing this, you'll have a view of the performance of your application, and a rich UI to drill into individual outputs and scores.
 
-First, we need to create a simple weave evaluation scoring function that tells whether the answer from the baseline module's output is the same as the ground truth answer or not. Scoring functions need to have a `model_output` keyword argument, but the other arguments are user defined and are taken from the dataset examples. It will only take the necessary keys by using a dictionary key based on the argument name.
+First, you need to create a simple weave evaluation scoring function that tells whether the answer from the baseline module's output is the same as the ground truth answer or not. Scoring functions need to have a `model_output` keyword argument, but the other arguments are user defined and are taken from the dataset examples. It will only take the necessary keys by using a dictionary key based on the argument name.
 
 ```python
 @weave.op()
@@ -182,7 +182,7 @@ def weave_evaluation_scorer(answer: str, output: Output) -> dict:
     return {"match": int(answer.lower() == output["answer"].lower())}
 ```
 
-Next, we can simply define the evaluation and run it.
+Next, you can simply define the evaluation and run it.
 
 ```python
 validation_dataset = weave.ref(
@@ -213,9 +213,9 @@ asyncio.run(evaluation.evaluate(baseline_module.forward))
 Running the evaluation causal reasoning dataset will cost approximately $0.24 in OpenAI credits.
 </Warning>
 
-## Optimizing our DSPy Program
+## Optimizing the DSPy Program
 
-Now, that we have a baseline DSPy program, let us try to improve its performance for causal reasoning using a [DSPy teleprompter](https://dspy-docs.vercel.app/docs/building-blocks/optimizers) that can tune the parameters of a DSPy program to maximize the specified metrics. In this tutorial, we use the [BootstrapFewShot](https://dspy-docs.vercel.app/api/category/optimizers) teleprompter.
+Now, that you have a baseline DSPy program, this tutorial improves its performance for causal reasoning using a [DSPy teleprompter](https://dspy-docs.vercel.app/docs/building-blocks/optimizers) that can tune the parameters of a DSPy program to maximize the specified metrics. This tutorial uses the [BootstrapFewShot](https://dspy-docs.vercel.app/api/category/optimizers) teleprompter.
 
 ```python
 from dspy.teleprompt import BootstrapFewShot
@@ -242,7 +242,7 @@ optimized_module = get_optimized_program(baseline_module, metadata)
 Running the evaluation causal reasoning dataset will cost approximately $0.04 in OpenAI credits.
 </Warning>
 
-Now that we have our optimized program (the optimized prompting strategy), let's evaluate it once again on our validation set and compare it with our baseline DSPy program.
+Now that you have the optimized program (the optimized prompting strategy), this tutorial evaluates it once again on the validation set and compares it with the baseline DSPy program.
 
 ```python
 evaluation = weave.Evaluation(
@@ -260,4 +260,4 @@ When coomparing the evalution of the baseline program with the optimized one sho
 
 ## Conclusion
 
-In this tutorial, we learned how to use DSPy for prompt optimization alongside using Weave for tracking and evaluation to compare the original and optimized programs.
+In this tutorial, you learned how to use DSPy for prompt optimization alongside using Weave for tracking and evaluation to compare the original and optimized programs.

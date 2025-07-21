@@ -33,3 +33,6 @@ yarn-error.log*
 venv/
 __pycache__/
 *.pyc
+
+# Vale analysis (temporary working directory)
+vale_analysis/
