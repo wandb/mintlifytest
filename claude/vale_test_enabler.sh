@@ -143,20 +143,12 @@ if command -v claude &> /dev/null; then
         # Continue with manual workflow
         echo -e "${YELLOW}Continuing with manual workflow...${NC}"
         automated_fix=false
-    else
-        # Test if Claude can work in automated mode
-        echo -e "${YELLOW}Testing Claude Code for automation compatibility...${NC}"
-        claude_test_output=$(echo "test" | claude 2>&1 || echo "")
-        if echo "$claude_test_output" | grep -q "Raw mode is not supported\|Welcome to Claude Code"; then
-            echo -e "${RED}Error: Claude Code detected but not suitable for automation.${NC}"
-            echo -e "${YELLOW}Claude Code is an interactive development environment.${NC}"
-            echo -e "${YELLOW}It cannot be used for automated scripting due to terminal requirements.${NC}"
-            automated_fix=false
         else
-            # Claude appears to be working for automation
-            echo -e "${GREEN}Claude CLI configured and ready for automation.${NC}"
-                         automated_fix=true
-         fi
+        # Claude Code is installed and API key is set, but it's still not suitable for automation
+        echo -e "${YELLOW}Claude Code detected with API key configured.${NC}"
+        echo -e "${YELLOW}However, Claude Code is designed for interactive use, not automation.${NC}"
+        echo -e "${YELLOW}The script will use the manual workflow with enhanced prompts.${NC}"
+        automated_fix=false
      fi
 else
     # No claude command found

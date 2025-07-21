@@ -114,11 +114,11 @@ If Claude CLI is not available, the script provides a manual workflow:
 ### Prerequisites
 
 - **Vale CLI**: Must be installed and accessible (`vale --version`)
-- **Claude Code** (optional): For automated AI-guided fixes
-  - Install: `npm install -g @anthropic-ai/claude-code`
-  - Requires `ANTHROPIC_API_KEY` environment variable
-  - Get API key from [Anthropic Console](https://console.anthropic.com)
-  - If not available, script provides comprehensive manual workflow
+- **Claude Code** (optional): For enhanced manual workflow prompts
+  - Install: `npm install -g @anthropic-ai/claude-code` 
+  - Note: Claude Code is interactive-only, not suitable for automation
+  - Script generates optimized prompts for manual use with Claude Code or web interface
+  - Script always uses manual workflow regardless of Claude Code installation
 - **Git**: For commits and pushes to current branch
 
 ### Environment
@@ -127,7 +127,6 @@ If Claude CLI is not available, the script provides a manual workflow:
 - Must be run from repository root directory
 - Requires write access to commit and push changes
 - `vale_analysis/` directory is auto-generated (added to .gitignore)
-- **Optional**: Set `ANTHROPIC_API_KEY` for automated Claude Code fixes
 
 ## Supported Vale Tests
 
@@ -228,15 +227,16 @@ Setup instructions:
 - **Security**: Never commit API keys to version control
 - Falls back to manual workflow if not configured
 
-**Claude Code detected (not suitable for automation):**
+**Claude Code detected (designed for interactive use):**
 ```bash
-Error: Claude Code detected but not suitable for automation.
-Claude Code is an interactive development environment.
-It cannot be used for automated scripting due to terminal requirements.
+Claude Code detected with API key configured.
+However, Claude Code is designed for interactive use, not automation.
+The script will use the manual workflow with enhanced prompts.
 ```
-- **Claude Code limitation**: Designed for interactive use, not scriptable automation
-- Generates detailed prompt and analysis files for manual workflow
-- All analysis preserved for review and manual processing
+- **Claude Code reality**: Even with API key, it's an interactive development environment
+- **Not scriptable**: Requires terminal control and user interaction
+- **Manual workflow**: Script generates detailed prompts optimized for Claude Code web interface
+- All analysis preserved for copy-paste into Claude Code or other AI tools
 
 **No Claude CLI available:**
 ```bash
