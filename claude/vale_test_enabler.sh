@@ -16,13 +16,14 @@ NC='\033[0m' # No Color
 # --- Input validation ---
 if [ -z "$1" ]; then
     echo -e "${RED}Usage: $0 <vale_test_name>${NC}"
-    echo -e "${YELLOW}Example: $0 Google.We${NC}"
-    echo -e "${YELLOW}Example: $0 write-good.Cliches${NC}"
+    echo -e "${YELLOW}Example: $0 'Google.We'${NC}"
+    echo -e "${YELLOW}Example: $0 'write-good.Cliches'${NC}"
     exit 1
 fi
 
 VALE_TEST="$1"
-BRANCH_NAME="feature/vale-$(echo "$VALE_TEST" | tr '.' '-' | tr '[:upper:]' '[:lower:]')-fix"
+# Create safe branch name by replacing dots and special characters
+BRANCH_NAME="feature/vale-$(echo "$VALE_TEST" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]')-fix"
 PROMPT_FILE="prompt_txts/vale_enabler_prompt.txt"
 
 echo -e "${BLUE}=== Vale Test Enabler Script ===${NC}"
@@ -50,11 +51,12 @@ TOTAL_FILES=$(wc -l < vale_analysis/all_files.txt)
 echo -e "${GREEN}Found $TOTAL_FILES MDX files to analyze${NC}"
 
 # Analyze violations per file
-echo -e "${YELLOW}Analyzing $VALE_TEST violations per file...${NC}"
+echo -e "${YELLOW}Analyzing '$VALE_TEST' violations per file...${NC}"
 : > vale_analysis/violations_by_file.txt
 
 while IFS= read -r file; do
     if [ -f "$file" ]; then
+        # Properly quote the test name in the filter
         violation_count=$(vale --filter=".Name == \"$VALE_TEST\"" "$file" 2>/dev/null | grep -c "$VALE_TEST" || echo "0")
         if [ "$violation_count" -gt 0 ]; then
             echo "$file: $violation_count violations" >> vale_analysis/violations_by_file.txt
@@ -72,11 +74,11 @@ echo -e "${GREEN}=== Analysis Results ===${NC}"
 echo -e "${YELLOW}Total violations found: $TOTAL_VIOLATIONS${NC}"
 
 if [ "$TOTAL_VIOLATIONS" -eq 0 ]; then
-    echo -e "${GREEN}No violations found for $VALE_TEST. The test might already be passing or not enabled.${NC}"
+    echo -e "${GREEN}No violations found for '$VALE_TEST'. The test might already be passing or not enabled.${NC}"
     echo -e "${BLUE}Checking test configuration...${NC}"
     
-    # Check if test exists
-    if find .github/styles -name "*.yml" -exec grep -l "$VALE_TEST" {} \; | head -1 > /dev/null; then
+    # Check if test exists - properly escape the test name for grep
+    if find .github/styles -name "*.yml" -exec grep -l "$(printf '%s\n' "$VALE_TEST" | sed 's/[[\.*^$()+?{|]/\\&/g')" {} \; | head -1 > /dev/null; then
         echo -e "${YELLOW}Test exists but no violations found. Consider this test already compliant.${NC}"
     else
         echo -e "${RED}Test '$VALE_TEST' not found in Vale configuration.${NC}"
@@ -100,7 +102,7 @@ echo -e "${YELLOW}Target file: $HIGH_IMPACT_FILE ($HIGH_IMPACT_COUNT violations)
 echo -e "${YELLOW}Generating detailed analysis for $HIGH_IMPACT_FILE...${NC}"
 vale --filter=".Name == \"$VALE_TEST\"" "$HIGH_IMPACT_FILE" 2>/dev/null > vale_analysis/high_impact_violations.txt
 
-# Create environment variables for the prompt
+# Create environment variables for the prompt - properly escape for environment
 export VALE_TEST_NAME="$VALE_TEST"
 export HIGH_IMPACT_FILE="$HIGH_IMPACT_FILE"
 export HIGH_IMPACT_COUNT="$HIGH_IMPACT_COUNT"
@@ -155,8 +157,8 @@ echo -e "${GREEN}=== Phase 1 Complete ===${NC}"
 echo -e "${YELLOW}High-impact file processing sent to Claude.${NC}"
 echo -e "${BLUE}Next steps:${NC}"
 echo -e "1. Review Claude's changes to $HIGH_IMPACT_FILE"
-echo -e "2. Test the changes: ${YELLOW}vale --filter='.Name == \"$VALE_TEST\"' $HIGH_IMPACT_FILE${NC}"
-echo -e "3. If satisfied, run: ${YELLOW}$0 $VALE_TEST --phase2${NC}"
+echo -e "2. Test the changes: ${YELLOW}vale --filter='.Name == \"$VALE_TEST\"' '$HIGH_IMPACT_FILE'${NC}"
+echo -e "3. If satisfied, run: ${YELLOW}$0 '$VALE_TEST' --phase2${NC}"
 
 # --- Phase 2 handling (if --phase2 flag is provided) ---
 if [ "$2" = "--phase2" ]; then
@@ -168,6 +170,7 @@ if [ "$2" = "--phase2" ]; then
     
     while IFS= read -r file; do
         if [ -f "$file" ] && [ "$file" != "$HIGH_IMPACT_FILE" ]; then
+            # Properly quote the test name in the filter
             violation_count=$(vale --filter=".Name == \"$VALE_TEST\"" "$file" 2>/dev/null | grep -c "$VALE_TEST" || echo "0")
             if [ "$violation_count" -gt 0 ]; then
                 echo "$file: $violation_count violations" >> vale_analysis/remaining_violations.txt
@@ -280,9 +283,9 @@ EOF
         
         echo -e "${BLUE}Committing bulk fixes...${NC}"
         git add .
-        git commit -m "Bulk fix $VALE_TEST violations across remaining files
+        git commit -m "Bulk fix '$VALE_TEST' violations across remaining files
 
-- Applied automated fixes to remaining files with $VALE_TEST violations
+- Applied automated fixes to remaining files with '$VALE_TEST' violations
 - Reduced total violations from $TOTAL_VIOLATIONS to target of 0
 - Followed technical writing guidelines while maintaining accuracy"
     fi
@@ -295,10 +298,10 @@ EOF
     # Create PR (requires gh CLI or manual creation)
     if command -v gh &> /dev/null; then
         echo -e "${YELLOW}Creating PR with GitHub CLI...${NC}"
-        gh pr create --title "Enable $VALE_TEST Vale test and fix all violations" \
+        gh pr create --title "Enable '$VALE_TEST' Vale test and fix all violations" \
                      --body "## Summary
 
-This PR enables the $VALE_TEST Vale test and fixes all violations across the documentation.
+This PR enables the '$VALE_TEST' Vale test and fixes all violations across the documentation.
 
 ## Changes Made
 
@@ -308,14 +311,14 @@ This PR enables the $VALE_TEST Vale test and fixes all violations across the doc
 
 ## Methodology
 
-1. Analyzed all MDX files for $VALE_TEST violations
+1. Analyzed all MDX files for '$VALE_TEST' violations
 2. Fixed highest-impact file first for review
 3. Applied systematic fixes following Google Developer Documentation Style Guide
 4. Maintained technical accuracy while improving documentation style
 
 ## Testing
 
-All files now pass the $VALE_TEST Vale test:
+All files now pass the '$VALE_TEST' Vale test:
 \`\`\`bash
 vale --filter='.Name == \"$VALE_TEST\"' .
 \`\`\`
@@ -324,7 +327,7 @@ Ready for review and potential merge to enable this Vale test going forward."
     else
         echo -e "${YELLOW}GitHub CLI not found. Manual PR creation needed.${NC}"
         echo -e "${BLUE}PR Details:${NC}"
-        echo -e "Title: Enable $VALE_TEST Vale test and fix all violations"
+        echo -e "Title: Enable '$VALE_TEST' Vale test and fix all violations"
         echo -e "Branch: $BRANCH_NAME"
     fi
     

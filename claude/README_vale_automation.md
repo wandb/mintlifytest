@@ -21,22 +21,27 @@ The Vale test enabler automates the process of:
 ### Basic Usage
 
 ```bash
-# Enable a specific Vale test and fix violations
-./claude/vale_test_enabler.sh <vale_test_name>
+# Enable a specific Vale test and fix violations (note the quotes for safety)
+./claude/vale_test_enabler.sh '<vale_test_name>'
 ```
 
 ### Examples
 
 ```bash
 # Fix Google.We violations (first-person plural pronouns)
-./claude/vale_test_enabler.sh Google.We
+./claude/vale_test_enabler.sh 'Google.We'
 
 # Fix write-good cliché violations  
-./claude/vale_test_enabler.sh write-good.Cliches
+./claude/vale_test_enabler.sh 'write-good.Cliches'
 
 # Fix passive voice violations
-./claude/vale_test_enabler.sh Google.Passive
+./claude/vale_test_enabler.sh 'Google.Passive'
+
+# Fix readability violations
+./claude/vale_test_enabler.sh 'write-good.ReadabilityTransforms'
 ```
+
+**Important**: Always quote the Vale test name to handle dots, hyphens, and other special characters safely.
 
 ## Workflow
 
@@ -70,7 +75,7 @@ Target file: cookbooks/dspy_prompt_optimization.mdx (37 violations)
 
 ```bash
 # After reviewing and approving Phase 1 changes
-./claude/vale_test_enabler.sh Google.We --phase2
+./claude/vale_test_enabler.sh 'Google.We' --phase2
 ```
 
 This will:
@@ -204,7 +209,7 @@ Add to GitHub Actions or similar:
 
 ```yaml
 - name: Enable Vale Test
-  run: ./claude/vale_test_enabler.sh Google.We --phase2
+  run: ./claude/vale_test_enabler.sh 'Google.We' --phase2
   env:
     CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
 ```
