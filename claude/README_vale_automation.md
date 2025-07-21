@@ -83,12 +83,40 @@ This will:
 - Commit bulk changes
 - Push branch and create pull request
 
+### Manual Workflow (No Claude CLI)
+
+If Claude CLI is not available, the script provides a manual workflow:
+
+```bash
+# Run analysis (stops at manual step)
+./claude/vale_test_enabler.sh 'Google.We'
+
+# Script provides:
+# 1. Detailed violation analysis in vale_analysis/
+# 2. Generated prompt in vale_analysis/current_prompt.txt  
+# 3. Clear instructions for manual fixing
+
+# Manual steps:
+# 1. Review violations: vale --filter='.Name == "Google.We"' target_file.mdx
+# 2. Edit the file to fix violations
+# 3. Test fixes: vale --filter='.Name == "Google.We"' target_file.mdx
+# 4. Commit changes
+# 5. Run Phase 2: ./claude/vale_test_enabler.sh 'Google.We' --phase2
+```
+
+**Alternative AI Tools:**
+- Copy prompt from `vale_analysis/current_prompt.txt` to ChatGPT, Claude web, etc.
+- Paste file content and get AI-assisted fixes
+- Apply suggested changes manually
+
 ## Requirements
 
 ### Prerequisites
 
-- **Vale CLI**: Must be installed and accessible
-- **Claude CLI**: For AI-guided fixes (`claude` command)
+- **Vale CLI**: Must be installed and accessible (`vale --version`)
+- **Claude CLI** (optional): For automated AI-guided fixes (`claude` command)
+  - Install from: https://claude.ai/cli
+  - If not available, script provides manual workflow
 - **Git**: For branch management and commits
 - **GitHub CLI** (optional): For automated PR creation (`gh` command)
 
@@ -177,9 +205,16 @@ Available tests: [list shown]
 **Claude CLI not available:**
 ```bash
 Error: 'claude' command not found
+The Claude CLI is required for automated fixing.
+
+Options:
+1. Install Claude CLI: Follow instructions at https://claude.ai/cli
+2. Manual fixing: Review violations and fix manually
+3. Use alternative AI: Copy prompt to your preferred AI tool
 ```
-- Install Claude CLI or use alternative AI integration
-- Manual fixes required if AI unavailable
+- Script provides manual workflow with detailed instructions
+- Generated prompt can be used with any AI tool (ChatGPT, etc.)
+- Analysis files preserved for manual review
 
 ## Best Practices
 

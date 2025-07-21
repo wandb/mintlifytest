@@ -116,6 +116,71 @@ export TOTAL_FILES="$TOTAL_FILES"
 
 # Call Claude with the prompt
 echo -e "${BLUE}=== Step 3: Calling Claude to fix violations ===${NC}"
+
+# Check if Claude CLI is available
+if ! command -v claude &> /dev/null; then
+    echo -e "${RED}Error: 'claude' command not found.${NC}"
+    echo -e "${YELLOW}The Claude CLI is required for automated fixing.${NC}"
+    echo ""
+    echo -e "${BLUE}Options:${NC}"
+    echo -e "1. ${YELLOW}Install Claude CLI:${NC} Follow instructions at https://claude.ai/cli"
+    echo -e "2. ${YELLOW}Manual fixing:${NC} Review violations and fix manually:"
+    echo -e "   - Check violations: ${YELLOW}vale --filter='.Name == \"$VALE_TEST\"' '$HIGH_IMPACT_FILE'${NC}"
+    echo -e "   - Edit file: ${YELLOW}$HIGH_IMPACT_FILE${NC}"
+    echo -e "   - Test fixes: ${YELLOW}vale --filter='.Name == \"$VALE_TEST\"' '$HIGH_IMPACT_FILE'${NC}"
+    echo -e "3. ${YELLOW}Use alternative AI:${NC} Copy prompt to your preferred AI tool"
+    echo ""
+    echo -e "${BLUE}Generated prompt saved to:${NC} ${YELLOW}vale_analysis/current_prompt.txt${NC}"
+    
+    # Create the prompt file anyway for manual use
+    if [ ! -f "$PROMPT_FILE" ]; then
+        echo -e "${YELLOW}Creating prompt file for manual use...${NC}"
+        cat > "$PROMPT_FILE" << 'EOF'
+You are working on enabling Vale tests to improve technical documentation quality. 
+
+**Current Task**: Fix violations for the Vale test: ${VALE_TEST_NAME}
+
+**Analysis Results**:
+- Total violations across all files: ${TOTAL_VIOLATIONS}
+- Files affected: ${TOTAL_FILES}
+- High-impact file: ${HIGH_IMPACT_FILE} (${HIGH_IMPACT_COUNT} violations)
+
+**Phase 1 Instructions**:
+1. Review the detailed violation analysis in vale_analysis/high_impact_violations.txt
+2. Fix all ${VALE_TEST_NAME} violations in ${HIGH_IMPACT_FILE}
+3. Follow the technical writing guidelines from CLAUDE.md
+4. Maintain technical accuracy while improving style
+5. Test your changes by running: vale --filter='.Name == "${VALE_TEST_NAME}"' ${HIGH_IMPACT_FILE}
+6. Commit your changes with a descriptive message
+
+**Important**: Only fix the high-impact file in this phase. After committing, stop and wait for approval before proceeding to fix remaining files.
+
+**Style Guidelines**:
+- Use second person ("you") for instructions
+- Avoid first-person plural pronouns ("we", "our", "us")  
+- Use active voice and present tense
+- Keep technical details intact
+- Follow Google Developer Documentation Style Guide principles
+
+When done with the high-impact file, commit your work and await further instructions.
+EOF
+    fi
+    
+    # Replace environment variables in prompt
+    envsubst < "$PROMPT_FILE" > vale_analysis/current_prompt.txt
+    
+    echo -e "${YELLOW}=== Manual Process Required ===${NC}"
+    echo -e "1. Review the analysis and prompt in ${YELLOW}vale_analysis/${NC}"
+    echo -e "2. Fix violations in ${YELLOW}$HIGH_IMPACT_FILE${NC}"
+    echo -e "3. Test with: ${YELLOW}vale --filter='.Name == \"$VALE_TEST\"' '$HIGH_IMPACT_FILE'${NC}"
+    echo -e "4. Commit your changes"
+    echo -e "5. Run Phase 2: ${YELLOW}$0 '$VALE_TEST' --phase2${NC}"
+    
+    # Don't cleanup so user can review files
+    echo -e "${BLUE}Analysis files preserved in ${YELLOW}vale_analysis/${NC} for manual review.${NC}"
+    exit 0
+fi
+
 echo -e "${YELLOW}Sending analysis to Claude for automated fixing...${NC}"
 
 if [ ! -f "$PROMPT_FILE" ]; then
