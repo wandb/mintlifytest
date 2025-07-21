@@ -1,0 +1,76 @@
+You are working on enabling Vale tests to improve technical documentation quality. Your task is to systematically fix Vale violations while maintaining technical accuracy and following established style guidelines.
+
+**Current Task**: Fix violations for the Vale test: ${VALE_TEST_NAME}
+
+**Analysis Results**:
+- Total violations across all files: ${TOTAL_VIOLATIONS}
+- Files affected: ${TOTAL_FILES}
+- High-impact file to fix first: ${HIGH_IMPACT_FILE} (${HIGH_IMPACT_COUNT} violations)
+
+**Phase 1 Instructions - Fix High-Impact File Only**:
+
+1. **Review Violations**: Examine the detailed violation analysis in `vale_analysis/high_impact_violations.txt` to understand specific issues
+
+2. **Fix All Violations**: Address every ${VALE_TEST_NAME} violation in `${HIGH_IMPACT_FILE}` following these guidelines:
+   - Read the file content to understand context
+   - Apply appropriate fixes based on the specific Vale test
+   - Maintain all technical details and accuracy
+   - Use the edit_file or search_replace tools to make changes
+   - Follow the technical writing style from CLAUDE.md
+
+3. **Test Changes**: After fixing, verify success by running:
+   ```bash
+   vale --filter='.Name == "${VALE_TEST_NAME}"' ${HIGH_IMPACT_FILE}
+   ```
+
+4. **Commit Changes**: Create a clear, descriptive commit message documenting the fixes
+
+**Important Constraints**:
+- ONLY fix the high-impact file `${HIGH_IMPACT_FILE}` in this phase
+- Do NOT fix other files yet - wait for approval after this phase
+- Focus on quality over speed - each fix should be thoughtful and accurate
+
+**Common Vale Test Fix Patterns**:
+
+**Google.We Test** (First-person plural pronouns):
+- "We" → "You" (when addressing reader)
+- "We" → "This tutorial/guide/example" (when describing content)
+- "our" → "your" or "the" 
+- "us" → "you"
+- "we'll" → "you'll" or "this tutorial will"
+- "we're" → "you're"
+
+**write-good.Cliches Test** (Overused phrases):
+- Replace clichéd expressions with specific, direct language
+- "at the end of the day" → "ultimately" or "finally"
+- "low hanging fruit" → "easy opportunities"
+- "game changer" → "significant improvement"
+
+**Google.Passive Test** (Passive voice):
+- Convert passive constructions to active voice
+- "The file is created by the system" → "The system creates the file"
+- "Data is processed" → "The application processes data"
+
+**Style Guidelines**:
+- Use second person ("you") for instructions and user actions
+- Use active voice and present tense
+- Keep technical terminology intact
+- Maintain code examples and technical specifications exactly
+- Preserve all links, references, and formatting
+- Follow Google Developer Documentation Style Guide principles
+- Ensure readability while preserving technical depth
+
+**Quality Checks**:
+- Verify no technical information is lost
+- Ensure all code examples remain functional
+- Check that links and references are preserved
+- Confirm the tone remains professional and helpful
+- Validate that instructions are still clear and actionable
+
+After completing the fixes and committing your work, provide a summary of:
+- Number of violations fixed
+- Types of changes made
+- Any challenges encountered
+- Confirmation that technical accuracy is preserved
+
+Wait for approval before proceeding to fix remaining files in other documents. 
