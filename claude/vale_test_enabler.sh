@@ -22,19 +22,19 @@ if [ -z "$1" ]; then
 fi
 
 VALE_TEST="$1"
-# Create safe branch name by replacing dots and special characters
-BRANCH_NAME="feature/vale-$(echo "$VALE_TEST" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]')-fix"
 PROMPT_FILE="prompt_txts/vale_enabler_prompt.txt"
 
 echo -e "${BLUE}=== Vale Test Enabler Script ===${NC}"
 echo -e "${BLUE}Test to enable: ${YELLOW}$VALE_TEST${NC}"
-echo -e "${BLUE}Branch name: ${YELLOW}$BRANCH_NAME${NC}"
+echo -e "${BLUE}Working on current branch: ${YELLOW}$(git branch --show-current)${NC}"
 
-# --- Check if we're already on the correct branch ---
-CURRENT_BRANCH=$(git branch --show-current)
-if [ "$CURRENT_BRANCH" != "$BRANCH_NAME" ]; then
-    echo -e "${BLUE}Creating and checking out branch: $BRANCH_NAME${NC}"
-    git checkout -b "$BRANCH_NAME"
+# --- Safety check for vale_analysis directory ---
+if [ -d "vale_analysis" ] && [ -n "$(ls -A vale_analysis 2>/dev/null)" ]; then
+    echo -e "${RED}Error: vale_analysis directory exists and is not empty.${NC}"
+    echo -e "${YELLOW}Please remove or clean the directory before running:${NC}"
+    echo -e "  ${YELLOW}rm -rf vale_analysis${NC}"
+    echo -e "  ${YELLOW}# or move files elsewhere if needed${NC}"
+    exit 1
 fi
 
 # --- Create output directory for analysis ---
@@ -369,49 +369,24 @@ EOF
 - Followed technical writing guidelines while maintaining accuracy"
     fi
     
-    echo -e "${BLUE}=== Step 4: Creating Pull Request ===${NC}"
+    echo -e "${BLUE}=== Step 4: Finalizing Changes ===${NC}"
     
-    # Push branch
-    git push -u origin "$BRANCH_NAME"
-    
-    # Create PR (requires gh CLI or manual creation)
-    if command -v gh &> /dev/null; then
-        echo -e "${YELLOW}Creating PR with GitHub CLI...${NC}"
-        gh pr create --title "Enable '$VALE_TEST' Vale test and fix all violations" \
-                     --body "## Summary
-
-This PR enables the '$VALE_TEST' Vale test and fixes all violations across the documentation.
-
-## Changes Made
-
-- **Phase 1**: Fixed $HIGH_IMPACT_COUNT violations in high-impact file: \`$HIGH_IMPACT_FILE\`
-- **Phase 2**: Applied bulk fixes to remaining files
-- **Total**: Reduced violations from $TOTAL_VIOLATIONS to 0
-
-## Methodology
-
-1. Analyzed all MDX files for '$VALE_TEST' violations
-2. Fixed highest-impact file first for review
-3. Applied systematic fixes following Google Developer Documentation Style Guide
-4. Maintained technical accuracy while improving documentation style
-
-## Testing
-
-All files now pass the '$VALE_TEST' Vale test:
-\`\`\`bash
-vale --filter='.Name == \"$VALE_TEST\"' .
-\`\`\`
-
-Ready for review and potential merge to enable this Vale test going forward."
-    else
-        echo -e "${YELLOW}GitHub CLI not found. Manual PR creation needed.${NC}"
-        echo -e "${BLUE}PR Details:${NC}"
-        echo -e "Title: Enable '$VALE_TEST' Vale test and fix all violations"
-        echo -e "Branch: $BRANCH_NAME"
-    fi
+    # Push changes to current branch
+    CURRENT_BRANCH=$(git branch --show-current)
+    echo -e "${YELLOW}Pushing changes to current branch: $CURRENT_BRANCH${NC}"
+    git push -u origin "$CURRENT_BRANCH"
     
     echo -e "${GREEN}=== All phases complete! ===${NC}"
-    echo -e "${YELLOW}Branch pushed and PR created for review.${NC}"
+    echo -e "${YELLOW}Changes committed and pushed to branch: $CURRENT_BRANCH${NC}"
+    echo -e "${BLUE}Summary:${NC}"
+    echo -e "- ✅ '$VALE_TEST' Vale test violations fixed"
+    echo -e "- ✅ Total violations reduced from $TOTAL_VIOLATIONS to 0"
+    echo -e "- ✅ Changes committed and pushed"
+    echo -e ""
+    echo -e "${YELLOW}Next steps:${NC}"
+    echo -e "- Review the changes"
+    echo -e "- Create a PR manually if needed"
+    echo -e "- Enable the '$VALE_TEST' test in Vale configuration if not already enabled"
 fi
 
 # Cleanup

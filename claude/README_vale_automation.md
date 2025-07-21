@@ -56,7 +56,7 @@ The Vale test enabler automates the process of:
 # Example output
 === Vale Test Enabler Script ===
 Test to enable: Google.We
-Branch name: feature/vale-google-we-fix
+Working on current branch: feature/my-documentation-updates
 
 === Step 1: Analyzing current Vale violations ===
 Found 128 MDX files to analyze
@@ -81,7 +81,7 @@ Target file: cookbooks/dspy_prompt_optimization.mdx (37 violations)
 This will:
 - Apply automated fixes to all remaining files
 - Commit bulk changes
-- Push branch and create pull request
+- Push changes to current branch
 
 ### Manual Workflow (No Claude CLI)
 
@@ -118,14 +118,14 @@ If Claude CLI is not available, the script provides a manual workflow:
   - Note: No official Claude API CLI exists. Consider third-party tools or manual workflow
   - Anthropic's "Claude Code" is a development environment, not an API CLI
   - If not available, script provides manual workflow
-- **Git**: For branch management and commits
-- **GitHub CLI** (optional): For automated PR creation (`gh` command)
+- **Git**: For commits and pushes to current branch
 
 ### Environment
 
 - Vale configuration must be present (`.vale.ini`, `.github/styles/`)
 - Must be run from repository root directory
-- Requires write access to create branches and commits
+- Requires write access to commit and push changes
+- `vale_analysis/` directory is auto-generated (added to .gitignore)
 
 ## Supported Vale Tests
 
@@ -222,7 +222,7 @@ Options:
 
 ### Before Running
 
-1. **Backup**: Ensure clean git state or create backup branch
+1. **Backup**: Ensure clean git state and current work is committed
 2. **Test**: Verify Vale configuration with `vale --config`
 3. **Review**: Check existing violations with `vale .`
 
