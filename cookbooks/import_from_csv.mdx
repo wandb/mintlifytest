@@ -30,20 +30,20 @@ conversation_id,turn_index,start_time,user_input,ground_truth,answer_text
 
 To understand the decisions for import in this cookbook, one should know that Weave traces have parent-child relationships that are 1:Many and continuous. Meaning a single parent may have multiple children, but that parent may itself be a children of another parent.
 
-We therefore use `conversation_id` as the parent identifier, and the `turn_index` as the child identifier to provide us complete conversation logging.
+You therefore use `conversation_id` as the parent identifier, and the `turn_index` as the child identifier to provide you complete conversation logging.
 
 Ensure to modify the variables as needed.
 
 # Set up the environment
 
-We install and import all needed packages.
-We set `WANDB_API_KEY` in our env so that we may easily login with `wandb.login()` (this should be given to the colab as a secret).
+You install and import all needed packages.
+You set `WANDB_API_KEY` in your env so that you may easily login with `wandb.login()` (this should be given to the colab as a secret).
 
-We set the name of the file we upload to colab in `name_of_file` and set the project in W&B you want to log this into in `name_of_wandb_project`.
+You set the name of the file you upload to colab in `name_of_file` and set the project in W&B you want to log this into in `name_of_wandb_project`.
 
 **_NOTE:_** `name_of_wandb_project` may also be in the format of `{team_name}/{project_name}` to specify a team to log the traces into.
 
-We then fetch a weave client by calling `weave.init()`
+You then fetch a weave client by calling `weave.init()`
 
 ```python
 %pip install wandb weave pandas datetime --quiet
@@ -89,7 +89,7 @@ weave_client = weave.init(name_of_wandb_project)
 
 # Data Loading
 
-We load the data into a Pandas dataframe, and ensure we sort it by the `conversation_id` and `turn_index` to ensure the parents and childs are correctly ordered.
+You load the data into a Pandas dataframe, and ensure you sort it by the `conversation_id` and `turn_index` to ensure the parents and childs are correctly ordered.
 
 This will result in a two column pandas DF with our conversation turns as an array under `conversation_data`.
 
@@ -117,9 +117,9 @@ result_df.head()
 
 # Log the Traces to Weave
 
-We now iterate through our pandas DF:
+You now iterate through your pandas DF:
 - You create a parent call for every `conversation_id`
-- We iterate through the turn array to create child calls sorted by their `turn_index`
+- You iterate through the turn array to create child calls sorted by their `turn_index`
 
 Important concepts of the lower level python API:
 - A Weave call is equivalent to a Weave trace, this call may have a parent or children associated with it

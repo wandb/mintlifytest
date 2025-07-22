@@ -42,12 +42,12 @@ python
 !pip install "httpx<0.28"
 ```
 
-We set `WANDB_API_KEY` in our env so that we may easily login with wandb.login() (this should be given to the colab as a secret).
+You set `WANDB_API_KEY` in your env so that you may easily login with wandb.login() (this should be given to the colab as a secret).
 
-We set the project in W&B you want to log this into in `name_of_wandb_project`.
+You set the project in W&B you want to log this into in `name_of_wandb_project`.
 
 **NOTE**: `name_of_wandb_project` may also be in the format of `{team_name}/{project_name}` to specify a team to log the traces into.
-We then fetch a weave client by calling weave.init()
+You then fetch a weave client by calling weave.init()
 
 Since we'll be using [OpenAI API](https://openai.com/index/openai-api/), you will also need an OpenAI API key. You can [sign up](https://platform.openai.com/signup) on the OpenAI platform to get your own API key. (this should be given to the colab as a secret too.)
 
