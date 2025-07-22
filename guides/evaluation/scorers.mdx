@@ -266,7 +266,7 @@ While this guide shows you how to create custom scorers, Weave comes with a vari
 
 <Tabs>
   <Tab title="Python">
-    During evaluation, the scorer will be computed for each row of your dataset. To provide a final score for the evaluation we provide an `auto_summarize` depending on the returning type of the output.
+    During evaluation, the scorer will be computed for each row of your dataset. To provide a final score for the evaluation you provide an `auto_summarize` depending on the returning type of the output.
     - Averages are computed for numerical columns
     - Count and fraction for boolean columns
     - Other column types are ignored
@@ -301,7 +301,7 @@ While this guide shows you how to create custom scorers, Weave comes with a vari
 
   </Tab>
   <Tab title="TypeScript">
-    During evaluation, the scorer will be computed for each row of your dataset.  To provide a final score, we use an internal `summarizeResults` function that aggregates depending on the output type.
+    During evaluation, the scorer will be computed for each row of your dataset.  To provide a final score, you use an internal `summarizeResults` function that aggregates depending on the output type.
     - Averages are computed for numerical columns
     - Count and fraction for boolean columns
     - Other column types are ignored
@@ -368,7 +368,7 @@ For usage information and an example, see [Using `preprocess_model_input` to for
 
 ## Score Analysis
 
-In this section, we'll show you how to analyze the scores for a single call, multiple calls, and all calls scored by a specific scorer.
+In this section, this tutorial will show you how to analyze the scores for a single call, multiple calls, and all calls scored by a specific scorer.
 
 ### Analyze a single Call's Scores
 
@@ -449,4 +449,3 @@ Next, click the `View Traces` button under `Scores` to view all the calls scored
 This will default to the selected version of the Scorer. You can remove the version filter to see all the calls scored by any version of the Scorer.
 
 ![Filtered Calls to Scorer Name](./img/filtered_calls_scorer_name.png)
-

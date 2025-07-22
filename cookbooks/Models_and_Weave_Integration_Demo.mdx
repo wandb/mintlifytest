@@ -79,7 +79,7 @@ import weave
 
 class UnslothLoRAChatModel(weave.Model):
     """
-    We define an extra ChatModel class to be able store and version more parameters than just the model name.
+    You define an extra ChatModel class to be able store and version more parameters than just the model name.
     Especially, relevant if we consider fine-tuning (locally or aaS) because of specific parameters.
     """
 
@@ -94,7 +94,7 @@ class UnslothLoRAChatModel(weave.Model):
     _tokenizer: Any = PrivateAttr()
 
     def model_post_init(self, __context):
-        # we can simply paste this from the "Use" tab from the registry
+        # you can simply paste this from the "Use" tab from the registry
         run = wandb.init(project=PROJECT, job_type="model_download")
         artifact = run.use_artifact(f"{self.chat_model}")
         model_path = artifact.download()
@@ -197,7 +197,7 @@ In Weave:
 The code below demonstrates how to retrieve an evaluation object, execute the evaluation using the updated `RagModel`, and log the results to both W&B and Weave. Ensure that the evaluation reference (`WEAVE_EVAL`) matches your project setup. 
 
 ```python
-# MAGIC: we can simply get an evaluation with a eval dataset and scorers and use them
+# MAGIC: you can simply get an evaluation with a eval dataset and scorers and use them
 WEAVE_EVAL = "weave:///wandb-smle/weave-cookboook-demo/object/climate_rag_eval:ntRX6qn3Tx6w3UEVZXdhIh1BWGh7uXcQpOQnIuvnSgo"
 climate_rag_eval = weave.ref(WEAVE_EVAL).get()
 python

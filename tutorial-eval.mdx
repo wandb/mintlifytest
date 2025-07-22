@@ -3,7 +3,7 @@ title: "Tutorial: Build an Evaluation pipeline"
 description: "Learn how to build an evaluation pipeline with Weave Models and Evaluations"
 ---
 
-To iterate on an application, we need a way to evaluate if it's improving. To do so, a common practice is to test it against the same set of examples when there is a change. Weave has a first-class way to track evaluations with `Model` & `Evaluation` classes. We have built the APIs to make minimal assumptions to allow for the flexibility to support a wide array of use-cases.
+To iterate on an application, you need a way to evaluate if it's improving. To do so, a common practice is to test it against the same set of examples when there is a change. Weave has a first-class way to track evaluations with `Model` & `Evaluation` classes. You have built the APIs to make minimal assumptions to allow for the flexibility to support a wide array of use-cases.
 
 ![Evals hero](./images/evals-hero.png)
 
@@ -98,7 +98,7 @@ Checkout the [Models](/guides/core-types/models) guide to learn more.
 
 Next, you need a dataset to evaluate your model on. A `Dataset` is just a collection of examples stored as a Weave object. You'll be able to download, browse and run evaluations on datasets in the Weave UI.
 
-Here we build a list of examples in code, but you can also log them one at a time from your running application.
+Here you build a list of examples in code, but you can also log them one at a time from your running application.
 
 <CodeGroup>
 ```python Python
@@ -195,7 +195,7 @@ const fruitNameScorer = weave.op(
 <Note>
 To make your own scoring function, learn more in the [Scorers](/guides/evaluation/scorers) guide.
 
-In some applications we want to create custom `Scorer` classes - where for example a standardized `LLMJudge` class should be created with specific parameters (e.g. chat model, prompt), specific scoring of each row, and specific calculation of an aggregate score. See the tutorial on defining a `Scorer` class in the next chapter on [Model-Based Evaluation of RAG applications](/tutorial-rag#optional-defining-a-scorer-class) for more information.
+In some applications you want to create custom `Scorer` classes - where for example a standardized `LLMJudge` class should be created with specific parameters (e.g. chat model, prompt), specific scoring of each row, and specific calculation of an aggregate score. See the tutorial on defining a `Scorer` class in the next chapter on [Model-Based Evaluation of RAG applications](/tutorial-rag#optional-defining-a-scorer-class) for more information.
 </Note>
 
 ## 4. Run the evaluation

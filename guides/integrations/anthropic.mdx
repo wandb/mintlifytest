@@ -59,7 +59,7 @@ Weave will now track and log all LLM calls made through Anthropic. You can view 
 
 ## Wrapping with your own ops
 
-Weave ops make results *reproducible* by automatically versioning code as you experiment, and they capture their inputs and outputs. Simply create a function decorated with [`@weave.op()`](https://wandb.github.io/weave/guides/tracking/ops) that calls into [`Anthropic.messages.create`](https://docs.anthropic.com/en/api/messages-examples) and Weave will track the inputs and outputs for you. Let's see how we can do this in nested example:
+Weave ops make results *reproducible* by automatically versioning code as you experiment, and they capture their inputs and outputs. Simply create a function decorated with [`@weave.op()`](https://wandb.github.io/weave/guides/tracking/ops) that calls into [`Anthropic.messages.create`](https://docs.anthropic.com/en/api/messages-examples) and Weave will track the inputs and outputs for you. To start, see how you can do this in nested example:
 
 ```python
 import weave

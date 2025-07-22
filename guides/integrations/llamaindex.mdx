@@ -25,7 +25,7 @@ response = chat_engine.chat(
 print(response)
 ```
 
-In the example above, we are creating a simple LlamaIndex chat engine which under the hood is making an OpenAI call. Check out the trace below:
+In the example above, you are creating a simple LlamaIndex chat engine which under the hood is making an OpenAI call. Check out the trace below:
 
 [![simple_llamaindex.png](/guides/integrations/imgs/simple_llamaindex.png)](https://wandb.ai/wandbot/test-llamaindex-weave/weave/calls/b6b5d898-2df8-4e14-b553-66ce84661e74)
 
@@ -148,7 +148,7 @@ This `SimpleRAGPipeline` class subclassed from `weave.Model` organizes the impor
 
 ## Doing Evaluation with `weave.Evaluation`
 
-Evaluations help you measure the performance of your applications. By using the [`weave.Evaluation`](/guides/core-types/evaluations) class, you can capture how well your model performs on specific tasks or datasets, making it easier to compare different models and iterations of your application. The following example demonstrates how to evaluate the model we created:
+Evaluations help you measure the performance of your applications. By using the [`weave.Evaluation`](/guides/core-types/evaluations) class, you can capture how well your model performs on specific tasks or datasets, making it easier to compare different models and iterations of your application. The following example demonstrates how to evaluate the model you created:
 
 ```python
 import asyncio

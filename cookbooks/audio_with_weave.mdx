@@ -38,7 +38,7 @@ python
 !pip install "httpx<0.28"
 ```
 
-Next, load the required API keys for OpenAI and Weave. Here, we use set_env which is compatible with google colab's secret keys manager, and is an alternative to colab's specific `google.colab.userdata`. See: [here](https://pypi.org/project/set-env-colab-kaggle-dotenv/) for usage instructions.
+Next, load the required API keys for OpenAI and Weave. Here, you use set_env which is compatible with google colab's secret keys manager, and is an alternative to colab's specific `google.colab.userdata`. See: [here](https://pypi.org/project/set-env-colab-kaggle-dotenv/) for usage instructions.
 
 ```python
 # Set environment variables.
@@ -65,14 +65,14 @@ import weave
 
 ## Audio Streaming and Storage Example
 
-Now we will setup a call to OpenAI's completions endpoint with audio modality enabled. First create the OpenAI client and initiate a Weave project.
+Now you will setup a call to OpenAI's completions endpoint with audio modality enabled. First create the OpenAI client and initiate a Weave project.
 
 ```python
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 weave.init("openai-audio-chat")
 ```
 
-Now we will define our OpenAI completions request and add our Weave decorator (op).
+Now you will define your OpenAI completions request and add your Weave decorator (op).
 
 Here, we define the function `prompt_endpont_and_log_trace`. This function has three primary steps:
 
@@ -199,7 +199,7 @@ _ = set_env("WANDB_API_KEY")
 Run the following cell to find all available audio devices. Then, populate the `INPUT_DEVICE_INDEX` and the `OUTPUT_DEVICE_INDEX` based on the devices listed. Your input device will have at least 1 input channels, and your output device will have at least 1 output channels.
 
 ```python
-# Get device list from pyaudio so we can configure the next cell
+# Get device list from pyaudio so you can configure the next cell
 p = pyaudio.PyAudio()
 devices_data = {i: p.get_device_info_by_index(i) for i in range(p.get_device_count())}
 for i, device in devices_data.items():
@@ -222,7 +222,7 @@ CHUNK = int(SAMPLE_RATE / 10)  # Samples per frame
 SAMPLE_WIDTH = p.get_sample_size(pyaudio.paInt16)  # Samples per frame for the format
 CHUNK_DURATION = 0.3  # Seconds of audio per chunk sent to OAI API
 OAI_SAMPLE_RATE = (
-    24000  # OAI Sample Rate is 24kHz, we need this to play or save assistant audio
+    24000  # OAI Sample Rate is 24kHz, you need this to play or save assistant audio
 )
 OUTPUT_DEVICE_CHANNELS = 1  # Set to 1 for mono output
 ```
@@ -1038,7 +1038,7 @@ class RTAudioModel(weave.Model):
 
 ## Audio recorder
 
-We use a pyaudio input stream with a handler linked to the `send_audio` method of the RTAudio model. The stream is returned to the main thread so it can be safely exited upon program completion.
+You use a pyaudio input stream with a handler linked to the `send_audio` method of the RTAudio model. The stream is returned to the main thread so it can be safely exited upon program completion.
 
 ```python
 # Audio capture stream
@@ -1100,4 +1100,3 @@ else:
 ```
 
 </details>
-

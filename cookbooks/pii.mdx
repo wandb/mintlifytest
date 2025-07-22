@@ -57,7 +57,7 @@ def postprocess_inputs(inputs: dict[str, Any]) -> dict[str, Any]:
 def postprocess_output(output: CustomObject) -> CustomObject:
     return CustomObject(x=output.x, secret_password="REDACTED")
 
-# Then, when we use the `@weave.op` decorator, we pass these processing functions as arguments to the decorator:
+# Then, when you use the `@weave.op` decorator, we pass these processing functions as arguments to the decorator:
 @weave.op(
     postprocess_inputs=postprocess_inputs,
     postprocess_output=postprocess_output,
@@ -98,11 +98,11 @@ Before using Weave with PII data, review the best practices for using Weave with
 !pip install presidio_analyzer
 !pip install presidio_anonymizer
 !python -m spacy download en_core_web_lg    # Presidio uses spacy NLP engine
-!pip install Faker                          # we'll use Faker to replace PII data with fake data
+!pip install Faker                          # this tutorial will use Faker to replace PII data with fake data
 !pip install weave                          # To leverage Traces
 !pip install set-env-colab-kaggle-dotenv -q # for env var
 !pip install anthropic                      # to use sonnet
-!pip install cryptography                   # to encrypt our data
+!pip install cryptography                   # to encrypt the data
 ```
 
 2. Set up your API keys. You can find your API keys at the following links.
@@ -207,7 +207,7 @@ def redact_with_regex(text):
     return text
 ```
 
-Let's test the function with a sample text:
+To start, test the function with a sample text:
 
 ```python
 # Test the function
@@ -246,7 +246,7 @@ def redact_with_presidio(text):
     return anonymized_text.text
 ```
 
-Let's test the function with a sample text:
+To start, test the function with a sample text:
 
 ```python
 text = "My phone number is 212-555-5555 and my name is alex"
@@ -310,7 +310,7 @@ print(f"Raw text:\n\t{text_to_anonymize}")
 print(f"Anonymized text:\n\t{anonymized_results.text}")
 ```
 
-Let's consolidate our code into a single class and expand the list of entities to include the additional ones identified earlier.
+Let's consolidate your code into a single class and expand the list of entities to include the additional ones identified earlier.
 
 ```python
 from typing import ClassVar
@@ -359,7 +359,7 @@ class MyFaker(Faker):
         return anonymized_results.text
 ```
 
-Let's test the function with a sample text:
+To start, test the function with a sample text:
 
 ```python
 faker = MyFaker()
@@ -409,17 +409,17 @@ client = weave.init(
 
 ## Apply the methods to Weave calls
 
-In the following examples, we will integrate our PII redaction and anonymization methods into Weave Models and preview the results in Weave Traces.
+In the following examples, you will integrate the PII redaction and anonymization methods into Weave Models and preview the results in Weave Traces.
 
-First, we'll create a [Weave Model](https://wandb.github.io/weave/guides/core-types/models). A Weave Model is a combination of information like configuration settings, model weights, and code that defines how the model operates.
+First, this tutorial will create a [Weave Model](https://wandb.github.io/weave/guides/core-types/models). A Weave Model is a combination of information like configuration settings, model weights, and code that defines how the model operates.
 
-In our model, we will include our predict function where the Anthropic API will be called. Anthropic's Claude Sonnet is used to perform sentiment analysis while tracing LLM calls using [Traces](https://wandb.github.io/weave/quickstart). Claude Sonnet will receive a block of text and output one of the following sentiment classifications: _positive_, _negative_, or _neutral_. Additionally, we will include our postprocessing functions to ensure that our PII data is redacted or anonymized before it is sent to the LLM.
+In the model, you will include your predict function where the Anthropic API will be called. Anthropic's Claude Sonnet is used to perform sentiment analysis while tracing LLM calls using [Traces](https://wandb.github.io/weave/quickstart). Claude Sonnet will receive a block of text and output one of the following sentiment classifications: _positive_, _negative_, or _neutral_. Additionally, you will include the postprocessing functions to ensure that your PII data is redacted or anonymized before it is sent to the LLM.
 
 Once you run this code, you will receive a links to the Weave project page, as well as the specific trace (LLM calls) you ran.
 
 ### Regex method
 
-In the simplest case, we can use regex to identify and redact PII data from the original text.
+In the simplest case, you can use regex to identify and redact PII data from the original text.
 
 ```python
 import json
@@ -475,7 +475,7 @@ for entry in pii_data:
 
 ### Presidio redaction method
 
-Next, we will use Presidio to identify and redact PII data from the original text.
+Next, you will use Presidio to identify and redact PII data from the original text.
 
 ![](/images/cookbooks/../../media/pii/redact.png)
 
@@ -530,7 +530,7 @@ for entry in pii_data:
 
 ### Faker and Presidio replacement method
 
-In this example, we use Faker to generate anonymized replacement PII data and use Presidio to identify and replace the PII data in the original text.
+In this example, you use Faker to generate anonymized replacement PII data and use Presidio to identify and replace the PII data in the original text.
 
 ![](/images/cookbooks/../../media/pii/replace.png)
 
@@ -711,7 +711,7 @@ class sentiment_analysis_model(weave.Model):
     async def predict(self, encrypted_input: EncryptedSentimentAnalysisInput) -> dict:
         client = AsyncAnthropic()
 
-        decrypted_text = encrypted_input.decrypt() # We use the custom class to decrypt the text
+        decrypted_text = encrypted_input.decrypt() # You use the custom class to decrypt the text
 
         response = await client.messages.create(
             max_tokens=1024,
@@ -745,4 +745,3 @@ for entry in pii_data:
     encrypted_input = EncryptedSentimentAnalysisInput.encrypt(entry["text"])
     await model.predict(encrypted_input)
 ```
-

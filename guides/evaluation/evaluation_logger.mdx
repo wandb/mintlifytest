@@ -159,7 +159,7 @@ def generate_random_audio_wave_read(duration=2, sample_rate=44100):
             sample = random.randint(-amplitude, amplitude)
             wf.writeframes(struct.pack('<h', sample))
 
-    # Rewind the buffer to the beginning so we can read from it
+    # Rewind the buffer to the beginning so you can read from it
     buffer.seek(0)
 
     # Return a Wave_read object

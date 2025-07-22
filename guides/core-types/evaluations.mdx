@@ -104,7 +104,7 @@ def match_score1(expected: str, output: dict) -> dict:
 
 ### (Optional) Define a custom `Scorer` class
 
-In some applications we want to create custom `Scorer` classes - where for example a standardized `LLMJudge` class should be created with specific parameters (e.g. chat model, prompt), specific scoring of each row, and specific calculation of an aggregate score.
+In some applications you want to create custom `Scorer` classes - where for example a standardized `LLMJudge` class should be created with specific parameters (e.g. chat model, prompt), specific scoring of each row, and specific calculation of an aggregate score.
 
 See the tutorial on defining a `Scorer` class in [Model-Based Evaluation of RAG applications](/tutorial-rag#optional-defining-a-scorer-class) for more information.
 
@@ -243,7 +243,7 @@ import weave
 from weave import Evaluation
 import asyncio
 
-# Our dataset has "input_text" but our model expects "question"
+# This dataset has "input_text" but the model expects "question"
 examples = [
     {"input_text": "What is the capital of France?", "expected": "Paris"},
     {"input_text": "Who wrote 'To Kill a Mockingbird'?", "expected": "Harper Lee"},
@@ -277,7 +277,7 @@ weave.init('preprocessing-example')
 asyncio.run(evaluation.evaluate(function_to_evaluate))
 ```
 
-In this example, our dataset contains examples with an `input_text` field, but our evaluation function expects a `question` parameter. The `preprocess_example` function transforms each example by renaming the field, allowing the evaluation to work correctly.
+In this example, the dataset contains examples with an `input_text` field, but our evaluation function expects a `question` parameter. The `preprocess_example` function transforms each example by renaming the field, allowing the evaluation to work correctly.
 
 The preprocessing function:
 
@@ -289,7 +289,7 @@ This is particularly useful when working with external datasets that may have di
 
 ### Use HuggingFace datasets with evaluations
 
-We are continuously improving our integrations with third-party services and libraries.
+You are continuously improving our integrations with third-party services and libraries.
 
 While we work on building more seamless integrations, you can use `preprocess_model_input` as a temporary workaround for using HuggingFace Datasets in Weave evaluations.
 

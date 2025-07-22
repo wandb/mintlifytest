@@ -13,8 +13,8 @@ This is an interactive notebook. You can run it locally or use the links below:
 
 It is often hard to automatically evaluate a generated LLM response so, depending on your risk tolerance, you can gather direct user feedback to find areas to improve.
 
-In this tutorial, we'll use a custom chatbot as an example app from which to collect user feedback.
-We'll use Streamlit to build the interface and we'll capture the LLM interactions and feedback in Weave.
+In this tutorial, this tutorial will use a custom chatbot as an example app from which to collect user feedback.
+This tutorial will use Streamlit to build the interface and we'll capture the LLM interactions and feedback in Weave.
 
 ## Setup
 
@@ -202,7 +202,7 @@ def predict(input_data):
     return some_result
 ```
 
-We can use it as usual to deliver some model response to the user:
+You can use it as usual to deliver some model response to the user:
 
 ```python
 with weave.attributes(
@@ -227,4 +227,3 @@ call.feedback.add_reaction("👍")  # user reaction through the App UI
 ## Conclusion
 
 In this tutorial, we built a chat UI with Streamlit which had inputs & outputs captured in Weave, alongside 👍👎 buttons to capture user feedback.
-

@@ -163,7 +163,7 @@ Interactions within group chats, such as `RoundRobinGroupChat`, are traced by We
 from autogen_agentchat.conditions import TextMentionTermination
 from autogen_agentchat.teams import RoundRobinGroupChat
 
-# we add this weave op here because we want to trace the entire group chat
+# we add this weave op here because you want to trace the entire group chat
 # it's completely optional but highly recommended to use it
 
 # highlight-next-line
@@ -210,7 +210,7 @@ AutoGen's memory components can be traced with Weave. You can use `@weave.op()` 
 
 from autogen_core.memory import ListMemory, MemoryContent, MemoryMimeType
 
-# We add this weave op here because we want to trace 
+# We add this weave op here because you want to trace 
 # the memory add calls along with the memory get calls under a single trace
 # it's completely optional but highly recommended to use it
 
@@ -434,7 +434,7 @@ class Checker(RoutedAgent):
         else:
             print(f"{'-'*80}\\nChecker:\\n{message.content} failed the check, stopping.")
 
-# we add this weave op here because we want to trace 
+# we add this weave op here because you want to trace 
 # the entire agent runtime call under a single trace
 # it's completely optional but highly recommended to use it
 
@@ -573,7 +573,7 @@ class UserAgent(RoutedAgent):
     async def handle_final_copy(self, message: WorkflowMessage, ctx: MessageContext) -> None:
         print(f"\\n{'-'*80}\\n{self.id.type} received final copy:\\n{message.content}")
 
-# we add this weave op here because we want to trace 
+# we add this weave op here because you want to trace 
 # the entire agent workflow under a single trace
 # it's completely optional but highly recommended to use it
 
@@ -678,7 +678,7 @@ class Executor(RoutedAgent):
             print(f"\\n{'-'*80}\\nExecutor:\\n{result.output}")
             await self.publish_message(CodeGenMessage(content=result.output), DefaultTopicId())
 
-# we add this weave op here because we want to trace 
+# we add this weave op here because you want to trace 
 # the entire code gen workflow under a single trace
 # it's completely optional but highly recommended to use it
 

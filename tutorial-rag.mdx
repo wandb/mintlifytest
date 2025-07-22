@@ -5,7 +5,7 @@ description: "Build and evaluate RAG applications using Weave with LLM judges"
 
 Retrieval Augmented Generation (RAG) is a common way of building Generative AI applications that have access to custom knowledge bases.
 
-In this example, we'll show an example that has a retrieval step to get documents. By tracking this, you can debug your app and see what documents were pulled into the LLM context.
+In this example, this tutorial will show an example that has a retrieval step to get documents. By tracking this, you can debug your app and see what documents were pulled into the LLM context.
 We'll also show how to evaluate it using an LLM judge.
 
 ![Evals hero](./images/evals-hero.png)
@@ -102,7 +102,7 @@ First, we compute the embeddings for our articles. You would typically do this o
 
 ## 2. Create a RAG app
 
-Next, we wrap our retrieval function `get_most_relevant_document` with a `weave.op()` decorator and we create our `Model` class. We call `weave.init('rag-qa')` to begin tracking all the inputs and outputs of our functions for later inspection.
+Next, we wrap our retrieval function `get_most_relevant_document` with a `weave.op()` decorator and you create our `Model` class. We call `weave.init('rag-qa')` to begin tracking all the inputs and outputs of our functions for later inspection.
 
 <Tabs>
   <Tab title="Python">
@@ -317,7 +317,7 @@ As we did in the [Build an Evaluation pipeline tutorial](/tutorial-eval), we'll 
 
 ### Optional: Defining a `Scorer` class
 
-In some applications we want to create custom evaluation classes - where for example a standardized `LLMJudge` class should be created with specific parameters (e.g. chat model, prompt), specific scoring of each row, and specific calculation of an aggregate score. In order to do that Weave defines a list of ready-to-use `Scorer` classes and also makes it easy to create a custom `Scorer` - in the following we'll see how to create a custom `class CorrectnessLLMJudge(Scorer)`.
+In some applications you want to create custom evaluation classes - where for example a standardized `LLMJudge` class should be created with specific parameters (e.g. chat model, prompt), specific scoring of each row, and specific calculation of an aggregate score. In order to do that Weave defines a list of ready-to-use `Scorer` classes and also makes it easy to create a custom `Scorer` - in the following this tutorial will see how to create a custom `class CorrectnessLLMJudge(Scorer)`.
 
 On a high-level the steps to create custom Scorer are quite simple:
 
@@ -432,7 +432,7 @@ To get the same result for your RAG apps:
 
 **NOTE:** Sometimes the async execution of Evaluations will trigger a rate limit on the models of OpenAI, Anthropic, etc. To prevent that you can set an environment variable to limit the amount of parallel workers e.g. `WEAVE_PARALLELISM=3`.
 
-Here, we show the code in it's entirety.
+Here, you show the code in it's entirety.
 
 <Tabs>
   <Tab title="Python">
@@ -444,7 +444,7 @@ Here, we show the code in it's entirety.
     import json
     import asyncio
 
-    # Examples we've gathered that we want to use for evaluations
+    # Examples we've gathered that you want to use for evaluations
     articles = [
         "Novo Nordisk and Eli Lilly rival soars 32 percent after promising weight loss drug results Shares of Denmarks Zealand Pharma shot 32 percent higher in morning trade, after results showed success in its liver disease treatment survodutide, which is also on trial as a drug to treat obesity. The trial “tells us that the 6mg dose is safe, which is the top dose used in the ongoing [Phase 3] obesity trial too,” one analyst said in a note. The results come amid feverish investor interest in drugs that can be used for weight loss.",
         "Berkshire shares jump after big profit gain as Buffetts conglomerate nears $1 trillion valuation Berkshire Hathaway shares rose on Monday after Warren Buffetts conglomerate posted strong earnings for the fourth quarter over the weekend. Berkshires Class A and B shares jumped more than 1.5%, each. Class A shares are higher by more than 17% this year, while Class B has gained more than 18%. Berkshire was last valued at $930.1 billion, up from $905.5 billion where it closed on Friday, according to FactSet. Berkshire on Saturday posted fourth-quarter operating earnings of $8.481 billion, about 28 percent higher than the $6.625 billion from the year-ago period, driven by big gains in its insurance business. Operating earnings refers to profits from businesses across insurance, railroads and utilities. Meanwhile, Berkshires cash levels also swelled to record levels. The conglomerate held $167.6 billion in cash in the fourth quarter, surpassing the $157.2 billion record the conglomerate held in the prior quarter.",
@@ -488,7 +488,7 @@ Here, we show the code in it's entirety.
         most_relevant_doc_index = np.argmax(similarities)
         return articles[most_relevant_doc_index]
 
-    # We create a Model subclass with some details about our app, along with a predict function that produces a response
+    # You create a Model subclass with some details about our app, along with a predict function that produces a response
     # highlight-next-line
     class RAGModel(Model):
         system_message: str
@@ -567,7 +567,7 @@ Here, we show the code in it's entirety.
         {"question": "What issue did Intuitive Machines' lunar lander encounter upon landing on the moon?"}
     ]
 
-    # We define an Evaluation object and pass our example questions along with scoring functions
+    # We define an Evaluation object and pass the example questions along with scoring functions
     # highlight-next-line
     evaluation = weave.Evaluation(dataset=questions, scorers=[context_precision_score])
     # highlight-next-line
@@ -761,5 +761,5 @@ Here, we show the code in it's entirety.
 
 ## Conclusion
 
-We've learned how to build observability into different steps of our applications, like the retrieval step in this example.
+We've learned how to build observability into different steps of the applications, like the retrieval step in this example.
 We've also learned how to build more complex scoring functions, like an LLM judge, for doing automatic evaluation of application responses.

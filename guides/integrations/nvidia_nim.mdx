@@ -1,4 +1,3 @@
-
 ---
 title: "NVIDIA NIM"
 description: "Use Weave to trace and log LLM calls made via the ChatNVIDIA library"
@@ -54,7 +53,7 @@ Wrapping a function with `@weave.op` starts capturing inputs, outputs and app lo
 
 Simply create a function decorated with [`@weave.op`](/guides/tracking/ops) that calls into [ChatNVIDIA python library](https://python.langchain.com/docs/integrations/chat/nvidia_ai_endpoints/).
 
-In the example below, we have 2 functions wrapped with op. This helps us see how intermediate steps, like the retrieval step in a RAG app, are affecting how our app behaves.
+In the example below, you have 2 functions wrapped with op. This helps us see how intermediate steps, like the retrieval step in a RAG app, are affecting how our app behaves.
 
     ```python
     # highlight-next-line

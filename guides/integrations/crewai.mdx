@@ -22,7 +22,7 @@ You need to install CrewAI ([more details](https://docs.crewai.com/installation)
 pip install crewai weave
 ```
 
-Now we will create a CrewAI Crew and trace the execution using Weave. To get started, simply call `weave.init()` at the beginning of your script. The argument in weave.init() is a project name where the traces will be logged.
+Now you will create a CrewAI Crew and trace the execution using Weave. To get started, simply call `weave.init()` at the beginning of your script. The argument in weave.init() is a project name where the traces will be logged.
 
 ```python
 import weave
@@ -92,7 +92,7 @@ CrewAI provides several methods for better control over the kickoff process: `ki
 
 CrewAI tools empower agents with capabilities ranging from web searching and data analysis to collaboration and delegating tasks among coworkers. The integration can trace them as well. 
 
-We will improve the quality of the generated report in the above example by giving it access to a tool that can search the internet and return the most relevant results.
+You will improve the quality of the generated report in the above example by giving it access to a tool that can search the internet and return the most relevant results.
 
 Let us first install the extra dependency.
 
@@ -100,13 +100,13 @@ Let us first install the extra dependency.
 pip install 'crewai[tools]'
 ```
 
-In this example, we are using the `SerperDevTool` to enable our 'Research Analyst' agent to search relevant information on the internet. Learn more about this tool and API requirements [here](https://docs.crewai.com/tools/serperdevtool).
+In this example, you are using the `SerperDevTool` to enable our 'Research Analyst' agent to search relevant information on the internet. Learn more about this tool and API requirements [here](https://docs.crewai.com/tools/serperdevtool).
 
 ```python
 # .... existing imports ....
 from crewai_tools import SerperDevTool
 
-# We provide the agent with the tool.
+# You provide the agent with the tool.
 researcher = Agent(
     role='Research Analyst',
     goal='Find and analyze the best investment opportunities',
@@ -215,7 +215,7 @@ The integration automatically patches the `Flow.kickoff` entry point and all the
 
 ## Crew Guardrail - Track your own ops
 
-Task guardrails provide a way to validate and transform task outputs before they are passed to the next task. We can use a simple python function to validate the agent's execution on-the-fly.
+Task guardrails provide a way to validate and transform task outputs before they are passed to the next task. You can use a simple python function to validate the agent's execution on-the-fly.
 
 Wrapping this function with `@weave.op` starts capturing inputs, outputs and app logic so you can debug how data is validated through your agents. This also starts automatically versioning code as you experiment to capture ad-hoc details that haven't been committed to git.
 
@@ -265,12 +265,12 @@ writing_task = Task(
 # .... existing code to run crew ....
 ```
 
-By simply decorating the guardrail function with `@weave.op` we are able to keep track of the input and output to this function along with execution time, token information if an LLM is used under the hood, code version and more.
+By simply decorating the guardrail function with `@weave.op` you are able to keep track of the input and output to this function along with execution time, token information if an LLM is used under the hood, code version and more.
 
 [![guardrail.png](/guides/integrations/imgs/crewai/crew_with_guardrail.png)](https://wandb.ai/ayut/crewai_demo/weave/traces?filter=%7B%22opVersionRefs%22%3A%5B%22weave%3A%2F%2F%2Fayut%2Fcrewai_demo%2Fop%2Fcrewai.Crew.kickoff%3A*%22%5D%7D&peekPath=%2Fayut%2Fcrewai_demo%2Fcalls%2F0195c838-38cb-71a2-8a15-651ecddf9d89%3FdescendentCallId%3D0195c838-8632-7173-846d-f230e7272c20&cols=%7B%22wb_run_id%22%3Afalse%2C%22attributes.weave.client_version%22%3Afalse%2C%22attributes.weave.os_name%22%3Afalse%2C%22attributes.weave.os_release%22%3Afalse%2C%22attributes.weave.os_version%22%3Afalse%2C%22attributes.weave.source%22%3Afalse%2C%22attributes.weave.sys_version%22%3Afalse%7D)
 
 ## Conclusion
 
-Do let us know what we should improve about this integration. Please open an issue if you encounter one [here](https://github.com/wandb/weave/issues/new/choose).
+Do let us know what you should improve about this integration. Please open an issue if you encounter one [here](https://github.com/wandb/weave/issues/new/choose).
 
 Learn more about how to build powerful multiagent systems using CrewAI through their [many examples](https://github.com/crewAIInc/crewAI-examples) and [documentation](https://docs.crewai.com/introduction).
