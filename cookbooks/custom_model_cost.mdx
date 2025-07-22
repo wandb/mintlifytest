@@ -82,7 +82,7 @@ class YourModel(Model):
             "output": prediction,
         }
 
-    # In our predict function we call our custom generate function, and return the output.
+    # In your predict function you call your custom generate function, and return the output.
     @weave.op()
     def predict(self, input_data: str) -> dict:
         # Here is where you would do any post processing of the data
@@ -92,19 +92,19 @@ class YourModel(Model):
 
 ## Add a custom cost
 
-Here we add a custom cost, and now that you have a custom cost, and our calls have usage, you can fetch the calls with `include_cost` and our calls with have costs under `summary.weave.costs`.
+Here we add a custom cost, and now that you have a custom cost, and your calls have usage, you can fetch the calls with `include_cost` and your calls with have costs under `summary.weave.costs`.
 
 ```python
 model = YourModel(attribute1="Hello", attribute2=1)
 model.predict("world")
 
-# We then add a custom cost to our project
+# You then add a custom cost to your project
 weave_client.add_cost(
     llm_id="your_model_name", prompt_token_cost=0.1, completion_token_cost=0.2
 )
 
 # You can then query for the calls, and with include_costs=True
-# we receive the costs back attached to the calls
+# you receive the costs back attached to the calls
 calls = weave_client.get_calls(filter={"trace_roots_only": True}, include_costs=True)
 
 list(calls)

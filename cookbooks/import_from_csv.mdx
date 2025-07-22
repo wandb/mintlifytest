@@ -124,7 +124,7 @@ We now iterate through our pandas DF:
 Important concepts of the lower level python API:
 - A Weave call is equivalent to a Weave trace, this call may have a parent or children associated with it
 - A Weave call may have other things associated with it: Feedback, Metadata, etc. We only associate inputs and outputs to it here, but you may want to add these things in your import if the data provides it.
-- A weave call is `created` and `finished` as these are meant to be tracked real time. Because this is an after-the-fact import, you create and finish once our objects are defined and tied to one another.
+- A weave call is `created` and `finished` as these are meant to be tracked real time. Because this is an after-the-fact import, you create and finish once your objects are defined and tied to one another.
 - The `op` value of a call is how Weave categorizes calls of the same make up. In this example, all parent calls are of `Conversation` type, and all children calls are of `Turn` type. You may modify this as you see fit.
 - A call may have `inputs` and `output`. `inputs` are defined at creation an `output` is defined when the call is finished.
 
@@ -209,7 +209,7 @@ To do this, we fetch all conversations from W&B through our simple query API and
 %%script false --no-raise-error
 ## Get all Conversation traces for evaluation and prepare dataset for eval
 
-# You create a query filter that brings us all our Conversation objects
+# You create a query filter that brings you all your Conversation objects
 # The ref shown below is specific to your project, and you can obtain it by
 # going into your project's Operations in the UI, clicking on the "Conversations"
 # object, then the "Use" tab in the side panel.
