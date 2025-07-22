@@ -2,4 +2,140 @@
 title: "Trace Server Interface"
 description: "Interface definitions and schemas for the trace server"
 ---
-This module defines the schemas and interfaces used by the Weave trace server. ## CallSchema The schema for a Call object in Weave. ```python class CallSchema: id: str # Unique identifier for the call project_id: Optional[str] # Associated project identifier op_name: str # Name of the operation display_name: Optional[str] # User-friendly display name trace_id: str # Trace this call belongs to parent_id: Optional[str] # Parent call ID (for nested calls) started_at: datetime # When the call started ended_at: Optional[datetime] # When the call ended exception: Optional[str] # Exception message if failed attributes: Dict[str, Any] # Custom attributes inputs: Dict[str, Any] # Input parameters output: Optional[Any] # Return value summary: Optional[Dict[str, Any]] # Summary metrics wb_user_id: Optional[str] # W&B user ID wb_run_id: Optional[str] # W&B run ID deleted_at: Optional[datetime] # Soft deletion timestamp ``` ### Field Descriptions #### Core Fields - **id**: UUID that uniquely identifies this call - **project_id**: The W&B project this call belongs to (format: "entity/project") - **op_name**: The name of the operation being called (can be a reference) - **display_name**: Optional human-readable name for the call #### Trace Hierarchy - **trace_id**: Groups related calls into a single trace - **parent_id**: Links child calls to their parent, forming a tree structure #### Timing - **started_at**: ISO 8601 timestamp when execution began - **ended_at**: ISO 8601 timestamp when execution completed - **deleted_at**: If set, indicates the call was soft-deleted #### Data - **inputs**: Dictionary of input parameters passed to the function - **output**: The return value of the function (if successful) - **exception**: Error message if the call failed - **attributes**: User-defined metadata (read-only during execution) - **summary**: Post-execution metrics and computed values #### Integration - **wb_user_id**: Links to W&B user who initiated the call - **wb_run_id**: Links to W&B run for experiment tracking ## CallsFilter Filter criteria for querying calls. ```python class CallsFilter: op_names: Optional[List[str]] # Filter by operation names input_refs: Optional[List[str]] # Filter by input references output_refs: Optional[List[str]] # Filter by output references parent_ids: Optional[List[str]] # Filter by parent call IDs trace_ids: Optional[List[str]] # Filter by trace IDs call_ids: Optional[List[str]] # Filter by specific call IDs trace_roots_only: Optional[bool] # Only return root calls wb_user_ids: Optional[List[str]] # Filter by W&B user IDs wb_run_ids: Optional[List[str]] # Filter by W&B run IDs ``` ### Usage Example ```python from weave import WeaveClient client = WeaveClient("my-entity/my-project") # Find all calls to a specific operation filter = CallsFilter( op_names=["process_document"], trace_roots_only=True ) calls = client.get_calls(filter=filter) ``` ## Query Expressions Advanced filtering using query expressions: ```python # Find calls with specific input values calls = client.get_calls( filter=CallsFilter(), query={ "$expr": { "$and": [ {"$eq": [{"$getField": "inputs.model"}, "gpt-4"]}, {"$gt": [{"$getField": "summary.total_tokens"}, 1000]} ] } } ) ``` ## Calculated Fields The following fields are calculated by the server: ### Status Derived from the presence of `exception` and `ended_at`: - `"running"`: Call has started but not ended - `"success"`: Call ended without exception - `"error"`: Call ended with exception ### Duration Calculated as the difference between `ended_at` and `started_at` in seconds. ### Costs Aggregated from cost tracking calls. Includes: - Token usage - API costs - Custom cost metrics <Note> The trace server interface is designed to be flexible and extensible. Custom fields can be added to `attributes` and `summary` without schema changes. </Note>
+
+This module defines the schemas and interfaces used by the Weave trace server.
+
+## CallSchema
+
+The schema for a Call object in Weave.
+
+```python
+class CallSchema:
+    id: str                          # Unique identifier for the call
+    project_id: Optional[str]        # Associated project identifier
+    op_name: str                     # Name of the operation
+    display_name: Optional[str]      # User-friendly display name
+    trace_id: str                    # Trace this call belongs to
+    parent_id: Optional[str]         # Parent call ID (for nested calls)
+    started_at: datetime             # When the call started
+    ended_at: Optional[datetime]     # When the call ended
+    exception: Optional[str]         # Exception message if failed
+    attributes: Dict[str, Any]       # Custom attributes
+    inputs: Dict[str, Any]          # Input parameters
+    output: Optional[Any]           # Return value
+    summary: Optional[Dict[str, Any]] # Summary metrics
+    wb_user_id: Optional[str]       # W&B user ID
+    wb_run_id: Optional[str]        # W&B run ID
+    deleted_at: Optional[datetime]   # Soft deletion timestamp
+```
+
+### Field Descriptions
+
+#### Core Fields
+
+- **id**: UUID that uniquely identifies this call
+- **project_id**: The W&B project this call belongs to (format: "entity/project")
+- **op_name**: The name of the operation being called (can be a reference)
+- **display_name**: Optional human-readable name for the call
+
+#### Trace Hierarchy
+
+- **trace_id**: Groups related calls into a single trace
+- **parent_id**: Links child calls to their parent, forming a tree structure
+
+#### Timing
+
+- **started_at**: ISO 8601 timestamp when execution began
+- **ended_at**: ISO 8601 timestamp when execution completed
+- **deleted_at**: If set, indicates the call was soft-deleted
+
+#### Data
+
+- **inputs**: Dictionary of input parameters passed to the function
+- **output**: The return value of the function (if successful)
+- **exception**: Error message if the call failed
+- **attributes**: User-defined metadata (read-only during execution)
+- **summary**: Post-execution metrics and computed values
+
+#### Integration
+
+- **wb_user_id**: Links to W&B user who initiated the call
+- **wb_run_id**: Links to W&B run for experiment tracking
+
+## CallsFilter
+
+Filter criteria for querying calls.
+
+```python
+class CallsFilter:
+    op_names: Optional[List[str]]      # Filter by operation names
+    input_refs: Optional[List[str]]    # Filter by input references
+    output_refs: Optional[List[str]]   # Filter by output references
+    parent_ids: Optional[List[str]]    # Filter by parent call IDs
+    trace_ids: Optional[List[str]]     # Filter by trace IDs
+    call_ids: Optional[List[str]]      # Filter by specific call IDs
+    trace_roots_only: Optional[bool]   # Only return root calls
+    wb_user_ids: Optional[List[str]]   # Filter by W&B user IDs
+    wb_run_ids: Optional[List[str]]    # Filter by W&B run IDs
+```
+
+### Usage Example
+
+```python
+from weave import WeaveClient
+
+client = WeaveClient("my-entity/my-project")
+
+# Find all calls to a specific operation
+filter = CallsFilter(
+    op_names=["process_document"],
+    trace_roots_only=True
+)
+
+calls = client.get_calls(filter=filter)
+```
+
+## Query Expressions
+
+Advanced filtering using query expressions:
+
+```python
+# Find calls with specific input values
+calls = client.get_calls(
+    filter=CallsFilter(),
+    query={
+        "$expr": {
+            "$and": [
+                {"$eq": [{"$getField": "inputs.model"}, "gpt-4"]},
+                {"$gt": [{"$getField": "summary.total_tokens"}, 1000]}
+            ]
+        }
+    }
+)
+```
+
+## Calculated Fields
+
+The following fields are calculated by the server:
+
+### Status
+
+Derived from the presence of `exception` and `ended_at`:
+- `"running"`: Call has started but not ended
+- `"success"`: Call ended without exception
+- `"error"`: Call ended with exception
+
+### Duration
+
+Calculated as the difference between `ended_at` and `started_at` in seconds.
+
+### Costs
+
+Aggregated from cost tracking calls. Includes:
+- Token usage
+- API costs
+- Custom cost metrics
+
+<Note>
+The trace server interface is designed to be flexible and extensible. Custom fields can be added to `attributes` and `summary` without schema changes.
+</Note>
