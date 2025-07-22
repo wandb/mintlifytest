@@ -11,7 +11,7 @@ This is an interactive notebook. You can run it locally or use the links below:
 
 # Leaderboard Quickstart
 
-In this notebook you will learn to use Weave's Leaderboard to compare model performance across different datasets and scoring functions. Specifically, you will:
+In this notebook you learn to use Weave's Leaderboard to compare model performance across different datasets and scoring functions. Specifically, you:
 
 1. Generate a dataset of fake zip code data
 2. Author some scoring functions and evaluate a baseline model.
@@ -20,7 +20,7 @@ In this notebook you will learn to use Weave's Leaderboard to compare model perf
 
 ## Step 1: Generate a dataset of fake zip code data
 
-First you will create a function `generate_dataset_rows` that generates a list of fake zip code data.
+First you create a function `generate_dataset_rows` that generates a list of fake zip code data.
 
 ```python
 import json
@@ -72,7 +72,7 @@ weave.init("leaderboard-demo")
 
 ## Step 2: Author scoring functions
 
-Next you will author 3 scoring functions:
+Next you author 3 scoring functions:
 
 1. `check_concrete_fields`: Checks if the model output matches the expected city and state.
 2. `check_value_fields`: Checks if the model output is within 10% of the expected population and median income.
@@ -144,7 +144,7 @@ evaluation = weave.Evaluation(
 
 ## Step 4: Evaluate a baseline model
 
-Now you will evaluate a baseline model which returns a static response.
+Now you evaluate a baseline model which returns a static response.
 
 ```python
 @weave.op
@@ -163,7 +163,7 @@ await evaluation.evaluate(baseline_model)
 
 ## Step 5: Create more Models
 
-Now you will create 2 more models to compare against the baseline.
+Now you create 2 more models to compare against the baseline.
 
 ```python
 @weave.op
@@ -221,7 +221,7 @@ await evaluation.evaluate(gpt_4o_mini_with_context)
 
 ## Step 6: Create more Evaluations
 
-Now you will evaluate a matrix of models vs evaluations.
+Now you evaluate a matrix of models vs evaluations.
 
 ```python
 scorers = [

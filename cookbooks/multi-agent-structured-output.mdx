@@ -49,7 +49,7 @@ You set the project in W&B you want to log this into in `name_of_wandb_project`.
 **NOTE**: `name_of_wandb_project` may also be in the format of `{team_name}/{project_name}` to specify a team to log the traces into.
 You then fetch a weave client by calling weave.init()
 
-Since we'll be using [OpenAI API](https://openai.com/index/openai-api/), you will also need an OpenAI API key. You can [sign up](https://platform.openai.com/signup) on the OpenAI platform to get your own API key. (this should be given to the colab as a secret too.)
+Since we'll be using [OpenAI API](https://openai.com/index/openai-api/), you also need an OpenAI API key. You can [sign up](https://platform.openai.com/signup) on the OpenAI platform to get your own API key. (this should be given to the colab as a secret too.)
 
 ```python
 import base64
@@ -79,14 +79,14 @@ MODEL = "gpt-4o-2024-08-06"
 
 ## Agents set up
 
-The use case you will tackle is a data analysis task.
+The use case you tackle is a data analysis task.
 Let's first set up our 4-agents system:
 
 - Triaging agent: Decides which agent(s) to call
 - Data pre-processing Agent: Prepares data for analysis - for example by cleaning it up
 - Data Analysis Agent: Performs analysis on the data
 - Data Visualization Agent: Visualizes the output of the analysis to extract insights
-  You will start by defining the system prompts for each of these agents.
+  You start by defining the system prompts for each of these agents.
 
 ```python
 triaging_system_prompt = """You are a Triaging Agent. Your role is to assess the user's query and route it to the relevant agents. The agents available are:
@@ -112,9 +112,9 @@ visualization_system_prompt = """You are a Visualization Agent. Your role is to 
 - create_pie_chart"""
 ```
 
-You will then define the tools for each agent.
+You then define the tools for each agent.
 
-Apart from the triaging agent, each agent will be equipped with tools specific to their role:
+Apart from the triaging agent, each agent is equipped with tools specific to their role:
 
 **Data pre-processing agent** : 1. Clean data, 2. Transform data, 3. Aggregate data
 
@@ -393,11 +393,11 @@ house_size (m3), house_price ($)
 
 From the user query, you can infer that the tools we would need to call are `clean_data`, `start_analysis` and `use_line_chart`.
 
-You will begin by defining the execution function responsible for running tool calls.
+You begin by defining the execution function responsible for running tool calls.
 
 By decorating Python functions with `@weave.op()`, you can log and debug language model inputs, outputs, and traces.
 
-When creating a multi-agent system, many functions will appear, but it's sufficient to simply add `@weave.op()` on top of them.
+When creating a multi-agent system, many functions appear, but it's sufficient to simply add `@weave.op()` on top of them.
 
 ```python
 @weave.op()
@@ -530,7 +530,7 @@ def execute_tool(tool_calls, messages):
     return messages
 ```
 
-Next, you will create the tool handlers for each of the sub-agents. These have a unique prompt and tool set passed to the model. The output is then passed to an execution function which runs the tool calls.
+Next, you create the tool handlers for each of the sub-agents. These have a unique prompt and tool set passed to the model. The output is then passed to an execution function which runs the tool calls.
 
 ```python
 # Define the functions to handle each agent's processing

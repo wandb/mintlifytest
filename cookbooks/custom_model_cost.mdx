@@ -57,7 +57,7 @@ class YourModel(Model):
     def simple_token_count(self, text: str) -> int:
         return len(text) // 3
 
-    # This is a custom op that you are defining
+    # This is a custom op that you define
     # It takes in a string, and outputs a dict with the usage counts, model name, and the output
     @weave.op()
     def custom_model_generate(self, input_data: str) -> dict:
