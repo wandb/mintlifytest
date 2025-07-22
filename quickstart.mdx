@@ -3,4 +3,111 @@ title: "Quickstart: Track LLM inputs & outputs"
 description: "Follow these steps to track your first call"
 mode: "wide"
 ---
-<Tabs> <Tab title="Python"> The following Quickstart uses an embedded notebook hosted by Deepnote so you can try out W&B Weave without setting up an environment on your local machine. After providing your API key and running the notebook, you will get live URLs to explore the W&B Weave dashboard and observe what happened when your LLM code was executed. <iframe height="700" src="https://deepnote.com/app/weights-and-biases-10af/Weave-Quickstart-4a7f7fb1-5a3f-4961-9c36-aad0d2de2a0b?utm_source=app-settings&utm_medium=product-embed&utm_campaign=data-app&utm_content=4a7f7fb1-5a3f-4961-9c36-aad0d2de2a0b&__embedded=true" title="Weave Quickstart" width="800" allowfullscreen> </iframe> After running this notebook with your API keys, you should have live Weave dashboards that allow you to deep dive on Weave's observability functionality. </Tab> <Tab title="TypeScript"> ## Install Weave and set up your environment First install the required libraries: ```shell pnpm install weave dotenv ``` Then, retrieve your Weights & Biases API key from https://wandb.ai/authorize and your OpenAI API key from https://platform.openai.com/api-keys. Set up environment variables by running these commands in your terminal: ```bash export WANDB_API_KEY="your_wandb_key" export OPENAI_API_KEY="your_openai_key" ``` Alternatively, you can create a `.env` file in your project root: ```bash WANDB_API_KEY=your_wandb_key OPENAI_API_KEY=your_openai_key ``` If you use the `.env` file approach, make sure to import dotenv at the top of your TypeScript file: ```typescript import 'dotenv/config'; // Add this at the top of your file ``` ## Track your LLM calls Add Weave tracking to the functions you want to track: ```typescript // If using .env file, add this line: // import 'dotenv/config'; import OpenAI from 'openai'; // highlight-next-line import * as weave from 'weave'; // highlight-next-line const openai = new OpenAI(); async function extractDinos(input: string) { const response = await openai.chat.completions.create({ model: 'gpt-4o', messages: [ { role: 'user', content: `In JSON format extract a list of 'dinosaurs', with their 'name', their 'common_name', and whether its 'diet' is a herbivore or carnivore: ${input}`, }, ], }); return response.choices[0].message.content; } // highlight-next-line const extractDinosOp = weave.op(extractDinos); async function main() { // highlight-next-line await weave.init('examples'); const result = await extractDinosOp( 'I watched as a Tyrannosaurus rex (T. rex) chased after a Triceratops (Trike), both carnivore and herbivore locked in an ancient dance. Meanwhile, a gentle giant Brachiosaurus (Brachi) calmly munched on treetops, blissfully unaware of the chaos below.' ); console.log(result); } main(); ``` When you call the `extractDinos` function Weave will output a link to view your trace. </Tab> </Tabs> ## Next steps Instrumenting your functions with Weave is only the beginning. - Learn to [track data flow](./tutorial-tracing_2) in your app - Read about [Evaluation](/tutorial-eval) to see how Weave enables the assement of your code's performance - Check out [Integrations](./guides/integrations/index) for all AI providers - Try the [Playground](./guides/tools/playground) to test different models
+
+<Tabs>
+<Tab title="Python">
+
+The following Quickstart uses an embedded notebook hosted by Deepnote so you can try out W&B Weave 
+without setting up an environment on your local machine.
+
+After providing your API key and running the notebook, you will get live URLs to explore 
+the W&B Weave dashboard and observe what happened when your LLM code was executed.
+
+<iframe
+  height="700"
+  src="https://deepnote.com/app/weights-and-biases-10af/Weave-Quickstart-4a7f7fb1-5a3f-4961-9c36-aad0d2de2a0b?utm_source=app-settings&utm_medium=product-embed&utm_campaign=data-app&utm_content=4a7f7fb1-5a3f-4961-9c36-aad0d2de2a0b&__embedded=true"
+  title="Weave Quickstart"
+  width="800" 
+  allowfullscreen>
+</iframe>
+
+After running this notebook with your API keys, you should have live Weave dashboards that
+allow you to deep dive on Weave's observability functionality. 
+
+</Tab>
+<Tab title="TypeScript">
+## Install Weave and set up your environment
+
+First install the required libraries:
+
+```shell
+pnpm install weave dotenv
+```
+
+Then, retrieve your Weights & Biases API key from https://wandb.ai/authorize and your OpenAI API key from https://platform.openai.com/api-keys. 
+
+Set up environment variables by running these commands in your terminal:
+
+```bash
+export WANDB_API_KEY="your_wandb_key"
+export OPENAI_API_KEY="your_openai_key"
+```
+
+Alternatively, you can create a `.env` file in your project root:
+
+```bash
+WANDB_API_KEY=your_wandb_key
+OPENAI_API_KEY=your_openai_key
+```
+
+If you use the `.env` file approach, make sure to import dotenv at the top of your TypeScript file:
+
+```typescript
+import 'dotenv/config';  // Add this at the top of your file
+```
+
+## Track your LLM calls
+
+Add Weave tracking to the functions you want to track:
+
+```typescript
+// If using .env file, add this line:
+// import 'dotenv/config';
+import OpenAI from 'openai';
+// highlight-next-line
+import * as weave from 'weave';
+
+// highlight-next-line
+const openai = new OpenAI();
+
+async function extractDinos(input: string) {
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4o',
+    messages: [
+      {
+        role: 'user',
+        content: `In JSON format extract a list of 'dinosaurs', with their 'name', their 'common_name', and whether its 'diet' is a herbivore or carnivore: ${input}`,
+      },
+    ],
+  });
+  return response.choices[0].message.content;
+}
+// highlight-next-line
+const extractDinosOp = weave.op(extractDinos);
+
+async function main() {
+  // highlight-next-line
+  await weave.init('examples');
+  const result = await extractDinosOp(
+    'I watched as a Tyrannosaurus rex (T. rex) chased after a Triceratops (Trike), both carnivore and herbivore locked in an ancient dance. Meanwhile, a gentle giant Brachiosaurus (Brachi) calmly munched on treetops, blissfully unaware of the chaos below.'
+  );
+  console.log(result);
+}
+
+main();
+
+```
+When you call the `extractDinos` function Weave will output a link to view your trace.
+
+
+</Tab>
+</Tabs> 
+
+## Next steps
+
+Instrumenting your functions with Weave is only the beginning. 
+
+- Learn to [track data flow](./tutorial-tracing_2) in your app
+- Read about [Evaluation](/tutorial-eval) to see how Weave enables the assement of your code's performance
+- Check out [Integrations](./guides/integrations/index) for all AI providers
+- Try the [Playground](./guides/tools/playground) to test different models 
