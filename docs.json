@@ -48,306 +48,301 @@
         "language": "en",
         "tabs": [
           {
-            "tab": "Documentation",
+            "tab": "W&B Weave",
             "groups": [
               {
-                "group": "Introduction",
+                "group": "Guides",
                 "pages": [
-                  "index",
-                  "quickstart"
-                ]
-              },
-              {
-                "group": "Iteration",
-                "pages": [
-                  "tutorial-tracing_2",
                   {
-                    "group": "Tracing & Debugging",
+                    "group": "Introduction",
                     "pages": [
-                      "guides/tracking/index",
-                      "guides/tracking/tracing",
-                      "guides/tracking/costs",
-                      "guides/core-types/media",
-                      "guides/tools/playground",
+                      "index",
+                      "quickstart"
+                    ]
+                  },
+                  {
+                    "group": "Iteration",
+                    "pages": [
+                      "tutorial-tracing_2",
+                      {
+                        "group": "Tracing & Debugging",
+                        "pages": [
+                          "guides/tracking/index",
+                          "guides/tracking/tracing",
+                          "guides/tracking/costs",
+                          "guides/core-types/media",
+                          "guides/tools/playground",
+                          "guides/integrations/index",
+                          "guides/tools/saved-views",
+                          "guides/tools/comparison",
+                          "guides/tracking/trace-tree",
+                          "guides/tracking/otel",
+                          "guides/tracking/video"
+                        ]
+                      },
+                      {
+                        "group": "Version Control for Models & Prompts",
+                        "pages": [
+                          "tutorial-weave_models",
+                          "guides/core-types/models",
+                          "guides/core-types/prompts",
+                          "guides/tracking/objects",
+                          "guides/tracking/ops"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Evaluation",
+                    "pages": [
+                      "tutorial-eval",
+                      "tutorial-rag",
+                      {
+                        "group": "Evaluations",
+                        "pages": [
+                          "guides/core-types/evaluations",
+                          "guides/core-types/datasets",
+                          "guides/evaluation/scorers",
+                          "guides/evaluation/builtin_scorers",
+                          "guides/evaluation/weave_local_scorers",
+                          "guides/evaluation/evaluation_logger",
+                          "guides/core-types/leaderboards"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Productionization",
+                    "pages": [
+                      {
+                        "group": "Collect Feedback & Examples",
+                        "pages": [
+                          "guides/tracking/feedback",
+                          "guides/tracking/redact-pii"
+                        ]
+                      },
+                      {
+                        "group": "Online Evaluation",
+                        "pages": [
+                          "guides/evaluation/guardrails_and_monitors"
+                        ]
+                      },
+                      {
+                        "group": "Tools & Utilities",
+                        "pages": [
+                          "guides/tools/index",
+                          "guides/tools/serve",
+                          "guides/tools/deploy",
+                          "guides/tracking/otel"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Integrations",
+                    "pages": [
                       "guides/integrations/index",
-                      "guides/tools/saved-views",
-                      "guides/tools/comparison",
-                      "guides/tracking/trace-tree",
-                      "guides/tracking/otel",
-                      "guides/tracking/video"
+                      {
+                        "group": "LLM Providers",
+                        "pages": [
+                          "guides/integrations/inference",
+                          "guides/integrations/bedrock",
+                          "guides/integrations/anthropic",
+                          "guides/integrations/cerebras",
+                          "guides/integrations/cohere",
+                          "guides/integrations/google",
+                          "guides/integrations/groq",
+                          "guides/integrations/huggingface",
+                          "guides/integrations/litellm",
+                          "guides/integrations/azure",
+                          "guides/integrations/mistral",
+                          "guides/integrations/nvidia_nim",
+                          "guides/integrations/openai",
+                          "guides/integrations/openrouter",
+                          "guides/integrations/together_ai"
+                        ]
+                      },
+                      "guides/integrations/local_models",
+                      {
+                        "group": "Frameworks",
+                        "pages": [
+                          "guides/integrations/openai_agents",
+                          "guides/integrations/langchain",
+                          "guides/integrations/llamaindex",
+                          "guides/integrations/dspy",
+                          "guides/integrations/instructor",
+                          "guides/integrations/crewai",
+                          "guides/integrations/smolagents",
+                          "guides/integrations/pydantic_ai",
+                          "guides/integrations/google_adk",
+                          "guides/integrations/autogen",
+                          "guides/integrations/verdict",
+                          "guides/integrations/js"
+                        ]
+                      },
+                      {
+                        "group": "Protocols",
+                        "pages": [
+                          "guides/integrations/mcp"
+                        ]
+                      }
                     ]
                   },
                   {
-                    "group": "Version Control for Models & Prompts",
+                    "group": "Enterprise",
                     "pages": [
-                      "tutorial-weave_models",
-                      "guides/core-types/models",
-                      "guides/core-types/prompts",
-                      "guides/tracking/objects",
-                      "guides/tracking/ops"
+                      "guides/platform/index",
+                      "guides/platform/weave-self-managed"
+                    ]
+                  },
+                  {
+                    "group": "Tools & Resources",
+                    "pages": [
+                      "guides/core-types/env-vars",
+                      "guides/troubleshooting",
+                      "guides/tracking/faqs"
                     ]
                   }
                 ]
               },
-              {
-                "group": "Evaluation",
-                "pages": [
-                  "tutorial-eval",
-                  "tutorial-rag",
-                  {
-                    "group": "Evaluations",
-                    "pages": [
-                      "guides/core-types/evaluations",
-                      "guides/core-types/datasets",
-                      "guides/evaluation/scorers",
-                      "guides/evaluation/builtin_scorers",
-                      "guides/evaluation/weave_local_scorers",
-                      "guides/evaluation/evaluation_logger",
-                      "guides/core-types/leaderboards"
-                    ]
-                  }
-                ]
-              },
-              {
-                "group": "Productionization",
-                "pages": [
-                  {
-                    "group": "Collect Feedback & Examples",
-                    "pages": [
-                      "guides/tracking/feedback",
-                      "guides/tracking/redact-pii"
-                    ]
-                  },
-                  {
-                    "group": "Online Evaluation",
-                    "pages": [
-                      "guides/evaluation/guardrails_and_monitors"
-                    ]
-                  },
-                  {
-                    "group": "Tools & Utilities",
-                    "pages": [
-                      "guides/tools/index",
-                      "guides/tools/serve",
-                      "guides/tools/deploy",
-                      "guides/tracking/otel"
-                    ]
-                  }
-                ]
-              },
-              {
-                "group": "Integrations",
-                "pages": [
-                  "guides/integrations/index",
-                  {
-                    "group": "LLM Providers",
-                    "pages": [
-                      "guides/integrations/inference",
-                      "guides/integrations/bedrock",
-                      "guides/integrations/anthropic",
-                      "guides/integrations/cerebras",
-                      "guides/integrations/cohere",
-                      "guides/integrations/google",
-                      "guides/integrations/groq",
-                      "guides/integrations/huggingface",
-                      "guides/integrations/litellm",
-                      "guides/integrations/azure",
-                      "guides/integrations/mistral",
-                      "guides/integrations/nvidia_nim",
-                      "guides/integrations/openai",
-                      "guides/integrations/openrouter",
-                      "guides/integrations/together_ai"
-                    ]
-                  },
-                  "guides/integrations/local_models",
-                  {
-                    "group": "Frameworks",
-                    "pages": [
-                      "guides/integrations/openai_agents",
-                      "guides/integrations/langchain",
-                      "guides/integrations/llamaindex",
-                      "guides/integrations/dspy",
-                      "guides/integrations/instructor",
-                      "guides/integrations/crewai",
-                      "guides/integrations/smolagents",
-                      "guides/integrations/pydantic_ai",
-                      "guides/integrations/google_adk",
-                      "guides/integrations/autogen",
-                      "guides/integrations/verdict",
-                      "guides/integrations/js"
-                    ]
-                  },
-                  {
-                    "group": "Protocols",
-                    "pages": [
-                      "guides/integrations/mcp"
-                    ]
-                  }
-                ]
-              },
-              {
-                "group": "Enterprise",
-                "pages": [
-                  "guides/platform/index",
-                  "guides/platform/weave-self-managed"
-                ]
-              },
-              {
-                "group": "Tools & Resources",
-                "pages": [
-                  "guides/core-types/env-vars",
-                  "guides/troubleshooting",
-                  "guides/tracking/faqs"
-                ]
-              }
-            ]
-          },
-          {
-            "tab": "Cookbooks",
-            "groups": [
               {
                 "group": "Cookbooks",
                 "pages": [
-                  "cookbooks/index"
+                  "cookbooks/index",
+                  {
+                    "group": "Getting Started",
+                    "pages": [
+                      "cookbooks/Intro_to_Weave_Hello_Trace",
+                      "cookbooks/Intro_to_Weave_Hello_Eval"
+                    ]
+                  },
+                  {
+                    "group": "Evaluations & Datasets",
+                    "pages": [
+                      "cookbooks/leaderboard_quickstart",
+                      "cookbooks/hf_dataset_evals",
+                      "cookbooks/import_from_csv"
+                    ]
+                  },
+                  {
+                    "group": "Models & Prompts",
+                    "pages": [
+                      "cookbooks/Models_and_Weave_Integration_Demo",
+                      "cookbooks/chain_of_density",
+                      "cookbooks/dspy_prompt_optimization",
+                      "cookbooks/notdiamond_custom_routing"
+                    ]
+                  },
+                  {
+                    "group": "Advanced Topics",
+                    "pages": [
+                      "cookbooks/multi-agent-structured-output",
+                      "cookbooks/codegen",
+                      "cookbooks/ocr-pipeline",
+                      "cookbooks/audio_with_weave"
+                    ]
+                  },
+                  {
+                    "group": "Production & Monitoring",
+                    "pages": [
+                      "cookbooks/online_monitoring",
+                      "cookbooks/feedback_prod",
+                      "cookbooks/scorers_as_guardrails",
+                      "cookbooks/custom_model_cost",
+                      "cookbooks/pii"
+                    ]
+                  },
+                  {
+                    "group": "API & Integration",
+                    "pages": [
+                      "cookbooks/weave_via_service_api"
+                    ]
+                  }
                 ]
               },
-              {
-                "group": "Getting Started",
-                "pages": [
-                  "cookbooks/Intro_to_Weave_Hello_Trace",
-                  "cookbooks/Intro_to_Weave_Hello_Eval"
-                ]
-              },
-              {
-                "group": "Evaluations & Datasets",
-                "pages": [
-                  "cookbooks/leaderboard_quickstart",
-                  "cookbooks/hf_dataset_evals",
-                  "cookbooks/import_from_csv"
-                ]
-              },
-              {
-                "group": "Models & Prompts",
-                "pages": [
-                  "cookbooks/Models_and_Weave_Integration_Demo",
-                  "cookbooks/chain_of_density",
-                  "cookbooks/dspy_prompt_optimization",
-                  "cookbooks/notdiamond_custom_routing"
-                ]
-              },
-              {
-                "group": "Advanced Topics",
-                "pages": [
-                  "cookbooks/multi-agent-structured-output",
-                  "cookbooks/codegen",
-                  "cookbooks/ocr-pipeline",
-                  "cookbooks/audio_with_weave"
-                ]
-              },
-              {
-                "group": "Production & Monitoring",
-                "pages": [
-                  "cookbooks/online_monitoring",
-                  "cookbooks/feedback_prod",
-                  "cookbooks/scorers_as_guardrails",
-                  "cookbooks/custom_model_cost",
-                  "cookbooks/pii"
-                ]
-              },
-              {
-                "group": "API & Integration",
-                "pages": [
-                  "cookbooks/weave_via_service_api"
-                ]
-              }
-            ]
-          },
-          {
-            "tab": "Reference",
-            "groups": [
               {
                 "group": "Reference",
                 "pages": [
-                  "reference/index"
-                ]
-              },
-              {
-                "group": "Python SDK",
-                "pages": [
-                  "reference/python-sdk/weave/index",
+                  "reference/index",
                   {
-                    "group": "Core",
+                    "group": "Python SDK",
                     "pages": [
-                      "reference/python-sdk/weave/trace/weave_client",
-                      "reference/python-sdk/weave/trace/op",
-                      "reference/python-sdk/weave/trace/util"
+                      "reference/python-sdk/weave/index",
+                      {
+                        "group": "Core",
+                        "pages": [
+                          "reference/python-sdk/weave/trace/weave_client",
+                          "reference/python-sdk/weave/trace/op",
+                          "reference/python-sdk/weave/trace/util"
+                        ]
+                      },
+                      {
+                        "group": "Trace Server",
+                        "pages": [
+                          "reference/python-sdk/weave/trace_server/trace_server_interface"
+                        ]
+                      }
                     ]
                   },
                   {
-                    "group": "Trace Server",
+                    "group": "TypeScript SDK",
                     "pages": [
-                      "reference/python-sdk/weave/trace_server/trace_server_interface"
+                      "reference/typescript-sdk/weave/index",
+                      {
+                        "group": "Classes",
+                        "pages": [
+                          "reference/typescript-sdk/weave/classes/Dataset",
+                          "reference/typescript-sdk/weave/classes/Evaluation",
+                          "reference/typescript-sdk/weave/classes/WeaveClient",
+                          "reference/typescript-sdk/weave/classes/WeaveObject"
+                        ]
+                      },
+                      {
+                        "group": "Functions",
+                        "pages": [
+                          "reference/typescript-sdk/weave/functions/init",
+                          "reference/typescript-sdk/weave/functions/login",
+                          "reference/typescript-sdk/weave/functions/op",
+                          "reference/typescript-sdk/weave/functions/weaveAudio",
+                          "reference/typescript-sdk/weave/functions/weaveImage",
+                          "reference/typescript-sdk/weave/functions/weavePython",
+                          "reference/typescript-sdk/weave/functions/weaveVideo",
+                          "reference/typescript-sdk/weave/functions/withWeaveClient"
+                        ]
+                      },
+                      {
+                        "group": "Interfaces",
+                        "pages": [
+                          "reference/typescript-sdk/weave/interfaces/CallSchema",
+                          "reference/typescript-sdk/weave/interfaces/CallsFilter"
+                        ]
+                      },
+                      {
+                        "group": "Type Aliases",
+                        "pages": [
+                          "reference/typescript-sdk/weave/type-aliases/Op"
+                        ]
+                      }
                     ]
+                  },
+                  {
+                    "group": "Service API",
+                    "openapi": "openapi.json"
                   }
                 ]
               },
               {
-                "group": "TypeScript SDK",
+                "group": "Open Source",
                 "pages": [
-                  "reference/typescript-sdk/weave/index",
-                  {
-                    "group": "Classes",
-                    "pages": [
-                      "reference/typescript-sdk/weave/classes/Dataset",
-                      "reference/typescript-sdk/weave/classes/Evaluation",
-                      "reference/typescript-sdk/weave/classes/WeaveClient",
-                      "reference/typescript-sdk/weave/classes/WeaveObject"
-                    ]
-                  },
-                  {
-                    "group": "Functions",
-                    "pages": [
-                      "reference/typescript-sdk/weave/functions/init",
-                      "reference/typescript-sdk/weave/functions/login",
-                      "reference/typescript-sdk/weave/functions/op",
-                      "reference/typescript-sdk/weave/functions/weaveAudio",
-                      "reference/typescript-sdk/weave/functions/weaveImage",
-                      "reference/typescript-sdk/weave/functions/weavePython",
-                      "reference/typescript-sdk/weave/functions/weaveVideo",
-                      "reference/typescript-sdk/weave/functions/withWeaveClient"
-                    ]
-                  },
-                  {
-                    "group": "Interfaces",
-                    "pages": [
-                      "reference/typescript-sdk/weave/interfaces/CallSchema",
-                      "reference/typescript-sdk/weave/interfaces/CallsFilter"
-                    ]
-                  },
-                  {
-                    "group": "Type Aliases",
-                    "pages": [
-                      "reference/typescript-sdk/weave/type-aliases/Op"
-                    ]
-                  }
+                  "open-source"
                 ]
               },
               {
-                "group": "Service API",
-                "openapi": "openapi.json"
+                "group": "Community",
+                "pages": [
+                  "community"
+                ]
               }
-            ]
-          },
-          {
-            "tab": "Open Source",
-            "pages": [
-              "open-source"
-            ]
-          },
-          {
-            "tab": "Community",
-            "pages": [
-              "community"
             ]
           }
         ]
