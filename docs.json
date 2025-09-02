@@ -48,6 +48,18 @@
         "language": "en",
         "tabs": [
           {
+            "tab": "Platform",
+            "pages": [
+              "index"
+            ]
+          },
+          {
+            "tab": "W&B Models",
+            "pages": [
+              "models/index"
+            ]
+          },
+          {
             "tab": "W&B Weave",
             "groups": [
               {
@@ -343,6 +355,12 @@
                   "weave/community"
                 ]
               }
+            ]
+          },
+          {
+            "tab": "W&B Inference",
+            "pages": [
+              "inference/index"
             ]
           }
         ]
