@@ -41,8 +41,7 @@
     }
   },
   "navigation": {
-    "global": {
-    },
+    "global": {},
     "languages": [
       {
         "language": "en",
@@ -55,8 +54,60 @@
           },
           {
             "tab": "W&B Models",
-            "pages": [
-              "models/index"
+            "dropdowns": [
+              {
+                "dropdown": "Guides",
+                "icon": "book",
+                "pages": [
+                  "models/index"
+                ]
+              },
+              {
+                "dropdown": " Support (First option)",
+                "icon": "bullhorn",
+                "pages": [
+                  "support"
+                ]
+              },
+              {
+                "dropdown": " Support (Second option)",
+                "icon": "bullhorn",
+                "pages": [
+                  "support/academic",
+                  "support/administrator",
+                  "support/alerts",
+                  "support/anonymous",
+                  "support/artifacts",
+                  "support/aws",
+                  "support/billing",
+                  "support/charts",
+                  "support/connectivity",
+                  "support/crashing_and_hanging_runs",
+                  "support/environment_variables",
+                  "support/experiments",
+                  "support/hyperparameter",
+                  "support/inference",
+                  "support/logs",
+                  "support/metrics",
+                  "support/notebooks",
+                  "support/outage",
+                  "support/privacy",
+                  "support/projects",
+                  "support/python",
+                  "support/reports",
+                  "support/resuming",
+                  "support/runs",
+                  "support/security",
+                  "support/storage",
+                  "support/sweeps",
+                  "support/tables",
+                  "support/team_management",
+                  "support/tensorboard",
+                  "support/user_management",
+                  "support/workspaces",
+                  "support/wysiwyg"
+                ]
+              }
             ]
           },
           {
