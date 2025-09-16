@@ -35,7 +35,7 @@ print(response.text)
 ```
 A powerful feature of cohere models is using [connectors](https://docs.cohere.com/docs/overview-rag-connectors#using-connectors-to-create-grounded-generations) enabling you to make requests to other API on the endpoint side. The response will then contain the generated text with citation elements that link to the documents returned from the connector. 
 
-[![cohere_trace.png](/guides/integrations/imgs/cohere_trace.png)](https://wandb.ai/capecape/cohere_dev/weave/calls)
+[![cohere_trace.png](/weave/guides/integrations/imgs/cohere_trace.png)](https://wandb.ai/capecape/cohere_dev/weave/calls)
 
 <Note>
 We patch the Cohere `Client.chat`, `AsyncClient.chat`, `Client.chat_stream`, and `AsyncClient.chat_stream` methods for you to keep track of your LLM calls.
@@ -43,7 +43,7 @@ We patch the Cohere `Client.chat`, `AsyncClient.chat`, `Client.chat_stream`, and
 
 ## Wrapping with your own ops
 
-Weave ops make results *reproducible* by automatically versioning code as you experiment, and they capture their inputs and outputs. Simply create a function decorated with [`@weave.op()`](/guides/tracking/ops) that calls into Cohere's chat methods, and Weave will track the inputs and outputs for you. Here's an example:
+Weave ops make results *reproducible* by automatically versioning code as you experiment, and they capture their inputs and outputs. Simply create a function decorated with [`@weave.op()`](/weave/guides/tracking/ops) that calls into Cohere's chat methods, and Weave will track the inputs and outputs for you. Here's an example:
 
 ```python
 import cohere
@@ -68,13 +68,13 @@ def weather(location: str, model: str) -> str:
 print(weather("Boston", "command"))
 ```
 
-[![cohere_ops.png](/guides/integrations/imgs/cohere_ops.png)](https://wandb.ai/capecape/cohere_dev/weave/calls)
+[![cohere_ops.png](/weave/guides/integrations/imgs/cohere_ops.png)](https://wandb.ai/capecape/cohere_dev/weave/calls)
 
 ## Create a `Model` for easier experimentation
 
-Organizing experimentation is difficult when there are many moving pieces. By using the [`Model`](/guides/core-types/models) class, you can capture and organize the experimental details of your app like your system prompt or the model you're using. This helps organize and compare different iterations of your app.
+Organizing experimentation is difficult when there are many moving pieces. By using the [`Model`](/weave/guides/core-types/models) class, you can capture and organize the experimental details of your app like your system prompt or the model you're using. This helps organize and compare different iterations of your app.
 
-In addition to versioning code and capturing inputs/outputs, [`Model`](/guides/core-types/models)s capture structured parameters that control your application's behavior, making it easy to find what parameters worked best. You can also use Weave Models with `serve`, and [`Evaluation`](/guides/core-types/evaluations)s.
+In addition to versioning code and capturing inputs/outputs, [`Model`](/weave/guides/core-types/models)s capture structured parameters that control your application's behavior, making it easy to find what parameters worked best. You can also use Weave Models with `serve`, and [`Evaluation`](/weave/guides/core-types/evaluations)s.
 
 In the example below, you can experiment with `model` and `temperature`. Every time you change one of these, you'll get a new _version_ of `WeatherModel`.
 
@@ -108,4 +108,4 @@ result = weather_model.predict("Boston")
 print(result)
 ```
 
-[![cohere_model.png](/guides/integrations/imgs/cohere_model.png)](https://wandb.ai/capecape/cohere_dev/weave/models)
+[![cohere_model.png](/weave/guides/integrations/imgs/cohere_model.png)](https://wandb.ai/capecape/cohere_dev/weave/models)

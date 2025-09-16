@@ -52,13 +52,13 @@ A _Call_ is any `@weave.op`-decorated function execution in your application.
 
 ### Trace
 
-A _Trace_ captures the full call stack for a single operation. Threads group traces together that are part of the same logical conversation or session. In other words, a thread is made up of multiple turns, each representing one part in the conversation. For more information on Traces, see the [Tracing overview](tracing.mdx).
+A _Trace_ captures the full call stack for a single operation. Threads group traces together that are part of the same logical conversation or session. In other words, a thread is made up of multiple turns, each representing one part in the conversation. For more information on Traces, see the [Tracing overview](/weave/guides/tracking/tracing).
 
 ## UI overview
 
 In the Weave sidebar, select **Threads** to access the [Threads list view](#threads-list-view). 
 
-![The Threads icon in the Weave sidebar](imgs/threads-sidebar.png)
+![The Threads icon in the Weave sidebar](/weave/guides/tracking/imgs/threads-sidebar.png)
 
 ### Threads list view
 
@@ -66,7 +66,7 @@ In the Weave sidebar, select **Threads** to access the [Threads list view](#thre
 - Columns include number of turns, start time, and last updated
 - Click a row to open its [detail drawer](#threads-detail-drawer)
 
-![The Threads list view](imgs/threads-list.png)
+![The Threads list view](/weave/guides/tracking/imgs/threads-list.png)
 
 ### Threads detail drawer
 
@@ -82,7 +82,7 @@ In the Weave sidebar, select **Threads** to access the [Threads list view](#thre
 
 The chat pane displays structured message data extracted from LLM calls made during each turn. This view gives you a conversational-style rendering of the interaction.
 
-![Chat view](imgs/threads-chat-view.png)
+![Chat view](/weave/guides/tracking/imgs/threads-chat-view.png)
 
 #### What qualifies as a message?
 
@@ -107,7 +107,7 @@ You can open the full trace for a turn by clicking into it.
 
 A back button appears in the upper left corner to return to the thread detail view. UI state (like scroll position) is not preserved across the transition.
 
-![The Threads drawer view](imgs/threads-drawer.png)
+![The Threads drawer view](/weave/guides/tracking/imgs/threads-drawer.png)
 
 ## SDK usage
 

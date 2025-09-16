@@ -44,7 +44,7 @@ response = google_client.models.generate_content(
 )
 ```
 
-[![dspy_trace.png](/guides/integrations/imgs/google-genai-trace.png)](https://wandb.ai/geekyrakshit/google-genai/weave/traces)
+[![dspy_trace.png](/weave/guides/integrations/imgs/google-genai-trace.png)](https://wandb.ai/geekyrakshit/google-genai/weave/traces)
 
 Weave will also automatically capture traces for [Vertex APIs](https://github.com/googleapis/python-aiplatform/tree/main/vertexai/generative_models). To start tracking, calling `weave.init(project_name="<YOUR-WANDB-PROJECT-NAME>")` and use the library as normal.
 
@@ -65,7 +65,7 @@ response = model.generate_content(
 
 Wrapping a function with `@weave.op` starts capturing inputs, outputs and app logic so you can debug how data flows through your app. You can deeply nest ops and build a tree of functions that you want to track. This also starts automatically versioning code as you experiment to capture ad-hoc details that haven't been committed to git.
 
-Simply create a function decorated with [`@weave.op`](/guides/tracking/ops).
+Simply create a function decorated with [`@weave.op`](/weave/guides/tracking/ops).
 
 In the example below, we have the function `recommend_places_to_visit` which is a function wrapped with `@weave.op` that recommends places to visit in a city.
 
@@ -92,7 +92,7 @@ recommend_places_to_visit("Paris")
 recommend_places_to_visit("Kolkata")
 ```
 
-[![dspy_trace.png](/guides/integrations/imgs/google-genai-ops.png)](https://wandb.ai/geekyrakshit/google-genai/weave/traces)
+[![dspy_trace.png](/weave/guides/integrations/imgs/google-genai-ops.png)](https://wandb.ai/geekyrakshit/google-genai/weave/traces)
 
 ## Create a `Model` for easier experimentation
 
