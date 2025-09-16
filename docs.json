@@ -41,8 +41,7 @@
     }
   },
   "navigation": {
-    "global": {
-    },
+    "global": {},
     "languages": [
       {
         "language": "en",
@@ -66,7 +65,8 @@
                 "group": "Introduction",
                 "pages": [
                   "weave/index",
-                  "weave/quickstart"
+                  "weave/quickstart",
+                  "weave/quickstart-inference"
                 ]
               },
               {
@@ -88,8 +88,9 @@
                           "weave/guides/tools/saved-views",
                           "weave/guides/tools/comparison",
                           "weave/guides/tracking/trace-tree",
-                          "weave/guides/tracking/otel",
-                          "weave/guides/tracking/video"
+                          "weave/guides/tracking/threads",
+                          "weave/guides/tracking/trace-plots",
+                          "weave/guides/tracking/otel"
                         ]
                       },
                       {
@@ -142,10 +143,8 @@
                       {
                         "group": "Tools & Utilities",
                         "pages": [
-                          "weave/guides/tools/index",
-                          "weave/guides/tools/serve",
-                          "weave/guides/tools/deploy",
-                          "guides/tracking/otel"
+                          "weave/guides/tools/evaluation_playground",
+                          "weave/guides/tools/weave-in-workspaces"
                         ]
                       }
                     ]
@@ -157,7 +156,6 @@
                       {
                         "group": "LLM Providers",
                         "pages": [
-                          "weave/guides/integrations/inference",
                           "weave/guides/integrations/bedrock",
                           "weave/guides/integrations/anthropic",
                           "weave/guides/integrations/cerebras",
@@ -187,6 +185,8 @@
                           "weave/guides/integrations/smolagents",
                           "weave/guides/integrations/pydantic_ai",
                           "weave/guides/integrations/google_adk",
+                          "weave/guides/integrations/agno",
+                          "weave/guides/integrations/koog",
                           "weave/guides/integrations/autogen",
                           "weave/guides/integrations/verdict",
                           "weave/guides/integrations/js"
