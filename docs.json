@@ -152,7 +152,7 @@
                   {
                     "group": "Integrations",
                     "pages": [
-                      "guides/integrations/index",
+                      "weave/guides/integrations/index",
                       {
                         "group": "LLM Providers",
                         "pages": [
@@ -316,10 +316,7 @@
                           "weave/reference/typescript-sdk/weave/functions/login",
                           "weave/reference/typescript-sdk/weave/functions/op",
                           "weave/reference/typescript-sdk/weave/functions/weaveAudio",
-                          "weave/reference/typescript-sdk/weave/functions/weaveImage",
-                          "weave/reference/typescript-sdk/weave/functions/weavePython",
-                          "weave/reference/typescript-sdk/weave/functions/weaveVideo",
-                          "weave/reference/typescript-sdk/weave/functions/withWeaveClient"
+                          "weave/reference/typescript-sdk/weave/functions/weaveImage"
                         ]
                       },
                       {

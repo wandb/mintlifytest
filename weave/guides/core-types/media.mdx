@@ -1,5 +1,3 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 # Logging media
 
@@ -27,17 +25,17 @@ Log images by annotating functions with `Annotated[bytes, Content]` types or fil
 
 The following example draws a basic image and then logs it to Weave using the `Content` annotation:
 
-<Tabs groupId="package-manager" queryString>
-  <TabItem value="pip" label="pip" default>
+<Tabs>
+  <Tab title="pip">
     ```bash
     pip install weave pillow
     ```
-  </TabItem>
-  <TabItem value="uv" label="uv">
+  </Tab>
+  <Tab title="uv">
     ```bash
     uv add weave pillow
     ```
-  </TabItem>
+  </Tab>
 </Tabs>
 
 
@@ -76,21 +74,21 @@ result2 = load_image_pil("sample_image.png")
 
 The following example shows how to log an image generated via the OpenAI DALL-E API:
 
-<Tabs groupId="package-manager" queryString>
-  <TabItem value="pip" label="pip" default>
+<Tabs>
+  <Tab title="pip">
     ```bash
     pip install weave pillow openai requests
     ```
-  </TabItem>
-  <TabItem value="uv" label="uv">
+  </Tab>
+  <Tab title="uv">
     ```bash
     uv add weave pillow openai requests
     ```
-  </TabItem>
+  </Tab>
 </Tabs>
 
-<Tabs groupId="programming-language" queryString>
-  <TabItem value="python" label="Python" default>
+<Tabs>
+  <Tab title="Python">
   
     ```python
 import weave
@@ -118,8 +116,8 @@ def generate_image(prompt: str) -> Annotated[bytes, Content]:
 generate_image("a cat with a pumpkin hat")
     ```
 
-  </TabItem>
-  <TabItem value="typescript" label="TypeScript">
+  </Tab>
+  <Tab title="TypeScript">
 
     ```typescript
     import {OpenAI} from 'openai';
@@ -150,7 +148,7 @@ generate_image("a cat with a pumpkin hat")
     main();
     ```
 
-  </TabItem>
+  </Tab>
 </Tabs>
 This image is logged to Weave and automatically displayed in the UI. 
 
@@ -201,17 +199,17 @@ Log videos by annotating functions with `Annotated[bytes, Content]` types. Weave
 
 ### Quickstart
 
-<Tabs groupId="package-manager" queryString>
-  <TabItem value="pip" label="pip" default>
+<Tabs>
+  <Tab title="pip">
     ```bash
     pip install weave requests
     ```
-  </TabItem>
-  <TabItem value="uv" label="uv">
+  </Tab>
+  <Tab title="uv">
     ```bash
     uv add weave requests
     ```
-  </TabItem>
+  </Tab>
 </Tabs>
 
 ```python
@@ -245,17 +243,17 @@ bunny_video = load_video_content("big_buck_bunny.mp4")
 The following example shows how to log video within a video-understanding project:
 
 
-<Tabs groupId="package-manager" queryString>
-  <TabItem value="pip" label="pip" default>
+<Tabs>
+  <Tab title="pip">
     ```bash
     pip install weave google-genai yt-dlp requests
     ```
-  </TabItem>
-  <TabItem value="uv" label="uv">
+  </Tab>
+  <Tab title="uv">
     ```bash
     uv add weave google-genai yt-dlp requests
     ```
-  </TabItem>
+  </Tab>
 </Tabs>
 
 ```python
@@ -319,17 +317,17 @@ Weave automatically handles `pdf`, `csv`, `md`, `text`, `json`, `xml` file types
 
 The following example shows how stores copies of the input PDF and CSV files, and then stores the file contents returned by the function:
 
-<Tabs groupId="package-manager" queryString>
-  <TabItem value="pip" label="pip" default>
+<Tabs>
+  <Tab title="pip">
     ```bash
     pip install weave reportlab pandas
     ```
-  </TabItem>
-  <TabItem value="uv" label="uv">
+  </Tab>
+  <Tab title="uv">
     ```bash
     uv add weave reportlab pandas
     ```
-  </TabItem>
+  </Tab>
 </Tabs>
 
 ```python
@@ -373,17 +371,17 @@ csv_result = load_document("sample_data.csv")
 
 This example demonstrates how to log documents within a Retrieval-Augmented Generation (RAG) system:
 
-<Tabs groupId="package-manager" queryString>
-  <TabItem value="pip" label="pip" default>
+<Tabs>
+  <Tab title="pip">
     ```bash
     pip install weave openai reportlab PyPDF2
     ```
-  </TabItem>
-  <TabItem value="uv" label="uv">
+  </Tab>
+  <Tab title="uv">
     ```bash
     uv add weave openai reportlab PyPDF2
     ```
-  </TabItem>
+  </Tab>
 </Tabs>
 
 ```python
@@ -454,17 +452,17 @@ Weave automatically handles `mp3`, `wav`, `flac`, `ogg` and `m4a` file types. Yo
 
 The following code snippet generates a sine wave, records it, and then logs the audio to Weave:
 
-<Tabs groupId="package-manager" queryString>
-  <TabItem value="pip" label="pip" default>
+<Tabs>
+  <Tab title="pip">
     ```bash
     pip install weave numpy
     ```
-  </TabItem>
-  <TabItem value="uv" label="uv">
+  </Tab>
+  <Tab title="uv">
     ```bash
     uv add weave numpy
     ```
-  </TabItem>
+  </Tab>
 </Tabs>
 
 ```python
@@ -499,17 +497,17 @@ result = load_audio("beep.wav")
 
 This example generates and logs AI-created audio using the `Content` annotation:
 
-<Tabs groupId="package-manager" queryString>
-  <TabItem value="pip" label="pip" default>
+<Tabs>
+  <Tab title="pip">
     ```bash
     pip install weave openai
     ```
-  </TabItem>
-  <TabItem value="uv" label="uv">
+  </Tab>
+  <Tab title="uv">
     ```bash
     uv add weave openai
     ```
-  </TabItem>
+  </Tab>
 </Tabs>
 
 ```python
@@ -548,8 +546,8 @@ demo1 = generate_demo("machine learning best practices")
 
 ![Audio logging in Weave](/img/audio.png)
 
-<Tabs groupId="programming-language" queryString>
-  <TabItem value="python" label="Python" default>
+<Tabs>
+  <Tab title="Python">
   
     ```python
     import weave
@@ -575,8 +573,8 @@ demo1 = generate_demo("machine learning best practices")
     make_audio_file_streaming("Hello, how are you?")
     ```
 
-  </TabItem>
-  <TabItem value="typescript" label="TypeScript">
+  </Tab>
+  <Tab title="TypeScript">
 
     ```typescript
     import {OpenAI} from 'openai';
@@ -607,7 +605,7 @@ demo1 = generate_demo("machine learning best practices")
     main();
     ```
 
-  </TabItem>
+  </Tab>
 </Tabs>
 
 This audio is logged to Weave and automatically displayed in the UI, along with an audio player. In the audio player, you can view and download the raw audio waveform.
@@ -626,17 +624,17 @@ Log interactive HTML by annotating functions with `Annotated[str, Content[Litera
 
 ### Quickstart
 
-<Tabs groupId="package-manager" queryString>
-  <TabItem value="pip" label="pip" default>
+<Tabs>
+  <Tab title="pip">
     ```bash
     pip install weave
     ```
-  </TabItem>
-  <TabItem value="uv" label="uv">
+  </Tab>
+  <Tab title="uv">
     ```bash
     uv add weave
     ```
-  </TabItem>
+  </Tab>
 </Tabs>
 
 ```python
@@ -674,17 +672,17 @@ result = create_simple_html()
 
 This example generates self-contained HTML pages using [W&B Inference](https://docs.wandb.ai/guides/inference/) and logs the pages to Weave:
 
-<Tabs groupId="package-manager" queryString>
-  <TabItem value="pip" label="pip" default>
+<Tabs>
+  <Tab title="pip">
     ```bash
     pip install weave openai wandb
     ```
-  </TabItem>
-  <TabItem value="uv" label="uv">
+  </Tab>
+  <Tab title="uv">
     ```bash
     uv add weave openai wandb
     ```
-  </TabItem>
+  </Tab>
 </Tabs>
 
 ```python
