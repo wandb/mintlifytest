@@ -16,6 +16,29 @@ The system generates three types of documentation:
 - Node.js 18+
 - npm
 
+## Security Considerations
+
+These scripts are intended for development/CI use only, not production environments:
+
+1. **Python Dependencies**: We use minimal dependencies (`requests` and `lazydocs`) with pinned versions
+2. **Network Access**: Scripts download from trusted sources (pypi.org, npm registry, trace.wandb.ai)
+3. **File System**: Scripts write only to the local `weave/` directory structure
+4. **No Sensitive Data**: Scripts don't handle authentication or sensitive information
+
+### Addressing License Policy Violations
+
+Socket Security may flag license policy violations for `lazydocs` and its dependencies. Since these are development-only tools used for documentation generation (not production code), they are excluded via `.socketignore`.
+
+**Note**: `lazydocs` is maintained by W&B and is the preferred tool for generating Python SDK documentation. See [LICENSE_NOTICE.md](./LICENSE_NOTICE.md) for important information about dependency licenses.
+
+If you still need alternatives:
+
+1. **Use the isolated generation script**: Run `./generate_docs_isolated.sh` which creates temporary virtual environments for each documentation type, preventing dependency conflicts in the main project
+
+2. **Use the minimal Python generator**: Run `./generate_python_sdk_minimal.py` as a fallback option if lazydocs cannot be used
+
+3. **Run in CI/Docker**: Generate documentation in a containerized environment where license policies don't affect the main repository
+
 ## Setup
 
 1. Create and activate a Python virtual environment:

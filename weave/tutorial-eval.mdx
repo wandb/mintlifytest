@@ -5,7 +5,7 @@ description: "Learn how to build an evaluation pipeline with Weave Models and Ev
 
 To iterate on an application, we need a way to evaluate if it's improving. To do so, a common practice is to test it against the same set of examples when there is a change. Weave has a first-class way to track evaluations with `Model` & `Evaluation` classes. We have built the APIs to make minimal assumptions to allow for the flexibility to support a wide array of use-cases.
 
-![Evals hero](/weave/images/evals-hero.png)
+![Evals hero](/images/evals-hero.png)
 
 ## 1. Build a `Model`
 
@@ -91,7 +91,7 @@ console.log(result);
 </CodeGroup>
 
 <Note>
-Checkout the [Models](/guides/core-types/models) guide to learn more.
+Checkout the [Models](/weave/guides/core-types/models) guide to learn more.
 </Note>
 
 ## 2. Collect some examples
@@ -162,7 +162,7 @@ await dataset.save();
 </CodeGroup>
 
 <Note>
-Checkout the [Datasets](/guides/core-types/datasets) guide to learn more.
+Checkout the [Datasets](/weave/guides/core-types/datasets) guide to learn more.
 </Note>
 
 ## 3. Define scoring functions
@@ -193,9 +193,9 @@ const fruitNameScorer = weave.op(
 </CodeGroup>
 
 <Note>
-To make your own scoring function, learn more in the [Scorers](/guides/evaluation/scorers) guide.
+To make your own scoring function, learn more in the [Scorers](/weave/guides/evaluation/scorers) guide.
 
-In some applications we want to create custom `Scorer` classes - where for example a standardized `LLMJudge` class should be created with specific parameters (e.g. chat model, prompt), specific scoring of each row, and specific calculation of an aggregate score. See the tutorial on defining a `Scorer` class in the next chapter on [Model-Based Evaluation of RAG applications](/tutorial-rag#optional-defining-a-scorer-class) for more information.
+In some applications we want to create custom `Scorer` classes - where for example a standardized `LLMJudge` class should be created with specific parameters (e.g. chat model, prompt), specific scoring of each row, and specific calculation of an aggregate score. See the tutorial on defining a `Scorer` class in the next chapter on [Model-Based Evaluation of RAG applications](/weave/tutorial-rag#optional-defining-a-scorer-class) for more information.
 </Note>
 
 ## 4. Run the evaluation
@@ -248,12 +248,12 @@ Weave will automatically capture traces of each prediction and score.
 
 Click on the link printed by the evaluation to view the results in the Weave UI.
 
-![Evaluation results](./images/evals-hero.png)
+![Evaluation results](/images/evals-hero.png)
 
 ## What's next?
 
 Learn how to:
 1. **Compare model performance**: Try different models and compare their results
-2. **Explore Built-in Scorers**: Check out Weave's built-in scoring functions in our [Scorers guide](/guides/evaluation/scorers)
-3. **Build a RAG app**: Follow our [RAG tutorial](/tutorial-rag) to learn about evaluating retrieval-augmented generation
-4. **Advanced evaluation patterns**: Learn about [Model-Based Evaluation](/guides/evaluation/scorers#model-based-evaluation) for using LLMs as judges
+2. **Explore Built-in Scorers**: Check out Weave's built-in scoring functions in our [Scorers guide](/weave/guides/evaluation/scorers)
+3. **Build a RAG app**: Follow our [RAG tutorial](/weave/tutorial-rag) to learn about evaluating retrieval-augmented generation
+4. **Advanced evaluation patterns**: Learn about [Model-Based Evaluation](/weave/guides/evaluation/scorers#model-based-evaluation) for using LLMs as judges
