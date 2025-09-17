@@ -1,0 +1,113 @@
+name: Generate Reference Documentation
+
+on:
+  workflow_dispatch:
+    inputs:
+      weave_version:
+        description: 'Weave version (e.g., "latest", "0.51.34", "v0.51.34", commit SHA, or branch name)'
+        required: false
+        default: 'latest'
+      create_pr:
+        description: 'Create a pull request with the changes'
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Cache Python dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('scripts/reference-generation/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
+    - name: Generate Service API Documentation
+      run: |
+        echo "Generating Service API documentation..."
+        python scripts/reference-generation/generate_service_api_spec.py
+        
+    - name: Generate Python SDK Documentation
+      run: |
+        echo "Generating Python SDK documentation..."
+        # Create isolated environment for Python SDK generation
+        python -m venv venv_python
+        source venv_python/bin/activate
+        pip install requests lazydocs
+        python scripts/reference-generation/generate_python_sdk_docs.py "${{ github.event.inputs.weave_version }}"
+        deactivate
+        rm -rf venv_python
+        
+    - name: Generate TypeScript SDK Documentation  
+      run: |
+        echo "Generating TypeScript SDK documentation..."
+        # Create isolated environment for TypeScript SDK generation
+        python -m venv venv_typescript
+        source venv_typescript/bin/activate
+        pip install requests
+        python scripts/reference-generation/generate_typescript_sdk_docs.py "${{ github.event.inputs.weave_version }}"
+        deactivate
+        rm -rf venv_typescript
+        
+    - name: Fix broken links
+      run: |
+        echo "Fixing broken links in documentation..."
+        python scripts/reference-generation/fix_broken_links.py
+        
+    - name: Create Pull Request
+      if: ${{ github.event.inputs.create_pr == 'true' }}
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "chore: Update reference documentation (Weave ${{ github.event.inputs.weave_version }})"
+        title: "Update reference documentation (Weave ${{ github.event.inputs.weave_version }})"
+        body: |
+          This PR updates the reference documentation for Weave.
+          
+          **Version**: ${{ github.event.inputs.weave_version }}
+          **Generated on**: ${{ github.event.repository.updated_at }}
+          
+          ### Changes
+          - Updated Service API documentation from OpenAPI spec
+          - Regenerated Python SDK documentation using lazydocs
+          - Regenerated TypeScript SDK documentation using typedoc
+          - Fixed internal cross-reference links
+          
+          ### Notes
+          - Documentation generation runs in isolated environments
+          - All dependencies are development-only and not included in the repository
+          - Please review the changes before merging
+        branch: update-reference-docs-${{ github.run_number }}
+        delete-branch: true
+        labels: |
+          documentation
+          automated
+
+  # Optional: Run on a schedule (weekly)
+  generate-docs-scheduled:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ./.github/workflows/generate-reference-docs.yml
+      with:
+        weave_version: 'latest'
+        create_pr: true
