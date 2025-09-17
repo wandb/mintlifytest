@@ -1,1258 +1,2508 @@
 ---
-title: "Python SDK Reference"
-description: "Complete API reference for the Weave Python SDK"
+title: "weave"
+description: "Python SDK reference for weave"
 ---
+
 
 # API Overview
 
-## Classes[​](/reference/python-sdk/weave/#classes)
 
-- [`obj.Object`](/reference/python-sdk/weave/#class-object)
 
-- [`dataset.Dataset`](/reference/python-sdk/weave/#class-dataset): Dataset object with easy saving and automatic versioning
 
-- [`model.Model`](/reference/python-sdk/weave/#class-model): Intended to capture a combination of code and data the operates on an input.
 
-- [`prompt.Prompt`](/reference/python-sdk/weave/#class-prompt)
 
-- [`prompt.StringPrompt`](/reference/python-sdk/weave/#class-stringprompt)
 
-- [`prompt.MessagesPrompt`](/reference/python-sdk/weave/#class-messagesprompt)
 
-- [`eval.Evaluation`](/reference/python-sdk/weave/#class-evaluation): Sets up an evaluation which includes a set of scorers and a dataset.
+---
 
-- [`eval_imperative.EvaluationLogger`](/reference/python-sdk/weave/#class-evaluationlogger): This class provides an imperative interface for logging evaluations.
 
-- [`scorer.Scorer`](/reference/python-sdk/weave/#class-scorer)
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L44"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-- [`annotation_spec.AnnotationSpec`](/reference/python-sdk/weave/#class-annotationspec)
+### <kbd>function</kbd> `init`
 
-- [`file.File`](/reference/python-sdk/weave/#class-file): A class representing a file with path, mimetype, and size information.
-
-- [`markdown.Markdown`](/reference/python-sdk/weave/#class-markdown): A Markdown renderable.
-
-- [`monitor.Monitor`](/reference/python-sdk/weave/#class-monitor): Sets up a monitor to score incoming calls automatically.
-
-- [`saved_view.SavedView`](/reference/python-sdk/weave/#class-savedview): A fluent-style class for working with SavedView objects.
-
-- [`audio.Audio`](/reference/python-sdk/weave/#class-audio): A class representing audio data in a supported format (wav or mp3).
-
-## Functions[​](/reference/python-sdk/weave/#functions)
-
-- [`api.init`](/reference/python-sdk/weave/#function-init): Initialize weave tracking, logging to a wandb project.
-
-- [`api.publish`](/reference/python-sdk/weave/#function-publish): Save and version a python object.
-
-- [`api.ref`](/reference/python-sdk/weave/#function-ref): Construct a Ref to a Weave object.
-
-- [`api.get`](/reference/python-sdk/weave/#function-get): A convenience function for getting an object from a URI.
-
-- [`call_context.require_current_call`](/reference/python-sdk/weave/#function-require_current_call): Get the Call object for the currently executing Op, within that Op.
-
-- [`call_context.get_current_call`](/reference/python-sdk/weave/#function-get_current_call): Get the Call object for the currently executing Op, within that Op.
-
-- [`api.finish`](/reference/python-sdk/weave/#function-finish): Stops logging to weave.
-
-- [`op.op`](/reference/python-sdk/weave/#function-op): A decorator to weave op-ify a function or method. Works for both sync and async.
-
-- [`api.attributes`](/reference/python-sdk/weave/#function-attributes): Context manager for setting attributes on a call.
-
-[](https://github.com/wandb/weave/blob/master/weave/trace/api.py#L37)
-
-### function `init`[​](/reference/python-sdk/weave/#function-init)
-
-```
-init( project_name: 'str', settings: 'UserSettings | dict[str, Any] | None' = None, autopatch_settings: 'AutopatchSettings | None' = None, global_postprocess_inputs: 'PostprocessInputsFunc | None' = None, global_postprocess_output: 'PostprocessOutputFunc | None' = None, global_attributes: 'dict[str, Any] | None' = None) → WeaveClient
+```python
+init(
+    project_name: 'str',
+    settings: 'UserSettings | dict[str, Any] | None' = None,
+    autopatch_settings: 'AutopatchSettings | None' = None,
+    global_postprocess_inputs: 'PostprocessInputsFunc | None' = None,
+    global_postprocess_output: 'PostprocessOutputFunc | None' = None,
+    global_attributes: 'dict[str, Any] | None' = None
+) → WeaveClient
 ```
 
-Initialize weave tracking, logging to a wandb project.
+Initialize weave tracking, logging to a wandb project. 
 
-Logging is initialized globally, so you do not need to keep a reference to the return value of init.
+Logging is initialized globally, so you do not need to keep a reference to the return value of init. 
 
-Following init, calls of weave.op() decorated functions will be logged to the specified project.
+Following init, calls of weave.op() decorated functions will be logged to the specified project. 
+
+
 
 **Args:**
+ 
+ - <b>`project_name`</b>:  The name of the Weights & Biases project to log to. 
+ - <b>`settings`</b>:  Configuration for the Weave client generally. 
+ - <b>`autopatch_settings`</b>:  (Deprecated) Configuration for autopatch integrations. Use explicit patching instead. 
+ - <b>`global_postprocess_inputs`</b>:  A function that will be applied to all inputs of all ops. 
+ - <b>`global_postprocess_output`</b>:  A function that will be applied to all outputs of all ops. 
+ - <b>`global_attributes`</b>:  A dictionary of attributes that will be applied to all traces. 
 
-- `project_name`**: The name of the Weights & Biases project to log to.
+NOTE: Global postprocessing settings are applied to all ops after each op's own postprocessing.  The order is always: 1. Op-specific postprocessing 2. Global postprocessing 
 
-- **`settings`**: Configuration for the Weave client generally.
 
-- **`autopatch_settings`**: Configuration for autopatch integrations, e.g. openai
-
-- **`global_postprocess_inputs`**: A function that will be applied to all inputs of all ops.
-
-- **`global_postprocess_output`**: A function that will be applied to all outputs of all ops.
-
-- **`global_attributes`**: A dictionary of attributes that will be applied to all traces.
-
-NOTE: Global postprocessing settings are applied to all ops after each op's own postprocessing. The order is always: 1. Op-specific postprocessing 2. Global postprocessing
 
 **Returns:**
-A Weave client.
+ A Weave client. 
 
-[](https://github.com/wandb/weave/blob/master/weave/trace/api.py#L116)
 
-### function `publish`[​](/reference/python-sdk/weave/#function-publish)
+---
 
-```
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L124"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>function</kbd> `publish`
+
+```python
 publish(obj: 'Any', name: 'str | None' = None) → ObjectRef
 ```
 
-Save and version a python object.
+Save and version a Python object. 
 
-If an object with name already exists, and the content hash of obj does not match the latest version of that object, a new version will be created.
+Weave creates a new version of the object if the object's name already exists and its content hash does not match the latest version of that object. 
 
-TODO: Need to document how name works with this change.
+
 
 **Args:**
+ 
+ - <b>`obj`</b>:  The object to save and version. 
+ - <b>`name`</b>:  The name to save the object under. 
 
-- `obj`**: The object to save and version.
 
-- **`name`**: The name to save the object under.
 
 **Returns:**
-A weave Ref to the saved object.
+ A Weave Ref to the saved object. 
 
-[](https://github.com/wandb/weave/blob/master/weave/trace/api.py#L170)
 
-### function `ref`[​](/reference/python-sdk/weave/#function-ref)
+---
 
-```
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L176"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>function</kbd> `ref`
+
+```python
 ref(location: 'str') → ObjectRef
 ```
 
-Construct a Ref to a Weave object.
+Creates a Ref to an existing Weave object. This does not directly retrieve the object but allows you to pass it to other Weave API functions. 
 
-TODO: what happens if obj does not exist
+
 
 **Args:**
+ 
+ - <b>`location`</b>:  A Weave Ref URI, or if `weave.init()` has been called, `name:version` or `name`. If no version is provided, `latest` is used. 
 
-- `location`**: A fully-qualified weave ref URI, or if weave.init() has been called, "name:version" or just "name" ("latest" will be used for version in this case).
+
 
 **Returns:**
-A weave Ref to the object.
+ A Weave Ref to the object. 
 
-[](https://github.com/wandb/weave/blob/master/weave/trace/api.py#L201)
 
-### function `get`[​](/reference/python-sdk/weave/#function-get)
+---
 
-```
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L205"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>function</kbd> `get`
+
+```python
 get(uri: 'str | ObjectRef') → Any
 ```
 
-A convenience function for getting an object from a URI.
+A convenience function for getting an object from a URI. 
 
-Many objects logged by Weave are automatically registered with the Weave server. This function allows you to retrieve those objects by their URI.
+Many objects logged by Weave are automatically registered with the Weave server. This function allows you to retrieve those objects by their URI. 
+
+
 
 **Args:**
+ 
+ - <b>`uri`</b>:  A fully-qualified weave ref URI. 
 
-- `uri`**: A fully-qualified weave ref URI.
+
 
 **Returns:**
-The object.
+ The object. 
+
+
 
 **Example:**
+```python
+weave.init("weave_get_example")
+dataset = weave.Dataset(rows=[{"a": 1, "b": 2}])
+ref = weave.publish(dataset)
 
+dataset2 = weave.get(ref)  # same as dataset!
 ```
-weave.init("weave_get_example")dataset = weave.Dataset(rows=[{"a": 1, "b": 2}])ref = weave.publish(dataset)dataset2 = weave.get(ref) # same as dataset!
-```
 
-[](https://github.com/wandb/weave/blob/master/weave/trace/context/call_context.py#L65)
 
-### function `require_current_call`[​](/reference/python-sdk/weave/#function-require_current_call)
+---
 
-```
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/context/call_context.py#L76"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>function</kbd> `require_current_call`
+
+```python
 require_current_call() → Call
 ```
 
-Get the Call object for the currently executing Op, within that Op.
+Get the Call object for the currently executing Op, within that Op. 
 
-This allows you to access attributes of the Call such as its id or feedback while it is running.
+This allows you to access attributes of the Call such as its id or feedback while it is running. 
 
-```
-@weave.opdef hello(name: str) -> None: print(f"Hello {name}!") current_call = weave.require_current_call() print(current_call.id)
-```
-
-It is also possible to access a Call after the Op has returned.
-
-If you have the Call's id, perhaps from the UI, you can use the `get_call` method on the `WeaveClient` returned from `weave.init` to retrieve the Call object.
-
-```
-client = weave.init("
-")mycall = client.get_call("")
+```python
+@weave.op
+def hello(name: str) -> None:
+     print(f"Hello {name}!")
+     current_call = weave.require_current_call()
+     print(current_call.id)
 ```
 
-Alternately, after defining your Op you can use its `call` method. For example:
+It is also possible to access a Call after the Op has returned. 
 
+If you have the Call's id, perhaps from the UI, you can use the `get_call` method on the `WeaveClient` returned from `weave.init` to retrieve the Call object. 
+
+```python
+client = weave.init("<project>")
+mycall = client.get_call("<call_id>")
 ```
-@weave.opdef add(a: int, b: int) -> int: return a + bresult, call = add.call(1, 2)print(call.id)
+
+Alternately, after defining your Op you can use its `call` method. For example: 
+
+```python
+@weave.op
+def add(a: int, b: int) -> int:
+     return a + b
+
+result, call = add.call(1, 2)
+print(call.id)
 ```
+
+
 
 **Returns:**
-The Call object for the currently executing Op
+  The Call object for the currently executing Op 
+
+
 
 **Raises:**
+ 
+ - <b>`NoCurrentCallError`</b>:  If tracking has not been initialized or this method is  invoked outside an Op. 
 
-- `NoCurrentCallError`**: If tracking has not been initialized or this method is invoked outside an Op.
 
-[](https://github.com/wandb/weave/blob/master/weave/trace/context/call_context.py#L114)
+---
 
-### function `get_current_call`[​](/reference/python-sdk/weave/#function-get_current_call)
 
-```
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/context/call_context.py#L125"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>function</kbd> `get_current_call`
+
+```python
 get_current_call() → Call | None
 ```
 
-Get the Call object for the currently executing Op, within that Op.
+Get the Call object for the currently executing Op, within that Op. 
+
+
 
 **Returns:**
-The Call object for the currently executing Op, or None if tracking has not been initialized or this method is invoked outside an Op.
+  The Call object for the currently executing Op, or  None if tracking has not been initialized or this method is  invoked outside an Op. 
 
-[](https://github.com/wandb/weave/blob/master/weave/trace/api.py#L264)
 
-### function `finish`[​](/reference/python-sdk/weave/#function-finish)
 
-```
+**Note:**
+
+> The returned Call's ``attributes`` dictionary becomes immutable once the call starts. Use :func:`weave.attributes` to set call metadata before invoking an Op. The ``summary`` field may be updated while the Op executes and will be merged with computed summary information when the call finishes. 
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L328"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>function</kbd> `finish`
+
+```python
 finish() → None
 ```
 
-Stops logging to weave.
+Stops logging to weave. 
 
-Following finish, calls of weave.op() decorated functions will no longer be logged. You will need to run weave.init() again to resume logging.
+Following finish, calls of weave.op() decorated functions will no longer be logged. You will need to run weave.init() again to resume logging. 
 
-[](https://github.com/wandb/weave/blob/master/weave/trace/op.py#L1191)
 
-### function `op`[​](/reference/python-sdk/weave/#function-op)
+---
 
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L1185"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>function</kbd> `op`
+
+```python
+op(
+    func: 'Callable[P, R] | None' = None,
+    name: 'str | None' = None,
+    call_display_name: 'str | CallDisplayNameFunc | None' = None,
+    postprocess_inputs: 'PostprocessInputsFunc | None' = None,
+    postprocess_output: 'PostprocessOutputFunc | None' = None,
+    tracing_sample_rate: 'float' = 1.0,
+    enable_code_capture: 'bool' = True,
+    accumulator: 'Callable[[Any | None, Any], Any] | None' = None
+) → Callable[[Callable[P, R]], Op[P, R]] | Op[P, R]
 ```
-op( func: 'Callable[P, R] | None' = None, name: 'str | None' = None, call_display_name: 'str | CallDisplayNameFunc | None' = None, postprocess_inputs: 'PostprocessInputsFunc | None' = None, postprocess_output: 'PostprocessOutputFunc | None' = None, tracing_sample_rate: 'float' = 1.0, enable_code_capture: 'bool' = True, accumulator: 'Callable[[Any | None, Any], Any] | None' = None) → Callable[[Callable[P, R]], Op[P, R]] | Op[P, R]
-```
 
-A decorator to weave op-ify a function or method. Works for both sync and async. Automatically detects iterator functions and applies appropriate behavior.
+A decorator to weave op-ify a function or method. Works for both sync and async. Automatically detects iterator functions and applies appropriate behavior. 
 
-[](https://github.com/wandb/weave/blob/master/../../../../../../develop/core/services/weave-python/weave-public/docs/weave/trace/api/attributes#L242)
 
-### function `attributes`[​](/reference/python-sdk/weave/#function-attributes)
+---
 
-```
+
+<a href="https://github.com/wandb/weave/blob/master/../../../../weave/trace/api/attributes#L231"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>function</kbd> `attributes`
+
+```python
 attributes(attributes: 'dict[str, Any]') → Iterator
 ```
 
-Context manager for setting attributes on a call.
+Context manager for setting attributes on a call. 
 
-Attributes become immutable once a call begins execution. Use this
-context manager to provide metadata before the call starts.
+
 
 **Example:**
-
+```python
+with weave.attributes({'env': 'production'}):
+     print(my_function.call("World"))
 ```
-with weave.attributes({'env': 'production'}): print(my_function.call("World"))
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/../../../../weave/trace/api/thread#L281"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>function</kbd> `thread`
+
+```python
+thread(
+    thread_id: 'str | None | object' = <object object at 0x105344660>
+) → Iterator[ThreadContext]
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/obj.py#L42)
+Context manager for setting thread_id on calls within the context. 
 
-## class `Object`[​](/reference/python-sdk/weave/#class-object)
+
+
+**Examples:**
+```python
+# Auto-generate thread_id
+with weave.thread() as t:
+     print(f"Thread ID: {t.thread_id}")
+     result = my_function("input")  # This call will have the auto-generated thread_id
+     print(f"Current turn: {t.turn_id}")
+
+# Explicit thread_id
+with weave.thread("custom_thread") as t:
+     result = my_function("input")  # This call will have thread_id="custom_thread"
+
+# Disable threading
+with weave.thread(None) as t:
+     result = my_function("input")  # This call will have thread_id=None
+```
+
+
+
+**Args:**
+ 
+ - <b>`thread_id`</b>:  The thread identifier to associate with calls in this context.  If not provided, a UUID v7 will be auto-generated.  If None, thread tracking will be disabled. 
+
+
+
+**Yields:**
+ 
+ - <b>`ThreadContext`</b>:  An object providing access to thread_id and current turn_id. 
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/object/obj.py#L74"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `Object`
+Base class for Weave objects that can be tracked and versioned. 
+
+This class extends Pydantic's BaseModel to provide Weave-specific functionality for object tracking, referencing, and serialization. Objects can have names, descriptions, and references that allow them to be stored and retrieved from the Weave system. 
+
+
+
+**Attributes:**
+ 
+ - <b>`name`</b> (Optional[str]):  A human-readable name for the object. 
+ - <b>`description`</b> (Optional[str]):  A description of what the object represents. 
+ - <b>`ref`</b> (Optional[ObjectRef]):  A reference to the object in the Weave system. 
+
+
+
+**Examples:**
+```python
+# Create a simple object
+obj = Object(name="my_object", description="A test object")
+
+# Create an object from a URI
+obj = Object.from_uri("weave:///entity/project/object:digest")
+```
+
+
 
 **Pydantic Fields:**
 
 - `name`: `typing.Optional[str]`
-
 - `description`: `typing.Optional[str]`
-
 - `ref`: `typing.Optional[trace.refs.ObjectRef]`
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/obj.py#L59)
+---------
 
-### classmethod `from_uri`[​](/reference/python-sdk/weave/#classmethod-from_uri)
+<a href="https://github.com/wandb/weave/blob/master/weave/object/obj.py#L113"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>classmethod</kbd> `from_uri`
+
+```python
 from_uri(uri: str, objectify: bool = True) → Self
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/obj.py#L69)
+Create an object instance from a Weave URI. 
 
-### classmethod `handle_relocatable_object`[​](/reference/python-sdk/weave/#classmethod-handle_relocatable_object)
 
-```
-handle_relocatable_object( v: Any, handler: ValidatorFunctionWrapHandler, info: ValidationInfo) → Any
-```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L23)
+**Args:**
+ 
+ - <b>`uri`</b> (str):  The Weave URI pointing to the object. 
+ - <b>`objectify`</b> (bool):  Whether to objectify the result. Defaults to True. 
 
-## class `Dataset`[​](/reference/python-sdk/weave/#class-dataset)
 
-Dataset object with easy saving and automatic versioning
+
+**Returns:**
+ 
+ - <b>`Self`</b>:  An instance of the class created from the URI. 
+
+
+
+**Raises:**
+ 
+ - <b>`NotImplementedError`</b>:  If the class doesn't implement the required  methods for deserialization. 
+
+
 
 **Examples:**
+```python
+obj = MyObject.from_uri("weave:///entity/project/object:digest")
+```
 
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/object/obj.py#L139"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `handle_relocatable_object`
+
+```python
+handle_relocatable_object(
+    v: Any,
+    handler: ValidatorFunctionWrapHandler,
+    info: ValidationInfo
+) → Any
 ```
-# Create a datasetdataset = Dataset(name='grammar', rows=[ {'id': '0', 'sentence': "He no likes ice cream.", 'correction': "He doesn't like ice cream."}, {'id': '1', 'sentence': "She goed to the store.", 'correction': "She went to the store."}, {'id': '2', 'sentence': "They plays video games all day.", 'correction': "They play video games all day."}])# Publish the datasetweave.publish(dataset)# Retrieve the datasetdataset_ref = weave.ref('grammar').get()# Access a specific exampleexample_label = dataset_ref.rows[2]['sentence']
+
+Handle validation of relocatable objects including ObjectRef and WeaveObject. 
+
+This validator handles special cases where the input is an ObjectRef or WeaveObject that needs to be properly converted to a standard Object instance. It ensures that references are preserved and that ignored types are handled correctly during the validation process. 
+
+
+
+**Args:**
+ 
+ - <b>`v`</b> (Any):  The value to validate. 
+ - <b>`handler`</b> (ValidatorFunctionWrapHandler):  The standard pydantic validation handler. 
+ - <b>`info`</b> (ValidationInfo):  Validation context information. 
+
+
+
+**Returns:**
+ 
+ - <b>`Any`</b>:  The validated object instance. 
+
+
+
+**Examples:**
+ This method is called automatically during object creation and validation. It handles cases like: ```python
+    # When an ObjectRef is passed
+    obj = MyObject(some_object_ref)
+
+    # When a WeaveObject is passed
+    obj = MyObject(some_weave_object)
+    ``` 
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L26"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `Dataset`
+Dataset object with easy saving and automatic versioning. 
+
+
+
+**Examples:**
+```python
+# Create a dataset
+dataset = Dataset(name='grammar', rows=[
+     {'id': '0', 'sentence': "He no likes ice cream.", 'correction': "He doesn't like ice cream."},
+     {'id': '1', 'sentence': "She goed to the store.", 'correction': "She went to the store."},
+     {'id': '2', 'sentence': "They plays video games all day.", 'correction': "They play video games all day."}
+])
+
+# Publish the dataset
+weave.publish(dataset)
+
+# Retrieve the dataset
+dataset_ref = weave.ref('grammar').get()
+
+# Access a specific example
+example_label = dataset_ref.rows[2]['sentence']
 ```
+
+
 
 **Pydantic Fields:**
 
 - `name`: `typing.Optional[str]`
-
 - `description`: `typing.Optional[str]`
-
 - `ref`: `typing.Optional[trace.refs.ObjectRef]`
-
 - `rows`: `typing.Union[trace.table.Table, trace.vals.WeaveTable]`
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L78)
+---------
 
-### method `add_rows`[​](/reference/python-sdk/weave/#method-add_rows)
+#### <kbd>handler</kbd> columns_names
 
-```
+---
+
+#### <kbd>handler</kbd> num_rows
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L129"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `add_rows`
+
+```python
 add_rows(rows: Iterable[dict]) → Dataset
 ```
 
-Create a new dataset version by appending rows to the existing dataset.
+Create a new dataset version by appending rows to the existing dataset. 
 
-This is useful for adding examples to large datasets without having to load the entire dataset into memory.
+This is useful for adding examples to large datasets without having to load the entire dataset into memory. 
+
+
 
 **Args:**
+ 
+ - <b>`rows`</b>:  The rows to add to the dataset. 
 
-- `rows`**: The rows to add to the dataset.
+
 
 **Returns:**
-The updated dataset.
+ The updated dataset. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L120)
+---
 
-### classmethod `convert_to_table`[​](/reference/python-sdk/weave/#classmethod-convert_to_table)
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L173"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>classmethod</kbd> `convert_to_table`
+
+```python
 convert_to_table(rows: Any) → Union[Table, WeaveTable]
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L60)
 
-### classmethod `from_calls`[​](/reference/python-sdk/weave/#classmethod-from_calls)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L61"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_calls`
+
+```python
 from_calls(calls: Iterable[Call]) → Self
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L51)
 
-### classmethod `from_obj`[​](/reference/python-sdk/weave/#classmethod-from_obj)
 
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L71"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_hf`
+
+```python
+from_hf(
+    hf_dataset: Union[ForwardRef('HFDataset'), ForwardRef('HFDatasetDict')]
+) → Self
 ```
+
+
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L52"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_obj`
+
+```python
 from_obj(obj: WeaveObject) → Self
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L65)
 
-### classmethod `from_pandas`[​](/reference/python-sdk/weave/#classmethod-from_pandas)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L66"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_pandas`
+
+```python
 from_pandas(df: 'DataFrame') → Self
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L167)
 
-### method `select`[​](/reference/python-sdk/weave/#method-select)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L220"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `select`
+
+```python
 select(indices: Iterable[int]) → Self
 ```
 
-Select rows from the dataset based on the provided indices.
+Select rows from the dataset based on the provided indices. 
+
+
 
 **Args:**
+ 
+ - <b>`indices`</b>:  An iterable of integer indices specifying which rows to select. 
 
-- `indices`**: An iterable of integer indices specifying which rows to select.
+
 
 **Returns:**
-A new Dataset object containing only the selected rows.
+ A new Dataset object containing only the selected rows. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/dataset.py#L70)
+---
 
-### method `to_pandas`[​](/reference/python-sdk/weave/#method-to_pandas)
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L115"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
+### <kbd>method</kbd> `to_hf`
+
+```python
+to_hf() → HFDataset
 ```
+
+
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L107"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `to_pandas`
+
+```python
 to_pandas() → DataFrame
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/model.py#L23)
 
-## class `Model`[​](/reference/python-sdk/weave/#class-model)
 
-Intended to capture a combination of code and data the operates on an input. For example it might call an LLM with a prompt to make a prediction or generate text.
 
-When you change the attributes or the code that defines your model, these changes will be logged and the version will be updated. This ensures that you can compare the predictions across different versions of your model. Use this to iterate on prompts or to try the latest LLM and compare predictions across different settings
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/model.py#L24"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `Model`
+Intended to capture a combination of code and data the operates on an input. For example it might call an LLM with a prompt to make a prediction or generate text. 
+
+When you change the attributes or the code that defines your model, these changes will be logged and the version will be updated. This ensures that you can compare the predictions across different versions of your model. Use this to iterate on prompts or to try the latest LLM and compare predictions across different settings 
+
+
 
 **Examples:**
+```python
+class YourModel(Model):
+     attribute1: str
+     attribute2: int
 
+     @weave.op()
+     def predict(self, input_data: str) -> dict:
+         # Model logic goes here
+         prediction = self.attribute1 + ' ' + input_data
+         return {'pred': prediction}
 ```
-class YourModel(Model): attribute1: str attribute2: int @weave.op() def predict(self, input_data: str) -> dict: # Model logic goes here prediction = self.attribute1 + ' ' + input_data return {'pred': prediction}
-```
+
+
 
 **Pydantic Fields:**
 
 - `name`: `typing.Optional[str]`
-
 - `description`: `typing.Optional[str]`
-
 - `ref`: `typing.Optional[trace.refs.ObjectRef]`
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/model.py#L51)
+---------
 
-### method `get_infer_method`[​](/reference/python-sdk/weave/#method-get_infer_method)
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/model.py#L50"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>method</kbd> `get_infer_method`
+
+```python
 get_infer_method() → Callable
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L77)
 
-## class `Prompt`[​](/reference/python-sdk/weave/#class-prompt)
+
+
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L77"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `Prompt`
+
+
+
+
+
 
 **Pydantic Fields:**
 
 - `name`: `typing.Optional[str]`
-
 - `description`: `typing.Optional[str]`
-
 - `ref`: `typing.Optional[trace.refs.ObjectRef]`
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L78)
+---------
 
-### method `format`[​](/reference/python-sdk/weave/#method-format)
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L78"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>method</kbd> `format`
+
+```python
 format(**kwargs: Any) → Any
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L82)
 
-## class `StringPrompt`[​](/reference/python-sdk/weave/#class-stringprompt)
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L86)
 
-### method `__init__`[​](/reference/python-sdk/weave/#method-__init__)
 
-```
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L82"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `StringPrompt`
+
+
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L86"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
 __init__(content: str)
 ```
 
+
+
+
+
+
+
 **Pydantic Fields:**
 
 - `name`: `typing.Optional[str]`
-
 - `description`: `typing.Optional[str]`
-
 - `ref`: `typing.Optional[trace.refs.ObjectRef]`
+- `content`: `<class 'str'>`
 
-- `content`: ``
+---------
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L90)
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L90"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-### method `format`[​](/reference/python-sdk/weave/#method-format-1)
+### <kbd>method</kbd> `format`
 
-```
+```python
 format(**kwargs: Any) → str
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L93)
 
-### classmethod `from_obj`[​](/reference/python-sdk/weave/#classmethod-from_obj-1)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L93"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_obj`
+
+```python
 from_obj(obj: WeaveObject) → Self
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L102)
 
-## class `MessagesPrompt`[​](/reference/python-sdk/weave/#class-messagesprompt)
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L106)
 
-### method `__init__`[​](/reference/python-sdk/weave/#method-__init__-1)
 
-```
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L102"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `MessagesPrompt`
+
+
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L106"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
 __init__(messages: list[dict])
 ```
 
+
+
+
+
+
+
 **Pydantic Fields:**
 
 - `name`: `typing.Optional[str]`
-
 - `description`: `typing.Optional[str]`
-
 - `ref`: `typing.Optional[trace.refs.ObjectRef]`
-
 - `messages`: `list[dict]`
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L119)
+---------
 
-### method `format`[​](/reference/python-sdk/weave/#method-format-2)
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L121"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>method</kbd> `format`
+
+```python
 format(**kwargs: Any) → list
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L110)
 
-### method `format_message`[​](/reference/python-sdk/weave/#method-format_message)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L110"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `format_message`
+
+```python
 format_message(message: dict, **kwargs: Any) → dict
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/prompt/prompt.py#L122)
 
-### classmethod `from_obj`[​](/reference/python-sdk/weave/#classmethod-from_obj-2)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L124"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_obj`
+
+```python
 from_obj(obj: WeaveObject) → Self
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/eval.py#L56)
 
-## class `Evaluation`[​](/reference/python-sdk/weave/#class-evaluation)
 
-Sets up an evaluation which includes a set of scorers and a dataset.
 
-Calling evaluation.evaluate(model) will pass in rows from a dataset into a model matching the names of the columns of the dataset to the argument names in model.predict.
 
-Then it will call all of the scorers and save the results in weave.
 
-If you want to preprocess the rows from the dataset you can pass in a function to preprocess_model_input.
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L59"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `Evaluation`
+Sets up an evaluation which includes a set of scorers and a dataset. 
+
+Calling evaluation.evaluate(model) will pass in rows from a dataset into a model matching  the names of the columns of the dataset to the argument names in model.predict. 
+
+Then it will call all of the scorers and save the results in weave. 
+
+If you want to preprocess the rows from the dataset you can pass in a function to preprocess_model_input. 
+
+
 
 **Examples:**
+```python
+# Collect your examples
+examples = [
+     {"question": "What is the capital of France?", "expected": "Paris"},
+     {"question": "Who wrote 'To Kill a Mockingbird'?", "expected": "Harper Lee"},
+     {"question": "What is the square root of 64?", "expected": "8"},
+]
 
+# Define any custom scoring function
+@weave.op()
+def match_score1(expected: str, model_output: dict) -> dict:
+     # Here is where you'd define the logic to score the model output
+     return {'match': expected == model_output['generated_text']}
+
+@weave.op()
+def function_to_evaluate(question: str):
+     # here's where you would add your LLM call and return the output
+     return  {'generated_text': 'Paris'}
+
+# Score your examples using scoring functions
+evaluation = Evaluation(
+     dataset=examples, scorers=[match_score1]
+)
+
+# Start tracking the evaluation
+weave.init('intro-example')
+# Run the evaluation
+asyncio.run(evaluation.evaluate(function_to_evaluate))
 ```
-# Collect your examplesexamples = [ {"question": "What is the capital of France?", "expected": "Paris"}, {"question": "Who wrote 'To Kill a Mockingbird'?", "expected": "Harper Lee"}, {"question": "What is the square root of 64?", "expected": "8"},]# Define any custom scoring function@weave.op()def match_score1(expected: str, model_output: dict) -> dict: # Here is where you'd define the logic to score the model output return {'match': expected == model_output['generated_text']}@weave.op()def function_to_evaluate(question: str): # here's where you would add your LLM call and return the output return {'generated_text': 'Paris'}# Score your examples using scoring functionsevaluation = Evaluation( dataset=examples, scorers=[match_score1])# Start tracking the evaluationweave.init('intro-example')# Run the evaluationasyncio.run(evaluation.evaluate(function_to_evaluate))
-```
+
+
 
 **Pydantic Fields:**
 
 - `name`: `typing.Optional[str]`
-
 - `description`: `typing.Optional[str]`
-
 - `ref`: `typing.Optional[trace.refs.ObjectRef]`
-
-- `dataset`: ``
-
-- `scorers`: `typing.Optional[list[typing.Annotated[typing.Union[trace.op.Op, flow.scorer.Scorer], BeforeValidator(func=)]]]`
-
+- `dataset`: `<class 'dataset.dataset.Dataset'>`
+- `scorers`: `typing.Optional[list[typing.Annotated[typing.Union[trace.op_protocol.Op, flow.scorer.Scorer], BeforeValidator(func=<function cast_to_scorer at 0x1054cee80>, json_schema_input_type=PydanticUndefined)]]]`
 - `preprocess_model_input`: `typing.Optional[typing.Callable[[dict], dict]]`
+- `trials`: `<class 'int'>`
+- `evaluation_name`: `typing.Union[str, typing.Callable[[trace.call.Call], str], NoneType]`
 
-- `trials`: ``
+---------
 
-- `evaluation_name`: `typing.Union[str, typing.Callable[[trace.weave_client.Call], str], NoneType]`
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L276"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-[](https://github.com/wandb/weave/blob/master/weave/trace/op.py#L237)
+### <kbd>method</kbd> `evaluate`
 
-### method `evaluate`[​](/reference/python-sdk/weave/#method-evaluate)
-
-```
+```python
 evaluate(model: Union[Op, Model]) → dict
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/eval.py#L114)
 
-### classmethod `from_obj`[​](/reference/python-sdk/weave/#classmethod-from_obj-3)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L115"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_obj`
+
+```python
 from_obj(obj: WeaveObject) → Self
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/eval.py#L195)
 
-### method `get_eval_results`[​](/reference/python-sdk/weave/#method-get_eval_results)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L234"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `get_eval_results`
+
+```python
 get_eval_results(model: Union[Op, Model]) → EvaluationResults
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/trace/op.py#L140)
 
-### method `predict_and_score`[​](/reference/python-sdk/weave/#method-predict_and_score)
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L287"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `get_evaluate_calls`
+
+```python
+get_evaluate_calls() → PaginatedIterator[CallSchema, WeaveObject]
+```
+
+Retrieve all evaluation calls that used this Evaluation object. 
+
+Note that this returns a CallsIter instead of a single call because it's possible to have multiple evaluation calls for a single evaluation (e.g. if you run the same evaluation multiple times). 
+
+
+
+**Returns:**
+ 
+ - <b>`CallsIter`</b>:  An iterator over Call objects representing evaluation runs. 
+
+
+
+**Raises:**
+ 
+ - <b>`ValueError`</b>:  If the evaluation has no ref (hasn't been saved/run yet). 
+
+
+
+**Examples:**
+```python
+evaluation = Evaluation(dataset=examples, scorers=[scorer])
+await evaluation.evaluate(model)  # Run evaluation first
+calls = evaluation.get_evaluate_calls()
+for call in calls:
+     print(f"Evaluation run: {call.id} at {call.started_at}")
+```
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L323"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `get_score_calls`
+
+```python
+get_score_calls() → dict[str, list[Call]]
+```
+
+Retrieve scorer calls for each evaluation run, grouped by trace ID. 
+
+
+
+**Returns:**
+ 
+ - <b>`dict[str, list[Call]]`</b>:  A dictionary mapping trace IDs to lists of scorer Call objects.  Each trace ID represents one evaluation run, and the list contains all scorer  calls executed during that run. 
+
+
+
+**Examples:**
+```python
+evaluation = Evaluation(dataset=examples, scorers=[accuracy_scorer, f1_scorer])
+await evaluation.evaluate(model)
+score_calls = evaluation.get_score_calls()
+for trace_id, calls in score_calls.items():
+     print(f"Trace {trace_id}: {len(calls)} scorer calls")
+     for call in calls:
+         scorer_name = call.summary.get("weave", {}).get("trace_name")
+         print(f"  Scorer: {scorer_name}, Output: {call.output}")
+```
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L362"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `get_scores`
+
+```python
+get_scores() → dict[str, dict[str, list[Any]]]
+```
+
+Extract and organize scorer outputs from evaluation runs. 
+
+
+
+**Returns:**
+ 
+ - <b>`dict[str, dict[str, list[Any]]]`</b>:  A nested dictionary structure where: 
+        - First level keys are trace IDs (evaluation runs) 
+        - Second level keys are scorer names 
+        - Values are lists of scorer outputs for that run and scorer 
+
+
+
+**Examples:**
+```python
+evaluation = Evaluation(dataset=examples, scorers=[accuracy_scorer, f1_scorer])
+await evaluation.evaluate(model)
+scores = evaluation.get_scores()
+# Access scores by trace and scorer
+for trace_id, trace_scores in scores.items():
+         print(f"Evaluation run {trace_id}:")
+         for scorer_name, outputs in trace_scores.items():
+             print(f"  {scorer_name}: {outputs}")
+```
+
+Expected output: 
 
 ```
+{
+     "trace_123": {
+     "accuracy_scorer": [{"accuracy": 0.85}],
+     "f1_scorer": [{"f1": 0.78}]
+     }
+}
+```
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/pydantic/_internal/_model_construction.py#L156"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `model_post_init`
+
+```python
+model_post_init(_Evaluation__context: Any) → None
+```
+
+
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L173"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `predict_and_score`
+
+```python
 predict_and_score(model: Union[Op, Model], example: dict) → dict
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/trace/op.py#L172)
 
-### method `summarize`[​](/reference/python-sdk/weave/#method-summarize)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L211"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `summarize`
+
+```python
 summarize(eval_table: EvaluationResults) → dict
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/eval_imperative.py#L306)
 
-## class `EvaluationLogger`[​](/reference/python-sdk/weave/#class-evaluationlogger)
 
-This class provides an imperative interface for logging evaluations.
 
-An evaluation is started automatically when the first prediction is logged using the `log_prediction` method, and finished when the `log_summary` method is called.
 
-Each time you log a prediction, you will get back a `ScoreLogger` object. You can use this object to log scores and metadata for that specific prediction. For more information, see the `ScoreLogger` class.
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L329"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `EvaluationLogger`
+This class provides an imperative interface for logging evaluations. 
+
+An evaluation is started automatically when the first prediction is logged using the `log_prediction` method, and finished when the `log_summary` method is called. 
+
+Each time you log a prediction, you will get back a `ScoreLogger` object. You can use this object to log scores and metadata for that specific prediction. For more information, see the `ScoreLogger` class. 
+
+
 
 **Example:**
+```python
+ev = EvaluationLogger()
+pred = ev.log_prediction(inputs, output)
+pred.log_score(scorer_name, score)
+ev.log_summary(summary)
+```
 
-```
- ev = EvaluationLogger() pred = ev.log_prediction(inputs, output) pred.log_score(scorer_name, score) ev.log_summary(summary)
-```
+
 
 **Pydantic Fields:**
 
 - `name`: `str | None`
-
 - `model`: `flow.model.Model | dict | str`
+- `dataset`: `dataset.dataset.Dataset | list[dict] | str`
+- `eval_attributes`: `dict[str, typing.Any]`
 
-- `dataset`: `flow.dataset.Dataset | list[dict] | str`
+---
 
-#### property ui_url[​](/reference/python-sdk/weave/#property-ui_url)
+#### <kbd>property</kbd> attributes
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/eval_imperative.py#L567)
 
-### method `finish`[​](/reference/python-sdk/weave/#method-finish)
 
+
+
+---------
+
+#### <kbd>property</kbd> ui_url
+
+
+
+
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L650"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `fail`
+
+```python
+fail(exception: 'BaseException') → None
 ```
-finish() → None
+
+Convenience method to fail the evaluation with an exception. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L634"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `finish`
+
+```python
+finish(exception: 'BaseException | None' = None) → None
 ```
 
-Clean up the evaluation resources explicitly without logging a summary.
+Clean up the evaluation resources explicitly without logging a summary. 
 
-Ensures all prediction calls and the main evaluation call are finalized. This is automatically called if the logger is used as a context manager.
+Ensures all prediction calls and the main evaluation call are finalized. This is automatically called if the logger is used as a context manager. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/eval_imperative.py#L490)
+---
 
-### method `log_prediction`[​](/reference/python-sdk/weave/#method-log_prediction)
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L538"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>method</kbd> `log_prediction`
+
+```python
 log_prediction(inputs: 'dict', output: 'Any') → ScoreLogger
 ```
 
-Log a prediction to the Evaluation, and return a reference.
+Log a prediction to the Evaluation, and return a reference. 
 
-The reference can be used to log scores which are attached to the specific prediction instance.
+The reference can be used to log scores which are attached to the specific prediction instance. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/eval_imperative.py#L521)
+---
 
-### method `log_summary`[​](/reference/python-sdk/weave/#method-log_summary)
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L585"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>method</kbd> `log_summary`
+
+```python
 log_summary(summary: 'dict | None' = None, auto_summarize: 'bool' = True) → None
 ```
 
-Log a summary dict to the Evaluation.
+Log a summary dict to the Evaluation. 
 
-This will calculate the summary, call the summarize op, and then finalize the evaluation, meaning no more predictions or scores can be logged.
+This will calculate the summary, call the summarize op, and then finalize the evaluation, meaning no more predictions or scores can be logged. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/scorer.py#L19)
+---
 
-## class `Scorer`[​](/reference/python-sdk/weave/#class-scorer)
+<a href="https://github.com/wandb/weave/blob/master/pydantic/_internal/_model_construction.py#L412"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `model_post_init`
+
+```python
+model_post_init(_EvaluationLogger__context: 'Any') → None
+```
+
+Initialize the pseudo evaluation with the dataset from the model. 
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/scorer.py#L30"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `Scorer`
+
+
+
+
+
 
 **Pydantic Fields:**
 
 - `name`: `typing.Optional[str]`
-
 - `description`: `typing.Optional[str]`
-
 - `ref`: `typing.Optional[trace.refs.ObjectRef]`
-
 - `column_map`: `typing.Optional[dict[str, str]]`
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/scorer.py#L25)
+---------
 
-### method `model_post_init`[​](/reference/python-sdk/weave/#method-model_post_init)
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/scorer.py#L48"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
-model_post_init(_Scorer__context: Any) → None
-```
+### <kbd>classmethod</kbd> `from_obj`
 
-[](https://github.com/wandb/weave/blob/master/weave/trace/op.py#L29)
-
-### method `score`[​](/reference/python-sdk/weave/#method-score)
-
-```
-score(output: Any, **kwargs: Any) → Any
-```
-
-[](https://github.com/wandb/weave/blob/master/weave/trace/op.py#L33)
-
-### method `summarize`[​](/reference/python-sdk/weave/#method-summarize-1)
-
-```
-summarize(score_rows: list) → Optional[dict]
-```
-
-[](https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L12)
-
-## class `AnnotationSpec`[​](/reference/python-sdk/weave/#class-annotationspec)
-
-**Pydantic Fields:**
-
-- `name`: `typing.Optional[str]`
-
-- `description`: `typing.Optional[str]`
-
-- `field_schema`: `dict[str, typing.Any]`
-
-- `unique_among_creators`: ``
-
-- `op_scope`: `typing.Optional[list[str]]`
-
-[](https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L47)
-
-### classmethod `preprocess_field_schema`[​](/reference/python-sdk/weave/#classmethod-preprocess_field_schema)
-
-```
-preprocess_field_schema(data: dict[str, Any]) → dict[str, Any]
-```
-
-[](https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L92)
-
-### classmethod `validate_field_schema`[​](/reference/python-sdk/weave/#classmethod-validate_field_schema)
-
-```
-validate_field_schema(schema: dict[str, Any]) → dict[str, Any]
-```
-
-[](https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L103)
-
-### method `value_is_valid`[​](/reference/python-sdk/weave/#method-value_is_valid)
-
-```
-value_is_valid(payload: Any) → bool
-```
-
-Validates a payload against this annotation spec's schema.
-
-**Args:**
-
-- `payload`**: The data to validate against the schema
-
-**Returns:**
-
-- **`bool`**: True if validation succeeds, False otherwise
-
-[](https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L20)
-
-## class `File`[​](/reference/python-sdk/weave/#class-file)
-
-A class representing a file with path, mimetype, and size information.
-
-[](https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L23)
-
-### method `__init__`[​](/reference/python-sdk/weave/#method-__init__-2)
-
-```
-__init__(path: 'str | Path', mimetype: 'str | None' = None)
-```
-
-Initialize a File object.
-
-**Args:**
-
-- `path`**: Path to the file (string or pathlib.Path)
-
-- **`mimetype`**: Optional MIME type of the file - will be inferred from extension if not provided
-
-#### property filename[​](/reference/python-sdk/weave/#property-filename)
-
-Get the filename of the file.
-
-**Returns:**
-
-- **`str`**: The name of the file without the directory path.
-
-[](https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L49)
-
-### method `open`[​](/reference/python-sdk/weave/#method-open)
-
-```
-open() → bool
-```
-
-Open the file using the operating system's default application.
-
-This method uses the platform-specific mechanism to open the file with the default application associated with the file's type.
-
-**Returns:**
-
-- `bool`**: True if the file was successfully opened, False otherwise.
-
-[](https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L70)
-
-### method `save`[​](/reference/python-sdk/weave/#method-save)
-
-```
-save(dest: 'str | Path') → None
-```
-
-Copy the file to the specified destination path.
-
-**Args:**
-
-- `dest`**: Destination path where the file will be copied to (string or pathlib.Path) The destination path can be a file or a directory.
-
-[](https://github.com/wandb/weave/blob/master/rich/markdown.py#L519)
-
-## class `Markdown`[​](/reference/python-sdk/weave/#class-markdown)
-
-A Markdown renderable.
-
-**Args:**
-
-- **`markup`** (str): A string containing markdown.
-
-- **`code_theme`** (str, optional): Pygments theme for code blocks. Defaults to "monokai".
-
-- **`justify`** (JustifyMethod, optional): Justify value for paragraphs. Defaults to None.
-
-- **`style`** (Union[str, Style], optional): Optional style to apply to markdown.
-
-- **`hyperlinks`** (bool, optional): Enable hyperlinks. Defaults to `True`.
-
-- **`inline_code_lexer`**: (str, optional): Lexer to use if inline code highlighting is enabled. Defaults to None.
-
-- **`inline_code_theme`**: (Optional[str], optional): Pygments theme for inline code highlighting, or None for no highlighting. Defaults to None.
-
-[](https://github.com/wandb/weave/blob/master/rich/markdown.py#L555)
-
-### method `__init__`[​](/reference/python-sdk/weave/#method-__init__-3)
-
-```
-__init__( markup: 'str', code_theme: 'str' = 'monokai', justify: 'Optional[JustifyMethod]' = None, style: 'Union[str, Style]' = 'none', hyperlinks: 'bool' = True, inline_code_lexer: 'Optional[str]' = None, inline_code_theme: 'Optional[str]' = None) → None
-```
-
-[](https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L14)
-
-## class `Monitor`[​](/reference/python-sdk/weave/#class-monitor)
-
-Sets up a monitor to score incoming calls automatically.
-
-**Examples:**
-
-```
-import weavefrom weave.scorers import ValidJSONScorerjson_scorer = ValidJSONScorer()my_monitor = weave.Monitor( name="my-monitor", description="This is a test monitor", sampling_rate=0.5, op_names=["my_op"], query={ "$expr": { "$gt": [ { "$getField": "started_at" }, { "$literal": 1742540400 } ] } } }, scorers=[json_scorer],)my_monitor.activate()
-```
-
-**Pydantic Fields:**
-
-- `name`: `typing.Optional[str]`
-
-- `description`: `typing.Optional[str]`
-
-- `ref`: `typing.Optional[trace.refs.ObjectRef]`
-
-- `sampling_rate`: ``
-
-- `scorers`: `list[flow.scorer.Scorer]`
-
-- `op_names`: `list[str]`
-
-- `query`: `typing.Optional[trace_server.interface.query.Query]`
-
-- `active`: ``
-
-[](https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L58)
-
-### method `activate`[​](/reference/python-sdk/weave/#method-activate)
-
-```
-activate() → ObjectRef
-```
-
-Activates the monitor.
-
-**Returns:**
-The ref to the monitor.
-
-[](https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L68)
-
-### method `deactivate`[​](/reference/python-sdk/weave/#method-deactivate)
-
-```
-deactivate() → ObjectRef
-```
-
-Deactivates the monitor.
-
-**Returns:**
-The ref to the monitor.
-
-[](https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L78)
-
-### classmethod `from_obj`[​](/reference/python-sdk/weave/#classmethod-from_obj-4)
-
-```
+```python
 from_obj(obj: WeaveObject) → Self
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L493)
 
-## class `SavedView`[​](/reference/python-sdk/weave/#class-savedview)
 
-A fluent-style class for working with SavedView objects.
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L499)
 
-### method `__init__`[​](/reference/python-sdk/weave/#method-__init__-4)
+---
 
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/scorer.py#L36"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `model_post_init`
+
+```python
+model_post_init(_Scorer__context: Any) → None
 ```
+
+
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L40"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `score`
+
+```python
+score(output: Any, **kwargs: Any) → Any
+```
+
+
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L44"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `summarize`
+
+```python
+summarize(score_rows: list) → Optional[dict]
+```
+
+
+
+
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L12"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `AnnotationSpec`
+
+
+
+
+
+
+**Pydantic Fields:**
+
+- `name`: `typing.Optional[str]`
+- `description`: `typing.Optional[str]`
+- `field_schema`: `dict[str, typing.Any]`
+- `unique_among_creators`: `<class 'bool'>`
+- `op_scope`: `typing.Optional[list[str]]`
+
+---------
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L47"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `preprocess_field_schema`
+
+```python
+preprocess_field_schema(data: dict[str, Any]) → dict[str, Any]
+```
+
+
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L92"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `validate_field_schema`
+
+```python
+validate_field_schema(schema: dict[str, Any]) → dict[str, Any]
+```
+
+
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L103"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `value_is_valid`
+
+```python
+value_is_valid(payload: Any) → bool
+```
+
+Validates a payload against this annotation spec's schema. 
+
+
+
+**Args:**
+ 
+ - <b>`payload`</b>:  The data to validate against the schema 
+
+
+
+**Returns:**
+ 
+ - <b>`bool`</b>:  True if validation succeeds, False otherwise 
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L29"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `File`
+A class representing a file with path, mimetype, and size information. 
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L33"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
+__init__(path: 'str | Path', mimetype: 'str | None' = None)
+```
+
+Initialize a File object. 
+
+
+
+**Args:**
+ 
+ - <b>`path`</b>:  Path to the file (string or pathlib.Path) 
+ - <b>`mimetype`</b>:  Optional MIME type of the file - will be inferred from extension if not provided 
+
+
+---
+
+#### <kbd>property</kbd> filename
+
+Get the filename of the file. 
+
+
+
+**Returns:**
+ 
+ - <b>`str`</b>:  The name of the file without the directory path. 
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L59"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `open`
+
+```python
+open() → bool
+```
+
+Open the file using the operating system's default application. 
+
+This method uses the platform-specific mechanism to open the file with the default application associated with the file's type. 
+
+
+
+**Returns:**
+ 
+ - <b>`bool`</b>:  True if the file was successfully opened, False otherwise. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L80"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `save`
+
+```python
+save(dest: 'str | Path') → None
+```
+
+Copy the file to the specified destination path. 
+
+
+
+**Args:**
+ 
+ - <b>`dest`</b>:  Destination path where the file will be copied to (string or pathlib.Path)  The destination path can be a file or a directory. 
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L43"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `Content`
+A class to represent content from various sources, resolving them to a unified byte-oriented representation with associated metadata. 
+
+This class must be instantiated using one of its classmethods: 
+- from_path() 
+- from_bytes() 
+- from_text() 
+- from_url() 
+- from_base64() 
+- from_data_url() 
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L90"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
+__init__(*args: 'Any', **kwargs: 'Any') → None
+```
+
+Direct initialization is disabled. Please use a classmethod like `Content.from_path()` to create an instance. 
+
+
+
+**Pydantic Fields:**
+
+- `id`: `<class 'str'>`
+- `data`: `<class 'bytes'>`
+- `size`: `<class 'int'>`
+- `mimetype`: `<class 'str'>`
+- `digest`: `<class 'str'>`
+- `filename`: `<class 'str'>`
+- `content_type`: `typing.Literal['bytes', 'text', 'base64', 'file', 'url', 'data_url', 'data_url:base64', 'data_url:encoding', 'data_url:encoding:base64']`
+- `input_type`: `<class 'str'>`
+- `encoding`: `<class 'str'>`
+- `metadata`: `dict[str, typing.Any] | None`
+- `path`: `str | None`
+- `extension`: `str | None`
+
+---
+
+#### <kbd>property</kbd> art
+
+
+
+
+
+---------
+
+#### <kbd>property</kbd> ref
+
+
+
+
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L542"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `as_string`
+
+```python
+as_string() → str
+```
+
+Display the data as a string. Bytes are decoded using the `encoding` attribute If base64, the data will be re-encoded to base64 bytes then decoded to an ASCII string 
+
+**Returns:**
+  str. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L252"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_base64`
+
+```python
+from_base64(
+    b64_data: 'str | bytes',
+    extension: 'str | None' = None,
+    mimetype: 'str | None' = None,
+    metadata: 'dict[str, Any] | None' = None
+) → Self
+```
+
+Initializes Content from a base64 encoded string or bytes. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L160"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_bytes`
+
+```python
+from_bytes(
+    data: 'bytes',
+    extension: 'str | None' = None,
+    mimetype: 'str | None' = None,
+    metadata: 'dict[str, Any] | None' = None,
+    encoding: 'str' = 'utf-8'
+) → Self
+```
+
+Initializes Content from raw bytes. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L354"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_data_url`
+
+```python
+from_data_url(url: 'str', metadata: 'dict[str, Any] | None' = None) → Self
+```
+
+Initializes Content from a data URL. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L304"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_path`
+
+```python
+from_path(
+    path: 'str | Path',
+    encoding: 'str' = 'utf-8',
+    mimetype: 'str | None' = None,
+    metadata: 'dict[str, Any] | None' = None
+) → Self
+```
+
+Initializes Content from a local file path. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L202"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_text`
+
+```python
+from_text(
+    text: 'str',
+    extension: 'str | None' = None,
+    mimetype: 'str | None' = None,
+    metadata: 'dict[str, Any] | None' = None,
+    encoding: 'str' = 'utf-8'
+) → Self
+```
+
+Initializes Content from a string of text. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L397"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_url`
+
+```python
+from_url(
+    url: 'str',
+    headers: 'dict[str, Any] | None' = None,
+    timeout: 'int | None' = 30,
+    metadata: 'dict[str, Any] | None' = None
+) → Self
+```
+
+Initializes Content by fetching bytes from an HTTP(S) URL. 
+
+Downloads the content, infers mimetype/extension from headers, URL path, and data, and constructs a Content object from the resulting bytes. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L100"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `model_validate`
+
+```python
+model_validate(
+    obj: 'Any',
+    strict: 'bool | None' = None,
+    from_attributes: 'bool | None' = None,
+    context: 'dict[str, Any] | None' = None
+) → Self
+```
+
+Override model_validate to handle Content reconstruction from dict. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L143"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `model_validate_json`
+
+```python
+model_validate_json(
+    json_data: 'str | bytes | bytearray',
+    strict: 'bool | None' = None,
+    context: 'dict[str, Any] | None' = None
+) → Self
+```
+
+Override model_validate_json to handle Content reconstruction from JSON. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L552"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `open`
+
+```python
+open() → bool
+```
+
+Open the file using the operating system's default application. 
+
+This method uses the platform-specific mechanism to open the file with the default application associated with the file's type. 
+
+
+
+**Returns:**
+ 
+ - <b>`bool`</b>:  True if the file was successfully opened, False otherwise. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L582"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `save`
+
+```python
+save(dest: 'str | Path') → None
+```
+
+Copy the file to the specified destination path. Updates the filename and the path of the content to reflect the last saved copy. 
+
+
+
+**Args:**
+ 
+ - <b>`dest`</b>:  Destination path where the file will be copied to (string or pathlib.Path)  The destination path can be a file or a directory.  If dest has no file extension (e.g. .txt), destination will be considered a directory. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L534"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `serialize_data`
+
+```python
+serialize_data(data: 'bytes') → str
+```
+
+When dumping model in json mode 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L509"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `to_data_url`
+
+```python
+to_data_url(use_base64: 'bool' = True) → str
+```
+
+Constructs a data URL from the content. 
+
+
+
+**Args:**
+ 
+ - <b>`use_base64`</b>:  If True, the data will be base64 encoded.  Otherwise, it will be percent-encoded. Defaults to True. 
+
+
+
+**Returns:**
+ A data URL string. 
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/rich/markdown.py#L503"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `Markdown`
+A Markdown renderable. 
+
+
+
+**Args:**
+ 
+ - <b>`markup`</b> (str):  A string containing markdown. 
+ - <b>`code_theme`</b> (str, optional):  Pygments theme for code blocks. Defaults to "monokai". See https://pygments.org/styles/ for code themes. 
+ - <b>`justify`</b> (JustifyMethod, optional):  Justify value for paragraphs. Defaults to None. 
+ - <b>`style`</b> (Union[str, Style], optional):  Optional style to apply to markdown. 
+ - <b>`hyperlinks`</b> (bool, optional):  Enable hyperlinks. Defaults to ``True``. 
+ - <b>`inline_code_lexer`</b>:  (str, optional): Lexer to use if inline code highlighting is  enabled. Defaults to None. 
+ - <b>`inline_code_theme`</b>:  (Optional[str], optional): Pygments theme for inline code  highlighting, or None for no highlighting. Defaults to None. 
+
+<a href="https://github.com/wandb/weave/blob/master/rich/markdown.py#L539"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
+__init__(
+    markup: 'str',
+    code_theme: 'str' = 'monokai',
+    justify: 'JustifyMethod | None' = None,
+    style: 'str | Style' = 'none',
+    hyperlinks: 'bool' = True,
+    inline_code_lexer: 'str | None' = None,
+    inline_code_theme: 'str | None' = None
+) → None
+```
+
+
+
+
+
+
+
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L14"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `Monitor`
+Sets up a monitor to score incoming calls automatically. 
+
+
+
+**Examples:**
+```python
+import weave
+from weave.scorers import ValidJSONScorer
+
+json_scorer = ValidJSONScorer()
+
+my_monitor = weave.Monitor(
+     name="my-monitor",
+     description="This is a test monitor",
+     sampling_rate=0.5,
+     op_names=["my_op"],
+     query={
+         "$expr": {
+             "$gt": [
+                 {
+                         "$getField": "started_at"
+                     },
+                     {
+                         "$literal": 1742540400
+                     }
+                 ]
+             }
+         }
+     },
+     scorers=[json_scorer],
+)
+
+my_monitor.activate()
+```
+
+
+
+**Pydantic Fields:**
+
+- `name`: `typing.Optional[str]`
+- `description`: `typing.Optional[str]`
+- `ref`: `typing.Optional[trace.refs.ObjectRef]`
+- `sampling_rate`: `<class 'float'>`
+- `scorers`: `list[flow.scorer.Scorer]`
+- `op_names`: `list[str]`
+- `query`: `typing.Optional[trace_server.interface.query.Query]`
+- `active`: `<class 'bool'>`
+
+---------
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L56"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `activate`
+
+```python
+activate() → ObjectRef
+```
+
+Activates the monitor. 
+
+
+
+**Returns:**
+  The ref to the monitor. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L66"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `deactivate`
+
+```python
+deactivate() → ObjectRef
+```
+
+Deactivates the monitor. 
+
+
+
+**Returns:**
+  The ref to the monitor. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L76"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `from_obj`
+
+```python
+from_obj(obj: WeaveObject) → Self
+```
+
+
+
+
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L491"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `SavedView`
+A fluent-style class for working with SavedView objects. 
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L497"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
 __init__(view_type: 'str' = 'traces', label: 'str' = 'SavedView') → None
 ```
 
-#### property entity[​](/reference/python-sdk/weave/#property-entity)
 
-#### property label[​](/reference/python-sdk/weave/#property-label)
 
-#### property project[​](/reference/python-sdk/weave/#property-project)
 
-#### property view_type[​](/reference/python-sdk/weave/#property-view_type)
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L623)
 
-### method `add_column`[​](/reference/python-sdk/weave/#method-add_column)
+---
 
-```
+#### <kbd>property</kbd> entity
+
+
+
+
+
+---
+
+#### <kbd>property</kbd> label
+
+
+
+
+
+---
+
+#### <kbd>property</kbd> project
+
+
+
+
+
+---
+
+#### <kbd>property</kbd> view_type
+
+
+
+
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L621"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `add_column`
+
+```python
 add_column(path: 'str | ObjectPath', label: 'str | None' = None) → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L632)
 
-### method `add_columns`[​](/reference/python-sdk/weave/#method-add_columns)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L630"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `add_columns`
+
+```python
 add_columns(*columns: 'str') → SavedView
 ```
 
-Convenience method for adding multiple columns to the grid.
+Convenience method for adding multiple columns to the grid. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L524)
+---
 
-### method `add_filter`[​](/reference/python-sdk/weave/#method-add_filter)
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L522"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
+### <kbd>method</kbd> `add_filter`
+
+```python
+add_filter(
+    field: 'str',
+    operator: 'str',
+    value: 'Any | None' = None
+) → SavedView
 ```
-add_filter( field: 'str', operator: 'str', value: 'Any | None' = None) → SavedView
-```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L598)
 
-### method `add_sort`[​](/reference/python-sdk/weave/#method-add_sort)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L596"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `add_sort`
+
+```python
 add_sort(field: 'str', direction: 'SortDirection') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L663)
 
-### method `column_index`[​](/reference/python-sdk/weave/#method-column_index)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L661"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `column_index`
+
+```python
 column_index(path: 'int | str | ObjectPath') → int
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L578)
 
-### method `filter_op`[​](/reference/python-sdk/weave/#method-filter_op)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L576"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `filter_op`
+
+```python
 filter_op(op_name: 'str | None') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L847)
 
-### method `get_calls`[​](/reference/python-sdk/weave/#method-get_calls)
 
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L846"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `get_calls`
+
+```python
+get_calls(
+    limit: 'int | None' = None,
+    offset: 'int | None' = None,
+    include_costs: 'bool' = False,
+    include_feedback: 'bool' = False,
+    all_columns: 'bool' = False
+) → CallsIter
 ```
-get_calls( limit: 'int | None' = None, offset: 'int | None' = None, include_costs: 'bool' = False, include_feedback: 'bool' = False, all_columns: 'bool' = False) → CallsIter
-```
 
-Get calls matching this saved view's filters and settings.
+Get calls matching this saved view's filters and settings. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L905)
+---
 
-### method `get_known_columns`[​](/reference/python-sdk/weave/#method-get_known_columns)
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L904"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>method</kbd> `get_known_columns`
+
+```python
 get_known_columns(num_calls_to_query: 'int | None' = None) → list[str]
 ```
 
-Get the set of columns that are known to exist.
+Get the set of columns that are known to exist. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L915)
+---
 
-### method `get_table_columns`[​](/reference/python-sdk/weave/#method-get_table_columns)
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L914"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>method</kbd> `get_table_columns`
+
+```python
 get_table_columns() → list[TableColumn]
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L617)
 
-### method `hide_column`[​](/reference/python-sdk/weave/#method-hide_column)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L615"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `hide_column`
+
+```python
 hide_column(col_name: 'str') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L638)
 
-### method `insert_column`[​](/reference/python-sdk/weave/#method-insert_column)
 
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L636"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `insert_column`
+
+```python
+insert_column(
+    idx: 'int',
+    path: 'str | ObjectPath',
+    label: 'str | None' = None
+) → SavedView
 ```
-insert_column( idx: 'int', path: 'str | ObjectPath', label: 'str | None' = None) → SavedView
-```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L972)
 
-### classmethod `load`[​](/reference/python-sdk/weave/#classmethod-load)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L974"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>classmethod</kbd> `load`
+
+```python
 load(ref: 'str') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L741)
 
-### method `page_size`[​](/reference/python-sdk/weave/#method-page_size)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L739"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `page_size`
+
+```python
 page_size(page_size: 'int') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L711)
 
-### method `pin_column_left`[​](/reference/python-sdk/weave/#method-pin_column_left)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L709"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `pin_column_left`
+
+```python
 pin_column_left(col_name: 'str') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L721)
 
-### method `pin_column_right`[​](/reference/python-sdk/weave/#method-pin_column_right)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L719"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `pin_column_right`
+
+```python
 pin_column_right(col_name: 'str') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L683)
 
-### method `remove_column`[​](/reference/python-sdk/weave/#method-remove_column)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L681"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `remove_column`
+
+```python
 remove_column(path: 'int | str | ObjectPath') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L702)
 
-### method `remove_columns`[​](/reference/python-sdk/weave/#method-remove_columns)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L700"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `remove_columns`
+
+```python
 remove_columns(*columns: 'str') → SavedView
 ```
 
-Remove columns from the saved view.
+Remove columns from the saved view. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L547)
+---
 
-### method `remove_filter`[​](/reference/python-sdk/weave/#method-remove_filter)
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L545"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>method</kbd> `remove_filter`
+
+```python
 remove_filter(index_or_field: 'int | str') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L562)
 
-### method `remove_filters`[​](/reference/python-sdk/weave/#method-remove_filters)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L560"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `remove_filters`
+
+```python
 remove_filters() → SavedView
 ```
 
-Remove all filters from the saved view.
+Remove all filters from the saved view. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L520)
+---
 
-### method `rename`[​](/reference/python-sdk/weave/#method-rename)
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L518"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>method</kbd> `rename`
+
+```python
 rename(label: 'str') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L677)
 
-### method `rename_column`[​](/reference/python-sdk/weave/#method-rename_column)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L675"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `rename_column`
+
+```python
 rename_column(path: 'int | str | ObjectPath', label: 'str') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L832)
 
-### method `save`[​](/reference/python-sdk/weave/#method-save-1)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L831"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `save`
+
+```python
 save() → SavedView
 ```
 
-Publish the saved view to the server.
+Publish the saved view to the server. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L657)
+---
 
-### method `set_columns`[​](/reference/python-sdk/weave/#method-set_columns)
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L655"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>method</kbd> `set_columns`
+
+```python
 set_columns(*columns: 'str') → SavedView
 ```
 
-Set the columns to be displayed in the grid.
+Set the columns to be displayed in the grid. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L611)
+---
 
-### method `show_column`[​](/reference/python-sdk/weave/#method-show_column)
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L609"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>method</kbd> `show_column`
+
+```python
 show_column(col_name: 'str') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L605)
 
-### method `sort_by`[​](/reference/python-sdk/weave/#method-sort_by)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L603"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `sort_by`
+
+```python
 sort_by(field: 'str', direction: 'SortDirection') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L888)
 
-### method `to_grid`[​](/reference/python-sdk/weave/#method-to_grid)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L887"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `to_grid`
+
+```python
 to_grid(limit: 'int | None' = None) → Grid
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L769)
 
-### method `to_rich_table_str`[​](/reference/python-sdk/weave/#method-to_rich_table_str)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L768"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `to_rich_table_str`
+
+```python
 to_rich_table_str() → str
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L753)
 
-### method `ui_url`[​](/reference/python-sdk/weave/#method-ui_url)
 
-```
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L751"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `ui_url`
+
+```python
 ui_url() → str | None
 ```
 
-URL to show this saved view in the UI.
+URL to show this saved view in the UI. 
 
-Note this is the "result" page with traces etc, not the URL for the view object.
+Note this is the "result" page with traces etc, not the URL for the view object. 
 
-[](https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L731)
+---
 
-### method `unpin_column`[​](/reference/python-sdk/weave/#method-unpin_column)
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L729"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-```
+### <kbd>method</kbd> `unpin_column`
+
+```python
 unpin_column(col_name: 'str') → SavedView
 ```
 
-[](https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L83)
 
-## class `Audio`[​](/reference/python-sdk/weave/#class-audio)
 
-A class representing audio data in a supported format (wav or mp3).
 
-This class handles audio data storage and provides methods for loading from different sources and exporting to files.
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L79"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `Audio`
+A class representing audio data in a supported format (wav or mp3). 
+
+This class handles audio data storage and provides methods for loading from different sources and exporting to files. 
+
+
 
 **Attributes:**
+ 
+ - <b>`format`</b>:  The audio format (currently supports 'wav' or 'mp3') 
+ - <b>`data`</b>:  The raw audio data as bytes 
 
-- `format`**: The audio format (currently supports 'wav' or 'mp3')
 
-- **`data`**: The raw audio data as bytes
 
 **Args:**
+ 
+ - <b>`data`</b>:  The audio data (bytes or base64 encoded string) 
+ - <b>`format`</b>:  The audio format ('wav' or 'mp3') 
+ - <b>`validate_base64`</b>:  Whether to attempt base64 decoding of the input data 
 
-- **`data`**: The audio data (bytes or base64 encoded string)
 
-- **`format`**: The audio format ('wav' or 'mp3')
-
-- **`validate_base64`**: Whether to attempt base64 decoding of the input data
 
 **Raises:**
+ 
+ - <b>`ValueError`</b>:  If audio data is empty or format is not supported 
 
-- **`ValueError`**: If audio data is empty or format is not supported
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L104"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-[](https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L108)
+### <kbd>method</kbd> `__init__`
 
-### method `__init__`[​](/reference/python-sdk/weave/#method-__init__-5)
-
+```python
+__init__(
+    data: 'bytes',
+    format: 'SUPPORTED_FORMATS_TYPE',
+    validate_base64: 'bool' = True
+) → None
 ```
-__init__( data: 'bytes', format: 'SUPPORTED_FORMATS_TYPE', validate_base64: 'bool' = True) → None
-```
 
-[](https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L176)
 
-### method `export`[​](/reference/python-sdk/weave/#method-export)
 
-```
+
+
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L172"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `export`
+
+```python
 export(path: 'str | bytes | Path | PathLike') → None
 ```
 
-Export audio data to a file.
+Export audio data to a file. 
+
+
 
 **Args:**
+ 
+ - <b>`path`</b>:  Path where the audio file should be written 
 
-- `path`**: Path where the audio file should be written
+---
 
-[](https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L123)
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L119"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-### classmethod `from_data`[​](/reference/python-sdk/weave/#classmethod-from_data)
+### <kbd>classmethod</kbd> `from_data`
 
-```
+```python
 from_data(data: 'str | bytes', format: 'str') → Audio
 ```
 
-Create an Audio object from raw data and specified format.
+Create an Audio object from raw data and specified format. 
+
+
 
 **Args:**
+ 
+ - <b>`data`</b>:  Audio data as bytes or base64 encoded string 
+ - <b>`format`</b>:  Audio format ('wav' or 'mp3') 
 
-- `data`**: Audio data as bytes or base64 encoded string
 
-- **`format`**: Audio format ('wav' or 'mp3')
 
 **Returns:**
+ 
+ - <b>`Audio`</b>:  A new Audio instance 
 
-- **`Audio`**: A new Audio instance
+
 
 **Raises:**
+ 
+ - <b>`ValueError`</b>:  If format is not supported 
 
-- **`ValueError`**: If format is not supported
+---
 
-[](https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L148)
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L144"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-### classmethod `from_path`[​](/reference/python-sdk/weave/#classmethod-from_path)
+### <kbd>classmethod</kbd> `from_path`
 
-```
+```python
 from_path(path: 'str | bytes | Path | PathLike') → Audio
 ```
 
-Create an Audio object from a file path.
+Create an Audio object from a file path. 
+
+
 
 **Args:**
+ 
+ - <b>`path`</b>:  Path to an audio file (must have .wav or .mp3 extension) 
 
-- `path`**: Path to an audio file (must have .wav or .mp3 extension)
+
 
 **Returns:**
+ 
+ - <b>`Audio`</b>:  A new Audio instance loaded from the file 
 
-- **`Audio`**: A new Audio instance loaded from the file
+
 
 **Raises:**
+ 
+ - <b>`ValueError`</b>:  If file doesn't exist or has unsupported extension 
 
-- **`ValueError`**: If file doesn't exist or has unsupported extension
-
-[Edit this page](https://github.com/wandb/weave/blob/master/docs/docs/reference/python-sdk/weave/index.mdx)Last updated on **Jul 14, 2025**
