@@ -35,7 +35,7 @@ print(response.choices[0].message.content)
 
 Weave will now track and log all LLM calls made through the Cerebras SDK. You can view the traces in the Weave web interface, including details like token usage and response time.
 
-[![cerebras_calls.png](/guides/integrations/imgs/cerebras_calls.png)](https://wandb.ai/capecape/cerebras_speedster/weave/traces)
+[![cerebras_calls.png](/weave/guides/integrations/imgs/cerebras_calls.png)](https://wandb.ai/capecape/cerebras_speedster/weave/traces)
 
 ## Wrapping with your own ops
 
@@ -69,7 +69,7 @@ animal_speedster("human", "llama3.1-8b")
 
 ## Create a `Model` for easier experimentation
 
-The [Model](/guides/core-types/models) class in Weave helps you organize and compare different iterations of your app. This is particularly useful when experimenting with Cerebras models. Here's an example:
+The [Model](/weave/guides/core-types/models) class in Weave helps you organize and compare different iterations of your app. This is particularly useful when experimenting with Cerebras models. Here's an example:
 
 
 ```python
@@ -107,4 +107,4 @@ print(result)
 
 With this setup, you can easily experiment with different models and parameters, all while keeping track of your Cerebras-powered inferences!
 
-[![cerebras_model.png](/guides/integrations/imgs/cerebras_model.png)](https://wandb.ai/capecape/cerebras_speedster/weave/traces)
+[![cerebras_model.png](/weave/guides/integrations/imgs/cerebras_model.png)](https://wandb.ai/capecape/cerebras_speedster/weave/traces)

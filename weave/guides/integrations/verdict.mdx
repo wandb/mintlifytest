@@ -162,7 +162,7 @@ result = pipeline.run(data)
 
 ## Models and Evaluations
 
-Organizing and evaluating AI systems with multiple pipeline components can be challenging. Using the [`weave.Model`](/guides/core-types/models), you can capture and organize experimental details like prompts, pipeline configurations, and evaluation parameters, making it easier to compare different iterations.
+Organizing and evaluating AI systems with multiple pipeline components can be challenging. Using the [`weave.Model`](/weave/guides/core-types/models), you can capture and organize experimental details like prompts, pipeline configurations, and evaluation parameters, making it easier to compare different iterations.
 
 The following example demonstrates wrapping a Verdict pipeline in a `WeaveModel`:
 
@@ -216,7 +216,7 @@ This code creates a model that can be visualized in the Weave UI, showing both t
 
 ### Evaluations
 
-Evaluations help you measure the performance of your evaluation pipelines themselves. By using the [`weave.Evaluation`](/guides/core-types/evaluations) class, you can capture how well your Verdict pipelines perform on specific tasks or datasets:
+Evaluations help you measure the performance of your evaluation pipelines themselves. By using the [`weave.Evaluation`](/weave/guides/core-types/evaluations) class, you can capture how well your Verdict pipelines perform on specific tasks or datasets:
 
 ```python
 import asyncio

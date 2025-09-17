@@ -477,7 +477,7 @@ for entry in pii_data:
 
 Next, we will use Presidio to identify and redact PII data from the original text.
 
-![](/images/cookbooks/../../media/pii/redact.png)
+![](/media/pii/redact.png)
 
 ```python
 from typing import Any
@@ -532,7 +532,7 @@ for entry in pii_data:
 
 In this example, we use Faker to generate anonymized replacement PII data and use Presidio to identify and replace the PII data in the original text.
 
-![](/images/cookbooks/../../media/pii/replace.png)
+![](/media/pii/replace.png)
 
 ```python
 from typing import Any
@@ -648,7 +648,7 @@ for entry in pii_data:
 
 ### (Optional) Encrypt your data
 
-![](/images/cookbooks/../../media/pii/encrypt.png)
+![](/media/pii/encrypt.png)
 
 In addition to anonymizing PII, you can add an extra layer of security by encrypting your data using the cryptography library's [Fernet](https://cryptography.io/en/latest/fernet/) symmetric encryption. This approach ensures that even if the anonymized data is intercepted, it remains unreadable without the encryption key.
 
