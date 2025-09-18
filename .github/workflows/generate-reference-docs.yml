@@ -1,6 +1,14 @@
 name: Generate Reference Documentation
 
 on:
+  # TEMPORARY: Push trigger for testing - REMOVE BEFORE MERGING
+  push:
+    branches:
+      - feature/reference-docs-generation-v2
+    paths:
+      - '.github/workflows/generate-reference-docs.yml'
+      - 'scripts/reference-generation/**'
+  
   workflow_dispatch:
     inputs:
       weave_version:
@@ -72,16 +80,16 @@ jobs:
         python scripts/reference-generation/fix_broken_links.py
         
     - name: Create Pull Request
-      if: ${{ github.event.inputs.create_pr == 'true' }}
+      if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.create_pr == 'true' }}
       uses: peter-evans/create-pull-request@v6
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: "chore: Update reference documentation (Weave ${{ github.event.inputs.weave_version }})"
-        title: "Update reference documentation (Weave ${{ github.event.inputs.weave_version }})"
+        commit-message: "chore: Update reference documentation (Weave ${{ github.event.inputs.weave_version || 'latest' }})"
+        title: "Update reference documentation (Weave ${{ github.event.inputs.weave_version || 'latest' }})"
         body: |
           This PR updates the reference documentation for Weave.
           
-          **Version**: ${{ github.event.inputs.weave_version }}
+          **Version**: ${{ github.event.inputs.weave_version || 'latest' }}
           **Generated on**: ${{ github.event.repository.updated_at }}
           
           ### Changes
@@ -99,15 +107,18 @@ jobs:
         labels: |
           documentation
           automated
-
-  # Optional: Run on a schedule (weekly)
-  generate-docs-scheduled:
-    if: github.event_name == 'schedule'
-    runs-on: ubuntu-latest
     
-    steps:
-    - uses: actions/checkout@v4
-    - uses: ./.github/workflows/generate-reference-docs.yml
-      with:
-        weave_version: 'latest'
-        create_pr: true
+    # For push events, just commit the changes back to the branch
+    - name: Commit changes (push trigger)
+      if: ${{ github.event_name == 'push' }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "test: Auto-generated reference documentation (push trigger)"
+          git push
+        fi
+
