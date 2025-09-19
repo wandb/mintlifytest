@@ -47,6 +47,10 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
           
+    - name: Install requests for Service API generation
+      run: |
+        pip install requests
+        
     - name: Generate Service API Documentation
       run: |
         echo "Generating Service API documentation..."
