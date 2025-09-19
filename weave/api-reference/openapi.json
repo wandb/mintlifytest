@@ -430,6 +430,28 @@
         ]
       }
     },
+    "/inference/router/openrouter/models": {
+      "get": {
+        "tags": [
+          "Inference"
+        ],
+        "summary": "Inference Router Openrouter Models",
+        "description": "Returns a list of models that are available to be used with OpenRouter.\n\nThis API is available without authentication.",
+        "operationId": "inference_router_openrouter_models_inference_router_openrouter_models_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RouterOpenRouterModelsRes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/inference/v1{path}": {
       "get": {
         "tags": [
@@ -3635,6 +3657,19 @@
         ],
         "title": "CostQueryRes"
       },
+      "Datacenter": {
+        "properties": {
+          "country_code": {
+            "type": "string",
+            "title": "Country Code"
+          }
+        },
+        "type": "object",
+        "required": [
+          "country_code"
+        ],
+        "title": "Datacenter"
+      },
       "EndedCallSchemaForInsert": {
         "properties": {
           "project_id": {
@@ -5668,6 +5703,45 @@
         "title": "OrOperation",
         "description": "Logical OR. At least one condition must be true.\n\nExample:\n    ```\n    {\n        \"$or\": [\n            {\"$eq\": [{\"$getField\": \"op_name\"}, {\"$literal\": \"a\"}]},\n            {\"$eq\": [{\"$getField\": \"op_name\"}, {\"$literal\": \"b\"}]}\n        ]\n    }\n    ```"
       },
+      "Pricing": {
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "title": "Prompt"
+          },
+          "completion": {
+            "type": "string",
+            "title": "Completion"
+          },
+          "image": {
+            "type": "string",
+            "title": "Image"
+          },
+          "request": {
+            "type": "string",
+            "title": "Request"
+          },
+          "input_cache_reads": {
+            "type": "string",
+            "title": "Input Cache Reads"
+          },
+          "input_cache_writes": {
+            "type": "string",
+            "title": "Input Cache Writes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "prompt",
+          "completion",
+          "image",
+          "request",
+          "input_cache_reads",
+          "input_cache_writes"
+        ],
+        "title": "Pricing",
+        "description": "All pricing values are in USD per 1 token.\n\nPricing fields are in string format to avoid floating point precision issues."
+      },
       "Query": {
         "properties": {
           "$expr": {
@@ -5737,6 +5811,131 @@
           "vals"
         ],
         "title": "RefsReadBatchRes"
+      },
+      "RouterOpenRouterModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "created": {
+            "type": "integer",
+            "title": "Created"
+          },
+          "input_modalities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Input Modalities"
+          },
+          "output_modalities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Output Modalities"
+          },
+          "quantization": {
+            "type": "string",
+            "enum": [
+              "int4",
+              "int8",
+              "fp4",
+              "fp6",
+              "fp8",
+              "fp16",
+              "bf16",
+              "fp32"
+            ],
+            "title": "Quantization"
+          },
+          "context_length": {
+            "type": "integer",
+            "title": "Context Length"
+          },
+          "max_output_length": {
+            "type": "integer",
+            "title": "Max Output Length"
+          },
+          "pricing": {
+            "$ref": "#/components/schemas/Pricing"
+          },
+          "supported_sampling_parameters": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "temperature",
+                "top_p",
+                "top_k",
+                "repetition_penalty",
+                "frequency_penalty",
+                "presence_penalty",
+                "stop",
+                "seed"
+              ]
+            },
+            "type": "array",
+            "title": "Supported Sampling Parameters"
+          },
+          "supported_features": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "tools",
+                "json_mode",
+                "structured_outputs",
+                "web_search",
+                "reasoning"
+              ]
+            },
+            "type": "array",
+            "title": "Supported Features"
+          },
+          "datacenters": {
+            "items": {
+              "$ref": "#/components/schemas/Datacenter"
+            },
+            "type": "array",
+            "title": "Datacenters"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "created",
+          "input_modalities",
+          "output_modalities",
+          "quantization",
+          "context_length",
+          "max_output_length",
+          "pricing",
+          "supported_sampling_parameters",
+          "supported_features",
+          "datacenters"
+        ],
+        "title": "RouterOpenRouterModel"
+      },
+      "RouterOpenRouterModelsRes": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/RouterOpenRouterModel"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "RouterOpenRouterModelsRes"
       },
       "ServerInfoRes": {
         "properties": {

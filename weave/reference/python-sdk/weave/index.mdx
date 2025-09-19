@@ -297,7 +297,7 @@ with weave.attributes({'env': 'production'}):
 
 ```python
 thread(
-    thread_id: 'str | None | object' = <object object at 0x105344660>
+    thread_id: 'str | None | object' = <object object at 0x7fad47444e10>
 ) → Iterator[ThreadContext]
 ```
 
@@ -494,15 +494,6 @@ example_label = dataset_ref.rows[2]['sentence']
 - `rows`: `typing.Union[trace.table.Table, trace.vals.WeaveTable]`
 
 ---------
-
-#### <kbd>handler</kbd> columns_names
-
----
-
-#### <kbd>handler</kbd> num_rows
-
-
----
 
 <a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L129"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
@@ -926,7 +917,7 @@ asyncio.run(evaluation.evaluate(function_to_evaluate))
 - `description`: `typing.Optional[str]`
 - `ref`: `typing.Optional[trace.refs.ObjectRef]`
 - `dataset`: `<class 'dataset.dataset.Dataset'>`
-- `scorers`: `typing.Optional[list[typing.Annotated[typing.Union[trace.op_protocol.Op, flow.scorer.Scorer], BeforeValidator(func=<function cast_to_scorer at 0x1054cee80>, json_schema_input_type=PydanticUndefined)]]]`
+- `scorers`: `typing.Optional[list[typing.Annotated[typing.Union[trace.op_protocol.Op, flow.scorer.Scorer], BeforeValidator(func=<function cast_to_scorer at 0x7fad47295b20>, json_schema_input_type=PydanticUndefined)]]]`
 - `preprocess_model_input`: `typing.Optional[typing.Callable[[dict], dict]]`
 - `trials`: `<class 'int'>`
 - `evaluation_name`: `typing.Union[str, typing.Callable[[trace.call.Call], str], NoneType]`
@@ -1768,7 +1759,7 @@ Constructs a data URL from the content.
 ---
 
 
-<a href="https://github.com/wandb/weave/blob/master/rich/markdown.py#L503"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/rich/markdown.py#L498"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ## <kbd>class</kbd> `Markdown`
 A Markdown renderable. 
@@ -1785,7 +1776,7 @@ A Markdown renderable.
  - <b>`inline_code_lexer`</b>:  (str, optional): Lexer to use if inline code highlighting is  enabled. Defaults to None. 
  - <b>`inline_code_theme`</b>:  (Optional[str], optional): Pygments theme for inline code  highlighting, or None for no highlighting. Defaults to None. 
 
-<a href="https://github.com/wandb/weave/blob/master/rich/markdown.py#L539"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/rich/markdown.py#L534"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `__init__`
 

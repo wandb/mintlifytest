@@ -1,26 +1,27 @@
 # Testing Guide for Reference Documentation Generation
 
-## Quick Start Testing
+## Production Usage (After Merge)
 
-The GitHub Action has a **temporary push trigger** for testing. Any push to the `feature/reference-docs-generation-v2` branch that modifies:
-- The workflow file (`.github/workflows/generate-reference-docs.yml`)
-- Any file in `scripts/reference-generation/`
+Once merged to main, the workflow will be triggered manually from the Actions tab:
 
-Will automatically trigger the documentation generation.
+1. Go to [Actions](https://github.com/wandb/mintlifytest/actions)
+2. Select "Generate Reference Documentation"
+3. Click "Run workflow"
+4. Enter the Weave version (e.g., "latest", "0.51.34", "v0.51.34", or commit SHA)
+5. Choose whether to create a PR (recommended: true)
+6. Click "Run workflow"
 
-## Testing Methods
+The workflow will generate the reference docs and create a new PR with the changes.
 
-### 1. Automatic Testing (Push Trigger)
-Simply push any change to trigger the workflow:
+## Testing While on Feature Branch
+
+The workflow has a **temporary push trigger** for testing before merge. Any push to the branch will trigger the workflow with the latest version.
+
+To test with a specific version while on the feature branch:
 ```bash
-# Make a small change to trigger the workflow
-echo "# Test trigger $(date)" >> scripts/reference-generation/test-trigger.txt
-git add scripts/reference-generation/test-trigger.txt
-git commit -m "test: Trigger workflow"
-git push origin feature/reference-docs-generation-v2
+# Set the version as an environment variable in your commit message or use the local test script
+./scripts/reference-generation/test-locally.sh 0.51.34
 ```
-
-Then check the Actions tab in GitHub to see the workflow run.
 
 ### 2. Manual Testing (Workflow Dispatch)
 1. Go to the [Actions tab](https://github.com/wandb/mintlifytest/actions) in the repository
@@ -70,9 +71,9 @@ python scripts/reference-generation/fix_broken_links.py
 ## Important Notes
 
 ⚠️ **BEFORE MERGING THE PR**:
-1. Remove the push trigger from `.github/workflows/generate-reference-docs.yml`
-2. Delete the test trigger file if created
-3. The workflow should only have `workflow_dispatch` trigger in production
+1. Remove the `push` trigger from `.github/workflows/generate-reference-docs.yml` (lines 16-19)
+2. The workflow should only have `workflow_dispatch` trigger in production
+3. Delete any test files created during testing
 
 ## Troubleshooting
 
@@ -81,13 +82,17 @@ python scripts/reference-generation/fix_broken_links.py
 - **TypeScript download fails**: Check the npm registry for the @wandb/weave package
 - **Broken links persist**: Run the fix_broken_links.py script manually
 
-## Clean Up Test Files
+## Clean Up Before Merging
 
-After testing:
+After testing is complete:
 ```bash
-# Remove test trigger file if created
-rm -f scripts/reference-generation/test-trigger.txt
+# Remove the test configuration file
+rm -f scripts/reference-generation/test-config.txt
 
-# Remove the push trigger from the workflow before merging
-# Edit .github/workflows/generate-reference-docs.yml and remove lines 4-10
+# Edit .github/workflows/generate-reference-docs.yml to:
+# 1. Remove the issue_comment trigger (lines 4-6)
+# 2. Remove the comment parsing steps
+# 3. Keep only the workflow_dispatch trigger
 ```
+
+The production workflow should only respond to manual triggers via the Actions UI.
