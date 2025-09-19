@@ -151,7 +151,6 @@ jobs:
         # Create isolated environment for TypeScript SDK generation
         python -m venv venv_typescript
         source venv_typescript/bin/activate
-        pip install requests
         python scripts/reference-generation/generate_typescript_sdk_docs.py "${VERSION:-latest}"
         deactivate
         rm -rf venv_typescript
@@ -210,4 +209,3 @@ jobs:
           git commit -m "test: Auto-generated reference documentation (Weave ${VERSION})"
           git push
         fi
-

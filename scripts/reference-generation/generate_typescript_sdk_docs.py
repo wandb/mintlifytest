@@ -13,9 +13,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import tarfile
 from pathlib import Path
-import requests
 
 
 def check_node_dependencies():
@@ -37,51 +35,69 @@ def check_node_dependencies():
 
 
 def download_weave_source(version="main"):
-    """Download Weave source code for a specific version."""
+    """Download Weave source code for a specific version using shallow clone."""
     print(f"\nDownloading Weave source code (version: {version})...")
     
     # Handle "latest" by fetching the latest release tag
     if version == "latest":
+        # Use git ls-remote to get latest tag without API calls
         try:
-            api_url = "https://api.github.com/repos/wandb/weave/releases/latest"
-            response = requests.get(api_url)
-            response.raise_for_status()
-            version = response.json()["tag_name"]
-            print(f"  Using latest release: {version}")
+            result = subprocess.run(
+                ["git", "ls-remote", "--tags", "--sort=-v:refname", "https://github.com/wandb/weave.git"],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            # Parse the output to get the latest version tag
+            for line in result.stdout.strip().split('\n'):
+                if '\trefs/tags/' in line and not line.endswith('^{}'):
+                    tag = line.split('\trefs/tags/')[-1]
+                    if tag.startswith('v') and not 'dev' in tag and not 'rc' in tag:
+                        version = tag
+                        print(f"  Using latest release: {version}")
+                        break
+            else:
+                print("  Warning: Could not determine latest release, using main branch")
+                version = "main"
         except Exception as e:
             print(f"  Warning: Could not fetch latest release, using main branch: {e}")
             version = "main"
     
     # Create temporary directory
     temp_dir = tempfile.mkdtemp()
+    weave_dir = Path(temp_dir) / "weave"
     
     try:
-        # Download tarball from GitHub
-        url = f"https://github.com/wandb/weave/archive/{version}.tar.gz"
-        response = requests.get(url, stream=True)
-        response.raise_for_status()
+        # Use shallow clone with single branch
+        print(f"  Cloning Weave repository (shallow clone)...")
+        clone_cmd = [
+            "git", "clone",
+            "--depth", "1",
+            "--single-branch"
+        ]
         
-        # Save and extract tarball
-        tarball_path = Path(temp_dir) / "weave.tar.gz"
-        with open(tarball_path, 'wb') as f:
-            for chunk in response.iter_content(chunk_size=8192):
-                f.write(chunk)
+        # Add branch/tag specification
+        if version != "main":
+            clone_cmd.extend(["--branch", version])
         
-        # Extract
-        with tarfile.open(tarball_path, 'r:gz') as tar:
-            tar.extractall(temp_dir)
+        clone_cmd.extend([
+            "https://github.com/wandb/weave.git",
+            str(weave_dir)
+        ])
         
-        # Find the extracted directory
-        extracted_dirs = [d for d in Path(temp_dir).iterdir() 
-                         if d.is_dir() and d.name.startswith('weave-')]
-        if not extracted_dirs:
-            raise Exception("Could not find extracted Weave directory")
+        # Run the clone command
+        subprocess.run(clone_cmd, check=True, capture_output=True, text=True)
         
-        weave_dir = extracted_dirs[0]
-        print(f"  ✓ Downloaded and extracted to {weave_dir}")
+        print(f"  ✓ Successfully cloned Weave {version} to {weave_dir}")
         
         return weave_dir
         
+    except subprocess.CalledProcessError as e:
+        print(f"Error cloning Weave repository: {e}", file=sys.stderr)
+        if e.stderr:
+            print(f"  stderr: {e.stderr}", file=sys.stderr)
+        shutil.rmtree(temp_dir, ignore_errors=True)
+        sys.exit(1)
     except Exception as e:
         print(f"Error downloading Weave source: {e}", file=sys.stderr)
         shutil.rmtree(temp_dir, ignore_errors=True)
