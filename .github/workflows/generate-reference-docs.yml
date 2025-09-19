@@ -79,12 +79,45 @@ jobs:
       run: |
         pip install requests
         
+    - name: Check if documentation needs regeneration
+      id: version-check
+      run: |
+        # Get the version we're about to build
+        if [ "${{ github.event_name }}" == "push" ]; then
+          VERSION="${{ steps.parse-pr.outputs.weave_version }}"
+        else
+          VERSION="${{ github.event.inputs.weave_version }}"
+        fi
+        
+        # Check if we have a version file from previous builds
+        if [ -f ".weave-docs-version" ]; then
+          LAST_VERSION=$(cat .weave-docs-version)
+          echo "Last generated version: $LAST_VERSION"
+          echo "Current version: $VERSION"
+          
+          if [ "$LAST_VERSION" == "$VERSION" ]; then
+            echo "Documentation already generated for version $VERSION"
+            echo "skip_generation=true" >> $GITHUB_OUTPUT
+          else
+            echo "Documentation needs to be regenerated"
+            echo "skip_generation=false" >> $GITHUB_OUTPUT
+          fi
+        else
+          echo "No previous version found, will generate documentation"
+          echo "skip_generation=false" >> $GITHUB_OUTPUT
+        fi
+        
+        # Save the version for next time
+        echo "$VERSION" > .weave-docs-version
+        
     - name: Generate Service API Documentation
+      if: steps.version-check.outputs.skip_generation != 'true'
       run: |
         echo "Generating Service API documentation..."
         python scripts/reference-generation/generate_service_api_spec.py
         
     - name: Generate Python SDK Documentation
+      if: steps.version-check.outputs.skip_generation != 'true'
       run: |
         echo "Generating Python SDK documentation..."
         # Use version from PR description for push triggers, or workflow input
@@ -104,6 +137,7 @@ jobs:
         rm -rf venv_python
         
     - name: Generate TypeScript SDK Documentation  
+      if: steps.version-check.outputs.skip_generation != 'true'
       run: |
         echo "Generating TypeScript SDK documentation..."
         # Use version from PR description for push triggers, or workflow input
@@ -123,6 +157,7 @@ jobs:
         rm -rf venv_typescript
         
     - name: Fix broken links
+      if: steps.version-check.outputs.skip_generation != 'true'
       run: |
         echo "Fixing broken links in documentation..."
         python scripts/reference-generation/fix_broken_links.py
@@ -164,7 +199,12 @@ jobs:
         git config --local user.name "GitHub Action"
         git add -A
         if git diff --staged --quiet; then
-          echo "No changes to commit"
+          if [ "${{ steps.version-check.outputs.skip_generation }}" == "true" ]; then
+            VERSION="${{ steps.parse-pr.outputs.weave_version }}"
+            echo "Skipped regeneration - documentation already up to date for Weave ${VERSION}"
+          else
+            echo "No changes to commit"
+          fi
         else
           VERSION="${{ steps.parse-pr.outputs.weave_version }}"
           git commit -m "test: Auto-generated reference documentation (Weave ${VERSION})"
