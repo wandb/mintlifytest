@@ -166,7 +166,7 @@ jobs:
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
-          VERSION="${WEAVE_TEST_VERSION:-latest}"
+          VERSION="${{ steps.parse-pr.outputs.weave_version }}"
           git commit -m "test: Auto-generated reference documentation (Weave ${VERSION})"
           git push
         fi
