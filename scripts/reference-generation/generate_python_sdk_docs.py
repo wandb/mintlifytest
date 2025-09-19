@@ -20,6 +20,21 @@ lazydocs = None
 pydantic = None
 
 
+def check_pypi_version(version):
+    """Check if a specific version exists on PyPI."""
+    import urllib.request
+    import json
+    
+    try:
+        with urllib.request.urlopen("https://pypi.org/pypi/weave/json") as response:
+            data = json.loads(response.read())
+            available_versions = list(data["releases"].keys())
+            return version in available_versions, available_versions
+    except Exception as e:
+        print(f"Warning: Could not check PyPI versions: {e}")
+        return True, []  # Allow to proceed if we can't check
+
+
 def install_dependencies(weave_version="latest"):
     """Install Weave and other required packages."""
     print(f"Installing dependencies (Weave version: {weave_version})...")
@@ -33,11 +48,43 @@ def install_dependencies(weave_version="latest"):
             cmd = [sys.executable, "-m", "pip", "install", "weave"]
         elif weave_version.startswith("v") or "." in weave_version:
             version_num = weave_version.lstrip("v")
+            
+            # Handle -dev0 versions by stripping the suffix for PyPI
+            if version_num.endswith("-dev0"):
+                print(f"Note: Converting {version_num} to release version for PyPI")
+                release_version = version_num.replace("-dev0", "")
+                
+                # Check if the release version exists on PyPI
+                exists, available = check_pypi_version(release_version)
+                if not exists:
+                    print(f"\nError: Weave version {release_version} is not available on PyPI.")
+                    print(f"This appears to be an unreleased development version ({version_num}).")
+                    print(f"\nAvailable versions near this one:")
+                    # Show versions that start with the same major.minor
+                    prefix = ".".join(release_version.split(".")[:2])
+                    matching = [v for v in available if v.startswith(prefix)]
+                    for v in sorted(matching, reverse=True)[:5]:
+                        print(f"  - {v}")
+                    sys.exit(1)
+                
+                version_num = release_version
+            else:
+                # Regular version - also check if it exists
+                exists, available = check_pypi_version(version_num)
+                if not exists:
+                    print(f"\nError: Weave version {version_num} is not available on PyPI.")
+                    print(f"\nAvailable versions:")
+                    # Show recent versions
+                    for v in sorted(available, reverse=True)[:10]:
+                        print(f"  - {v}")
+                    sys.exit(1)
+            
             cmd = [sys.executable, "-m", "pip", "install", f"weave=={version_num}"]
         else:
-            # Assume it's a commit hash or branch name
-            cmd = [sys.executable, "-m", "pip", "install", 
-                   f"git+https://github.com/wandb/weave.git@{weave_version}"]
+            # For commit hashes or branch names, we don't generate docs
+            print(f"\nError: Cannot generate documentation for Git references ({weave_version}).")
+            print("Please specify a released version available on PyPI or 'latest'.")
+            sys.exit(1)
         
         subprocess.run(cmd, check=True)
         print("✓ Dependencies installed successfully")
@@ -252,8 +299,11 @@ def get_modules_to_document():
 
 def main():
     """Main function."""
-    # Get Weave version from environment or use latest
-    weave_version = os.environ.get("WEAVE_VERSION", "latest")
+    # Get Weave version from command line, environment variable, or use latest
+    if len(sys.argv) > 1:
+        weave_version = sys.argv[1]
+    else:
+        weave_version = os.environ.get("WEAVE_VERSION", "latest")
     
     # Install dependencies
     install_dependencies(weave_version)
