@@ -1,14 +1,6 @@
 name: Generate Reference Documentation
 
 on:
-  # TEMPORARY: Push trigger for testing - REMOVE BEFORE MERGING
-  push:
-    branches:
-      - feature/reference-docs-generation-v2
-    paths:
-      - '.github/workflows/generate-reference-docs.yml'
-      - 'scripts/reference-generation/**'
-  
   workflow_dispatch:
     inputs:
       weave_version:
@@ -20,6 +12,11 @@ on:
         required: true
         type: boolean
         default: true
+  
+  # TEMPORARY: Push trigger for testing - REMOVE BEFORE MERGING
+  push:
+    branches:
+      - feature/reference-docs-generation-v2
 
 jobs:
   generate-docs:
@@ -28,6 +25,37 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      
+    - name: Parse version from PR description (push trigger only)
+      if: ${{ github.event_name == 'push' }}
+      id: parse-pr
+      uses: actions/github-script@v7
+      with:
+        script: |
+          // Get PR number from the push event
+          const { data: prs } = await github.rest.pulls.list({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            head: `${context.repo.owner}:${context.ref.replace('refs/heads/', '')}`,
+            state: 'open'
+          });
+          
+          if (prs.length > 0) {
+            const pr = prs[0];
+            const body = pr.body || '';
+            
+            // Look for version specification in PR body
+            // Format: WEAVE_VERSION: 0.51.34
+            const match = body.match(/WEAVE_VERSION:\s*(\S+)/);
+            const version = match ? match[1] : 'latest';
+            
+            console.log(`Found PR #${pr.number} with version: ${version}`);
+            core.setOutput('weave_version', version);
+            core.setOutput('pr_number', pr.number.toString());
+          } else {
+            console.log('No open PR found for this branch');
+            core.setOutput('weave_version', 'latest');
+          }
       
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -59,22 +87,38 @@ jobs:
     - name: Generate Python SDK Documentation
       run: |
         echo "Generating Python SDK documentation..."
+        # Use version from PR description for push triggers, or workflow input
+        if [ "${{ github.event_name }}" == "push" ]; then
+          VERSION="${{ steps.parse-pr.outputs.weave_version }}"
+        else
+          VERSION="${{ github.event.inputs.weave_version }}"
+        fi
+        echo "Using Weave version: ${VERSION:-latest}"
+        
         # Create isolated environment for Python SDK generation
         python -m venv venv_python
         source venv_python/bin/activate
         pip install requests lazydocs
-        python scripts/reference-generation/generate_python_sdk_docs.py "${{ github.event.inputs.weave_version }}"
+        python scripts/reference-generation/generate_python_sdk_docs.py "${VERSION:-latest}"
         deactivate
         rm -rf venv_python
         
     - name: Generate TypeScript SDK Documentation  
       run: |
         echo "Generating TypeScript SDK documentation..."
+        # Use version from PR description for push triggers, or workflow input
+        if [ "${{ github.event_name }}" == "push" ]; then
+          VERSION="${{ steps.parse-pr.outputs.weave_version }}"
+        else
+          VERSION="${{ github.event.inputs.weave_version }}"
+        fi
+        echo "Using Weave version: ${VERSION:-latest}"
+        
         # Create isolated environment for TypeScript SDK generation
         python -m venv venv_typescript
         source venv_typescript/bin/activate
         pip install requests
-        python scripts/reference-generation/generate_typescript_sdk_docs.py "${{ github.event.inputs.weave_version }}"
+        python scripts/reference-generation/generate_typescript_sdk_docs.py "${VERSION:-latest}"
         deactivate
         rm -rf venv_typescript
         
@@ -112,7 +156,7 @@ jobs:
           documentation
           automated
     
-    # For push events, just commit the changes back to the branch
+    # For push events (testing only), commit the changes back
     - name: Commit changes (push trigger)
       if: ${{ github.event_name == 'push' }}
       run: |
@@ -122,7 +166,8 @@ jobs:
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
-          git commit -m "test: Auto-generated reference documentation (push trigger)"
+          VERSION="${WEAVE_TEST_VERSION:-latest}"
+          git commit -m "test: Auto-generated reference documentation (Weave ${VERSION})"
           git push
         fi
 
