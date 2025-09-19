@@ -1,138 +1,173 @@
 ---
-title: "Trace Utilities"
-description: "Utility functions and classes for tracing, including ThreadPoolExecutor"
+title: "util"
+description: "Python SDK reference for weave.trace.util"
 ---
 
-The trace utilities module provides helper functions and classes for advanced tracing scenarios.
 
-## ThreadPoolExecutor
+# API Overview
 
-A context-aware ThreadPoolExecutor that preserves trace context across thread boundaries.
 
-```python
-from weave import ThreadPoolExecutor
 
-@weave.op
-def process_item(item: str) -> str:
-    return item.upper()
 
-@weave.op
-def process_batch(items: List[str]) -> List[str]:
-    with ThreadPoolExecutor(max_workers=4) as executor:
-        # Each item is processed in parallel while maintaining trace context
-        results = list(executor.map(process_item, items))
-    return results
-```
 
-### Key Features
 
-- Preserves parent-child relationships in traces
-- Maintains trace context across thread boundaries
-- Compatible with standard ThreadPoolExecutor API
 
-### Example with Nested Tracing
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/util.py#L40"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `ContextAwareThreadPoolExecutor`
+A ThreadPoolExecutor that runs functions with the context of the caller. 
+
+This is a drop-in replacement for concurrent.futures.ThreadPoolExecutor that ensures weave calls behave as expected inside the executor.  Weave requires certain contextvars to be set (see call_context.py), but new threads do not automatically copy context from the parent, which can cause the call context to be lost -- not good!  This class automates contextvar copying so using this executor "just works" as the user probably expects. 
+
+You can achieve the same effect without this class by instead writing: 
 
 ```python
-@weave.op
-def fetch_data(url: str) -> dict:
-    # Simulated API call
-    return {"data": f"from {url}"}
+with concurrent.futures.ThreadPoolExecutor() as executor:
+     contexts = [copy_context() for _ in range(len(vals))]
 
-@weave.op
-def process_urls(urls: List[str]) -> List[dict]:
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        # All fetch_data calls will be properly nested under process_urls
-        results = list(executor.map(fetch_data, urls))
-    return results
+     def _wrapped_fn(*args):
+         return contexts.pop().run(fn, *args)
 
-# Usage
-urls = ["http://api1.com", "http://api2.com", "http://api3.com"]
-data = process_urls(urls)
+     executor.map(_wrapped_fn, vals)
 ```
 
-## attributes
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/util.py#L63"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-Context manager for adding attributes to calls.
+### <kbd>method</kbd> `__init__`
 
 ```python
-from weave import attributes
-
-@weave.op
-def my_function():
-    return "result"
-
-# Add metadata to the call
-with attributes({'environment': 'production', 'version': '1.0.0'}):
-    my_function()
+__init__(*args: 'Any', **kwargs: 'Any') → None
 ```
 
-### Nested Attributes
 
-Attributes can be nested and will merge:
+
+
+
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/util.py#L72"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `map`
 
 ```python
-with attributes({'env': 'prod'}):
-    with attributes({'region': 'us-east-1'}):
-        # Call will have both attributes
-        my_function()
+map(
+    fn: 'Callable',
+    *iterables: 'Iterable[Any]',
+    timeout: 'float | None' = None,
+    chunksize: 'int' = 1
+) → Iterator
 ```
 
-## set_tracing_enabled
 
-Context manager to temporarily disable tracing.
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/util.py#L68"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `submit`
 
 ```python
-from weave.trace.context.call_context import set_tracing_enabled
-
-@weave.op
-def traced_function():
-    return "This will be traced"
-
-# Temporarily disable tracing
-with set_tracing_enabled(False):
-    traced_function()  # This call won't be traced
-
-# Tracing is automatically re-enabled outside the context
-traced_function()  # This will be traced
+submit(fn: 'Callable', *args: 'Any', **kwargs: 'Any') → Any
 ```
 
-## get_current_call
 
-Get the currently executing call within an op.
+
+
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/util.py#L100"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `ContextAwareThread`
+A Thread that runs functions with the context of the caller. 
+
+This is a drop-in replacement for threading.Thread that ensures calls behave as expected inside the thread.  Weave requires certain contextvars to be set (see call_context.py), but new threads do not automatically copy context from the parent, which can cause the call context to be lost -- not good!  This class automates contextvar copying so using this thread "just works" as the user probably expects. 
+
+You can achieve the same effect without this class by instead writing: 
 
 ```python
-from weave.trace.context import get_current_call
+def run_with_context(func, *args, **kwargs):
+     context = copy_context()
+     def wrapper():
+         context.run(func, *args, **kwargs)
+     return wrapper
 
-@weave.op
-def my_function():
-    call = get_current_call()
-    if call:
-        print(f"Current call ID: {call.id}")
-        print(f"Current call inputs: {call.inputs}")
+thread = threading.Thread(target=run_with_context(your_func, *args, **kwargs))
+thread.start()
 ```
 
-## Summary Utilities
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/util.py#L124"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
-### add_summary
-
-Add custom summary metrics to a call.
+### <kbd>method</kbd> `__init__`
 
 ```python
-@weave.op
-def evaluate_model(prompt: str) -> str:
-    result = model.generate(prompt)
-    
-    # Add custom metrics to the call summary
-    call = get_current_call()
-    if call:
-        call.summary.update({
-            'token_count': len(result.split()),
-            'confidence': 0.95
-        })
-    
-    return result
+__init__(*args: 'Any', **kwargs: 'Any') → None
 ```
 
-<Note>
-These utilities are designed to work seamlessly with Weave's tracing system. Always ensure `weave.init()` has been called before using these features.
-</Note>
+
+
+
+
+
+---
+
+#### <kbd>property</kbd> daemon
+
+A boolean value indicating whether this thread is a daemon thread. 
+
+This must be set before start() is called, otherwise RuntimeError is raised. Its initial value is inherited from the creating thread; the main thread is not a daemon thread and therefore all threads created in the main thread default to daemon = False. 
+
+The entire Python program exits when only daemon threads are left. 
+
+---
+
+#### <kbd>property</kbd> ident
+
+Thread identifier of this thread or None if it has not been started. 
+
+This is a nonzero integer. See the get_ident() function. Thread identifiers may be recycled when a thread exits and another thread is created. The identifier is available even after the thread has exited. 
+
+---
+
+#### <kbd>property</kbd> name
+
+A string used for identification purposes only. 
+
+It has no semantics. Multiple threads may be given the same name. The initial name is set by the constructor. 
+
+---
+
+#### <kbd>property</kbd> native_id
+
+Native integral thread ID of this thread, or None if it has not been started. 
+
+This is a non-negative integer. See the get_native_id() function. This represents the Thread ID as reported by the kernel. 
+
+
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/util.py#L128"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `run`
+
+```python
+run() → None
+```
+
+
+
+
+

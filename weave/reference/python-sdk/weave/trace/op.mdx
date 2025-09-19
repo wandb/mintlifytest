@@ -1,171 +1,72 @@
 ---
-title: "Op"
-description: "The Op decorator and related functionality for tracking function calls"
+title: "op"
+description: "Python SDK reference for weave.trace.op"
 ---
 
-The `@weave.op` decorator is used to track function calls in Weave. It automatically logs inputs, outputs, and metadata for decorated functions.
 
-## Basic Usage
+# API Overview
 
-```python
-import weave
 
-@weave.op
-def my_function(x: int, y: int) -> int:
-    return x + y
 
-# When called, this function is automatically tracked
-result = my_function(3, 4)
-```
 
-## Decorator Options
 
-### name
 
-Set a custom name for the operation.
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L1087"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>function</kbd> `call`
 
 ```python
-@weave.op(name="custom_operation_name")
-def my_function():
-    pass
+call(
+    op: 'Op',
+    *args: 'Any',
+    __weave: 'WeaveKwargs | None' = None,
+    __should_raise: 'bool' = False,
+    __require_explicit_finish: 'bool' = False,
+    **kwargs: 'Any'
+) → tuple[Any, Call] | Coroutine[Any, Any, tuple[Any, Call]]
 ```
 
-### call_display_name
+Executes the op and returns both the result and a Call representing the execution. 
 
-Set a display name for all calls of this operation.
+This function will never raise.  Any errors are captured in the Call object. 
 
-```python
-@weave.op(call_display_name="My Custom Display")
-def my_function():
-    pass
-```
-
-You can also use a function to dynamically generate display names:
-
-```python
-def generate_name(call):
-    return f"Processing {call.inputs['item_id']}"
-
-@weave.op(call_display_name=generate_name)
-def process_item(item_id: str):
-    pass
-```
-
-### postprocess_inputs
-
-Transform inputs before they are logged.
-
-```python
-def redact_sensitive(inputs):
-    if 'password' in inputs:
-        inputs['password'] = '[REDACTED]'
-    return inputs
-
-@weave.op(postprocess_inputs=redact_sensitive)
-def login(username: str, password: str):
-    pass
-```
-
-### postprocess_output
-
-Transform outputs before they are logged.
-
-```python
-def format_output(output):
-    return weave.Markdown(f"**Result:** {output}")
-
-@weave.op(postprocess_output=format_output)
-def generate_report():
-    return "Analysis complete"
-```
-
-## Op Methods
-
-### call
-
-Get both the result and the Call object.
+This method is automatically bound to any function decorated with `@weave.op`, allowing for usage like: 
 
 ```python
 @weave.op
-def my_function(x: int) -> int:
-    return x * 2
+def add(a: int, b: int) -> int:
+     return a + b
 
-result, call = my_function.call(5)
-print(f"Result: {result}")
-print(f"Call ID: {call.id}")
+result, call = add.call(1, 2)
 ```
 
-### name
 
-Get or set the operation name.
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L1133"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>function</kbd> `calls`
+
+```python
+calls(op: 'Op') → CallsIter
+```
+
+Get an iterator over all calls to this op. 
+
+This method is automatically bound to any function decorated with `@weave.op`, allowing for usage like: 
 
 ```python
 @weave.op
-def my_function():
-    pass
+def add(a: int, b: int) -> int:
+     return a + b
 
-# Get the current name
-print(my_function.name)
-
-# Set a new name
-my_function.name = "new_operation_name"
+calls = add.calls()
+for call in calls:
+     print(call)
 ```
-
-## Working with Async Functions
-
-Weave supports async operations:
-
-```python
-@weave.op
-async def async_operation(prompt: str) -> str:
-    # Async operations are tracked the same way
-    result = await some_async_api(prompt)
-    return result
-```
-
-## Working with Generators
-
-Weave can track generator functions:
-
-```python
-@weave.op
-def generate_items(count: int):
-    for i in range(count):
-        yield f"Item {i}"
-
-# The output is captured when the generator is consumed
-items = list(generate_items(5))
-```
-
-## Class Methods
-
-Decorate methods on classes:
-
-```python
-class MyClass:
-    @weave.op
-    def process(self, data: str) -> str:
-        return data.upper()
-
-instance = MyClass()
-result = instance.process("hello")
-```
-
-## Static and Class Methods
-
-```python
-class MyClass:
-    @staticmethod
-    @weave.op
-    def static_method(x: int) -> int:
-        return x * 2
-    
-    @classmethod
-    @weave.op
-    def class_method(cls, x: int) -> int:
-        return x * 3
-```
-
-<Note>
-The `@weave.op` decorator should be the innermost decorator when stacking decorators.
-</Note>

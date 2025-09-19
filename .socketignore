@@ -1,0 +1,20 @@
+# Socket Security ignore file
+# These patterns tell Socket to ignore certain files/directories
+
+# Ignore virtual environments (these are development-only)
+.venv/
+venv/
+env/
+.env/
+
+# Ignore the reference generation scripts and their dependencies
+# These are only used in CI/development, not in production
+scripts/reference-generation/
+scripts/reference-generation/requirements.txt
+
+# Ignore generated documentation (it doesn't contain executable code)
+weave/reference/
+weave/api-reference/
+
+# Note: The lazydocs dependency (used for Python SDK doc generation) is maintained
+# by W&B and only used during documentation builds, not in production code

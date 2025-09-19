@@ -3,7 +3,7 @@ title: "Tutorial: App versioning"
 description: "Learn how to use Weave Model to track and version your application and its parameters"
 ---
 
-Tracking the [inputs, outputs, metadata](/quickstart) as well as [data flowing through your app](/tutorial-tracing_2) is critical to understanding the performance of your system. However **versioning your app over time** is also critical to understand how modifications to your code or application parameters change your outputs. Weave's `Model` class is how these changes can be tracked in Weave.
+Tracking the [inputs, outputs, metadata](/weave/quickstart) as well as [data flowing through your app](/weave/tutorial-tracing_2) is critical to understanding the performance of your system. However **versioning your app over time** is also critical to understand how modifications to your code or application parameters change your outputs. Weave's `Model` class is how these changes can be tracked in Weave.
 
 In this tutorial you'll learn:
 
@@ -120,7 +120,7 @@ Now you can instantiate and call the model with `invoke`:
 
 Now after calling `.invoke` you can see the trace in Weave **now tracks the model parameters as well as the code** for the model functions that have been decorated with `weave.op()`. You can see the model is also versioned, "v21" in this case, and if you click on the model **you can see all of the calls** that have used that version of the model
 
-![Re-using a weave model](/weave/images/tutorial-model_invoke3.png)
+![Re-using a weave model](/images/tutorial-model_invoke3.png)
 
 **A note on using `weave.Model`:**
 
@@ -163,8 +163,8 @@ Once you have the URI of the Model object, you can export and re-use it. Note th
 
 Here you can now see the name Model version (v21) was used with the new input:
 
-![Re-using a weave model](/weave/images/tutorial-model_re-use.png)
+![Re-using a weave model](/images/tutorial-model_re-use.png)
 
 ## What's next?
 
-- Follow the [Build an Evaluation pipeline tutorial](/tutorial-eval) to start iteratively improving your applications.
+- Follow the [Build an Evaluation pipeline tutorial](/weave/tutorial-eval) to start iteratively improving your applications.
