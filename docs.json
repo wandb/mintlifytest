@@ -411,6 +411,12 @@
             "pages": [
               "inference/index"
             ]
+          },
+          {
+            "tab": "Release Notes",
+            "pages": [
+              "release-notes/index"
+            ]
           }
         ]
       }
