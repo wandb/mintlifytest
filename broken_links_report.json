@@ -1,0 +1,427 @@
+{
+  "metadata": {
+    "generated_at": "2025-09-26 14:30:20",
+    "base_url": "https://docs.wandb.ai",
+    "total_pages": 15,
+    "total_links_processed": 42,
+    "pages_not_found": 0,
+    "max_instances": 15,
+    "processing_time_seconds": 306.71517848968506,
+    "script_version": "3.1_with_404_detection"
+  },
+  "results": [
+    {
+      "page": "guides/app/features/panels/media.mdx",
+      "links": [
+        {
+          "broken": "/guides/models/track/log/media",
+          "fix": "/guides/track/log/media/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 2.625534772872925,
+      "worker_id": 6,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/features/panels/run-comparer.mdx",
+      "links": [
+        {
+          "broken": "/guides/models/track/runs/filter-runs",
+          "fix": "/guides/runs/filter-runs/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 5.769514083862305,
+      "worker_id": 10,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/features/panels/parameter-importance.mdx",
+      "links": [
+        {
+          "broken": "/guides/models/track/config/",
+          "fix": "/guides/track/config/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 6.016732931137085,
+      "worker_id": 8,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/features/custom-charts.mdx",
+      "links": [
+        {
+          "broken": "/guides/models/track/config",
+          "fix": "/guides/track/config/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 5.811561107635498,
+      "worker_id": 3,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/features/custom-charts/walkthrough.mdx",
+      "links": [
+        {
+          "broken": "/guides/models/track/config",
+          "fix": "/guides/track/config/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/track/log/",
+          "fix": "/guides/track/log/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 7.686327219009399,
+      "worker_id": 2,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/features/cascade-settings.mdx",
+      "links": [
+        {
+          "broken": "/guides/models/track/workspaces.md#workspace-templates",
+          "fix": "/guides/track/workspaces/#workspace-templates",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "panels/",
+          "fix": "/guides/app/features/panels/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/app/features/panels/line-plot/smoothing",
+          "fix": "/guides/app/features/panels/line-plot/smoothing/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/app/features/panels/line-plot/sampling",
+          "fix": "/guides/app/features/panels/line-plot/sampling/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/app/features/panels/line-plot/#edit-line-panel-settings",
+          "fix": "/guides/app/features/panels/line-plot/#edit-line-panel-settings",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/app/features/panels/line-plot/#edit-line-panel-settings",
+          "fix": "/guides/app/features/panels/line-plot/#edit-line-panel-settings",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 7.199069023132324,
+      "worker_id": 1,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/settings-page/teams.mdx",
+      "links": [
+        {
+          "broken": "team-settings.md#privacy",
+          "fix": "/guides/app/settings-page/team-settings/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "team-settings.md#privacy",
+          "fix": "/guides/app/settings-page/team-settings/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/hosting/iam/authentication/service-accounts",
+          "fix": "/guides/hosting/iam/service-accounts/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/ref/python/public-api/index",
+          "fix": "/ref/python/public-api/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 8.984459400177002,
+      "worker_id": 15,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/settings-page/billing-settings.mdx",
+      "links": [
+        {
+          "broken": "storage",
+          "fix": "/guides/app/settings-page/storage/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 6.755381345748901,
+      "worker_id": 12,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/settings-page/storage.mdx",
+      "links": [
+        {
+          "broken": "/guides/core/artifacts/track-external-files",
+          "fix": "/guides/artifacts/track-external-files/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "teams",
+          "fix": "/guides/app/settings-page/teams/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/artifacts/manage-data/ttl",
+          "fix": "/guides/artifacts/ttl/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 9.30336594581604,
+      "worker_id": 13,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/features/panels.mdx",
+      "links": [
+        {
+          "broken": "line-plot/#all-line-plots-in-a-workspace",
+          "fix": "/guides/app/features/panels/line-plot/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "line-plot/",
+          "fix": "/guides/app/features/panels/line-plot/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "bar-plot",
+          "fix": "/guides/app/features/panels/bar-plot/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/",
+          "fix": "/guides/automations/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 9.69031023979187,
+      "worker_id": 11,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/features/panels/line-plot/reference.mdx",
+      "links": [
+        {
+          "broken": "/support/kb-articles/formula_smoothing_algorithm",
+          "fix": "/support/formula_smoothing_algorithm/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "sampling.md#random-sampling",
+          "fix": "/guides/app/features/panels/line-plot/sampling/#random-sampling",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "sampling.md#full-fidelity",
+          "fix": "/guides/app/features/panels/line-plot/sampling/#full-fidelity",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 9.640966176986694,
+      "worker_id": 4,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/features/panels/line-plot.mdx",
+      "links": [
+        {
+          "broken": "sampling",
+          "fix": "/guides/app/features/panels/line-plot/sampling/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations",
+          "fix": "/guides/automations/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/automation-events.md#run-events",
+          "fix": "/guides/automations/automation-events/#run-events",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations",
+          "fix": "/guides/automations/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/track/runs/_index",
+          "fix": "/guides/runs/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/track/runs/#customize-how-runs-are-displayed",
+          "fix": "/guides/runs/#customize-how-runs-are-displayed",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 13.789062976837158,
+      "worker_id": 5,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/settings-page/team-settings.mdx",
+      "links": [
+        {
+          "broken": "/guides/models/track/runs/alert",
+          "fix": "/guides/models/evaluate-models/",
+          "confidence": "high",
+          "fix_method": "content_matching",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/",
+          "fix": "/guides/automations/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/create-automations/slack",
+          "fix": "/guides/automations/create-automations/slack/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/",
+          "fix": "/guides/automations/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/create-automations/slack",
+          "fix": "/guides/automations/create-automations/slack/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "teams.md#secure-storage-connector",
+          "fix": "/guides/app/settings-page/teams/#secure-storage-connector",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 32.12593340873718,
+      "worker_id": 14,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/features/panels/parallel-coordinates.mdx",
+      "links": [
+        {
+          "broken": "/guides/models/track/config",
+          "fix": "/guides/models/evaluate-models/",
+          "confidence": "high",
+          "fix_method": "content_matching",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/track/log/",
+          "fix": "/guides/models/evaluate-models/",
+          "confidence": "high",
+          "fix_method": "content_matching",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 52.05955386161804,
+      "worker_id": 7,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/features/panels/query-panels.mdx",
+      "links": [
+        {
+          "broken": "../../../../track/public-api-guide.md#understanding-the-different-attributes",
+          "fix": "/guides/track/public-api-guide/#understanding-the-different-attributes",
+          "confidence": "none"
+        }
+      ],
+      "processing_time": 120.15338635444641,
+      "worker_id": 9,
+      "is_404": false
+    }
+  ],
+  "not_found_pages": []
+}
