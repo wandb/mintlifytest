@@ -40,7 +40,7 @@ with wandb.init() as run:
 W&B automatically flattens nested values. This means that if you pass a dictionary, W&B turns it into a dot-separated name. For config values, W&B supports 3 dots in the name. For summary values, W&B supports 4 dots.
 </Note>
 
-Metric names must follow certain naming constraints imposed by GraphQL. See [Metric naming constraints](/guides/models/track/log/#metric-naming-constraints) for details.
+Metric names must follow certain naming constraints imposed by GraphQL. See [Metric naming constraints](/guides/track/log/#metric-naming-constraints) for details.
 
 {/* ### Log media with same metric name
 Log related media to the same metric name:
@@ -180,7 +180,7 @@ To reduce loading times, keep the total number of runs in a single project under
 
 Run counts over these thresholds can slow down operations that involve project workspaces or runs tables, especially when grouping runs or collecting a large number of distinct metrics during runs. See also the [Metric count](#metric-count) section.
 
-If your team accesses the same set of runs frequently, such as the set of recent runs, consider [moving less frequently used runs in bulk](/guides/models/track/runs/manage-runs) to a new "archive" project, leaving a smaller set of runs in your working project.
+If your team accesses the same set of runs frequently, such as the set of recent runs, consider [moving less frequently used runs in bulk](/guides/runs/manage-runs/) to a new "archive" project, leaving a smaller set of runs in your working project.
 
 ### Workspace performance
 This section gives tips for optimizing the performance of your workspace.
@@ -189,13 +189,13 @@ This section gives tips for optimizing the performance of your workspace.
 By default, a workspace is _automatic_, and generates standard panels for each logged key. If a workspace for a large project includes panels for many logged keys, the workspace may be slow to load and use. To improve performance, you can:
 
 1. Reset the workspace to manual mode, which includes no panels by default.
-1. Use [Quick add](/guides/models/app/features/panels/#quick-add) to selectively add panels for the logged keys you need to visualize.
+1. Use [Quick add](/guides/app/features/panels/#quick-add) to selectively add panels for the logged keys you need to visualize.
 
 <Note>
 Deleting unused panels one at a time has little impact on performance. Instead, reset the workspace and seletively add back only those panels you need.
 </Note>
 
-To learn more about configuring your workspace, refer to [Panels](/guides/models/app/features/panels/).
+To learn more about configuring your workspace, refer to [Panels](/guides/app/features/panels/).
 
 #### Section count
 
@@ -209,9 +209,9 @@ If you find you have too many sections and performance is slow, consider the wor
 
 ### Metric count
 
-When logging between 5000 and 100,000 metrics per run, W&B recommends using a [manual workspace](/guides/models/app/features/panels/#workspace-modes). In Manual mode, you can easily add and remove panels in bulk as you choose to explore different sets of metrics. With a more focused set of plots, the workspace loads faster. Metrics that are not plotted are still collected and stored as usual.
+When logging between 5000 and 100,000 metrics per run, W&B recommends using a [manual workspace](/guides/app/features/panels/#workspace-modes). In Manual mode, you can easily add and remove panels in bulk as you choose to explore different sets of metrics. With a more focused set of plots, the workspace loads faster. Metrics that are not plotted are still collected and stored as usual.
 
-To reset a workspace to manual mode, click the workspace's action `...` menu, then click **Reset workspace**. Resetting a workspace has no impact on stored metrics for runs. See [workspace panel management](/guides/models/app/features/panels/).
+To reset a workspace to manual mode, click the workspace's action `...` menu, then click **Reset workspace**. Resetting a workspace has no impact on stored metrics for runs. See [workspace panel management](/guides/app/features/panels/).
 
 ### File count
 

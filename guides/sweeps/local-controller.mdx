@@ -22,7 +22,7 @@ Before you get start, you must install the W&B SDK(`wandb`). Type the following 
 pip install wandb sweeps 
 ```
 
-The following examples assume you already have a configuration file and a training loop defined in a python script or Jupyter Notebook. For more information about how to define a configuration file, see [Define sweep configuration](/guides/models/sweeps/define-sweep-configuration/).
+The following examples assume you already have a configuration file and a training loop defined in a python script or Jupyter Notebook. For more information about how to define a configuration file, see [Define sweep configuration](/guides/sweeps/define-sweep-configuration/).
 
 ### Run the local controller from the command line
 
@@ -53,7 +53,7 @@ wandb sweep config.yaml
 wandb controller {user}/{entity}/{sweep_id}
 ```
 
-Once you have specified you want to use a local controller, start one or more Sweep agents to execute the sweep. Start a W&B Sweep similar to how you normally would. See [Start sweep agents](/guides/models/sweeps/start-sweep-agents), for more information.
+Once you have specified you want to use a local controller, start one or more Sweep agents to execute the sweep. Start a W&B Sweep similar to how you normally would. See [Start sweep agents](/guides/sweeps/start-sweep-agents/), for more information.
 
 ```bash
 wandb sweep sweep_ID

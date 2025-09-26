@@ -12,32 +12,32 @@ The W&B Automations API enables programmatic creation and management of automate
 
 | Class | Description |
 |-------|-------------|
-| [`Automation`](./automation/) | Represents a saved automation instance with its configuration. |
-| [`NewAutomation`](./newautomation/) | Builder class for creating new automations. |
+| [`Automation`](/ref/python/automations/automation/) | Represents a saved automation instance with its configuration. |
+| [`NewAutomation`](/ref/python/automations/newautomation/) | Builder class for creating new automations. |
 
 ### Events (Triggers)
 
 | Event | Description |
 |-------|-------------|
-| [`OnRunMetric`](./onrunmetric/) | Trigger when a run metric satisfies a defined condition (threshold, change, etc.). |
-| [`OnCreateArtifact`](./oncreateartifact/) | Trigger when a new artifact is created in a collection. |
-| [`OnLinkArtifact`](./onlinkartifact/) | Trigger when an artifact is linked to a registry. |
-| [`OnAddArtifactAlias`](./onaddartifactalias/) | Trigger when an alias is added to an artifact. |
+| [`OnRunMetric`](/ref/python/automations/onrunmetric/) | Trigger when a run metric satisfies a defined condition (threshold, change, etc.). |
+| [`OnCreateArtifact`](/ref/python/automations/oncreateartifact/) | Trigger when a new artifact is created in a collection. |
+| [`OnLinkArtifact`](/ref/python/automations/onlinkartifact/) | Trigger when an artifact is linked to a registry. |
+| [`OnAddArtifactAlias`](/ref/python/automations/onaddartifactalias/) | Trigger when an alias is added to an artifact. |
 
 ### Actions
 
 | Action | Description |
 |--------|-------------|
-| [`SendNotification`](./sendnotification/) | Send notifications via Slack or other integrated channels. |
-| [`SendWebhook`](./sendwebhook/) | Send HTTP webhook requests to external services. |
-| [`DoNothing`](./donothing/) | Placeholder action for testing automation configurations. |
+| [`SendNotification`](/ref/python/automations/sendnotification/) | Send notifications via Slack or other integrated channels. |
+| [`SendWebhook`](/ref/python/automations/sendwebhook/) | Send HTTP webhook requests to external services. |
+| [`DoNothing`](/ref/python/automations/donothing/) | Placeholder action for testing automation configurations. |
 
 ### Filters
 
 | Filter | Description |
 |--------|-------------|
-| [`MetricThresholdFilter`](./metricthresholdfilter/) | Filter runs based on metric value comparisons against thresholds. |
-| [`MetricChangeFilter`](./metricchangefilter/) | Filter runs based on metric value changes over time. |
+| [`MetricThresholdFilter`](/ref/python/automations/metricthresholdfilter/) | Filter runs based on metric value comparisons against thresholds. |
+| [`MetricChangeFilter`](/ref/python/automations/metricchangefilter/) | Filter runs based on metric value changes over time. |
 
 ## Common Use Cases
 
@@ -93,4 +93,4 @@ automation = api.create_automation(
 )
 ```
 
-For more information about using the Automations API, see the [Automations Guide](/guides/core/automations).
+For more information about using the Automations API, see the [Automations Guide](/guides/automations/).

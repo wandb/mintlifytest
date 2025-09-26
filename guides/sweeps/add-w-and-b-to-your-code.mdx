@@ -69,7 +69,7 @@ How you integrate W&B to your Python script or notebook depends on how you manag
 <Tab title="Python script or notebook">
 Add the following to your Python script:
 
-1. Create a dictionary object where the key-value pairs define a [sweep configuration](/guides/models/sweeps/define-sweep-configuration/). The sweep configuration defines the hyperparameters you want W&B to explore on your behalf along with the metric you want to optimize. Continuing from the previous example, the batch size (`batch_size`), epochs (`epochs`), and the learning rate (`lr`) are the hyperparameters to vary during each sweep. You want to maximize the accuracy of the validation score so you set `"goal": "maximize"` and the name of the variable you want to optimize for, in this case `val_acc` (`"name": "val_acc"`).
+1. Create a dictionary object where the key-value pairs define a [sweep configuration](/guides/sweeps/define-sweep-configuration/). The sweep configuration defines the hyperparameters you want W&B to explore on your behalf along with the metric you want to optimize. Continuing from the previous example, the batch size (`batch_size`), epochs (`epochs`), and the learning rate (`lr`) are the hyperparameters to vary during each sweep. You want to maximize the accuracy of the validation score so you set `"goal": "maximize"` and the name of the variable you want to optimize for, in this case `val_acc` (`"name": "val_acc"`).
 2. Pass the sweep configuration dictionary to [`wandb.sweep()`](/ref/python/functions/sweep). This initializes the sweep and returns a sweep ID (`sweep_id`). For more information, see [Initialize sweeps](./initialize-sweeps).
 3. At the top of your script, import the W&B Python SDK (`wandb`).
 4. Within your `main` function, use the [`wandb.init()`](/ref/python/functions/init) API to generate a background process to sync and log data as a [W&B Run](/ref/python/experiments/run). Pass the project name as a parameter to the `wandb.init()` method. If you do not pass a project name, W&B uses the default project name.
@@ -176,7 +176,7 @@ parameters:
     values: [5, 10, 15]
 ```
 
-For more information on how to create a W&B Sweep configuration, see [Define sweep configuration](/guides/models/sweeps/define-sweep-configuration/).
+For more information on how to create a W&B Sweep configuration, see [Define sweep configuration](/guides/sweeps/define-sweep-configuration/).
 
 You must provide the name of your Python script for the `program` key
 in your YAML file.

@@ -14,18 +14,18 @@ The following guide describes how to log models to a W&B run and interact with t
 <Note>
 The following APIs are useful for tracking models as a part of your experiment tracking workflow. Use the APIs listed on this page to log models to a run, and to access metrics, tables, media, and other objects.
 
-W&B suggests that you use [W&B Artifacts](/guides/core/artifacts/) if you want to:
+W&B suggests that you use [W&B Artifacts](/guides/artifacts/) if you want to:
 - Create and keep track of different versions of serialized data besides models, such as datasets, prompts, and more.
-- Explore [lineage graphs](/guides/core/artifacts/explore-and-traverse-an-artifact-graph) of a model or any other objects tracked in W&B.
-- Interact with the model artifacts these methods created, such as [updating properties](/guides/core/artifacts/update-an-artifact) (metadata, aliases, and descriptions) 
+- Explore [lineage graphs](/guides/artifacts/explore-and-traverse-an-artifact-graph/) of a model or any other objects tracked in W&B.
+- Interact with the model artifacts these methods created, such as [updating properties](/guides/artifacts/update-an-artifact/) (metadata, aliases, and descriptions) 
 
-For more information on W&B Artifacts and advanced versioning use cases, see the [Artifacts](/guides/core/artifacts/) documentation.
+For more information on W&B Artifacts and advanced versioning use cases, see the [Artifacts](/guides/artifacts/) documentation.
 </Note>
 
 ## Log a model to a run
 Use the [`log_model`](/ref/python/experiments/run.md#log_model) to log a model artifact that contains content within a directory you specify. The [`log_model`](/ref/python/experiments/run.md#log_model) method also marks the resulting model artifact as an output of the W&B run. 
 
-You can track a model's dependencies and the model's associations if you mark the model as the input or output of a W&B run. View the lineage of the model within the W&B App UI. See the [Explore and traverse artifact graphs](/guides/core/artifacts/explore-and-traverse-an-artifact-graph) page within the [Artifacts](/guides/core/artifacts/) chapter for more information.
+You can track a model's dependencies and the model's associations if you mark the model as the input or output of a W&B run. View the lineage of the model within the W&B App UI. See the [Explore and traverse artifact graphs](/guides/artifacts/explore-and-traverse-an-artifact-graph/) page within the [Artifacts](/guides/artifacts/) chapter for more information.
 
 Provide the path where your model files are saved to the `path` parameter. The path can be a local file, directory, or [reference URI](/guides/core/artifacts/track-external-files.md#amazon-s3--gcs--azure-blob-storage-references) to an external bucket such as `s3://bucket/path`. 
 

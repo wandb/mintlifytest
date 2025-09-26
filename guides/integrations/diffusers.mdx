@@ -49,10 +49,10 @@ autolog(init=dict(project="diffusers_logging"))
 
     When you call `autolog()`, it initializes a W&B Run and automatically tracks the inputs and the outputs from [all supported pipeline calls](https://github.com/wandb/wandb/blob/main/wandb/integration/diffusers/autologger.py#L12-L72).
 
-    - Each pipeline call is tracked into its own [table](/guides/models/tables/) in the workspace, and the configs associated with the pipeline call is appended to the list of workflows in the configs for that run.
-    - The prompts, negative prompts, and the generated media are logged in a [`wandb.Table`](/guides/models/tables/).
+    - Each pipeline call is tracked into its own [table](/guides/tables/) in the workspace, and the configs associated with the pipeline call is appended to the list of workflows in the configs for that run.
+    - The prompts, negative prompts, and the generated media are logged in a [`wandb.Table`](/guides/tables/).
     - All other configs associated with the experiment including seed and the pipeline architecture are stored in the config section for the run.
-    - The generated media for each pipeline call are also logged in [media panels](/guides/models/track/log/media) in the run.
+    - The generated media for each pipeline call are also logged in [media panels](/guides/track/log/media/) in the run.
 
     <Note>
     You can find a [list of supported pipeline calls](https://github.com/wandb/wandb/blob/main/wandb/integration/diffusers/autologger.py#L12-L72). In case, you want to request a new feature of this integration or report a bug associated with it, open an issue on the [W&B GitHub issues page](https://github.com/wandb/wandb/issues).

@@ -26,7 +26,7 @@ To install the `wandb` library locally and log in:
 
 <Tabs>
 <Tab title="Command Line">
-1. Set the `WANDB_API_KEY` [environment variable](/guides/models/track/environment-variables) to your API key.
+1. Set the `WANDB_API_KEY` [environment variable](/guides/track/environment-variables/) to your API key.
 
     ```bash
     export WANDB_API_KEY=<your_api_key>
@@ -82,7 +82,7 @@ model_log_interval = 1000
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `project_name`         | `str`. The name of the W&B Project. The project will be created automatically if it doesn’t exist yet.                                                                                                    |
 | `remove_config_values` | `List[str]` . A list of values to exclude from the config before it is uploaded to W&B. `[]` by default.                                                                                                                                                     |
-| `model_log_interval`   | `Optional int`. `None` by default. If set, enables [model versioning](/guides/core/registry/) with [Artifacts](/guides/core/artifacts/). Pass in the number of steps to wait between logging model checkpoints. `None` by default. |
+| `model_log_interval`   | `Optional int`. `None` by default. If set, enables [model versioning](/guides/registry/) with [Artifacts](/guides/artifacts/). Pass in the number of steps to wait between logging model checkpoints. `None` by default. |
 | `log_dataset_dir`      | `Optional str`. If passed a path, the dataset will be uploaded as an Artifact at the beginning of training. `None` by default.                                                                                                            |
 | `entity`               | `Optional str` . If passed, the run will be created in the specified entity                                                                                                                                                                                   |
 | `run_name`             | `Optional str` . If specified, the run will be created with the specified name.                                                                                                                                                                               |
@@ -121,4 +121,4 @@ python -m spacy train \
 </Tab>
 </Tabs>
 
-When training begins, a link to your training run's [W&B page](/guides/models/track/runs/) will be output which will take you to this run's experiment tracking [dashboard](/guides/models/track/workspaces) in the W&B web UI.
+When training begins, a link to your training run's [W&B page](/guides/runs/) will be output which will take you to this run's experiment tracking [dashboard](/guides/track/workspaces/) in the W&B web UI.

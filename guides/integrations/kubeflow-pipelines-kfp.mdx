@@ -33,7 +33,7 @@ To install the `wandb` library locally and log in:
 
 <Tabs>
 <Tab title="Command Line">
-1. Set the `WANDB_API_KEY` [environment variable](/guides/models/track/environment-variables) to your API key.
+1. Set the `WANDB_API_KEY` [environment variable](/guides/track/environment-variables/) to your API key.
 
     ```bash
     export WANDB_API_KEY=<your_api_key>
@@ -88,7 +88,7 @@ add = components.create_component_from_func(add)
 
 ## Pass environment variables to containers
 
-You may need to explicitly pass [environment variables](/guides/models/track/environment-variables) to your containers. For two-way linking, you should also set the environment variables `WANDB_KUBEFLOW_URL` to the base URL of your Kubeflow Pipelines instance. For example, `https://kubeflow.mysite.com`.
+You may need to explicitly pass [environment variables](/guides/track/environment-variables/) to your containers. For two-way linking, you should also set the environment variables `WANDB_KUBEFLOW_URL` to the base URL of your Kubeflow Pipelines instance. For example, `https://kubeflow.mysite.com`.
 
 ```python
 import os
@@ -139,7 +139,7 @@ The web app UI has the same content as the `Visualizations` tab in Kubeflow Pipe
 
 ### Via the Public API (for programmatic access)
 
-* For programmatic access, [see our Public API](/ref/python/public-api/index).
+* For programmatic access, [see our Public API](/ref/python/public-api/).
 
 ### Concept mapping from Kubeflow Pipelines to W&B
 
@@ -147,10 +147,10 @@ Here's a mapping of Kubeflow Pipelines concepts to W&B
 
 | Kubeflow Pipelines | W&B | Location in W&B |
 | ------------------ | --- | --------------- |
-| Input Scalar | [`config`](/guides/models/track/config) | [Overview tab](/guides/models/track/runs/#overview-tab) |
-| Output Scalar | [`summary`](/guides/models/track/log) | [Overview tab](/guides/models/track/runs/#overview-tab) |
-| Input Artifact | Input Artifact | [Artifacts tab](/guides/models/track/runs/#artifacts-tab) |
-| Output Artifact | Output Artifact | [Artifacts tab](/guides/models/track/runs/#artifacts-tab) |
+| Input Scalar | [`config`](/guides/models/) | [Overview tab](/guides/runs/#overview-tab) |
+| Output Scalar | [`summary`](/guides/models/) | [Overview tab](/guides/runs/#overview-tab) |
+| Input Artifact | Input Artifact | [Artifacts tab](/guides/runs/#artifacts-tab) |
+| Output Artifact | Output Artifact | [Artifacts tab](/guides/runs/#artifacts-tab) |
 
 ## Fine-grain logging
 

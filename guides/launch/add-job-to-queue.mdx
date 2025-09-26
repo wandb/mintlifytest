@@ -30,7 +30,7 @@ Add a job to your queue programmatically with the W&B App.
     <img src="/images/launch/view_jobs.png" alt="Jobs listing"  />
 </Frame>
 4. Select the **Launch** button next to the name of the Job name. A modal will appear on the right side of the page.
-5. From the **Job version** dropdown, select the version of the launch job you want to use. Launch jobs are versioned like any other [W&B Artifact](/guides/core/artifacts/create-a-new-artifact-version). Different versions of the same launch job will be created if you make modifications to the software dependencies or source code used to run the job.
+5. From the **Job version** dropdown, select the version of the launch job you want to use. Launch jobs are versioned like any other [W&B Artifact](/guides/artifacts/create-a-new-artifact-version/). Different versions of the same launch job will be created if you make modifications to the software dependencies or source code used to run the job.
 6. Within the **Overrides** section, provide new values for any inputs that are configured for your launch job. Common overrides include a new entrypoint command, arguments, or values in the `wandb.Run.config` of your new W&B run.  
   <Frame>
     <img src="/images/launch/create_starter_queue_gs.png" alt="Queue configuration"  />
@@ -48,7 +48,7 @@ For example, in the following example, the team admin configured AWS instance ty
 11. Select the **Launch now** button.
 </Tab>
 <Tab title="Tab">
-Use the `wandb launch` command to add jobs to a queue. Create a JSON configuration with hyperparameter overrides. For example, using the script from the [Quickstart](../walkthrough) guide, we create a JSON file with the following overrides:
+Use the `wandb launch` command to add jobs to a queue. Create a JSON configuration with hyperparameter overrides. For example, using the script from the [Quickstart](/guides/launch/walkthrough/) guide, we create a JSON file with the following overrides:
 
 ```json title="config.json"
 {

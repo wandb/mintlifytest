@@ -15,7 +15,7 @@ cascade:
 <Card title="Try in W&B" href="https://wandb.ai/stacey/deep-drive/workspace?workspace=user-lavanyashukla" icon="sliders-up"/>
 </CardGroup>
 
-Track machine learning experiments with a few lines of code. You can then review the results in an [interactive dashboard](/guides/models/track/workspaces) or export your data to Python for programmatic access using our [Public API](/ref/python/public-api/index). 
+Track machine learning experiments with a few lines of code. You can then review the results in an [interactive dashboard](/guides/track/workspaces/) or export your data to Python for programmatic access using our [Public API](/ref/python/public-api/). 
 
 Utilize W&B Integrations if you use popular frameworks such as [PyTorch](/guides/integrations/pytorch), [Keras](/guides/integrations/keras), or [Scikit](/guides/integrations/scikit). See our [Integration guides](/guides/integrations/) for a full list of integrations and information on how to add W&B to your code.
 
@@ -23,14 +23,14 @@ Utilize W&B Integrations if you use popular frameworks such as [PyTorch](/guides
     <img src="/images/experiments/experiments_landing_page.png" alt="Experiments dashboard"  />
 </Frame>
 
-The image above shows an example dashboard where you can view and compare metrics across multiple [runs](/guides/models/track/runs/).
+The image above shows an example dashboard where you can view and compare metrics across multiple [runs](/guides/runs/).
 
 ## How it works
 
 Track a machine learning experiment with a few lines of code:
-1. Create a [W&B Run](/guides/models/track/runs/).
-2. Store a dictionary of hyperparameters, such as learning rate or model type, into your configuration ([`wandb.Run.config`](./config)).
-3. Log metrics ([`wandb.Run.log()`](/guides/models/track/log/)) over time in a training loop, such as accuracy and loss.
+1. Create a [W&B Run](/guides/runs/).
+2. Store a dictionary of hyperparameters, such as learning rate or model type, into your configuration ([`wandb.Run.config`](/guides/track/config/)).
+3. Log metrics ([`wandb.Run.log()`](/guides/track/log/)) over time in a training loop, such as accuracy and loss.
 4. Save outputs of a run, like the model weights or a table of predictions.
 
 The following code demonstrates a common W&B experiment tracking workflow:
@@ -59,13 +59,13 @@ with wandb.init(entity="", project="my-project-name") as run:
 
 Depending on your use case, explore the following resources to get started with W&B Experiments:
 
-* Read the [W&B Quickstart](/guides/quickstart) for a step-by-step outline of the W&B Python SDK commands you could use to create, track, and use a dataset artifact.
+* Read the [W&B Quickstart](/quickstart/) for a step-by-step outline of the W&B Python SDK commands you could use to create, track, and use a dataset artifact.
 * Explore this chapter to learn how to:
   * Create an experiment
   * Configure experiments
   * Log data from experiments
   * View results from experiments
-* Explore the [W&B Python Library](/ref/python/index) within the [W&B API Reference Guide](/ref/).
+* Explore the [W&B Python Library](/ref/python/) within the [W&B API Reference Guide](/ref/).
 
 ## Best practices and tips 
 

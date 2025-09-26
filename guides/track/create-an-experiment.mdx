@@ -68,7 +68,7 @@ for epoch in range(run.config.epochs):
         run.log({"accuracy": accuracy, "loss": loss})
 ```
 
-For more information on different data types you can log with W&B, see [Log Data During Experiments](/guides/models/track/log/).
+For more information on different data types you can log with W&B, see [Log Data During Experiments](/guides/track/log/).
 
 ### Log an artifact to W&B 
 Optionally log a W&B Artifact. Artifacts make it easy to version datasets and models. 
@@ -78,7 +78,7 @@ Optionally log a W&B Artifact. Artifacts make it easy to version datasets and mo
 model.save("path_to_model.onnx")
 run.log_artifact("path_to_model.onnx", name="trained-model", type="model")
 ```
-Learn more about [Artifacts](/guides/core/artifacts/) or about versioning models in [Registry](/guides/core/registry/).
+Learn more about [Artifacts](/guides/artifacts/) or about versioning models in [Registry](/guides/registry/).
 
 
 ### Putting it all together
@@ -108,13 +108,13 @@ with wandb.init(
 ```
 
 ## Next steps: Visualize your experiment 
-Use the W&B Dashboard as a central place to organize and visualize results from your machine learning models. With just a few clicks, construct rich, interactive charts like [parallel coordinates plots](/guides/models/app/features/panels/parallel-coordinates),[ parameter importance analyzes](/guides/models/app/features/panels/parameter-importance), and [additional chart types](/guides/models/app/features/panels/).
+Use the W&B Dashboard as a central place to organize and visualize results from your machine learning models. With just a few clicks, construct rich, interactive charts like [parallel coordinates plots](/guides/app/features/panels/parallel-coordinates/),[ parameter importance analyzes](/guides/app/features/panels/parameter-importance/), and [additional chart types](/guides/app/features/panels/).
 
 <Frame>
     <img src="/images/sweeps/quickstart_dashboard_example.png" alt="Quickstart Sweeps Dashboard example"  />
 </Frame>
 
-For more information on how to view experiments and specific runs, see [Visualize results from experiments](/guides/models/track/workspaces).
+For more information on how to view experiments and specific runs, see [Visualize results from experiments](/guides/track/workspaces/).
 
 
 ## Best practices

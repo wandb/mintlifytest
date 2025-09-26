@@ -44,7 +44,7 @@ The storage layer consists of a MySQL database and object storage. The MySQL dat
 ## Infrastructure requirements
 
 ### Kubernetes
-The W&B Server application is deployed as a [Kubernetes Operator](kubernetes-operator/) that deploys multiple pods. For this reason, W&B requires a Kubernetes cluster with:
+The W&B Server application is deployed as a [Kubernetes Operator](/guides/hosting/operator/) that deploys multiple pods. For this reason, W&B requires a Kubernetes cluster with:
 - A fully configured and functioning Ingress controller.
 - The capability to provision Persistent Volumes.
 
@@ -93,7 +93,7 @@ For a networked deployment, egress to these endpoints is required during _both_ 
 * https://quay.io
 * `https://gcr.io`
 
-To learn about air-gapped deployments, refer to [Kubernetes operator for air-gapped instances](kubernetes-operator/operator-airgapped).
+To learn about air-gapped deployments, refer to [Kubernetes operator for air-gapped instances](/guides/hosting/self-managed/operator-airgapped/).
 Access to W&B and to the object storage is required for the training infrastructure and for each system that tracks the needs of experiments.
 
 ### DNS

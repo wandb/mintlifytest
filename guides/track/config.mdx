@@ -175,9 +175,9 @@ run.config.update({"lr": 0.1, "channels": 16})
 ```
 
 ### Set the configuration after your Run has finished
-Use the [W&B Public API](/ref/python/public-api/index) to update a completed run's config. 
+Use the [W&B Public API](/ref/python/public-api/) to update a completed run's config. 
 
-You must provide the API with your entity, project name and the run's ID. You can find these details in the Run object or in the [W&B App](/guides/models/track/workspaces):
+You must provide the API with your entity, project name and the run's ID. You can find these details in the Run object or in the [W&B App](/guides/track/workspaces/):
 
 ```python
 with wandb.init() as run:

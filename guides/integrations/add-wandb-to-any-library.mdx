@@ -12,7 +12,7 @@ weight: 10
 This guide provides best practices on how to integrate W&B into your Python library to get powerful Experiment Tracking, GPU and System Monitoring, Model Checkpointing, and more for your own library.
 
 <Note>
-If you are still learning how to use W&B, we recommend exploring the other W&B Guides in these docs, such as [Experiment Tracking](/guides/models/track), before reading further.
+If you are still learning how to use W&B, we recommend exploring the other W&B Guides in these docs, such as [Experiment Tracking](/guides/track/), before reading further.
 </Note>
 
 Below we cover best tips and best practices when the codebase you are working on is more complicated than a single Python training script or Jupyter notebook. The topics covered are:
@@ -94,7 +94,7 @@ To install the `wandb` library locally and log in:
 
 <Tabs>
 <Tab title="Command Line">
-1. Set the `WANDB_API_KEY` [environment variable](/guides/models/track/environment-variables) to your API key.
+1. Set the `WANDB_API_KEY` [environment variable](/guides/track/environment-variables/) to your API key.
 
     ```bash
     export WANDB_API_KEY=<your_api_key>
@@ -250,13 +250,13 @@ Use `wandb.Run.config.update` to update the config. Updating your configuration 
 run.config.update({"model_parameters": 3500})
 ```
 
-For more information on how to define a config file, see [Configure experiments](/guides/models/track/config).
+For more information on how to define a config file, see [Configure experiments](/guides/track/config/).
 
 ### Log to W&B
 
 #### Log metrics
 
-Create a dictionary where the key value is the name of the metric. Pass this dictionary object to [`run.log`](/guides/models/track/log):
+Create a dictionary where the key value is the name of the metric. Pass this dictionary object to [`run.log`](/guides/models/):
 
 ```python
 for epoch in range(NUM_EPOCHS):
@@ -283,7 +283,7 @@ run.log(metrics)
     <img src="/images/integrations/integrations_add_any_lib_log.png" alt="W&B Workspace"  />
 </Frame>
 
-See the [`wandb.Run.log()` reference](/guides/models/track/log).
+See the [`wandb.Run.log()` reference](/guides/models/).
 
 #### Prevent x-axis misalignments
 
@@ -324,7 +324,7 @@ Some considerations when logging data include:
   * For images, you can log sample predictions, segmentation masks, etc., to see the evolution over time.
   * For text, you can log tables of sample predictions for later exploration.
 
-See the [logging guide](/guides/models/track/log) for media, objects, plots, and more.
+See the [logging guide](/guides/models/) for media, objects, plots, and more.
 
 ### Distributed training
 
@@ -333,7 +333,7 @@ For frameworks supporting distributed environments, you can adapt any of the fol
 * Detect which is the "main" process and only use `wandb` there. Any required data coming from other processes must be routed to the main process first. (This workflow is encouraged).
 * Call `wandb` in every process and auto-group them by giving them all the same unique `group` name.
 
-See [Log Distributed Training Experiments](/guides/models/track/log/distributed-training) for more details.
+See [Log Distributed Training Experiments](/guides/track/log/distributed-training/) for more details.
 
 ### Log model checkpoints and more
 
@@ -367,7 +367,7 @@ aliases = ["best", "epoch_10"]
 run.log_artifact(artifact, aliases=aliases)
 ```
 
-For information on how to create a custom alias, see [Create a Custom Alias](/guides/core/artifacts/create-a-custom-alias/).
+For information on how to create a custom alias, see [Create a Custom Alias](/guides/artifacts/create-a-custom-alias/).
 
 You can log output Artifacts at any frequency (for example, every epoch, every 500 steps, and so on) and they are automatically versioned.
 
@@ -392,18 +392,18 @@ local_path = artifact.download("./tmp")
 
 Artifacts can be found in the Artifacts section of W&B and can be referenced with aliases generated automatically (`latest`, `v2`, `v3`) or manually when logging (`best_accuracy`, etc.).
 
-To download an Artifact without creating a `wandb` run (through `wandb.init`), for example in distributed environments or for simple inference, you can instead reference the artifact with the [wandb API](/ref/python/public-api/index):
+To download an Artifact without creating a `wandb` run (through `wandb.init`), for example in distributed environments or for simple inference, you can instead reference the artifact with the [wandb API](/ref/python/public-api/):
 
 ```python
 artifact = wandb.Api().artifact("user/project/artifact:latest")
 local_path = artifact.download()
 ```
 
-For more information, see [Download and Use Artifacts](/guides/core/artifacts/download-and-use-an-artifact).
+For more information, see [Download and Use Artifacts](/guides/artifacts/download-and-use-an-artifact/).
 
 ### Tune hyper-parameters
 
-If your library would like to leverage W&B hyper-parameter tuning, [W&B Sweeps](/guides/models/sweeps/) can also be added to your library.
+If your library would like to leverage W&B hyper-parameter tuning, [W&B Sweeps](/guides/sweeps/) can also be added to your library.
 
 ### Advanced integrations
 

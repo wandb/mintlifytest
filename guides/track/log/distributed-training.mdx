@@ -67,14 +67,14 @@ However, the loss values as a function epoch and batch size were only logged fro
 ## Track multiple processes
 
 Track multiple processes with W&B with one of the following approaches:
-* [Tracking each process separately](distributed-training/#track-each-process-separately) by creating a run for each process.
-* [Tracking all processes to a single run](distributed-training/#track-all-processes-to-a-single-run).
+* [Tracking each process separately](/guides/track/log/distributed-training/#track-each-process-separately) by creating a run for each process.
+* [Tracking all processes to a single run](/guides/track/log/distributed-training/#track-all-processes-to-a-single-run).
 
 ### Track each process separately
 
 This section describes how to track each process separately by creating a run for each process. Within each run you log metrics, artifacts, and forth to their respective run. Call `wandb.Run.finish()` at the end of training, to mark that the run has completed so that all processes exit properly.
 
-You might find it difficult to keep track of runs across multiple experiments. To mitigate this, provide a value to the `group` parameter when you initialize W&B (`wandb.init(group='group-name')`) to keep track of which run belongs to a given experiment. For more information about how to keep track of training and evaluation W&B Runs in experiments, see [Group Runs](/guides/models/track/runs/grouping).
+You might find it difficult to keep track of runs across multiple experiments. To mitigate this, provide a value to the `group` parameter when you initialize W&B (`wandb.init(group='group-name')`) to keep track of which run belongs to a given experiment. For more information about how to keep track of training and evaluation W&B Runs in experiments, see [Group Runs](/guides/runs/grouping/).
 
 <Note>
 **Use this approach if you want to track metrics from individual processes**. Typical examples include the data and predictions on each node (for debugging data distribution) and metrics on individual batches outside of the main node. This approach is not necessary to get system metrics from all nodes nor to get summary statistics available on the main node.
@@ -142,7 +142,7 @@ For each worker node, initialize a W&B run with [`wandb.init()`](/ref/python/fun
    * A unique label for `x_label`. You use the value you specify for `x_label` to identify which node the data is coming from in logs and system metrics in the W&B App UI. If left unspecified, W&B creates a label for you using the hostname and a random hash.
    * Set the `x_primary` parameter to `False` to indicate that this is a worker node.
 2. Pass the run ID used by the primary node to the `id` parameter.
-3. Optionally set [`x_update_finish_state`](https://github.com/wandb/wandb/blob/main/wandb/sdk/wandb_settings.py#L772) to `False`. This prevents non-primary nodes from updating the [run's state](/guides/models/track/runs/#run-states) to `finished` prematurely, ensuring the run state remains consistent and managed by the primary node.
+3. Optionally set [`x_update_finish_state`](https://github.com/wandb/wandb/blob/main/wandb/sdk/wandb_settings.py#L772) to `False`. This prevents non-primary nodes from updating the [run's state](/guides/models/evaluate-models/#run-states) to `finished` prematurely, ensuring the run state remains consistent and managed by the primary node.
 
 <Note>
 * Use the same entity and project for all nodes. This helps ensure the correct run ID is found.
@@ -209,7 +209,7 @@ You can filter console logs based on the labels you provide for `x_label` in the
     <img src="/images/track/multi_node_console_logs.png" alt="Multi-node console logs"  />
 </Frame>
 
-See [Console logs](/guides/models/app/console-logs/) for more information.
+See [Console logs](/guides/app/console-logs/) for more information.
 
 W&B aggregates system metrics from all nodes and displays them in the W&B App UI. For example, the following image shows a sample dashboard with system metrics from multiple nodes. Each node possesses a unique label (`rank_0`, `rank_1`, `rank_2`) that you specify in the `x_label` parameter.
 
@@ -217,7 +217,7 @@ W&B aggregates system metrics from all nodes and displays them in the W&B App UI
     <img src="/images/track/multi_node_system_metrics.png" alt="Multi-node system metrics"  />
 </Frame>
 
-See [Line plots](/guides/models/app/features/panels/line-plot/) for information on how to customize line plot panels. 
+See [Line plots](/guides/app/features/panels/line-plot/) for information on how to customize line plot panels. 
 
 ## Example use cases
 

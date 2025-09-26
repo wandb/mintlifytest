@@ -100,7 +100,7 @@ The key takeaways from the previous code block are:
 
 Now that you have trained a model and saved it as an artifact, you can publish it to a registry in W&B. Use [`wandb.Run.use_artifact()`](/ref/python/experiments/run/#method-runuse_artifact) to retrieve the artifact from your project and prepare it for publication in the Model registry. `wandb.Run.use_artifact()` serves two key purposes:
 * Retrieves the artifact object from your project.
-* Marks the artifact as an input to the run, ensuring reproducibility and traceability. See [Create and view lineage map](/guides/core/registry/lineage/) for details.
+* Marks the artifact as an input to the run, ensuring reproducibility and traceability. See [Create and view lineage map](/guides/registry/lineage/) for details.
 
 ## View the training data in the dashboard
 
@@ -117,7 +117,7 @@ From here, you can see details about every run you've done. In this screenshot, 
 
 ## Publish the model to the Model registry
 
-To share the model with others in your organization, publish it to a [collection](/guides/core/registry/create_collection) using `wandb.Run.link_artifact()`. The following code links the artifact to the [core Model registry](/guides/core/registry/registry_types/#core-registry), making it accessible to your team.
+To share the model with others in your organization, publish it to a [collection](/guides/registry/create_collection/) using `wandb.Run.link_artifact()`. The following code links the artifact to the [core Model registry](/guides/registry/registry_types/#core-registry), making it accessible to your team.
 
 ```python
 # Artifact name specifies the specific artifact version within our team's project
@@ -137,9 +137,9 @@ run.link_artifact(artifact=model_artifact, target_path=target_path)
 run.finish()
 ```
 
-After running `wandb.Run.link_artifact()`, the model artifact will be in the `DemoModels` collection in your registry. From there, you can view details such as the version history, [lineage map](/guides/core/registry/lineage/), and other [metadata](/guides/core/registry/registry_cards/). 
+After running `wandb.Run.link_artifact()`, the model artifact will be in the `DemoModels` collection in your registry. From there, you can view details such as the version history, [lineage map](/guides/registry/lineage/), and other [metadata](/guides/registry/registry_cards/). 
 
-For additional information on how to link artifacts to a registry, see [Link artifacts to a registry](/guides/core/registry/link_version/).
+For additional information on how to link artifacts to a registry, see [Link artifacts to a registry](/guides/registry/link_version/).
 
 ## Retrieve model artifact from registry for inference
 
@@ -158,7 +158,7 @@ registry_model = run.use_artifact(artifact_or_name=model_artifact_name)
 local_model_path = registry_model.download()
 ```
 
-For more information on how to retrieve artifacts from a registry, see [Download an artifact from a registry](/guides/core/registry/download_use_artifact/).
+For more information on how to retrieve artifacts from a registry, see [Download an artifact from a registry](/guides/registry/download_use_artifact/).
 
 Depending on your machine learning framework, you may need to recreate the model architecture before loading the weights. This is left as an exercise for the reader, as it depends on the specific framework and model you are using. 
 
@@ -168,7 +168,7 @@ Depending on your machine learning framework, you may need to recreate the model
 W&B Report and Workspace API is in Public Preview.
 </Note>
 
-Create and share a [report](/guides/core/reports/_index) to summarize your work. To create a report programmatically, use the [W&B Report and Workspace API](/ref/wandb_workspaces/reports).
+Create and share a [report](/guides/reports/) to summarize your work. To create a report programmatically, use the [W&B Report and Workspace API](/ref/wandb_workspaces/reports).
 
 First, install the W&B Reports API:
 
@@ -213,10 +213,10 @@ report = wr.Report(
 report.save()
 ```
 
-For more information on how to create a report programmatically or how to create a report interactively with the W&B App, see [Create a report](/guides/core/reports/create-a-report) in the W&B Docs Developer guide. 
+For more information on how to create a report programmatically or how to create a report interactively with the W&B App, see [Create a report](/guides/reports/create-a-report/) in the W&B Docs Developer guide. 
 
 ## Query the registry
-Use the [W&B Public APIs](/ref/python/public-api/_index) to query, analyze, and manage historical data from W&B. This can be useful for tracking the lineage of artifacts, comparing different versions, and analyzing the performance of models over time.
+Use the [W&B Public APIs](/ref/python/public-api/) to query, analyze, and manage historical data from W&B. This can be useful for tracking the lineage of artifacts, comparing different versions, and analyzing the performance of models over time.
 
 The following code block demonstrates how to query the Model registry for all artifacts in a specific collection. It retrieves the collection and iterates through its versions, printing out the name and version of each artifact.
 
@@ -252,4 +252,4 @@ for art in artifacts:
     print(f"artifact created at: {art.created_at}\n")
 ```
 
-For more information on querying the registry, see the [Query registry items with MongoDB-style queries](/guides/core/registry/search_registry.md#query-registry-items-with-mongodb-style-queries).
+For more information on querying the registry, see the [Query registry items with MongoDB-style queries](/guides/registry/search_registry/#query-registry-items-with-mongodb-style-queries).

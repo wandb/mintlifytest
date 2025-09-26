@@ -56,7 +56,7 @@ with wandb.init(project="my_project", entity="my_entity") as run:
     run.log({"examples": [wandb.Image(im) for im in images_t]})
 ```
 
-For more on logging rich media to W&B in PyTorch and other frameworks, check out our [media logging guide](/guides/models/track/log/media).
+For more on logging rich media to W&B in PyTorch and other frameworks, check out our [media logging guide](/guides/track/log/media/).
 
 If you also want to include information alongside media, like your model's predictions or derived metrics, use a `wandb.Table`.
 
@@ -76,7 +76,7 @@ with wandb.init() as run:
     <img src="/images/integrations/pytorch_example_table.png" alt="PyTorch model results"  />
 </Frame>
 
-For more on logging and visualizing datasets and models, check out our [guide to W&B Tables](/guides/models/tables/).
+For more on logging and visualizing datasets and models, check out our [guide to W&B Tables](/guides/tables/).
 
 ## Profile PyTorch code
 

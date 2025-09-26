@@ -20,12 +20,12 @@ Each project has a visibility setting that determines who can access it. For mor
 
 Each project contains the following tabs:
 
-* [Overview](project-page.md#overview-tab): snapshot of your project
-* [Workspace](project-page.md#workspace-tab): personal visualization sandbox
+* [Overview](/guides/track/project-page/#overview-tab): snapshot of your project
+* [Workspace](/guides/track/project-page/#workspace-tab): personal visualization sandbox
 * [Runs](#runs-tab): A table that lists all the runs in your project
 * [Automations](#automations-tab): Automations configured in your project
-* [Sweeps](project-page.md#sweeps-tab): automated exploration and optimization
-* [Reports](project-page.md#reports-tab): saved snapshots of notes, runs, and graphs
+* [Sweeps](/guides/sweeps/): automated exploration and optimization
+* [Reports](/guides/track/project-page/#reports-tab): saved snapshots of notes, runs, and graphs
 * [Artifacts](#artifacts-tab): Contains all runs and the artifacts associated with that run
 
 ## Overview tab
@@ -195,7 +195,7 @@ By default, this turns other numeric columns into histograms showing the distrib
 {/* ## Automations tab */}
 
 ## Automations tab
-Automate downstream actions for versioning artifacts. To create an automation, define trigger events and resulting actions. Actions include executing a webhook or launching a W&B job. For more information, see [Automations](/guides/core/automations/).
+Automate downstream actions for versioning artifacts. To create an automation, define trigger events and resulting actions. Actions include executing a webhook or launching a W&B job. For more information, see [Automations](/guides/automations/).
 
 <Frame>
     <img src="/images/app_ui/automations_tab.png" alt="Automation tab"  />
@@ -211,7 +211,7 @@ See all the snapshots of results in one place, and share findings with your team
 
 ## Sweeps tab
 
-Start a new [sweep](/guides/models/sweeps/) from your project.
+Start a new [sweep](/guides/sweeps/) from your project.
 
 <Frame>
     <img src="/images/app_ui/sweeps-tab.png" alt="Sweeps tab"  />
@@ -219,7 +219,7 @@ Start a new [sweep](/guides/models/sweeps/) from your project.
 
 ## Artifacts tab
 
-View all [artifacts](/guides/core/artifacts/) associated with a project, from training datasets and [fine-tuned models](/guides/core/registry/) to [tables of metrics and media](/guides/models/tables/tables-walkthrough).
+View all [artifacts](/guides/artifacts/) associated with a project, from training datasets and [fine-tuned models](/guides/registry/) to [tables of metrics and media](/guides/tables/tables-walkthrough/).
 
 ### Overview panel
 
@@ -253,7 +253,7 @@ The Usage panel provides a code snippet for downloading the artifact for use out
 
 The files panel lists the files and folders associated with the artifact. W&B uploads certain files for a run automatically. For example, `requirements.txt` shows the versions of each library the run used, and `wandb-metadata.json`, and `wandb-summary.json` include information about the run. Other files may be uploaded, such as artifacts or media, depending on the run's configuration. You can navigate through this file tree and view the contents directly in the W&B web app.
 
-[Tables](/guides/models/tables//tables-walkthrough) associated with artifacts are particularly rich and interactive in this context. Learn more about using Tables with Artifacts [here](/guides/models/tables//visualize-tables).
+[Tables](/guides/tables/tables-walkthrough/) associated with artifacts are particularly rich and interactive in this context. Learn more about using Tables with Artifacts [here](/guides/tables/visualize-tables/).
 
 <Frame>
     <img src="/images/app_ui/files_panel_table.png" alt="Artifact table view"  />
