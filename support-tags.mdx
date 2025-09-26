@@ -1593,7 +1593,7 @@ Check the `Debug Bundle`. An admin can retrieve it from the `/system-admin` page
 
 There are several ways to manage experiments.
 
-For complex workflows, use multiple runs and set the group parameters in [`wandb.init()`](/guides/models/track/create-an-experiment.md) to a unique value for all processes within a single experiment. The [**Runs** tab](/guides/models/track/project-page.md#runs-tab) will group the table by group ID, ensuring that visualizations function properly. This approach enables concurrent experiments and training runs while logging results in one location.
+For complex workflows, use multiple runs and set the group parameters in [`wandb.init()`](/guides/track/create-an-experiment) to a unique value for all processes within a single experiment. The [**Runs** tab](/guides/models/track/project-page.md#runs-tab) will group the table by group ID, ensuring that visualizations function properly. This approach enables concurrent experiments and training runs while logging results in one location.
 
 For simpler workflows, call `wandb.init()` with `resume=True` and `id=UNIQUE_ID`, then call `wandb.init()` again with the same `id=UNIQUE_ID`. Log normally with [`run.log()`](/guides/models/track/log/) or `run.summary()`, and the run values will update accordingly.
 </Accordion>
@@ -2017,7 +2017,7 @@ To change a project's privacy (visibility):
     - **Public**: Anyone can view the project, but only your team can edit it.
 
         <Note>
-        If your W&B admins have turned off **Public** visibility, you cannot choose it. Instead, you can share a view-only [W&B Report](/guides/core/reports/collaborate-on-reports.md#share-a-report), or contact your W&B organization's admins for assistance.
+        If your W&B admins have turned off **Public** visibility, you cannot choose it. Instead, you can share a view-only [W&B Report](/guides/reports/collaborate-on-reports#share-a-report), or contact your W&B organization's admins for assistance.
         </Note>
 1. Click **Save**.
     

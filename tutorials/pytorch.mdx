@@ -442,7 +442,7 @@ Check out a [Colab notebook demonstrating hyperparameter optimization using W&B 
 
 Running a hyperparameter sweep with W&B is very easy. There are just 3 simple steps:
 
-1. **Define the sweep:** We do this by creating a dictionary or a [YAML file](/guides/models/sweeps/define-sweep-configuration) that specifies the parameters to search through, the search strategy, the optimization metric et all.
+1. **Define the sweep:** We do this by creating a dictionary or a [YAML file](/guides/sweeps/define-sweep-configuration/) that specifies the parameters to search through, the search strategy, the optimization metric et all.
 
 2. **Initialize the sweep:** 
 `sweep_id = wandb.sweep(sweep_config)`
@@ -463,6 +463,6 @@ Explore examples of projects tracked and visualized with W&B in our [Gallery →
 
 ## Advanced Setup
 1. [Environment variables](/guides/hosting/env-vars/): Set API keys in environment variables so you can run training on a managed cluster.
-2. [Offline mode](/support/kb-articles/run_wandb_offline): Use `dryrun` mode to train offline and sync results later.
+2. [Offline mode](/support/run_wandb_offline/): Use `dryrun` mode to train offline and sync results later.
 3. [On-prem](/guides/hosting/hosting-options/self-managed): Install W&B in a private cloud or air-gapped servers in your own infrastructure. We have local installations for everyone from academics to enterprise teams.
-4. [Sweeps](/guides/models/sweeps/): Set up hyperparameter search quickly with our lightweight tool for tuning.
+4. [Sweeps](/guides/sweeps/): Set up hyperparameter search quickly with our lightweight tool for tuning.

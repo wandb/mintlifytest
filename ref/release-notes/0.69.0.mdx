@@ -25,7 +25,7 @@ import Text from "/snippets/en/_includes/release-notes-support-eol-reminder.mdx"
 <Text/>
 
 ## Upgrading
-To [upgrade](/guides/hosting/hosting-options/self-managed/server-upgrade-process.md#update-with-helm) to W&B v0.69.x, you must use v0.31.4+ of the `operator-wandb` Helm chart. Otherwise, after the upgrade, the `weave-cache-clear` container can fail to start. Ensure that your deployment uses these values:
+To [upgrade](/guides/hosting/server-upgrade-process/#update-with-helm) to W&B v0.69.x, you must use v0.31.4+ of the `operator-wandb` Helm chart. Otherwise, after the upgrade, the `weave-cache-clear` container can fail to start. Ensure that your deployment uses these values:
 
 ```yaml
 chart:
@@ -44,7 +44,7 @@ If you have questions or are experiencing issues with an upgrade, contact [suppo
 - Settings for all types of media panels have been reorganized and improved.
 - You can now customize the point and background colors for point cloud panels.
 - Team-level and organization-level service accounts can now interact with Registry.
-- Improved Exponentially-weighted Moving Average (EMA) smoothing provides more reliable [smoothed lines](/guides/models/app/features/panels/line-plot/smoothing) when operating on complete, unbinned data. In most cases, smoothing is handled at the back end for improved performance. This feature was in private preview in v0.68.x.
+- Improved Exponentially-weighted Moving Average (EMA) smoothing provides more reliable [smoothed lines](/guides/app/features/panels/line-plot/smoothing/) when operating on complete, unbinned data. In most cases, smoothing is handled at the back end for improved performance. This feature was in private preview in v0.68.x.
 
 ### Private preview
 Private preview features are available by invitation only. To request enrollment in a private preview, contact [support](mailto:support@wandb.com) or your AISE.
@@ -65,7 +65,7 @@ Private preview features are available by invitation only. To request enrollment
 
 ## Performance
 - With [`wandb` SDK](/quickstart/#install-the-wandb-library-and-log-in) v0.19.11, artifacts now download 3-5x faster on average. For example, an artifact that previously downloaded at around 100 MB/sec may now download at 450 MB/sec or faster. Actual download speeds vary based on factors such as your network and storage infrastructure.
-- Improved caching on [Project](/guides/track/project-page/) and [User Settings](/guides/models/app/settings-page/user-settings/) pages.
+- Improved caching on [Project](/guides/track/project-page/) and [User Settings](/guides/app/settings-page/user-settings/) pages.
 
 ## Fixes
 - Improved the startup process for the `weave-cache-clear` container to ensure compatibility with Python virtual environments.

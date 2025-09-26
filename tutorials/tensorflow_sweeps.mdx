@@ -25,7 +25,7 @@ Use W&B Sweeps to automate hyperparameter optimization and explore model possibi
 * **Transparent**: The project cites all algorithms used, and the [code is open source](https://github.com/wandb/wandb/blob/main/wandb/apis/public/sweeps.py).
 * **Powerful**: Sweeps provide customization options and can run on multiple machines or a laptop with ease.
 
-For more information, see the [Sweeps overview](/guides/models/sweeps/).
+For more information, see the [Sweeps overview](/guides/sweeps/).
 
 ## What this notebook covers
 
@@ -197,7 +197,7 @@ Steps to configure the sweep:
 * Set a goal and metric for `bayes`, like minimizing `val_loss`
 * Use `hyperband` for early termination of performing runs
 
-See more in the [sweep configuration guide](/guides/models/sweeps/define-sweep-configuration).
+See more in the [sweep configuration guide](/guides/sweeps/define-sweep-configuration/).
 
 ```python
 sweep_config = {
@@ -300,5 +300,5 @@ Explore projects tracked and visualized with W&B in the [Gallery](https://app.wa
 
 ## Advanced setup
 1. [Environment variables](/guides/hosting/env-vars/): Set API keys for training on a managed cluster.
-2. [Offline mode](/support/kb-articles/run_wandb_offline)
+2. [Offline mode](/support/run_wandb_offline/)
 3. [On-prem](/guides/hosting/hosting-options/self-managed): Install W&B in a private cloud or air-gapped servers in your infrastructure. Local installations suit academics and enterprise teams.
