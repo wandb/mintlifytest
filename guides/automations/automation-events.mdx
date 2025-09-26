@@ -12,10 +12,10 @@ import EnterpriseCloudOnly from "/snippets/en/_includes/enterprise-cloud-only.md
 <EnterpriseCloudOnly/>
 </Info>
 
-An automation can start when a specific event occurs within a project or registry. This page describes the events that can trigger an automation within each scope. Learn more about automations in the [Automations overview](/guides/core/automations/) or [Create an automation](create-automations/).
+An automation can start when a specific event occurs within a project or registry. This page describes the events that can trigger an automation within each scope. Learn more about automations in the [Automations overview](/guides/automations/) or [Create an automation](/guides/automations/create-automations/).
 
 ## Registry
-This section describes the scopes and events for an automation in a [Registry](/guides/core/registry/).
+This section describes the scopes and events for an automation in a [Registry](/guides/registry/).
 
 1. Navigate to the **Registry** App at https://wandb.ai/registry/.
 1. Click the name of a registry, then view and create automations in the **Automations** tab.
@@ -24,11 +24,11 @@ This section describes the scopes and events for an automation in a [Registry](/
 ![Screenshot of the Registry Automations tab with an automation](/images/automations/registry_automations_tab.png)
 </Frame>
 
-Learn more about [creating automations](create-automations/).
+Learn more about [creating automations](/guides/automations/create-automations/).
 
 ### Scopes
 You can create a Registry automation at these scopes:
-- [Registry](/guides/core/registry/) level: The automation watches for the event taking place on any collection within a specific registry, including collections added in the future.
+- [Registry](/guides/registry/) level: The automation watches for the event taking place on any collection within a specific registry, including collections added in the future.
 - Collection level: A single collection in a specific registry.
 
 ### Events
@@ -37,7 +37,7 @@ A Registry automation can watch for these events:
 - **An artifact alias is added**: Trigger a specific step of your workflow when a new artifact version has a specific alias applied. For example, deploy a model when it has the `production` alias applied.
 
 ## Project
-This section describes the scopes and events for an automation in a [project](/guides/models/track/project-page).
+This section describes the scopes and events for an automation in a [project](/guides/track/project-page/).
 
 1. Navigate to your W&B project on the W&B App at `https://wandb.ai/<team>/<project-name>`.
 1. View and create automations in the **Automations** tab.
@@ -46,7 +46,7 @@ This section describes the scopes and events for an automation in a [project](/g
 ![Screenshot of the Project Automations tab with an automation](/images/automations/project_automations_tab.png)
 </Frame>
 
-Learn more about [creating automations](create-automations/).
+Learn more about [creating automations](/guides/automations/create-automations/).
 
 ### Scopes
 You can create a project automation at these scopes:
@@ -61,7 +61,7 @@ This section describes the events related to an artifact that can trigger an aut
 - **An artifact tag is added**: Trigger a specific step of your workflow when an artifact version in a project or collection has a specific tag applied. For example, trigger a geo-specific workflow when the tag "europe" is added to an artifact version. Artifact tags are used for grouping and filtering, and a given tag can be assigned to multiple artifact versions simultaneously.
 
 ### Run events
-An automation can be triggered by a change in a [run's status](/guides/models/track/runs/#run-states) or a change in a [metric value](/guides/models/track/log/#what-data-is-logged-with-specific-wb-api-calls).
+An automation can be triggered by a change in a [run's status](/guides/models/#run-states) or a change in a [metric value](/guides/track/log/#what-data-is-logged-with-specific-wb-api-calls).
 
 #### Run status change
 <Note>
@@ -69,7 +69,7 @@ An automation can be triggered by a change in a [run's status](/guides/models/tr
 - A run with **Killed** status cannot trigger an automation. This status indicates that the run was stopped forcibly by an admin user.
 </Note>
 
-Trigger a workflow when a run changes its [status](/guides/models/track/runs/_index.md#run-states) to **Running**, **Finished**, or **Failed**. Optionally, you can further limit the runs that can trigger an automation by filtering by the user that started a run or the run's name.
+Trigger a workflow when a run changes its [status](/guides/runs/#run-states) to **Running**, **Finished**, or **Failed**. Optionally, you can further limit the runs that can trigger an automation by filtering by the user that started a run or the run's name.
 
 <Frame>
 ![Screenshot showing a run status change automation](/images/automations/run_status_change.png)
@@ -140,5 +140,5 @@ This section describes how the automation selects runs to evaluate.
 - In a 24 hour period, a particular automation can fire at most once per run.
 
 ## Next steps
-- [Create a Slack automation](create-automations/slack)
-- [Create a webhook automation](create-automations/webhook)
+- [Create a Slack automation](/guides/automations/create-automations/slack/)
+- [Create a webhook automation](/guides/automations/create-automations/webhook/)

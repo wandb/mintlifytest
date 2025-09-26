@@ -1,201 +1,40 @@
 {
   "metadata": {
-    "generated_at": "2025-09-26 14:30:20",
+    "generated_at": "2025-09-26 14:36:09",
     "base_url": "https://docs.wandb.ai",
     "total_pages": 15,
-    "total_links_processed": 42,
+    "total_links_processed": 70,
     "pages_not_found": 0,
     "max_instances": 15,
-    "processing_time_seconds": 306.71517848968506,
+    "processing_time_seconds": 50.68214464187622,
     "script_version": "3.1_with_404_detection"
   },
   "results": [
     {
-      "page": "guides/app/features/panels/media.mdx",
+      "page": "guides/artifacts/delete-artifacts.mdx",
       "links": [
         {
-          "broken": "/guides/models/track/log/media",
-          "fix": "/guides/track/log/media/",
+          "broken": "/guides/core/registry/model_registry/access_controls",
+          "fix": "/guides/registry/model_registry/access_controls/",
           "confidence": "high",
-          "fix_method": "text_href_match",
+          "fix_method": "http_redirect",
           "fix_type": "redirect"
         }
       ],
-      "processing_time": 2.625534772872925,
+      "processing_time": 0.19614076614379883,
       "worker_id": 6,
       "is_404": false
     },
     {
-      "page": "guides/app/features/panels/run-comparer.mdx",
+      "page": "guides/artifacts/download-and-use-an-artifact.mdx",
       "links": [
-        {
-          "broken": "/guides/models/track/runs/filter-runs",
-          "fix": "/guides/runs/filter-runs/",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        }
-      ],
-      "processing_time": 5.769514083862305,
-      "worker_id": 10,
-      "is_404": false
-    },
-    {
-      "page": "guides/app/features/panels/parameter-importance.mdx",
-      "links": [
-        {
-          "broken": "/guides/models/track/config/",
-          "fix": "/guides/track/config/",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        }
-      ],
-      "processing_time": 6.016732931137085,
-      "worker_id": 8,
-      "is_404": false
-    },
-    {
-      "page": "guides/app/features/custom-charts.mdx",
-      "links": [
-        {
-          "broken": "/guides/models/track/config",
-          "fix": "/guides/track/config/",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        }
-      ],
-      "processing_time": 5.811561107635498,
-      "worker_id": 3,
-      "is_404": false
-    },
-    {
-      "page": "guides/app/features/custom-charts/walkthrough.mdx",
-      "links": [
-        {
-          "broken": "/guides/models/track/config",
-          "fix": "/guides/track/config/",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "/guides/models/track/log/",
-          "fix": "/guides/track/log/",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        }
-      ],
-      "processing_time": 7.686327219009399,
-      "worker_id": 2,
-      "is_404": false
-    },
-    {
-      "page": "guides/app/features/cascade-settings.mdx",
-      "links": [
-        {
-          "broken": "/guides/models/track/workspaces.md#workspace-templates",
-          "fix": "/guides/track/workspaces/#workspace-templates",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "panels/",
-          "fix": "/guides/app/features/panels/",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "/guides/models/app/features/panels/line-plot/smoothing",
-          "fix": "/guides/app/features/panels/line-plot/smoothing/",
-          "confidence": "high",
-          "fix_method": "http_redirect",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "/guides/models/app/features/panels/line-plot/sampling",
-          "fix": "/guides/app/features/panels/line-plot/sampling/",
-          "confidence": "high",
-          "fix_method": "http_redirect",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "/guides/models/app/features/panels/line-plot/#edit-line-panel-settings",
-          "fix": "/guides/app/features/panels/line-plot/#edit-line-panel-settings",
-          "confidence": "high",
-          "fix_method": "http_redirect",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "/guides/models/app/features/panels/line-plot/#edit-line-panel-settings",
-          "fix": "/guides/app/features/panels/line-plot/#edit-line-panel-settings",
-          "confidence": "high",
-          "fix_method": "http_redirect",
-          "fix_type": "redirect"
-        }
-      ],
-      "processing_time": 7.199069023132324,
-      "worker_id": 1,
-      "is_404": false
-    },
-    {
-      "page": "guides/app/settings-page/teams.mdx",
-      "links": [
-        {
-          "broken": "team-settings.md#privacy",
-          "fix": "/guides/app/settings-page/team-settings/",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "team-settings.md#privacy",
-          "fix": "/guides/app/settings-page/team-settings/",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "/guides/hosting/iam/authentication/service-accounts",
-          "fix": "/guides/hosting/iam/service-accounts/",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        },
         {
           "broken": "/ref/python/public-api/index",
           "fix": "/ref/python/public-api/",
           "confidence": "high",
           "fix_method": "http_redirect",
           "fix_type": "redirect"
-        }
-      ],
-      "processing_time": 8.984459400177002,
-      "worker_id": 15,
-      "is_404": false
-    },
-    {
-      "page": "guides/app/settings-page/billing-settings.mdx",
-      "links": [
-        {
-          "broken": "storage",
-          "fix": "/guides/app/settings-page/storage/",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        }
-      ],
-      "processing_time": 6.755381345748901,
-      "worker_id": 12,
-      "is_404": false
-    },
-    {
-      "page": "guides/app/settings-page/storage.mdx",
-      "links": [
+        },
         {
           "broken": "/guides/core/artifacts/track-external-files",
           "fix": "/guides/artifacts/track-external-files/",
@@ -204,222 +43,581 @@
           "fix_type": "redirect"
         },
         {
-          "broken": "teams",
-          "fix": "/guides/app/settings-page/teams/",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "/guides/core/artifacts/manage-data/ttl",
-          "fix": "/guides/artifacts/ttl/",
+          "broken": "/guides/core/artifacts/construct-an-artifact",
+          "fix": "/guides/artifacts/construct-an-artifact/",
           "confidence": "high",
           "fix_method": "text_href_match",
           "fix_type": "redirect"
         }
       ],
-      "processing_time": 9.30336594581604,
-      "worker_id": 13,
+      "processing_time": 6.238675594329834,
+      "worker_id": 7,
       "is_404": false
     },
     {
-      "page": "guides/app/features/panels.mdx",
+      "page": "guides/artifacts/create-a-new-artifact-version.mdx",
       "links": [
         {
-          "broken": "line-plot/#all-line-plots-in-a-workspace",
-          "fix": "/guides/app/features/panels/line-plot/",
+          "broken": "/guides/models/track/runs/",
+          "fix": "/guides/runs/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 3.772066593170166,
+      "worker_id": 5,
+      "is_404": false
+    },
+    {
+      "page": "guides/artifacts/track-external-files.mdx",
+      "links": [
+        {
+          "broken": "/guides/core/artifacts/artifacts-walkthrough",
+          "fix": "/guides/artifacts/artifacts-walkthrough/",
           "confidence": "high",
           "fix_method": "text_href_match",
           "fix_type": "redirect"
         },
         {
-          "broken": "line-plot/",
-          "fix": "/guides/app/features/panels/line-plot/",
+          "broken": "/guides/core/artifacts/explore-and-traverse-an-artifact-graph",
+          "fix": "/guides/artifacts/explore-and-traverse-an-artifact-graph/",
           "confidence": "high",
           "fix_method": "text_href_match",
           "fix_type": "redirect"
-        },
+        }
+      ],
+      "processing_time": 6.9813501834869385,
+      "worker_id": 10,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/settings-page/user-settings.mdx",
+      "links": [
         {
-          "broken": "bar-plot",
-          "fix": "/guides/app/features/panels/bar-plot/",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "/guides/core/automations/",
-          "fix": "/guides/automations/",
+          "broken": "/guides/models/app/features/panels/code",
+          "fix": "/guides/app/features/panels/code/",
           "confidence": "high",
           "fix_method": "http_redirect",
           "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/app/settings-page/teams/",
+          "fix": "/guides/app/settings-page/teams/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/track/runs/alert",
+          "fix": "/guides/runs/alert/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/track/runs/alert",
+          "fix": "/guides/runs/alert/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
         }
       ],
-      "processing_time": 9.69031023979187,
-      "worker_id": 11,
+      "processing_time": 6.133660793304443,
+      "worker_id": 1,
       "is_404": false
     },
     {
-      "page": "guides/app/features/panels/line-plot/reference.mdx",
+      "page": "guides/artifacts/storage.mdx",
       "links": [
         {
-          "broken": "/support/kb-articles/formula_smoothing_algorithm",
-          "fix": "/support/formula_smoothing_algorithm/",
+          "broken": "../track-external-files",
+          "fix": "/guides/artifacts/track-external-files/",
           "confidence": "high",
           "fix_method": "text_href_match",
           "fix_type": "redirect"
         },
         {
-          "broken": "sampling.md#random-sampling",
-          "fix": "/guides/app/features/panels/line-plot/sampling/#random-sampling",
-          "confidence": "high",
-          "fix_method": "text_href_match",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "sampling.md#full-fidelity",
-          "fix": "/guides/app/features/panels/line-plot/sampling/#full-fidelity",
+          "broken": "/guides/models/track/environment-variables",
+          "fix": "/guides/track/environment-variables/",
           "confidence": "high",
           "fix_method": "text_href_match",
           "fix_type": "redirect"
         }
       ],
-      "processing_time": 9.640966176986694,
+      "processing_time": 6.227831602096558,
+      "worker_id": 9,
+      "is_404": false
+    },
+    {
+      "page": "guides/app/settings-page.mdx",
+      "links": [
+        {
+          "broken": "./user-settings",
+          "fix": "/guides/app/settings-page/user-settings/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "./team-settings",
+          "fix": "/guides/app/settings-page/team-settings/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 6.8438403606414795,
+      "worker_id": 2,
+      "is_404": false
+    },
+    {
+      "page": "guides/artifacts/artifacts-walkthrough.mdx",
+      "links": [
+        {
+          "broken": "/guides/models/track/runs/",
+          "fix": "/guides/runs/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 6.053926706314087,
       "worker_id": 4,
       "is_404": false
     },
     {
-      "page": "guides/app/features/panels/line-plot.mdx",
+      "page": "guides/artifacts/explore-and-traverse-an-artifact-graph.mdx",
       "links": [
         {
-          "broken": "sampling",
-          "fix": "/guides/app/features/panels/line-plot/sampling/",
+          "broken": "/guides/core/artifacts/artifacts-walkthrough",
+          "fix": "/guides/artifacts/artifacts-walkthrough/",
           "confidence": "high",
           "fix_method": "text_href_match",
           "fix_type": "redirect"
         },
         {
-          "broken": "/guides/core/automations",
-          "fix": "/guides/automations/",
+          "broken": "/guides/core/artifacts/manage-data/delete-artifacts",
+          "fix": "/guides/artifacts/delete-artifacts/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 7.563006639480591,
+      "worker_id": 8,
+      "is_404": false
+    },
+    {
+      "page": "guides/app.mdx",
+      "links": [
+        {
+          "broken": "/guides/models/track/",
+          "fix": "/guides/track/",
           "confidence": "high",
           "fix_method": "text_href_match",
           "fix_type": "redirect"
         },
         {
-          "broken": "/guides/core/automations/automation-events.md#run-events",
-          "fix": "/guides/automations/automation-events/#run-events",
+          "broken": "settings-page/",
+          "fix": "/guides/app/settings-page/",
           "confidence": "high",
           "fix_method": "text_href_match",
           "fix_type": "redirect"
         },
         {
-          "broken": "/guides/core/automations",
-          "fix": "/guides/automations/",
+          "broken": "features/cascade-settings",
+          "fix": "/guides/app/features/cascade-settings/",
           "confidence": "high",
           "fix_method": "text_href_match",
           "fix_type": "redirect"
         },
         {
-          "broken": "/guides/models/track/runs/_index",
+          "broken": "/guides/models/app/features/panels/",
+          "fix": "/guides/app/features/panels/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/app/features/custom-charts/",
+          "fix": "/guides/app/features/custom-charts/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/reports/",
+          "fix": "/guides/reports/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 11.054112911224365,
+      "worker_id": 3,
+      "is_404": false
+    },
+    {
+      "page": "guides/artifacts.mdx",
+      "links": [
+        {
+          "broken": "/guides/models/track/runs/",
           "fix": "/guides/runs/",
           "confidence": "high",
           "fix_method": "text_href_match",
           "fix_type": "redirect"
         },
         {
-          "broken": "/guides/models/track/runs/#customize-how-runs-are-displayed",
-          "fix": "/guides/runs/#customize-how-runs-are-displayed",
+          "broken": "/guides/models/track/runs/",
+          "fix": "/guides/runs/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/tables/",
+          "fix": "/guides/tables/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/track/runs/",
+          "fix": "/guides/runs/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "./track-external-files",
+          "fix": "/guides/artifacts/track-external-files/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "./download-and-use-an-artifact",
+          "fix": "/guides/artifacts/download-and-use-an-artifact/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "./create-a-new-artifact-version",
+          "fix": "/guides/artifacts/create-a-new-artifact-version/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "./update-an-artifact",
+          "fix": "/guides/artifacts/update-an-artifact/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/",
+          "fix": "/guides/automations/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/registry/",
+          "fix": "/guides/registry/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        }
+      ],
+      "processing_time": 15.499746084213257,
+      "worker_id": 12,
+      "is_404": false
+    },
+    {
+      "page": "guides/artifacts/ttl.mdx",
+      "links": [
+        {
+          "broken": "/guides/models/app/settings-page/team-settings",
+          "fix": "/guides/app/settings-page/team-settings/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/artifacts/explore-and-traverse-an-artifact-graph",
+          "fix": "/guides/artifacts/explore-and-traverse-an-artifact-graph/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "../construct-an-artifact",
+          "fix": "/guides/artifacts/construct-an-artifact/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "../construct-an-artifact",
+          "fix": "/guides/artifacts/construct-an-artifact/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "../construct-an-artifact.md#add-files-to-an-artifact",
+          "fix": "/guides/artifacts/construct-an-artifact/#add-files-to-an-artifact",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "../construct-an-artifact.md#3-save-your-artifact-to-the-wb-server",
+          "fix": "/guides/artifacts/construct-an-artifact/#3-save-your-artifact-to-the-wb-server",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "../download-and-use-an-artifact",
+          "fix": "/guides/artifacts/download-and-use-an-artifact/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "../download-and-use-an-artifact",
+          "fix": "/guides/artifacts/download-and-use-an-artifact/",
           "confidence": "high",
           "fix_method": "text_href_match",
           "fix_type": "redirect"
         }
       ],
-      "processing_time": 13.789062976837158,
-      "worker_id": 5,
+      "processing_time": 15.108645677566528,
+      "worker_id": 11,
       "is_404": false
     },
     {
-      "page": "guides/app/settings-page/team-settings.mdx",
+      "page": "guides/automations/create-automations/slack.mdx",
       "links": [
         {
-          "broken": "/guides/models/track/runs/alert",
-          "fix": "/guides/models/evaluate-models/",
+          "broken": "/guides/core/automations/",
+          "fix": "/guides/automations/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/create-automations/webhook",
+          "fix": "/guides/automations/create-automations/webhook/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/automation-events",
+          "fix": "/guides/automations/automation-events/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/automation-events",
+          "fix": "/guides/automations/automation-events/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/automation-events.md#run-events",
+          "fix": "/guides/automations/automation-events/#run-events",
           "confidence": "high",
           "fix_method": "content_matching",
           "fix_type": "redirect"
         },
         {
-          "broken": "/guides/core/automations/",
-          "fix": "/guides/automations/",
+          "broken": "/guides/core/automations/automation-events",
+          "fix": "/guides/automations/automation-events/",
           "confidence": "high",
           "fix_method": "http_redirect",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "/guides/core/automations/create-automations/slack",
-          "fix": "/guides/automations/create-automations/slack/",
-          "confidence": "high",
-          "fix_method": "http_redirect",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "/guides/core/automations/",
-          "fix": "/guides/automations/",
-          "confidence": "high",
-          "fix_method": "http_redirect",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "/guides/core/automations/create-automations/slack",
-          "fix": "/guides/automations/create-automations/slack/",
-          "confidence": "high",
-          "fix_method": "http_redirect",
-          "fix_type": "redirect"
-        },
-        {
-          "broken": "teams.md#secure-storage-connector",
-          "fix": "/guides/app/settings-page/teams/#secure-storage-connector",
-          "confidence": "high",
-          "fix_method": "text_href_match",
           "fix_type": "redirect"
         }
       ],
-      "processing_time": 32.12593340873718,
+      "processing_time": 27.473588466644287,
       "worker_id": 14,
       "is_404": false
     },
     {
-      "page": "guides/app/features/panels/parallel-coordinates.mdx",
+      "page": "guides/automations/create-automations/webhook.mdx",
       "links": [
         {
-          "broken": "/guides/models/track/config",
-          "fix": "/guides/models/evaluate-models/",
+          "broken": "/guides/core/automations/",
+          "fix": "/guides/automations/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/create-automations/slack",
+          "fix": "/guides/automations/create-automations/slack/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/secrets",
+          "fix": "/guides/secrets/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/automation-events",
+          "fix": "/guides/automations/automation-events/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/secrets.md#add-a-secret",
+          "fix": "/guides/secrets/#add-a-secret",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/secrets",
+          "fix": "/guides/secrets/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/automation-events",
+          "fix": "/guides/automations/automation-events/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/automations/automation-events.md#run-events",
+          "fix": "/guides/automations/automation-events/#run-events",
           "confidence": "high",
           "fix_method": "content_matching",
           "fix_type": "redirect"
         },
         {
-          "broken": "/guides/models/track/log/",
-          "fix": "/guides/models/evaluate-models/",
+          "broken": "/guides/core/automations/automation-events",
+          "fix": "/guides/automations/automation-events/",
           "confidence": "high",
-          "fix_method": "content_matching",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/artifacts/download-and-use-an-artifact",
+          "fix": "/guides/artifacts/download-and-use-an-artifact/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
           "fix_type": "redirect"
         }
       ],
-      "processing_time": 52.05955386161804,
-      "worker_id": 7,
+      "processing_time": 36.09650421142578,
+      "worker_id": 15,
       "is_404": false
     },
     {
-      "page": "guides/app/features/panels/query-panels.mdx",
+      "page": "guides/automations/automation-events.mdx",
       "links": [
         {
-          "broken": "../../../../track/public-api-guide.md#understanding-the-different-attributes",
-          "fix": "/guides/track/public-api-guide/#understanding-the-different-attributes",
-          "confidence": "none"
+          "broken": "/guides/core/automations/",
+          "fix": "/guides/automations/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "create-automations/",
+          "fix": "/guides/automations/create-automations/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/registry/",
+          "fix": "/guides/registry/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "create-automations/",
+          "fix": "/guides/automations/create-automations/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/core/registry/",
+          "fix": "/guides/registry/",
+          "confidence": "high",
+          "fix_method": "http_redirect",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/track/project-page",
+          "fix": "/guides/track/project-page/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "create-automations/",
+          "fix": "/guides/automations/create-automations/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/track/runs/#run-states",
+          "fix": "/guides/models/#run-states",
+          "confidence": "high",
+          "fix_method": "content_matching",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/track/log/#what-data-is-logged-with-specific-wb-api-calls",
+          "fix": "/guides/track/log/#what-data-is-logged-with-specific-wb-api-calls",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "/guides/models/track/runs/_index.md#run-states",
+          "fix": "/guides/runs/#run-states",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "create-automations/slack",
+          "fix": "/guides/automations/create-automations/slack/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
+        },
+        {
+          "broken": "create-automations/webhook",
+          "fix": "/guides/automations/create-automations/webhook/",
+          "confidence": "high",
+          "fix_method": "text_href_match",
+          "fix_type": "redirect"
         }
       ],
-      "processing_time": 120.15338635444641,
-      "worker_id": 9,
+      "processing_time": 42.386427879333496,
+      "worker_id": 13,
       "is_404": false
     }
   ],

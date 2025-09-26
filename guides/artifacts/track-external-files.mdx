@@ -15,7 +15,7 @@ W&B logs metadata about the the object, such as the object's ETag and size. If o
 <Note>
 If you log an artifact that does not track external files, W&B saves the artifact's files to W&B servers. This is the default behavior when you log artifacts with the W&B Python SDK.
 
-See the [Artifacts quickstart](/guides/core/artifacts/artifacts-walkthrough) for information on how to save files and directories to W&B servers instead.
+See the [Artifacts quickstart](/guides/artifacts/artifacts-walkthrough/) for information on how to save files and directories to W&B servers instead.
 </Note>
 
 The following describes how to construct reference artifacts.
@@ -69,7 +69,7 @@ run.log_artifact(artifact)
 run.finish()
 ```
 
-Within the W&B App, you can look through the contents of the reference artifact using the file browser, [explore the full dependency graph](/guides/core/artifacts/explore-and-traverse-an-artifact-graph), and scan through the versioned history of your artifact. The W&B App does not render rich media such as images, audio, and so forth because the data itself is not contained within the artifact.
+Within the W&B App, you can look through the contents of the reference artifact using the file browser, [explore the full dependency graph](/guides/artifacts/explore-and-traverse-an-artifact-graph/), and scan through the versioned history of your artifact. The W&B App does not render rich media such as images, audio, and so forth because the data itself is not contained within the artifact.
 
 <Note>
 W&B Artifacts support any Amazon S3 compatible interface, including CoreWeave Storage and MinIO. The scripts described below work as-is with both providers, when you set the `AWS_S3_ENDPOINT_URL` environment variable to point at your CoreWeave Storage or MinIO server.
