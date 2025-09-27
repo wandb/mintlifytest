@@ -50,7 +50,7 @@ from wandb.integration.ultralytics import add_wandb_callback
 from ultralytics import YOLO
 ```
 
-選択した `YOLO` モデルを初期化し、推論を行う前に `add_wandb_callback` 関数を呼び出します。これにより、トレーニング、ファインチューニング、バリデーション、または推論を行うときに、実験ログと、地上真実とそれぞれの予測結果を重ね合わせた画像が、自動的に [コンピュータビジョンタスクの対話型オーバーレイ](/ja/guides/models/track/log/media#image-overlays-in-tables) で保存され、追加の洞察が [`wandb.Table`](/ja/guides/models/tables/) に保存されることを保証します。
+選択した `YOLO` モデルを初期化し、推論を行う前に `add_wandb_callback` 関数を呼び出します。これにより、トレーニング、ファインチューニング、バリデーション、または推論を行うときに、実験ログと、地上真実とそれぞれの予測結果を重ね合わせた画像が、自動的に [コンピュータビジョンタスクの対話型オーバーレイ](/ja/guides/track/log/media/#image-overlays-in-tables) で保存され、追加の洞察が [`wandb.Table`](/ja/guides/models/tables/) に保存されることを保証します。
 
 ```python
 # YOLO モデルを初期化
@@ -105,14 +105,14 @@ from ultralytics.engine.model import YOLO
 !wget https://raw.githubusercontent.com/wandb/examples/ultralytics/colabs/ultralytics/assets/img5.png
 ```
 
-次に、`wandb.init` を使って W&B の [run](/ja/guides/models/track/runs/) を初期化します。
+次に、`wandb.init` を使って W&B の [run](/ja/guides/runs/) を初期化します。
 
 ```python
 # W&B run を初期化
 wandb.init(project="ultralytics", job_type="inference")
 ```
 
-次に、希望する `YOLO` モデルを初期化し、推論を行う前に `add_wandb_callback` 関数を呼び出します。これにより、推論を実行すると、[コンピュータビジョンタスク用の対話型オーバーレイ](/ja/guides/models/track/log/media#image-overlays-in-tables) で画像が自動的にログに記録され、追加の洞察が [`wandb.Table`](/ja/guides/models/tables/) に提供されることを保証します。
+次に、希望する `YOLO` モデルを初期化し、推論を行う前に `add_wandb_callback` 関数を呼び出します。これにより、推論を実行すると、[コンピュータビジョンタスク用の対話型オーバーレイ](/ja/guides/track/log/media/#image-overlays-in-tables) で画像が自動的にログに記録され、追加の洞察が [`wandb.Table`](/ja/guides/models/tables/) に提供されることを保証します。
 
 ```python
 # YOLO モデルを初期化
@@ -142,7 +142,7 @@ wandb.finish()
 
 <blockquote class="imgur-embed-pub" lang="en" data-id="a/UTSiufs"  ><a href="https://imgur.com/a/UTSiufs">WandB Image Overlay</a></blockquote><script async src="https://s.imgur.com/min/embed.js" charset="utf-8"></script>
 
-W&B 画像オーバーレイに関する詳細情報は [こちら](/ja/guides/models/track/log/media#image-overlays) で取得できます。
+W&B 画像オーバーレイに関する詳細情報は [こちら](/ja/guides/track/log/media/#image-overlays) で取得できます。
 
 ## その他のリソース
 

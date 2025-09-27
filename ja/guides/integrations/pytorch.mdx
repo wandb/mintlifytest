@@ -56,7 +56,7 @@ images_t = ...  # PyTorch Tensors として画像を生成またはロードす�
 wandb.log({"examples": [wandb.Image(im) for im in images_t]})
 ```
 
-PyTorch や他のフレームワークにおけるリッチメディアのログについての詳細は、[メディアログガイド](/ja/guides/models/track/log/media)をご覧ください。
+PyTorch や他のフレームワークにおけるリッチメディアのログについての詳細は、[メディアログガイド](/ja/guides/track/log/media/)をご覧ください。
 
 メディアと一緒にモデルの予測や派生メトリクスなどの情報も含めたい場合は、`wandb.Table` を使用します。
 

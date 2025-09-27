@@ -16,7 +16,7 @@ weight: 1
 <Card title="Try in W&B" href="https://wandb.ai/stacey/deep-drive/workspace?workspace=user-lavanyashukla" icon="sliders-up"/>
 </CardGroup>
 
-数行のコードで機械学習実験を追跡します。その後、[インタラクティブなダッシュボード](/ja/guides/models/track/workspaces)で結果をレビューしたり、[Public API](/ja/ref/python/public-api/)を使用してプログラムからアクセスできるようにPythonにデータをエクスポートすることができます。
+数行のコードで機械学習実験を追跡します。その後、[インタラクティブなダッシュボード](/ja/guides/track/workspaces/)で結果をレビューしたり、[Public API](/ja/ref/python/public-api/)を使用してプログラムからアクセスできるようにPythonにデータをエクスポートすることができます。
 
 人気のあるフレームワークを使用している場合は、W&Bのインテグレーションを活用してください。[PyTorch](/ja/guides/integrations/pytorch)、[Keras](/ja/guides/integrations/keras)、または[Scikit](/ja/guides/integrations/scikit)のようなフレームワークがあります。インテグレーションの完全なリストや、W&Bをコードに追加する方法については、[インテグレーションガイド](/ja/guides/integrations/)をご覧ください。
 
@@ -24,14 +24,14 @@ weight: 1
     <img src="/images/experiments/experiments_landing_page.png"  />
 </Frame>
 
-上の画像は、複数の[Runs](/ja/guides/models/track/runs/)でメトリクスを確認および比較できるダッシュボードの例を示しています。
+上の画像は、複数の[Runs](/ja/guides/runs/)でメトリクスを確認および比較できるダッシュボードの例を示しています。
 
 ## 仕組み
 
 数行のコードで機械学習実験を追跡します:
-1. [W&B Run](/ja/guides/models/track/runs/)を作成します。
-2. 学習率やモデルタイプなどのハイパーパラメーターを辞書として設定（[`run.config`](/ja/./config)）に保存します。
-3. トレーニングループ中に正確性や損失などのメトリクスをログ（[`run.log()`](/ja/guides/models/track/log/)）します。
+1. [W&B Run](/ja/guides/runs/)を作成します。
+2. 学習率やモデルタイプなどのハイパーパラメーターを辞書として設定（[`run.config`](/ja/guides/track/config/)）に保存します。
+3. トレーニングループ中に正確性や損失などのメトリクスをログ（[`run.log()`](/ja/guides/track/log/)）します。
 4. モデルの重みや予測のテーブルのようなRunの出力を保存します。
 
 以下のコードは、一般的なW&B実験管理ワークフローを示しています:
@@ -60,7 +60,7 @@ with wandb.init(entity="", project="my-project-name") as run:
 
 あなたのユースケースに応じて、W&B Experimentsの開始に役立つ次のリソースを探索してください:
 
-* [W&Bクイックスタート](/ja/guides/quickstart)を読んで、W&B Python SDKコマンドを使用してデータセットアーティファクトを作成、追跡、および利用するためのステップバイステップの概要を確認してください。
+* [W&Bクイックスタート](/ja/quickstart/)を読んで、W&B Python SDKコマンドを使用してデータセットアーティファクトを作成、追跡、および利用するためのステップバイステップの概要を確認してください。
 * このチャプターを探索して、以下を学びましょう:
   * 実験を作成する
   * 実験を設定する

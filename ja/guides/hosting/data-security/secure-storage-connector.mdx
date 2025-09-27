@@ -10,8 +10,8 @@ weight: 1
 自分のバケットを持ち込む (BYOB) を使用することで、W&B Artifacts やその他の機密性の高いデータを、自分のクラウドやオンプレミスのインフラストラクチャーに保存することができます。[専用クラウド](/ja/guides/hosting/hosting-options/dedicated_cloud)または[SaaS クラウド](/ja/guides/hosting/hosting-options/saas_cloud)の場合、バケットに保存したデータは W&B が管理するインフラストラクチャーにコピーされません。
 
 <Note>
-* W&B SDK / CLI / UI とあなたのバケットとの通信は、[事前署名URL](/ja/./presigned-urls)を使用して行われます。
-* W&B はガベージコレクションプロセスを使用して W&B Artifacts を削除します。詳細は[Artifacts の削除](/ja/guides/core/artifacts/manage-data/delete-artifacts)をご覧ください。
+* W&B SDK / CLI / UI とあなたのバケットとの通信は、[事前署名URL](/ja/guides/hosting/data-security/presigned-urls/)を使用して行われます。
+* W&B はガベージコレクションプロセスを使用して W&B Artifacts を削除します。詳細は[Artifacts の削除](/ja/guides/artifacts/delete-artifacts/)をご覧ください。
 * バケットを設定する際にサブパスを指定することができ、これにより W&B がバケットのルートフォルダにファイルを保存しないようにできます。これにより、組織のバケットガバナンスポリシーによりよく適合するのに役立つかもしれません。
 </Note>
 
@@ -191,7 +191,7 @@ W&B は、ストレージバケットをプロビジョニングするために 
         ]
         ```
 
-    5. W&B プラットフォームのホスティング先の AWS アカウントに必要な S3 権限を付与します。これにより、AI ワークロードがクラウドインフラストラクチャーやユーザーブラウザーでバケットにアクセスするための[事前署名された URL](/ja/./presigned-urls)が生成されます。
+    5. W&B プラットフォームのホスティング先の AWS アカウントに必要な S3 権限を付与します。これにより、AI ワークロードがクラウドインフラストラクチャーやユーザーブラウザーでバケットにアクセスするための[事前署名された URL](/ja/guides/hosting/data-security/presigned-urls/)が生成されます。
 
         ```json
         {

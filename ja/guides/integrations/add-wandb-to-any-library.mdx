@@ -12,7 +12,7 @@ weight: 10
 このガイドでは、独自の Python ライブラリに W&B をインテグレーションするためのベストプラクティスを提供します。このことで、強力な実験管理、GPU およびシステム監視、モデルチェックポイントなどが利用可能になります。
 
 <Note>
-W&B の使い方をまだ学んでいる場合は、読み進める前に [実験管理](/ja/guides/models/track) など、他の W&B ガイドを探索することをお勧めします。
+W&B の使い方をまだ学んでいる場合は、読み進める前に [実験管理](/ja/guides/track/) など、他の W&B ガイドを探索することをお勧めします。
 </Note>
 
 ここでは、作業しているコードベースが単一の Python トレーニングスクリプトや Jupyter ノートブックよりも複雑な場合のベストなヒントとベストプラクティスを紹介します。対象となるトピックは以下の通りです：
@@ -94,7 +94,7 @@ API キーはクライアントまたはマシンを W&B に認証するもの�
 
 <Tabs>
 <Tab title="Command Line">
-1. `WANDB_API_KEY` [環境変数](/ja/guides/models/track/environment-variables) にあなたの API キーを設定します。
+1. `WANDB_API_KEY` [環境変数](/ja/guides/track/environment-variables/) にあなたの API キーを設定します。
 
     ```bash
     export WANDB_API_KEY=<your_api_key>
@@ -251,13 +251,13 @@ wandb.init(..., config=config)
 run.config.update({"model_parameters": 3500})
 ```
 
-設定ファイルを定義する方法の詳細については、[実験を設定する](/ja/guides/models/track/config)を参照してください。
+設定ファイルを定義する方法の詳細については、[実験を設定する](/ja/guides/track/config/)を参照してください。
 
 ### W&B へのログ記録
 
 #### メトリクスのログ記録
 
-キーがメトリクス名となる辞書を作成し、この辞書オブジェクトを [`run.log`](/ja/guides/models/track/log) に渡します：
+キーがメトリクス名となる辞書を作成し、この辞書オブジェクトを [`run.log`](/ja/guides/track/log/) に渡します：
 
 ```python
 for epoch in range(NUM_EPOCHS):
@@ -284,7 +284,7 @@ run.log(metrics)
     <img src="/images/integrations/integrations_add_any_lib_log.png" alt="2つの別々のセクションがあるW&Bワークスペース"  />
 </Frame>
 
-[`run.log` の詳細を学ぶ](/ja/guides/models/track/log)。
+[`run.log` の詳細を学ぶ](/ja/guides/track/log/)。
 
 #### x軸の非整合を防ぐ
 
@@ -325,7 +325,7 @@ for step, (input, ground_truth) in enumerate(data):
   * 画像の場合、サンプル予測、セグメンテーションマスクなどのログを記録して、時間の経過を見て進化を追うことができます。
   * テキストの場合、後で検討できるサンプル予測のテーブルをログすることができます。
 
-[メディア、オブジェクト、プロットなどのログ記録について詳しく学ぶ](/ja/guides/models/track/log)。
+[メディア、オブジェクト、プロットなどのログ記録について詳しく学ぶ](/ja/guides/track/log/)。
 
 ### 分散トレーニング
 
@@ -334,7 +334,7 @@ for step, (input, ground_truth) in enumerate(data):
 * 「メイン」のプロセスを検出し、そこでのみ `wandb` を使用してください。他のプロセスから必要なデータは最初にメインプロセスにルーティングされなければなりません（このワークフローが推奨されます）。
 * すべてのプロセスで `wandb` を呼び出し、それらすべてに同じ一意の `group` 名を与えて自動グループ化します。
 
-詳細については [分散トレーニング実験のログ記録](/ja/guides/models/track/log/distributed-training) を参照してください。
+詳細については [分散トレーニング実験のログ記録](/ja/guides/track/log/distributed-training/) を参照してください。
 
 ### モデルチェックポイントとその他のログ記録
 
@@ -368,7 +368,7 @@ aliases = ["best", "epoch_10"]
 run.log_artifact(artifact, aliases=aliases)
 ```
 
-カスタムエイリアスの作成方法については [カスタムエイリアスを作成する](/ja/guides/core/artifacts/create-a-custom-alias/) を参照してください。
+カスタムエイリアスの作成方法については [カスタムエイリアスを作成する](/ja/guides/artifacts/create-a-custom-alias/) を参照してください。
 
 Artifacts は任意の頻度で出力ログが可能（例えば、各エポックごと、各500ステップごとなど）であり、これらは自動的にバージョン管理されます。
 
@@ -400,11 +400,11 @@ artifact = wandb.Api().artifact("user/project/artifact:latest")
 local_path = artifact.download()
 ```
 
-詳細については、[Artのダウンロードと使用](/ja/guides/core/artifacts/download-and-use-an-artifact)を参照してください。
+詳細については、[Artのダウンロードと使用](/ja/guides/artifacts/download-and-use-an-artifact/)を参照してください。
 
 ### ハイパーパラメータのチューニング
 
-ライブラリが W&B ハイパーパラメータチューニングを活用したい場合、[W&B Sweeps](/ja/guides/models/sweeps/) もライブラリに追加できます。
+ライブラリが W&B ハイパーパラメータチューニングを活用したい場合、[W&B Sweeps](/ja/guides/sweeps/) もライブラリに追加できます。
 
 ### 高度なインテグレーション
 

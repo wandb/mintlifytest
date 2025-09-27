@@ -13,7 +13,7 @@ W&B は、_Sweep Controller_ を使用して、クラウド (標準)、ローカ
 以下のコードスニペットは、CLI、および Jupyter Notebook や Python スクリプト内でスイープを初期化する方法を示しています。
 
 <Warning>
-1. スイープを初期化する前に、スイープ設定が YAML ファイルまたはスクリプト内のネストされた Python 辞書オブジェクトで定義されていることを確認してください。詳細については、[sweep configuration を定義する](/ja/guides/models/sweeps/define-sweep-configuration) を参照してください。
+1. スイープを初期化する前に、スイープ設定が YAML ファイルまたはスクリプト内のネストされた Python 辞書オブジェクトで定義されていることを確認してください。詳細については、[sweep configuration を定義する](/ja/guides/sweeps/define-sweep-configuration/) を参照してください。
 2. W&B Sweep と W&B Run は同じ Project 内にある必要があります。そのため、W&B を初期化するときに指定する名前 ([`wandb.init`](/ja/ref/python/init)) は、W&B Sweep を初期化するときに提供する Project 名 ([`wandb.sweep`](/ja/ref/python/sweep)) と一致している必要があります。
 </Warning>
 

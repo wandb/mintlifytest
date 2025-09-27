@@ -10,7 +10,7 @@ weight: 2
 
 W&B Python SDK を使用して、[W&B Runs](/ja/ref/python/run) から artifacts を構築します。[ファイル、ディレクトリ、URI、並行実行からのファイルを artifacts に追加](#add-files-to-an-artifact)できます。ファイルをアーティファクトに追加した後、W&B サーバーまたは[自分のプライベートサーバー](/ja/guides/hosting/hosting-options/self-managed)に保存します。
 
-Amazon S3 に保存されているファイルなど、外部ファイルのトラッキング方法については、[外部ファイルのトラッキング](/ja/./track-external-files)ページをご覧ください。
+Amazon S3 に保存されているファイルなど、外部ファイルのトラッキング方法については、[外部ファイルのトラッキング](/ja/guides/artifacts/track-external-files/)ページをご覧ください。
 
 ## アーティファクトの構築方法
 
@@ -26,7 +26,7 @@ Amazon S3 に保存されているファイルなど、外部ファイルのト�
 <Note>
 指定した「name」と「type」は、有向非循環グラフを作成するために使用されます。これは、W&B アプリでアーティファクトのリネージを見ることができることを意味します。
 
-詳細については、[アーティファクトグラフの探索とトラバース](/ja/./explore-and-traverse-an-artifact-graph)をご覧ください。
+詳細については、[アーティファクトグラフの探索とトラバース](/ja/guides/artifacts/explore-and-traverse-an-artifact-graph/)をご覧ください。
 </Note>
 
 
@@ -54,7 +54,7 @@ artifact = wandb.Artifact(name="<replace>", type="<replace>")
 artifact.add_file(local_path="hello_world.txt", name="optional-name")
 ```
 
-また、複数のファイルを [`add_dir`](/ja/ref/python/artifact#add_dir) メソッドで追加することもできます。ファイルを追加する方法の詳細については、[アーティファクトの更新](/ja/./update-an-artifact)をご覧ください。
+また、複数のファイルを [`add_dir`](/ja/ref/python/artifact#add_dir) メソッドで追加することもできます。ファイルを追加する方法の詳細については、[アーティファクトの更新](/ja/guides/artifacts/update-an-artifact/)をご覧ください。
 
 ### 3. アーティファクトを W&B サーバーに保存する
 
@@ -67,7 +67,7 @@ run = wandb.init(project="artifacts-example", job_type="job-type")
 run.log_artifact(artifact)
 ```
 
-W&B Run の外でアーティファクトを作成することもできます。詳細については、[外部ファイルのトラッキング](/ja/./track-external-files)をご覧ください。
+W&B Run の外でアーティファクトを作成することもできます。詳細については、[外部ファイルのトラッキング](/ja/guides/artifacts/track-external-files/)をご覧ください。
 
 <Warning>
 `log_artifact` の呼び出しは、パフォーマンスを向上させるために非同期で行われます。これにより、ループ内でアーティファクトをログする際に予期しない挙動が生じることがあります。たとえば、

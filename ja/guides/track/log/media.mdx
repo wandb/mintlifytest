@@ -315,7 +315,7 @@ wandb.log(
 
 
 
-Summary内にあるヒストグラムは、[Run Page](/ja/guides/models/track/runs/)のOverviewタブに表示されます。履歴にある場合、Chartsタブで時間経過によるビンのヒートマップをプロットします。
+Summary内にあるヒストグラムは、[Run Page](/ja/guides/runs/)のOverviewタブに表示されます。履歴にある場合、Chartsタブで時間経過によるビンのヒートマップをプロットします。
 
 ## 3D可視化
 
@@ -624,7 +624,7 @@ wandb.log({"video": wandb.Video(numpy_array_or_path_to_video, fps=4, format="gif
 
 numpy配列が供給された場合、時間、チャンネル、幅、高さの順であると仮定します。 デフォルトでは4fpsのgif画像を作成します（numpyオブジェクトを渡す場合、[`ffmpeg`](https://www.ffmpeg.org)と[`moviepy`](https://pypi.org/project/moviepy/) pythonライブラリが必要です）。 サポートされているフォーマットは、`"gif"`、`"mp4"`、`"webm"`、そして`"ogg"`です。`wandb.Video` に文字列を渡すと、ファイルが存在し、wandbにアップロードする前にサポートされたフォーマットであることを確認します。 `BytesIO`オブジェクトを渡すと、指定されたフォーマットを拡張子とする一時ファイルを作成します。
 
-W&Bの[Run](/ja/guides/models/track/runs/)と[Project](/ja/guides/models/track/project-page)ページで、メディアセクションにビデオが表示されます。
+W&Bの[Run](/ja/guides/runs/)と[Project](/ja/guides/track/project-page/)ページで、メディアセクションにビデオが表示されます。
 
 詳細な使い方については、[`video-file`](/ja/ref/query-panel/video-file)を参照してください。
 

@@ -8,7 +8,7 @@ menu:
 weight: 6
 ---
 
-W&B スイープエージェントをマルチコアまたはマルチ GPU マシンで並列化しましょう。始める前に、W&B スイープが初期化されていることを確認してください。W&B スイープの初期化方法についての詳細は、[Initialize sweeps](/ja/./initialize-sweeps)をご覧ください。
+W&B スイープエージェントをマルチコアまたはマルチ GPU マシンで並列化しましょう。始める前に、W&B スイープが初期化されていることを確認してください。W&B スイープの初期化方法についての詳細は、[Initialize sweeps](/ja/guides/sweeps/initialize-sweeps/)をご覧ください。
 
 ### マルチ CPU マシンで並列化
 
@@ -16,7 +16,7 @@ W&B スイープエージェントをマルチコアまたはマルチ GPU マ�
 
 <Tabs>
 <Tab title="CLI">
-[`wandb agent`](/ja/ref/cli/wandb-agent) コマンドを使用して、ターミナルで W&B スイープエージェントを複数の CPU に渡って並列化します。[sweep を初期化したとき](/ja/./initialize-sweeps)に返されたスイープ ID を提供してください。
+[`wandb agent`](/ja/ref/cli/wandb-agent) コマンドを使用して、ターミナルで W&B スイープエージェントを複数の CPU に渡って並列化します。[sweep を初期化したとき](/ja/guides/sweeps/initialize-sweeps/)に返されたスイープ ID を提供してください。
 
 1. ローカルマシンで複数のターミナルウィンドウを開きます。
 2. 以下のコードスニペットをコピーして貼り付け、`sweep_id` をあなたのスイープ ID に置き換えます:
@@ -26,7 +26,7 @@ wandb agent sweep_id
 ```
 </Tab>
 <Tab title="Jupyter Notebook">
-W&B Python SDK ライブラリを使用して、Jupyter ノートブック内で W&B スイープエージェントを複数の CPU に渡って並列化します。[sweep を初期化したとき](/ja/./initialize-sweeps)に返されたスイープ ID を確認してください。さらに、スイープが実行する関数の名前を `function` パラメータに提供します。
+W&B Python SDK ライブラリを使用して、Jupyter ノートブック内で W&B スイープエージェントを複数の CPU に渡って並列化します。[sweep を初期化したとき](/ja/guides/sweeps/initialize-sweeps/)に返されたスイープ ID を確認してください。さらに、スイープが実行する関数の名前を `function` パラメータに提供します。
 
 1. 複数の Jupyter ノートブックを開きます。
 2. 複数の Jupyter ノートブックに W&B スイープ ID をコピーして貼り付け、W&B スイープを並列化します。例えば、`sweep_id` という変数にスイープ ID が保存されていて、関数の名前が `function_name` である場合、以下のコードスニペットを複数の Jupyter ノートブックに貼り付けることができます:

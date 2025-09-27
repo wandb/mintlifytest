@@ -7,7 +7,7 @@ menu:
     parent: log-objects-and-media
 ---
 
-Using the methods in `wandb.plot`, you can track charts with `wandb.log`, including charts that change over time during training. To learn more about our custom charting framework, check out [this guide](/ja/guides/models/app/features/custom-charts/walkthrough).
+Using the methods in `wandb.plot`, you can track charts with `wandb.log`, including charts that change over time during training. To learn more about our custom charting framework, check out [this guide](/ja/guides/app/features/custom-charts/walkthrough/).
 
 ### Basic charts
 
@@ -223,7 +223,7 @@ wandb.log({"conf_mat": cm})
 
 ### Interactive custom charts
 
-完全なカスタマイズを行う場合、内蔵の[Custom Chart preset](/ja/guides/models/app/features/custom-charts/walkthrough)を調整するか、新しいプリセットを作成し、チャートを保存します。チャートIDを使用して、そのカスタムプリセットに直接スクリプトからデータをログします。
+完全なカスタマイズを行う場合、内蔵の[Custom Chart preset](/ja/guides/app/features/custom-charts/walkthrough/)を調整するか、新しいプリセットを作成し、チャートを保存します。チャートIDを使用して、そのカスタムプリセットに直接スクリプトからデータをログします。
 
 ```python
 # 作成したい列を持つテーブルを作成
@@ -247,7 +247,7 @@ my_custom_chart = wandb.plot_table(
 
 ### Matplotlib and Plotly plots
 
-W&Bの[Custom Charts](/ja/guides/models/app/features/custom-charts/walkthrough)を`wandb.plot`で使用する代わりに、[matplotlib](https://matplotlib.org/)や[Plotly](https://plotly.com/)で生成されたチャートをログすることができます。
+W&Bの[Custom Charts](/ja/guides/app/features/custom-charts/walkthrough/)を`wandb.plot`で使用する代わりに、[matplotlib](https://matplotlib.org/)や[Plotly](https://plotly.com/)で生成されたチャートをログすることができます。
 
 ```python
 import matplotlib.pyplot as plt

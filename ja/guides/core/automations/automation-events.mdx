@@ -15,7 +15,7 @@ import EnterpriseCloudOnly from "/snippets/en/_includes/enterprise-cloud-only.md
 
 あるオートメーションは、プロジェクトやレジストリのスコープ内で特定のイベントが発生したときに開始されます。プロジェクトの*スコープ*は[スコープの技術的定義を挿入]を参照してください。このページでは、それぞれのスコープ内でオートメーションをトリガーするイベントについて説明します。
 
-オートメーションの詳細は、[オートメーション概要](/ja/guides/core/automations/)または[オートメーションの作成](/ja/create-automations/)を参照してください。
+オートメーションの詳細は、[オートメーション概要](/ja/guides/core/automations/)または[オートメーションの作成](/ja/guides/core/automations/create-automations/)を参照してください。
 
 ## レジストリ
 このセクションでは、[レジストリ](/ja/guides/core/registry/)でのオートメーションのスコープとイベントについて説明します。
@@ -23,7 +23,7 @@ import EnterpriseCloudOnly from "/snippets/en/_includes/enterprise-cloud-only.md
 1. レジストリアプリをhttps://wandb.ai/registry/で開きます。
 1. レジストリの名前をクリックし、**オートメーション**タブでオートメーションを表示および作成します。
 
-[オートメーションの作成](/ja/create-automations/)の詳細をご覧ください。
+[オートメーションの作成](/ja/guides/core/automations/create-automations/)の詳細をご覧ください。
 
 ### スコープ
 レジストリにおけるオートメーションは、これらのスコープで作成できます：
@@ -36,12 +36,12 @@ import EnterpriseCloudOnly from "/snippets/en/_includes/enterprise-cloud-only.md
 - **アーティファクトのバージョンに新しいエイリアスを追加**: 新しいアーティファクトバージョンに特定のエイリアスが適用されたときに、ワークフローの特定のステップをトリガーします。たとえば、`production`エイリアスが適用されたときにモデルをデプロイする。
 
 ## プロジェクト
-このセクションでは、[プロジェクト](/ja/guides/models/track/project-page)でのオートメーションのスコープとイベントについて説明します。
+このセクションでは、[プロジェクト](/ja/guides/core/automations/automation-events/#%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88)でのオートメーションのスコープとイベントについて説明します。
 
 1. W&Bアプリの `https://wandb.ai/<team>/<project-name>` にあるW&Bプロジェクトに移動します。
 1. **オートメーション**タブでオートメーションを表示および作成します。
 
-[オートメーションの作成](/ja/create-automations/)の詳細をご覧ください。
+[オートメーションの作成](/ja/guides/core/automations/create-automations/)の詳細をご覧ください。
 
 ### スコープ
 プロジェクト内でオートメーションを作成できるスコープ：
@@ -54,5 +54,5 @@ import EnterpriseCloudOnly from "/snippets/en/_includes/enterprise-cloud-only.md
 - **アーティファクトエイリアスが追加される**: プロジェクトやコレクション内の新しいアーティファクトバージョンに特定のエイリアスが適用されたときに、ワークフローの特定のステップをトリガーします。例えば、アーティファクトに `test-set-quality-check` エイリアスが適用されたときに一連の後処理ステップを実行します。
 
 ## 次のステップ
-- [Slackオートメーションを作成](/ja/create-automations/slack)
-- [Webhookオートメーションを作成](/ja/create-automations/webhook)
+- [Slackオートメーションを作成](/ja/guides/core/automations/create-automations/slack/)
+- [Webhookオートメーションを作成](/ja/guides/core/automations/create-automations/webhook/)

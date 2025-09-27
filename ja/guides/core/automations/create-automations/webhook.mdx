@@ -17,7 +17,7 @@ import EnterpriseCloudOnly from "/snippets/en/_includes/enterprise-cloud-only.md
 
 webhook オートメーションを作成するための大まかな手順は以下の通りです。
 
-1. 必要に応じて、オートメーションに必要なアクストークン、パスワード、またはSSHキーなどを含む機密文字列ごとに[W&B シークレットを作成](/ja/guides/core/secrets)します。シークレットはチーム設定で定義されます。
+1. 必要に応じて、オートメーションに必要なアクストークン、パスワード、またはSSHキーなどを含む機密文字列ごとに[W&B シークレットを作成](/ja/guides/secrets/)します。シークレットはチーム設定で定義されます。
 2. [webhook を作成](#create-a-webhook)し、エンドポイントと承認の詳細を定義し、必要なシークレットにアクセスするためのインテグレーションのアクセス権を付与します。
 3. [オートメーションを作成](#create-an-automation)し、監視する[event](/ja/guides/core/automations/automation-events)と W&B が送信するペイロードを定義します。ペイロードのために必要なシークレットに対して、オートメーションにアクセスを許可します。
 
@@ -25,14 +25,14 @@ webhook オートメーションを作成するための大まかな手順は以
 チーム管理者は、チームに webhook を追加できます。
 
 <Note>
-webhook が Bearer トークンを必要とする場合、またはペイロードが機密文字列を必要とする場合は、webhook を作成する前にそれを含む[シークレットを作成](/ja/guides/core/secrets#add-a-secret)してください。webhook には最大で1つのアクストークンと1つの他のシークレットを設定することができます。webhook の認証と承認の要件は、webhook のサービスによって決まります。
+webhook が Bearer トークンを必要とする場合、またはペイロードが機密文字列を必要とする場合は、webhook を作成する前にそれを含む[シークレットを作成](/ja/guides/secrets/#add-a-secret)してください。webhook には最大で1つのアクストークンと1つの他のシークレットを設定することができます。webhook の認証と承認の要件は、webhook のサービスによって決まります。
 </Note>
 
 1. W&B にログインし、チーム設定ページに移動します。
 2. **Webhooks** セクションで、**New webhook** をクリックします。
 3. webhook に名前を提供します。
 4. webhook のエンドポイント URL を提供します。
-5. webhook が Bearer トークンを必要とする場合、**Access token** をそれを含む [secret](/ja/guides/core/secrets)に設定します。webhook オートメーションを使用する際、W&B は `Authorization: Bearer` HTTP ヘッダーをアクストークンに設定し、`${ACCESS_TOKEN}` [payload variable](#payload-variables) でトークンにアクセスできます。
+5. webhook が Bearer トークンを必要とする場合、**Access token** をそれを含む [secret](/ja/guides/secrets/)に設定します。webhook オートメーションを使用する際、W&B は `Authorization: Bearer` HTTP ヘッダーをアクストークンに設定し、`${ACCESS_TOKEN}` [payload variable](#payload-variables) でトークンにアクセスできます。
 6. webhook のペイロードにパスワードまたは他の機密文字列が必要な場合、**Secret** をその文字列を含むシークレットに設定します。webhook を使用するオートメーションを設定するとき、シークレットの名前に `$` を付けて [payload variable](#payload-variables) としてシークレットにアクセスできます。
 
     webhook のアクセストークンがシークレットに保存されている場合は、アクセストークンとしてシークレットを指定するために次のステップを _必ず_ 完了してください。
@@ -173,7 +173,7 @@ ${project_name} --> "model-registry"
 ${entity_name} --> "<entity>"
 ```
 
-テンプレート文字列を使用して W&B から GitHub Actions や他のツールにコンテキストを動的に渡します。これらのツールが Python スクリプトを呼び出すことができる場合、それらは [W&B API](/ja/guides/core/artifacts/download-and-use-an-artifact)を通じて登録されたモデルアーティファクトを使用することができます。
+テンプレート文字列を使用して W&B から GitHub Actions や他のツールにコンテキストを動的に渡します。これらのツールが Python スクリプトを呼び出すことができる場合、それらは [W&B API](/ja/guides/artifacts/download-and-use-an-artifact/)を通じて登録されたモデルアーティファクトを使用することができます。
 
 - リポジトリディスパッチの詳細については、[GitHub Marketplace の公式ドキュメント](https://github.com/marketplace/actions/repository-dispatch)を参照してください。
 

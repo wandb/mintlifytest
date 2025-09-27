@@ -54,7 +54,7 @@ with wandb.init(
     ...
 ```
 
-実験を設定する方法の詳細については、[Configure Experiments](/ja/./config)を参照してください。
+実験を設定する方法の詳細については、[Configure Experiments](/ja/guides/track/config/)を参照してください。
 
 ### トレーニングループ内でメトリクスをログ
 [`run.log()`](/ja/ref/python/log)を呼び出して、精度や損失といった各トレーニングステップに関するメトリクスをログします。
@@ -68,7 +68,7 @@ for epoch in range(run.config.epochs):
         run.log({"accuracy": accuracy, "loss": loss})
 ```
 
-W&Bでログできるさまざまなデータタイプの詳細については、[Log Data During Experiments](/ja/guides/models/track/log/)を参照してください。
+W&Bでログできるさまざまなデータタイプの詳細については、[Log Data During Experiments](/ja/guides/track/log/)を参照してください。
 
 ### アーティファクトをW&Bにログ
 オプションでW&Bアーティファクトをログします。アーティファクトは、データセットやモデルのバージョン管理を容易にします。
@@ -77,7 +77,7 @@ W&Bでログできるさまざまなデータタイプの詳細については�
 model.save("path_to_model.onnx")
 run.log_artifact("path_to_model.onnx", name="trained-model", type="model")
 ```
-[Artifacts](/ja/guides/core/artifacts/)や[Registry](/ja/guides/core/registry/)でのモデルのバージョン管理について詳しく学んでください。
+[Artifacts](/ja/guides/artifacts/)や[Registry](/ja/guides/core/registry/)でのモデルのバージョン管理について詳しく学んでください。
 
 ### すべてをまとめる
 前述のコードスニペットを使った完全なスクリプトは以下の通りです：
@@ -106,13 +106,13 @@ with wandb.init(
 ```
 
 ## 次のステップ：実験を可視化
-W&Bダッシュボードを使用して、機械学習モデルの結果を整理し可視化する中央の場所として利用します。[parallel coordinates plots](/ja/guides/models/app/features/panels/parallel-coordinates)、[parameter importance analyzes](/ja/guides/models/app/features/panels/parameter-importance)、および[その他の](/ja/guides/models/app/features/panels/)ようなリッチでインタラクティブなグラフを数クリックで構築します。
+W&Bダッシュボードを使用して、機械学習モデルの結果を整理し可視化する中央の場所として利用します。[parallel coordinates plots](/ja/guides/app/features/panels/parallel-coordinates/)、[parameter importance analyzes](/ja/guides/app/features/panels/parameter-importance/)、および[その他の](/ja/guides/app/features/panels/)ようなリッチでインタラクティブなグラフを数クリックで構築します。
 
 <Frame>
     <img src="/images/sweeps/quickstart_dashboard_example.png" alt="クイックスタートスイープダッシュボードの例"  />
 </Frame>
 
-実験や特定runの表示方法についての詳細は、[Visualize results from experiments](/ja/guides/models/track/workspaces)を参照してください。
+実験や特定runの表示方法についての詳細は、[Visualize results from experiments](/ja/guides/track/workspaces/)を参照してください。
 
 ## ベストプラクティス
 以下は、実験を作成する際に考慮すべきいくつかのガイドラインです：

@@ -10,10 +10,10 @@ menu:
 <Card title="Try in Colab" href="https://colab.research.google.com/github/wandb/examples/blob/master/colabs/keras/Use_WandbModelCheckpoint_in_your_Keras_workflow.ipynb" icon="python"/>
 `wandb.Table` を使って、データをログに記録し W&B で視覚化・クエリできるようにします。このガイドでは次のことを学びます：
 
-1. [テーブルを作成する](/ja/./log-tables#create-tables)
-2. [データを追加する](/ja/./log-tables#add-data)
-3. [データを取得する](/ja/./log-tables#retrieve-data)
-4. [テーブルを保存する](/ja/./log-tables#save-tables)
+1. [テーブルを作成する](/ja/guides/track/log/log-tables/#%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B)
+2. [データを追加する](/ja/guides/track/log/log-tables/#%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B)
+3. [データを取得する](/ja/guides/track/log/log-tables/#%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B)
+4. [テーブルを保存する](/ja/guides/track/log/log-tables/#%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B)
 
 ## テーブルを作成する
 
@@ -145,11 +145,11 @@ with wandb.init() as run:
     my_table = run.use_artifact("run-<run-id>-<table-name>:<tag>").get("<table-name>")
 ```
 
-Artifacts の詳細については、デベロッパーガイドの [Artifacts チャプター](/ja/guides/core/artifacts/) を参照してください。
+Artifacts の詳細については、デベロッパーガイドの [Artifacts チャプター](/ja/guides/artifacts/) を参照してください。
 
 ### テーブルを視覚化する
 
-この方法でログに記録されたテーブルは、Run ページと Project ページの両方でワークスペースに表示されます。詳細については、[テーブルの視覚化と分析](/ja/guides/models/tables//visualize-tables) を参照してください。
+この方法でログに記録されたテーブルは、Run ページと Project ページの両方でワークスペースに表示されます。詳細については、[テーブルの視覚化と分析](/ja/guides/models/tables/visualize-tables/) を参照してください。
 
 ## アーティファクトテーブル
 

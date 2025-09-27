@@ -14,17 +14,17 @@ menu:
 <Note>
 以下の API は、実験管理ワークフローの一環としてモデルを追跡するのに便利です。このページに記載されている API を使用して、run にモデルをログし、メトリクス、テーブル、メディア、その他のオブジェクトにアクセスします。
 
-モデル以外にも、データセットやプロンプトなど、シリアライズされたデータの異なるバージョンを作成し追跡したい場合は、[W&B Artifacts](/ja/guides/core/artifacts/) を使用することをお勧めします。
-- モデルやその他のオブジェクトを W&B で追跡するための [リネージグラフ](/ja/guides/core/artifacts/explore-and-traverse-an-artifact-graph)を探索します。
+モデル以外にも、データセットやプロンプトなど、シリアライズされたデータの異なるバージョンを作成し追跡したい場合は、[W&B Artifacts](/ja/guides/artifacts/) を使用することをお勧めします。
+- モデルやその他のオブジェクトを W&B で追跡するための [リネージグラフ](/ja/guides/artifacts/explore-and-traverse-an-artifact-graph/)を探索します。
 - これらのメソッドで作成されたモデル アーティファクトとの対話（プロパティの更新、メタデータ、エイリアス、説明など）を行います。
 
-W&B Artifacts や高度なバージョン管理ユースケースの詳細については、[Artifacts](/ja/guides/core/artifacts/) ドキュメントをご覧ください。
+W&B Artifacts や高度なバージョン管理ユースケースの詳細については、[Artifacts](/ja/guides/artifacts/) ドキュメントをご覧ください。
 </Note>
 
 ## モデルを run にログする
 [`log_model`](/ja/ref/python/run#log_model) を使用して、指定したディレクトリ内にコンテンツを含むモデルアーティファクトをログします。 [`log_model`](/ja/ref/python/run#log_model) メソッドは、結果のモデルアーティファクトを W&B run の出力としてもマークします。
 
-モデルを W&B run の入力または出力としてマークすると、モデルの依存関係とモデルの関連付けを追跡できます。W&B アプリ UI 内でモデルのリネージを確認します。詳細については、[Artifacts](/ja/guides/core/artifacts/) チャプターの [アーティファクトグラフを探索して移動する](/ja/guides/core/artifacts/explore-and-traverse-an-artifact-graph) ページを参照してください。
+モデルを W&B run の入力または出力としてマークすると、モデルの依存関係とモデルの関連付けを追跡できます。W&B アプリ UI 内でモデルのリネージを確認します。詳細については、[Artifacts](/ja/guides/artifacts/) チャプターの [アーティファクトグラフを探索して移動する](/ja/guides/artifacts/explore-and-traverse-an-artifact-graph/) ページを参照してください。
 
 モデルファイルが保存されているパスを `path` パラメータに指定します。パスには、ローカルファイル、ディレクトリ、または `s3://bucket/path` などの外部バケットへの [参照 URI](/ja/guides/core/artifacts/track-external-files#amazon-s3--gcs--azure-blob-storage-references) を指定できます。
 

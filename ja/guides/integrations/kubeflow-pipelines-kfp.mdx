@@ -32,7 +32,7 @@ APIキーは、あなたのマシンをW&Bに認証します。APIキーは、�
 
 <Tabs>
 <Tab title="Command Line">
-1. `WANDB_API_KEY` [環境変数](/ja/guides/models/track/environment-variables) をAPIキーに設定します。
+1. `WANDB_API_KEY` [環境変数](/ja/guides/track/environment-variables/) をAPIキーに設定します。
 
     ```bash
     export WANDB_API_KEY=<your_api_key>
@@ -84,7 +84,7 @@ add = components.create_component_from_func(add)
 
 ## 環境変数をコンテナに渡す
 
-[環境変数](/ja/guides/models/track/environment-variables)をコンテナに明示的に渡す必要があるかもしれません。双方向リンクのためには、`WANDB_KUBEFLOW_URL` 環境変数をKubeflow Pipelinesインスタンスの基本URLに設定する必要があります。例えば、`https://kubeflow.mysite.com`です。
+[環境変数](/ja/guides/track/environment-variables/)をコンテナに明示的に渡す必要があるかもしれません。双方向リンクのためには、`WANDB_KUBEFLOW_URL` 環境変数をKubeflow Pipelinesインスタンスの基本URLに設定する必要があります。例えば、`https://kubeflow.mysite.com`です。
 
 ```python
 import os
@@ -123,7 +123,7 @@ W&Bでログされた任意の Run を Kubeflow Pipelines UI でクリックし�
 
 ### ウェブアプリ UI から
 
-ウェブアプリ UI は Kubeflow Pipelines の `Visualizations` タブと同じコンテンツを持っていますが、より多くのスペースがあります。[ここでウェブアプリ UI についてもっと学びましょう](/ja/guides/models/app)。
+ウェブアプリ UI は Kubeflow Pipelines の `Visualizations` タブと同じコンテンツを持っていますが、より多くのスペースがあります。[ここでウェブアプリ UI についてもっと学びましょう](/ja/guides/app/)。
 
 <Frame>
     <img src="/images/integrations/kubeflow_pipelines.png" alt="特定の run の詳細を確認し、Kubeflow UI に戻るリンク"  />
@@ -143,10 +143,10 @@ W&Bでログされた任意の Run を Kubeflow Pipelines UI でクリックし�
 
 | Kubeflow Pipelines | W&B | W&B 内の場所 |
 | ------------------ | --- | --------------- |
-| Input Scalar | [`config`](/ja/guides/models/track/config) | [Overview tab](/ja/guides/models/track/runs/#overview-tab) |
-| Output Scalar | [`summary`](/ja/guides/models/track/log) | [Overview tab](/ja/guides/models/track/runs/#overview-tab) |
-| Input Artifact | Input Artifact | [Artifacts tab](/ja/guides/models/track/runs/#artifacts-tab) |
-| Output Artifact | Output Artifact | [Artifacts tab](/ja/guides/models/track/runs/#artifacts-tab) |
+| Input Scalar | [`config`](/ja/guides/track/config/) | [Overview tab](/ja/guides/runs/#overview-tab) |
+| Output Scalar | [`summary`](/ja/guides/track/log/) | [Overview tab](/ja/guides/runs/#overview-tab) |
+| Input Artifact | Input Artifact | [Artifacts tab](/ja/guides/runs/#artifacts-tab) |
+| Output Artifact | Output Artifact | [Artifacts tab](/ja/guides/runs/#artifacts-tab) |
 
 ## 細かいログ
 

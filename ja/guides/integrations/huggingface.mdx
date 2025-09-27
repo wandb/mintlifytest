@@ -50,7 +50,7 @@ APIキーは、あなたのマシンをW&Bに認証します。ユーザープ�
 
 <Tabs>
 <Tab title="Command Line">
-1. `WANDB_API_KEY` [環境変数](/ja/guides/models/track/environment-variables)をAPIキーに設定します。
+1. `WANDB_API_KEY` [環境変数](/ja/guides/track/environment-variables/)をAPIキーに設定します。
 
     ```bash
     export WANDB_API_KEY=<your_api_key>
@@ -83,7 +83,7 @@ wandb.login()
 </Tab>
 </Tabs>
 
-初めてW&Bを使用する場合、[**クイックスタート**](/ja/guides/quickstart)をご覧になることをお勧めします。
+初めてW&Bを使用する場合、[**クイックスタート**](/ja/quickstart/)をご覧になることをお勧めします。
 
 ### プロジェクトの名前を付ける
 
@@ -160,7 +160,7 @@ TensorFlowを使用していますか？ PyTorchの`Trainer`をTensorFlowの`TFT
 
 ### モデルのチェックポイントをオンにする
 
-[Artifacts](/ja/guides/core/artifacts/)を使用すると、最大100GBのモデルやデータセットを無料で保存し、その後Weights & Biasesの[Registry](/ja/guides/core/registry/)を使用できます。Registryを使用して、モデルを登録し、それらを探索・評価したり、ステージングの準備をしたり、プロダクション環境にデプロイできます。
+[Artifacts](/ja/guides/artifacts/)を使用すると、最大100GBのモデルやデータセットを無料で保存し、その後Weights & Biasesの[Registry](/ja/guides/core/registry/)を使用できます。Registryを使用して、モデルを登録し、それらを探索・評価したり、ステージングの準備をしたり、プロダクション環境にデプロイできます。
 
 Hugging FaceモデルのチェックポイントをArtifactsにログするには、`WANDB_LOG_MODEL` 環境変数を以下のいずれかに設定します：
 
@@ -188,7 +188,7 @@ os.environ["WANDB_LOG_MODEL"] = "checkpoint"
 </Tab>
 </Tabs>
 
-これ以降に初期化するすべてのTransformers `Trainer`は、モデルをW&Bプロジェクトにアップロードします。ログされたモデルチェックポイントは[Artifacts](/ja/guides/core/artifacts/) UIを通じて表示可能で、完全なモデルリネージを含みます（UIでのモデルチェックポイントの例はこちらをご覧ください [here](https://wandb.ai/wandb/arttest/artifacts/model/iv3_trained/5334ab69740f9dda4fed/lineage?_gl=1*yyql5q*_ga*MTQxOTYyNzExOS4xNjg0NDYyNzk1*_ga_JH1SJHJQXJ*MTY5MjMwNzI2Mi4yNjkuMS4xNjkyMzA5NjM2LjM3LjAuMA..))。
+これ以降に初期化するすべてのTransformers `Trainer`は、モデルをW&Bプロジェクトにアップロードします。ログされたモデルチェックポイントは[Artifacts](/ja/guides/artifacts/) UIを通じて表示可能で、完全なモデルリネージを含みます（UIでのモデルチェックポイントの例はこちらをご覧ください [here](https://wandb.ai/wandb/arttest/artifacts/model/iv3_trained/5334ab69740f9dda4fed/lineage?_gl=1*yyql5q*_ga*MTQxOTYyNzExOS4xNjg0NDYyNzk1*_ga_JH1SJHJQXJ*MTY5MjMwNzI2Mi4yNjkuMS4xNjkyMzA5NjM2LjM3LjAuMA..))。
 
 <Note>
 デフォルトでは、`WANDB_LOG_MODEL`が`end`に設定されているときは`model-{run_id}`として、`WANDB_LOG_MODEL`が`checkpoint`に設定されているときは`checkpoint-{run_id}`として、モデルがW&B Artifactsに保存されます。しかし、`TrainingArguments`に[`run_name`](https://huggingface.co/docs/transformers/main/en/main_classes/trainer#transformers.TrainingArguments.run_name)を渡すと、モデルは`model-{run_name}`または`checkpoint-{run_name}`として保存されます。
@@ -227,7 +227,7 @@ wandb.finish()
 
 ### 結果を視覚化する
 
-トレーニング結果をログしたら、[W&B Dashboard](/ja/guides/models/track/workspaces)で結果を動的に探索できます。複数のrunを一度に比較したり、興味深い知見にズームインしたり、柔軟でインタラクティブな可視化を用いて複雑なデータから洞察を引き出すのが簡単です。
+トレーニング結果をログしたら、[W&B Dashboard](/ja/guides/track/workspaces/)で結果を動的に探索できます。複数のrunを一度に比較したり、興味深い知見にズームインしたり、柔軟でインタラクティブな可視化を用いて複雑なデータから洞察を引き出すのが簡単です。
 
 ## 高度な機能とFAQ
 

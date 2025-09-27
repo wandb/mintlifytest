@@ -119,7 +119,7 @@ self._metric_logger.log_dict(
 
 torchtune ライブラリは様々な [チェックポイントフォーマット](https://pytorch.org/torchtune/stable/deep_dives/checkpointer.html) をサポートしています。使用しているモデルの出所に応じて、適切な [チェックポインタークラス](https://pytorch.org/torchtune/stable/deep_dives/checkpointer.html) に切り替えるべきです。
 
-もしモデルのチェックポイントを [W&B Artifacts](/ja/guides/core/artifacts/) に保存したい場合は、対応するレシピ内の `save_checkpoint` 関数をオーバーライドするのが最も簡単です。
+もしモデルのチェックポイントを [W&B Artifacts](/ja/guides/artifacts/) に保存したい場合は、対応するレシピ内の `save_checkpoint` 関数をオーバーライドするのが最も簡単です。
 
 ここにモデルのチェックポイントを W&B Artifacts に保存するために `save_checkpoint` 関数をオーバーライドする方法の例を示します。
 

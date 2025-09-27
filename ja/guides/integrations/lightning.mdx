@@ -68,7 +68,7 @@ APIキー は、あなたのマシンを W&B に認証するためのもので�
 
 <Tabs>
 <Tab title="コマンドライン">
-1. あなたの APIキー に `WANDB_API_KEY` [環境変数](/ja/guides/models/track/environment-variables) を設定します。
+1. あなたの APIキー に `WANDB_API_KEY` [環境変数](/ja/guides/track/environment-variables/) を設定します。
 
     ```bash
     export WANDB_API_KEY=<your_api_key>
@@ -295,7 +295,7 @@ for epoch in range(num_epochs):
 
 ## メトリクスの最小/最大値を記録する
 
-wandb の [`define_metric`](/ja/ref/python/run#define_metric) 関数を使用して、W&B の要約メトリクスがそのメトリクスの最小、最大、平均、または最良の値を表示するかどうかを定義できます。`define_metric` が使用されていない場合、最後に記録された値が要約メトリクスに表示されます。詳細な `define_metric` の [ドキュメントはこちら](/ja/ref/python/run#define_metric) と [ガイドはこちら](/ja/guides/models/track/log/customize-logging-axes) を参照してください。
+wandb の [`define_metric`](/ja/ref/python/run#define_metric) 関数を使用して、W&B の要約メトリクスがそのメトリクスの最小、最大、平均、または最良の値を表示するかどうかを定義できます。`define_metric` が使用されていない場合、最後に記録された値が要約メトリクスに表示されます。詳細な `define_metric` の [ドキュメントはこちら](/ja/ref/python/run#define_metric) と [ガイドはこちら](/ja/guides/track/log/customize-logging-axes/) を参照してください。
 
 W&B の要約メトリクスで最大の検証精度を追跡するよう W&B に指示するには、トレーニングの開始時に一度だけ `wandb.define_metric` を呼び出します：
 
@@ -329,7 +329,7 @@ fabric.log_dict({"val_accuracy": val_accuracy})
 
 ## モデルチェックポイントを作成する
 
-モデルのチェックポイントを W&B の [Artifacts](/ja/guides/core/artifacts/) として保存するには、Lightning の [`ModelCheckpoint`](https://pytorch-lightning.readthedocs.io/en/stable/api/pytorch_lightning.callbacks.ModelCheckpoint.html#pytorch_lightning.callbacks.ModelCheckpoint) コールバックを使用し、`WandbLogger` の `log_model` 引数を設定します。
+モデルのチェックポイントを W&B の [Artifacts](/ja/guides/artifacts/) として保存するには、Lightning の [`ModelCheckpoint`](https://pytorch-lightning.readthedocs.io/en/stable/api/pytorch_lightning.callbacks.ModelCheckpoint.html#pytorch_lightning.callbacks.ModelCheckpoint) コールバックを使用し、`WandbLogger` の `log_model` 引数を設定します。
 
 <Tabs>
 <Tab title="PyTorch Logger">
@@ -344,7 +344,7 @@ fabric = L.Fabric(loggers=[wandb_logger], callbacks=[checkpoint_callback])
 </Tab>
 </Tabs>
 
-_最新_ 及び _最良_ のエイリアスは、W&B の [Artifact](/ja/guides/core/artifacts/) からモデルのチェックポイントを簡単に取得できるように自動的に設定されます：
+_最新_ 及び _最良_ のエイリアスは、W&B の [Artifact](/ja/guides/artifacts/) からモデルのチェックポイントを簡単に取得できるように自動的に設定されます：
 
 ```python
 # アーティファクトパネルでリファレンスを取得できます
@@ -387,7 +387,7 @@ optimizer.load_state_dict(full_checkpoint["optimizer"])
 </Tab>
 </Tabs>
 
-記録されたモデルのチェックポイントは [W&B Artifacts](/ja/guides/core/artifacts) UI を通じて表示可能で、完全なモデルリネージも含まれます（UIでのモデルチェックポイントの例はこちら (https://wandb.ai/wandb/arttest/artifacts/model/iv3_trained/5334ab69740f9dda4fed/lineage?_gl=1*yyql5q*_ga*MTQxOTYyNzExOS4xNjg0NDYyNzk1*_ga_JH1SJHJQXJ*MTY5MjMwNzI2Mi4yNjkuMS4xNjkyMzA5NjM2LjM3LjAuMA..))。
+記録されたモデルのチェックポイントは [W&B Artifacts](/ja/guides/artifacts/) UI を通じて表示可能で、完全なモデルリネージも含まれます（UIでのモデルチェックポイントの例はこちら (https://wandb.ai/wandb/arttest/artifacts/model/iv3_trained/5334ab69740f9dda4fed/lineage?_gl=1*yyql5q*_ga*MTQxOTYyNzExOS4xNjg0NDYyNzk1*_ga_JH1SJHJQXJ*MTY5MjMwNzI2Mi4yNjkuMS4xNjkyMzA5NjM2LjM3LjAuMA..))。
 
 最良のモデルチェックポイントをブックマークし、チーム全体でそれらを一元化するために、[W&B Model Registry](/ja/guides/models) にリンクすることができます。
 
@@ -578,7 +578,7 @@ Colab のビデオチュートリアルに従うことができます。[こち�
 
 ### 追加のコードなしでインテグレーションがログする内容は？
 
-モデルのチェックポイントを W&B に保存し、今後のRunsで使用するために閲覧またはダウンロードできるようにします。また、GPU使用量やネットワークI/Oなどの[システムメトリクス](/ref/system-metrics)、ハードウェア情報やOS情報などの環境情報、gitコミットやdiffパッチ、ノートブックコンテンツやセッション履歴を含む[コードの状態](/ja/guides/models/app/features/panels/code)、標準出力に印刷されるものをキャプチャします。
+モデルのチェックポイントを W&B に保存し、今後のRunsで使用するために閲覧またはダウンロードできるようにします。また、GPU使用量やネットワークI/Oなどの[システムメトリクス](/ja/ref/system-metrics/)、ハードウェア情報やOS情報などの環境情報、gitコミットやdiffパッチ、ノートブックコンテンツやセッション履歴を含む[コードの状態](/ja/guides/app/features/panels/code/)、標準出力に印刷されるものをキャプチャします。
 
 ### トレーニングセットアップで `wandb.run` を使用する必要がある場合はどうすればいいですか？
 

@@ -7,7 +7,7 @@ menu:
     identifier: ja-guides-core-artifacts-artifacts-walkthrough
 ---
 
-このウォークスルーでは、[W&B Runs](/ja/guides/models/track/runs/)からデータセットアーティファクトを作成、追跡、使用する方法を示します。
+このウォークスルーでは、[W&B Runs](/ja/guides/runs/)からデータセットアーティファクトを作成、追跡、使用する方法を示します。
 
 ## 1. W&B にログイン
 
@@ -39,7 +39,7 @@ run = wandb.init(project="artifacts-example", job_type="upload-dataset")
 artifact = wandb.Artifact(name="bicycle-dataset", type="dataset")
 ```
 
-アーティファクトの構築方法の詳細については、[Construct artifacts](/ja/./construct-an-artifact)を参照してください。
+アーティファクトの構築方法の詳細については、[Construct artifacts](/ja/guides/artifacts/construct-an-artifact/)を参照してください。
 
 ## データセットをアーティファクトに追加
 
@@ -62,7 +62,7 @@ W&B Run オブジェクトの `log_artifact()` メソッドを使用して、ア
 run.log_artifact(artifact)
 ```
 
-アーティファクトをログする際、'latest' エイリアスがデフォルトで作成されます。アーティファクトのエイリアスとバージョンに関する詳細については、[Create a custom alias](/ja/./create-a-custom-alias) および [Create new artifact versions](/ja/./create-a-new-artifact-version) をそれぞれ参照してください。
+アーティファクトをログする際、'latest' エイリアスがデフォルトで作成されます。アーティファクトのエイリアスとバージョンに関する詳細については、[Create a custom alias](/ja/guides/artifacts/create-a-custom-alias/) および [Create new artifact versions](/ja/guides/artifacts/create-a-new-artifact-version/) をそれぞれ参照してください。
 
 ## 5. アーティファクトをダウンロードして使用
 
@@ -84,4 +84,4 @@ artifact = run.use_artifact("bicycle-dataset:latest")
 artifact_dir = artifact.download()
 ```
 
-または、Public API (`wandb.Api`) を使用して、Run の外で W&B に既に保存されたデータをエクスポート（または更新）できます。詳細は [Track external files](/ja/./track-external-files) を参照してください。
+または、Public API (`wandb.Api`) を使用して、Run の外で W&B に既に保存されたデータをエクスポート（または更新）できます。詳細は [Track external files](/ja/guides/artifacts/track-external-files/) を参照してください。

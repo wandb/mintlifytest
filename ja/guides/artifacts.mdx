@@ -16,10 +16,10 @@ weight: 1
 <Card title="Try in W&B" href="https://wandb.ai/wandb/arttest/artifacts/model/iv3_trained/5334ab69740f9dda4fed/lineage" icon="sliders-up"/>
 </CardGroup>
 
-W&B Artifacts を使用して、[W&B Runs](/ja/guides/models/track/runs/) の入力と出力としてデータをトラッキングし、バージョン管理します。たとえば、モデルトレーニングの run では、データセットを入力として受け取り、トレーニングされたモデルを出力として生成することがあります。ハイパーパラメーター、メタデータ、メトリクスを run にログし、アーティファクトを使用してモデルをトレーニングするために使用されるデータセットを入力としてログ、トラッキング、およびバージョン管理し、生成されたモデルのチェックポイントを出力として管理できます。
+W&B Artifacts を使用して、[W&B Runs](/ja/guides/runs/) の入力と出力としてデータをトラッキングし、バージョン管理します。たとえば、モデルトレーニングの run では、データセットを入力として受け取り、トレーニングされたモデルを出力として生成することがあります。ハイパーパラメーター、メタデータ、メトリクスを run にログし、アーティファクトを使用してモデルをトレーニングするために使用されるデータセットを入力としてログ、トラッキング、およびバージョン管理し、生成されたモデルのチェックポイントを出力として管理できます。
 
 ## ユースケース
-あなたの ML ワークフロー全体で、[runs](/ja/guides/models/track/runs/) の入力と出力としてアーティファクトを使用することができます。データセット、モデル、または他のアーティファクトをプロセシングの入力として使用することができます。
+あなたの ML ワークフロー全体で、[runs](/ja/guides/runs/) の入力と出力としてアーティファクトを使用することができます。データセット、モデル、または他のアーティファクトをプロセシングの入力として使用することができます。
 
 <Frame>
     <img src="/images/artifacts/artifacts_landing_page2.png"  />
@@ -39,7 +39,7 @@ W&B Artifacts を使用して、[W&B Runs](/ja/guides/models/track/runs/) の入
 ## アーティファクトを作成する
 
 4行のコードでアーティファクトを作成します:
-1. [W&B run](/ja/guides/models/track/runs/) を作成する。
+1. [W&B run](/ja/guides/runs/) を作成する。
 2. [`wandb.Artifact`](/ja/ref/python/artifact) API を使用してアーティファクトオブジェクトを作成する。
 3. モデルファイルやデータセットなど、一つ以上のファイルをアーティファクトオブジェクトに追加する。
 4. あなたのアーティファクトを W&B にログする。
@@ -58,7 +58,7 @@ artifact.save()
 ```
 
 <Note>
-外部オブジェクトストレージに保存されているファイルやディレクトリーへの参照の追加方法については、[外部ファイルのトラッキング](/ja/./track-external-files)ページを参照してください。
+外部オブジェクトストレージに保存されているファイルやディレクトリーへの参照の追加方法については、[外部ファイルのトラッキング](/ja/guides/artifacts/track-external-files/)ページを参照してください。
 </Note>
 
 ## アーティファクトをダウンロードする
@@ -83,11 +83,11 @@ datadir = (
 ```
 
 <Note>
-アーティファクトを特定のディレクトリにダウンロードするために、`root` [parameter](/ja/ref/python/artifact) にカスタムパスを渡すことができます。アーティファクトをダウンロードする別の方法や追加のパラメータについては、[アーティファクトをダウンロードして使用するガイド](/ja/./download-and-use-an-artifact)を参照してください。
+アーティファクトを特定のディレクトリにダウンロードするために、`root` [parameter](/ja/ref/python/artifact) にカスタムパスを渡すことができます。アーティファクトをダウンロードする別の方法や追加のパラメータについては、[アーティファクトをダウンロードして使用するガイド](/ja/guides/artifacts/download-and-use-an-artifact/)を参照してください。
 </Note>
 
 ## 次のステップ
-* アーティファクトを[バージョン管理](/ja/./create-a-new-artifact-version)し、[更新](/ja/./update-an-artifact)する方法を学びます。
+* アーティファクトを[バージョン管理](/ja/guides/artifacts/create-a-new-artifact-version/)し、[更新](/ja/guides/artifacts/update-an-artifact/)する方法を学びます。
 * [オートメーション](/ja/guides/core/automations/)を使用して、あなたのアーティファクトに対する変更に反応して下流のワークフローをトリガーしたり、Slack チャンネルに通知する方法を学びます。
 * トレーニングされたモデルを収容するスペースである[レジストリ](/ja/guides/core/registry/)について学びます。
 * [Python SDK](/ja/ref/python/artifact) と [CLI](/ja/ref/cli/wandb-artifact/) リファレンスガイドを探索します。

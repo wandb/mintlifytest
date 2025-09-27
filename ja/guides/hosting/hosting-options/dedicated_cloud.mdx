@@ -11,7 +11,7 @@ slug: /ja/guides/hosting/hosting-options/dedicated_cloud
 
 W&B 専用クラウドは、シングルテナントで完全に管理されたプラットフォームであり、W&B の AWS、GCP または Azure クラウドアカウントにデプロイされます。各専用クラウドインスタンスは、他の W&B 専用クラウドインスタンスと隔離されたネットワーク、コンピュート、ストレージを持っています。W&B 固有のメタデータとデータは、隔離されたクラウドストレージに保存され、隔離されたクラウドコンピュートサービスを使って処理されます。
 
-W&B 専用クラウドは[各クラウドプロバイダーにとって複数の世界各地域で利用可能です](/ja/./dedicated_regions)
+W&B 専用クラウドは[各クラウドプロバイダーにとって複数の世界各地域で利用可能です](/ja/guides/hosting/hosting-options/dedicated_regions/)
 
 ## データセキュリティ
 
@@ -31,10 +31,10 @@ W&B マルチテナントクラウドと同様に、複数のチーム用に 1 �
 
 W&B 組織での安全な認証と効果的な認可のためのアイデンティティおよびアクセス管理機能を利用してください。専用クラウドインスタンスの IAM には、次の機能があります:
 
-* [OpenID Connect (OIDC) を使用した SSO](/ja/guides/hosting/iam/authentication/sso) または [LDAP](/ja/guides/hosting/iam/authentication/ldap) で認証します。
+* [OpenID Connect (OIDC) を使用した SSO](/ja/guides/hosting/iam/sso/) または [LDAP](/ja/guides/hosting/iam/ldap/) で認証します。
 * 組織の範囲およびチーム内で[適切なユーザー役割を設定](/ja/guides/hosting/iam/access-management/manage-organization#assign-or-update-a-users-role)します。
 * [制限付きプロジェクト](/ja/guides/hosting/iam/access-management/restricted-projects)で、誰が W&B プロジェクトを閲覧、編集、または W&B runs に送信できるかの範囲を定義します。
-* JSON Web トークンを[アイデンティティフェデレーション](/ja/guides/hosting/iam/authentication/identity_federation)と組み合わせて利用し、W&B API にアクセスします。
+* JSON Web トークンを[アイデンティティフェデレーション](/ja/guides/hosting/iam/identity_federation/)と組み合わせて利用し、W&B API にアクセスします。
 
 ## 監視
 
@@ -44,7 +44,7 @@ W&B 組織での安全な認証と効果的な認可のためのアイデンテ�
 
 W&B マルチテナントクラウドと同様に、専用クラウドを使用することで、W&B プラットフォームのプロビジョニングやメンテナンスに関するオーバーヘッドやコストを負担することはありません。
 
-専用クラウドで W&B がどのようにアップデートを管理するかを理解するためには、[サーバーリリースプロセス](/ja/guides/hosting/hosting-options/self-managed/server-upgrade-process)を参照してください。
+専用クラウドで W&B がどのようにアップデートを管理するかを理解するためには、[サーバーリリースプロセス](/ja/guides/hosting/server-upgrade-process/)を参照してください。
 
 ## コンプライアンス
 
@@ -52,7 +52,7 @@ W&B 専用クラウドのセキュリティ管理は、定期的に内部およ�
 
 ## 移行オプション
 
-[セルフマネージドインスタンス](/ja/guides/hosting/hosting-options/self-managed/)または[マルチテナントクラウド](/ja/../saas_cloud)から専用クラウドへの移行がサポートされています。
+[セルフマネージドインスタンス](/ja/guides/hosting/hosting-options/self-managed/)または[マルチテナントクラウド](/ja/guides/hosting/hosting-options/saas_cloud/)から専用クラウドへの移行がサポートされています。
 
 ## 次のステップ
 

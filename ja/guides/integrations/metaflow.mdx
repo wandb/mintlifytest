@@ -37,7 +37,7 @@ APIキーはあなたのマシンをW&Bに認証します。ユーザープロ�
 
 <Tabs>
 <Tab title="Command Line">
-1. `WANDB_API_KEY` [環境変数](/ja/guides/models/track/environment-variables)をAPIキーに設定します。
+1. `WANDB_API_KEY` [環境変数](/ja/guides/track/environment-variables/)をAPIキーに設定します。
 
     ```bash
     export WANDB_API_KEY=<your_api_key>
@@ -146,7 +146,7 @@ class WandbExampleFlow(FlowSpec):
 
 ## データへプログラムでアクセスする
 
-キャプチャされた情報には3つの方法でアクセスできます: [`wandb`クライアントライブラリ](/ja/ref/python/)を使用してオリジナルのPythonプロセス内でログされたもの、[ウェブアプリUI](/ja/guides/models/track/workspaces)、あるいは[パブリックAPI](/ja/ref/python/public-api/)をプログラムで使用する方法です。パラメータはW&Bの[`config`](/ja/guides/models/track/config)に保存され、[Overviewタブ](/ja/guides/models/track/runs/#overview-tab)で見つけることができます。`datasets`、`models`、およびその他は[W&B Artifacts](/ja/guides/core/artifacts/)に保存され、[Artifactsタブ](/ja/guides/models/track/runs/#artifacts-tab)で見つけることができます。基本的なPythonタイプはW&Bの[`summary`](/ja/guides/models/track/log/)ディクショナリに保存され、Overviewタブで見ることができます。これらの情報を外部からプログラムで取得する方法の詳細については、[パブリックAPIのガイド](/ja/guides/models/track/public-api-guide)をご覧ください。
+キャプチャされた情報には3つの方法でアクセスできます: [`wandb`クライアントライブラリ](/ja/ref/python/)を使用してオリジナルのPythonプロセス内でログされたもの、[ウェブアプリUI](/ja/guides/track/workspaces/)、あるいは[パブリックAPI](/ja/ref/python/public-api/)をプログラムで使用する方法です。パラメータはW&Bの[`config`](/ja/guides/track/config/)に保存され、[Overviewタブ](/ja/guides/runs/#overview-tab)で見つけることができます。`datasets`、`models`、およびその他は[W&B Artifacts](/ja/guides/artifacts/)に保存され、[Artifactsタブ](/ja/guides/runs/#artifacts-tab)で見つけることができます。基本的なPythonタイプはW&Bの[`summary`](/ja/guides/track/log/)ディクショナリに保存され、Overviewタブで見ることができます。これらの情報を外部からプログラムで取得する方法の詳細については、[パブリックAPIのガイド](/ja/guides/track/public-api-guide/)をご覧ください。
 
 ### クイックリファレンス
 

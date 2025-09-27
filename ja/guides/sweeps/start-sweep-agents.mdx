@@ -24,7 +24,7 @@ entity/project/sweep_ID
 
 Jupyter ノートブックまたは Python スクリプト内で W&B Sweep エージェントを開始する場合、W&B Sweep が実行する関数の名前を指定します。
 
-次のコードスニペットは、W&B でエージェントを開始する方法を示しています。ここでは、既に設定ファイルを持っており、W&B Sweep を初期化済みであると仮定しています。設定ファイルを定義する方法について詳しくは、[Define sweep configuration](/ja/guides/models/sweeps/define-sweep-configuration/) を参照してください。
+次のコードスニペットは、W&B でエージェントを開始する方法を示しています。ここでは、既に設定ファイルを持っており、W&B Sweep を初期化済みであると仮定しています。設定ファイルを定義する方法について詳しくは、[Define sweep configuration](/ja/guides/sweeps/define-sweep-configuration/) を参照してください。
 
 <Tabs>
 <Tab title="CLI">
@@ -46,14 +46,14 @@ wandb.agent(sweep_id=sweep_id, function=function_name)
 ### W&B エージェントを停止
 
 <Warning>
-ランダムおよびベイズ探索は永遠に実行されます。プロセスをコマンドライン、Python スクリプト内、または [Sweeps UI](/ja/./visualize-sweep-results) から停止する必要があります。
+ランダムおよびベイズ探索は永遠に実行されます。プロセスをコマンドライン、Python スクリプト内、または [Sweeps UI](/ja/guides/sweeps/visualize-sweep-results/) から停止する必要があります。
 </Warning>
 
 オプションで、Sweep agent が試みるべき W&B Runs の数を指定します。以下のコードスニペットは、Jupyter ノートブック、Python スクリプト内で最大の [W&B Runs](/ja/ref/python/run) 数を設定する方法を示しています。
 
 <Tabs>
 <Tab title="Python script or notebook">
-まず、スイープを初期化します。詳細は [Initialize sweeps](/ja/./initialize-sweeps) を参照してください。
+まず、スイープを初期化します。詳細は [Initialize sweeps](/ja/guides/sweeps/initialize-sweeps/) を参照してください。
 
 ```
 sweep_id = wandb.sweep(sweep_config)
@@ -71,7 +71,7 @@ wandb.agent(sweep_id, count=count)
 </Warning>
 </Tab>
 <Tab title="CLI">
-まず、[`wandb sweep`](/ja/ref/cli/wandb-sweep) コマンドでスイープを初期化します。詳細は [Initialize sweeps](/ja/./initialize-sweeps) を参照してください。
+まず、[`wandb sweep`](/ja/ref/cli/wandb-sweep) コマンドでスイープを初期化します。詳細は [Initialize sweeps](/ja/guides/sweeps/initialize-sweeps/) を参照してください。
 
 ```
 wandb sweep config.yaml

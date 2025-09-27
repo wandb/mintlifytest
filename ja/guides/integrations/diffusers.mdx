@@ -53,7 +53,7 @@ autolog(init=dict(project="diffusers_logging"))
     - 各パイプライン呼び出しはその run のワークスペース内の独自の [table](/ja/guides/models/tables/) に追跡され、パイプライン呼び出しに関連する設定はその run のワークフローリストに追加されます。
     - プロンプト、ネガティブプロンプト、生成されたメディアは [`wandb.Table`](/ja/guides/models/tables/) にログされます。
     - シードやパイプライン アーキテクチャーを含む実験に関連するすべての他の設定は、その run の設定セクションに保存されます。
-    - 各パイプライン呼び出しの生成されたメディアは run の [media panels](/ja/guides/models/track/log/media) にもログされます。
+    - 各パイプライン呼び出しの生成されたメディアは run の [media panels](/ja/guides/track/log/media/) にもログされます。
 
     <Note>
     サポートされているパイプライン呼び出しのリストは[こちら](https://github.com/wandb/wandb/blob/main/wandb/integration/diffusers/autologger.py#L12-L72)から見つけることができます。このインテグレーションの新機能をリクエストしたり、関連するバグを報告したりする場合は、[https://github.com/wandb/wandb/issues](https://github.com/wandb/wandb/issues)で問題をオープンしてください。

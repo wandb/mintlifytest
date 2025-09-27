@@ -43,7 +43,7 @@ W&Bを自社で管理するアプローチが、あなたのチームが抱え�
 ## インフラストラクチャの要件
 
 ### Kubernetes
-W&Bサーバーアプリケーションは、複数のポッドをデプロイする[Kubernetesオペレーター](/ja/kubernetes-operator/)としてデプロイされます。このため、W&Bには以下の要件を備えたKubernetesクラスターが必要です：
+W&Bサーバーアプリケーションは、複数のポッドをデプロイする[Kubernetesオペレーター](/ja/guides/hosting/operator/)としてデプロイされます。このため、W&Bには以下の要件を備えたKubernetesクラスターが必要です：
 - 完全に設定され機能するインフラストラクチャコントローラ。
 - 永続ボリュームをプロビジョニングする能力。
 
@@ -79,7 +79,7 @@ W&Bは、Pre-signed URLとCORSサポートのあるオブジェクトストレ�
 * https://quay.io
 * `https://gcr.io`
 
-エアギャップデプロイメントについて知るには、[エアギャップインスタンス用Kubernetesオペレーター](/ja/kubernetes-operator/operator-airgapped)を参照してください。
+エアギャップデプロイメントについて知るには、[エアギャップインスタンス用Kubernetesオペレーター](/ja/guides/hosting/self-managed/operator-airgapped/)を参照してください。
 トレーニングインフラストラクチャと実験のニーズを追跡する各システムにおいて、W&Bおよびオブジェクトストレージへのアクセスが必要です。
 
 ### DNS

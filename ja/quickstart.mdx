@@ -19,7 +19,7 @@ W&Bとマシンを認証するには、ユーザープロファイルまたは[w
 
 <Tabs>
 <Tab title="コマンドライン">
-1. `WANDB_API_KEY` [環境変数](/ja/guides/models/track/environment-variables) を設定します。
+1. `WANDB_API_KEY` [環境変数](/ja/guides/track/environment-variables/) を設定します。
 
     ```bash
     export WANDB_API_KEY=<your_api_key>
@@ -64,7 +64,7 @@ run = wandb.init(
 )
 ```
 
-W&B のコア要素として [ラン](/ja/guides/models/track/runs/) は使用され、[メトリクスをトラックする](/ja/guides/models/track/)、[ログを作成する](/ja/guides/models/track/log/) など様々なことができます。
+W&B のコア要素として [ラン](/ja/guides/runs/) は使用され、[メトリクスをトラックする](/ja/guides/track/)、[ログを作成する](/ja/guides/track/log/) など様々なことができます。
 
 ## コンポーネントを組み立てる
 
@@ -112,8 +112,8 @@ for epoch in range(2, epochs):
 W&B エコシステムのさらなる機能を探求しましょう:
 
 1. PyTorch や Hugging Face のライブラリ、および SageMaker のようなサービスと W&B を組み合わせた [W&B インテグレーションチュートリアル](/ja/guides/integrations/) を読んでみてください。
-2. [W&B Reports](/ja/guides/core/reports/) を使用して、ランを整理し、自動可視化し、学びを要約し、共同作業者と更新を共有します。
-3. [W&B Artifacts](/ja/guides/core/artifacts/) を作成して、データセット、モデル、依存関係、および機械学習パイプライン全体の結果をトラックします。
-4. [W&B Sweeps](/ja/guides/models/sweeps/) を使用してハイパーパラメーター検索を自動化し、モデルを最適化します。
+2. [W&B Reports](/ja/guides/reports/) を使用して、ランを整理し、自動可視化し、学びを要約し、共同作業者と更新を共有します。
+3. [W&B Artifacts](/ja/guides/artifacts/) を作成して、データセット、モデル、依存関係、および機械学習パイプライン全体の結果をトラックします。
+4. [W&B Sweeps](/ja/guides/sweeps/) を使用してハイパーパラメーター検索を自動化し、モデルを最適化します。
 5. [中央ダッシュボード](/ja/guides/models/tables/) でランを分析し、モデルの予測を可視化し、洞察を共有します。
 6. [W&B AI Academy](https://wandb.ai/site/courses/) を訪れて、ハンズオンのコースを通じて LLMs、MLOps、W&B Models について学びましょう。

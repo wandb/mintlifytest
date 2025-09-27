@@ -17,13 +17,13 @@ Sweep configuration を [Python 辞書](https://docs.python.org/3/tutorial/datas
 スイープを初期化し、コマンドラインからスイープエージェントを開始したい場合は、YAMLファイルでスイープ設定を定義します。スイープを初期化し、完全にPythonスクリプトまたはJupyterノートブック内でスイープを開始する場合は、Python辞書でスイープを定義します。
 </Note>
 
-以下のガイドでは、sweep configuration のフォーマット方法について説明します。[Sweep configuration options](/ja/./sweep-config-keys) で、トップレベルの sweep configuration キーの包括的なリストをご覧ください。
+以下のガイドでは、sweep configuration のフォーマット方法について説明します。[Sweep configuration options](/ja/guides/sweeps/sweep-config-keys/) で、トップレベルの sweep configuration キーの包括的なリストをご覧ください。
 
 ## 基本構造
 
 両方のスイープ設定フォーマットオプション (YAML および Python 辞書) は、キーと値のペアおよびネストされた構造を利用します。
 
-スイープ設定内でトップレベルキーを使用して、sweep 検索の特性を定義します。たとえば、スイープの名前（[`name`](/ja/./sweep-config-keys) キー）、検索するパラメータ（[`parameters`](/ja/./sweep-config-keys#parameters) キー）、パラメータ空間を検索する方法（[`method`](/ja/./sweep-config-keys#method) キー）、その他があります。
+スイープ設定内でトップレベルキーを使用して、sweep 検索の特性を定義します。たとえば、スイープの名前（[`name`](/ja/guides/sweeps/sweep-config-keys/) キー）、検索するパラメータ（[`parameters`](/ja/guides/sweeps/sweep-config-keys/#parameters) キー）、パラメータ空間を検索する方法（[`method`](/ja/guides/sweeps/sweep-config-keys/#method) キー）、その他があります。
 
 例えば、以下のコードスニペットは、YAML ファイルと Python 辞書の両方で定義された同じスイープ設定を示しています。スイープ設定内には、`program`、`name`、`method`、`metric`、および `parameters` という5つのトップレベルキーが指定されています。
 
@@ -71,7 +71,7 @@ sweep_configuration = {
 </Tab>
 </Tabs>
 
-トップレベルの `parameters` キーの中に、以下のキーがネストされています：`learning_rate`、`batch_size`、`epoch`、および `optimizer`。指定したネストされたキーごとに、1つ以上の値、分布、確率などを提供できます。詳細については、[Sweep configuration options](/ja/./sweep-config-keys) の [parameters](/ja/./sweep-config-keys#parameters) セクションを参照してください。
+トップレベルの `parameters` キーの中に、以下のキーがネストされています：`learning_rate`、`batch_size`、`epoch`、および `optimizer`。指定したネストされたキーごとに、1つ以上の値、分布、確率などを提供できます。詳細については、[Sweep configuration options](/ja/guides/sweeps/sweep-config-keys/) の [parameters](/ja/guides/sweeps/sweep-config-keys/#parameters) セクションを参照してください。
 
 ## 二重ネストパラメータ
 

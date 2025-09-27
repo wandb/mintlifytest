@@ -7,7 +7,7 @@ menu:
     parent: log-objects-and-media
 ---
 
-W&B Python ライブラリを使用して、CSV ファイルをログし、[W&B ダッシュボード](/ja/guides/models/track/workspaces)で可視化します。W&B ダッシュボードは、機械学習モデルからの結果を整理し可視化する中心的な場所です。これは、W&B にログされていない[以前の機械学習実験の情報を含む CSV ファイル](#import-and-log-your-csv-of-experiments)や[データセットを含む CSV ファイル](#import-and-log-your-dataset-csv-file)がある場合に特に便利です。
+W&B Python ライブラリを使用して、CSV ファイルをログし、[W&B ダッシュボード](/ja/guides/track/workspaces/)で可視化します。W&B ダッシュボードは、機械学習モデルからの結果を整理し可視化する中心的な場所です。これは、W&B にログされていない[以前の機械学習実験の情報を含む CSV ファイル](#import-and-log-your-csv-of-experiments)や[データセットを含む CSV ファイル](#import-and-log-your-dataset-csv-file)がある場合に特に便利です。
 
 ## データセットの CSV ファイルをインポートしてログする
 
@@ -23,7 +23,7 @@ import pandas as pd
 new_iris_dataframe = pd.read_csv("iris.csv")
 ```
 
-2. CSV ファイルを W&B Table に変換し、[W&B ダッシュボード](/ja/guides/models/track/workspaces)を利用します。
+2. CSV ファイルを W&B Table に変換し、[W&B ダッシュボード](/ja/guides/track/workspaces/)を利用します。
 
 ```python
 # DataFrame を W&B Table に変換
@@ -40,7 +40,7 @@ iris_table_artifact.add(iris_table, "iris_table")
 # データを保存するために、生の CSV ファイルを Artifact 内にログする
 iris_table_artifact.add_file("iris.csv")
 ```
-W&B Artifacts についての詳細は、[Artifacts チャプター](/ja/guides/core/artifacts/)を参照してください。
+W&B Artifacts についての詳細は、[Artifacts チャプター](/ja/guides/artifacts/)を参照してください。
 
 4. 最後に、`wandb.init` を使用して W&B で追跡しログするために新しい W&B Run を開始します:
 
@@ -98,9 +98,9 @@ run.finish()
 場合によっては、実験の詳細が CSV ファイルにあることがあります。そのような CSV ファイルに共通する詳細には次のようなものがあります:
 
 * 実験 run の名前
-* 初期の[ノート](/ja/guides/models/track/runs/#add-a-note-to-a-run)
-* 実験を区別するための[タグ](/ja/guides/models/track/runs/tags)
-* 実験に必要な設定（[Sweeps ハイパーパラメータチューニング](/ja/guides/models/sweeps/)の利用の利点があります）。
+* 初期の[ノート](/ja/guides/runs/#add-a-note-to-a-run)
+* 実験を区別するための[タグ](/ja/guides/runs/tags/)
+* 実験に必要な設定（[Sweeps ハイパーパラメータチューニング](/ja/guides/sweeps/)の利用の利点があります）。
 
 | 実験         | モデル名          | ノート                                           | タグ          | 層の数     | 最終トレイン精度 | 最終評価精度 | トレーニング損失                             |
 | ------------ | ---------------- | ------------------------------------------------ | ------------- | ---------- | --------------- | ------------- | ------------------------------------- |
@@ -169,9 +169,9 @@ run.log({key: val})
 run.summary.update(summaries)
 ```
 
-サマリーメトリクスの詳細については、[Log Summary Metrics](/ja/./log-summary)を参照してください。
+サマリーメトリクスの詳細については、[Log Summary Metrics](/ja/guides/track/log/log-summary/)を参照してください。
 
-以下は、上記のサンプルテーブルを [W&B ダッシュボード](/ja/guides/models/track/workspaces)に変換する完全な例のスクリプトです:
+以下は、上記のサンプルテーブルを [W&B ダッシュボード](/ja/guides/track/workspaces/)に変換する完全な例のスクリプトです:
 
 ```python
 FILENAME = "experiments.csv"

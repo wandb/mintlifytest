@@ -27,7 +27,7 @@ APIキーは、あなたのマシンをW&Bに認証します。ユーザープ�
 
 <Tabs>
 <Tab title="Command Line">
-1. `WANDB_API_KEY` [環境変数](/ja/guides/models/track/environment-variables) をあなたのAPIキーに設定します。
+1. `WANDB_API_KEY` [環境変数](/ja/guides/track/environment-variables/) をあなたのAPIキーに設定します。
 
     ```bash
     export WANDB_API_KEY=<your_api_key>
@@ -81,7 +81,7 @@ model_log_interval = 1000
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `project_name`         | `str`型。W&Bプロジェクトの名前。存在しない場合は、自動的にプロジェクトが作成されます。                                                                                                    |
 | `remove_config_values` | `List[str]`型。W&Bにアップロードする前に設定から除外する値のリスト。デフォルトは`[]`です。                                                                                                                                                     |
-| `model_log_interval`   | `Optional int`型。デフォルトは`None`です。設定すると、[モデルのバージョン管理](/ja/guides/core/registry/)が[Artifacts](/ja/guides/core/artifacts/)とともに有効になります。モデルチェックポイントをログに記録する間隔のステップ数を渡します。デフォルトは`None`です。 |
+| `model_log_interval`   | `Optional int`型。デフォルトは`None`です。設定すると、[モデルのバージョン管理](/ja/guides/core/registry/)が[Artifacts](/ja/guides/artifacts/)とともに有効になります。モデルチェックポイントをログに記録する間隔のステップ数を渡します。デフォルトは`None`です。 |
 | `log_dataset_dir`      | `Optional str`型。パスを渡すと、トレーニング開始時にデータセットはArtifactsとしてアップロードされます。デフォルトは`None`です。                                                                                                            |
 | `entity`               | `Optional str`型。指定した場合、run は指定したエンティティで作成されます。                                                                                                                                                                                   |
 | `run_name`             | `Optional str`型。指定された場合、run は指定された名前で作成されます。                                                                                                                                                                               |
@@ -120,4 +120,4 @@ python -m spacy train \
 </Tab>
 </Tabs>
 
-トレーニングが始まると、トレーニングrun の[W&Bページ](/ja/guides/models/track/runs/)へのリンクが出力され、このrun の実験管理[ダッシュボード](/ja/guides/models/track/workspaces)にWeights & BiasesのウェブUIでアクセスできます。
+トレーニングが始まると、トレーニングrun の[W&Bページ](/ja/guides/runs/)へのリンクが出力され、このrun の実験管理[ダッシュボード](/ja/guides/track/workspaces/)にWeights & BiasesのウェブUIでアクセスできます。

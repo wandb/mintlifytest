@@ -176,7 +176,7 @@ run.config.update({"lr": 0.1, "channels": 16})
 ### Run終了後に設定を行う
 [W&B Public API](/ja/ref/python/public-api/)を使用して、完了済みの run の設定を更新できます。
 
-API に対して、エンティティ、プロジェクト名、および run の ID を提供する必要があります。これらの詳細は Run オブジェクトや [W&B App UI](/ja/guides/models/track/workspaces) で確認できます:
+API に対して、エンティティ、プロジェクト名、および run の ID を提供する必要があります。これらの詳細は Run オブジェクトや [W&B App UI](/ja/guides/track/workspaces/) で確認できます:
 
 ```python
 with wandb.init() as run:

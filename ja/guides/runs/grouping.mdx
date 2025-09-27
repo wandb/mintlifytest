@@ -23,7 +23,7 @@ menu:
 
 ### 2. グループ環境変数を設定する
 
-`WANDB_RUN_GROUP` を使用して、runのグループを環境変数として指定します。詳細は[**Environment Variables**](/ja/guides/models/track/environment-variables)をご覧ください。**Group**はプロジェクト内で一意である必要があり、グループ内のすべてのrunで共有されます。`wandb.util.generate_id()` を使用して、すべてのプロセスで使用するための一意の8文字の文字列を生成することができます。例: `os.environ["WANDB_RUN_GROUP"] = "experiment-" + wandb.util.generate_id()`
+`WANDB_RUN_GROUP` を使用して、runのグループを環境変数として指定します。詳細は[**Environment Variables**](/ja/guides/track/environment-variables/)をご覧ください。**Group**はプロジェクト内で一意である必要があり、グループ内のすべてのrunで共有されます。`wandb.util.generate_id()` を使用して、すべてのプロセスで使用するための一意の8文字の文字列を生成することができます。例: `os.environ["WANDB_RUN_GROUP"] = "experiment-" + wandb.util.generate_id()`
 
 ### 3. UIでグループ化を切り替える
 

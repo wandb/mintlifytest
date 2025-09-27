@@ -76,7 +76,7 @@ def main():
 
 ## スイープ設定で探索空間を定義する
 
-探索するハイパーパラメーターを辞書で指定します。設定オプションについては、[スイープ設定を定義する](/ja/guides/models/sweeps/define-sweep-configuration/)を参照してください。
+探索するハイパーパラメーターを辞書で指定します。設定オプションについては、[スイープ設定を定義する](/ja/guides/sweeps/define-sweep-configuration/)を参照してください。
 
 次の例では、ランダム検索（`'method':'random'`）を使用するスイープ設定を示しています。スイープは、バッチサイズ、エポック、および学習率の設定にリストされているランダムな値を無作為に選択します。
 
@@ -96,7 +96,7 @@ sweep_configuration = {
 
 ## スイープを初期化する
 
-W&Bは、クラウド（標準）またはローカル（ローカル）で複数のマシンを横断してスイープを管理するために、_Sweep Controller_ を使用します。Sweep Controller についての詳細は、[ローカルで探索と停止のアルゴリズムを確認する](/ja/./local-controller)を参照してください。
+W&Bは、クラウド（標準）またはローカル（ローカル）で複数のマシンを横断してスイープを管理するために、_Sweep Controller_ を使用します。Sweep Controller についての詳細は、[ローカルで探索と停止のアルゴリズムを確認する](/ja/guides/sweeps/local-controller/)を参照してください。
 
 スイープを初期化すると、スイープ識別番号が返されます。
 
@@ -104,7 +104,7 @@ W&Bは、クラウド（標準）またはローカル（ローカル）で複�
 sweep_id = wandb.sweep(sweep=sweep_configuration, project="my-first-sweep")
 ```
 
-スイープの初期化に関する詳細は、[スイープを初期化する](/ja/./initialize-sweeps)を参照してください。
+スイープの初期化に関する詳細は、[スイープを初期化する](/ja/guides/sweeps/walkthrough/#%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%97%E3%82%92%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%99%E3%82%8B)を参照してください。
 
 ## スイープを開始する
 
@@ -116,13 +116,13 @@ wandb.agent(sweep_id, function=main, count=10)
 
 ## 結果を視覚化する（オプション）
 
-プロジェクトを開くと、W&Bアプリダッシュボードでライブ結果を確認できます。数回のクリックで豊富なインタラクティブグラフを構築します。例えば、[並列座標プロット](/ja/guides/models/app/features/panels/parallel-coordinates)、[パラメータの重要度解析](/ja/guides/models/app/features/panels/parameter-importance)、および[その他](/ja/guides/models/app/features/panels/)です。
+プロジェクトを開くと、W&Bアプリダッシュボードでライブ結果を確認できます。数回のクリックで豊富なインタラクティブグラフを構築します。例えば、[並列座標プロット](/ja/guides/app/features/panels/parallel-coordinates/)、[パラメータの重要度解析](/ja/guides/app/features/panels/parameter-importance/)、および[その他](/ja/guides/app/features/panels/)です。
 
 <Frame>
     <img src="/images/sweeps/quickstart_dashboard_example.png" alt="Sweeps ダッシュボード例"  />
 </Frame>
 
-結果の視覚化方法に関する詳細は、[スイープ結果を視覚化する](/ja/./visualize-sweep-results)を参照してください。サンプルのダッシュボードについては、この[スイーププロジェクト](https://wandb.ai/anmolmann/pytorch-cnn-fashion/sweeps/pmqye6u3)を参照してください。
+結果の視覚化方法に関する詳細は、[スイープ結果を視覚化する](/ja/guides/sweeps/visualize-sweep-results/)を参照してください。サンプルのダッシュボードについては、この[スイーププロジェクト](https://wandb.ai/anmolmann/pytorch-cnn-fashion/sweeps/pmqye6u3)を参照してください。
 
 ## エージェントを停止する（オプション）
 

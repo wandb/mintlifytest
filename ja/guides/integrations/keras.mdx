@@ -13,9 +13,9 @@ weight: 160
 
 W&B は Keras 用に3つのコールバックを提供しています。`wandb` v0.13.4から利用可能です。レガシーな `WandbCallback` は下にスクロールしてください。
 
-- **`WandbMetricsLogger`** : このコールバックは [Experiment Tracking](/ja/guides/models/track) に使用します。トレーニングと検証のメトリクス、システムメトリクスを Weights and Biases にログします。
+- **`WandbMetricsLogger`** : このコールバックは [Experiment Tracking](/ja/guides/track/) に使用します。トレーニングと検証のメトリクス、システムメトリクスを Weights and Biases にログします。
 
-- **`WandbModelCheckpoint`** : モデルのチェックポイントを Weights and Biases の [Artifacts](/ja/guides/core/artifacts/) にログするためにこのコールバックを使用します。
+- **`WandbModelCheckpoint`** : モデルのチェックポイントを Weights and Biases の [Artifacts](/ja/guides/artifacts/) にログするためにこのコールバックを使用します。
 
 - **`WandbEvalCallback`**: このベースコールバックは、モデルの予測を Weights and Biases の [Tables](/ja/guides/models/tables/) にログして、インタラクティブな可視化を行います。
 
@@ -207,7 +207,7 @@ model.fit(
 ```
 
 <Note>
-W&B の [Artifact ページ](/ja/guides/core/artifacts/explore-and-traverse-an-artifact-graph) には、デフォルトでテーブルログが含まれており、**Workspace** ページには含まれていません。
+W&B の [Artifact ページ](/ja/guides/artifacts/explore-and-traverse-an-artifact-graph/) には、デフォルトでテーブルログが含まれており、**Workspace** ページには含まれていません。
 </Note>
 
 ### `WandbEvalCallback` リファレンス

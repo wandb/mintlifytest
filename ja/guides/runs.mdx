@@ -18,10 +18,10 @@ run を開始する一般的なパターンには以下が含まれますが、�
 * モデルのトレーニング
 * ハイパーパラメーターを変更して新しい実験を行う
 * 異なるモデルで新しい機械学習実験を行う
-* データやモデルを [W&B Artifact](/ja/guides/core/artifacts/) としてログ記録する
-* [W&B Artifact をダウンロードする](/ja/guides/core/artifacts/download-and-use-an-artifact)
+* データやモデルを [W&B Artifact](/ja/guides/artifacts/) としてログ記録する
+* [W&B Artifact をダウンロードする](/ja/guides/artifacts/download-and-use-an-artifact/)
 
-W&B はあなたが作成した run を [projects](/ja/guides/models/track/project-page) に保存します。W&B App UI 上でプロジェクトのワークスペース内の run とそのプロパティを表示できます。また、[`wandb.Api.Run`](/ja/ref/python/public-api/run) オブジェクトを使用してプログラムで run のプロパティにアクセスすることも可能です。
+W&B はあなたが作成した run を [projects](/ja/guides/track/project-page/) に保存します。W&B App UI 上でプロジェクトのワークスペース内の run とそのプロパティを表示できます。また、[`wandb.Api.Run`](/ja/ref/python/public-api/run) オブジェクトを使用してプログラムで run のプロパティにアクセスすることも可能です。
 
 `run.log` でログ記録したものは、その run に記録されます。次のコードスニペットを考えてみてください。
 
@@ -116,7 +116,7 @@ W&B は、シミュレーションしたトレーニングループを `jolly-ha
     <img src="/images/runs/run_log_example_2.png"  />
 </Frame>
 
-別の例として、[スイープ](/ja/guides/models/sweeps/)の際、W&B はあなたが指定したハイパーパラメーター探索空間を探索します。スイープが作成する各新しいハイパーパラメーターの組み合わせを、一意の run として実装します。
+別の例として、[スイープ](/ja/guides/sweeps/)の際、W&B はあなたが指定したハイパーパラメーター探索空間を探索します。スイープが作成する各新しいハイパーパラメーターの組み合わせを、一意の run として実装します。
 
 ## run を初期化する
 
@@ -458,7 +458,7 @@ Table のある列の値で全行を並べ替えます。
 ファイルタブの例はこちらから見ることができます [here](https://app.wandb.ai/stacey/deep-drive/runs/pr0os44x/files/media/images).
 
 ### Artifacts タブ
-**Artifacts** タブには、指定した run の入力および出力 [Artifacts](/ja/guides/core/artifacts/) が一覧表示されます。
+**Artifacts** タブには、指定した run の入力および出力 [Artifacts](/ja/guides/artifacts/) が一覧表示されます。
 
 <Frame>
     <img src="/images/app_ui/artifacts_tab.png"  />

@@ -53,7 +53,7 @@ path = artifact.get_path(name)
 * `Entry.download`: パス `name` のアーティファクトからファイルをダウンロード
 * `Entry.ref`: `add_reference` がエントリーを参照として保存している場合、URI を返します。
 
-W&B が処理方法を知っているスキームを持つ参照は、アーティファクトファイルと同様にダウンロードされます。詳細については、[Track external files](/ja/guides/core/artifacts/track-external-files) を参照してください。
+W&B が処理方法を知っているスキームを持つ参照は、アーティファクトファイルと同様にダウンロードされます。詳細については、[Track external files](/ja/guides/artifacts/track-external-files/) を参照してください。
 </Tab>
 <Tab title="Outside of a run">
 まず、W&B SDK をインポートします。次に、Public API クラスからアーティファクトを作成します。エンティティ、プロジェクト、アーティファクト、およびエイリアスをそのアーティファクトに関連付けます。
@@ -129,4 +129,4 @@ artifact.add_file("model.h5")
 run.use_artifact(artifact)
 ```
 
-アーティファクトの構築に関する詳細については、[Construct an artifact](/ja/guides/core/artifacts/construct-an-artifact) を参照してください。
+アーティファクトの構築に関する詳細については、[Construct an artifact](/ja/guides/artifacts/construct-an-artifact/) を参照してください。

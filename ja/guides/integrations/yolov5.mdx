@@ -19,7 +19,7 @@ weight: 470
 
 ## コア実験の追跡
 
-`wandb` をインストールするだけで、システムメトリクス、モデルメトリクス、インタラクティブな[ダッシュボード](/ja/guides/models/track/workspaces)にログされるメディアといった、ビルトインの W&B [ログ機能](/ja/guides/models/track/log/)が有効になります。
+`wandb` をインストールするだけで、システムメトリクス、モデルメトリクス、インタラクティブな[ダッシュボード](/ja/guides/track/workspaces/)にログされるメディアといった、ビルトインの W&B [ログ機能](/ja/guides/track/log/)が有効になります。
 
 ```python
 pip install wandb
@@ -39,7 +39,7 @@ YOLO にいくつかの簡単なコマンドライン引数を渡すことで、
 
 * `--save_period` に数値を渡すと、W&B は各 `save_period` エポックの終わりに[モデルバージョン](/ja/guides/core/registry/)を保存します。モデルバージョンにはモデルの重みが含まれ、検証セットで最もパフォーマンスの良いモデルにタグ付けされます。
 * `--upload_dataset` フラグをオンにすると、データセットがデータバージョン管理のためにアップロードされます。
-* `--bbox_interval` に数値を渡すと、[データ可視化](/ja/../)が有効になります。各 `bbox_interval` エポックの終わりに、モデルの出力が検証セットに対して W&B にアップロードされます。
+* `--bbox_interval` に数値を渡すと、[データ可視化](/)が有効になります。各 `bbox_interval` エポックの終わりに、モデルの出力が検証セットに対して W&B にアップロードされます。
 
 <Tabs>
 <Tab title="Model Versioning Only">

@@ -79,7 +79,7 @@ importer.import_runs(runs, namespace=Namespace(entity, project))
 
 ## データのエクスポート
 
-パブリックAPIを使用して、W&B に保存したデータをエクスポートまたは更新します。このAPIを使用する前に、スクリプトからデータをログします。詳細は[クイックスタート](/ja/guides/quickstart)を確認してください。
+パブリックAPIを使用して、W&B に保存したデータをエクスポートまたは更新します。このAPIを使用する前に、スクリプトからデータをログします。詳細は[クイックスタート](/ja/quickstart/)を確認してください。
 
 **パブリックAPIのユースケース**
 
@@ -102,7 +102,7 @@ APIキーは、マシンをW&Bに認証します。ユーザープロフィー�
 
 ### run パスを見つける
 
-パブリックAPIを使用するには、しばしば `<entity>/<project>/<run_id>` という形式の run パスが必要になります。アプリUIでrunページを開き、[Overviewタブ](/ja/guides/models/track/runs/#overview-tab)をクリックしてrunパスを取得します。
+パブリックAPIを使用するには、しばしば `<entity>/<project>/<run_id>` という形式の run パスが必要になります。アプリUIでrunページを開き、[Overviewタブ](/ja/guides/runs/#overview-tab)をクリックしてrunパスを取得します。
 
 ### run データをエクスポートする
 
@@ -247,7 +247,7 @@ run の識別子を効果的に設定する方法について考えている場�
 - **run ID**：生成されたハッシュのままにしておきます。これはプロジェクト内の run で一意である必要があります。
 - **run 名前**：短く、読み書き可能で、おそらく一意であるべきです。そうすれば、チャートの異なる線間で違いをつけることができます。
 - **run ノート**：run内で何をしているかを簡単に説明するのに最適です。`wandb.init(notes="your notes here")` で設定できます。
-- **run タグ**：run タグで動的に追跡し、UIでフィルターを使用して興味のある run に絞り込みます。スクリプトからタグを設定し、runsテーブルやrunページのoverviewタブでUIからも編集できます。詳細な指示は[こちら](/ja/guides/models/track/runs/tags)を参照してください。
+- **run タグ**：run タグで動的に追跡し、UIでフィルターを使用して興味のある run に絞り込みます。スクリプトからタグを設定し、runsテーブルやrunページのoverviewタブでUIからも編集できます。詳細な指示は[こちら](/ja/guides/runs/tags/)を参照してください。
 
 ## 公開APIの例
 

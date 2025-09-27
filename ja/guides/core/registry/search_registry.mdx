@@ -7,7 +7,7 @@ menu:
 weight: 7
 ---
 
-[W&B レジストリアプリのグローバル検索バー](/ja/./search_registry#search-for-registry-items)を使用して、レジストリ、コレクション、アーティファクトバージョンタグ、コレクションタグ、またはエイリアスを見つけます。W&B Python SDK を使用して、特定の条件に基づいて [レジストリ、コレクション、およびアーティファクトバージョンをフィルタリング](/ja/./search_registry#query-registry-items-with-mongodb-style-queries) するために、MongoDBスタイルのクエリを使用することができます。
+[W&B レジストリアプリのグローバル検索バー](/ja/guides/core/registry/search_registry/#search-for-registry-items)を使用して、レジストリ、コレクション、アーティファクトバージョンタグ、コレクションタグ、またはエイリアスを見つけます。W&B Python SDK を使用して、特定の条件に基づいて [レジストリ、コレクション、およびアーティファクトバージョンをフィルタリング](/ja/guides/core/registry/search_registry/#query-registry-items-with-mongodb-style-queries) するために、MongoDBスタイルのクエリを使用することができます。
 
 表示権限がある項目のみが検索結果に表示されます。
 
@@ -38,7 +38,7 @@ weight: 7
 
 以下のコード例は、一般的な検索シナリオを示しています。
 
-`wandb.Api().registries()` メソッドを使用するには、まず W&B Python SDK （[`wandb`](/ja/ref/python/_index)） ライブラリをインポートします。
+`wandb.Api().registries()` メソッドを使用するには、まず W&B Python SDK （[`wandb`](/ja/ref/python/)） ライブラリをインポートします。
 ```python
 import wandb
 
@@ -119,7 +119,7 @@ for art in artifacts:
     print(f"artifact created at: {art.created_at}\n")
 ```
 
-アーティファクトオブジェクトの属性の完全なリストについては、API Reference docs の [Artifacts Class](/ja/ref/python/artifact/_index) を参照してください。
+アーティファクトオブジェクトの属性の完全なリストについては、API Reference docs の [Artifacts Class](/ja/ref/python/artifact/) を参照してください。
 
 レジストリやコレクションに関係なく、2024-01-08 から 2025-03-04 の 13:10 UTC の間に作成されたすべてのアーティファクトバージョンをフィルタリングします。
 

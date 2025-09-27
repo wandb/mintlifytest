@@ -11,7 +11,7 @@ You can restrict access to your [Dedicated Cloud](/ja/guides/hosting/hosting-opt
 
 IP ホワイトリストは、AWS、GCP、Azure 上の Dedicated Cloud インスタンスで利用可能です。
 
-[セキュアなプライベート接続](/ja/./private-connectivity) とともに IP ホワイトリストを使用できます。セキュアなプライベート接続とともに IP ホワイトリストを使用する場合、W&B は AI ワークロードからのすべてのトラフィックおよび可能であればユーザーのブラウザからのトラフィックの大部分にセキュアなプライベート接続を使用し、特権のある場所からのインスタンス管理には IP ホワイトリストを使用することを推奨します。
+[セキュアなプライベート接続](/ja/guides/hosting/data-security/private-connectivity/) とともに IP ホワイトリストを使用できます。セキュアなプライベート接続とともに IP ホワイトリストを使用する場合、W&B は AI ワークロードからのすべてのトラフィックおよび可能であればユーザーのブラウザからのトラフィックの大部分にセキュアなプライベート接続を使用し、特権のある場所からのインスタンス管理には IP ホワイトリストを使用することを推奨します。
 
 <Warning>
 W&B は、個々の `/32` IP アドレスではなく、企業または事業 egress ゲートウェイに割り当てられた [CIDR ブロック](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) の使用を強く推奨します。個々の IP アドレスの使用は、スケーラブルではなく、クラウドごとに厳しい制限があります。

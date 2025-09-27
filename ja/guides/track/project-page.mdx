@@ -16,12 +16,12 @@ A *プロジェクト* は、結果の可視化、実験の比較、アーティ
 
 各プロジェクトには、サイドバーからアクセスできる次の項目が含まれています:
 
-* [**Overview**](/ja/project-page#overview-tab): プロジェクトのスナップショット
-* [**Workspace**](/ja/project-page#workspace-tab): 個人の可視化サンドボックス
+* [**Overview**](/ja/guides/track/project-page/#overview-tab): プロジェクトのスナップショット
+* [**Workspace**](/ja/guides/track/project-page/#workspace-tab): 個人の可視化サンドボックス
 * [**Runs**](#runs-tab): プロジェクト内のすべての run を一覧表示するテーブル
 * **Automations**: プロジェクトで設定されたオートメーション
-* [**Sweeps**](/ja/project-page#sweeps-tab): 自動探索と最適化
-* [**Reports**](/ja/project-page#reports-tab): メモ、run、およびグラフの保存されたスナップショット
+* [**Sweeps**](/ja/guides/track/project-page/#sweeps-tab): 自動探索と最適化
+* [**Reports**](/ja/guides/track/project-page/#reports-tab): メモ、run、およびグラフの保存されたスナップショット
 * [**Artifacts**](#artifacts-tab): すべての run およびその run に関連するアーティファクトを含む
 
 ## Overview タブ
@@ -191,7 +191,7 @@ Runs タブをカスタマイズすると、そのカスタマイズは[Workspac
 
 ## Sweeps タブ
 
-[スイープ](/ja/guides/models/sweeps/)をプロジェクトから新たに開始します。
+[スイープ](/ja/guides/sweeps/)をプロジェクトから新たに開始します。
 
 <Frame>
     <img src="/images/app_ui/sweeps-tab.png"  />
@@ -199,7 +199,7 @@ Runs タブをカスタマイズすると、そのカスタマイズは[Workspac
 
 ## Artifacts タブ
 
-プロジェクトに関連付けられたすべての[Artifacts](/ja/guides/core/artifacts/)をトレーニングデータセットや [ファインチューンされたモデル](/ja/guides/core/registry/)から[メトリクスやメディアのテーブル](/ja/guides/models/tables/tables-walkthrough)まで表示します。
+プロジェクトに関連付けられたすべての[Artifacts](/ja/guides/track/project-page/#artifacts-tab)をトレーニングデータセットや [ファインチューンされたモデル](/ja/guides/core/registry/)から[メトリクスやメディアのテーブル](/ja/guides/models/tables/tables-walkthrough/)まで表示します。
 
 ### Overview パネル
 
@@ -233,7 +233,7 @@ Usage パネルは、ウェブアプリの外部で、例えばローカルマ�
 
 ファイルパネルは、アーティファクトに関連付けられたファイルとフォルダを一覧表示します。W&B は特定のファイルを run 用に自動的にアップロードします。例えば、`requirements.txt` は run が使用した各ライブラリのバージョンを示し、`wandb-metadata.json` および `wandb-summary.json` は run に関する情報を含みます。他のファイルもアーティファクトやメディアなど、run の設定に応じてアップロードされる場合があります。このファイルツリーをナビゲートし、W&B ウェブアプリで直接内容を確認することができます。
 
-Artifacts に関連付けられた[テーブル](/ja/guides/models/tables//tables-walkthrough)は、このコンテキストでは特にリッチでインタラクティブです。Artifacts で Tables を使用する方法についての詳細は[こちら](/ja/guides/models/tables//visualize-tables)から学べます。
+Artifacts に関連付けられた[テーブル](/ja/guides/models/tables/tables-walkthrough/)は、このコンテキストでは特にリッチでインタラクティブです。Artifacts で Tables を使用する方法についての詳細は[こちら](/ja/guides/models/tables/visualize-tables/)から学べます。
 
 <Frame>
     <img src="/images/app_ui/files_panel_table.png"  />

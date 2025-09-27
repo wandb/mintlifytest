@@ -57,12 +57,12 @@ def main():
 W&B Sweepを作成するために、コード例に以下を追加しました:
 
 1. Weights & Biases Python SDKをインポートします。
-2. キーと値のペアがスイープ設定を定義する辞書オブジェクトを作成します。次の例では、バッチサイズ (`batch_size`), エポック (`epochs`), および学習率 (`lr`) のハイパーパラメーターが各スイープで変化します。スイープ設定の作成方法についての詳細は、[Define sweep configuration](/ja/guides/models/sweeps/define-sweep-configuration/)を参照してください。
-3. スイープ設定辞書を[`wandb.sweep`](/ja/ref/python/sweep)に渡します。これによりスイープが初期化され、スイープID (`sweep_id`) が返されます。スイープの初期化方法についての詳細は、[Initialize sweeps](/ja/./initialize-sweeps)を参照してください。
+2. キーと値のペアがスイープ設定を定義する辞書オブジェクトを作成します。次の例では、バッチサイズ (`batch_size`), エポック (`epochs`), および学習率 (`lr`) のハイパーパラメーターが各スイープで変化します。スイープ設定の作成方法についての詳細は、[Define sweep configuration](/ja/guides/sweeps/define-sweep-configuration/)を参照してください。
+3. スイープ設定辞書を[`wandb.sweep`](/ja/ref/python/sweep)に渡します。これによりスイープが初期化され、スイープID (`sweep_id`) が返されます。スイープの初期化方法についての詳細は、[Initialize sweeps](/ja/guides/sweeps/initialize-sweeps/)を参照してください。
 4. [`wandb.init()`](/ja/ref/python/init) APIを使用して、データを同期およびログ化しながら、バックグラウンドプロセスを生成して [W&B Run](/ja/ref/python/run) として実行します。
 5. (オプション) 固定値を定義する代わりに `wandb.config` から値を定義します。
 6. `wandb.log` を使用して最適化したいメトリクスをログします。設定で定義されたメトリクスを必ずログしてください。この例では、設定辞書 (`sweep_configuration`) で `val_acc` を最大化するスイープを定義しました。
-7. [`wandb.agent`](/ja/ref/python/agent) API呼び出しを使用してスイープを開始します。スイープID、スイープが実行する関数の名前 (`function=main`)、および試行する最大run数を4に設定します (`count=4`)。W&B Sweepの開始方法についての詳細は、[Start sweep agents](/ja/./start-sweep-agents)を参照してください。
+7. [`wandb.agent`](/ja/ref/python/agent) API呼び出しを使用してスイープを開始します。スイープID、スイープが実行する関数の名前 (`function=main`)、および試行する最大run数を4に設定します (`count=4`)。W&B Sweepの開始方法についての詳細は、[Start sweep agents](/ja/guides/sweeps/start-sweep-agents/)を参照してください。
 
 ```python
 import wandb
@@ -149,7 +149,7 @@ parameters:
     values: [5, 10, 15]
 ```
 
-W&B Sweep設定の作成方法についての詳細は、[Define sweep configuration](/ja/guides/models/sweeps/define-sweep-configuration/)を参照してください。
+W&B Sweep設定の作成方法についての詳細は、[Define sweep configuration](/ja/guides/sweeps/define-sweep-configuration/)を参照してください。
 
 YAMLファイルで `program` のキーにPythonスクリプトの名前を必ず指定してください。
 
@@ -224,7 +224,7 @@ NUM=5
 wandb sweep --project sweep-demo-cli config.yaml
 ```
 
-これによりスイープIDが返されます。スイープの初期化方法についての詳細は、[Initialize sweeps](/ja/./initialize-sweeps)を参照してください。
+これによりスイープIDが返されます。スイープの初期化方法についての詳細は、[Initialize sweeps](/ja/guides/sweeps/initialize-sweeps/)を参照してください。
 
 スイープIDをコピーし、次のコードスニペットの `sweepID` を置き換えて、[`wandb agent`](/ja/ref/cli/wandb-agent) コマンドでスイープジョブを開始します:
 
@@ -232,7 +232,7 @@ wandb sweep --project sweep-demo-cli config.yaml
 wandb agent --count $NUM your-entity/sweep-demo-cli/sweepID
 ```
 
-スイープジョブの開始方法についての詳細は、[Start sweep jobs](/ja/./start-sweep-agents)を参照してください。
+スイープジョブの開始方法についての詳細は、[Start sweep jobs](/ja/guides/sweeps/start-sweep-agents/)を参照してください。
 </Tab>
 </Tabs>
 

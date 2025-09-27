@@ -8,7 +8,7 @@ menu:
 weight: 4
 ---
 
-[registered model](/ja/./model-management-concepts#registered-model) を作成し、モデリングタスクのすべての候補モデルを保持します。モデルレジストリ内でインタラクティブに、または Python SDK を使用してプログラム的に registered model を作成できます。
+[registered model](/ja/guides/core/registry/model_registry/model-management-concepts/#registered-model) を作成し、モデリングタスクのすべての候補モデルを保持します。モデルレジストリ内でインタラクティブに、または Python SDK を使用してプログラム的に registered model を作成できます。
 
 ## プログラムで registered model を作成する
 
@@ -49,7 +49,7 @@ run.finish()
 8. **Register model** をクリックします。
 
 <Note>
-モデルをモデルレジストリに手動でリンクすることは、一度だけのモデルに便利です。しかし、[プログラムでモデルバージョンをモデルレジストリにリンクする](/ja/link-model-version#programmatically-link-a-model)こともよくあります。
+モデルをモデルレジストリに手動でリンクすることは、一度だけのモデルに便利です。しかし、[プログラムでモデルバージョンをモデルレジストリにリンクする](/ja/guides/core/registry/model_registry/link-model-version/#programmatically-link-a-model)こともよくあります。
 
 例えば、毎晩のジョブがあるとします。毎晩作成されるモデルを手動でリンクするのは面倒です。代わりに、モデルを評価し、そのモデルがパフォーマンスを改善した場合にそのモデルを W&B Python SDK を使用してモデルレジストリにリンクするスクリプトを作成することができます。
 </Note>
