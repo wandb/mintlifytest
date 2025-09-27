@@ -1128,5 +1128,1751 @@
       "weight": 600,
       "format": "woff2"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/app/",
+      "destination": "/guides/app/"
+    },
+    {
+      "source": "/app/features/",
+      "destination": "/guides/app/"
+    },
+    {
+      "source": "/app/features/alerts/",
+      "destination": "/guides/runs/alert/"
+    },
+    {
+      "source": "/app/features/custom-charts-beta/",
+      "destination": "/guides/app/features/custom-charts-beta/"
+    },
+    {
+      "source": "/app/features/custom-charts/",
+      "destination": "/guides/app/features/custom-charts/"
+    },
+    {
+      "source": "/app/features/custom-charts/walkthrough/",
+      "destination": "/guides/app/features/custom-charts/walkthrough/"
+    },
+    {
+      "source": "/app/features/notes/",
+      "destination": "/guides/app/features/notes/"
+    },
+    {
+      "source": "/app/features/panels/",
+      "destination": "/guides/app/features/panels/"
+    },
+    {
+      "source": "/app/features/panels/code/",
+      "destination": "/guides/app/features/panels/code/"
+    },
+    {
+      "source": "/app/features/panels/compare-metrics/",
+      "destination": "/guides/app/features/panels/"
+    },
+    {
+      "source": "/app/features/panels/compare-metrics/reference/",
+      "destination": "/guides/app/features/panels/line-plot#compare-two-metrics-on-one-chart/"
+    },
+    {
+      "source": "/app/features/panels/compare-metrics/smoothing/",
+      "destination": "/guides/app/features/panels/compare-metrics/smoothing/"
+    },
+    {
+      "source": "/app/features/panels/parameter-importance/",
+      "destination": "/guides/app/features/panels/parameter-importance/"
+    },
+    {
+      "source": "/app/features/panels/run-colors/",
+      "destination": "/guides/app/features/panels/run-colors/"
+    },
+    {
+      "source": "/app/features/panels/weave/",
+      "destination": "/guides/app/features/panels/query-panels/"
+    },
+    {
+      "source": "/app/features/sidebar/",
+      "destination": "/guides/app/features/runs-table#add-sidebar-columns/"
+    },
+    {
+      "source": "/app/features/sweeps/",
+      "destination": "/guides/sweeps/"
+    },
+    {
+      "source": "/app/features/system-metrics/",
+      "destination": "/guides/app/features/system-metrics/"
+    },
+    {
+      "source": "/app/features/tags/",
+      "destination": "/guides/app/features/tags/"
+    },
+    {
+      "source": "/app/features/teams/",
+      "destination": "/guides/app/features/teams/"
+    },
+    {
+      "source": "/app/pages/project-page/",
+      "destination": "/guides/app/pages/project-page/"
+    },
+    {
+      "source": "/app/panels/parameter-importance/",
+      "destination": "/guides/app/features/panels/parameter-importance/"
+    },
+    {
+      "source": "/app/visualizations/",
+      "destination": "/guides/app/"
+    },
+    {
+      "source": "/artifacts/",
+      "destination": "/guides/artifacts/"
+    },
+    {
+      "source": "/artifacts/api/",
+      "destination": "/ref/python/artifact/"
+    },
+    {
+      "source": "/artifacts/dataset-versioning/",
+      "destination": "/guides/artifacts/create-a-new-artifact-version/"
+    },
+    {
+      "source": "/artifacts/overview/",
+      "destination": "/guides/artifacts/"
+    },
+    {
+      "source": "/artifacts/references/",
+      "destination": "/guides/artifacts/track-external-files/"
+    },
+    {
+      "source": "/authenticate/",
+      "destination": "/"
+    },
+    {
+      "source": "/authorize/",
+      "destination": "/"
+    },
+    {
+      "source": "/classes/",
+      "destination": "/"
+    },
+    {
+      "source": "/cli/",
+      "destination": "/ref/cli/"
+    },
+    {
+      "source": "/cn/",
+      "destination": "/"
+    },
+    {
+      "source": "/company",
+      "destination": "https://wandb.ai/site/company/"
+    },
+    {
+      "source": "/company/academics",
+      "destination": "https://wandb.ai/site/research/"
+    },
+    {
+      "source": "/company/beginner-faq/",
+      "destination": "/support/"
+    },
+    {
+      "source": "/company/classes/",
+      "destination": "/"
+    },
+    {
+      "source": "/company/classes/talks/",
+      "destination": "/"
+    },
+    {
+      "source": "/company/company-faq/",
+      "destination": "/support/"
+    },
+    {
+      "source": "/company/data-and-privacy",
+      "destination": "https://security.wandb.ai/"
+    },
+    {
+      "source": "/company/getting-help/",
+      "destination": "/"
+    },
+    {
+      "source": "/data-vis/log-tables/",
+      "destination": "/guides/track/log/log-tables/"
+    },
+    {
+      "source": "/datasets-and-predictions/",
+      "destination": "/guides/integrations/mmdetection#visualize-dataset-and-model-prediction/"
+    },
+    {
+      "source": "/define-sweep-configuration/",
+      "destination": "/guides/sweeps/define-sweep-configuration/"
+    },
+    {
+      "source": "/deployment/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/docs/config.html",
+      "destination": "/ref/python/experiments/run/#property-runconfig"
+    },
+    {
+      "source": "/docs/configs.html",
+      "destination": "/guides/track/config/"
+    },
+    {
+      "source": "/docs/frameworks/fastai.html",
+      "destination": "/guides/integrations/fastai/"
+    },
+    {
+      "source": "/docs/init.html",
+      "destination": "/ref/python/functions/init/"
+    },
+    {
+      "source": "/docs/integrations/api.html",
+      "destination": "/ref/python/public-api/api/"
+    },
+    {
+      "source": "/docs/integrations/docker.html",
+      "destination": "/guides/integrations/docker/"
+    },
+    {
+      "source": "/docs/integrations/sagemaker.html",
+      "destination": "/guides/integrations/sagemaker/"
+    },
+    {
+      "source": "/docs/restoring.html",
+      "destination": "/"
+    },
+    {
+      "source": "/docs/resuming.html",
+      "destination": "/guides/runs/resuming/"
+    },
+    {
+      "source": "/docs/saving.html",
+      "destination": "/guides/app/features/panels/code/"
+    },
+    {
+      "source": "/docs/started.html",
+      "destination": "/quickstart/"
+    },
+    {
+      "source": "/docs/sweep.html",
+      "destination": "/guides/sweeps/"
+    },
+    {
+      "source": "/examples/",
+      "destination": "/guides/integrations/"
+    },
+    {
+      "source": "/frameworks/keras/",
+      "destination": "/guides/integrations/keras/"
+    },
+    {
+      "source": "/frameworks/pytorch/",
+      "destination": "/guides/integrations/pytorch/"
+    },
+    {
+      "source": "/getting-started/",
+      "destination": "/quickstart/"
+    },
+    {
+      "source": "/guides/app/features/",
+      "destination": "/guides/models/"
+    },
+    {
+      "source": "/guides/app/features/panels/compare-metrics/",
+      "destination": "/guides/app/features/panels/line-plot#compare-two-metrics-on-one-chart/"
+    },
+    {
+      "source": "/guides/app/features/panels/compare-metrics/reference/",
+      "destination": "/guides/app/features/panels/line-plot#compare-two-metrics-on-one-chart/"
+    },
+    {
+      "source": "/guides/app/features/panels/panels/",
+      "destination": "/guides/app/features/panels/"
+    },
+    {
+      "source": "/guides/app/features/panels/query-panel/",
+      "destination": "/guides/app/features/panels/query-panels/"
+    },
+    {
+      "source": "/guides/app/features/panels/run-colors/",
+      "destination": "/guides/runs/filter-runs/"
+    },
+    {
+      "source": "/guides/app/features/panels/weave/",
+      "destination": "/guides/app/features/panels/query-panels/"
+    },
+    {
+      "source": "/guides/app/features/panels/weave/embedding-projector/",
+      "destination": "/guides/app/features/panels/query-panels/embedding-projector/"
+    },
+    {
+      "source": "/guides/app/intro/",
+      "destination": "/guides/app/features/panels/"
+    },
+    {
+      "source": "/guides/app/pages/guides/app/settings-page/",
+      "destination": "/guides/app/pages/"
+    },
+    {
+      "source": "/guides/app/pages/intro/",
+      "destination": "/guides/app/pages/"
+    },
+    {
+      "source": "/guides/app/pages/settings-page/",
+      "destination": "/guides/app/settings-page/"
+    },
+    {
+      "source": "/guides/app/pages/workspaces#create-saved-workspace-views-beta",
+      "destination": "/guides/track/workspaces/"
+    },
+    {
+      "source": "/guides/artifacts-1/",
+      "destination": "/guides/artifacts/"
+    },
+    {
+      "source": "/guides/artifacts/api/",
+      "destination": "/ref/python/public-api/api#artifact/"
+    },
+    {
+      "source": "/guides/artifacts/artifacts-core-concepts/",
+      "destination": "/guides/artifacts/"
+    },
+    {
+      "source": "/guides/artifacts/artifacts-faqs/",
+      "destination": "/support/artifacts/"
+    },
+    {
+      "source": "/guides/artifacts/dataset-versioning/",
+      "destination": "/guides/artifacts/"
+    },
+    {
+      "source": "/guides/artifacts/model-versioning/",
+      "destination": "/guides/registry/organize-with-tags/"
+    },
+    {
+      "source": "/guides/artifacts/project-scoped-automations/",
+      "destination": "/guides/automations/"
+    },
+    {
+      "source": "/guides/artifacts/quickstart/",
+      "destination": "/guides/artifacts/artifacts-walkthrough/"
+    },
+    {
+      "source": "/guides/artifacts/references/",
+      "destination": "/guides/artifacts/"
+    },
+    {
+      "source": "/guides/artifacts/using-artifacts/",
+      "destination": "/guides/artifacts/download-and-use-an-artifact/"
+    },
+    {
+      "source": "/guides/comparing-runs/",
+      "destination": "/guides/runs/"
+    },
+    {
+      "source": "/guides/config/",
+      "destination": "/guides/sweeps/define-sweep-configuration/"
+    },
+    {
+      "source": "/guides/configurations/",
+      "destination": "/guides/track/config/"
+    },
+    {
+      "source": "/guides/data-and-model-versioning/",
+      "destination": "/"
+    },
+    {
+      "source": "/guides/data-and-model-versioning/dataset-versioning/",
+      "destination": "/guides/artifacts/"
+    },
+    {
+      "source": "/guides/data-and-model-versioning/intro/",
+      "destination": "/"
+    },
+    {
+      "source": "/guides/data-and-model-versioning/model-versioning/",
+      "destination": "/guides/registry/"
+    },
+    {
+      "source": "/guides/data-vis/log-tables/",
+      "destination": "/guides/track/log/log-tables/"
+    },
+    {
+      "source": "/guides/data-vis/tables-quickstart/",
+      "destination": "/guides/tables/tables-walkthrough/"
+    },
+    {
+      "source": "/guides/data-vis/tables/",
+      "destination": "/guides/tables/"
+    },
+    {
+      "source": "/guides/data_types/",
+      "destination": "/ref/python/data-types/"
+    },
+    {
+      "source": "/guides/datasets-and-predictions/",
+      "destination": "/"
+    },
+    {
+      "source": "/guides/experiments/track/",
+      "destination": "/guides/track/"
+    },
+    {
+      "source": "/guides/hosting/audit-logging/",
+      "destination": "/guides/hosting/monitoring-usage/audit-logging/"
+    },
+    {
+      "source": "/guides/hosting/basic-setup/",
+      "destination": "/guides/hosting/how-to-guides/basic-setup/"
+    },
+    {
+      "source": "/guides/hosting/hosting-options/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/hosting/hosting-options/intro/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/hosting/hosting-options/wb-managed/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/hosting/hosting-upgrade/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/hosting/how-to-guides/aws-tf/",
+      "destination": "/guides/hosting/self-managed/aws-tf/"
+    },
+    {
+      "source": "/guides/hosting/how-to-guides/azure-tf/",
+      "destination": "/guides/hosting/self-managed/azure-tf/"
+    },
+    {
+      "source": "/guides/hosting/how-to-guides/bare-metal/",
+      "destination": "/guides/hosting/self-managed/bare-metal/"
+    },
+    {
+      "source": "/guides/hosting/how-to-guides/basic-setup/",
+      "destination": "/guides/hosting/self-managed/basic-setup/"
+    },
+    {
+      "source": "/guides/hosting/how-to-guides/gcp-tf/",
+      "destination": "/guides/hosting/self-managed/gcp-tf/"
+    },
+    {
+      "source": "/guides/hosting/how-to-guides/operator/",
+      "destination": "/guides/hosting/operator/"
+    },
+    {
+      "source": "/guides/hosting/iam/manage-users/",
+      "destination": "/guides/hosting/iam/access-management/manage-organization/"
+    },
+    {
+      "source": "/guides/hosting/intro/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/hosting/ip-allowlisting/",
+      "destination": "/guides/hosting/data-security/ip-allowlisting/"
+    },
+    {
+      "source": "/guides/hosting/ldap/",
+      "destination": "/guides/hosting/iam/ldap/"
+    },
+    {
+      "source": "/guides/hosting/local/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/hosting/manage-users/",
+      "destination": "/guides/hosting/iam/access-management/manage-organization/"
+    },
+    {
+      "source": "/guides/hosting/org_dashboard/",
+      "destination": "/guides/hosting/monitoring-usage/org_dashboard/"
+    },
+    {
+      "source": "/guides/hosting/presigned-urls/",
+      "destination": "/guides/hosting/data-security/presigned-urls/"
+    },
+    {
+      "source": "/guides/hosting/private-connectivity/",
+      "destination": "/guides/hosting/data-security/private-connectivity/"
+    },
+    {
+      "source": "/guides/hosting/prometheus-logging/",
+      "destination": "/guides/hosting/monitoring-usage/prometheus-logging/"
+    },
+    {
+      "source": "/guides/hosting/quickstart/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/hosting/restricted-projects/",
+      "destination": "/guides/hosting/iam/restricted-projects/"
+    },
+    {
+      "source": "/guides/hosting/scim/",
+      "destination": "/guides/hosting/iam/scim/"
+    },
+    {
+      "source": "/guides/hosting/secure-storage-connector/",
+      "destination": "/guides/hosting/data-security/secure-storage-connector/"
+    },
+    {
+      "source": "/guides/hosting/server-release-process/",
+      "destination": "/release-notes/release-policies/"
+    },
+    {
+      "source": "/guides/hosting/setup/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/hosting/setup/configuration/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/hosting/setup/intro/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/hosting/slack-alerts/",
+      "destination": "/guides/hosting/monitoring-usage/slack-alerts/"
+    },
+    {
+      "source": "/guides/hosting/sso/",
+      "destination": "/guides/hosting/iam/sso/"
+    },
+    {
+      "source": "/guides/hosting/system-admin/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/integrations/boosting/",
+      "destination": "/guides/integrations/"
+    },
+    {
+      "source": "/guides/integrations/fastai/v2/",
+      "destination": "/guides/integrations/fastai/"
+    },
+    {
+      "source": "/guides/integrations/jax/",
+      "destination": "/guides/integrations/"
+    },
+    {
+      "source": "/guides/integrations/kerasyou/",
+      "destination": "/guides/integrations/keras/"
+    },
+    {
+      "source": "/guides/integrations/kubeflow/",
+      "destination": "/guides/integrations/kubeflow-pipelines-kfp/"
+    },
+    {
+      "source": "/guides/integrations/mmsegmentation/",
+      "destination": "/guides/integrations/"
+    },
+    {
+      "source": "/guides/integrations/open/",
+      "destination": "/guides/integrations/openai/"
+    },
+    {
+      "source": "/guides/integrations/otherray-tune/",
+      "destination": "/guides/integrations/"
+    },
+    {
+      "source": "/guides/integrations/tensorboardgetting%20recal%20from%20precision/",
+      "destination": "/guides/integrations/tensorboard/"
+    },
+    {
+      "source": "/guides/integrations/w-and-b-for-r/",
+      "destination": "/guides/integrations/"
+    },
+    {
+      "source": "/guides/integrations/yolov8",
+      "destination": "/guides/integrations/yolov5"
+    },
+    {
+      "source": "/guides/intro/",
+      "destination": "/"
+    },
+    {
+      "source": "/guides/launch/add-jobs-to-queue/",
+      "destination": "/guides/launch/create-queue/"
+    },
+    {
+      "source": "/guides/launch/containers/",
+      "destination": "/guides/launch/"
+    },
+    {
+      "source": "/guides/launch/create-job/",
+      "destination": "/guides/launch/create-launch-job/"
+    },
+    {
+      "source": "/guides/launch/create-queue/",
+      "destination": "/guides/launch/setup-queue-advanced/"
+    },
+    {
+      "source": "/guides/launch/docker/",
+      "destination": "/guides/launch/setup-launch-docker/"
+    },
+    {
+      "source": "/guides/launch/getting-started/",
+      "destination": "/guides/launch/walkthrough/"
+    },
+    {
+      "source": "/guides/launch/integrations/",
+      "destination": "/guides/launch/"
+    },
+    {
+      "source": "/guides/launch/integrations/sagemaker/",
+      "destination": "/guides/launch/"
+    },
+    {
+      "source": "/guides/launch/kubernetes/",
+      "destination": "/guides/launch/setup-launch-kubernetes/"
+    },
+    {
+      "source": "/guides/launch/launch-jobs/",
+      "destination": "/guides/launch/add-job-to-queue/"
+    },
+    {
+      "source": "/guides/launch/prerequisites/",
+      "destination": "/guides/launch/getting-started/"
+    },
+    {
+      "source": "/guides/launch/run-agent/",
+      "destination": "/guides/launch/setup-agent-advanced/"
+    },
+    {
+      "source": "/guides/launch/sagemaker/",
+      "destination": "/guides/launch/setup-launch-sagemaker/"
+    },
+    {
+      "source": "/guides/launch/vertex/",
+      "destination": "/guides/launch/setup-vertex/"
+    },
+    {
+      "source": "/guides/manage-runs/",
+      "destination": "/guides/runs/manage-runs/"
+    },
+    {
+      "source": "/guides/model_registry/model-registry-automations/",
+      "destination": "/guides/automations/"
+    },
+    {
+      "source": "/guides/model_registry/quickstart/",
+      "destination": "/guides/registry/"
+    },
+    {
+      "source": "/guides/models/access_controls/",
+      "destination": "/guides/registry/configure_registry/"
+    },
+    {
+      "source": "/guides/models/app/settings-page/team-settings.md",
+      "destination": "/guides/models/app/settings-page/teams.md"
+    },
+    {
+      "source": "/guides/models/app/settings-page/system-metrics/",
+      "destination": "/ref/python/experiments/system-metrics/"
+    },
+    {
+      "source": "/guides/models/automation/",
+      "destination": "/guides/automations/"
+    },
+    {
+      "source": "/guides/models/automations/registry-automations/",
+      "destination": "/guides/automations/"
+    },
+    {
+      "source": "/guides/models/model-management-concepts/",
+      "destination": "/guides/registry/"
+    },
+    {
+      "source": "/guides/models/model_tags/",
+      "destination": "/guides/registry/organize-with-tags/"
+    },
+    {
+      "source": "/guides/models/notifications/",
+      "destination": "/guides/automations/create-automations/webhook/#payload-examples"
+    },
+    {
+      "source": "/guides/models/walkthrough/",
+      "destination": "/guides/models_quickstart/"
+    },
+    {
+      "source": "/guides/platform/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/projects/campaigns/",
+      "destination": "/"
+    },
+    {
+      "source": "/guides/projects/sharing-and-visibility/",
+      "destination": "/"
+    },
+    {
+      "source": "/guides/prompts/intro/",
+      "destination": "/guides/"
+    },
+    {
+      "source": "/guides/reference/data_types/",
+      "destination": "/ref/python/data-types/"
+    },
+    {
+      "source": "/guides/registry/model_registry/model-registry-automations/",
+      "destination": "/guides/automations/"
+    },
+    {
+      "source": "/guides/reports/reports-faq/",
+      "destination": "/support/reports/"
+    },
+    {
+      "source": "/guides/reports/reports-walkthrough/",
+      "destination": "/guides/reports/"
+    },
+    {
+      "source": "/guides/run/grouping/",
+      "destination": "/guides/runs/grouping/"
+    },
+    {
+      "source": "/guides/self-hosted/",
+      "destination": "/guides/hosting/hosting-options/self-managed/"
+    },
+    {
+      "source": "/guides/self-hosted/configuration/",
+      "destination": "/guides/hosting/env-vars/"
+    },
+    {
+      "source": "/guides/self-hosted/local-common-questions/",
+      "destination": "/guides/hosting/operator/#faq"
+    },
+    {
+      "source": "/guides/self-hosted/local/",
+      "destination": "/guides/hosting/hosting-options/self-managed/"
+    },
+    {
+      "source": "/guides/self-hosted/setup/",
+      "destination": "/guides/hosting/setup/"
+    },
+    {
+      "source": "/guides/self-hosted/setup/configuration/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/self-hosted/setup/dedicated-cloud/",
+      "destination": "/guides/hosting/hosting-options/wb-managed/"
+    },
+    {
+      "source": "/guides/self-hosted/setup/on-premise-baremetal/",
+      "destination": "/guides/hosting/hosting-options/self-managed#on-prem-bare-metal/"
+    },
+    {
+      "source": "/guides/self-hosted/setup/private-cloud/",
+      "destination": "/guides/hosting/hosting-options/dedicated_cloud/"
+    },
+    {
+      "source": "/guides/self-hosted/system-admin/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/guides/sweeps/advanced-sweeps/ray-tune/",
+      "destination": "/guides/integrations/ray-tune/"
+    },
+    {
+      "source": "/guides/sweeps/configuration/",
+      "destination": "/guides/sweeps/define-sweep-configuration/"
+    },
+    {
+      "source": "/guides/sweeps/faq/",
+      "destination": "/support/sweeps/"
+    },
+    {
+      "source": "/guides/sweeps/parallelize-agent/",
+      "destination": "/guides/sweeps/parallelize-agents/"
+    },
+    {
+      "source": "/guides/sweeps/python-api/",
+      "destination": "/ref/python/public-api/api/"
+    },
+    {
+      "source": "/guides/tables/log-tables/",
+      "destination": "/guides/track/log/log-tables/"
+    },
+    {
+      "source": "/guides/technical-faq/admin/",
+      "destination": "/support/administrator/"
+    },
+    {
+      "source": "/guides/technical-faq/general/",
+      "destination": "/support/index/"
+    },
+    {
+      "source": "/guides/technical-faq/metrics-and-performance/",
+      "destination": "/support/metrics/"
+    },
+    {
+      "source": "/guides/technical-faq/setup/",
+      "destination": "/support/index/"
+    },
+    {
+      "source": "/guides/technical-faq/troubleshooting/",
+      "destination": "/support/index/"
+    },
+    {
+      "source": "/guides/track/advanced/",
+      "destination": "/guides/track/"
+    },
+    {
+      "source": "/guides/track/advanced/alert/",
+      "destination": "/guides/runs/alert/"
+    },
+    {
+      "source": "/guides/track/advanced/customizing-runs/",
+      "destination": "/guides/runs/"
+    },
+    {
+      "source": "/guides/track/advanced/distributed-training/",
+      "destination": "/guides/track/log/distributed-training/"
+    },
+    {
+      "source": "/guides/track/advanced/environment-variables/",
+      "destination": "/guides/track/environment-variables/"
+    },
+    {
+      "source": "/guides/track/advanced/grouping/",
+      "destination": "/guides/runs/grouping/"
+    },
+    {
+      "source": "/guides/track/advanced/init/",
+      "destination": "/guides/track/"
+    },
+    {
+      "source": "/guides/track/advanced/integrations/",
+      "destination": "/guides/track/"
+    },
+    {
+      "source": "/guides/track/advanced/integrations/google-colab/",
+      "destination": "/guides/track/jupyter/"
+    },
+    {
+      "source": "/guides/track/advanced/offline/",
+      "destination": "/guides/track/"
+    },
+    {
+      "source": "/guides/track/advanced/resuming/",
+      "destination": "/guides/runs/resuming/"
+    },
+    {
+      "source": "/guides/track/advanced/save-restore/",
+      "destination": "/guides/track/save-restore/"
+    },
+    {
+      "source": "/guides/track/alert/",
+      "destination": "/guides/runs/alert/"
+    },
+    {
+      "source": "/guides/track/app/",
+      "destination": "/guides/track/workspaces/"
+    },
+    {
+      "source": "/guides/track/colab/",
+      "destination": "/guides/track/jupyter/"
+    },
+    {
+      "source": "/guides/track/configurations/",
+      "destination": "/guides/track/config/"
+    },
+    {
+      "source": "/guides/track/data-offline/",
+      "destination": "/guides/track/"
+    },
+    {
+      "source": "/guides/track/distributed-training/",
+      "destination": "/guides/track/log/distributed-training/"
+    },
+    {
+      "source": "/guides/track/grouping/",
+      "destination": "/guides/runs/grouping/"
+    },
+    {
+      "source": "/guides/track/launch/",
+      "destination": "/guides/track/create-an-experiment/"
+    },
+    {
+      "source": "/guides/track/local/",
+      "destination": "/guides/track/"
+    },
+    {
+      "source": "/guides/track/log-a-model/",
+      "destination": "/guides/track/log/"
+    },
+    {
+      "source": "/guides/track/log-interactive-plots/",
+      "destination": "/guides/track/log/"
+    },
+    {
+      "source": "/guides/track/log/intro/",
+      "destination": "/guides/track/log/"
+    },
+    {
+      "source": "/guides/track/log/logging-faqs/",
+      "destination": "/support/logs/"
+    },
+    {
+      "source": "/guides/track/log/media/image-logging-de-duplication/",
+      "destination": "/guides/track/log/media/"
+    },
+    {
+      "source": "/guides/track/log/tables/",
+      "destination": "/guides/track/log/log-tables/"
+    },
+    {
+      "source": "/guides/track/media/",
+      "destination": "/guides/track/log/media/"
+    },
+    {
+      "source": "/guides/track/plots/",
+      "destination": "/guides/track/log/plots/"
+    },
+    {
+      "source": "/guides/track/save-restore/",
+      "destination": "/guides/artifacts/"
+    },
+    {
+      "source": "/guides/track/summary-metrics/",
+      "destination": "/guides/track/log/log-summary/"
+    },
+    {
+      "source": "/guides/troubleshooting/network/",
+      "destination": "/guides/technical-faq/"
+    },
+    {
+      "source": "/home/",
+      "destination": "/"
+    },
+    {
+      "source": "/hosting/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/hosting/setup/",
+      "destination": "/hosting/"
+    },
+    {
+      "source": "/huggingface/",
+      "destination": "/guides/integrations/huggingface/"
+    },
+    {
+      "source": "/integrations/jupyter.html",
+      "destination": "/guides/track/jupyter/"
+    },
+    {
+      "source": "/ja/",
+      "destination": "/ja/guides/"
+    },
+    {
+      "source": "/java/",
+      "destination": "/ref/"
+    },
+    {
+      "source": "/jp/",
+      "destination": "/ja/guides/"
+    },
+    {
+      "source": "/ko/",
+      "destination": "/ko/guides/"
+    },
+    {
+      "source": "/library/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/library/advanced/environment-variables/",
+      "destination": "/guides/track/environment-variables/"
+    },
+    {
+      "source": "/library/advanced/grouping/",
+      "destination": "/guides/runs/grouping/"
+    },
+    {
+      "source": "/library/advanced/limits/",
+      "destination": "/guides/track/limits/"
+    },
+    {
+      "source": "/library/advanced/resuming/",
+      "destination": "/guides/runs/resuming/"
+    },
+    {
+      "source": "/library/agents/",
+      "destination": "/ref/python/functions/agent/"
+    },
+    {
+      "source": "/library/api/",
+      "destination": "/ref/python/public-api/api/"
+    },
+    {
+      "source": "/library/api/examples/",
+      "destination": "/ref/python/public-api/api/"
+    },
+    {
+      "source": "/library/cli/",
+      "destination": "/ref/cli/"
+    },
+    {
+      "source": "/library/config/",
+      "destination": "/ref/python/experiments/run/#property-runconfig"
+    },
+    {
+      "source": "/library/distributed-training/",
+      "destination": "/guides/track/log/distributed-training/"
+    },
+    {
+      "source": "/library/environment-variables/",
+      "destination": "/guides/track/environment-variables/"
+    },
+    {
+      "source": "/library/example-projects/",
+      "destination": "/guides/integrations/tensorflow#examples/"
+    },
+    {
+      "source": "/library/graphs/graph-edit-axes/",
+      "destination": "/"
+    },
+    {
+      "source": "/library/grouping/",
+      "destination": "/guides/runs/grouping/"
+    },
+    {
+      "source": "/library/hyperparameter-sweeps/",
+      "destination": "/guides/sweeps/"
+    },
+    {
+      "source": "/library/init/",
+      "destination": "/ref/python/functions/init/"
+    },
+    {
+      "source": "/library/integrations/cpp/",
+      "destination": "/guides/integrations/"
+    },
+    {
+      "source": "/library/integrations/pytorch-lightning/",
+      "destination": "/guides/integrations/lightning/"
+    },
+    {
+      "source": "/library/log/",
+      "destination": "/ref/python/log/"
+    },
+    {
+      "source": "/library/plots/",
+      "destination": "/guides/app/"
+    },
+    {
+      "source": "/library/plots/heatmap/",
+      "destination": "/guides/track/log/media/"
+    },
+    {
+      "source": "/library/public-api-guide/",
+      "destination": "/ref/python/public-api/api/"
+    },
+    {
+      "source": "/library/python/config/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/library/python/log/",
+      "destination": "/ref/python/log/"
+    },
+    {
+      "source": "/library/reference/data_types/",
+      "destination": "/ref/python/data-types/"
+    },
+    {
+      "source": "/library/restore/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/library/resuming/",
+      "destination": "/guides/runs/resuming/"
+    },
+    {
+      "source": "/library/save/",
+      "destination": "/ref/python/public-api/run#save/"
+    },
+    {
+      "source": "/library/security",
+      "destination": "https://security.wandb.ai/"
+    },
+    {
+      "source": "/library/sweeps/",
+      "destination": "/ref/python/functions/sweep"
+    },
+    {
+      "source": "/library/sweeps/configuration/",
+      "destination": "/ref/python/functions/sweep/"
+    },
+    {
+      "source": "/library/sweeps/local-controller/",
+      "destination": "/guides/sweeps/local-controller/"
+    },
+    {
+      "source": "/library/sweeps/python-api/",
+      "destination": "/ref/python/public-api/sweep/"
+    },
+    {
+      "source": "/library/tables/",
+      "destination": "/ref/python/data-types/table/"
+    },
+    {
+      "source": "/library/technical-faq/",
+      "destination": "/guides/hosting/faq/"
+    },
+    {
+      "source": "/library/wandb.alert/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/library/wandb.init/",
+      "destination": "/ref/python/functions/init/"
+    },
+    {
+      "source": "/library/wandb.save/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/python/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/quickstar/",
+      "destination": "/quickstart/"
+    },
+    {
+      "source": "/quickstart/korea/",
+      "destination": "/ko/quickstart/"
+    },
+    {
+      "source": "/quickstart/korean/",
+      "destination": "/ko/quickstart/"
+    },
+    {
+      "source": "/ref/README/",
+      "destination": "/ref/"
+    },
+    {
+      "source": "/ref/api/public-methods/",
+      "destination": "/ref/python/public-api/"
+    },
+    {
+      "source": "/ref/app/",
+      "destination": "/guides/app/"
+    },
+    {
+      "source": "/ref/app/feature/",
+      "destination": "/guides/app/features/"
+    },
+    {
+      "source": "/ref/app/features/",
+      "destination": "/guides/app/features/"
+    },
+    {
+      "source": "/ref/app/features/alerts/",
+      "destination": "/guides/app/"
+    },
+    {
+      "source": "/ref/app/features/anon/",
+      "destination": "/guides/app/features/anon/"
+    },
+    {
+      "source": "/ref/app/features/custom-charts/",
+      "destination": "/guides/app/features/custom-charts/"
+    },
+    {
+      "source": "/ref/app/features/custom-charts/walkthrough/",
+      "destination": "/guides/app/features/custom-charts/"
+    },
+    {
+      "source": "/ref/app/features/notes/",
+      "destination": "/guides/app/features/notes/"
+    },
+    {
+      "source": "/ref/app/features/panels/",
+      "destination": "/guides/app/features/panels/"
+    },
+    {
+      "source": "/ref/app/features/panels/bar-plot/",
+      "destination": "/guides/app/features/panels/bar-plot/"
+    },
+    {
+      "source": "/ref/app/features/panels/code/",
+      "destination": "/guides/app/features/panels/code/"
+    },
+    {
+      "source": "/ref/app/features/panels/line-plot/sampling/",
+      "destination": "/guides/app/features/panels/line-plot/"
+    },
+    {
+      "source": "/ref/app/features/panels/parallel-coordinates/",
+      "destination": "/guides/app/features/panels/parallel-coordinates/"
+    },
+    {
+      "source": "/ref/app/features/panels/parameter-importance/",
+      "destination": "/guides/app/features/panels/parameter-importance/"
+    },
+    {
+      "source": "/ref/app/features/panels/run-colors/",
+      "destination": "/guides/app/features/panels/run-colors/"
+    },
+    {
+      "source": "/ref/app/features/panels/run-comparer/",
+      "destination": "/guides/app/features/panels/run-comparer/"
+    },
+    {
+      "source": "/ref/app/features/panels/scatter-plot/",
+      "destination": "/guides/app/features/panels/scatter-plot/"
+    },
+    {
+      "source": "/ref/app/features/panels/weave/",
+      "destination": "/guides/app/features/panels/query-panels/"
+    },
+    {
+      "source": "/ref/app/features/panels/weave/embedding-projector/",
+      "destination": "/guides/app/features/panels/query-panels/embedding-projector/"
+    },
+    {
+      "source": "/ref/app/features/runs-table/",
+      "destination": "/guides/tables/"
+    },
+    {
+      "source": "/ref/app/features/sweeps/",
+      "destination": "/guides/sweeps/"
+    },
+    {
+      "source": "/ref/app/features/system-metrics/",
+      "destination": "/ref/python/experiments/system-metrics/"
+    },
+    {
+      "source": "/ref/app/features/tags/",
+      "destination": "/guides/app/features/tags/"
+    },
+    {
+      "source": "/ref/app/features/teams/",
+      "destination": "/guides/app/features/teams/"
+    },
+    {
+      "source": "/ref/app/pages/",
+      "destination": "/guides/app/pages/"
+    },
+    {
+      "source": "/ref/app/pages/gradient-panel/",
+      "destination": "/guides/app/pages/gradient-panel/"
+    },
+    {
+      "source": "/ref/app/pages/project-page/",
+      "destination": "/guides/app/pages/project-page/"
+    },
+    {
+      "source": "/ref/app/pages/run-page/",
+      "destination": "/guides/app/pages/run-page/"
+    },
+    {
+      "source": "/ref/app/pages/settings-page/",
+      "destination": "/guides/models/app/settings-page/"
+    },
+    {
+      "source": "/ref/app/pages/settings-page/emails/",
+      "destination": "/guides/models/app/settings-page/emails/"
+    },
+    {
+      "source": "/ref/app/pages/settings-page/team-settings/",
+      "destination": "/guides/models/app/settings-page/team-settings/"
+    },
+    {
+      "source": "/ref/app/pages/settings-page/user-settings/",
+      "destination": "/guides/models/app/settings-page/user-settings/"
+    },
+    {
+      "source": "/ref/app/pages/workspaces/",
+      "destination": "/guides/track/workspaces/"
+    },
+    {
+      "source": "/ref/cli/wandb-server-start/",
+      "destination": "/ref/cli/wandb-server/"
+    },
+    {
+      "source": "/ref/data_types/",
+      "destination": "/ref/python/data-types/"
+    },
+    {
+      "source": "/ref/export-api/examples/",
+      "destination": "/ref/python/public-api/"
+    },
+    {
+      "source": "/ref/history/",
+      "destination": "/"
+    },
+    {
+      "source": "/ref/init-1",
+      "destination": "/ref/python/functions/init/"
+    },
+    {
+      "source": "/ref/java/",
+      "destination": "/ref/"
+    },
+    {
+      "source": "/ref/java/wandbrun-builder/",
+      "destination": "/ref/"
+    },
+    {
+      "source": "/ref/java/wandbrun/",
+      "destination": "/ref/"
+    },
+    {
+      "source": "/ref/python/README/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/ref/python/agent/",
+      "destination": "/ref/python/functions/agent/"
+    },
+    {
+      "source": "/ref/python/artifact/",
+      "destination": "/ref/python/experiments/artifact/"
+    },
+    {
+      "source": "/ref/python/config/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/ref/python/controller/",
+      "destination": "/ref/python/functions/controller/"
+    },
+    {
+      "source": "/ref/python/data-types/boundingboxes2d/",
+      "destination": "/guides/track/log/media/#image-overlays"
+    },
+    {
+      "source": "/ref/python/data-types/graph/",
+      "destination": "/ref/python/data-types/"
+    },
+    {
+      "source": "/ref/python/data-types/imagemask/",
+      "destination": "/guides/track/log/media/#image-overlays"
+    },
+    {
+      "source": "/ref/python/data_types/",
+      "destination": "/ref/python/data-types/"
+    },
+    {
+      "source": "/ref/python/errors/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/ref/python/finish/",
+      "destination": "/ref/python/functions/finish/"
+    },
+    {
+      "source": "/ref/python/integrations/sklearn/",
+      "destination": "/guides/integrations/scikit/"
+    },
+    {
+      "source": "/ref/python/join/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/ref/python/log/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/ref/python/login/",
+      "destination": "/ref/python/functions/login/"
+    },
+    {
+      "source": "/ref/python/public-api/integrations/",
+      "destination": "/ref/python/public-api/"
+    },
+    {
+      "source": "/ref/python/public-api/job/",
+      "destination": "/ref/python/functions/init/"
+    },
+    {
+      "source": "/ref/python/public-api/queuedrun/",
+      "destination": "/ref/python/functions/init/"
+    },
+    {
+      "source": "/ref/python/public-api/runqueue/",
+      "destination": "/ref/python/functions/init/"
+    },
+    {
+      "source": "/ref/python/public-api/teams/",
+      "destination": "/ref/python/public-api/Team/"
+    },
+    {
+      "source": "/ref/python/public-api/users/",
+      "destination": "/ref/python/public-api/User/"
+    },
+    {
+      "source": "/ref/python/python_api_walkthrough/",
+      "destination": "/guides/models_quickstart/"
+    },
+    {
+      "source": "/ref/python/run/",
+      "destination": "/ref/python/experiments/run/"
+    },
+    {
+      "source": "/ref/python/save/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/ref/python/sweep/",
+      "destination": "/ref/python/functions/sweep/"
+    },
+    {
+      "source": "/ref/python/wandb.ai/settings/",
+      "destination": "/ref/python/experiments/settings/"
+    },
+    {
+      "source": "/ref/python/watch/",
+      "destination": "/ref/python/"
+    },
+    {
+      "source": "/ref/release-notes/releases/",
+      "destination": "/ref/release-notes/"
+    },
+    {
+      "source": "/ref/release-notes/releases/index.xml/",
+      "destination": "/ref/release-notes/index.xml/"
+    },
+    {
+      "source": "/ref/run/summary/",
+      "destination": "/ref/python/experiments/run/"
+    },
+    {
+      "source": "/ref/sweep/configurations/",
+      "destination": "/guides/sweeps/define-sweep-configuration/"
+    },
+    {
+      "source": "/ref/system-metrics/",
+      "destination": "/ref/python/experiments/system-metrics/"
+    },
+    {
+      "source": "/ref/weave/README/",
+      "destination": "/guides/weave/"
+    },
+    {
+      "source": "/reports/",
+      "destination": "/guides/reports/create-a-report/"
+    },
+    {
+      "source": "/resources/technical-faq/",
+      "destination": "/"
+    },
+    {
+      "source": "/runner/",
+      "destination": "/"
+    },
+    {
+      "source": "/scikit/",
+      "destination": "/guides/integrations/scikit/"
+    },
+    {
+      "source": "/search.json/",
+      "destination": "/"
+    },
+    {
+      "source": "/self-hosted/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/self-hosted/configuration/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/self-hosted/local%EF%BC%8C/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/self-hosted/local-common-questions/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/self-hosted/local/",
+      "destination": "/guides/hosting/basic-setup/"
+    },
+    {
+      "source": "/self-hosted/run-docker-server/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/self-hosted/setup/",
+      "destination": "/guides/hosting/setup/"
+    },
+    {
+      "source": "/self-hosted/setup/on-premise-baremetal/",
+      "destination": "/guides/hosting/hosting-options/self-managed/"
+    },
+    {
+      "source": "/self-hoted/local/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/site/",
+      "destination": "/"
+    },
+    {
+      "source": "/start/windows/",
+      "destination": "/guides/hosting/"
+    },
+    {
+      "source": "/sweeps/",
+      "destination": "/guides/sweeps/"
+    },
+    {
+      "source": "/sweeps/add-to-existing/",
+      "destination": "/guides/sweeps/add-w-and-b-to-your-code/"
+    },
+    {
+      "source": "/sweeps/configuration/",
+      "destination": "/guides/sweeps/define-sweep-configuration/"
+    },
+    {
+      "source": "/sweeps/early-stopping/",
+      "destination": "/guides/sweeps/define-sweep-configuration/"
+    },
+    {
+      "source": "/sweeps/existing-project/",
+      "destination": "/guides/sweeps/existing-project/"
+    },
+    {
+      "source": "/sweeps/faq/",
+      "destination": "/guides/sweeps/faq/"
+    },
+    {
+      "source": "/sweeps/overview/",
+      "destination": "/guides/sweeps/"
+    },
+    {
+      "source": "/sweeps/overview/add-to-existing/",
+      "destination": "/guides/sweeps/add-w-and-b-to-your-code/"
+    },
+    {
+      "source": "/sweeps/overview/getting-started/",
+      "destination": "/guides/sweeps/walkthrough/"
+    },
+    {
+      "source": "/sweeps/overview/quickstart/",
+      "destination": "/guides/sweeps/walkthrough/"
+    },
+    {
+      "source": "/sweeps/python-api/",
+      "destination": "/ref/python/public-api/sweep/"
+    },
+    {
+      "source": "/sweeps/python/",
+      "destination": "/guides/sweeps/"
+    },
+    {
+      "source": "/sweeps/quickstart/",
+      "destination": "/guides/sweeps/walkthrough/"
+    },
+    {
+      "source": "/sweeps/ray-tune/",
+      "destination": "/guides/integrations/ray-tune/"
+    },
+    {
+      "source": "/sweeps/sweeps-examples/",
+      "destination": "/guides/sweeps/"
+    },
+    {
+      "source": "/sweeps/visualize-sweep-results/",
+      "destination": "/guides/sweeps/visualize-sweep-results/"
+    },
+    {
+      "source": "/teams/",
+      "destination": "/guides/app/features/teams/"
+    },
+    {
+      "source": "/tutorials/Workspace_tutorial/",
+      "destination": "/tutorials/workspaces/"
+    },
+    {
+      "source": "/tutorials/lightgbm/",
+      "destination": "/tutorials/"
+    },
+    {
+      "source": "/tutorials/prompts/",
+      "destination": "/tutorials/"
+    },
+    {
+      "source": "/tutorials/xgboost/",
+      "destination": "/tutorials/"
+    },
+    {
+      "source": "/v/",
+      "destination": "/"
+    },
+    {
+      "source": "/wandb/config/",
+      "destination": "/ref/python/functions/init/"
+    },
+    {
+      "source": "/wandb/init/",
+      "destination": "/ref/python/functions/init/"
+    },
+    {
+      "source": "/wandb/log/",
+      "destination": "/ref/python/log/"
+    },
+    {
+      "source": "/weave/",
+      "destination": "/guides/app/features/panels/query-panels/"
+    },
+    {
+      "source": "/weave/boards/",
+      "destination": "/guides/app/features/panels/query-panels/"
+    },
+    {
+      "source": "/weave/prod-mon/",
+      "destination": "/guides/weave/"
+    },
+    {
+      "source": "/weave/streamtable/",
+      "destination": "/guides/app/features/panels/query-panels/"
+    },
+    {
+      "source": "/zh/",
+      "destination": "/"
+    },
+    {
+      "source": "/data-vis/_",
+      "destination": "/guides/tables/"
+    },
+    {
+      "source": "/guides/app/features/runs-table*",
+      "destination": "/guides/tables/:slug*"
+    },
+    {
+      "source": "/guides/core/automations/*",
+      "destination": "/guides/automations/:slug*"
+    },
+    {
+      "source": "/guides/core/registry/*",
+      "destination": "/guides/registry/:slug*"
+    },
+    {
+      "source": "/guides/core/registry/model_registry/*",
+      "destination": "/guides/registry/model_registry/:slug*"
+    },
+    {
+      "source": "/guides/core/tables/*",
+      "destination": "/guides/tables/:slug*"
+    },
+    {
+      "source": "/guides/integrations/other/*",
+      "destination": "/guides/integrations/:slug*"
+    },
+    {
+      "source": "/guides/integrations/prompts/_",
+      "destination": "/guides/"
+    },
+    {
+      "source": "/guides/model_registry/*",
+      "destination": "/guides/registry/model_registry/:slug*"
+    },
+    {
+      "source": "/guides/models/app/*",
+      "destination": "/guides/app/:slug*"
+    },
+    {
+      "source": "/guides/models/automation/*",
+      "destination": "/guides/automations/:slug*"
+    },
+    {
+      "source": "/guides/models/automations/*",
+      "destination": "/guides/automations/:slug*"
+    },
+    {
+      "source": "/guides/models/registry/*",
+      "destination": "/guides/registry/:slug*"
+    },
+    {
+      "source": "/guides/models/tables/*",
+      "destination": "/guides/tables/:slug*"
+    },
+    {
+      "source": "/guides/track/tracking-faq:slug*",
+      "destination": "/support/experiments/"
+    },
+    {
+      "source": "/integrations/:slug*",
+      "destination": "/guides/integrations/:slug*"
+    },
+    {
+      "source": "/library/frameworks/*",
+      "destination": "/guides/integrations/:slug*"
+    },
+    {
+      "source": "/library/integrations/*",
+      "destination": "/guides/integrations/:slug*"
+    },
+    {
+      "source": "/ref/app/features/panels/line-plot/*",
+      "destination": "/guides/app/features/panels/line-plot/:slug*"
+    },
+    {
+      "source": "/ref/public-api/*",
+      "destination": "/ref/python/public-api/:slug*"
+    },
+    {
+      "source": "/ref/python/classes/*",
+      "destination": "/ref/python/experiments/:slug*"
+    },
+    {
+      "source": "/ref/python/ini*",
+      "destination": "/ref/python/functions/init/:slug*"
+    },
+    {
+      "source": "/ref/python/integrations/*",
+      "destination": "/ref/python/:slug*"
+    },
+    {
+      "source": "/ref/python/launch-library/*",
+      "destination": "/launch-library/:slug*"
+    },
+    {
+      "source": "/ref/python/sdk/*",
+      "destination": "/ref/python/:slug*"
+    },
+    {
+      "source": "/ref/python/sdk/classes/*",
+      "destination": "/ref/python/experiments/:slug*"
+    },
+    {
+      "source": "/ref/python/wandb_workspaces/*",
+      "destination": "/ref/wandb_workspaces/:slug*"
+    },
+    {
+      "source": "/ref/release-notes/0.3*",
+      "destination": "/ref/release-notes/archived/0.3:slug*"
+    },
+    {
+      "source": "/ref/release-notes/0.4:slug*",
+      "destination": "/ref/release-notes/archived/0.4:slug*"
+    },
+    {
+      "source": "/ref/release-notes/0.5*/",
+      "destination": "/ref/release-notes/releases/archived/0.56:slug*"
+    },
+    {
+      "source": "/ref/release-notes/releases/*",
+      "destination": "/ref/releases/:slug*"
+    },
+    {
+      "source": "/ref/release-notes/releases/archived/*",
+      "destination": "/ref/releases/archived/:slug*"
+    }
+  ]
 }
