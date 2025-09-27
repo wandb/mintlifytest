@@ -7,7 +7,7 @@ menu:
 weight: 7
 ---
 
-[W&B Registry App의 글로벌 검색 창](/ko/./search_registry#search-for-registry-items)을 사용하여 registry, collection, artifact version tag, collection tag 또는 에일리어스를 찾으세요. W&B Python SDK를 사용하여 특정 기준에 따라 [MongoDB 스타일 쿼리로 registries, collections 및 artifact versions을 필터링](/ko/./search_registry#query-registry-items-with-mongodb-style-queries)할 수 있습니다.
+[W&B Registry App의 글로벌 검색 창](/ko/guides/core/registry/search_registry/#search-for-registry-items)을 사용하여 registry, collection, artifact version tag, collection tag 또는 에일리어스를 찾으세요. W&B Python SDK를 사용하여 특정 기준에 따라 [MongoDB 스타일 쿼리로 registries, collections 및 artifact versions을 필터링](/ko/guides/core/registry/search_registry/#query-registry-items-with-mongodb-style-queries)할 수 있습니다.
 
 보기 권한이 있는 항목만 검색 결과에 나타납니다.
 
@@ -38,7 +38,7 @@ registry 항목을 검색하려면 다음을 수행하세요.
 
 다음 코드 예제는 몇 가지 일반적인 검색 시나리오를 보여줍니다.
 
-`wandb.Api().registries()` 메소드를 사용하려면 먼저 W&B Python SDK([`wandb`](/ko/ref/python/_index)) 라이브러리를 가져옵니다.
+`wandb.Api().registries()` 메소드를 사용하려면 먼저 W&B Python SDK([`wandb`](/ko/ref/python)) 라이브러리를 가져옵니다.
 ```python
 import wandb
 
@@ -118,7 +118,7 @@ for art in artifacts:
     print(f"tags attached to artifact: {art.tags}")
     print(f"artifact created at: {art.created_at}\n")
 ```
-아티팩트 오브젝트의 속성 전체 목록은 API Reference 문서의 [Artifacts Class](/ko/ref/python/artifact/_index)를 참조하세요.
+아티팩트 오브젝트의 속성 전체 목록은 API Reference 문서의 [Artifacts Class](/ko/ref/python/artifact/)를 참조하세요.
 
 2024-01-08과 2025-03-04 13:10 UTC 사이에 생성된 registry 또는 collection에 관계없이 모든 artifact versions을 필터링합니다.
 

@@ -10,7 +10,7 @@ menu:
 분산 트레이닝에서 모델은 여러 개의 GPU를 병렬로 사용하여 트레이닝됩니다. W&B는 분산 트레이닝 Experiments를 추적하는 두 가지 패턴을 지원합니다.
 
 1. **단일 프로세스**: 단일 프로세스에서 W&B ([`wandb.init`](/ko/ref//python/init))를 초기화하고 Experiments ([`wandb.log`](/ko/ref//python/log))를 기록합니다. 이는 [PyTorch Distributed Data Parallel](https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html#torch.nn.parallel.DistributedDataParallel) (DDP) 클래스를 사용하여 분산 트레이닝 Experiments를 로깅하는 일반적인 솔루션입니다. 경우에 따라 사용자는 멀티프로세싱 대기열(또는 다른 통신 기본 요소)을 사용하여 다른 프로세스의 데이터를 기본 로깅 프로세스로 전달합니다.
-2. **다중 프로세스**: 모든 프로세스에서 W&B ([`wandb.init`](/ko/ref//python/init))를 초기화하고 Experiments ([`wandb.log`](/ref//python/log))를 기록합니다. 각 프로세스는 사실상 별도의 experiment입니다. W&B를 초기화할 때 `group` 파라미터(`wandb.init(group='group-name')`)를 사용하여 공유 experiment를 정의하고 기록된 값들을 W&B App UI에서 함께 그룹화합니다.
+2. **다중 프로세스**: 모든 프로세스에서 W&B ([`wandb.init`](/ko/ref//python/init))를 초기화하고 Experiments ([`wandb.log`](/ko/ref/python/log/))를 기록합니다. 각 프로세스는 사실상 별도의 experiment입니다. W&B를 초기화할 때 `group` 파라미터(`wandb.init(group='group-name')`)를 사용하여 공유 experiment를 정의하고 기록된 값들을 W&B App UI에서 함께 그룹화합니다.
 
 다음 예제는 단일 머신에서 2개의 GPU를 사용하는 PyTorch DDP를 통해 W&B로 메트릭을 추적하는 방법을 보여줍니다. [PyTorch DDP](https://pytorch.org/tutorials/intermediate/ddp_tutorial.html)(`torch.nn`의 `DistributedDataParallel`)는 분산 트레이닝을 위한 널리 사용되는 라이브러리입니다. 기본 원리는 모든 분산 트레이닝 설정에 적용되지만 구현 세부 사항은 다를 수 있습니다.
 
@@ -61,7 +61,7 @@ W&B App UI를 탐색하여 단일 프로세스에서 추적된 메트릭의 [예
 
 이 방법에서는 작업의 각 프로세스를 추적하여 각 프로세스에서 `wandb.init()` 및 `wandb.log()`를 호출합니다. 트레이닝이 끝나면 `wandb.finish()`를 호출하여 Run이 완료되었음을 표시하여 모든 프로세스가 올바르게 종료되도록 하는 것이 좋습니다.
 
-이 방법을 사용하면 더 많은 정보를 로깅에 엑세스할 수 있습니다. 그러나 여러 개의 W&B Runs가 W&B App UI에 보고되는 점에 유의하세요. 여러 Experiments에서 W&B Runs를 추적하기 어려울 수 있습니다. 이를 완화하려면 W&B를 초기화할 때 group 파라미터에 값을 제공하여 지정된 experiment에 속하는 W&B Run을 추적하세요. Experiments에서 트레이닝 및 평가 W&B Runs를 추적하는 방법에 대한 자세한 내용은 [Run 그룹화](/ko/guides/models/track/runs/grouping)를 참조하세요.
+이 방법을 사용하면 더 많은 정보를 로깅에 엑세스할 수 있습니다. 그러나 여러 개의 W&B Runs가 W&B App UI에 보고되는 점에 유의하세요. 여러 Experiments에서 W&B Runs를 추적하기 어려울 수 있습니다. 이를 완화하려면 W&B를 초기화할 때 group 파라미터에 값을 제공하여 지정된 experiment에 속하는 W&B Run을 추적하세요. Experiments에서 트레이닝 및 평가 W&B Runs를 추적하는 방법에 대한 자세한 내용은 [Run 그룹화](/ko/guides/runs/grouping/)를 참조하세요.
 
 <Note>
 **개별 프로세스의 메트릭을 추적하려면 이 방법을 사용하세요**. 일반적인 예로는 각 노드의 데이터 및 예측(데이터 배포 디버깅용)과 기본 노드 외부의 개별 배치에 대한 메트릭이 있습니다. 이 방법은 모든 노드에서 시스템 메트릭을 가져오거나 기본 노드에서 사용 가능한 요약 통계를 가져오는 데 필요하지 않습니다.

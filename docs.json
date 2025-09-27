@@ -1096,18 +1096,6 @@
                 ]
               }
             ]
-          },
-          {
-            "tab": "W&B Inference",
-            "pages": [
-              "inference/index"
-            ]
-          },
-          {
-            "tab": "Release Notes",
-            "pages": [
-              "release-notes/index"
-            ]
           }
         ]
       },
@@ -2059,18 +2047,6 @@
                   "weave/community"
                 ]
               }
-            ]
-          },
-          {
-            "tab": "W&B Inference",
-            "pages": [
-              "inference/index"
-            ]
-          },
-          {
-            "tab": "Release Notes",
-            "pages": [
-              "release-notes/index"
             ]
           }
         ]
@@ -3030,18 +3006,6 @@
                   "weave/community"
                 ]
               }
-            ]
-          },
-          {
-            "tab": "W&B Inference",
-            "pages": [
-              "inference/index"
-            ]
-          },
-          {
-            "tab": "Release Notes",
-            "pages": [
-              "release-notes/index"
             ]
           }
         ]

@@ -26,7 +26,7 @@ W&B Sweeps를 사용하여 하이퍼파라미터 최적화를 자동화하고 �
 * **투명성**: 프로젝트는 사용된 모든 알고리즘을 인용하고, [코드는 오픈 소스](https://github.com/wandb/wandb/blob/main/wandb/apis/public/sweeps.py)입니다.
 * **강력한 기능**: Sweeps는 사용자 정의 옵션을 제공하며 여러 시스템 또는 랩톱에서 쉽게 실행할 수 있습니다.
 
-자세한 내용은 [Sweep documentation](/ko/guides/models/sweeps/)을 참조하십시오.
+자세한 내용은 [Sweep documentation](/ko/guides/sweeps/)을 참조하십시오.
 
 ## 이 노트북에서 다루는 내용
 
@@ -187,7 +187,7 @@ def train(
 * `val_loss` 최소화와 같이 `bayes`에 대한 목표 및 메트릭 설정
 * 수행 중인 Runs를 조기에 종료하려면 `hyperband`를 사용합니다.
 
-자세한 내용은 [W&B Sweeps documentation](/ko/guides/models/sweeps/define-sweep-configuration)을 참조하십시오.
+자세한 내용은 [W&B Sweeps documentation](/ko/guides/sweeps/define-sweep-configuration/)을 참조하십시오.
 
 ```python
 sweep_config = {
@@ -287,5 +287,5 @@ wandb.agent(sweep_id, function=sweep_train, count=10)
 
 ## 고급 설정
 1. [환경 변수](/ko/guides/hosting/env-vars/): 관리형 클러스터에서 트레이닝하기 위한 API 키를 설정합니다.
-2. [오프라인 모드](/ko/support/kb-articles/run_wandb_offline)
+2. [오프라인 모드](/ko/support/run_wandb_offline/)
 3. [On-prem](/ko/guides/hosting/hosting-options/self-managed): 인프라의 프라이빗 클라우드 또는 에어 갭 서버에 W&B를 설치합니다. 로컬 설치는 학계 및 엔터프라이즈 팀에 적합합니다.

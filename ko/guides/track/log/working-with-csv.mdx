@@ -7,7 +7,7 @@ menu:
     parent: log-objects-and-media
 ---
 
-W&B Python 라이브러리를 사용하여 CSV 파일을 기록하고 [W&B 대시보드](/ko/guides/models/track/workspaces)에서 시각화하세요. W&B 대시보드는 기계 학습 모델의 결과를 구성하고 시각화하는 중심 공간입니다. 이는 W&B에 기록되지 않은 [이전 기계 학습 Experiments의 정보가 포함된 CSV 파일](#import-and-log-your-csv-of-experiments)이 있거나 [데이터셋이 포함된 CSV 파일](#import-and-log-your-dataset-csv-file)이 있는 경우 특히 유용합니다.
+W&B Python 라이브러리를 사용하여 CSV 파일을 기록하고 [W&B 대시보드](/ko/guides/track/workspaces/)에서 시각화하세요. W&B 대시보드는 기계 학습 모델의 결과를 구성하고 시각화하는 중심 공간입니다. 이는 W&B에 기록되지 않은 [이전 기계 학습 Experiments의 정보가 포함된 CSV 파일](#import-and-log-your-csv-of-experiments)이 있거나 [데이터셋이 포함된 CSV 파일](#import-and-log-your-dataset-csv-file)이 있는 경우 특히 유용합니다.
 
 ## 데이터셋 CSV 파일 가져오기 및 기록
 
@@ -23,7 +23,7 @@ import pandas as pd
 new_iris_dataframe = pd.read_csv("iris.csv")
 ```
 
-2. CSV 파일을 W&B Table로 변환하여 [W&B 대시보드](/ko/guides/models/track/workspaces)를 활용합니다.
+2. CSV 파일을 W&B Table로 변환하여 [W&B 대시보드](/ko/guides/track/workspaces/)를 활용합니다.
 
 ```python
 # DataFrame을 W&B Table로 변환
@@ -42,7 +42,7 @@ iris_table_artifact.add(iris_table, "iris_table")
 iris_table_artifact.add_file("iris.csv")
 ```
 
-W&B Artifacts에 대한 자세한 내용은 [Artifacts 챕터](/ko/guides/core/artifacts/)를 참조하세요.
+W&B Artifacts에 대한 자세한 내용은 [Artifacts 챕터](/ko/guides/artifacts/)를 참조하세요.
 
 4. 마지막으로 `wandb.init`으로 새로운 W&B Run을 시작하여 W&B에 추적하고 기록합니다.
 
@@ -101,9 +101,9 @@ run.finish()
 경우에 따라 Experiments 세부 정보가 CSV 파일에 있을 수 있습니다. 이러한 CSV 파일에서 흔히 볼 수 있는 세부 정보는 다음과 같습니다.
 
 * Experiment Run의 이름
-* 초기 [메모](/ko/guides/models/track/runs/#add-a-note-to-a-run)
-* Experiments를 구별하기 위한 [태그](/ko/guides/models/track/runs/tags)
-* Experiment에 필요한 설정([Sweeps Hyperparameter Tuning](/ko/guides/models/sweeps/)을 활용할 수 있는 추가적인 이점 포함).
+* 초기 [메모](/ko/guides/runs/#add-a-note-to-a-run)
+* Experiments를 구별하기 위한 [태그](/ko/guides/runs/tags/)
+* Experiment에 필요한 설정([Sweeps Hyperparameter Tuning](/ko/guides/sweeps/)을 활용할 수 있는 추가적인 이점 포함).
 
 | Experiment | Model Name | Notes | Tags | Num Layers | Final Train Acc | Final Val Acc | Training Losses |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -172,9 +172,9 @@ run.log({key: val})
 run.summary.update(summaries)
 ```
 
-요약 메트릭에 대한 자세한 내용은 [요약 메트릭 기록](/ko/./log-summary)을 참조하세요.
+요약 메트릭에 대한 자세한 내용은 [요약 메트릭 기록](/ko/guides/track/log/log-summary/)을 참조하세요.
 
-아래는 위의 샘플 테이블을 [W&B 대시보드](/ko/guides/models/track/workspaces)로 변환하는 전체 예제 스크립트입니다.
+아래는 위의 샘플 테이블을 [W&B 대시보드](/ko/guides/track/workspaces/)로 변환하는 전체 예제 스크립트입니다.
 
 ```python
 FILENAME = "experiments.csv"

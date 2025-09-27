@@ -56,7 +56,7 @@ images_t = ...  # generate or load images as PyTorch Tensors
 wandb.log({"examples": [wandb.Image(im) for im in images_t]})
 ```
 
-PyTorch 및 기타 프레임워크에서 W&B에 rich media를 로깅하는 방법에 대한 자세한 내용은 [미디어 로깅 가이드](/ko/guides/models/track/log/media)를 확인하세요.
+PyTorch 및 기타 프레임워크에서 W&B에 rich media를 로깅하는 방법에 대한 자세한 내용은 [미디어 로깅 가이드](/ko/guides/track/log/media/)를 확인하세요.
 
 model의 예측 또는 파생 메트릭과 같은 정보를 미디어와 함께 포함하려면 `wandb.Table`을 사용하세요.
 

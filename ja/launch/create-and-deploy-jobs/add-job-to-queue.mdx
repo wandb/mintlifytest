@@ -31,7 +31,7 @@ W&B Appを使用してプログラム的にキューにジョブを追加しま�
     <img src="/images/launch/view_jobs.png"  />
 </Frame>
 4. ジョブ名の横にある **Launch** ボタンを選択します。ページの右側にモーダルが表示されます。
-5. **Job version** ドロップダウンから使用するローンチジョブのバージョンを選択します。ローンチジョブは他の [W&B Artifact](/ja/guides/core/artifacts/create-a-new-artifact-version) と同様にバージョン管理されます。ソフトウェアの依存関係やジョブを実行するために使用されるソースコードに変更を加えると、同じローンチジョブの異なるバージョンが作成されます。
+5. **Job version** ドロップダウンから使用するローンチジョブのバージョンを選択します。ローンチジョブは他の [W&B Artifact](/ja/guides/artifacts/create-a-new-artifact-version) と同様にバージョン管理されます。ソフトウェアの依存関係やジョブを実行するために使用されるソースコードに変更を加えると、同じローンチジョブの異なるバージョンが作成されます。
 6. **Overrides** セクションで、ローンチジョブに設定された入力の新しい値を提供します。一般的なオーバーライドには、新しいエントリーポイントコマンド、引数、または新しいW&B runの `wandb.config` 内の値が含まれます。  
   <Frame>
     <img src="/images/launch/create_starter_queue_gs.png"  />
@@ -49,7 +49,7 @@ W&B Appを使用してプログラム的にキューにジョブを追加しま�
 11. **Launch now** ボタンを選択します。
 </Tab>
 <Tab title="Tab">
-`wandb launch` コマンドを使用して、キューにジョブを追加します。ハイパーパラメーターオーバーライドを含むJSON設定を作成します。例えば、[クイックスタート](/ja/../walkthrough) ガイドのスクリプトを使用して、以下のオーバーライドを含むJSONファイルを作成します。
+`wandb launch` コマンドを使用して、キューにジョブを追加します。ハイパーパラメーターオーバーライドを含むJSON設定を作成します。例えば、[クイックスタート](/ja/launch/walkthrough) ガイドのスクリプトを使用して、以下のオーバーライドを含むJSONファイルを作成します。
 
 ```json title="config.json"
 {

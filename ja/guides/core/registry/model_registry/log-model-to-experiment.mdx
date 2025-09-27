@@ -14,7 +14,7 @@ weight: 3
 
 ## モデルをログする方法
 
-`run.log_model` API を使用してモデルをログします。モデルファイルが保存されているパスを `path` パラメータに提供してください。このパスはローカルファイル、ディレクトリー、または `s3://bucket/path` のような外部バケットへの[リファレンス URI](/ja/guides/core/artifacts/track-external-files#amazon-s3--gcs--azure-blob-storage-references) のいずれかにすることができます。
+`run.log_model` API を使用してモデルをログします。モデルファイルが保存されているパスを `path` パラメータに提供してください。このパスはローカルファイル、ディレクトリー、または `s3://bucket/path` のような外部バケットへの[リファレンス URI](/ja/guides/artifacts/track-external-files/#amazon-s3--gcs--azure-blob-storage-references) のいずれかにすることができます。
 
 オプションでモデルアーティファクトの名前を `name` パラメータに指定できます。`name` が指定されていない場合、W&B は入力パスのベース名を実行 ID を前に付けたものとして使用します。
 

@@ -5,12 +5,12 @@ menu:
   launch:
     identifier: ko-launch-integration-guides-dagster
     parent: launch-integration-guides
-url: /ko/guides//integrations/dagster
+slug: /ko/guides//integrations/dagster
 ---
 
 Dagster 와 W&B (Weights & Biases) 를 사용하여 MLOps 파이프라인을 조정하고 ML 자산을 유지 관리합니다. W&B 와의 통합으로 Dagster 내에서 다음을 쉽게 수행할 수 있습니다.
 
-* [W&B Artifacts](/ko/guides/core/artifacts/)를 사용하고 생성합니다.
+* [W&B Artifacts](/ko/guides/artifacts/)를 사용하고 생성합니다.
 * [W&B Registry](/ko/guides/core/registry/)에서 Registered Models를 사용하고 생성합니다.
 * [W&B Launch](/ko/launch/)를 사용하여 전용 컴퓨팅에서 트레이닝 작업을 실행합니다.
 * ops 및 assets에서 [wandb](/ko/ref/python/) 클라이언트를 사용합니다.
@@ -26,13 +26,13 @@ W&B Dagster 통합은 W&B 특정 Dagster 리소스 및 IO Manager를 제공합�
 Weights & Biases 내에서 Dagster를 사용하려면 다음 리소스가 필요합니다.
 1. **W&B API 키**.
 2. **W&B entity (user 또는 team)**: entity는 W&B Runs 및 Artifacts를 보내는 사용자 이름 또는 팀 이름입니다. Runs를 기록하기 전에 W&B App UI에서 계정 또는 팀 entity를 생성해야 합니다. entity를 지정하지 않으면 Run은 일반적으로 사용자 이름인 기본 entity로 전송됩니다. **Project Defaults**에서 설정에서 기본 entity를 변경합니다.
-3. **W&B project**: [W&B Runs](/ko/guides/models/track/runs/)가 저장되는 프로젝트 이름입니다.
+3. **W&B project**: [W&B Runs](/ko/guides/runs/)가 저장되는 프로젝트 이름입니다.
 
 W&B App에서 해당 사용자 또는 팀의 프로필 페이지를 확인하여 W&B entity를 찾으십시오. 기존 W&B 프로젝트를 사용하거나 새 프로젝트를 만들 수 있습니다. 새 프로젝트는 W&B App 홈페이지 또는 사용자/팀 프로필 페이지에서 만들 수 있습니다. 프로젝트가 존재하지 않으면 처음 사용할 때 자동으로 생성됩니다. 다음 지침은 API 키를 얻는 방법을 보여줍니다.
 
 ### API 키를 얻는 방법
 1. [W&B에 로그인](https://wandb.ai/login)합니다. 참고: W&B Server를 사용하는 경우 관리자에게 인스턴스 호스트 이름을 문의하십시오.
-2. [인증 페이지](https://wandb.ai/authorize) 또는 사용자/팀 설정에서 API 키를 수집합니다. 프로덕션 환경의 경우 해당 키를 소유할 [서비스 계정](/ko/support/kb-articles/service_account_useful)을 사용하는 것이 좋습니다.
+2. [인증 페이지](https://wandb.ai/authorize) 또는 사용자/팀 설정에서 API 키를 수집합니다. 프로덕션 환경의 경우 해당 키를 소유할 [서비스 계정](/ko/support/service_account_useful)을 사용하는 것이 좋습니다.
 3. 해당 API 키에 대한 환경 변수 내보내기 `WANDB_API_KEY=YOUR_KEY`를 설정합니다.
 
 다음 예제에서는 Dagster 코드에서 API 키를 지정할 위치를 보여줍니다. `wandb_config` 중첩 사전에 entity 및 프로젝트 이름을 지정해야 합니다. 다른 W&B 프로젝트를 사용하려는 경우 다른 `wandb_config` 값을 다른 ops/assets에 전달할 수 있습니다. 전달할 수 있는 가능한 키에 대한 자세한 내용은 아래의 Configuration 섹션을 참조하십시오.
@@ -151,7 +151,7 @@ def create_dataset():
 Artifacts를 쓰기 위해 `@op`, `@asset` 및 `@multi_asset`에 메타데이터 구성을 주석으로 추가할 수 있습니다. 마찬가지로 Dagster 외부에서 생성된 경우에도 W&B Artifacts를 소비할 수 있습니다.
 
 ## W&B Artifacts 쓰기
-계속하기 전에 W&B Artifacts를 사용하는 방법을 잘 이해하는 것이 좋습니다. [Artifacts 가이드](/ko/guides/core/artifacts/)를 읽어 보십시오.
+계속하기 전에 W&B Artifacts를 사용하는 방법을 잘 이해하는 것이 좋습니다. [Artifacts 가이드](/ko/guides/artifacts/)를 읽어 보십시오.
 
 Python 함수에서 오브젝트를 반환하여 W&B Artifact를 작성합니다. W&B에서 지원하는 오브젝트는 다음과 같습니다.
 * Python 오브젝트 (int, dict, list…)

@@ -4,14 +4,14 @@ menu:
   launch:
     identifier: ko-launch-launch-terminology
     parent: launch
-url: /ko/guides//launch/launch-terminology
+slug: /ko/guides//launch/launch-terminology
 weight: 2
 ---
 
-W&B Launch를 사용하면 [jobs](#launch-job)를 [queues](#launch-queue)에 대기열에 추가하여 runs를 생성할 수 있습니다. Jobs는 W&B로 계측된 Python 스크립트입니다. Queues는 [target resource](#target-resources)에서 실행할 jobs 목록을 보관합니다. [Agents](#launch-agent)는 queues에서 jobs를 가져와 target resource에서 jobs를 실행합니다. W&B는 W&B가 [runs](/ko/guides/models/track/runs/)를 추적하는 방식과 유사하게 Launch jobs를 추적합니다.
+W&B Launch를 사용하면 [jobs](#launch-job)를 [queues](#launch-queue)에 대기열에 추가하여 runs를 생성할 수 있습니다. Jobs는 W&B로 계측된 Python 스크립트입니다. Queues는 [target resource](#target-resources)에서 실행할 jobs 목록을 보관합니다. [Agents](#launch-agent)는 queues에서 jobs를 가져와 target resource에서 jobs를 실행합니다. W&B는 W&B가 [runs](/ko/guides/runs/)를 추적하는 방식과 유사하게 Launch jobs를 추적합니다.
 
 ### Launch job
-Launch job은 완료할 작업을 나타내는 특정 유형의 [W&B Artifact](/ko/guides/core/artifacts/)입니다. 예를 들어 일반적인 Launch jobs에는 model 트레이닝 또는 model 평가 트리거가 포함됩니다. Job 정의에는 다음이 포함됩니다.
+Launch job은 완료할 작업을 나타내는 특정 유형의 [W&B Artifact](/ko/guides/artifacts/)입니다. 예를 들어 일반적인 Launch jobs에는 model 트레이닝 또는 model 평가 트리거가 포함됩니다. Job 정의에는 다음이 포함됩니다.
 
 - 하나 이상의 실행 가능한 진입점을 포함하여 Python 코드 및 기타 파일 자산.
 - 입력 (config parameter) 및 출력 (metrics 로깅)에 대한 정보.

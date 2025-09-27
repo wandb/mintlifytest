@@ -5,16 +5,16 @@ menu:
   launch:
     identifier: ko-launch-sweeps-on-launch
     parent: launch
-url: /ko/guides//launch/sweeps-on-launch
+slug: /ko/guides//launch/sweeps-on-launch
 ---
 
 <Card title="Try in Colab" href="https://colab.research.google.com/drive/1WxLKaJlltThgZyhc7dcZhDQ6cjVQDfil#scrollTo=AFEzIxA6foC7" icon="python"/>
 
-W&B Launch를 사용하여 하이퍼파라미터 튜닝 작업( [Sweeps](/ko/guides/models/sweeps/))을 생성합니다. Launch에서 Sweeps를 사용하면 스윕 스케줄러가 스윕할 지정된 하이퍼파라미터와 함께 Launch Queue로 푸시됩니다. 스윕 스케줄러는 에이전트가 선택함에 따라 시작되어 선택한 하이퍼파라미터로 스윕 run을 동일한 Queue로 시작합니다. 이는 스윕이 완료되거나 중지될 때까지 계속됩니다.
+W&B Launch를 사용하여 하이퍼파라미터 튜닝 작업( [Sweeps](/ko/guides/sweeps/))을 생성합니다. Launch에서 Sweeps를 사용하면 스윕 스케줄러가 스윕할 지정된 하이퍼파라미터와 함께 Launch Queue로 푸시됩니다. 스윕 스케줄러는 에이전트가 선택함에 따라 시작되어 선택한 하이퍼파라미터로 스윕 run을 동일한 Queue로 시작합니다. 이는 스윕이 완료되거나 중지될 때까지 계속됩니다.
 
 기본 W&B 스윕 스케줄링 엔진을 사용하거나 자체 사용자 정의 스케줄러를 구현할 수 있습니다.
 
-1. 표준 스윕 스케줄러: [W&B Sweeps](/ko/guides/models/sweeps/)를 제어하는 기본 W&B 스윕 스케줄링 엔진을 사용합니다. 친숙한 `bayes`, `grid` 및 `random` 메소드를 사용할 수 있습니다.
+1. 표준 스윕 스케줄러: [W&B Sweeps](/ko/guides/sweeps/)를 제어하는 기본 W&B 스윕 스케줄링 엔진을 사용합니다. 친숙한 `bayes`, `grid` 및 `random` 메소드를 사용할 수 있습니다.
 2. 사용자 정의 스윕 스케줄러: 스윕 스케줄러가 작업으로 실행되도록 구성합니다. 이 옵션을 사용하면 완벽하게 사용자 정의할 수 있습니다. 표준 스윕 스케줄러를 확장하여 더 많은 로깅을 포함하는 방법의 예는 아래 섹션에서 찾을 수 있습니다.
 
 <Note>
@@ -29,7 +29,7 @@ Launch에서 Sweeps를 처음 사용하는 경우 'basic' 메소드를 사용하
 Launch로 W&B Sweeps를 생성합니다. W&B App을 사용하여 대화식으로 또는 W&B CLI를 사용하여 프로그래밍 방식으로 스윕을 생성할 수 있습니다. 스케줄러를 사용자 정의하는 기능을 포함하여 Launch 스윕의 고급 구성은 CLI를 사용하십시오.
 
 <Note>
-W&B Launch로 스윕을 생성하기 전에 먼저 스윕할 작업을 생성해야 합니다. 자세한 내용은 [작업 생성](/ko/./create-and-deploy-jobs/create-launch-job) 페이지를 참조하십시오.
+W&B Launch로 스윕을 생성하기 전에 먼저 스윕할 작업을 생성해야 합니다. 자세한 내용은 [작업 생성](/ko/launch/create-and-deploy-jobs/create-launch-job) 페이지를 참조하십시오.
 </Note>
 
 <Tabs>
@@ -100,7 +100,7 @@ parameters:
 #    registry: <이미지 풀링 레지스트리>
 ```
 
-스윕 구성 생성 방법에 대한 자세한 내용은 [스윕 구성 정의](/ko/guides/models/sweeps/define-sweep-configuration) 페이지를 참조하십시오.
+스윕 구성 생성 방법에 대한 자세한 내용은 [스윕 구성 정의](/ko/guides/sweeps/define-sweep-configuration) 페이지를 참조하십시오.
 
 4. 다음으로 스윕을 초기화합니다. 구성 파일의 경로, 작업 Queue 이름, W&B 엔티티 및 프로젝트 이름을 제공합니다.
 
@@ -108,7 +108,7 @@ parameters:
 wandb launch-sweep <path/to/yaml/file> --queue <queue_name> --entity <your_entity>  --project <project_name>
 ```
 
-W&B Sweeps에 대한 자세한 내용은 [하이퍼파라미터 튜닝](/ko/guides/models/sweeps/) 챕터를 참조하십시오.
+W&B Sweeps에 대한 자세한 내용은 [하이퍼파라미터 튜닝](/ko/guides/sweeps/) 챕터를 참조하십시오.
 </Tab>
 </Tabs>
 

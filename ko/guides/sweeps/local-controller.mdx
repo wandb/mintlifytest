@@ -21,7 +21,7 @@ menu:
 pip install wandb sweeps
 ```
 
-다음 예제에서는 이미 구성 파일과 트레이닝 루프가 Python 스크립트 또는 Jupyter Notebook에 정의되어 있다고 가정합니다. 구성 파일을 정의하는 방법에 대한 자세한 내용은 [스윕 구성 정의](/ko/guides/models/sweeps/define-sweep-configuration/)를 참조하세요.
+다음 예제에서는 이미 구성 파일과 트레이닝 루프가 Python 스크립트 또는 Jupyter Notebook에 정의되어 있다고 가정합니다. 구성 파일을 정의하는 방법에 대한 자세한 내용은 [스윕 구성 정의](/ko/guides/sweeps/define-sweep-configuration/)를 참조하세요.
 
 ### 커맨드라인에서 로컬 컨트롤러 실행
 
@@ -53,7 +53,7 @@ wandb sweep config.yaml
 wandb controller {user}/{entity}/{sweep_id}
 ```
 
-로컬 컨트롤러를 사용하도록 지정했으면 스윕을 실행하기 위해 하나 이상의 Sweep 에이전트를 시작합니다. 평소와 같은 방식으로 W&B 스윕을 시작합니다. 자세한 내용은 [스윕 에이전트 시작](/ko/guides/models/sweeps/start-sweep-agents)을 참조하세요.
+로컬 컨트롤러를 사용하도록 지정했으면 스윕을 실행하기 위해 하나 이상의 Sweep 에이전트를 시작합니다. 평소와 같은 방식으로 W&B 스윕을 시작합니다. 자세한 내용은 [스윕 에이전트 시작](/ko/guides/sweeps/start-sweep-agents/)을 참조하세요.
 
 ```bash
 wandb sweep sweep_ID

@@ -232,7 +232,7 @@ val_dataset = DecathlonDataset(
 
 ### データセットの可視化
 
-Weights & Biasesは画像、ビデオ、オーディオなどをサポートしています。リッチメディアをログに取り込み、結果を探索し、run、モデル、データセットを視覚的に比較できます。[セグメンテーションマスクオーバーレイシステム](/ja/guides/models/track/log/media/#image-overlays-in-tables)を使用してデータボリュームを可視化します。 [テーブル](/ja/guides/models/tables/)にセグメンテーションマスクをログに追加するには、テーブル内の各行に`wandb.Image` オブジェクトを提供する必要があります。
+Weights & Biasesは画像、ビデオ、オーディオなどをサポートしています。リッチメディアをログに取り込み、結果を探索し、run、モデル、データセットを視覚的に比較できます。[セグメンテーションマスクオーバーレイシステム](/ja/guides/track/log/media/#image-overlays-in-tables)を使用してデータボリュームを可視化します。 [テーブル](/ja/guides/models/tables/)にセグメンテーションマスクをログに追加するには、テーブル内の各行に`wandb.Image` オブジェクトを提供する必要があります。
 
 次の擬似コードは、その例です。
 

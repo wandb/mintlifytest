@@ -2,12 +2,12 @@
 title: What are runs?
 description: W&B의 기본 구성 요소인 Runs에 대해 알아보세요.
 cascade:
-- url: /ko/guides//runs/:filename
+- slug: /ko/guides//runs/:filename
 menu:
   default:
     identifier: ko-guides-models-track-runs-_index
     parent: experiments
-url: /ko/guides//runs
+slug: /ko/guides//runs
 weight: 5
 ---
 
@@ -18,10 +18,10 @@ run을 시작하는 일반적인 패턴은 다음을 포함하지만 이에 국�
 * 모델 트레이닝
 * 하이퍼파라미터를 변경하고 새로운 실험 수행
 * 다른 모델로 새로운 기계학습 실험 수행
-* [W&B Artifacts](/ko/guides/core/artifacts/)로 데이터 또는 모델 로깅
-* [W&B Artifacts 다운로드](/ko/guides/core/artifacts/download-and-use-an-artifact)
+* [W&B Artifacts](/ko/guides/artifacts/)로 데이터 또는 모델 로깅
+* [W&B Artifacts 다운로드](/ko/guides/artifacts/download-and-use-an-artifact/)
 
-W&B는 생성한 run을 [*프로젝트*](/ko/guides/models/track/project-page)에 저장합니다. W&B 앱 UI에서 run과 해당 속성을 run의 프로젝트 워크스페이스 내에서 볼 수 있습니다. [`wandb.Api.Run`](/ko/ref/python/public-api/run) 오브젝트를 사용하여 run 속성에 프로그래밍 방식으로 엑세스할 수도 있습니다.
+W&B는 생성한 run을 [*프로젝트*](/ko/guides/track/project-page/)에 저장합니다. W&B 앱 UI에서 run과 해당 속성을 run의 프로젝트 워크스페이스 내에서 볼 수 있습니다. [`wandb.Api.Run`](/ko/ref/python/public-api/run) 오브젝트를 사용하여 run 속성에 프로그래밍 방식으로 엑세스할 수도 있습니다.
 
 `run.log`로 로그하는 모든 내용은 해당 run에 기록됩니다. 다음 코드 조각을 살펴보십시오.
 
@@ -116,7 +116,7 @@ wandb: Find logs at: wandb/run-20241105_111816-pdo5110r/logs
     <img src="/images/runs/run_log_example_2.png"  />
 </Frame>
 
-또 다른 예로, [스윕](/ko/guides/models/sweeps/) 중에 W&B는 사용자가 지정한 하이퍼파라미터 검색 공간을 탐색합니다. W&B는 스윕이 생성하는 각 새로운 하이퍼파라미터 조합을 고유한 run으로 구현합니다.
+또 다른 예로, [스윕](/ko/guides/sweeps/) 중에 W&B는 사용자가 지정한 하이퍼파라미터 검색 공간을 탐색합니다. W&B는 스윕이 생성하는 각 새로운 하이퍼파라미터 조합을 고유한 run으로 구현합니다.
 
 ## Run 초기화
 
@@ -330,7 +330,7 @@ https://wandb.ai/<team-name>/<project-name>/runs/<run-id>
 * **Command**: run을 초기화하는 코맨드입니다.
 * **Description**: 사용자가 제공한 run에 대한 설명입니다. run을 만들 때 설명을 지정하지 않으면 이 필드는 비어 있습니다. W&B 앱 UI를 사용하거나 Python SDK를 사용하여 프로그래밍 방식으로 run에 설명을 추가할 수 있습니다.
 * **Duration**: run이 일시 중지 또는 대기 시간을 제외하고 활발하게 연산하거나 데이터를 로깅하는 데 걸리는 시간입니다.
-* **Git repository**: run과 연결된 Git 리포지토리입니다. 이 필드를 보려면 [Git을 활성화](/ko/guides/models/app/settings-page/user-settings#personal-github-integration)해야 합니다.
+* **Git repository**: run과 연결된 Git 리포지토리입니다. 이 필드를 보려면 [Git을 활성화](/ko/guides/app/settings-page/user-settings/#personal-github-integration)해야 합니다.
 * **Host name**: W&B가 run을 연산하는 위치입니다. 머신에서 로컬로 run을 초기화하는 경우 W&B는 머신 이름을 표시합니다.
 * **Name**: run 이름입니다.
 * **OS**: run을 초기화하는 운영 체제입니다.
@@ -347,8 +347,8 @@ https://wandb.ai/<team-name>/<project-name>/runs/<run-id>
 W&B는 Overview 섹션 아래에 다음 정보를 저장합니다.
 
 * **Artifact Outputs**: run에서 생성된 Artifacts 출력입니다.
-* **Config**: [`wandb.config`](/ko/guides/models/track/config)로 저장된 구성 파라미터 목록입니다.
-* **Summary**: [`wandb.log()`](/ko/guides/models/track/log/)로 저장된 요약 파라미터 목록입니다. 기본적으로 W&B는 이 값을 마지막으로 기록된 값으로 설정합니다.
+* **Config**: [`wandb.config`](/ko/guides/track/config/)로 저장된 구성 파라미터 목록입니다.
+* **Summary**: [`wandb.log()`](/ko/guides/track/log/)로 저장된 요약 파라미터 목록입니다. 기본적으로 W&B는 이 값을 마지막으로 기록된 값으로 설정합니다.
 
 <Frame>
     <img src="/images/app_ui/wandb_run_overview_page.png" alt="W&B 대시보드 run Overview 탭"  />
@@ -436,7 +436,7 @@ Runs 탭을 사용자 지정하면 사용자 지정이 [Workspace 탭](#workspac
 ### System 탭
 **System 탭**은 CPU 사용률, 시스템 메모리, 디스크 I/O, 네트워크 트래픽, GPU 사용률 등과 같은 특정 run에 대해 추적된 시스템 메트릭을 보여줍니다.
 
-W&B가 추적하는 시스템 메트릭의 전체 목록은 [시스템 메트릭](/ref/system-metrics)을 참조하십시오.
+W&B가 추적하는 시스템 메트릭의 전체 목록은 [시스템 메트릭](/ko/ref/system-metrics/)을 참조하십시오.
 
 <Frame>
     <img src="/images/app_ui/wandb_system_utilization.png"  />
@@ -465,7 +465,7 @@ W&B가 추적하는 시스템 메트릭의 전체 목록은 [시스템 메트릭
 [여기](https://app.wandb.ai/stacey/deep-drive/runs/pr0os44x/files/media/images)에서 파일 탭의 예를 봅니다.
 
 ### Artifacts 탭
-**Artifacts** 탭에는 지정된 run에 대한 입력 및 출력 [artifacts](/ko/guides/core/artifacts/)가 나열됩니다.
+**Artifacts** 탭에는 지정된 run에 대한 입력 및 출력 [artifacts](/ko/guides/artifacts/)가 나열됩니다.
 
 <Frame>
     <img src="/images/app_ui/artifacts_tab.png"  />

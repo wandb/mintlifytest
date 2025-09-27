@@ -2,12 +2,12 @@
 title: Model registry
 description: 트레이닝부터 프로덕션까지 모델 생명주기를 관리하는 모델 레지스트리
 cascade:
-- url: /ko/guides//core/registry/model_registry/:filename
+- slug: /ko/guides//core/registry/model_registry/:filename
 menu:
   default:
     identifier: ko-guides-core-registry-model_registry-_index
     parent: registry
-url: /ko/guides//core/registry/model_registry
+slug: /ko/guides//core/registry/model_registry
 weight: 9
 ---
 
@@ -25,7 +25,7 @@ W&B Model Registry는 팀의 트레이닝된 모델을 보관하는 곳으로, M
 
 W&B Model Registry를 사용하면 다음을 수행할 수 있습니다.
 
-* [각 기계 학습 작업에 대해 가장 적합한 모델 버전을 북마크합니다.](/ko/./link-model-version)
+* [각 기계 학습 작업에 대해 가장 적합한 모델 버전을 북마크합니다.](/ko/guides/core/registry/model_registry/link-model-version/)
 * 다운스트림 프로세스 및 모델 CI/CD를 [자동화](/ko/guides/core/automations/)합니다.
 * 모델 버전을 ML 라이프사이클(스테이징에서 프로덕션)을 거쳐 이동합니다.
 * 모델의 계보를 추적하고 프로덕션 모델에 대한 변경 이력을 감사합니다.
@@ -71,11 +71,11 @@ run.finish()
 * 2부작 비디오 시리즈를 확인하세요.
   1. [모델 로깅 및 등록](https://www.youtube.com/watch?si=MV7nc6v-pYwDyS-3&v=ZYipBwBeSKE&feature=youtu.be)
   2. Model Registry에서 [모델 사용 및 다운스트림 프로세스 자동화](https://www.youtube.com/watch?v=8PFCrDSeHzw).
-* W&B Python SDK 코맨드에 대한 단계별 개요는 [모델 둘러보기](/ko/./walkthrough)를 읽어보세요. 이를 통해 데이터셋 아티팩트 를 생성, 추적 및 사용할 수 있습니다.
+* W&B Python SDK 코맨드에 대한 단계별 개요는 [모델 둘러보기](/ko/guides/core/registry/model_registry/walkthrough/)를 읽어보세요. 이를 통해 데이터셋 아티팩트 를 생성, 추적 및 사용할 수 있습니다.
 * 다음에 대해 알아보세요.
-   * [보호된 모델 및 엑세스 제어](/ko/./access_controls).
+   * [보호된 모델 및 엑세스 제어](/ko/guides/core/registry/model_registry/access_controls/).
    * [레지스트리를 CI/CD 프로세스에 연결하는 방법](/ko/guides/core/automations/).
-   * 새 모델 버전이 등록된 모델에 연결되면 [Slack 알림](/ko/./notifications)을 설정합니다.
+   * 새 모델 버전이 등록된 모델에 연결되면 [Slack 알림](/ko/guides/core/registry/model_registry/notifications/)을 설정합니다.
 * Model Registry가 ML 워크플로우에 어떻게 적합하고 모델 관리에 사용하는 이점에 대한 [이] (https://wandb.ai/wandb_fc/model-registry-reports/reports/What-is-an-ML-Model-Registry---Vmlldzo1MTE5MjYx) 리포트 를 검토합니다.
 * W&B [Enterprise Model Management](https://www.wandb.courses/courses/enterprise-model-management) 코스를 수강하고 다음 방법을 배우세요.
   * W&B Model Registry를 사용하여 모델을 관리 및 버전 관리하고, 계보를 추적하고, 다양한 라이프사이클 단계를 거쳐 모델을 승격합니다.

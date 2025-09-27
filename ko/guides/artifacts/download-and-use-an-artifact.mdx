@@ -53,7 +53,7 @@ path = artifact.get_path(name)
 * `Entry.download`: `name` 경로에 있는 Artifact에서 파일을 다운로드합니다.
 * `Entry.ref`: `add_reference`가 항목을 참조로 저장한 경우 URI를 반환합니다.
 
-W&B가 처리하는 방법을 아는 스키마가 있는 참조는 Artifact 파일처럼 다운로드됩니다. 자세한 내용은 [외부 파일 추적](/ko/guides/core/artifacts/track-external-files)을 참조하세요.
+W&B가 처리하는 방법을 아는 스키마가 있는 참조는 Artifact 파일처럼 다운로드됩니다. 자세한 내용은 [외부 파일 추적](/ko/guides/artifacts/track-external-files/)을 참조하세요.
 </Tab>
 <Tab title="Run 외부">
 먼저 W&B SDK를 임포트합니다. 다음으로 퍼블릭 API 클래스에서 Artifact를 생성합니다. 해당 Artifact와 연결된 엔티티, 프로젝트, Artifact 및 에일리어스를 제공합니다.
@@ -128,4 +128,4 @@ artifact.add_file("model.h5")
 run.use_artifact(artifact)
 ```
 
-Artifact 구성에 대한 자세한 내용은 [Artifact 구성](/ko/guides/core/artifacts/construct-an-artifact)을 참조하세요.
+Artifact 구성에 대한 자세한 내용은 [Artifact 구성](/ko/guides/artifacts/construct-an-artifact/)을 참조하세요.

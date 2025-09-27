@@ -1,12 +1,12 @@
 ---
 title: Custom charts
 cascade:
-- url: /ko/guides//app/features/custom-charts/:filename
+- slug: /ko/guides//app/features/custom-charts/:filename
 menu:
   default:
     identifier: ko-guides-models-app-features-custom-charts-_index
     parent: w-b-app-ui-reference
-url: /ko/guides//app/features/custom-charts
+slug: /ko/guides//app/features/custom-charts
 weight: 2
 ---
 
@@ -22,7 +22,7 @@ W&B 프로젝트에서 커스텀 차트를 만드세요. 임의의 데이터 테
 
 ### 작동 방식
 
-1. **데이터 기록**: 스크립트에서 [config](/ko/guides/models/track/config) 및 요약 데이터를 기록합니다.
+1. **데이터 기록**: 스크립트에서 [config](/ko/guides/track/config/) 및 요약 데이터를 기록합니다.
 2. **차트 사용자 정의**: [GraphQL](https://graphql.org) 쿼리로 기록된 데이터를 가져옵니다. 강력한 시각화 문법인 [Vega](https://vega.github.io/vega/)로 쿼리 결과를 시각화합니다.
 3. **차트 기록**: `wandb.plot_table()`로 스크립트에서 자체 프리셋을 호출합니다.
 

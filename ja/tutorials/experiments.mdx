@@ -38,7 +38,7 @@ wandb.login()
 
 機械学習の実験を作成、追跡、視覚化します。これを行うには:
 
-1. [W&B run](/ja/guides/models/track/runs/) を初期化し、追跡したいハイパーパラメーターを渡します。
+1. [W&B run](/ja/guides/runs/) を初期化し、追跡したいハイパーパラメーターを渡します。
 2. トレーニングループ内で、精度や損失などのメトリクスをログに記録します。
 
 ```
@@ -90,7 +90,7 @@ W&B を疑似的な機械学習トレーニングループに統合する方法�
 
 以下のコードセルは、簡単な MNIST クラス分類器を定義しトレーニングします。トレーニング中は、W&B が URL を表示します。プロジェクトページリンクをクリックして、W&B プロジェクトでリアルタイムに結果を確認してください。
 
-W&B run では自動で [メトリクス](/ja/guides/models/track/runs/#workspace-tab)、システム情報、[ハイパーパラメーター](/ja/guides/models/track/runs/#overview-tab)、[ターミナル出力](/ja/guides/models/track/runs/#logs-tab) をログし、モデルの入力と出力を含む [インタラクティブテーブル](/ja/guides/models/tables/) が表示されます。
+W&B run では自動で [メトリクス](/ja/guides/runs/#workspace-tab)、システム情報、[ハイパーパラメーター](/ja/guides/runs/#overview-tab)、[ターミナル出力](/ja/guides/runs/#logs-tab) をログし、モデルの入力と出力を含む [インタラクティブテーブル](/ja/guides/models/tables/) が表示されます。
 
 ### PyTorch Dataloader をセットアップする
 次のセルでは、機械学習モデルをトレーニングするために必要な便利な関数を定義します。これらの関数は W&B に特化したものではないため、ここでは詳しくは説明しません。詳細については、[forward および backward training loop](https://pytorch.org/tutorials/beginner/nn_tutorial.html) の定義方法、トレーニングデータをロードするための [PyTorch DataLoaders](https://pytorch.org/tutorials/beginner/basics/data_tutorial.html) の使用方法、および [`torch.nn.Sequential` クラス](https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html) を使用して PyTorch モデルを定義する方法について、PyTorch のドキュメントを参照してください。
@@ -279,7 +279,7 @@ for _ in range(3):
 
 ## (オプション) W&B アラートを設定する
 
-[W&B アラート](/ja/guides/models/track/runs/alert/) を作成して、Python コードからあなたの Slack やメールにアラートを送信します。
+[W&B アラート](/ja/guides/runs/alert/) を作成して、Python コードからあなたの Slack やメールにアラートを送信します。
 
 コードから発生する 1 回目の Slack またはメールのアラートに対して実施する 2 つの手順は次のとおりです:
 
@@ -321,7 +321,7 @@ for training_step in range(1000):
 wandb.finish()
 ```
 
-[W&B アラートの完全なドキュメントはこちらで見つけることができます](/ja/guides/models/track/runs/alert)。
+[W&B アラートの完全なドキュメントはこちらで見つけることができます](/ja/guides/runs/alert/)。
 
 ## 次のステップ
 次のチュートリアルでは、W&B Sweeps を使用したハイパーパラメーター最適化について学びます:

@@ -13,7 +13,7 @@ Jupyter와 W&B를 함께 사용하면 노트북에서 나가지 않고도 대화
 ## Jupyter 노트북과 W&B의 유스 케이스
 
 1. **반복적인 실험**: 파라미터를 조정하여 Experiments를 실행하고 다시 실행하면 수동으로 메모하지 않아도 수행하는 모든 Runs가 자동으로 W&B에 저장됩니다.
-2. **코드 저장**: 모델을 재현할 때 노트북에서 어떤 셀이 어떤 순서로 실행되었는지 알기 어렵습니다. [설정 페이지](/ko/guides/models/app/settings-page/)에서 코드 저장을 켜면 각 experiment에 대한 셀 실행 기록이 저장됩니다.
+2. **코드 저장**: 모델을 재현할 때 노트북에서 어떤 셀이 어떤 순서로 실행되었는지 알기 어렵습니다. [설정 페이지](/ko/guides/app/settings-page/)에서 코드 저장을 켜면 각 experiment에 대한 셀 실행 기록이 저장됩니다.
 3. **사용자 정의 분석**: Runs가 W&B에 기록되면 API에서 데이터프레임을 가져와 사용자 정의 분석을 수행한 다음 해당 결과를 W&B에 기록하여 리포트에 저장하고 공유하기 쉽습니다.
 
 ## 노트북에서 시작하기
@@ -81,7 +81,7 @@ wandb.run
 ```
 
 <Note>
-W&B로 무엇을 할 수 있는지 더 자세히 알고 싶으신가요? [데이터 및 미디어 로깅 가이드](/ko/guides/models/track/log/)를 확인하거나, [자주 사용하는 ML 툴킷과 통합하는 방법](/ko/guides/integrations/)을 배우거나, [참조 문서](/ko/ref/python/) 또는 [예제 리포지토리](https://github.com/wandb/examples)로 바로 이동하세요.
+W&B로 무엇을 할 수 있는지 더 자세히 알고 싶으신가요? [데이터 및 미디어 로깅 가이드](/ko/guides/track/log/)를 확인하거나, [자주 사용하는 ML 툴킷과 통합하는 방법](/ko/guides/integrations/)을 배우거나, [참조 문서](/ko/ref/python/) 또는 [예제 리포지토리](https://github.com/wandb/examples)로 바로 이동하세요.
 </Note>
 
 ## W&B의 추가 Jupyter 기능

@@ -14,7 +14,7 @@ slug: /ja/guides/launch/sweeps-on-launch
 
 デフォルトの W&B Sweep スケジューリングエンジンを使用するか、独自のカスタムスケジューラーを実装することができます。
 
-1. 標準スイープスケジューラー: デフォルトの W&B Sweep スケジューリングエンジンを使用して [W&B Sweeps](/ja/guides/models/sweeps/) を制御します。`bayes`、`grid`、`random` メソッドが利用可能です。
+1. 標準スイープスケジューラー: デフォルトの W&B Sweep スケジューリングエンジンを使用して [W&B Sweeps](/ja/guides/sweeps/) を制御します。`bayes`、`grid`、`random` メソッドが利用可能です。
 2. カスタムスイープスケジューラー: スイープスケジューラーをジョブとして動作するように設定します。このオプションにより、完全なカスタマイズが可能です。標準のスイープスケジューラーを拡張して追加のログを含める方法の例は、以下のセクションに記載されています。
 
 <Note>
@@ -29,7 +29,7 @@ slug: /ja/guides/launch/sweeps-on-launch
 Launch で W&B Sweeps を作成します。W&B App を使用してインタラクティブにスイープを作成することも、W&B CLI を使用してプログラム的にスイープを作成することもできます。Launch スイープの高度な設定、スケジューラーのカスタマイズを可能にする CLI を使用します。
 
 <Note>
-W&B Launch でスイープを作成する前に、まずスイープするジョブを作成しておいてください。[Create a Job](/ja/./create-and-deploy-jobs/create-launch-job) ページを参照してください。
+W&B Launch でスイープを作成する前に、まずスイープするジョブを作成しておいてください。[Create a Job](/ja/launch/create-and-deploy-jobs/create-launch-job) ページを参照してください。
 </Note>
 
 <Tabs>
@@ -100,7 +100,7 @@ parameters:
 #    registry: <イメージのプル用のレジストリ>
 ```
 
-スイープ設定の作成方法についての情報は、[Define sweep configuration](/ja/guides/models/sweeps/define-sweep-configuration) ページを参照してください。
+スイープ設定の作成方法についての情報は、[Define sweep configuration](/ja/guides/sweeps/define-sweep-configuration) ページを参照してください。
 
 4. 次に、スイープを初期化します。設定ファイルのパス、ジョブキューの名前、W&B エンティティ、プロジェクトの名前を指定します。
 
@@ -108,7 +108,7 @@ parameters:
 wandb launch-sweep <path/to/yaml/file> --queue <queue_name> --entity <your_entity> --project <project_name>
 ```
 
-W&B Sweeps についての詳細は、[Tune Hyperparameters](/ja/guides/models/sweeps/) チャプターを参照してください。
+W&B Sweeps についての詳細は、[Tune Hyperparameters](/ja/guides/sweeps/) チャプターを参照してください。
 </Tab>
 </Tabs>
 

@@ -23,7 +23,7 @@ menu:
 
 ### 2. 그룹 환경 변수 설정
 
-`WANDB_RUN_GROUP` 를 사용하여 Runs 에 대한 그룹을 환경 변수로 지정합니다. 자세한 내용은 [**환경 변수**](/ko/guides/models/track/environment-variables)**에 대한 문서를 확인하세요. Group** 은 프로젝트 내에서 고유해야 하며 그룹의 모든 Runs 에서 공유해야 합니다. `wandb.util.generate_id()` 를 사용하여 모든 프로세스에서 사용할 고유한 8자 문자열을 생성할 수 있습니다. 예를 들어 `os.environ["WANDB_RUN_GROUP"] = "experiment-" + wandb.util.generate_id()` 와 같습니다.
+`WANDB_RUN_GROUP` 를 사용하여 Runs 에 대한 그룹을 환경 변수로 지정합니다. 자세한 내용은 [**환경 변수**](/ko/guides/track/environment-variables/)**에 대한 문서를 확인하세요. Group** 은 프로젝트 내에서 고유해야 하며 그룹의 모든 Runs 에서 공유해야 합니다. `wandb.util.generate_id()` 를 사용하여 모든 프로세스에서 사용할 고유한 8자 문자열을 생성할 수 있습니다. 예를 들어 `os.environ["WANDB_RUN_GROUP"] = "experiment-" + wandb.util.generate_id()` 와 같습니다.
 
 ### 3. UI에서 그룹화 전환
 

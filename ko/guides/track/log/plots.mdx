@@ -7,7 +7,7 @@ menu:
     parent: log-objects-and-media
 ---
 
-`wandb.plot`의 메소드를 사용하면 트레이닝 중 시간에 따라 변하는 차트를 포함하여 `wandb.log`로 차트를 추적할 수 있습니다. 사용자 정의 차트 프레임워크에 대해 자세히 알아보려면 [이 가이드](/ko/guides/models/app/features/custom-charts/walkthrough)를 확인하십시오.
+`wandb.plot`의 메소드를 사용하면 트레이닝 중 시간에 따라 변하는 차트를 포함하여 `wandb.log`로 차트를 추적할 수 있습니다. 사용자 정의 차트 프레임워크에 대해 자세히 알아보려면 [이 가이드](/ko/guides/app/features/custom-charts/walkthrough/)를 확인하십시오.
 
 ### 기본 차트
 
@@ -226,7 +226,7 @@ wandb.log({"conf_mat": cm})
 
 ### 인터랙티브 사용자 정의 차트
 
-전체 사용자 정의를 위해 기본 제공 [사용자 정의 차트 사전 설정](/ko/guides/models/app/features/custom-charts/walkthrough)을 조정하거나 새 사전 설정을 만든 다음 차트를 저장합니다. 차트 ID를 사용하여 스크립트에서 직접 해당 사용자 정의 사전 설정에 데이터를 기록합니다.
+전체 사용자 정의를 위해 기본 제공 [사용자 정의 차트 사전 설정](/ko/guides/app/features/custom-charts/walkthrough/)을 조정하거나 새 사전 설정을 만든 다음 차트를 저장합니다. 차트 ID를 사용하여 스크립트에서 직접 해당 사용자 정의 사전 설정에 데이터를 기록합니다.
 
 ```python
 # 플로팅할 열이 있는 테이블을 만듭니다.
@@ -250,7 +250,7 @@ my_custom_chart = wandb.plot_table(
 
 ### Matplotlib 및 Plotly 플롯
 
-`wandb.plot`으로 W&B [사용자 정의 차트](/ko/guides/models/app/features/custom-charts/walkthrough)를 사용하는 대신 [matplotlib](https://matplotlib.org/) 및 [Plotly](https://plotly.com/)로 생성된 차트를 기록할 수 있습니다.
+`wandb.plot`으로 W&B [사용자 정의 차트](/ko/guides/app/features/custom-charts/walkthrough/)를 사용하는 대신 [matplotlib](https://matplotlib.org/) 및 [Plotly](https://plotly.com/)로 생성된 차트를 기록할 수 있습니다.
 
 ```python
 import matplotlib.pyplot as plt

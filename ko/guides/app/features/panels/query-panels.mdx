@@ -3,12 +3,12 @@ title: Query panels
 description: 이 페이지의 일부 기능은 베타 버전이며 기능 플래그 뒤에 숨겨져 있습니다. 프로필 페이지의 자기 소개에 `weave-plot`을
   추가하여 관련된 모든 기능을 잠금 해제하세요.
 cascade:
-- url: /ko/guides//app/features/panels/query-panels/:filename
+- slug: /ko/guides//app/features/panels/query-panels/:filename
 menu:
   default:
     identifier: ko-guides-models-app-features-panels-query-panels-_index
     parent: panels
-url: /ko/guides//app/features/panels/query-panels
+slug: /ko/guides//app/features/panels/query-panels
 ---
 
 <Note>
@@ -72,7 +72,7 @@ runs.summary["cifar10_sample_table"]
 
 분해하면 다음과 같습니다:
 
-* `runs`는 쿼리 패널이 워크스페이스에 있을 때 쿼리 패널 표현식에 자동으로 삽입되는 변수입니다. "값"은 해당 특정 워크스페이스에 대해 보이는 run 목록입니다. [run 내에서 사용할 수 있는 다양한 속성에 대해 자세히 알아보려면 여기를 참조하세요.](/ko/../../../../track/public-api-guide#understanding-the-different-attributes)
+* `runs`는 쿼리 패널이 워크스페이스에 있을 때 쿼리 패널 표현식에 자동으로 삽입되는 변수입니다. "값"은 해당 특정 워크스페이스에 대해 보이는 run 목록입니다. [run 내에서 사용할 수 있는 다양한 속성에 대해 자세히 알아보려면 여기를 참조하세요.](/ko/guides/track/public-api-guide/#understanding-the-different-attributes)
 * `summary`는 Run에 대한 Summary 오브젝트를 반환하는 op입니다. Op는 _매핑_됩니다. 즉, 이 op는 목록의 각 Run에 적용되어 Summary 오브젝트 목록이 생성됩니다.
 * `["cifar10_sample_table"]`은 `predictions` 파라미터가 있는 Pick op(대괄호로 표시)입니다. Summary 오브젝트는 사전 또는 맵과 같이 작동하므로 이 작업은 각 Summary 오브젝트에서 `predictions` 필드를 선택합니다.
 

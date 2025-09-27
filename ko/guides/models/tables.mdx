@@ -2,12 +2,12 @@
 title: Tables
 description: 데이터셋을 반복하고 모델 예측값을 이해합니다
 cascade:
-- url: /ko/guides//models/tables/:filename
+- slug: /ko/guides//models/tables/:filename
 menu:
   default:
     identifier: ko-guides-models-tables-_index
     parent: models
-url: /ko/guides//models/tables
+slug: /ko/guides//models/tables
 weight: 2
 ---
 
@@ -36,7 +36,7 @@ Table은 각 열에 단일 유형의 데이터가 있는 2차원 데이터 그�
 
 몇 줄의 코드로 table을 기록합니다.
 
-- [`wandb.init()`](/ko/ref/python/init): 결과를 추적하기 위해 [run](/ko/guides/models/track/runs/)을 생성합니다.
+- [`wandb.init()`](/ko/ref/python/init): 결과를 추적하기 위해 [run](/ko/guides/runs/)을 생성합니다.
 - [`wandb.Table()`](/ko/ref/python/data-types/table): 새 table 오브젝트를 생성합니다.
   - `columns`: 열 이름을 설정합니다.
   - `data`: table의 내용을 설정합니다.
@@ -51,5 +51,5 @@ run.log({"Table Name": my_table})
 ```
 
 ## 시작 방법
-* [퀵스타트](/ko/./tables-walkthrough): 데이터 table 기록, 데이터 시각화 및 데이터 쿼리에 대해 알아봅니다.
-* [Tables Gallery](/ko/./tables-gallery): Tables의 유스 케이스 예시를 확인하세요.
+* [퀵스타트](/ko/guides/models/tables/tables-walkthrough/): 데이터 table 기록, 데이터 시각화 및 데이터 쿼리에 대해 알아봅니다.
+* [Tables Gallery](/ko/guides/models/tables/tables-gallery/): Tables의 유스 케이스 예시를 확인하세요.

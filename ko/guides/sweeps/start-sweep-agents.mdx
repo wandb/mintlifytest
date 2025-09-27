@@ -24,7 +24,7 @@ entity/project/sweep_ID
 
 Jupyter Notebook 또는 Python 스크립트 내에서 W&B 스윕 에이전트를 시작하는 경우 W&B 스윕이 실행할 함수의 이름을 제공하세요.
 
-다음 코드 조각은 W&B로 에이전트를 시작하는 방법을 보여줍니다. 이미 구성 파일이 있고 W&B 스윕을 초기화했다고 가정합니다. 구성 파일을 정의하는 방법에 대한 자세한 내용은 [스윕 구성 정의](/ko/guides/models/sweeps/define-sweep-configuration/)을 참조하세요.
+다음 코드 조각은 W&B로 에이전트를 시작하는 방법을 보여줍니다. 이미 구성 파일이 있고 W&B 스윕을 초기화했다고 가정합니다. 구성 파일을 정의하는 방법에 대한 자세한 내용은 [스윕 구성 정의](/ko/guides/sweeps/define-sweep-configuration/)을 참조하세요.
 
 <Tabs>
 <Tab title="CLI">
@@ -46,14 +46,14 @@ wandb.agent(sweep_id=sweep_id, function=function_name)
 ### W&B 에이전트 중지
 
 <Warning>
-랜덤 및 베이지안 탐색은 영원히 실행됩니다. 커맨드라인, Python 스크립트 또는 [Sweeps UI](/ko/./visualize-sweep-results) 내에서 프로세스를 중지해야 합니다.
+랜덤 및 베이지안 탐색은 영원히 실행됩니다. 커맨드라인, Python 스크립트 또는 [Sweeps UI](/ko/guides/sweeps/sweeps-ui/) 내에서 프로세스를 중지해야 합니다.
 </Warning>
 
 선택적으로 스윕 에이전트가 시도해야 하는 W&B Runs의 수를 지정합니다. 다음 코드 조각은 CLI 및 Jupyter Notebook, Python 스크립트 내에서 최대 [W&B Runs](/ko/ref/python/run) 수를 설정하는 방법을 보여줍니다.
 
 <Tabs>
 <Tab title="Python 스크립트 또는 노트북">
-먼저 스윕을 초기화합니다. 자세한 내용은 [스윕 초기화](/ko/./initialize-sweeps)을 참조하세요.
+먼저 스윕을 초기화합니다. 자세한 내용은 [스윕 초기화](/ko/guides/sweeps/initialize-sweeps/)을 참조하세요.
 
 ```
 sweep_id = wandb.sweep(sweep_config)
@@ -71,7 +71,7 @@ wandb.agent(sweep_id, count=count)
 </Warning>
 </Tab>
 <Tab title="CLI">
-먼저 [`wandb sweep`](/ko/ref/cli/wandb-sweep) 코맨드로 스윕을 초기화합니다. 자세한 내용은 [스윕 초기화](/ko/./initialize-sweeps)을 참조하세요.
+먼저 [`wandb sweep`](/ko/ref/cli/wandb-sweep) 코맨드로 스윕을 초기화합니다. 자세한 내용은 [스윕 초기화](/ko/guides/sweeps/initialize-sweeps/)을 참조하세요.
 
 ```
 wandb sweep config.yaml

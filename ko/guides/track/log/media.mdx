@@ -308,7 +308,7 @@ wandb.log(
 </Tab>
 </Tabs>
 
-히스토그램이 요약에 있으면 [Run 페이지](/ko/guides/models/track/runs/)의 Overview 탭에 나타납니다. 히스토리가 있으면 차트 탭에서 시간 경과에 따른 구간의 히트맵이 플롯됩니다.
+히스토그램이 요약에 있으면 [Run 페이지](/ko/guides/runs/)의 Overview 탭에 나타납니다. 히스토리가 있으면 차트 탭에서 시간 경과에 따른 구간의 히트맵이 플롯됩니다.
 
 ## 3D 시각화
 
@@ -615,7 +615,7 @@ wandb.log({"video": wandb.Video(numpy_array_or_path_to_video, fps=4, format="gif
 
 numpy 배열이 제공되면 차원은 시간, 채널, 너비, 높이 순서라고 가정합니다. 기본적으로 4fps gif 이미지를 만듭니다 ([`ffmpeg`](https://www.ffmpeg.org) 및 [`moviepy`](https://pypi.org/project/moviepy/) python 라이브러리는 numpy 오브젝트를 전달할 때 필요합니다). 지원되는 형식은 `"gif"`, `"mp4"`, `"webm"` 및 `"ogg"`입니다. 문자열을 `wandb.Video`에 전달하면 파일을 업로드하기 전에 파일이 존재하고 지원되는 형식인지 확인합니다. `BytesIO` 오브젝트를 전달하면 지정된 형식을 확장자로 사용하여 임시 파일이 생성됩니다.
 
-W&B [Run](/ko/guides/models/track/runs/) 및 [Project](/ko/guides/models/track/project-page) 페이지에서 미디어 섹션에 비디오가 표시됩니다.
+W&B [Run](/ko/guides/runs/) 및 [Project](/ko/guides/track/project-page/) 페이지에서 미디어 섹션에 비디오가 표시됩니다.
 
 자세한 사용 정보는 [`video-file`](/ko/ref/query-panel/video-file)을 참조하세요.
 

@@ -26,7 +26,7 @@ W&B Sweeps を使用してハイパーパラメーターの最適化を自動化
 * **透明性**: このプロジェクトは使用されるすべてのアルゴリズムを引用し、[コードはオープンソース](https://github.com/wandb/wandb/blob/main/wandb/apis/public/sweeps.py)です。
 * **強力**: Sweeps はカスタマイズオプションを提供し、複数のマシンやノートパソコンで簡単に実行できます。
 
-詳しくは、[Sweep ドキュメント](/ja/guides/models/sweeps/)を参照してください。
+詳しくは、[Sweep ドキュメント](/ja/guides/sweeps/)を参照してください。
 
 ## このノートブックで扱う内容
 
@@ -187,7 +187,7 @@ sweep を設定する手順:
 * `bayes` の目標とメトリクスを設定する。例えば `val_loss` を最小化する
 * `hyperband` を使用して、実行中のものを早期終了する
 
-詳しくは [W&B Sweeps ドキュメント](/ja/guides/models/sweeps/define-sweep-configuration)を参照してください。
+詳しくは [W&B Sweeps ドキュメント](/ja/guides/sweeps/define-sweep-configuration/)を参照してください。
 
 ```python
 sweep_config = {
@@ -289,5 +289,5 @@ W&B で追跡および視覚化されたプロジェクトを [Gallery](https://
 ## 高度なセットアップ
 
 1. [環境変数](/ja/guides/hosting/env-vars/): 管理されたクラスターでのトレーニングのために API キーを設定します。
-2. [オフラインモード](/ja/support/kb-articles/run_wandb_offline)
+2. [オフラインモード](/ja/support/run_wandb_offline/)
 3. [オンプレミス](/ja/guides/hosting/hosting-options/self-managed): W&B をプライベートクラウドまたはインフラストラクチャ内のエアギャップサーバーにインストールします。ローカルインストールは学術機関および企業チームに適しています。

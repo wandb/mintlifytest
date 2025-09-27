@@ -37,7 +37,7 @@ API 키는 사용자의 장치를 W&B에 인증합니다. 사용자 프로필에
 
 <Tabs>
 <Tab title="커맨드라인">
-1. `WANDB_API_KEY` [환경 변수](/ko/guides/models/track/environment-variables)를 API 키로 설정합니다.
+1. `WANDB_API_KEY` [환경 변수](/ko/guides/track/environment-variables/)를 API 키로 설정합니다.
 
     ```bash
     export WANDB_API_KEY=<your_api_key>
@@ -146,7 +146,7 @@ class WandbExampleFlow(FlowSpec):
 
 ## 프로그램 방식으로 데이터에 액세스
 
-[`wandb` 클라이언트 라이브러리](/ko/ref/python/)를 사용하여 기록 중인 원래 Python 프로세스 내부, [웹 앱 UI](/ko/guides/models/track/workspaces) 또는 [Public API](/ko/ref/python/public-api/)를 사용하여 프로그램 방식으로 캡처한 정보에 액세스할 수 있습니다. `Parameter`는 W&B의 [`config`](/ko/guides/models/track/config)에 저장되며 [Overview 탭](/ko/guides/models/track/runs/#overview-tab)에서 찾을 수 있습니다. `datasets`, `models` 및 `others`는 [W&B Artifacts](/ko/guides/core/artifacts/)에 저장되며 [Artifacts 탭](/ko/guides/models/track/runs/#artifacts-tab)에서 찾을 수 있습니다. 기본 Python 유형은 W&B의 [`summary`](/ko/guides/models/track/log/) 사전에 저장되며 Overview 탭에서 찾을 수 있습니다. API를 사용하여 외부에서 이 정보를 프로그램 방식으로 가져오는 방법에 대한 자세한 내용은 [Public API 가이드](/ko/guides/models/track/public-api-guide)를 참조하십시오.
+[`wandb` 클라이언트 라이브러리](/ko/ref/python/)를 사용하여 기록 중인 원래 Python 프로세스 내부, [웹 앱 UI](/ko/guides/track/workspaces/) 또는 [Public API](/ko/ref/python/public-api/)를 사용하여 프로그램 방식으로 캡처한 정보에 액세스할 수 있습니다. `Parameter`는 W&B의 [`config`](/ko/guides/track/config/)에 저장되며 [Overview 탭](/ko/guides/runs/#overview-tab)에서 찾을 수 있습니다. `datasets`, `models` 및 `others`는 [W&B Artifacts](/ko/guides/artifacts/)에 저장되며 [Artifacts 탭](/ko/guides/runs/#artifacts-tab)에서 찾을 수 있습니다. 기본 Python 유형은 W&B의 [`summary`](/ko/guides/track/log/) 사전에 저장되며 Overview 탭에서 찾을 수 있습니다. API를 사용하여 외부에서 이 정보를 프로그램 방식으로 가져오는 방법에 대한 자세한 내용은 [Public API 가이드](/ko/guides/track/public-api-guide/)를 참조하십시오.
 
 ### 빠른 참조
 

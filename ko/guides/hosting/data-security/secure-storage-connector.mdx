@@ -10,8 +10,8 @@ weight: 1
 Bring your own bucket(BYOB)을 사용하면 W&B 아티팩트 및 기타 관련 민감한 데이터를 자체 클라우드 또는 온프레미스 인프라에 저장할 수 있습니다. [전용 클라우드](/ko/guides/hosting/hosting-options/dedicated_cloud) 또는 [SaaS Cloud](/guides/hosting/hosting-options/saas_cloud)의 경우 버킷에 저장하는 데이터는 W&B 관리 인프라에 복사되지 않습니다.
 
 <Note>
-* W&B SDK / CLI / UI와 버킷 간의 통신은 [사전 서명된 URL](/ko/./presigned-urls)을 사용하여 이루어집니다.
-* W&B는 가비지 컬렉션 프로세스를 사용하여 W&B Artifacts를 삭제합니다. 자세한 내용은 [Artifacts 삭제](/ko/guides/core/artifacts/manage-data/delete-artifacts)를 참조하세요.
+* W&B SDK / CLI / UI와 버킷 간의 통신은 [사전 서명된 URL](/ko/guides/hosting/data-security/presigned-urls/)을 사용하여 이루어집니다.
+* W&B는 가비지 컬렉션 프로세스를 사용하여 W&B Artifacts를 삭제합니다. 자세한 내용은 [Artifacts 삭제](/ko/guides/artifacts/delete-artifacts/)를 참조하세요.
 * 버킷을 구성할 때 하위 경로를 지정하여 W&B가 버킷 루트의 폴더에 파일을 저장하지 않도록 할 수 있습니다. 이는 조직의 버킷 관리 정책을 준수하는 데 도움이 될 수 있습니다.
 </Note>
 
@@ -190,7 +190,7 @@ W&B는 필요한 엑세스 메커니즘 및 관련 IAM 권한과 함께 스토�
         ]
         ```
 
-    5. 클라우드 인프라 또는 사용자 브라우저의 AI 워크로드가 버킷에 엑세스하는 데 사용하는 [사전 서명된 URL](/ko/./presigned-urls)을 생성하는 데 필요한 권한인 W&B 플랫폼을 호스팅하는 AWS 계정에 필요한 S3 권한을 부여합니다.
+    5. 클라우드 인프라 또는 사용자 브라우저의 AI 워크로드가 버킷에 엑세스하는 데 사용하는 [사전 서명된 URL](/ko/guides/hosting/data-security/presigned-urls/)을 생성하는 데 필요한 권한인 W&B 플랫폼을 호스팅하는 AWS 계정에 필요한 S3 권한을 부여합니다.
 
         ```json
         {
@@ -230,7 +230,7 @@ W&B는 필요한 엑세스 메커니즘 및 관련 IAM 권한과 함께 스토�
         * [SaaS Cloud](/ko/guides/hosting/hosting-options/saas_cloud): `arn:aws:iam::725579432336:role/WandbIntegration`
         * [전용 클라우드](/ko/guides/hosting/hosting-options/dedicated_cloud): `arn:aws:iam::830241207209:root`
   
-  자세한 내용은 [AWS 자체 관리 호스팅 가이드](/ko/guides/hosting/hosting-options/self-managed/install-on-public-cloud/aws-tf)를 참조하십시오.
+  자세한 내용은 [AWS 자체 관리 호스팅 가이드](/ko/guides/hosting/self-managed/aws-tf/)를 참조하십시오.
 </Tab>
 <Tab title="GCP">
 1. GCS 버킷 프로비저닝

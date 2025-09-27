@@ -13,23 +13,23 @@ weight: 1
 
 <Card title="Try in Colab" href="https://colab.research.google.com/drive/1wX0OSVxZJDHRsZaOaOEDx-lLUrO1hHgP" icon="python"/>
 
-W&B Launch を使用して、トレーニング [Runs](/ja/guides/models/track/runs/) をデスクトップから Amazon SageMaker、Kubernetes などの計算リソースに簡単にスケールできます。W&B Launch の設定が完了すると、トレーニング スクリプト、モデルの評価スイート、プロダクション推論用のモデルの準備などを、数回のクリックとコマンドで迅速に実行できます。
+W&B Launch を使用して、トレーニング [Runs](/ja/guides/runs/) をデスクトップから Amazon SageMaker、Kubernetes などの計算リソースに簡単にスケールできます。W&B Launch の設定が完了すると、トレーニング スクリプト、モデルの評価スイート、プロダクション推論用のモデルの準備などを、数回のクリックとコマンドで迅速に実行できます。
 
 ## 仕組み
 
 Launch は、**launch jobs**、**queues**、**agents** の3つの基本的なコンポーネントで構成されています。
 
-[*launch job*](/ja/./launch-terminology#launch-job)は、ML ワークフローでタスクを設定および実行するためのブループリントです。Launch Job を作成したら、[*launch queue*](/ja/./launch-terminology#launch-queue) に追加できます。Launch Queue は、Amazon SageMaker や Kubernetes クラスターなどの特定のコンピュートターゲットリソースに Jobs を構成して送信できる先入れ先出し (FIFO) のキューです。
+[*launch job*](/ja/launch/launch-terminology#launch-job)は、ML ワークフローでタスクを設定および実行するためのブループリントです。Launch Job を作成したら、[*launch queue*](/ja/launch/launch-terminology#launch-queue) に追加できます。Launch Queue は、Amazon SageMaker や Kubernetes クラスターなどの特定のコンピュートターゲットリソースに Jobs を構成して送信できる先入れ先出し (FIFO) のキューです。
 
-ジョブがキューに追加されると、[*launch agents*](/ja/./launch-terminology#launch-agent) がそのキューをポーリングし、キューによってターゲットとされたシステムでジョブを実行します。
+ジョブがキューに追加されると、[*launch agents*](/ja/launch/launch-terminology#launch-agent) がそのキューをポーリングし、キューによってターゲットとされたシステムでジョブを実行します。
 
 <Frame>
     <img src="/images/launch/launch_overview.png"  />
 </Frame>
 
-ユースケースに基づいて、あなた自身またはチームの誰かが選択した [compute resource target](/ja/./launch-terminology#target-resources)（たとえば、Amazon SageMaker）に従って Launch Queue を設定し、独自のインフラストラクチャーに Launch エージェントをデプロイします。
+ユースケースに基づいて、あなた自身またはチームの誰かが選択した [compute resource target](/ja/launch/launch-terminology#target-resources)（たとえば、Amazon SageMaker）に従って Launch Queue を設定し、独自のインフラストラクチャーに Launch エージェントをデプロイします。
 
-Launch Jobs、キューの仕組み、Launch エージェント、および W&B Launch の動作に関する追加情報については、[Terms and Concepts](/ja/./launch-terminology) ページを参照してください。
+Launch Jobs、キューの仕組み、Launch エージェント、および W&B Launch の動作に関する追加情報については、[Terms and Concepts](/ja/launch/launch-terminology) ページを参照してください。
 
 ## 開始方法
 
@@ -37,7 +37,7 @@ Launch Jobs、キューの仕組み、Launch エージェント、および W&B 
 
 * 初めて W&B Launch を使用する場合は、[Walkthrough](#walkthrough) ガイドを閲覧することをお勧めします。
 * [W&B Launch](/ja/launch/set-up-launch/) の設定方法を学びます。
-* [Launch Job](/ja/./create-and-deploy-jobs/create-launch-job) を作成します。
+* [Launch Job](/ja/launch/create-and-deploy-jobs/create-launch-job) を作成します。
 * Triton へのデプロイや LLM の評価などの一般的なタスクのテンプレートについては、W&B Launch の[公開ジョブ GitHub リポジトリ](https://github.com/wandb/launch-jobs) をチェックしてください。
     * このリポジトリから作成された Launch Job は、この公開された [`wandb/jobs` project](https://wandb.ai/wandb/jobs/jobs) W&B プロジェクトで閲覧できます。
 
@@ -79,7 +79,7 @@ pip install wandb>=0.17.1
 </Tabs>
 
 ## Create a launch job
-Docker イメージ、git リポジトリから、またはローカルソースコードから3つの方法のいずれかで [Launch Job](/ja/./launch-terminology#launch-job) を作成します。
+Docker イメージ、git リポジトリから、またはローカルソースコードから3つの方法のいずれかで [Launch Job](/ja/launch/launch-terminology#launch-job) を作成します。
 
 <Tabs>
 <Tab title="Tab">

@@ -16,7 +16,7 @@ import EnterpriseCloudOnly from "/snippets/en/_includes/enterprise-cloud-only.md
 이 페이지에서는 webhook [자동화](/ko/guides/core/automations/)를 만드는 방법을 보여줍니다. Slack 자동화를 만들려면 [Slack 자동화 만들기](/ko/guides/core/automations/create-automations/slack)를 참조하세요.
 
 개략적으로 webhook 자동화를 만들려면 다음 단계를 수행합니다.
-1. 필요한 경우 액세스 토큰, 비밀번호 또는 SSH 키와 같이 자동화에 필요한 각 민감한 문자열에 대해 [W&B secret 만들기](/ko/guides/core/secrets)를 수행합니다. secret은 팀 설정에 정의되어 있습니다.
+1. 필요한 경우 액세스 토큰, 비밀번호 또는 SSH 키와 같이 자동화에 필요한 각 민감한 문자열에 대해 [W&B secret 만들기](/ko/guides/secrets/)를 수행합니다. secret은 팀 설정에 정의되어 있습니다.
 1. [webhook 만들기](#create-a-webhook)를 수행하여 엔드포인트 및 인증 세부 정보를 정의하고 통합에 필요한 secret에 대한 엑세스 권한을 부여합니다.
 1. [자동화 만들기](#create-an-automation)를 수행하여 감시할 [이벤트](/ko/guides/core/automations/automation-events)와 W&B가 보낼 페이로드를 정의합니다. 페이로드에 필요한 secret에 대한 자동화 엑세스 권한을 부여합니다.
 
@@ -24,14 +24,14 @@ import EnterpriseCloudOnly from "/snippets/en/_includes/enterprise-cloud-only.md
 팀 관리자는 팀에 대한 webhook을 추가할 수 있습니다.
 
 <Note>
-webhook에 Bearer 토큰이 필요하거나 페이로드에 민감한 문자열이 필요한 경우 webhook을 만들기 전에 [해당 문자열을 포함하는 secret을 만드세요](/ko/guides/core/secrets#add-a-secret). webhook에 대해 최대 하나의 엑세스 토큰과 다른 하나의 secret을 구성할 수 있습니다. webhook의 인증 및 권한 부여 요구 사항은 webhook의 서비스에 의해 결정됩니다.
+webhook에 Bearer 토큰이 필요하거나 페이로드에 민감한 문자열이 필요한 경우 webhook을 만들기 전에 [해당 문자열을 포함하는 secret을 만드세요](/ko/guides/secrets/#add-a-secret). webhook에 대해 최대 하나의 엑세스 토큰과 다른 하나의 secret을 구성할 수 있습니다. webhook의 인증 및 권한 부여 요구 사항은 webhook의 서비스에 의해 결정됩니다.
 </Note>
 
 1. W&B에 로그인하고 팀 설정 페이지로 이동합니다.
 2. **Webhooks** 섹션에서 **New webhook**을 클릭합니다.
 3. webhook의 이름을 입력합니다.
 4. webhook의 엔드포인트 URL을 입력합니다.
-5. webhook에 Bearer 토큰이 필요한 경우 **Access token**을 해당 토큰을 포함하는 [secret](/ko/guides/core/secrets)으로 설정합니다. webhook 자동화를 사용할 때 W&B는 `Authorization: Bearer` HTTP 헤더를 엑세스 토큰으로 설정하고 `${ACCESS_TOKEN}` [페이로드 변수](#payload-variables)에서 토큰에 엑세스할 수 있습니다.
+5. webhook에 Bearer 토큰이 필요한 경우 **Access token**을 해당 토큰을 포함하는 [secret](/ko/guides/secrets/)으로 설정합니다. webhook 자동화를 사용할 때 W&B는 `Authorization: Bearer` HTTP 헤더를 엑세스 토큰으로 설정하고 `${ACCESS_TOKEN}` [페이로드 변수](#payload-variables)에서 토큰에 엑세스할 수 있습니다.
 6. webhook의 페이로드에 비밀번호 또는 기타 민감한 문자열이 필요한 경우 **Secret**을 해당 문자열을 포함하는 secret으로 설정합니다. webhook을 사용하는 자동화를 구성할 때 이름 앞에 `$`를 붙여 [페이로드 변수](#payload-variables)로 secret에 엑세스할 수 있습니다.
 
     webhook의 엑세스 토큰이 secret에 저장된 경우 secret을 엑세스 토큰으로 지정하려면 _또한_ 다음 단계를 완료해야 합니다.
@@ -172,7 +172,7 @@ ${project_name} --> "model-registry"
 ${entity_name} --> "<entity>"
 ```
 
-템플릿 문자열을 사용하여 W&B에서 GitHub Actions 및 기타 툴로 컨텍스트를 동적으로 전달합니다. 이러한 툴이 Python 스크립트를 호출할 수 있는 경우 [W&B API](/ko/guides/core/artifacts/download-and-use-an-artifact)를 통해 등록된 모델 아티팩트를 사용할 수 있습니다.
+템플릿 문자열을 사용하여 W&B에서 GitHub Actions 및 기타 툴로 컨텍스트를 동적으로 전달합니다. 이러한 툴이 Python 스크립트를 호출할 수 있는 경우 [W&B API](/ko/guides/artifacts/download-and-use-an-artifact/)를 통해 등록된 모델 아티팩트를 사용할 수 있습니다.
 
 - 리포지토리 디스패치에 대한 자세한 내용은 [GitHub Marketplace의 공식 문서](https://github.com/marketplace/actions/repository-dispatch)를 참조하세요.
 

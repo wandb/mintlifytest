@@ -9,7 +9,7 @@ menu:
 
 <Card title="Try in Colab" href="https://colab.research.google.com/github/wandb/examples/blob/kas-artifacts-ttl-colab/colabs/wandb-artifacts/WandB_Artifacts_Time_to_live_TTL_Walkthrough.ipynb" icon="python"/>
 
-W&B Artifact time-to-live (TTL) 정책을 사용하여 Artifacts가 W&B에서 삭제되는 시점을 예약하세요. 아티팩트를 삭제하면 W&B는 해당 아티팩트를 *soft-delete* 로 표시합니다. 즉, 아티팩트는 삭제 대상으로 표시되지만 파일은 즉시 스토리지에서 삭제되지 않습니다. W&B에서 아티팩트를 삭제하는 방법에 대한 자세한 내용은 [아티팩트 삭제](/ko/./delete-artifacts) 페이지를 참조하세요.
+W&B Artifact time-to-live (TTL) 정책을 사용하여 Artifacts가 W&B에서 삭제되는 시점을 예약하세요. 아티팩트를 삭제하면 W&B는 해당 아티팩트를 *soft-delete* 로 표시합니다. 즉, 아티팩트는 삭제 대상으로 표시되지만 파일은 즉시 스토리지에서 삭제되지 않습니다. W&B에서 아티팩트를 삭제하는 방법에 대한 자세한 내용은 [아티팩트 삭제](/ko/guides/artifacts/delete-artifacts/) 페이지를 참조하세요.
 
 [이](https://www.youtube.com/watch?v=hQ9J6BoVmnc) 비디오 튜토리얼에서 W&B 앱에서 Artifacts TTL로 데이터 보존을 관리하는 방법을 알아보세요.
 
@@ -17,7 +17,7 @@ W&B Artifact time-to-live (TTL) 정책을 사용하여 Artifacts가 W&B에서 �
 W&B는 모델 레지스트리에 연결된 모델 아티팩트에 대한 TTL 정책을 설정하는 옵션을 비활성화합니다. 이는 연결된 모델이 프로덕션 워크플로우에서 사용되는 경우 실수로 만료되지 않도록 하기 위함입니다.
 </Note>
 <Note>
-* 팀 관리자만 [팀 설정](/ko/guides/models/app/settings-page/teams)을 보고 (1) 누가 TTL 정책을 설정하거나 편집할 수 있는지 허용하거나 (2) 팀 기본 TTL을 설정하는 것과 같은 팀 수준 TTL 설정에 엑세스할 수 있습니다.
+* 팀 관리자만 [팀 설정](/ko/guides/app/settings-page/teams/)을 보고 (1) 누가 TTL 정책을 설정하거나 편집할 수 있는지 허용하거나 (2) 팀 기본 TTL을 설정하는 것과 같은 팀 수준 TTL 설정에 엑세스할 수 있습니다.
 * W&B 앱 UI에서 아티팩트 세부 정보에 TTL 정책을 설정하거나 편집하는 옵션이 표시되지 않거나 프로그래밍 방식으로 TTL을 설정해도 아티팩트의 TTL 속성이 성공적으로 변경되지 않으면 팀 관리자가 해당 권한을 부여하지 않은 것입니다.
 </Note>
 
@@ -30,7 +30,7 @@ W&B는 모델 레지스트리에 연결된 모델 아티팩트에 대한 TTL 정
 - `job`
 - `wandb-*` 로 시작하는 모든 아티팩트 유형
 
-[W&B 플랫폼](/ko/guides/core/artifacts/explore-and-traverse-an-artifact-graph) 또는 프로그래밍 방식으로 아티팩트의 유형을 확인할 수 있습니다.
+[W&B 플랫폼](/ko/guides/artifacts/explore-and-traverse-an-artifact-graph/) 또는 프로그래밍 방식으로 아티팩트의 유형을 확인할 수 있습니다.
 
 ```python
 import wandb
@@ -69,15 +69,15 @@ print(artifact.type)
 W&B Python SDK를 사용하여 아티팩트를 생성할 때 TTL 정책을 정의합니다. TTL 정책은 일반적으로 일 단위로 정의됩니다.
 
 <Note>
-아티팩트를 생성할 때 TTL 정책을 정의하는 것은 일반적으로 [아티팩트를 생성하는 방법](/ko/../construct-an-artifact)과 유사합니다. 단, 시간 델타를 아티팩트의 `ttl` 속성에 전달한다는 점만 다릅니다.
+아티팩트를 생성할 때 TTL 정책을 정의하는 것은 일반적으로 [아티팩트를 생성하는 방법](/ko/guides/artifacts/construct-an-artifact/)과 유사합니다. 단, 시간 델타를 아티팩트의 `ttl` 속성에 전달한다는 점만 다릅니다.
 </Note>
 
 단계는 다음과 같습니다.
 
-1. [아티팩트 만들기](/ko/../construct-an-artifact).
-2. 파일, 디렉토리 또는 참조와 같은 [아티팩트에 콘텐츠 추가](/ko/../construct-an-artifact#add-files-to-an-artifact).
+1. [아티팩트 만들기](/ko/guides/artifacts/construct-an-artifact/).
+2. 파일, 디렉토리 또는 참조와 같은 [아티팩트에 콘텐츠 추가](/ko/guides/artifacts/construct-an-artifact/#add-files-to-an-artifact).
 3. Python 표준 라이브러리의 일부인 [`datetime.timedelta`](https://docs.python.org/3/library/datetime.html) 데이터 유형으로 TTL 시간 제한을 정의합니다.
-4. [아티팩트 로깅](/ko/../construct-an-artifact#3-save-your-artifact-to-the-wb-server).
+4. [아티팩트 로깅](/ko/guides/artifacts/construct-an-artifact/#3-save-your-artifact-to-the-wb-server).
 
 다음 코드 조각은 아티팩트를 만들고 TTL 정책을 설정하는 방법을 보여줍니다.
 
@@ -104,7 +104,7 @@ W&B App UI 또는 W&B Python SDK를 사용하여 이미 존재하는 아티팩�
 
 <Tabs>
 <Tab title="Python SDK">
-1. [아티팩트 가져오기](/ko/../download-and-use-an-artifact).
+1. [아티팩트 가져오기](/ko/guides/artifacts/download-and-use-an-artifact/).
 2. 시간 델타를 아티팩트의 `ttl` 속성에 전달합니다.
 3. [`save`](/ko/ref/python/run#save) 메소드로 아티팩트를 업데이트합니다.
 
@@ -183,7 +183,7 @@ W&B Python SDK 또는 W&B App UI를 사용하여 특정 아티팩트 버전에 �
 
 <Tabs>
 <Tab title="Python SDK">
-1. [아티팩트 가져오기](/ko/../download-and-use-an-artifact).
+1. [아티팩트 가져오기](/ko/guides/artifacts/download-and-use-an-artifact/).
 2. 아티팩트의 `ttl` 속성을 `None` 으로 설정합니다.
 3. [`save`](/ko/ref/python/run#save) 메소드로 아티팩트를 업데이트합니다.
 

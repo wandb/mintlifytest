@@ -5,7 +5,7 @@ menu:
   default:
     identifier: ko-guides-hosting-hosting-options-self-managed-kubernetes-operator-_index
     parent: self-managed
-url: /ko/guides/hosting/operator
+slug: /ko/guides/hosting/operator
 weight: 2
 ---
 
@@ -60,16 +60,16 @@ metadata:
 ### W&B Kubernetes Operator 사용 요구 사항
 W&B Kubernetes operator로 W&B를 배포하려면 다음 요구 사항을 충족해야 합니다.
 
-[참조 아키텍처](/ko/../ref-arch#infrastructure-requirements)를 참조하세요. 또한 [유효한 W&B Server 라이선스를 획득하세요](/ko/../#obtain-your-wb-server-license).
+[참조 아키텍처](/ko/guides/hosting/self-managed/ref-arch/#infrastructure-requirements)를 참조하세요. 또한 [유효한 W&B Server 라이선스를 획득하세요](/#obtain-your-wb-server-license).
 
-자체 관리 설치를 설정하고 구성하는 방법에 대한 자세한 설명은 [이](/ko/../bare-metal) 가이드를 참조하세요.
+자체 관리 설치를 설정하고 구성하는 방법에 대한 자세한 설명은 [이](/ko/guides/hosting/self-managed/bare-metal/) 가이드를 참조하세요.
 
 설치 방법에 따라 다음 요구 사항을 충족해야 할 수도 있습니다.
 * 올바른 Kubernetes 클러스터 컨텍스트로 설치 및 구성된 Kubectl.
 * Helm이 설치되어 있습니다.
 
 ### 에어 갭 설치
-에어 갭 환경에 W&B Kubernetes Operator를 설치하는 방법은 [Kubernetes를 사용하여 에어 갭 환경에 W&B 배포](/ko/operator-airgapped) 튜토리얼을 참조하세요.
+에어 갭 환경에 W&B Kubernetes Operator를 설치하는 방법은 [Kubernetes를 사용하여 에어 갭 환경에 W&B 배포](/ko/guides/hosting/self-managed/operator-airgapped/) 튜토리얼을 참조하세요.
 
 ## W&B Server 애플리케이션 배포
 이 섹션에서는 W&B Kubernetes operator를 배포하는 다양한 방법을 설명합니다.
@@ -220,7 +220,7 @@ W&B는 AWS, GCP 및 Azure용 Terraform Modules 세트를 제공합니다. 이러
 
 이 통합은 W&B Kubernetes Operator가 최소한의 설정으로 인스턴스에 사용할 준비가 되어 있는지 확인하여 클라우드 환경에서 W&B Server를 배포하고 관리하는 간소화된 경로를 제공합니다.
 
-이러한 모듈을 사용하는 방법에 대한 자세한 설명은 문서의 자체 관리 설치 섹션의 [이 섹션](/ko/../#deploy-wb-server-within-self-managed-cloud-accounts)을 참조하세요.
+이러한 모듈을 사용하는 방법에 대한 자세한 설명은 문서의 자체 관리 설치 섹션의 [이 섹션](/#deploy-wb-server-within-self-managed-cloud-accounts)을 참조하세요.
 
 ### 설치 확인
 
@@ -342,7 +342,7 @@ W&B Operator는 W&B Server의 기본 및 권장 설치 방법입니다. 질문�
 
 ### Operator 기반 AWS Terraform Modules로 마이그레이션
 
-마이그레이션 프로세스에 대한 자세한 설명은 [여기](/ko/../install-on-public-cloud/aws-tf#migrate-to-operator-based-aws-terraform-modules)를 계속 진행하세요.
+마이그레이션 프로세스에 대한 자세한 설명은 [여기](/ko/guides/hosting/operator/#deploy-wb-with-helm-cli)를 계속 진행하세요.
 
 ### Operator 기반 GCP Terraform Modules로 마이그레이션
 

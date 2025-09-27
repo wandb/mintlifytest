@@ -5,7 +5,7 @@ menu:
   launch:
     identifier: ko-launch-walkthrough
     parent: launch
-url: /ko/guides//launch/walkthrough
+slug: /ko/guides//launch/walkthrough
 weight: 1
 ---
 
@@ -13,23 +13,23 @@ weight: 1
 
 <Card title="Try in Colab" href="https://colab.research.google.com/drive/1wX0OSVxZJDHRsZaOaOEDx-lLUrO1hHgP" icon="python"/>
 
-W&B Launch를 사용하면 데스크톱에서 Amazon SageMaker, Kubernetes 등과 같은 컴퓨팅 리소스로 트레이닝 [runs](/ko/guides/models/track/runs/)을 쉽게 확장할 수 있습니다. W&B Launch가 구성되면 몇 번의 클릭과 코맨드만으로 트레이닝 스크립트, 모델 평가 스위트, 프로덕션 추론을 위한 모델 준비 등을 빠르게 실행할 수 있습니다.
+W&B Launch를 사용하면 데스크톱에서 Amazon SageMaker, Kubernetes 등과 같은 컴퓨팅 리소스로 트레이닝 [runs](/ko/guides/runs/)을 쉽게 확장할 수 있습니다. W&B Launch가 구성되면 몇 번의 클릭과 코맨드만으로 트레이닝 스크립트, 모델 평가 스위트, 프로덕션 추론을 위한 모델 준비 등을 빠르게 실행할 수 있습니다.
 
 ## 작동 방식
 
 Launch는 **launch jobs**, **queues**, **agents**의 세 가지 기본 구성 요소로 구성됩니다.
 
-[*launch job*](/ko/./launch-terminology#launch-job)은 머신러닝 워크플로우에서 작업을 구성하고 실행하기 위한 청사진입니다. launch job이 있으면 [*launch queue*](/ko/./launch-terminology#launch-queue)에 추가할 수 있습니다. launch queue는 Amazon SageMaker 또는 Kubernetes 클러스터와 같은 특정 컴퓨팅 대상 리소스에 작업을 구성하고 제출할 수 있는 선입선출 (FIFO) queue입니다.
+[*launch job*](/ko/launch/launch-terminology#launch-job)은 머신러닝 워크플로우에서 작업을 구성하고 실행하기 위한 청사진입니다. launch job이 있으면 [*launch queue*](/ko/launch/launch-terminology#launch-queue)에 추가할 수 있습니다. launch queue는 Amazon SageMaker 또는 Kubernetes 클러스터와 같은 특정 컴퓨팅 대상 리소스에 작업을 구성하고 제출할 수 있는 선입선출 (FIFO) queue입니다.
 
-작업이 queue에 추가되면 [*launch agents*](/ko/./launch-terminology#launch-agent)가 해당 queue를 폴링하고 queue가 대상으로 하는 시스템에서 작업을 실행합니다.
+작업이 queue에 추가되면 [*launch agents*](/ko/launch/launch-terminology#launch-agent)가 해당 queue를 폴링하고 queue가 대상으로 하는 시스템에서 작업을 실행합니다.
 
 <Frame>
     <img src="/images/launch/launch_overview.png"  />
 </Frame>
 
-유스 케이스에 따라 귀하 (또는 팀의 누군가)는 선택한 [컴퓨팅 리소스 대상](/ko/./launch-terminology#target-resources) (예: Amazon SageMaker)에 따라 launch queue를 구성하고 인프라에 launch agent를 배포합니다.
+유스 케이스에 따라 귀하 (또는 팀의 누군가)는 선택한 [컴퓨팅 리소스 대상](/ko/launch/launch-terminology#target-resources) (예: Amazon SageMaker)에 따라 launch queue를 구성하고 인프라에 launch agent를 배포합니다.
 
-launch jobs, queue 작동 방식, launch agents 및 W&B Launch 작동 방식에 대한 추가 정보는 [용어 및 개념](/ko/./launch-terminology) 페이지를 참조하십시오.
+launch jobs, queue 작동 방식, launch agents 및 W&B Launch 작동 방식에 대한 추가 정보는 [용어 및 개념](/ko/launch/launch-terminology) 페이지를 참조하십시오.
 
 ## 시작 방법
 
@@ -37,7 +37,7 @@ launch jobs, queue 작동 방식, launch agents 및 W&B Launch 작동 방식에 
 
 * W&B Launch를 처음 사용하는 경우 [워크쓰루](#walkthrough) 가이드를 살펴보는 것이 좋습니다.
 * [W&B Launch 설정 방법](/ko/launch/set-up-launch/)을 알아봅니다.
-* [launch job 만들기](/ko/./create-and-deploy-jobs/create-launch-job)
+* [launch job 만들기](/ko/launch/create-and-deploy-jobs/create-launch-job)
 * W&B Launch [public jobs GitHub repository](https://github.com/wandb/launch-jobs)에서 [Triton에 배포](https://github.com/wandb/launch-jobs/tree/main/jobs/deploy_to_nvidia_triton), [LLM 평가](https://github.com/wandb/launch-jobs/tree/main/jobs/openai_evals) 등과 같은 일반적인 작업 템플릿을 확인하십시오.
     * 이 리포지토리에서 생성된 launch jobs는 이 public [`wandb/jobs` project](https://wandb.ai/wandb/jobs/jobs) W&B project에서 볼 수 있습니다.
 
@@ -79,7 +79,7 @@ pip install wandb>=0.17.1
 </Tabs>
 
 ## launch job 만들기
-다음 세 가지 방법 중 하나로 [launch job](/ko/./launch-terminology#launch-job)을 만듭니다. Docker 이미지, git 리포지토리 또는 로컬 소스 코드를 사용합니다.
+다음 세 가지 방법 중 하나로 [launch job](/ko/launch/launch-terminology#launch-job)을 만듭니다. Docker 이미지, git 리포지토리 또는 로컬 소스 코드를 사용합니다.
 
 <Tabs>
 <Tab title="Tab">

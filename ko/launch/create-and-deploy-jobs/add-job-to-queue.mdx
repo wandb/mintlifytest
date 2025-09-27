@@ -4,7 +4,7 @@ menu:
   launch:
     identifier: ko-launch-create-and-deploy-jobs-add-job-to-queue
     parent: create-and-deploy-jobs
-url: /ko/guides//launch/add-job-to-queue
+slug: /ko/guides//launch/add-job-to-queue
 ---
 
 다음 페이지에서는 launch queue에 launch job을 추가하는 방법을 설명합니다.
@@ -31,7 +31,7 @@ W&B App을 사용하여 프로그래밍 방식으로 queue에 job을 추가합�
     <img src="/images/launch/view_jobs.png"  />
 </Frame>
 4. Job 이름 옆에 있는 **Launch** 버튼을 선택합니다. 페이지 오른쪽에 모달이 나타납니다.
-5. **Job version** 드롭다운에서 사용하려는 launch job 버전을 선택합니다. Launch job은 다른 [W&B Artifact](/ko/guides/core/artifacts/create-a-new-artifact-version)처럼 버전이 관리됩니다. job을 실행하는 데 사용되는 소프트웨어 종속성 또는 소스 코드를 수정하면 동일한 launch job의 다른 버전이 생성됩니다.
+5. **Job version** 드롭다운에서 사용하려는 launch job 버전을 선택합니다. Launch job은 다른 [W&B Artifact](/ko/guides/artifacts/create-a-new-artifact-version)처럼 버전이 관리됩니다. job을 실행하는 데 사용되는 소프트웨어 종속성 또는 소스 코드를 수정하면 동일한 launch job의 다른 버전이 생성됩니다.
 6. **Overrides** 섹션 내에서 launch job에 대해 구성된 모든 입력에 대해 새 값을 제공합니다. 일반적인 재정의에는 새 진입점 커맨드, 인수 또는 새 W&B run의 `wandb.config`의 값이 포함됩니다.
   <Frame>
     <img src="/images/launch/create_starter_queue_gs.png"  />
@@ -49,7 +49,7 @@ W&B App을 사용하여 프로그래밍 방식으로 queue에 job을 추가합�
 11. **Launch now** 버튼을 선택합니다.
 </Tab>
 <Tab title="Tab">
-`wandb launch` 커맨드를 사용하여 queue에 job을 추가합니다. 하이퍼파라미터 재정의를 사용하여 JSON 설정을 만듭니다. 예를 들어 [퀵스타트](/ko/../walkthrough) 가이드의 스크립트를 사용하여 다음 재정의를 사용하여 JSON 파일을 만듭니다.
+`wandb launch` 커맨드를 사용하여 queue에 job을 추가합니다. 하이퍼파라미터 재정의를 사용하여 JSON 설정을 만듭니다. 예를 들어 [퀵스타트](/ko/launch/walkthrough) 가이드의 스크립트를 사용하여 다음 재정의를 사용하여 JSON 파일을 만듭니다.
 
 ```json title="config.json"
 {

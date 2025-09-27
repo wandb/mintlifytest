@@ -7,7 +7,7 @@ menu:
 slug: /ja/guides/launch/job-inputs
 ---
 
-Launch のコア体験は、ハイパーパラメーターやデータセットのような異なるジョブの入力を簡単に実験し、それらのジョブを適切なハードウェアにルーティングすることです。一度ジョブが作成されると、元の作成者以外のユーザーも W&B GUI または CLI を介してこれらの入力を調整できます。CLI または UI からジョブ入力を設定する方法については、[Enqueue jobs](/ja/./add-job-to-queue) ガイドを参照してください。
+Launch のコア体験は、ハイパーパラメーターやデータセットのような異なるジョブの入力を簡単に実験し、それらのジョブを適切なハードウェアにルーティングすることです。一度ジョブが作成されると、元の作成者以外のユーザーも W&B GUI または CLI を介してこれらの入力を調整できます。CLI または UI からジョブ入力を設定する方法については、[Enqueue jobs](/ja/launch/create-and-deploy-jobs/add-job-to-queue) ガイドを参照してください。
 
 このセクションでは、プログラム的にジョブの調整可能な入力を制御する方法を説明します。
 
@@ -93,7 +93,7 @@ run_config_overrides = launch.load_wandb_config()
 Launch SDK はまた、ジョブ コードで設定ファイルに格納された入力値を管理する方法も提供します。これは、多くのディープラーニングや大規模な言語モデルのユースケースで一般的なパターンであり、例えばこの [torchtune](https://github.com/pytorch/torchtune/blob/main/recipes/configs/llama3/8B_lora.yaml) の例やこの [Axolotl config](https://github.com/OpenAccess-AI-Collective/axolotl/blob/main/examples/llama-3/qlora-fsdp-70b.yaml) などがあります。
 
 <Note>
-[Sweeps on Launch](/ja/../sweeps-on-launch) は、sweep パラメーターとしての設定ファイル入力の使用をサポートしていません。sweep パラメーターは `Run.config` オブジェクトで制御する必要があります。
+[Sweeps on Launch](/ja/launch/sweeps-on-launch) は、sweep パラメーターとしての設定ファイル入力の使用をサポートしていません。sweep パラメーターは `Run.config` オブジェクトで制御する必要があります。
 </Note>
 
 `launch.manage_config_file` 関数を使用して、設定ファイルを Launch ジョブの入力として追加し、ジョブをローンチする際に設定ファイル内の値の編集アクセスを提供します。

@@ -119,7 +119,7 @@ self._metric_logger.log_dict(
 
 torchtune 라이브러리는 다양한 [체크포인트 형식](https://pytorch.org/torchtune/stable/deep_dives/checkpointer.html)을 지원합니다. 사용 중인 모델의 출처에 따라 적절한 [체크포인터 클래스](https://pytorch.org/torchtune/stable/deep_dives/checkpointer.html)로 전환해야 합니다.
 
-모델 체크포인트를 [W&B Artifacts](/ko/guides/core/artifacts/)에 저장하려면 해당 레시피 내에서 `save_checkpoint` 함수를 재정의하는 것이 가장 간단한 해결책입니다.
+모델 체크포인트를 [W&B Artifacts](/ko/guides/artifacts/)에 저장하려면 해당 레시피 내에서 `save_checkpoint` 함수를 재정의하는 것이 가장 간단한 해결책입니다.
 
 다음은 모델 체크포인트를 W&B Artifacts 에 저장하기 위해 `save_checkpoint` 함수를 재정의하는 방법의 예입니다.
 

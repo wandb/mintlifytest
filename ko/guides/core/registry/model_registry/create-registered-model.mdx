@@ -8,7 +8,7 @@ menu:
 weight: 4
 ---
 
-[등록된 모델](/ko/./model-management-concepts#registered-model)을 생성하여 모델링 작업을 위한 모든 후보 모델을 보관하세요. Model Registry 내에서 대화식으로 또는 Python SDK를 사용하여 프로그래밍 방식으로 등록된 모델을 생성할 수 있습니다.
+[등록된 모델](/ko/guides/core/registry/model_registry/model-management-concepts/#registered-model)을 생성하여 모델링 작업을 위한 모든 후보 모델을 보관하세요. Model Registry 내에서 대화식으로 또는 Python SDK를 사용하여 프로그래밍 방식으로 등록된 모델을 생성할 수 있습니다.
 
 ## 프로그래밍 방식으로 등록된 모델 생성
 W&B Python SDK로 모델을 프로그래밍 방식으로 등록하세요. 등록된 모델이 존재하지 않으면 W&B가 자동으로 등록된 모델을 생성합니다.
@@ -47,7 +47,7 @@ run.finish()
 8. **Register model**을 클릭합니다.
 
 <Note>
-모델을 Model Registry에 수동으로 연결하는 것은 일회성 모델에 유용합니다. 그러나 [모델 버전을 Model Registry에 프로그래밍 방식으로 연결](/ko/link-model-version#programmatically-link-a-model)하는 것이 유용한 경우가 많습니다.
+모델을 Model Registry에 수동으로 연결하는 것은 일회성 모델에 유용합니다. 그러나 [모델 버전을 Model Registry에 프로그래밍 방식으로 연결](/ko/guides/core/registry/model_registry/link-model-version/#programmatically-link-a-model)하는 것이 유용한 경우가 많습니다.
 
 예를 들어 야간 작업이 있다고 가정해 봅시다. 매일 밤 생성된 모델을 수동으로 연결하는 것은 지루합니다. 대신 모델을 평가하고 모델 성능이 향상되면 W&B Python SDK를 사용하여 해당 모델을 Model Registry에 연결하는 스크립트를 만들 수 있습니다.
 </Note>

@@ -7,7 +7,7 @@ menu:
     identifier: ko-guides-core-artifacts-artifacts-walkthrough
 ---
 
-이 가이드는 [W&B Runs](/ko/guides/models/track/runs/)에서 데이터셋 Artifacts를 생성, 추적 및 사용하는 방법을 설명합니다.
+이 가이드는 [W&B Runs](/ko/guides/runs/)에서 데이터셋 Artifacts를 생성, 추적 및 사용하는 방법을 설명합니다.
 
 ## 1. W&B에 로그인
 
@@ -39,7 +39,7 @@ run = wandb.init(project="artifacts-example", job_type="upload-dataset")
 artifact = wandb.Artifact(name="bicycle-dataset", type="dataset")
 ```
 
-Artifact를 구성하는 방법에 대한 자세한 내용은 [Artifact 구성](/ko/./construct-an-artifact)을 참조하십시오.
+Artifact를 구성하는 방법에 대한 자세한 내용은 [Artifact 구성](/ko/guides/artifacts/construct-an-artifact/)을 참조하십시오.
 
 ## Artifact에 데이터셋 추가
 
@@ -61,7 +61,7 @@ W&B run 오브젝트 `log_artifact()` 메소드를 사용하여 Artifact 버전�
 run.log_artifact(artifact)
 ```
 
-Artifact를 기록할 때 기본적으로 `'latest'` 에일리어스가 생성됩니다. Artifact 에일리어스 및 버전에 대한 자세한 내용은 [사용자 지정 에일리어스 만들기](/ko/./create-a-custom-alias) 및 [새 Artifact 버전 만들기](/ko/./create-a-new-artifact-version)를 참조하십시오.
+Artifact를 기록할 때 기본적으로 `'latest'` 에일리어스가 생성됩니다. Artifact 에일리어스 및 버전에 대한 자세한 내용은 [사용자 지정 에일리어스 만들기](/ko/guides/artifacts/create-a-custom-alias/) 및 [새 Artifact 버전 만들기](/ko/guides/artifacts/create-a-new-artifact-version/)를 참조하십시오.
 
 ## 5. Artifact 다운로드 및 사용
 
@@ -83,4 +83,4 @@ artifact = run.use_artifact("bicycle-dataset:latest")
 artifact_dir = artifact.download()
 ```
 
-또는 Public API (`wandb.Api`)를 사용하여 Run 외부의 W&B에 이미 저장된 데이터를 내보내거나 (또는 업데이트)할 수 있습니다. 자세한 내용은 [외부 파일 추적](/ko/./track-external-files)을 참조하십시오.
+또는 Public API (`wandb.Api`)를 사용하여 Run 외부의 W&B에 이미 저장된 데이터를 내보내거나 (또는 업데이트)할 수 있습니다. 자세한 내용은 [외부 파일 추적](/ko/guides/artifacts/track-external-files/)을 참조하십시오.

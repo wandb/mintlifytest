@@ -4,10 +4,10 @@ menu:
   launch:
     identifier: ko-launch-create-and-deploy-jobs-job-inputs
     parent: create-and-deploy-jobs
-url: /ko/guides//launch/job-inputs
+slug: /ko/guides//launch/job-inputs
 ---
 
-Launch의 핵심 경험은 하이퍼파라미터 및 데이터셋과 같은 다양한 작업 입력을 쉽게 실험하고 이러한 작업을 적절한 하드웨어로 라우팅하는 것입니다. 작업이 생성되면 원래 작성자 이외의 사용자도 W&B GUI 또는 CLI를 통해 이러한 입력을 조정할 수 있습니다. CLI 또는 UI에서 Launch할 때 작업 입력을 설정하는 방법에 대한 자세한 내용은 [작업 대기열에 추가](/ko/./add-job-to-queue) 가이드를 참조하세요.
+Launch의 핵심 경험은 하이퍼파라미터 및 데이터셋과 같은 다양한 작업 입력을 쉽게 실험하고 이러한 작업을 적절한 하드웨어로 라우팅하는 것입니다. 작업이 생성되면 원래 작성자 이외의 사용자도 W&B GUI 또는 CLI를 통해 이러한 입력을 조정할 수 있습니다. CLI 또는 UI에서 Launch할 때 작업 입력을 설정하는 방법에 대한 자세한 내용은 [작업 대기열에 추가](/ko/launch/create-and-deploy-jobs/add-job-to-queue) 가이드를 참조하세요.
 
 이 섹션에서는 작업을 위해 조정할 수 있는 입력을 프로그래밍 방식으로 제어하는 방법에 대해 설명합니다.
 
@@ -93,7 +93,7 @@ run_config_overrides = launch.load_wandb_config()
 Launch SDK는 작업 코드의 config 파일에 저장된 입력 값을 관리하는 방법도 제공합니다. 이것은 이 [torchtune](https://github.com/pytorch/torchtune/blob/main/recipes/configs/llama3/8B_lora.yaml) 예제 또는 이 [Axolotl config](https://github.com/OpenAccess-AI-Collective/axolotl/blob/main/examples/llama-3/qlora-fsdp-70b.yaml)와 같은 많은 딥러닝 및 대규모 언어 모델 유스 케이스에서 일반적인 패턴입니다.
 
 <Note>
-[Launch에서의 Sweeps](/ko/../sweeps-on-launch)는 config 파일 입력을 스윕 파라미터로 사용하는 것을 지원하지 않습니다. 스윕 파라미터는 `Run.config` 오브젝트를 통해 제어되어야 합니다.
+[Launch에서의 Sweeps](/ko/launch/sweeps-on-launch)는 config 파일 입력을 스윕 파라미터로 사용하는 것을 지원하지 않습니다. 스윕 파라미터는 `Run.config` 오브젝트를 통해 제어되어야 합니다.
 </Note>
 
 `launch.manage_config_file` 함수를 사용하여 config 파일을 Launch 작업에 대한 입력으로 추가하여 작업을 시작할 때 config 파일 내의 값을 편집할 수 있습니다.

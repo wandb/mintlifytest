@@ -13,9 +13,9 @@ weight: 160
 
 W&B는 `wandb` v0.13.4부터 사용할 수 있는 Keras용 콜백 세 가지를 제공합니다. 기존 `WandbCallback`은 아래로 스크롤하세요.
 
-- **`WandbMetricsLogger`** : [Experiment 추적](/ko/guides/models/track)에 이 콜백을 사용하세요. 트레이닝 및 검증 메트릭과 시스템 메트릭을 Weights & Biases에 기록합니다.
+- **`WandbMetricsLogger`** : [Experiment 추적](/ko/guides/track/)에 이 콜백을 사용하세요. 트레이닝 및 검증 메트릭과 시스템 메트릭을 Weights & Biases에 기록합니다.
 
-- **`WandbModelCheckpoint`** : 모델 체크포인트를 Weight and Biases [Artifacts](/ko/guides/core/artifacts/)에 기록하려면 이 콜백을 사용하세요.
+- **`WandbModelCheckpoint`** : 모델 체크포인트를 Weight and Biases [Artifacts](/ko/guides/artifacts/)에 기록하려면 이 콜백을 사용하세요.
 
 - **`WandbEvalCallback`**: 이 기본 콜백은 모델 예측값을 대화형 시각화를 위해 Weights and Biases [Tables](/ko/guides/models/tables/)에 기록합니다.
 
@@ -207,7 +207,7 @@ model.fit(
 ```
 
 <Note>
-W&B [Artifact 페이지](/ko/guides/core/artifacts/explore-and-traverse-an-artifact-graph)에는 **Workspace** 페이지가 아닌 Table 로그가 기본적으로 포함되어 있습니다.
+W&B [Artifact 페이지](/ko/guides/artifacts/explore-and-traverse-an-artifact-graph/)에는 **Workspace** 페이지가 아닌 Table 로그가 기본적으로 포함되어 있습니다.
 </Note>
 
 ### `WandbEvalCallback` 참조

@@ -4,7 +4,7 @@ menu:
   launch:
     identifier: ko-launch-set-up-launch-setup-launch-sagemaker
     parent: set-up-launch
-url: /ko/guides//launch/setup-launch-sagemaker
+slug: /ko/guides//launch/setup-launch-sagemaker
 ---
 
 W&B Launch 를 사용하여 제공된 또는 사용자 지정 알고리즘을 사용하여 Amazon SageMaker 에 launch 작업을 제출하여 SageMaker 플랫폼에서 기계 학습 모델을 트레이닝할 수 있습니다. SageMaker 는 컴퓨팅 리소스를 가동 및 해제하는 작업을 처리하므로 EKS 클러스터가 없는 팀에게 적합한 선택이 될 수 있습니다.
@@ -158,7 +158,7 @@ Launch 에이전트는 Amazon SageMaker 트레이닝 작업을 생성할 수 있
 IAM 역할을 만드는 방법에 대한 자세한 내용은 [AWS Identity and Access Management 설명서](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)를 참조하십시오.
 
 <Note>
-* launch 에이전트가 이미지를 빌드하도록 하려면 필요한 추가 권한에 대해 [고급 에이전트 설정](/ko/./setup-agent-advanced)을 참조하십시오.
+* launch 에이전트가 이미지를 빌드하도록 하려면 필요한 추가 권한에 대해 [고급 에이전트 설정](/ko/launch/set-up-launch/setup-agent-advanced)을 참조하십시오.
 * 연결된 ResourceConfig 에 VolumeKmsKeyId 가 지정되어 있고 연결된 역할에 이 작업을 허용하는 정책이 없는 경우에만 SageMaker 대기열에 대한 `kms:CreateGrant` 권한이 필요합니다.
 </Note>
 

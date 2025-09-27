@@ -79,7 +79,7 @@ importer.import_runs(runs, namespace=Namespace(entity, project))
 
 ## 데이터 내보내기
 
-Public API를 사용하여 W&B에 저장한 데이터를 내보내거나 업데이트합니다. 이 API를 사용하기 전에 스크립트에서 데이터를 기록하십시오. 자세한 내용은 [퀵스타트](/ko/guides/quickstart)를 확인하세요.
+Public API를 사용하여 W&B에 저장한 데이터를 내보내거나 업데이트합니다. 이 API를 사용하기 전에 스크립트에서 데이터를 기록하십시오. 자세한 내용은 [퀵스타트](/ko/quickstart/)를 확인하세요.
 
 **Public API 유스 케이스**
 
@@ -102,7 +102,7 @@ API 키는 W&B에 대한 컴퓨터 인증을 처리합니다. 사용자 프로�
 
 ### Run 경로 찾기
 
-Public API를 사용하려면 `<entity>/<project>/<run_id>`인 Run 경로가 필요한 경우가 많습니다. 앱 UI에서 Run 페이지를 열고 [Overview 탭](/ko/guides/models/track/runs/#overview-tab)을 클릭하여 Run 경로를 가져옵니다.
+Public API를 사용하려면 `<entity>/<project>/<run_id>`인 Run 경로가 필요한 경우가 많습니다. 앱 UI에서 Run 페이지를 열고 [Overview 탭](/ko/guides/runs/#overview-tab)을 클릭하여 Run 경로를 가져옵니다.
 
 ### Run 데이터 내보내기
 
@@ -248,7 +248,7 @@ Runs에 유용한 식별자를 설정하는 방법을 고려하고 있다면 다
 - **Run ID**: 생성된 해시로 둡니다. 이는 프로젝트의 Runs에서 고유해야 합니다.
 - **Run 이름**: 차트에서 여러 줄의 차이점을 알 수 있도록 짧고 읽기 쉽고 가급적이면 고유해야 합니다.
 - **Run 노트**: Run에서 수행하는 작업에 대한 간단한 설명을 적어두는 것이 좋습니다. `wandb.init(notes="여기에 메모 입력")`로 설정할 수 있습니다.
-- **Run 태그**: Run 태그에서 동적으로 추적하고 UI에서 필터를 사용하여 테이블을 원하는 Runs로 필터링합니다. 스크립트에서 태그를 설정한 다음 Runs 테이블과 Run 페이지의 Overview 탭 모두에서 UI에서 편집할 수 있습니다. 자세한 내용은 [여기](/ko/guides/models/track/runs/tags)의 자세한 지침을 참조하십시오.
+- **Run 태그**: Run 태그에서 동적으로 추적하고 UI에서 필터를 사용하여 테이블을 원하는 Runs로 필터링합니다. 스크립트에서 태그를 설정한 다음 Runs 테이블과 Run 페이지의 Overview 탭 모두에서 UI에서 편집할 수 있습니다. 자세한 내용은 [여기](/ko/guides/runs/tags/)의 자세한 지침을 참조하십시오.
 
 ## Public API 예제
 

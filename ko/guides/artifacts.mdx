@@ -2,12 +2,12 @@
 title: Artifacts
 description: W&B Artifacts 에 대한 개요, 작동 방식, Artifacts 사용 시작 방법
 cascade:
-- url: /ko/guides//artifacts/:filename
+- slug: /ko/guides//artifacts/:filename
 menu:
   default:
     identifier: ko-guides-core-artifacts-_index
     parent: core
-url: /ko/guides//artifacts
+slug: /ko/guides//artifacts
 weight: 1
 ---
 
@@ -16,10 +16,10 @@ weight: 1
 <Card title="Try in W&B" href="https://wandb.ai/wandb/arttest/artifacts/model/iv3_trained/5334ab69740f9dda4fed/lineage" icon="sliders-up"/>
 </CardGroup>
 
-W&B Artifacts를 사용하여 데이터를 [W&B Runs](/ko/guides/models/track/runs/)의 입력 및 출력으로 추적하고 버전을 관리하세요. 예를 들어, 모델 트레이닝 run은 데이터셋을 입력으로 사용하고 트레이닝된 모델을 출력으로 생성할 수 있습니다. 하이퍼파라미터, 메타데이터, 메트릭을 run에 기록하고, 아티팩트를 사용하여 모델 트레이닝에 사용된 데이터셋을 입력으로, 결과 모델 체크포인트를 출력으로 기록, 추적 및 버전 관리할 수 있습니다.
+W&B Artifacts를 사용하여 데이터를 [W&B Runs](/ko/guides/runs/)의 입력 및 출력으로 추적하고 버전을 관리하세요. 예를 들어, 모델 트레이닝 run은 데이터셋을 입력으로 사용하고 트레이닝된 모델을 출력으로 생성할 수 있습니다. 하이퍼파라미터, 메타데이터, 메트릭을 run에 기록하고, 아티팩트를 사용하여 모델 트레이닝에 사용된 데이터셋을 입력으로, 결과 모델 체크포인트를 출력으로 기록, 추적 및 버전 관리할 수 있습니다.
 
 ## 유스 케이스
-[runs](/ko/guides/models/track/runs/)의 입력 및 출력으로 전체 ML 워크플로우에서 아티팩트를 사용할 수 있습니다. 데이터셋, 모델 또는 기타 아티팩트를 처리 입력으로 사용할 수 있습니다.
+[runs](/ko/guides/runs/)의 입력 및 출력으로 전체 ML 워크플로우에서 아티팩트를 사용할 수 있습니다. 데이터셋, 모델 또는 기타 아티팩트를 처리 입력으로 사용할 수 있습니다.
 
 <Frame>
     <img src="/images/artifacts/artifacts_landing_page2.png"  />
@@ -39,7 +39,7 @@ W&B Artifacts를 사용하여 데이터를 [W&B Runs](/ko/guides/models/track/ru
 ## 아티팩트 만들기
 
 다음 네 줄의 코드로 아티팩트를 만드세요:
-1. [W&B run](/ko/guides/models/track/runs/)을 만듭니다.
+1. [W&B run](/ko/guides/runs/)을 만듭니다.
 2. [`wandb.Artifact`](/ko/ref/python/artifact) API로 아티팩트 오브젝트를 만듭니다.
 3. 모델 파일 또는 데이터셋과 같은 파일을 아티팩트 오브젝트에 하나 이상 추가합니다.
 4. 아티팩트를 W&B에 기록합니다.
@@ -58,7 +58,7 @@ artifact.save()
 ```
 
 <Note>
-Amazon S3 버킷과 같은 외부 오브젝트 스토리지에 저장된 파일 또는 디렉토리에 대한 참조를 추가하는 방법에 대한 자세한 내용은 [외부 파일 추적](/ko/./track-external-files) 페이지를 참조하십시오.
+Amazon S3 버킷과 같은 외부 오브젝트 스토리지에 저장된 파일 또는 디렉토리에 대한 참조를 추가하는 방법에 대한 자세한 내용은 [외부 파일 추적](/ko/guides/artifacts/track-external-files/) 페이지를 참조하십시오.
 </Note>
 
 ## 아티팩트 다운로드
@@ -82,11 +82,11 @@ datadir = (
 ```
 
 <Note>
-`root` [파라미터](/ko/ref/python/artifact)에 사용자 지정 경로를 전달하여 특정 디렉토리에 아티팩트를 다운로드할 수 있습니다. 아티팩트를 다운로드하는 다른 방법과 추가 파라미터를 보려면 [아티팩트 다운로드 및 사용](/ko/./download-and-use-an-artifact) 가이드를 참조하세요.
+`root` [파라미터](/ko/ref/python/artifact)에 사용자 지정 경로를 전달하여 특정 디렉토리에 아티팩트를 다운로드할 수 있습니다. 아티팩트를 다운로드하는 다른 방법과 추가 파라미터를 보려면 [아티팩트 다운로드 및 사용](/ko/guides/artifacts/download-and-use-an-artifact/) 가이드를 참조하세요.
 </Note>
 
 ## 다음 단계
-* 아티팩트 [버전 관리](/ko/./create-a-new-artifact-version) 및 [업데이트](/ko/./update-an-artifact) 방법에 대해 알아보세요.
+* 아티팩트 [버전 관리](/ko/guides/artifacts/create-a-new-artifact-version/) 및 [업데이트](/ko/guides/artifacts/update-an-artifact/) 방법에 대해 알아보세요.
 * [자동화](/ko/guides/core/automations/)를 통해 아티팩트 변경에 대한 응답으로 다운스트림 워크플로우를 트리거하거나 Slack 채널에 알리는 방법에 대해 알아보세요.
 * 트레이닝된 모델을 보관하는 공간인 [레지스트리](/ko/guides/core/registry/)에 대해 알아보세요.
 * [Python SDK](/ko/ref/python/artifact) 및 [CLI](/ko/ref/cli/wandb-artifact/) 참조 가이드를 살펴보세요.

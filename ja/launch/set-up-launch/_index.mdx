@@ -15,7 +15,7 @@ weight: 3
 ## キューのセットアップ
 Launch キューは、特定の対象リソースとそのリソースに特有の追加設定を指すように設定する必要があります。例えば、Kubernetes クラスターを指すローンチキューは、環境変数を含めたり、カスタムネームスペースのローンチキュー設定を設定したりします。キューを作成する際には、使用したい対象リソースとそのリソースに使用する設定の両方を指定します。
 
-エージェントがキューからジョブを受け取ると、キュー設定も受け取ります。エージェントがジョブを対象リソースに送信する際には、キュー設定とジョブ自体のオーバーライドを含めます。例えば、ジョブ設定を使用して、特定のジョブインスタンスのみの Amazon SageMaker インスタンスタイプを指定することができます。この場合、エンドユーザーインターフェースとして [queue config templates](/ja/./setup-queue-advanced#configure-queue-template) を使用することが一般的です。
+エージェントがキューからジョブを受け取ると、キュー設定も受け取ります。エージェントがジョブを対象リソースに送信する際には、キュー設定とジョブ自体のオーバーライドを含めます。例えば、ジョブ設定を使用して、特定のジョブインスタンスのみの Amazon SageMaker インスタンスタイプを指定することができます。この場合、エンドユーザーインターフェースとして [queue config templates](/ja/launch/set-up-launch/setup-queue-advanced) を使用することが一般的です。
 
 ### キューの作成
 1. [wandb.ai/launch](https://wandb.ai/launch) で Launch App へ移動します。
@@ -35,7 +35,7 @@ Launch キューは、特定の対象リソースとそのリソースに特有�
 ローンチエージェントは、ジョブのための1つ以上のローンチキューをポールする長時間実行されるプロセスです。ローンチエージェントは、FIFO 順序または優先順序でジョブをデキューし、ポールするキューに依存します。エージェントがキューからジョブをデキューすると、そのジョブのためにイメージをオプションでビルドします。その後、エージェントはジョブをキュー設定で指定された設定オプションとともに対象リソースに送信します。
 
 <Note>
-エージェントは非常に柔軟で、さまざまなユースケースをサポートするように設定できます。エージェントに必要な設定は、特定のユースケースに依存します。[Docker](/ja/./setup-launch-docker)、[Amazon SageMaker](/ja/./setup-launch-sagemaker)、[Kubernetes](/ja/./setup-launch-kubernetes)、または [Vertex AI](/ja/./setup-vertex) に関する専用ページを参照してください。
+エージェントは非常に柔軟で、さまざまなユースケースをサポートするように設定できます。エージェントに必要な設定は、特定のユースケースに依存します。[Docker](/ja/launch/set-up-launch/setup-launch-docker)、[Amazon SageMaker](/ja/launch/set-up-launch/setup-launch-sagemaker)、[Kubernetes](/ja/launch/set-up-launch/setup-launch-kubernetes)、または [Vertex AI](/ja/launch/set-up-launch/setup-vertex) に関する専用ページを参照してください。
 </Note>
 
 <Note>
@@ -72,7 +72,7 @@ queues:
 ```
 
 ### コンテナビルダーの設定
-ローンチエージェントをイメージ構築に使用するように設定できます。Git リポジトリまたはコードアーティファクトから作成されたローンチジョブを使用する場合、コンテナビルダーを使用するようにエージェントを設定する必要があります。[Create a launch job](/ja/../create-and-deploy-jobs/create-launch-job) を参照して、ローンチジョブの作成方法について詳しく学んでください。
+ローンチエージェントをイメージ構築に使用するように設定できます。Git リポジトリまたはコードアーティファクトから作成されたローンチジョブを使用する場合、コンテナビルダーを使用するようにエージェントを設定する必要があります。[Create a launch job](/ja/launch/create-and-deploy-jobs/create-launch-job) を参照して、ローンチジョブの作成方法について詳しく学んでください。
 
 W&B Launch は3つのビルダーオプションをサポートしています：
 
@@ -83,7 +83,7 @@ W&B Launch は3つのビルダーオプションをサポートしています�
 <Note>
 エージェントが Dockerデーモンが利用できない環境でポールしている場合（例えば、Kubernetesクラスター）、Kanikoビルダーを使用してください。
 
-Kanikoビルダーの詳細については、[Set up Kubernetes](/ja/./setup-launch-kubernetes) を参照してください。
+Kanikoビルダーの詳細については、[Set up Kubernetes](/ja/launch/set-up-launch/setup-launch-kubernetes) を参照してください。
 </Note>
 
 イメージビルダーを指定するには、エージェント設定にビルダーキーを含めます。例えば、次のコードスニペットは、DockerまたはKanikoを使用することを指定するローンチ設定（`launch-config.yaml`）の一部を示しています。
@@ -100,7 +100,7 @@ builder:
 * エージェントを使用してイメージをビルドし、Amazon SageMakerやVertexAIでこれらのイメージを実行したい場合。
 * エージェントにイメージリポジトリからプルするための資格情報を提供してもらいたい場合。
 
-コンテナレジストリと対話するようにエージェントを設定する方法の詳細については、[Advanced agent set](/ja/./setup-agent-advanced) ページを参照してください。
+コンテナレジストリと対話するようにエージェントを設定する方法の詳細については、[Advanced agent set](/ja/launch/set-up-launch/setup-agent-advanced) ページを参照してください。
 
 ## ローンチエージェントのアクティブ化
 `launch-agent` W&B CLIコマンドを使用してローンチエージェントをアクティブ化します：
@@ -109,4 +109,4 @@ builder:
 wandb launch-agent -q <queue-1> -q <queue-2> --max-jobs 5
 ```
 
-いくつかのユースケースでは、ローンチエージェントをKubernetesクラスター内からキューをポールするように設定したいかもしれません。[Advanced queue set up page](/ja/./setup-queue-advanced) を参照して、詳細情報を得てください。
+いくつかのユースケースでは、ローンチエージェントをKubernetesクラスター内からキューをポールするように設定したいかもしれません。[Advanced queue set up page](/ja/launch/set-up-launch/setup-queue-advanced) を参照して、詳細情報を得てください。

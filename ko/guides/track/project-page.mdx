@@ -16,12 +16,12 @@ weight: 3
 
 각 프로젝트에는 사이드바에서 엑세스할 수 있는 다음이 포함되어 있습니다.
 
-* [**Overview**](/ko/project-page#overview-tab): 프로젝트의 스냅샷
-* [**Workspace**](/ko/project-page#workspace-tab): 개인 시각화 샌드박스
+* [**Overview**](/ko/guides/track/project-page/#overview-tab): 프로젝트의 스냅샷
+* [**Workspace**](/ko/guides/track/project-page/#workspace-tab): 개인 시각화 샌드박스
 * [**Runs**](#runs-tab): 프로젝트의 모든 run을 나열하는 테이블
 * **Automations**: 프로젝트에서 구성된 자동화
-* [**Sweeps**](/ko/project-page#sweeps-tab): 자동화된 탐색 및 최적화
-* [**Reports**](/ko/project-page#reports-tab): 노트, run 및 그래프의 저장된 스냅샷
+* [**Sweeps**](/ko/guides/track/project-page/#sweeps-tab): 자동화된 탐색 및 최적화
+* [**Reports**](/ko/guides/track/project-page/#reports-tab): 노트, run 및 그래프의 저장된 스냅샷
 * [**Artifacts**](#artifacts-tab): 모든 run과 해당 run과 연결된 아티팩트 포함
 
 ## Overview 탭
@@ -190,7 +190,7 @@ Runs 탭을 사용자 지정하면 사용자 지정은 [Workspace 탭](#workspac
 
 ## Sweeps 탭
 
-프로젝트에서 새 [sweep](/ko/guides/models/sweeps/)을 시작합니다.
+프로젝트에서 새 [sweep](/ko/guides/sweeps/)을 시작합니다.
 
 <Frame>
     <img src="/images/app_ui/sweeps-tab.png"  />
@@ -198,7 +198,7 @@ Runs 탭을 사용자 지정하면 사용자 지정은 [Workspace 탭](#workspac
 
 ## Artifacts 탭
 
-트레이닝 데이터셋 및 [파인튜닝된 Models](/ko/guides/core/registry/)에서 [메트릭 및 미디어 테이블](/ko/guides/models/tables/tables-walkthrough)에 이르기까지 프로젝트와 연결된 모든 [Artifacts](/ko/guides/core/artifacts/)를 봅니다.
+트레이닝 데이터셋 및 [파인튜닝된 Models](/ko/guides/core/registry/)에서 [메트릭 및 미디어 테이블](/ko/guides/models/tables/tables-walkthrough/)에 이르기까지 프로젝트와 연결된 모든 [Artifacts](/ko/guides/track/project-page/#artifacts-tab)를 봅니다.
 
 ### Overview 패널
 
@@ -232,7 +232,7 @@ Usage 패널은 예를 들어 로컬 머신에서 웹 앱 외부에서 사용할
 
 Files 패널은 아티팩트와 연결된 파일 및 폴더를 나열합니다. W&B는 run에 대한 특정 파일을 자동으로 업로드합니다. 예를 들어 `requirements.txt`는 run에서 사용된 각 라이브러리의 버전을 보여주고 `wandb-metadata.json` 및 `wandb-summary.json`에는 run에 대한 정보가 포함되어 있습니다. 다른 파일은 run의 구성에 따라 아티팩트 또는 미디어와 같이 업로드될 수 있습니다. 이 파일 트리를 탐색하고 W&B 웹 앱에서 직접 내용을 볼 수 있습니다.
 
-아티팩트와 연결된 [테이블](/ko/guides/models/tables//tables-walkthrough)은 특히 풍부하고 대화형입니다. Artifacts와 함께 테이블을 사용하는 방법에 대해 자세히 알아보려면 [여기](/ko/guides/models/tables//visualize-tables)를 참조하세요.
+아티팩트와 연결된 [테이블](/ko/guides/models/tables/tables-walkthrough/)은 특히 풍부하고 대화형입니다. Artifacts와 함께 테이블을 사용하는 방법에 대해 자세히 알아보려면 [여기](/ko/guides/models/tables/visualize-tables/)를 참조하세요.
 
 <Frame>
     <img src="/images/app_ui/files_panel_table.png"  />

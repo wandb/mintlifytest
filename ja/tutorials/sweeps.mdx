@@ -23,7 +23,7 @@ W&B Sweeps を使用して、学習率、バッチサイズ、隠れ層の数、
 
 Weights & Biases を使ったハイパーパラメータ探索 run はとても簡単です。以下のシンプルな3ステップで行います：
 
-1. **スイープの定義:** 検索するパラメータ、検索戦略、最適化メトリクスなどを指定する辞書または[YAMLファイル](/ja/guides/models/sweeps/define-sweep-configuration)を作成します。
+1. **スイープの定義:** 検索するパラメータ、検索戦略、最適化メトリクスなどを指定する辞書または[YAMLファイル](/ja/guides/sweeps/define-sweep-configuration/)を作成します。
 
 2. **スイープの初期化:** 1行のコードでスイープを初期化し、sweep 設定の辞書を渡します：
 `sweep_id = wandb.sweep(sweep_config)`
@@ -61,12 +61,12 @@ W&B スイープは、ハイパーパラメータ値を試行するための戦�
 <Note>
 Jupyter ノートブックでスイープを開始する場合、スイープ設定はネストされた辞書でなければなりません。
 
-コマンドラインでスイープを行う場合は、[YAMLファイル](/ja/guides/models/sweeps/define-sweep-configuration)でスイープ設定を指定する必要があります。
+コマンドラインでスイープを行う場合は、[YAMLファイル](/ja/guides/sweeps/define-sweep-configuration/)でスイープ設定を指定する必要があります。
 </Note>
 
 ### 検索メソッドの選択
 
-最初に、設定辞書内でハイパーパラメータ検索メソッドを指定します。[選べるハイパーパラメータ検索戦略は、グリッド、ランダム、ベイズ探索です](/ja/guides/models/sweeps/define-sweep-configuration/sweep-config-keys/#method)。
+最初に、設定辞書内でハイパーパラメータ検索メソッドを指定します。[選べるハイパーパラメータ検索戦略は、グリッド、ランダム、ベイズ探索です](/ja/guides/sweeps/sweep-config-keys/#method)。
 
 このチュートリアルでは、ランダム検索を使用します。ノートブック内で辞書を作成し、`method` キーに対して `random` を指定します。
 
@@ -158,7 +158,7 @@ import pprint
 pprint.pprint(sweep_config)
 ```
 
-設定オプションの全リストについては、[Sweep 設定オプション](/ja/guides/models/sweeps/define-sweep-configuration/sweep-config-keys/)をご覧ください。
+設定オプションの全リストについては、[Sweep 設定オプション](/ja/guides/sweeps/sweep-config-keys/)をご覧ください。
 
 <Note>
 可能性のある無限の選択肢を持つハイパーパラメータの場合
@@ -192,7 +192,7 @@ wandb sweep config.yaml
 ```
 </Note>
 
-ターミナルで W&B Sweeps を作成する方法についての詳細は、[W&B Sweep ウォークスルー](/ja/guides/models/sweeps/walkthrough)を参照してください。
+ターミナルで W&B Sweeps を作成する方法についての詳細は、[W&B Sweep ウォークスルー](/ja/guides/sweeps/walkthrough/)を参照してください。
 
 ## ステップ 3: 機械学習コードを定義する
 
@@ -229,7 +229,7 @@ def train(config=None):
 
 `train`関数内では、次のW&B Python SDKメソッドが見られます:
 * [`wandb.init()`](/ja/ref/python/init): 新しい W&B run を初期化します。各 run は、トレーニング関数の1回の実行です。
-* [`wandb.config`](/ja/guides/models/track/config): 試してみたいハイパーパラメータを含むスイープ設定を渡します。
+* [`wandb.config`](/ja/guides/track/config/): 試してみたいハイパーパラメータを含むスイープ設定を渡します。
 * [`wandb.log()`](/ja/ref/python/log): 各エポックのトレーニングlossをログに記録します。
 
 次のセルでは、4つの関数を定義します:
@@ -315,7 +315,7 @@ wandb.agent(sweep_id, train, count=5)
 スイープ設定で`random` 検索メソッドが指定されていたため、スイープコントローラーはランダムに生成されたハイパーパラメータ値を提供します。
 </Note>
 
-ターミナルで W&B Sweeps を作成する方法についての詳細は、[W&B Sweep ウォークスルー](/ja/guides/models/sweeps/walkthrough)を参照してください。
+ターミナルで W&B Sweeps を作成する方法についての詳細は、[W&B Sweep ウォークスルー](/ja/guides/sweeps/walkthrough/)を参照してください。
 
 ## スイープ結果の可視化
 

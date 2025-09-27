@@ -10,7 +10,7 @@ slug: /ja/guides/integrations/dagster
 
 Dagster と W&B (W&B) を使用して MLOps パイプラインを調整し、ML アセットを維持します。W&B とのインテグレーションにより、Dagster 内で以下が簡単になります：
 
-* [W&B Artifacts](/ja/guides/core/artifacts/) の使用と作成。
+* [W&B Artifacts](/ja/guides/artifacts/) の使用と作成。
 * [W&B Registry](/ja/guides/core/registry/) で Registered Models の使用と作成。
 * [W&B Launch](/ja/launch/) を使用して専用のコンピュートでトレーニングジョブを実行します。
 * ops とアセットで [wandb](/ja/ref/python/) クライアントを使用します。
@@ -26,13 +26,13 @@ W&B Dagster インテグレーションは W&B 専用の Dagster リソースと
 Dagster を Weights and Biases 内で使用するためには、以下のリソースが必要です：
 1. **W&B API Key**。
 2. **W&B entity (ユーザーまたはチーム)**: Entity は W&B Runs と Artifacts を送信する場所のユーザー名またはチーム名です。Runs をログに記録する前に、W&B App の UI でアカウントまたはチームエンティティを作成しておいてください。エンティティを指定しない場合、その run はデフォルトのエンティティに送信されます。通常、これはあなたのユーザー名です。設定の「Project Defaults」内でデフォルトのエンティティを変更できます。
-3. **W&B project**: [W&B Runs](/ja/guides/models/track/runs/) が保存されるプロジェクトの名前。
+3. **W&B project**: [W&B Runs](/ja/guides/runs/) が保存されるプロジェクトの名前。
 
 W&B entity は、W&B App のそのユーザーまたはチームページのプロフィールページをチェックすることで見つけられます。既存の W&B project を使用するか、新しいものを作成することができます。新しいプロジェクトは、W&B App のホームページまたはユーザー/チームのプロフィールページで作成できます。プロジェクトが存在しない場合は、初回使用時に自動的に作成されます。以下の手順は API キーを取得する方法を示しています：
 
 ### APIキーの取得方法
 1. [W&B にログインします](https://wandb.ai/login)。注：W&B サーバーを使用している場合は、管理者にインスタンスのホスト名を尋ねてください。
-2. [認証ページ](https://wandb.ai/authorize) またはユーザー/チーム設定で APIキーを集めます。プロダクション環境では、そのキーを所有するために [サービスアカウント](/ja/support/kb-articles/service_account_useful) を使用することをお勧めします。
+2. [認証ページ](https://wandb.ai/authorize) またはユーザー/チーム設定で APIキーを集めます。プロダクション環境では、そのキーを所有するために [サービスアカウント](/ja/support/service_account_useful) を使用することをお勧めします。
 3. その APIキー用に環境変数を設定します。`WANDB_API_KEY=YOUR_KEY` をエクスポートします。
 
 以下の例は、Dagster コード内で API キーを指定する場所を示しています。`wandb_config` のネストされた辞書内でエンティティとプロジェクト名を必ず指定してください。異なる W&B Project を使用したい場合は、異なる `wandb_config` の値を異なる ops/assets に渡すことができます。渡すことができる可能性のあるキーについての詳細は、以下の設定セクションを参照してください。
@@ -150,7 +150,7 @@ def create_dataset():
 `@op`、`@asset`、`@multi_asset` をメタデータ設定で注釈を付けてアーティファクトを記述できます。同様に、W&B Artifacts を Dagster 外部で作成された場合でも消費できます。
 
 ## W&B Artifacts を書き込む
-続行する前に、W&B Artifacts の使用方法について十分な理解を持っていることをお勧めします。[Guide on Artifacts](/ja/guides/core/artifacts/) を検討してください。
+続行する前に、W&B Artifacts の使用方法について十分な理解を持っていることをお勧めします。[Guide on Artifacts](/ja/guides/artifacts/) を検討してください。
 
 Python 関数からオブジェクトを返すことで W&B Artifact を書き込みます。W&B でサポートされているオブジェクトは以下の通りです：
 * Python オブジェクト (int, dict, list…)
@@ -952,7 +952,7 @@ Artifacts はなんらかのアセットです。Dagster がそのアセット�
 小さなモデルは Dagster クラスター内でトレーニングできますし、GPU ノードを持つ Kubernetes クラスターで Dagster を実行することもできます。W&B Launch を使用して大規模なモデルのトレーニングを行うことをお勧めします。これによりインスタンスの負荷が軽減され、より適切なコンピュートへのアクセスが得られます。
 
 7. Dagster 内で実験管理を行う際は、W&B Run ID を Dagster Run ID の値に設定してください。
-[Run を再開可能にする](/ja/guides/models/track/runs/resuming) ことと、W&B Run ID を Dagster Run ID またはお好みの文字列に設定することの両方をお勧めします。この推奨事項に従うことで、Dagster 内でモデルをトレーニングする際に W&B メトリクスと W&B Artifacts がすべて同じ W&B Run に格納されていることが保証されます。
+[Run を再開可能にする](/ja/guides/runs/resuming) ことと、W&B Run ID を Dagster Run ID またはお好みの文字列に設定することの両方をお勧めします。この推奨事項に従うことで、Dagster 内でモデルをトレーニングする際に W&B メトリクスと W&B Artifacts がすべて同じ W&B Run に格納されていることが保証されます。
 
 W&B Run ID を Dagster Run ID に設定するか、
 
