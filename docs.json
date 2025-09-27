@@ -1110,6 +1110,972 @@
             ]
           }
         ]
+      },
+      {
+        "language": "ja",
+        "tabs": [
+          {
+            "tab": "Home",
+            "pages": [
+              "ja/index"
+            ]
+          },
+          {
+            "tab": "Documentation",
+            "dropdowns": [
+              {
+                "dropdown": "ガイド",
+                "icon": "book-open",
+                "pages": [
+                  "ja/guides",
+                  "ja/quickstart",
+                  {
+                    "group": "W&B モデル",
+                    "pages": [
+                      {
+                        "group": "実験管理",
+                        "pages": [
+                          "ja/guides/track",
+                          "ja/guides/track/create-an-experiment",
+                          "ja/guides/track/config",
+                          "ja/guides/track/project-page",
+                          "ja/guides/track/workspaces",
+                          {
+                            "group": "runs とは何ですか？",
+                            "pages": [
+                              "ja/guides/runs",
+                              "ja/guides/runs/filter-runs",
+                              "ja/guides/runs/forking",
+                              "ja/guides/runs/manage-runs",
+                              "ja/guides/runs/rewind",
+                              "ja/guides/runs/resuming",
+                              "ja/guides/runs/grouping",
+                              "ja/guides/runs/tags",
+                              "ja/guides/runs/alert"
+                            ]
+                          },
+                          "ja/guides/track/jupyter",
+                          {
+                            "group": "ログ オブジェクト と メディア",
+                            "pages": [
+                              "ja/guides/track/log",
+                              "ja/guides/track/log/media",
+                              "ja/guides/track/log/log-models",
+                              "ja/guides/track/log/log-tables",
+                              "ja/guides/track/log/log-summary",
+                              "ja/guides/track/log/customize-logging-axes",
+                              "ja/guides/track/log/plots",
+                              "ja/guides/track/log/working-with-csv",
+                              "ja/guides/track/log/distributed-training"
+                            ]
+                          },
+                          "ja/guides/track/reproduce_experiments",
+                          "ja/guides/track/limits",
+                          "ja/guides/track/public-api-guide",
+                          "ja/guides/track/environment-variables"
+                        ]
+                      },
+                      {
+                        "group": "テーブル",
+                        "pages": [
+                          "ja/guides/models/tables",
+                          "ja/guides/models/tables/tables-walkthrough",
+                          "ja/guides/models/tables/visualize-tables",
+                          "ja/guides/models/tables/tables-download",
+                          "ja/guides/models/tables/tables-gallery"
+                        ]
+                      },
+                      {
+                        "group": "スイープ",
+                        "pages": [
+                          "ja/guides/sweeps",
+                          "ja/guides/sweeps/walkthrough",
+                          "ja/guides/sweeps/add-w-and-b-to-your-code",
+                          {
+                            "group": "sweep configuration を定義する",
+                            "pages": [
+                              "ja/guides/sweeps/define-sweep-configuration",
+                              "ja/guides/sweeps/sweep-config-keys"
+                            ]
+                          },
+                          "ja/guides/sweeps/initialize-sweeps",
+                          "ja/guides/sweeps/start-sweep-agents",
+                          "ja/guides/sweeps/parallelize-agents",
+                          "ja/guides/sweeps/visualize-sweep-results",
+                          "ja/guides/sweeps/pause-resume-and-cancel-sweeps",
+                          "ja/guides/sweeps/local-controller",
+                          "ja/guides/sweeps/sweeps-ui",
+                          "ja/guides/sweeps/useful-resources",
+                          "ja/guides/sweeps/troubleshoot-sweeps",
+                          "ja/guides/sweeps/existing-project"
+                        ]
+                      },
+                      {
+                        "group": "W&B アプリ UI リファレンス",
+                        "pages": [
+                          "ja/guides/app",
+                          {
+                            "group": "パネル",
+                            "pages": [
+                              "ja/guides/app/features/panels",
+                              {
+                                "group": "折れ線グラフ",
+                                "pages": [
+                                  "ja/guides/app/features/panels/line-plot",
+                                  "ja/guides/app/features/panels/line-plot/reference",
+                                  "ja/guides/app/features/panels/line-plot/sampling",
+                                  "ja/guides/app/features/panels/line-plot/smoothing"
+                                ]
+                              },
+                              "ja/guides/app/features/panels/bar-plot",
+                              "ja/guides/app/features/panels/parallel-coordinates",
+                              "ja/guides/app/features/panels/scatter-plot",
+                              "ja/guides/app/features/panels/code",
+                              "ja/guides/app/features/panels/parameter-importance",
+                              "ja/guides/app/features/panels/run-comparer",
+                              {
+                                "group": "クエリパネル",
+                                "pages": [
+                                  "ja/guides/app/features/panels/query-panels",
+                                  "ja/guides/app/features/panels/query-panels/embedding-projector"
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "group": "カスタムチャート",
+                            "pages": [
+                              "ja/guides/app/features/custom-charts",
+                              "ja/guides/app/features/custom-charts/walkthrough"
+                            ]
+                          },
+                          "ja/guides/app/features/cascade-settings",
+                          {
+                            "group": "設定",
+                            "pages": [
+                              "ja/guides/app/settings-page",
+                              "ja/guides/app/settings-page/user-settings",
+                              "ja/guides/app/settings-page/billing-settings",
+                              "ja/guides/app/settings-page/emails",
+                              "ja/guides/app/settings-page/teams",
+                              "ja/guides/app/settings-page/storage",
+                              "ja/guides/app/settings-page/anon"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "ja/guides/weave",
+                  {
+                    "group": "W&B コア",
+                    "pages": [
+                      "ja/guides/core",
+                      {
+                        "group": "Artifacts",
+                        "pages": [
+                          "ja/guides/artifacts",
+                          "ja/guides/artifacts/construct-an-artifact",
+                          "ja/guides/artifacts/download-and-use-an-artifact",
+                          "ja/guides/artifacts/update-an-artifact",
+                          "ja/guides/artifacts/create-a-custom-alias",
+                          "ja/guides/artifacts/create-a-new-artifact-version",
+                          "ja/guides/artifacts/track-external-files",
+                          {
+                            "group": "データを管理する",
+                            "pages": [
+                              "ja/guides/artifacts/ttl",
+                              "ja/guides/artifacts/storage",
+                              "ja/guides/artifacts/delete-artifacts"
+                            ]
+                          },
+                          "ja/guides/artifacts/explore-and-traverse-an-artifact-graph",
+                          "ja/guides/artifacts/data-privacy-and-compliance",
+                          "ja/guides/artifacts/artifacts-walkthrough"
+                        ]
+                      },
+                      "ja/guides/secrets",
+                      {
+                        "group": "レポート",
+                        "pages": [
+                          "ja/guides/reports",
+                          "ja/guides/reports/create-a-report",
+                          "ja/guides/reports/edit-a-report",
+                          "ja/guides/reports/collaborate-on-reports",
+                          "ja/guides/reports/clone-and-export-reports",
+                          "ja/guides/reports/embed-reports",
+                          "ja/guides/reports/cross-project-reports",
+                          "ja/guides/reports/reports-gallery"
+                        ]
+                      },
+                      {
+                        "group": "レジストリ",
+                        "pages": [
+                          "ja/guides/core/registry/",
+                          "ja/guides/core/registry/registry_types",
+                          "ja/guides/core/registry/create_registry",
+                          "ja/guides/core/registry/configure_registry",
+                          "ja/guides/core/registry/create_collection",
+                          "ja/guides/core/registry/link_version",
+                          "ja/guides/core/registry/download_use_artifact",
+                          "ja/guides/core/registry/organize-with-tags",
+                          "ja/guides/core/registry/search_registry",
+                          "ja/guides/core/registry/registry_cards",
+                          "ja/guides/core/registry/lineage",
+                          "ja/guides/core/registry/model_registry_eol",
+                          {
+                            "group": "モデルレジストリ",
+                            "pages": [
+                              "ja/guides/core/registry/model_registry/",
+                              "ja/guides/core/registry/model_registry/walkthrough",
+                              "ja/guides/core/registry/model_registry/model-management-concepts",
+                              "ja/guides/core/registry/model_registry/log-model-to-experiment",
+                              "ja/guides/core/registry/model_registry/create-registered-model",
+                              "ja/guides/core/registry/model_registry/link-model-version",
+                              "ja/guides/core/registry/model_registry/organize-models",
+                              "ja/guides/core/registry/model_registry/model-lineage",
+                              "ja/guides/core/registry/model_registry/consume-models",
+                              "ja/guides/core/registry/model_registry/create-model-cards",
+                              "ja/guides/core/registry/model_registry/notifications",
+                              "ja/guides/core/registry/model_registry/access_controls"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "group": "オートメーション",
+                        "pages": [
+                          "ja/guides/core/automations",
+                          {
+                            "group": "自動化の作成",
+                            "pages": [
+                              "ja/guides/core/automations/create-automations",
+                              "ja/guides/core/automations/create-automations/slack",
+                              "ja/guides/core/automations/create-automations/webhook"
+                            ]
+                          },
+                          "ja/guides/core/automations/automation-events"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "W&B プラットフォーム",
+                    "pages": [
+                      "ja/guides/hosting",
+                      {
+                        "group": "デプロイメントオプション",
+                        "pages": [
+                          "ja/guides/hosting/hosting-options",
+                          "ja/guides/hosting/hosting-options/saas_cloud",
+                          {
+                            "group": "自己管理",
+                            "pages": [
+                              "ja/guides/hosting/hosting-options/self-managed",
+                              "ja/guides/hosting/self-managed/ref-arch",
+                              {
+                                "group": "W&B サーバーを Kubernetes で実行する",
+                                "pages": [
+                                  "ja/guides/hosting/operator",
+                                  "ja/guides/hosting/self-managed/operator-airgapped"
+                                ]
+                              },
+                              {
+                                "group": "パブリック クラウドにインストールする",
+                                "pages": [
+                                  "ja/guides/hosting/self-managed/aws-tf",
+                                  "ja/guides/hosting/self-managed/gcp-tf",
+                                  "ja/guides/hosting/self-managed/azure-tf"
+                                ]
+                              },
+                              "ja/guides/hosting/self-managed/bare-metal",
+                              "ja/guides/hosting/server-upgrade-process"
+                            ]
+                          },
+                          {
+                            "group": "専用クラウド",
+                            "pages": [
+                              "ja/guides/hosting/hosting-options/dedicated_cloud",
+                              "ja/guides/hosting/hosting-options/dedicated_regions",
+                              "ja/guides/hosting/export-data-from-dedicated-cloud"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "group": "アイデンティティとアクセス管理 (IAM)",
+                        "pages": [
+                          "/ja/guides/hosting/iam/org_team_struct",
+                          {
+                            "group": "認証",
+                            "pages": [
+                              "ja/guides/hosting/iam/identity_federation",
+                              "ja/guides/hosting/iam/ldap",
+                              "ja/guides/hosting/iam/sso",
+                              "ja/guides/hosting/iam/service-accounts"
+                            ]
+                          },
+                          {
+                            "group": "アクセス管理",
+                            "pages": [
+                              "ja/guides/hosting/iam/access-management-intro",
+                              "ja/guides/hosting/iam/access-management/manage-organization",
+                              "ja/guides/hosting/iam/access-management/restricted-projects"
+                            ]
+                          },
+                          "ja/guides/hosting/iam/automate_iam",
+                          "ja/guides/hosting/iam/scim",
+                          "ja/guides/hosting/iam/advanced_env_vars"
+                        ]
+                      },
+                      {
+                        "group": "データセキュリティ",
+                        "pages": [
+                          "ja/guides/hosting/data-security/secure-storage-connector",
+                          "ja/guides/hosting/data-security/presigned-urls",
+                          "ja/guides/hosting/data-security/ip-allowlisting",
+                          "ja/guides/hosting/data-security/private-connectivity",
+                          "ja/guides/hosting/data-security/data-encryption"
+                        ]
+                      },
+                      "ja/guides/hosting/privacy-settings",
+                      {
+                        "group": "監視と利用状況",
+                        "pages": [
+                          "ja/guides/hosting/monitoring-usage/audit-logging",
+                          "ja/guides/hosting/monitoring-usage/prometheus-logging",
+                          "ja/guides/hosting/monitoring-usage/slack-alerts",
+                          "ja/guides/hosting/monitoring-usage/org_dashboard"
+                        ]
+                      },
+                      "ja/guides/hosting/smtp",
+                      "ja/guides/hosting/env-vars",
+                      "ja/guides/hosting/server-release-process"
+                    ]
+                  },
+                  {
+                    "group": "インテグレーション",
+                    "pages": [
+                      "ja/guides/integrations",
+                      "ja/guides/integrations/add-wandb-to-any-library",
+                      "ja/guides/integrations/azure-openai-fine-tuning",
+                      "ja/guides/integrations/catalyst",
+                      "ja/guides/integrations/cohere-fine-tuning",
+                      "ja/guides/integrations/databricks",
+                      "ja/guides/integrations/deepchecks",
+                      "ja/guides/integrations/deepchem",
+                      "ja/guides/integrations/docker",
+                      "ja/guides/integrations/farama-gymnasium",
+                      {
+                        "group": "fastai",
+                        "pages": [
+                          "ja/guides/integrations/fastai",
+                          "ja/guides/integrations/fastai/v1"
+                        ]
+                      },
+                      "ja/guides/integrations/huggingface",
+                      "ja/guides/integrations/diffusers",
+                      "ja/guides/integrations/autotrain",
+                      "ja/guides/integrations/accelerate",
+                      "ja/guides/integrations/hydra",
+                      "ja/guides/integrations/keras",
+                      "ja/guides/integrations/kubeflow-pipelines-kfp",
+                      "ja/guides/integrations/lightgbm",
+                      "ja/guides/integrations/metaflow",
+                      "ja/guides/integrations/mmengine",
+                      "ja/guides/integrations/mmf",
+                      "ja/guides/integrations/composer",
+                      "ja/guides/integrations/openai-api",
+                      "ja/guides/integrations/openai-fine-tuning",
+                      "ja/guides/integrations/openai-gym",
+                      "ja/guides/integrations/paddledetection",
+                      "ja/guides/integrations/paddleocr",
+                      "ja/guides/integrations/prodigy",
+                      "ja/guides/integrations/pytorch",
+                      "ja/guides/integrations/pytorch-geometric",
+                      "ja/guides/integrations/torchtune",
+                      "ja/guides/integrations/ignite",
+                      "ja/guides/integrations/lightning",
+                      "ja/guides/integrations/ray-tune",
+                      "ja/guides/integrations/sagemaker",
+                      "ja/guides/integrations/scikit",
+                      "ja/guides/integrations/simpletransformers",
+                      "ja/guides/integrations/skorch",
+                      "ja/guides/integrations/spacy",
+                      "ja/guides/integrations/stable-baselines-3",
+                      "ja/guides/integrations/tensorboard",
+                      "ja/guides/integrations/tensorflow",
+                      "ja/guides/integrations/w-and-b-for-julia",
+                      "ja/guides/integrations/xgboost",
+                      "ja/guides/integrations/yolov5",
+                      "ja/guides/integrations/ultralytics",
+                      "ja/guides/integrations/yolox"
+                    ]
+                  }
+                ]
+              },
+              {
+                "dropdown": "チュートリアル",
+                "icon": "chalkboard-user",
+                "pages": [
+                  "ja/tutorials",
+                  "ja/tutorials/experiments",
+                  "ja/tutorials/tables",
+                  "ja/tutorials/sweeps",
+                  "ja/tutorials/artifacts",
+                  "ja/tutorials/workspaces",
+                  "ja/tutorials/weave_models_registry",
+                  {
+                    "group": "インテグレーションチュートリアル",
+                    "pages": [
+                      "ja/tutorials/pytorch",
+                      "ja/tutorials/lightning",
+                      "ja/tutorials/huggingface",
+                      "ja/tutorials/tensorflow",
+                      "ja/tutorials/tensorflow_sweeps",
+                      "ja/tutorials/monai_3d_segmentation",
+                      "ja/tutorials/keras",
+                      "ja/tutorials/keras_tables",
+                      "ja/tutorials/keras_models",
+                      "ja/tutorials/xgboost_sweeps"
+                    ]
+                  }
+                ]
+              },
+              {
+                "dropdown": "参照",
+                "icon": "code",
+                "pages": [
+                  "ja/ref",
+                  "ja/ref/system-metrics",
+                  "ja/ref/js",
+                  {
+                    "group": "Python ライブラリ",
+                    "pages": [
+                      "ja/ref/python/",
+                      "ja/ref/python/init",
+                      {
+                        "group": "launch-library",
+                        "pages": [
+                          "ja/ref/python/launch-library/",
+                          "ja/ref/python/launch-library/launch_add",
+                          "ja/ref/python/launch-library/launchagent",
+                          "ja/ref/python/launch-library/launch"
+                        ]
+                      },
+                      "ja/ref/python/run",
+                      "ja/ref/python/sweep",
+                      {
+                        "group": "wandb_ワークスペース",
+                        "pages": [
+                          "ja/ref/python/wandb_workspaces/",
+                          "ja/ref/python/wandb_workspaces/workspaces",
+                          "ja/ref/python/wandb_workspaces/reports"
+                        ]
+                      },
+                      "ja/ref/python/watch",
+                      "ja/ref/python/artifact",
+                      {
+                        "group": "インポート＆エクスポート API",
+                        "pages": [
+                          "ja/ref/python/public-api/",
+                          "ja/ref/python/public-api/queuedrun",
+                          "ja/ref/python/public-api/runs",
+                          "ja/ref/python/public-api/run",
+                          "ja/ref/python/public-api/runqueue",
+                          "ja/ref/python/public-api/sweep",
+                          "ja/ref/python/public-api/job",
+                          "ja/ref/python/public-api/files",
+                          "ja/ref/python/public-api/project",
+                          "ja/ref/python/public-api/projects",
+                          "ja/ref/python/public-api/file"
+                        ]
+                      },
+                      {
+                        "group": "インテグレーション",
+                        "pages": [
+                          "ja/ref/python/integrations",
+                          {
+                            "group": "keras",
+                            "pages": [
+                              "ja/ref/python/integrations/keras",
+                              "ja/ref/python/integrations/keras/wandbcallback",
+                              "ja/ref/python/integrations/keras/wandbevalcallback",
+                              "ja/ref/python/integrations/keras/wandbmetricslogger",
+                              "ja/ref/python/integrations/keras/wandbmodelcheckpoint"
+                            ]
+                          }
+                        ]
+                      },
+                      "ja/ref/python/agent",
+                      {
+                        "group": "データタイプ",
+                        "pages": [
+                          "ja/ref/python/data-types/",
+                          "ja/ref/python/data-types/boundingboxes2d",
+                          "ja/ref/python/data-types/html",
+                          "ja/ref/python/data-types/imagemask",
+                          "ja/ref/python/data-types/molecule",
+                          "ja/ref/python/data-types/object3d",
+                          "ja/ref/python/data-types/plotly",
+                          "ja/ref/python/data-types/wbtracetree",
+                          "ja/ref/python/data-types/image",
+                          "ja/ref/python/data-types/table",
+                          "ja/ref/python/data-types/audio",
+                          "ja/ref/python/data-types/graph",
+                          "ja/ref/python/data-types/histogram",
+                          "ja/ref/python/data-types/video"
+                        ]
+                      },
+                      "ja/ref/python/controller",
+                      "ja/ref/python/log",
+                      "ja/ref/python/login",
+                      "ja/ref/python/finish",
+                      "ja/ref/python/save"
+                    ]
+                  },
+                  {
+                    "group": "クエリ式言語",
+                    "pages": [
+                      "ja/ref/query-panel",
+                      "ja/ref/query-panel/artifact-version",
+                      "ja/ref/query-panel/artifact-type",
+                      "ja/ref/query-panel/audio-file",
+                      "ja/ref/query-panel/bokeh-file",
+                      "ja/ref/query-panel/html-file",
+                      "ja/ref/query-panel/int",
+                      "ja/ref/query-panel/joined-table",
+                      "ja/ref/query-panel/molecule-file",
+                      "ja/ref/query-panel/object-3-d-file",
+                      "ja/ref/query-panel/pytorch-model-file",
+                      "ja/ref/query-panel/run",
+                      "ja/ref/query-panel/video-file",
+                      "ja/ref/query-panel/artifact",
+                      "ja/ref/query-panel/partitioned-table",
+                      "ja/ref/query-panel/boolean",
+                      "ja/ref/query-panel/user",
+                      "ja/ref/query-panel/entity",
+                      "ja/ref/query-panel/project",
+                      "ja/ref/query-panel/image-file",
+                      "ja/ref/query-panel/file",
+                      "ja/ref/query-panel/table",
+                      "ja/ref/query-panel/string",
+                      "ja/ref/query-panel/number"
+                    ]
+                  },
+                  {
+                    "group": "コマンドライン インターフェース",
+                    "pages": [
+                      "ja/ref/cli",
+                      "ja/ref/cli/wandb-disabled",
+                      "ja/ref/cli/wandb-docker",
+                      "ja/ref/cli/wandb-docker-run",
+                      "ja/ref/cli/wandb-init",
+                      "ja/ref/cli/wandb-offline",
+                      "ja/ref/cli/wandb-pull",
+                      "ja/ref/cli/wandb-restore",
+                      "ja/ref/cli/wandb-sweep",
+                      "ja/ref/cli/wandb-sync",
+                      "ja/ref/cli/wandb-verify",
+                      {
+                        "group": "wandb アーティファクト",
+                        "pages": [
+                          {
+                            "group": "wandb アーティファクト cache",
+                            "pages": [
+                              "ja/ref/cli/wandb-artifact/wandb-artifact-cache/wandb-artifact-cache-cleanup"
+                            ]
+                          },
+                          "ja/ref/cli/wandb-artifact/wandb-artifact-get",
+                          "ja/ref/cli/wandb-artifact/wandb-artifact-ls",
+                          "ja/ref/cli/wandb-artifact/wandb-artifact-put"
+                        ]
+                      },
+                      {
+                        "group": "wandb サーバー",
+                        "pages": [
+                          "ja/ref/cli/wandb-server/wandb-server-start",
+                          "ja/ref/cli/wandb-server/wandb-server-stop"
+                        ]
+                      },
+                      "ja/ref/cli/wandb-agent",
+                      {
+                        "group": "wandb ベータ版",
+                        "pages": [
+                          "ja/ref/cli/wandb-beta/wandb-beta-sync"
+                        ]
+                      },
+                      "ja/ref/cli/wandb-launch",
+                      "ja/ref/cli/wandb-launch-sweep",
+                      "ja/ref/cli/wandb-launch-agent",
+                      "ja/ref/cli/wandb-online",
+                      "ja/ref/cli/wandb-controller",
+                      {
+                        "group": "wandb ジョブ",
+                        "pages": [
+                          "ja/ref/cli/wandb-job/wandb-job-create",
+                          "ja/ref/cli/wandb-job/wandb-job-describe",
+                          "ja/ref/cli/wandb-job/wandb-job-list"
+                        ]
+                      },
+                      "ja/ref/cli/wandb-status",
+                      "ja/ref/cli/wandb-scheduler",
+                      "ja/ref/cli/wandb-login",
+                      "ja/ref/cli/wandb-enabled"
+                    ]
+                  }
+                ]
+              },
+              {
+                "dropdown": "サポート",
+                "icon": "bullhorn",
+                "pages": [
+                  "ja/support",
+                  "ja/support/academic",
+                  "ja/support/administrator",
+                  "ja/support/alerts",
+                  "ja/support/anonymous",
+                  "ja/support/artifacts",
+                  "ja/support/aws",
+                  "ja/support/billing",
+                  "ja/support/charts",
+                  "ja/support/connectivity",
+                  "ja/support/crashing_and_hanging_runs",
+                  "ja/support/environment_variables",
+                  "ja/support/experiments",
+                  "ja/support/hyperparameter",
+                  "ja/support/logs",
+                  "ja/support/metrics",
+                  "ja/support/notebooks",
+                  "ja/support/outage",
+                  "ja/support/privacy",
+                  "ja/support/projects",
+                  "ja/support/python",
+                  "ja/support/reports",
+                  "ja/support/resuming",
+                  "ja/support/runs",
+                  "ja/support/security",
+                  "ja/support/storage",
+                  "ja/support/sweeps",
+                  "ja/support/tables",
+                  "ja/support/team_management",
+                  "ja/support/tensorboard",
+                  "ja/support/user_management",
+                  "ja/support/workspaces",
+                  "ja/support/wysiwyg"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "W&B Weave",
+            "groups": [
+              {
+                "group": "Introduction",
+                "pages": [
+                  "weave/index",
+                  "weave/quickstart",
+                  "weave/quickstart-inference"
+                ]
+              },
+              {
+                "group": "Guides",
+                "pages": [
+                  {
+                    "group": "Iteration",
+                    "pages": [
+                      "weave/tutorial-tracing_2",
+                      {
+                        "group": "Tracing & Debugging",
+                        "pages": [
+                          "weave/guides/tracking/index",
+                          "weave/guides/tracking/tracing",
+                          "weave/guides/tracking/costs",
+                          "weave/guides/core-types/media",
+                          "weave/guides/tools/playground",
+                          "weave/guides/integrations/index",
+                          "weave/guides/tools/saved-views",
+                          "weave/guides/tools/comparison",
+                          "weave/guides/tracking/trace-tree",
+                          "weave/guides/tracking/threads",
+                          "weave/guides/tracking/trace-plots",
+                          "weave/guides/tracking/otel"
+                        ]
+                      },
+                      {
+                        "group": "Version Control for Models & Prompts",
+                        "pages": [
+                          "weave/tutorial-weave_models",
+                          "weave/guides/core-types/models",
+                          "weave/guides/core-types/prompts",
+                          "weave/guides/tracking/objects",
+                          "weave/guides/tracking/ops"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Evaluation",
+                    "pages": [
+                      "weave/tutorial-eval",
+                      "weave/tutorial-rag",
+                      {
+                        "group": "Evaluations",
+                        "pages": [
+                          "weave/guides/core-types/evaluations",
+                          "weave/guides/core-types/datasets",
+                          "weave/guides/evaluation/scorers",
+                          "weave/guides/evaluation/builtin_scorers",
+                          "weave/guides/evaluation/weave_local_scorers",
+                          "weave/guides/evaluation/evaluation_logger",
+                          "weave/guides/core-types/leaderboards"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Productionization",
+                    "pages": [
+                      {
+                        "group": "Collect Feedback & Examples",
+                        "pages": [
+                          "weave/guides/tracking/feedback",
+                          "weave/guides/tracking/redact-pii"
+                        ]
+                      },
+                      {
+                        "group": "Online Evaluation",
+                        "pages": [
+                          "weave/guides/evaluation/guardrails_and_monitors"
+                        ]
+                      },
+                      {
+                        "group": "Tools & Utilities",
+                        "pages": [
+                          "weave/guides/tools/evaluation_playground",
+                          "weave/guides/tools/weave-in-workspaces"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Integrations",
+                    "pages": [
+                      "weave/guides/integrations/index",
+                      {
+                        "group": "LLM Providers",
+                        "pages": [
+                          "weave/guides/integrations/bedrock",
+                          "weave/guides/integrations/anthropic",
+                          "weave/guides/integrations/cerebras",
+                          "weave/guides/integrations/cohere",
+                          "weave/guides/integrations/google",
+                          "weave/guides/integrations/groq",
+                          "weave/guides/integrations/huggingface",
+                          "weave/guides/integrations/litellm",
+                          "weave/guides/integrations/azure",
+                          "weave/guides/integrations/mistral",
+                          "weave/guides/integrations/nvidia_nim",
+                          "weave/guides/integrations/openai",
+                          "weave/guides/integrations/openrouter",
+                          "weave/guides/integrations/together_ai"
+                        ]
+                      },
+                      "weave/guides/integrations/local_models",
+                      {
+                        "group": "Frameworks",
+                        "pages": [
+                          "weave/guides/integrations/openai_agents",
+                          "weave/guides/integrations/langchain",
+                          "weave/guides/integrations/llamaindex",
+                          "weave/guides/integrations/dspy",
+                          "weave/guides/integrations/instructor",
+                          "weave/guides/integrations/crewai",
+                          "weave/guides/integrations/smolagents",
+                          "weave/guides/integrations/pydantic_ai",
+                          "weave/guides/integrations/google_adk",
+                          "weave/guides/integrations/agno",
+                          "weave/guides/integrations/koog",
+                          "weave/guides/integrations/autogen",
+                          "weave/guides/integrations/verdict",
+                          "weave/guides/integrations/js"
+                        ]
+                      },
+                      {
+                        "group": "Protocols",
+                        "pages": [
+                          "weave/guides/integrations/mcp"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Enterprise",
+                    "pages": [
+                      "weave/guides/platform/index",
+                      "weave/guides/platform/weave-self-managed"
+                    ]
+                  },
+                  {
+                    "group": "Tools & Resources",
+                    "pages": [
+                      "weave/guides/core-types/env-vars",
+                      "weave/guides/troubleshooting",
+                      "weave/guides/tracking/faqs"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Cookbooks",
+                "pages": [
+                  "weave/cookbooks/index",
+                  {
+                    "group": "Getting Started",
+                    "pages": [
+                      "weave/cookbooks/Intro_to_Weave_Hello_Trace",
+                      "weave/cookbooks/Intro_to_Weave_Hello_Eval"
+                    ]
+                  },
+                  {
+                    "group": "Evaluations & Datasets",
+                    "pages": [
+                      "weave/cookbooks/leaderboard_quickstart",
+                      "weave/cookbooks/hf_dataset_evals",
+                      "weave/cookbooks/import_from_csv"
+                    ]
+                  },
+                  {
+                    "group": "Models & Prompts",
+                    "pages": [
+                      "weave/cookbooks/Models_and_Weave_Integration_Demo",
+                      "weave/cookbooks/chain_of_density",
+                      "weave/cookbooks/dspy_prompt_optimization",
+                      "weave/cookbooks/notdiamond_custom_routing"
+                    ]
+                  },
+                  {
+                    "group": "Advanced Topics",
+                    "pages": [
+                      "weave/cookbooks/multi-agent-structured-output",
+                      "weave/cookbooks/codegen",
+                      "weave/cookbooks/ocr-pipeline",
+                      "weave/cookbooks/audio_with_weave"
+                    ]
+                  },
+                  {
+                    "group": "Production & Monitoring",
+                    "pages": [
+                      "weave/cookbooks/online_monitoring",
+                      "weave/cookbooks/feedback_prod",
+                      "weave/cookbooks/scorers_as_guardrails",
+                      "weave/cookbooks/custom_model_cost",
+                      "weave/cookbooks/pii"
+                    ]
+                  },
+                  {
+                    "group": "API & Integration",
+                    "pages": [
+                      "weave/cookbooks/weave_via_service_api"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Reference",
+                "pages": [
+                  "weave/reference/index",
+                  {
+                    "group": "Python SDK",
+                    "pages": [
+                      "weave/reference/python-sdk/weave/index",
+                      {
+                        "group": "Core",
+                        "pages": [
+                          "weave/reference/python-sdk/weave/trace/weave_client",
+                          "weave/reference/python-sdk/weave/trace/op",
+                          "weave/reference/python-sdk/weave/trace/util"
+                        ]
+                      },
+                      {
+                        "group": "Trace Server",
+                        "pages": [
+                          "weave/reference/python-sdk/weave/trace_server/trace_server_interface"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "TypeScript SDK",
+                    "pages": [
+                      "weave/reference/typescript-sdk/weave/index",
+                      {
+                        "group": "Classes",
+                        "pages": [
+                          "weave/reference/typescript-sdk/weave/classes/Dataset",
+                          "weave/reference/typescript-sdk/weave/classes/Evaluation",
+                          "weave/reference/typescript-sdk/weave/classes/WeaveClient",
+                          "weave/reference/typescript-sdk/weave/classes/WeaveObject"
+                        ]
+                      },
+                      {
+                        "group": "Functions",
+                        "pages": [
+                          "weave/reference/typescript-sdk/weave/functions/init",
+                          "weave/reference/typescript-sdk/weave/functions/login",
+                          "weave/reference/typescript-sdk/weave/functions/op",
+                          "weave/reference/typescript-sdk/weave/functions/weaveAudio",
+                          "weave/reference/typescript-sdk/weave/functions/weaveImage"
+                        ]
+                      },
+                      {
+                        "group": "Interfaces",
+                        "pages": [
+                          "weave/reference/typescript-sdk/weave/interfaces/CallSchema",
+                          "weave/reference/typescript-sdk/weave/interfaces/CallsFilter"
+                        ]
+                      },
+                      {
+                        "group": "Type Aliases",
+                        "pages": [
+                          "weave/reference/typescript-sdk/weave/type-aliases/Op"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Service API",
+                    "openapi": "openapi.json"
+                  }
+                ]
+              },
+              {
+                "group": "Open Source",
+                "pages": [
+                  "weave/open-source"
+                ]
+              },
+              {
+                "group": "Community",
+                "pages": [
+                  "weave/community"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "W&B Inference",
+            "pages": [
+              "inference/index"
+            ]
+          },
+          {
+            "tab": "Release Notes",
+            "pages": [
+              "release-notes/index"
+            ]
+          }
+        ]
       }
     ]
   },
