@@ -1213,7 +1213,6 @@
                       {
                         "group": "W&B アプリ UI リファレンス",
                         "pages": [
-                          "ja/guides/app",
                           {
                             "group": "パネル",
                             "pages": [
@@ -1366,7 +1365,6 @@
                       {
                         "group": "デプロイメントオプション",
                         "pages": [
-                          "ja/guides/hosting/hosting-options",
                           "ja/guides/hosting/hosting-options/saas_cloud",
                           {
                             "group": "自己管理",

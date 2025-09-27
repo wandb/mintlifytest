@@ -267,12 +267,12 @@ W&B アプリ UI または Bash スクリプトを使用して、インタラク
 4. **Test** を選択します。
 5. 現れた UI パネルから、表示されるフィールドに POST リクエストを貼り付けます。 
     <Frame>
-    <img src="/images/models/webhook_ui.png" alt="webhook ペイロードのテストデモ"  />
-</Frame>
+      <img src="/images/models/webhook_ui.png" alt="webhook ペイロードのテストデモ"  />
+    </Frame>
 6. **Test webhook** をクリックします。W&B アプリ UI 内で、W&B はエンドポイントからの応答を投稿します。
     <Frame>
-    <img src="/images/models/webhook_ui_testing.gif" alt="webhook のテストデモ"  />
-</Frame>
+      <img src="/images/models/webhook_ui_testing.gif" alt="webhook のテストデモ"  />
+    </Frame>
 
 [Testing Webhooks in Weights & Biases](https://www.youtube.com/watch?v=bl44fDpMGJw&ab_channel=Weights%26Biases) のビデオを見て、デモをご覧ください。
 </Tab>
@@ -286,6 +286,32 @@ W&B アプリ UI または Bash スクリプトを使用して、インタラク
 * `PAYLOAD`
 * `API_ENDPOINT`
 
-{{< prism file="/webhook_test.sh" title="webhook_test.sh">}}{{< /prism >}}
+```bash webhook_test.sh
+#!/bin/bash
+
+# Your access token and secret
+ACCESS_TOKEN="your_api_key"
+SECRET="your_api_secret"
+
+# The data you want to send (for example, in JSON 
+format)
+PAYLOAD='{"key1": "value1", "key2": "value2"}'
+
+# Generate the HMAC signature
+# For security, Wandb includes the 
+X-Wandb-Signature in the header computed
+# from the payload and the shared secret key 
+associated with the webhook
+# using the HMAC with SHA-256 algorithm.
+SIGNATURE=$(echo -n "$PAYLOAD" | openssl dgst 
+-sha256 -hmac "$SECRET" -binary | base64)
+
+# Make the cURL request
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "X-Wandb-Signature: $SIGNATURE" \
+  -d "$PAYLOAD" API_ENDPOINT
+```
 </Tab>
 </Tabs>

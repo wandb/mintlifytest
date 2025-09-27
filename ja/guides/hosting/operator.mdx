@@ -286,7 +286,7 @@ W&B Kubernetes オペレーターには管理コンソールが付属してい�
 
     <Frame>
     <img src="/images/hosting/access_system_console_via_main_app.png"  />
-</Frame>
+    </Frame>
 </Tab>
 <Tab title="Option 2">
 <Note>
@@ -296,7 +296,7 @@ W&B は、Option 1 が機能しない場合のみ、以下の手順を使用し�
 1. ブラウザでコンソールアプリケーションを開きます。上記で説明されている URL を開くと、ログイン画面にリダイレクトされます:
     <Frame>
     <img src="/images/hosting/access_system_console_directly.png"  />
-</Frame>
+    </Frame>
 2. インストールが生成する Kubernetes シークレットからパスワードを取得します:
     ```shell
     kubectl get secret wandb-password -o jsonpath='{.data.password}' | base64 -d

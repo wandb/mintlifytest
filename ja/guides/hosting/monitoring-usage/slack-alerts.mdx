@@ -19,14 +19,14 @@ W&B 専用クラウドデプロイメントでの Slack アラートの設定を
 
     <Frame>
     <img src="/images/hosting/create_an_app.png"  />
-</Frame>
+    </Frame>
 
 2. **App Name** フィールドにアプリの名前を入力します。
 3. アプリを開発したい Slack ワークスペースを選択します。アラートに使用する予定のワークスペースと同じワークスペースを使用していることを確認してください。
 
     <Frame>
     <img src="/images/hosting/name_app_workspace.png"  />
-</Frame>
+    </Frame>
 
 ## Slack アプリケーションを設定する
 
@@ -34,7 +34,7 @@ W&B 専用クラウドデプロイメントでの Slack アラートの設定を
 
     <Frame>
     <img src="/images/hosting/add_an_oath.png"  />
-</Frame>
+    </Frame>
 
 2. Scopes セクションで、ボットに **incoming_webhook** スコープを追加します。スコープは、アプリに開発ワークスペースでのアクションを実行する権限を与えます。
 
@@ -42,13 +42,13 @@ W&B 専用クラウドデプロイメントでの Slack アラートの設定を
 
     <Frame>
     <img src="/images/hosting/save_urls.png"  />
-</Frame>
+    </Frame>
 
 3. W&B インストールを指すようにリダイレクト URL を設定します。ローカルシステム設定で指定されたホスト URL と同じ URL を使用してください。インスタンスへの異なる DNS マッピングを持つ場合は、複数の URL を指定できます。
 
     <Frame>
     <img src="/images/hosting/redirect_urls.png"  />
-</Frame>
+    </Frame>
 
 4. **Save URLs** を選択します。
 5. **Restrict API Token Usage** で、オプションとして W&B インスタンスの IP または IP 範囲を許可リストに指定できます。許可された IP アドレスの制限は、Slack アプリケーションのセキュリティをより強化します。
@@ -61,15 +61,15 @@ W&B 専用クラウドデプロイメントでの Slack アラートの設定を
 
     - **System Console** にいる場合: **Settings** から **Notifications** に進みます。
 
-      <Frame>
-    <img src="/images/hosting/register_slack_app_console.png"  />
-</Frame>
+        <Frame>
+        <img src="/images/hosting/register_slack_app_console.png"  />
+        </Frame>
 
     - **System Settings** にいる場合: カスタム Slack アプリケーションを有効にするために **Enable a custom Slack application to dispatch alerts** をトグルします。
 
-      <Frame>
-    <img src="/images/hosting/register_slack_app.png"  />
-</Frame>
+        <Frame>
+        <img src="/images/hosting/register_slack_app.png"  />
+        </Frame>
 
 3. **Slack client ID** と **Slack secret** を入力し、**Save** をクリックします。設定の基本情報でアプリケーションのクライアント ID とシークレットを見つけることができます。
 

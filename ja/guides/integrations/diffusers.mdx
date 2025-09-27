@@ -23,11 +23,9 @@ from wandb.integration.diffusers import autolog
 autolog(init=dict(project="diffusers_logging"))
 ```
 
-| <Frame>
+<Frame caption="実験の結果がどのようにログされるかの例です。">
     <img src="/images/integrations/diffusers-autolog-4.gif" alt="An example of how the results of your experiment are logged"  />
-</Frame> | 
-|:--:| 
-| **実験の結果がどのようにログされるかの例です。** |
+</Frame>
 
 ## 始め方
 
@@ -58,8 +56,8 @@ autolog(init=dict(project="diffusers_logging"))
     - 各パイプライン呼び出しの生成されたメディアは run の [media panels](/ja/guides/models/track/log/media) にもログされます。
 
     <Note>
-サポートされているパイプライン呼び出しのリストは[こちら](https://github.com/wandb/wandb/blob/main/wandb/integration/diffusers/autologger.py#L12-L72)から見つけることができます。このインテグレーションの新機能をリクエストしたり、関連するバグを報告したりする場合は、[https://github.com/wandb/wandb/issues](https://github.com/wandb/wandb/issues)で問題をオープンしてください。
-</Note>
+    サポートされているパイプライン呼び出しのリストは[こちら](https://github.com/wandb/wandb/blob/main/wandb/integration/diffusers/autologger.py#L12-L72)から見つけることができます。このインテグレーションの新機能をリクエストしたり、関連するバグを報告したりする場合は、[https://github.com/wandb/wandb/issues](https://github.com/wandb/wandb/issues)で問題をオープンしてください。
+    </Note>
 
 ## 例
 
@@ -139,19 +137,19 @@ wandb.finish()
 
     <Frame>
     <img src="/images/integrations/diffusers-autolog-2.gif" alt="An example of how the results of your experiment are logged"  />
-</Frame>
+    </Frame>
 
 - 複数の実験の結果:
 
     <Frame>
     <img src="/images/integrations/diffusers-autolog-1.gif" alt="An example of how the results of your experiment are logged"  />
-</Frame>
+    </Frame>
 
 - 実験の設定:
 
     <Frame>
     <img src="/images/integrations/diffusers-autolog-3.gif" alt="An example of how the autolog logs the configs of your experiment"  />
-</Frame>
+    </Frame>
 
 <Note>
 パイプラインを呼び出した後、IPython ノートブック環境でコードを実行する際には [`wandb.finish()`](/ja/ref/python/finish)を明示的に呼び出す必要があります。Python スクリプトを実行する際は必要ありません。
@@ -290,7 +288,7 @@ wandb.finish()
 - Stable Diffusion XL + Refiner の実験の例:
     <Frame>
     <img src="/images/integrations/diffusers-autolog-6.gif" alt="An example of how the autolog tracks an Stable Diffusion XL + Refiner experiment"  />
-</Frame>
+    </Frame>
 
 ## 追加リソース
 

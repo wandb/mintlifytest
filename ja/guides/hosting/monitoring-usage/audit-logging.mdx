@@ -93,7 +93,7 @@ API レスポンスには、新しい行で区切られた JSON オブジェク�
 ### 基本認証を使用する
 Audit logs API に アクセスするために基本認証を API キーで使用するには、HTTP リクエストの `Authorization` ヘッダーを `Basic` という文字列の後にスペースを置き、 その後にフォーマット `username:API-KEY` で base-64 エンコードされた文字列を設定します。すなわち、ユーザー名と API キーを `:` 文字で区切って、その結果を base-64 エンコードします。例えば、`demo:p@55w0rd` として認証するには、ヘッダーは `Authorization: Basic ZGVtbzpwQDU1dzByZA==` となります。
 
-### 監査ログ取得時の PII を除外する {#exclude-pii}
+### 監査ログ取得時の PII を除外する 
 [Self-managed](/ja/guides/hosting/hosting-options/self-managed) および [Dedicated Cloud](/ja/guides/hosting/hosting-options/dedicated_cloud) では、W&B の組織やインスタンス管理者が監査ログを取得する際に PII を除外できます。[SaaS Cloud](/ja/guides/hosting/hosting-options/saas_cloud) では、監査ログの関連フィールドを常に API エンドポイントが返します。この設定は変更できません。
 
 PII を除外するには、URL パラメータ `anonymize=true` を渡します。例えば、W&B インスタンスの URL が `https://mycompany.wandb.io` で、過去 1 週間のユーザー活動の監査ログを取得し、PII を除外したい場合、以下のような API エンドポイントを使用します：

@@ -24,6 +24,7 @@ weight: 220
 
 wandb ロギングを有効にしカスタマイズするために MMF 設定で利用可能なオプションは次のとおりです:
 
+```yml
     training:
         wandb:
             enabled: true
@@ -51,3 +52,4 @@ wandb ロギングを有効にしカスタマイズするために MMF 設定で
     env:
         # wandb メタデータが保存されるディレクトリへのパスを変更するには（デフォルト: env.log_dir）:
         wandb_logdir: ${env:MMF_WANDB_LOGDIR,}
+```
