@@ -5,7 +5,7 @@ You can trace [Agno](https://docs.agno.com/) agent and tool calls in Weave using
 This guide explains how to trace Agno agent and tool calls using OTEL, and visualize those traces in Weave. You'll learn how to install the required dependencies, configure an OTEL tracer to send data to Weave, and instrument your Agno agents and tools.
 
 :::tip
-For more information on OTEL tracing in Weave, see [Send OTEL Traces to Weave](../tracking/otel.md).
+For more information on OTEL tracing in Weave, see [Send OTEL Traces to Weave](../tracking/otel).
 :::
 
 ## Prerequisites
@@ -131,7 +131,9 @@ finance_agent.print_response(
 
 All agent operations are automatically traced and sent to Weave, allowing you to visualize the execution flow, model calls, reasoning steps, and tool invocations.
 
+<Frame>
 ![A trace visualization of an Agno agent](./imgs/agno/agno_agent_trace.png)
+</Frame>
 
 ## Trace Agno tools with OTEL
 
@@ -178,7 +180,9 @@ research_agent.print_response(
 )
 ```
 
+<Frame>
 ![A trace visualization of Agno tool calls](./imgs/agno/agno_tool_calls.png)
+</Frame>
 
 ## Trace multi-agent teams with OTEL
 
@@ -238,7 +242,9 @@ agent_team.print_response(
 
 This multi-agent trace will show the coordination between different agents in Weave, providing visibility into how tasks are distributed and executed across your agent team.
 
+<Frame>
 ![A trace visualization of Agno multi-agent team](./imgs/agno/agno_team_trace.png)
+</Frame>
 
 ## Work with Reasoning Agents
 
@@ -286,7 +292,9 @@ reasoning_agent.print_response(
 
 The reasoning steps will be visible in the trace, showing how the agent breaks down complex problems and makes decisions.
 
+<Frame>
 ![A trace visualization of Agno reasoning agent](./imgs/agno/agno_reasoning_trace.png)
+</Frame>
 
 ## Work with memory and knowledge
 
@@ -329,13 +337,15 @@ memory_agent.print_response("My name is John and I'm interested in AI investing 
 memory_agent.print_response("What specific AI companies would you recommend for my portfolio?")
 ```
 
+<Frame>
 ![A trace visualization of Agno memory usage](./imgs/agno/agno_memory_use.png)
+</Frame>
 
 Memory operations, including storing and retrieving conversation history, will be shown in the trace.
 
 ## Learn more
 
-- [Weave documentation: Send OTEL traces to Weave](../tracking/otel.md)
+- [Weave documentation: Send OTEL traces to Weave](../tracking/otel)
 - [Official Agno documentation](https://docs.agno.com/)
 - [Official OTEL documentation](https://opentelemetry.io/)
 - [Agno GitHub repository](https://github.com/agno-agi/agno)
