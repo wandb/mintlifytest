@@ -55,7 +55,6 @@
                 "pages": [
                   "platform/app/settings-page/user-settings",
                   "platform/app/settings-page/billing-settings",
-                  "platform/app/settings-page/team-settings",
                   "platform/app/settings-page/emails",
                   "platform/app/settings-page/teams",
                   "platform/app/settings-page/storage",
@@ -64,43 +63,43 @@
                   {
                     "group": "Deployment Options",
                     "pages": [
-                      "guides/hosting",
+                      "platform/hosting",
                       {
                         "group": "Deployment Options",
                         "pages": [
-                          "guides/hosting/hosting-options/saas_cloud",
+                          "platform/hosting/hosting-options/saas_cloud",
                           {
                             "group": "Dedicated Cloud",
                             "pages": [
-                              "guides/hosting/hosting-options/dedicated_cloud",
-                              "guides/hosting/hosting-options/dedicated_regions",
-                              "guides/hosting/export-data-from-dedicated-cloud"
+                              "platform/hosting/hosting-options/dedicated_cloud",
+                              "platform/hosting/hosting-options/dedicated_regions",
+                              "platform/hosting/export-data-from-dedicated-cloud"
                             ]
                           },
                           {
                             "group": "Self-Managed",
                             "pages": [
-                              "guides/hosting/hosting-options/self-managed",
-                              "guides/hosting/self-managed/ref-arch",
+                              "platform/hosting/hosting-options/self-managed",
+                              "platform/hosting/self-managed/ref-arch",
                               {
                                 "group": "Run W&B Server on Kubernetes",
                                 "pages": [
-                                  "guides/hosting/operator",
-                                  "guides/hosting/self-managed/operator-airgapped"
+                                  "platform/hosting/operator",
+                                  "platform/hosting/self-managed/operator-airgapped"
                                 ]
                               },
                               {
                                 "group": "Install on public cloud",
                                 "pages": [
-                                  "guides/hosting/self-managed/install-on-public-cloud",
-                                  "guides/hosting/self-managed/aws-tf",
-                                  "guides/hosting/self-managed/gcp-tf",
-                                  "guides/hosting/self-managed/azure-tf"
+                                  "platform/hosting/self-managed/install-on-public-cloud",
+                                  "platform/hosting/self-managed/aws-tf",
+                                  "platform/hosting/self-managed/gcp-tf",
+                                  "platform/hosting/self-managed/azure-tf"
                                 ]
                               },
-                              "guides/hosting/self-managed/bare-metal",
-                              "guides/hosting/server-upgrade-process",
-                              "guides/hosting/self-managed/disable-automatic-app-version-updates"
+                              "platform/hosting/self-managed/bare-metal",
+                              "platform/hosting/server-upgrade-process",
+                              "platform/hosting/self-managed/disable-automatic-app-version-updates"
                             ]
                           }
                         ]
@@ -108,54 +107,54 @@
                       {
                         "group": "Identity and access management (IAM)",
                         "pages": [
-                          "guides/hosting/iam/org_team_struct",
+                          "platform/hosting/iam/org_team_struct",
                           {
                             "group": "Authentication",
                             "pages": [
-                              "guides/hosting/iam/authentication",
-                              "guides/hosting/iam/ldap",
-                              "guides/hosting/iam/sso",
-                              "guides/hosting/iam/identity_federation",
-                              "guides/hosting/iam/service-accounts"
+                              "platform/hosting/iam/authentication",
+                              "platform/hosting/iam/ldap",
+                              "platform/hosting/iam/sso",
+                              "platform/hosting/iam/identity_federation",
+                              "platform/hosting/iam/service-accounts"
                             ]
                           },
                           {
                             "group": "Access management",
                             "pages": [
-                              "guides/hosting/iam/access-management-intro",
-                              "guides/hosting/iam/access-management/manage-organization",
-                              "guides/hosting/iam/access-management/restricted-projects"
+                              "platform/hosting/iam/access-management-intro",
+                              "platform/hosting/iam/access-management/manage-organization",
+                              "platform/hosting/iam/access-management/restricted-projects"
                             ]
                           },
-                          "guides/hosting/iam/automate_iam",
-                          "guides/hosting/iam/scim",
-                          "guides/hosting/iam/advanced_env_vars"
+                          "platform/hosting/iam/automate_iam",
+                          "platform/hosting/iam/scim",
+                          "platform/hosting/iam/advanced_env_vars"
                         ]
                       },
                       {
                         "group": "Data security",
                         "pages": [
-                          "guides/hosting/data-security",
-                          "guides/hosting/data-security/secure-storage-connector",
-                          "guides/hosting/data-security/presigned-urls",
-                          "guides/hosting/data-security/ip-allowlisting",
-                          "guides/hosting/data-security/private-connectivity",
-                          "guides/hosting/data-security/data-encryption"
+                          "platform/hosting/data-security",
+                          "platform/hosting/data-security/secure-storage-connector",
+                          "platform/hosting/data-security/presigned-urls",
+                          "platform/hosting/data-security/ip-allowlisting",
+                          "platform/hosting/data-security/private-connectivity",
+                          "platform/hosting/data-security/data-encryption"
                         ]
                       },
-                      "guides/hosting/privacy-settings",
+                      "platform/hosting/privacy-settings",
                       {
                         "group": "Monitoring and usage",
                         "pages": [
-                          "guides/hosting/monitoring-usage",
-                          "guides/hosting/monitoring-usage/audit-logging",
-                          "guides/hosting/monitoring-usage/prometheus-logging",
-                          "guides/hosting/monitoring-usage/slack-alerts",
-                          "guides/hosting/monitoring-usage/org_dashboard"
+                          "platform/hosting/monitoring-usage",
+                          "platform/hosting/monitoring-usage/audit-logging",
+                          "platform/hosting/monitoring-usage/prometheus-logging",
+                          "platform/hosting/monitoring-usage/slack-alerts",
+                          "platform/hosting/monitoring-usage/org_dashboard"
                         ]
                       },
-                      "guides/hosting/smtp",
-                      "guides/hosting/env-vars"
+                      "platform/hosting/smtp",
+                      "platform/hosting/env-vars"
                     ]
                   }
                 ]
@@ -1013,7 +1012,6 @@
                 "pages": [
                   "ja/guides/app/settings-page/user-settings",
                   "ja/guides/app/settings-page/billing-settings",
-                  "ja/guides/app/settings-page/team-settings",
                   "ja/guides/app/settings-page/emails",
                   "ja/guides/app/settings-page/teams",
                   "ja/guides/app/settings-page/storage",
@@ -1583,11 +1581,9 @@
                 "pages": [
                   "ko/guides/app/settings-page/user-settings/",
                   "ko/guides/app/settings-page/billing-settings/",
-                  "ko/guides/app/settings-page/team-settings/",
                   "ko/guides/app/settings-page/emails/",
                   "ko/guides/app/settings-page/teams/",
                   "ko/guides/app/settings-page/storage/",
-                  "ko/guides/app/settings-page/system-metrics/",
                   "ko/guides/app/settings-page/anon/",
                   "ko/guides/secrets",
                   {
