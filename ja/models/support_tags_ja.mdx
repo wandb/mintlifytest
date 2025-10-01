@@ -1,36 +1,7 @@
 ---
-title: サポート
-menu:
-  support:
-    identifier: ja-support-_index
+title: "Support Articles"
+description: "Collection of support articles"
 ---
-
-import {Banner} from "/snippets/Banner.jsx";
-
-<Banner title="どのようにお手伝いできますか?" background="/images/support/support_banner.png" >
-サポート記事、製品ドキュメント、<br/>
-そして W&B コミュニティからのヘルプを検索してください。
-</Banner>
-
-## 注目の記事
-
-以下は全てのカテゴリーで最もよくある質問です。
-
-* [`wandb.init` をトレーニング プロセスにどう影響させますか？](/ja/support/wandbinit_training_process/)
-* [スイープでカスタム CLI コマンドを使用するにはどうすればよいですか？](/ja/support/custom_cli_commands_sweeps/)
-* [メトリクスをオフラインで保存して、後で W&B に同期することは可能ですか？](/ja/support/same_metric_appearing_more/)
-* [トレーニング コードで run の名前を設定するにはどうすればよいですか？](/ja/support/configure_name_run_training_code/)
-
-探しているものが見つからない場合は、以下の[人気のカテゴリー](#popular-categories)を参照するか、カテゴリーに基づいて記事を検索してください。
-
-<Card
-  title="それでも探しているものが見つからないですか？"
-  href="mailto:support@wandb.com"
-  icon="circle-info"
-  horizontal
->
-  サポートに連絡
-</Card>
 
 <Update tags={["administrator", "academic", "user management"]}>
 <Accordion title="学生として学術プランを利用することは できますか？">
@@ -893,7 +864,7 @@ run は複数のタグを持つことができるため、タグによるグル�
 </Update>
 
 <Update tags={["workspaces", "runs"]}>
-<Accordion title="'Group' 機能を使用せずに run をグループ化できますか？">
+<Accordion title=""Group" 機能を使用せずに run をグループ化できますか？">
 
 はい、tags やカスタムメタデータを使用して runs を分類することもできます。これは、プロジェクトの Workspace および Runs ビューで利用可能な `Group` ボタンを使用して行えます。
 </Accordion>
@@ -1508,7 +1479,7 @@ wandb.log({"train/loss": 0.1, "train/acc": 0.94})
 </Update>
 
 <Update tags={["workspaces"]}>
-<Accordion title="64 ビット符号付き整数の '最大値を超えた' エラーをどのように修正しますか？">
+<Accordion title="64 ビット符号付き整数の "最大値を超えた" エラーをどのように修正しますか？">
 
 このエラーを解決するには、URL の末尾に `?workspace=clear` を追加して Enter キーを押します。この操作により、プロジェクトページ ワークスペースのクリアされたバージョンに移動します。
 </Accordion>
@@ -1815,7 +1786,7 @@ wandb.agent(sweep_id=sweep_id, function=train)
 </Update>
 
 <Update tags={["alerts", "notebooks"]}>
-<Accordion title="ノートブックで 'Run Finished' アラートは機能しますか?">
+<Accordion title="ノートブックで "Run Finished" アラートは機能しますか?">
 
 No. **Run Finished** アラート (**Run Finished** 設定をユーザー設定で有効にする) は Python スクリプトでのみ機能し、各セルの実行に対する通知を避けるために Jupyter ノートブック 環境では無効になっています。
 

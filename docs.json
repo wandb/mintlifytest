@@ -41,7 +41,25 @@
     }
   },
   "navigation": {
-    "global": {},
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Security Details",
+          "icon": "shield",
+          "href": "https://wandb.ai/site/security/"
+        },
+        {
+          "anchor": "Pricing Details",
+          "icon": "square-dollar",
+          "href": "https://wandb.ai/site/pricing/"
+        },
+        {
+          "anchor": "Blog & Tutorials",
+          "icon": "messages",
+          "href": "https://wandb.ai/fully-connected"
+        }
+      ]
+    },
     "languages": [
       {
         "language": "en",
@@ -51,6 +69,103 @@
             "pages": [
               "index",
               {
+                "group": "Deployment Options",
+                "pages": [
+                  "platform/hosting",
+                  {
+                    "group": "Deployment Options",
+                    "pages": [
+                      "platform/hosting/hosting-options/saas_cloud",
+                      {
+                        "group": "Dedicated Cloud",
+                        "pages": [
+                          "platform/hosting/hosting-options/dedicated_cloud",
+                          "platform/hosting/hosting-options/dedicated_regions",
+                          "platform/hosting/export-data-from-dedicated-cloud"
+                        ]
+                      },
+                      {
+                        "group": "Self-Managed",
+                        "pages": [
+                          "platform/hosting/hosting-options/self-managed",
+                          "platform/hosting/self-managed/ref-arch",
+                          {
+                            "group": "Run W&B Server on Kubernetes",
+                            "pages": [
+                              "platform/hosting/operator",
+                              "platform/hosting/self-managed/operator-airgapped"
+                            ]
+                          },
+                          {
+                            "group": "Install on public cloud",
+                            "pages": [
+                              "platform/hosting/self-managed/install-on-public-cloud",
+                              "platform/hosting/self-managed/aws-tf",
+                              "platform/hosting/self-managed/gcp-tf",
+                              "platform/hosting/self-managed/azure-tf"
+                            ]
+                          },
+                          "platform/hosting/self-managed/bare-metal",
+                          "platform/hosting/server-upgrade-process",
+                          "platform/hosting/self-managed/disable-automatic-app-version-updates"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Identity and access management (IAM)",
+                    "pages": [
+                      "platform/hosting/iam/org_team_struct",
+                      {
+                        "group": "Authentication",
+                        "pages": [
+                          "platform/hosting/iam/authentication",
+                          "platform/hosting/iam/ldap",
+                          "platform/hosting/iam/sso",
+                          "platform/hosting/iam/identity_federation",
+                          "platform/hosting/iam/service-accounts"
+                        ]
+                      },
+                      {
+                        "group": "Access management",
+                        "pages": [
+                          "platform/hosting/iam/access-management-intro",
+                          "platform/hosting/iam/access-management/manage-organization",
+                          "platform/hosting/iam/access-management/restricted-projects"
+                        ]
+                      },
+                      "platform/hosting/iam/automate_iam",
+                      "platform/hosting/iam/scim",
+                      "platform/hosting/iam/advanced_env_vars"
+                    ]
+                  },
+                  {
+                    "group": "Data security",
+                    "pages": [
+                      "platform/hosting/data-security",
+                      "platform/hosting/data-security/secure-storage-connector",
+                      "platform/hosting/data-security/presigned-urls",
+                      "platform/hosting/data-security/ip-allowlisting",
+                      "platform/hosting/data-security/private-connectivity",
+                      "platform/hosting/data-security/data-encryption"
+                    ]
+                  },
+                  "platform/hosting/privacy-settings",
+                  {
+                    "group": "Monitoring and usage",
+                    "pages": [
+                      "platform/hosting/monitoring-usage",
+                      "platform/hosting/monitoring-usage/audit-logging",
+                      "platform/hosting/monitoring-usage/prometheus-logging",
+                      "platform/hosting/monitoring-usage/slack-alerts",
+                      "platform/hosting/monitoring-usage/org_dashboard"
+                    ]
+                  },
+                  "platform/hosting/smtp",
+                  "platform/hosting/env-vars"
+                ]
+              },
+              {
                 "group": "Configuring W&B",
                 "pages": [
                   "platform/app/settings-page/user-settings",
@@ -59,104 +174,7 @@
                   "platform/app/settings-page/teams",
                   "platform/app/settings-page/storage",
                   "platform/app/settings-page/anon",
-                  "platform/secrets",
-                  {
-                    "group": "Deployment Options",
-                    "pages": [
-                      "platform/hosting",
-                      {
-                        "group": "Deployment Options",
-                        "pages": [
-                          "platform/hosting/hosting-options/saas_cloud",
-                          {
-                            "group": "Dedicated Cloud",
-                            "pages": [
-                              "platform/hosting/hosting-options/dedicated_cloud",
-                              "platform/hosting/hosting-options/dedicated_regions",
-                              "platform/hosting/export-data-from-dedicated-cloud"
-                            ]
-                          },
-                          {
-                            "group": "Self-Managed",
-                            "pages": [
-                              "platform/hosting/hosting-options/self-managed",
-                              "platform/hosting/self-managed/ref-arch",
-                              {
-                                "group": "Run W&B Server on Kubernetes",
-                                "pages": [
-                                  "platform/hosting/operator",
-                                  "platform/hosting/self-managed/operator-airgapped"
-                                ]
-                              },
-                              {
-                                "group": "Install on public cloud",
-                                "pages": [
-                                  "platform/hosting/self-managed/install-on-public-cloud",
-                                  "platform/hosting/self-managed/aws-tf",
-                                  "platform/hosting/self-managed/gcp-tf",
-                                  "platform/hosting/self-managed/azure-tf"
-                                ]
-                              },
-                              "platform/hosting/self-managed/bare-metal",
-                              "platform/hosting/server-upgrade-process",
-                              "platform/hosting/self-managed/disable-automatic-app-version-updates"
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "group": "Identity and access management (IAM)",
-                        "pages": [
-                          "platform/hosting/iam/org_team_struct",
-                          {
-                            "group": "Authentication",
-                            "pages": [
-                              "platform/hosting/iam/authentication",
-                              "platform/hosting/iam/ldap",
-                              "platform/hosting/iam/sso",
-                              "platform/hosting/iam/identity_federation",
-                              "platform/hosting/iam/service-accounts"
-                            ]
-                          },
-                          {
-                            "group": "Access management",
-                            "pages": [
-                              "platform/hosting/iam/access-management-intro",
-                              "platform/hosting/iam/access-management/manage-organization",
-                              "platform/hosting/iam/access-management/restricted-projects"
-                            ]
-                          },
-                          "platform/hosting/iam/automate_iam",
-                          "platform/hosting/iam/scim",
-                          "platform/hosting/iam/advanced_env_vars"
-                        ]
-                      },
-                      {
-                        "group": "Data security",
-                        "pages": [
-                          "platform/hosting/data-security",
-                          "platform/hosting/data-security/secure-storage-connector",
-                          "platform/hosting/data-security/presigned-urls",
-                          "platform/hosting/data-security/ip-allowlisting",
-                          "platform/hosting/data-security/private-connectivity",
-                          "platform/hosting/data-security/data-encryption"
-                        ]
-                      },
-                      "platform/hosting/privacy-settings",
-                      {
-                        "group": "Monitoring and usage",
-                        "pages": [
-                          "platform/hosting/monitoring-usage",
-                          "platform/hosting/monitoring-usage/audit-logging",
-                          "platform/hosting/monitoring-usage/prometheus-logging",
-                          "platform/hosting/monitoring-usage/slack-alerts",
-                          "platform/hosting/monitoring-usage/org_dashboard"
-                        ]
-                      },
-                      "platform/hosting/smtp",
-                      "platform/hosting/env-vars"
-                    ]
-                  }
+                  "platform/secrets"
                 ]
               }
             ]
@@ -169,6 +187,7 @@
                 "pages": [
                   "models",
                   "models/quickstart",
+                  "models/evaluate-models",
                   {
                     "group": "Experiments",
                     "pages": [
@@ -251,57 +270,6 @@
                       "models/tables/tables-download"
                     ]
                   },
-                  "models/evaluate-models",
-                  {
-                    "group": "W&B App UI",
-                    "pages": [
-                      "models/app",
-                      "models/app/keyboard-shortcuts",
-                      {
-                        "group": "Panels",
-                        "pages": [
-                          "models/app/features/panels",
-                          {
-                            "group": "Line plots",
-                            "pages": [
-                              "models/app/features/panels/line-plot",
-                              "models/app/features/panels/line-plot/reference",
-                              "models/app/features/panels/line-plot/sampling",
-                              "models/app/features/panels/line-plot/smoothing"
-                            ]
-                          },
-                          "models/app/features/panels/bar-plot",
-                          "models/app/features/panels/parallel-coordinates",
-                          "models/app/features/panels/scatter-plot",
-                          "models/app/features/panels/media",
-                          "models/app/features/panels/code",
-                          "models/app/features/panels/parameter-importance",
-                          "models/app/features/panels/run-comparer",
-                          {
-                            "group": "Query panels",
-                            "pages": [
-                              "models/app/features/panels/query-panels",
-                              "models/app/features/panels/query-panels/embedding-projector"
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "group": "Custom charts",
-                        "pages": [
-                          "models/app/features/custom-charts",
-                          "models/app/features/custom-charts/walkthrough"
-                        ]
-                      },
-                      "models/app/console-logs",
-                      "models/app/features/cascade-settings"
-                    ]
-                  }
-                ]
-              },
-              {
-                "group": "W&B Core",
-                "pages": [
                   {
                     "group": "Artifacts",
                     "pages": [
@@ -388,6 +356,51 @@
                         ]
                       },
                       "models/automations/automation-events"
+                    ]
+                  },
+                  {
+                    "group": "W&B App UI",
+                    "pages": [
+                      "models/app",
+                      "models/app/keyboard-shortcuts",
+                      {
+                        "group": "Panels",
+                        "pages": [
+                          "models/app/features/panels",
+                          {
+                            "group": "Line plots",
+                            "pages": [
+                              "models/app/features/panels/line-plot",
+                              "models/app/features/panels/line-plot/reference",
+                              "models/app/features/panels/line-plot/sampling",
+                              "models/app/features/panels/line-plot/smoothing"
+                            ]
+                          },
+                          "models/app/features/panels/bar-plot",
+                          "models/app/features/panels/parallel-coordinates",
+                          "models/app/features/panels/scatter-plot",
+                          "models/app/features/panels/media",
+                          "models/app/features/panels/code",
+                          "models/app/features/panels/parameter-importance",
+                          "models/app/features/panels/run-comparer",
+                          {
+                            "group": "Query panels",
+                            "pages": [
+                              "models/app/features/panels/query-panels",
+                              "models/app/features/panels/query-panels/embedding-projector"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "group": "Custom charts",
+                        "pages": [
+                          "models/app/features/custom-charts",
+                          "models/app/features/custom-charts/walkthrough"
+                        ]
+                      },
+                      "models/app/console-logs",
+                      "models/app/features/cascade-settings"
                     ]
                   }
                 ]
@@ -595,45 +608,7 @@
                   }
                 ]
               },
-              {
-                "group": "Support",
-                "pages": [
-                  "models/support",
-                  "models/support/academic",
-                  "models/support/administrator",
-                  "models/support/alerts",
-                  "models/support/anonymous",
-                  "models/support/artifacts",
-                  "models/support/aws",
-                  "models/support/billing",
-                  "models/support/charts",
-                  "models/support/connectivity",
-                  "models/support/crashing-and-hanging-runs",
-                  "models/support/environment-variables",
-                  "models/support/experiments",
-                  "models/support/hyperparameter",
-                  "models/support/inference",
-                  "models/support/logs",
-                  "models/support/metrics",
-                  "models/support/notebooks",
-                  "models/support/outage",
-                  "models/support/privacy",
-                  "models/support/projects",
-                  "models/support/python",
-                  "models/support/reports",
-                  "models/support/resuming",
-                  "models/support/runs",
-                  "models/support/security",
-                  "models/support/storage",
-                  "models/support/sweeps",
-                  "models/support/tables",
-                  "models/support/team-management",
-                  "models/support/tensorboard",
-                  "models/support/user-management",
-                  "models/support/workspaces",
-                  "models/support/wysiwyg"
-                ]
-              }
+              "models/support"
             ]
           },
           {
@@ -1007,6 +982,100 @@
             "pages": [
               "ja/index",
               {
+                "group": "デプロイメントオプション",
+                "pages": [
+                  "ja/platform/hosting",
+                  {
+                    "group": "デプロイメントオプション",
+                    "pages": [
+                      "ja/platform/hosting/hosting-options/saas_cloud",
+                      {
+                        "group": "自己管理",
+                        "pages": [
+                          "ja/platform/hosting/hosting-options/self-managed",
+                          "ja/platform/hosting/self-managed/ref-arch",
+                          {
+                            "group": "W&B サーバーを Kubernetes で実行する",
+                            "pages": [
+                              "ja/platform/hosting/operator",
+                              "ja/platform/hosting/self-managed/operator-airgapped"
+                            ]
+                          },
+                          {
+                            "group": "パブリック クラウドにインストールする",
+                            "pages": [
+                              "ja/platform/hosting/self-managed/aws-tf",
+                              "ja/platform/hosting/self-managed/gcp-tf",
+                              "ja/platform/hosting/self-managed/azure-tf"
+                            ]
+                          },
+                          "ja/platform/hosting/self-managed/bare-metal",
+                          "ja/platform/hosting/server-upgrade-process"
+                        ]
+                      },
+                      {
+                        "group": "専用クラウド",
+                        "pages": [
+                          "ja/platform/hosting/hosting-options/dedicated_cloud",
+                          "ja/platform/hosting/hosting-options/dedicated_regions",
+                          "ja/platform/hosting/export-data-from-dedicated-cloud"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "アイデンティティとアクセス管理 (IAM)",
+                    "pages": [
+                      "ja/platform/hosting/iam/org_team_struct",
+                      {
+                        "group": "認証",
+                        "pages": [
+                          "ja/platform/hosting/iam/authentication",
+                          "ja/platform/hosting/iam/ldap",
+                          "ja/platform/hosting/iam/sso",
+                          "ja/platform/hosting/iam/identity_federation",
+                          "ja/platform/hosting/iam/service-accounts"
+                        ]
+                      },
+                      {
+                        "group": "アクセス管理",
+                        "pages": [
+                          "ja/platform/hosting/iam/access-management-intro",
+                          "ja/platform/hosting/iam/access-management/manage-organization",
+                          "ja/platform/hosting/iam/access-management/restricted-projects"
+                        ]
+                      },
+                      "ja/platform/hosting/iam/automate_iam",
+                      "ja/platform/hosting/iam/scim",
+                      "ja/platform/hosting/iam/advanced_env_vars"
+                    ]
+                  },
+                  {
+                    "group": "データセキュリティ",
+                    "pages": [
+                      "ja/platform/hosting/data-security/secure-storage-connector",
+                      "ja/platform/hosting/data-security/presigned-urls",
+                      "ja/platform/hosting/data-security/ip-allowlisting",
+                      "ja/platform/hosting/data-security/private-connectivity",
+                      "ja/platform/hosting/data-security/data-encryption"
+                    ]
+                  },
+                  "ja/platform/hosting/privacy-settings",
+                  {
+                    "group": "監視と利用状況",
+                    "pages": [
+                      "ja/platform/hosting/monitoring-usage",
+                      "ja/platform/hosting/monitoring-usage/audit-logging",
+                      "ja/platform/hosting/monitoring-usage/prometheus-logging",
+                      "ja/platform/hosting/monitoring-usage/slack-alerts",
+                      "ja/platform/hosting/monitoring-usage/org_dashboard"
+                    ]
+                  },
+                  "ja/platform/hosting/smtp",
+                  "ja/platform/hosting/env-vars"
+                ]
+              },
+              {
                 "group": "Configuring W&B",
                 "pages": [
                   "ja/platform/app/settings-page/user-settings",
@@ -1015,101 +1084,7 @@
                   "ja/platform/app/settings-page/teams",
                   "ja/platform/app/settings-page/storage",
                   "ja/platform/app/settings-page/anon",
-                  "ja/platform/secrets",
-                  {
-                    "group": "デプロイメントオプション",
-                    "pages": [
-                      "ja/platform/hosting",
-                      {
-                        "group": "デプロイメントオプション",
-                        "pages": [
-                          "ja/platform/hosting/hosting-options/saas_cloud",
-                          {
-                            "group": "自己管理",
-                            "pages": [
-                              "ja/platform/hosting/hosting-options/self-managed",
-                              "ja/platform/hosting/self-managed/ref-arch",
-                              {
-                                "group": "W&B サーバーを Kubernetes で実行する",
-                                "pages": [
-                                  "ja/platform/hosting/operator",
-                                  "ja/platform/hosting/self-managed/operator-airgapped"
-                                ]
-                              },
-                              {
-                                "group": "パブリック クラウドにインストールする",
-                                "pages": [
-                                  "ja/platform/hosting/self-managed/aws-tf",
-                                  "ja/platform/hosting/self-managed/gcp-tf",
-                                  "ja/platform/hosting/self-managed/azure-tf"
-                                ]
-                              },
-                              "ja/platform/hosting/self-managed/bare-metal",
-                              "ja/platform/hosting/server-upgrade-process"
-                            ]
-                          },
-                          {
-                            "group": "専用クラウド",
-                            "pages": [
-                              "ja/platform/hosting/hosting-options/dedicated_cloud",
-                              "ja/platform/hosting/hosting-options/dedicated_regions",
-                              "ja/platform/hosting/export-data-from-dedicated-cloud"
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "group": "アイデンティティとアクセス管理 (IAM)",
-                        "pages": [
-                          "ja/platform/hosting/iam/org_team_struct",
-                          {
-                            "group": "認証",
-                            "pages": [
-                              "ja/platform/hosting/iam/authentication",
-                              "ja/platform/hosting/iam/ldap",
-                              "ja/platform/hosting/iam/sso",
-                              "ja/platform/hosting/iam/identity_federation",
-                              "ja/platform/hosting/iam/service-accounts"
-                            ]
-                          },
-                          {
-                            "group": "アクセス管理",
-                            "pages": [
-                              "ja/platform/hosting/iam/access-management-intro",
-                              "ja/platform/hosting/iam/access-management/manage-organization",
-                              "ja/platform/hosting/iam/access-management/restricted-projects"
-                            ]
-                          },
-                          "ja/platform/hosting/iam/automate_iam",
-                          "ja/platform/hosting/iam/scim",
-                          "ja/platform/hosting/iam/advanced_env_vars"
-                        ]
-                      },
-                      {
-                        "group": "データセキュリティ",
-                        "pages": [
-                          "ja/platform/hosting/data-security/secure-storage-connector",
-                          "ja/platform/hosting/data-security/presigned-urls",
-                          "ja/platform/hosting/data-security/ip-allowlisting",
-                          "ja/platform/hosting/data-security/private-connectivity",
-                          "ja/platform/hosting/data-security/data-encryption"
-                        ]
-                      },
-                      "ja/platform/hosting/privacy-settings",
-                      {
-                        "group": "監視と利用状況",
-                        "pages": [
-                          "ja/platform/hosting/monitoring-usage",
-                          "ja/platform/hosting/monitoring-usage/audit-logging",
-                          "ja/platform/hosting/monitoring-usage/prometheus-logging",
-                          "ja/platform/hosting/monitoring-usage/slack-alerts",
-                          "ja/platform/hosting/monitoring-usage/org_dashboard"
-                        ]
-                      },
-                      "ja/platform/hosting/smtp",
-                      "ja/platform/hosting/env-vars"
-                    ]
-                  }
+                  "ja/platform/secrets"
                 ]
               }
             ]
@@ -1201,52 +1176,6 @@
                     ]
                   },
                   {
-                    "group": "W&B アプリ UI リファレンス",
-                    "pages": [
-                      {
-                        "group": "パネル",
-                        "pages": [
-                          "ja/models/app/features/panels",
-                          {
-                            "group": "折れ線グラフ",
-                            "pages": [
-                              "ja/models/app/features/panels/line-plot",
-                              "ja/models/app/features/panels/line-plot/reference",
-                              "ja/models/app/features/panels/line-plot/sampling",
-                              "ja/models/app/features/panels/line-plot/smoothing"
-                            ]
-                          },
-                          "ja/models/app/features/panels/bar-plot",
-                          "ja/models/app/features/panels/parallel-coordinates",
-                          "ja/models/app/features/panels/scatter-plot",
-                          "ja/models/app/features/panels/code",
-                          "ja/models/app/features/panels/parameter-importance",
-                          "ja/models/app/features/panels/run-comparer",
-                          {
-                            "group": "クエリパネル",
-                            "pages": [
-                              "ja/models/app/features/panels/query-panels",
-                              "ja/models/app/features/panels/query-panels/embedding-projector"
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "group": "カスタムチャート",
-                        "pages": [
-                          "ja/models/app/features/custom-charts/",
-                          "ja/models/app/features/custom-charts/walkthrough"
-                        ]
-                      },
-                      "ja/models/app/features/cascade-settings"
-                    ]
-                  }
-                ]
-              },
-              {
-                "group": "W&B コア",
-                "pages": [
-                  {
                     "group": "Artifacts",
                     "pages": [
                       "ja/models/artifacts",
@@ -1329,6 +1258,47 @@
                         ]
                       },
                       "ja/models/core/automations/automation-events"
+                    ]
+                  },
+                  {
+                    "group": "W&B アプリ UI リファレンス",
+                    "pages": [
+                      {
+                        "group": "パネル",
+                        "pages": [
+                          "ja/models/app/features/panels",
+                          {
+                            "group": "折れ線グラフ",
+                            "pages": [
+                              "ja/models/app/features/panels/line-plot",
+                              "ja/models/app/features/panels/line-plot/reference",
+                              "ja/models/app/features/panels/line-plot/sampling",
+                              "ja/models/app/features/panels/line-plot/smoothing"
+                            ]
+                          },
+                          "ja/models/app/features/panels/bar-plot",
+                          "ja/models/app/features/panels/parallel-coordinates",
+                          "ja/models/app/features/panels/scatter-plot",
+                          "ja/models/app/features/panels/code",
+                          "ja/models/app/features/panels/parameter-importance",
+                          "ja/models/app/features/panels/run-comparer",
+                          {
+                            "group": "クエリパネル",
+                            "pages": [
+                              "ja/models/app/features/panels/query-panels",
+                              "ja/models/app/features/panels/query-panels/embedding-projector"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "group": "カスタムチャート",
+                        "pages": [
+                          "ja/models/app/features/custom-charts/",
+                          "ja/models/app/features/custom-charts/walkthrough"
+                        ]
+                      },
+                      "ja/models/app/features/cascade-settings"
                     ]
                   }
                 ]
@@ -1570,6 +1540,99 @@
             "pages": [
               "ko/index",
               {
+                "group": "Deployment Options",
+                "pages": [
+                  "ko/platform/hosting",
+                  {
+                    "group": "Deployment Options",
+                    "pages": [
+                      "ko/platform/hosting/hosting-options/saas_cloud",
+                      {
+                        "group": "Dedicated Cloud",
+                        "pages": [
+                          "ko/platform/hosting/hosting-options/dedicated_cloud",
+                          "ko/platform/hosting/hosting-options/dedicated_cloud/dedicated_regions/",
+                          "ko/platform/hosting/export-data-from-dedicated-cloud"
+                        ]
+                      },
+                      {
+                        "group": "Self-Managed",
+                        "pages": [
+                          "ko/platform/hosting/hosting-options/self-managed",
+                          "ko/platform/hosting/self-managed/ref-arch",
+                          {
+                            "group": "Run W&B Server on Kubernetes",
+                            "pages": [
+                              "ko/platform/hosting/operator",
+                              "ko/platform/hosting/self-managed/operator-airgapped"
+                            ]
+                          },
+                          {
+                            "group": "Install on public cloud",
+                            "pages": [
+                              "ko/platform/hosting/self-managed/aws-tf",
+                              "ko/platform/hosting/self-managed/gcp-tf",
+                              "ko/platform/hosting/self-managed/azure-tf"
+                            ]
+                          },
+                          "ko/platform/hosting/self-managed/bare-metal",
+                          "ko/platform/hosting/server-upgrade-process"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Identity and access management (IAM)",
+                    "pages": [
+                      "ko/platform/hosting/iam/org_team_struct",
+                      {
+                        "group": "Authentication",
+                        "pages": [
+                          "ko/platform/hosting/iam/ldap",
+                          "ko/platform/hosting/iam/sso",
+                          "ko/platform/hosting/iam/identity_federation",
+                          "ko/platform/hosting/iam/service-accounts"
+                        ]
+                      },
+                      {
+                        "group": "Access management",
+                        "pages": [
+                          "ko/platform/hosting/iam/access-management-intro",
+                          "ko/platform/hosting/iam/access-management/manage-organization",
+                          "ko/platform/hosting/iam/access-management/restricted-projects"
+                        ]
+                      },
+                      "ko/platform/hosting/iam/automate_iam",
+                      "ko/platform/hosting/iam/scim",
+                      "ko/platform/hosting/iam/advanced_env_vars"
+                    ]
+                  },
+                  {
+                    "group": "Data security",
+                    "pages": [
+                      "ko/platform/hosting/data-security/secure-storage-connector",
+                      "ko/platform/hosting/data-security/presigned-urls",
+                      "ko/platform/hosting/data-security/ip-allowlisting",
+                      "ko/platform/hosting/data-security/private-connectivity",
+                      "ko/platform/hosting/data-security/data-encryption"
+                    ]
+                  },
+                  "ko/platform/hosting/privacy-settings",
+                  {
+                    "group": "Monitoring and usage",
+                    "pages": [
+                      "ko/platform/hosting/monitoring-usage/audit-logging",
+                      "ko/platform/hosting/monitoring-usage/prometheus-logging",
+                      "ko/platform/hosting/monitoring-usage/slack-alerts",
+                      "ko/platform/hosting/monitoring-usage/org_dashboard"
+                    ]
+                  },
+                  "ko/platform/hosting/smtp",
+                  "ko/platform/hosting/env-vars",
+                  "ko/platform/hosting/server-release-process/"
+                ]
+              },
+              {
                 "group": "Configuring W&B",
                 "pages": [
                   "ko/platform/app/settings-page/user-settings/",
@@ -1578,100 +1641,7 @@
                   "ko/platform/app/settings-page/teams/",
                   "ko/platform/app/settings-page/storage/",
                   "ko/platform/app/settings-page/anon/",
-                  "ko/platform/secrets",
-                  {
-                    "group": "Deployment Options",
-                    "pages": [
-                      "ko/platform/hosting",
-                      {
-                        "group": "Deployment Options",
-                        "pages": [
-                          "ko/platform/hosting/hosting-options/saas_cloud",
-                          {
-                            "group": "Dedicated Cloud",
-                            "pages": [
-                              "ko/platform/hosting/hosting-options/dedicated_cloud",
-                              "ko/platform/hosting/hosting-options/dedicated_cloud/dedicated_regions/",
-                              "ko/platform/hosting/export-data-from-dedicated-cloud"
-                            ]
-                          },
-                          {
-                            "group": "Self-Managed",
-                            "pages": [
-                              "ko/platform/hosting/hosting-options/self-managed",
-                              "ko/platform/hosting/self-managed/ref-arch",
-                              {
-                                "group": "Run W&B Server on Kubernetes",
-                                "pages": [
-                                  "ko/platform/hosting/operator",
-                                  "ko/platform/hosting/self-managed/operator-airgapped"
-                                ]
-                              },
-                              {
-                                "group": "Install on public cloud",
-                                "pages": [
-                                  "ko/platform/hosting/self-managed/aws-tf",
-                                  "ko/platform/hosting/self-managed/gcp-tf",
-                                  "ko/platform/hosting/self-managed/azure-tf"
-                                ]
-                              },
-                              "ko/platform/hosting/self-managed/bare-metal",
-                              "ko/platform/hosting/server-upgrade-process"
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "group": "Identity and access management (IAM)",
-                        "pages": [
-                          "ko/platform/hosting/iam/org_team_struct",
-                          {
-                            "group": "Authentication",
-                            "pages": [
-                              "ko/platform/hosting/iam/ldap",
-                              "ko/platform/hosting/iam/sso",
-                              "ko/platform/hosting/iam/identity_federation",
-                              "ko/platform/hosting/iam/service-accounts"
-                            ]
-                          },
-                          {
-                            "group": "Access management",
-                            "pages": [
-                              "ko/platform/hosting/iam/access-management-intro",
-                              "ko/platform/hosting/iam/access-management/manage-organization",
-                              "ko/platform/hosting/iam/access-management/restricted-projects"
-                            ]
-                          },
-                          "ko/platform/hosting/iam/automate_iam",
-                          "ko/platform/hosting/iam/scim",
-                          "ko/platform/hosting/iam/advanced_env_vars"
-                        ]
-                      },
-                      {
-                        "group": "Data security",
-                        "pages": [
-                          "ko/platform/hosting/data-security/secure-storage-connector",
-                          "ko/platform/hosting/data-security/presigned-urls",
-                          "ko/platform/hosting/data-security/ip-allowlisting",
-                          "ko/platform/hosting/data-security/private-connectivity",
-                          "ko/platform/hosting/data-security/data-encryption"
-                        ]
-                      },
-                      "ko/platform/hosting/privacy-settings",
-                      {
-                        "group": "Monitoring and usage",
-                        "pages": [
-                          "ko/platform/hosting/monitoring-usage/audit-logging",
-                          "ko/platform/hosting/monitoring-usage/prometheus-logging",
-                          "ko/platform/hosting/monitoring-usage/slack-alerts",
-                          "ko/platform/hosting/monitoring-usage/org_dashboard"
-                        ]
-                      },
-                      "ko/platform/hosting/smtp",
-                      "ko/platform/hosting/env-vars",
-                      "ko/platform/hosting/server-release-process/"
-                    ]
-                  }
+                  "ko/platform/secrets"
                 ]
               }
             ]
@@ -1763,52 +1733,6 @@
                     ]
                   },
                   {
-                    "group": "W&B App UI",
-                    "pages": [
-                      {
-                        "group": "Panels",
-                        "pages": [
-                          "ko/models/app/features/panels",
-                          {
-                            "group": "Line plots",
-                            "pages": [
-                              "ko/models/app/features/panels/line-plot",
-                              "ko/models/app/features/panels/line-plot/reference",
-                              "ko/models/app/features/panels/line-plot/sampling",
-                              "ko/models/app/features/panels/line-plot/smoothing"
-                            ]
-                          },
-                          "ko/models/app/features/panels/bar-plot",
-                          "ko/models/app/features/panels/parallel-coordinates",
-                          "ko/models/app/features/panels/scatter-plot",
-                          "ko/models/app/features/panels/code",
-                          "ko/models/app/features/panels/parameter-importance",
-                          "ko/models/app/features/panels/run-comparer",
-                          {
-                            "group": "Query panels",
-                            "pages": [
-                              "ko/models/app/features/panels/query-panels",
-                              "ko/models/app/features/panels/query-panels/embedding-projector"
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "group": "Custom charts",
-                        "pages": [
-                          "ko/models/app/features/custom-charts",
-                          "ko/models/app/features/custom-charts/walkthrough"
-                        ]
-                      },
-                      "ko/models/app/features/cascade-settings"
-                    ]
-                  }
-                ]
-              },
-              {
-                "group": "W&B Core",
-                "pages": [
-                  {
                     "group": "Artifacts",
                     "pages": [
                       "ko/models/artifacts",
@@ -1892,6 +1816,47 @@
                         ]
                       },
                       "ko/models/core/automations/automation-events"
+                    ]
+                  },
+                  {
+                    "group": "W&B App UI",
+                    "pages": [
+                      {
+                        "group": "Panels",
+                        "pages": [
+                          "ko/models/app/features/panels",
+                          {
+                            "group": "Line plots",
+                            "pages": [
+                              "ko/models/app/features/panels/line-plot",
+                              "ko/models/app/features/panels/line-plot/reference",
+                              "ko/models/app/features/panels/line-plot/sampling",
+                              "ko/models/app/features/panels/line-plot/smoothing"
+                            ]
+                          },
+                          "ko/models/app/features/panels/bar-plot",
+                          "ko/models/app/features/panels/parallel-coordinates",
+                          "ko/models/app/features/panels/scatter-plot",
+                          "ko/models/app/features/panels/code",
+                          "ko/models/app/features/panels/parameter-importance",
+                          "ko/models/app/features/panels/run-comparer",
+                          {
+                            "group": "Query panels",
+                            "pages": [
+                              "ko/models/app/features/panels/query-panels",
+                              "ko/models/app/features/panels/query-panels/embedding-projector"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "group": "Custom charts",
+                        "pages": [
+                          "ko/models/app/features/custom-charts",
+                          "ko/models/app/features/custom-charts/walkthrough"
+                        ]
+                      },
+                      "ko/models/app/features/cascade-settings"
                     ]
                   }
                 ]
