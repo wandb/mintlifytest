@@ -18,26 +18,29 @@ Choose the product for which you need documentation.
 
 <HomeWrapper padding="mint-px-24">
 <Columns cols={3}>
-    <ProductCard
+    <Card
         title="W&B Models"
         subtitle="Develop AI models"
         href="/guides"
-        icon="/icons/Name=Models,%20Mode=Dark.svg"
-        links={[
-            { href: "/guides/", text: "Introduction" },
-            { href: "/quickstart/", text: "Quickstart" },
-            { href: "https://www.youtube.com/watch?v=tHAFujRhZLA", text: "YouTube Tutorial" },
-            { href: "https://wandb.ai/site/courses/101/", text: "Online Course" },
-        ]}
+        icon="hexagon-nodes"
     >
+        Develop AI models
+        <br/>
         Use [W&B Models](/guides) to manage AI model development. Features include training, fine-tuning, reporting, automating hyperparameter sweeps, and utilizing the model registry for versioning and reproducibility.
-    </ProductCard>
+        <br/>
+        <br/>
 
-    <ProductCard
+        • [Introduction](/guides/)  
+        • [Quickstart](/quickstart/)  
+        • [YouTube Tutorial](https://www.youtube.com/watch?v=tHAFujRhZLA)  
+        • [Online Course](https://wandb.ai/site/courses/101/)  
+    </Card>
+
+    <Card
         title="W&B Weave"
-        subtitle="Use AI models in your app"
+        subtitle=""
         href="/weave"
-        icon="/icons/Name=Weave,%20Mode=Dark.svg"
+        icon="table"
         links={[
             { href: "/guides/", text: "Introduction" },
             { href: "/weave/quickstart", text: "Quickstart" },
@@ -45,24 +48,34 @@ Choose the product for which you need documentation.
             { href: "/weave/guides/tools/playground/", text: "Try the Playground" },
             { href: "/guides/weave/set-up-weave", text: "Use Weave in your W&B runs" }
         ]}
-    >
+    >   
+        Use AI models in your app
+        <br/>
         Use [W&B Weave](/weave/) to manage AI models in your code. Features include tracing, output evaluation, cost estimates, and a hosted inference service and playground for comparing different large language models (LLMs) and settings.
-    </ProductCard>
+        <br/>
+        <br/>
+        • [Introduction](/guides/)  
+        • [Quickstart](/weave/quickstart)  
+        • [YouTube Demo](https://www.youtube.com/watch?v=IQcGGNLN3zo)  
+        • [Try the Playground](/weave/guides/tools/playground/)  
+        • [Use Weave in your W&B runs](/guides/weave/set-up-weave)  
+    </Card>
     
-    <ProductCard
+    <Card
     title="W&B Inference"
-    subtitle="Access foundation models"
     href="/guides/inference/"
-    icon="/icons/Name=Inference,%20Mode=Dark.svg"
-    links={[
-        { href: "/guides/inference/", text: "Introduction" },
-        { href: "/guides/inference/models/", text: "Available Models" },
-        { href: "/guides/inference/api-reference/", text: "API Reference" },
-        { href: "https://wandb.ai/inference", text: "Try in Playground" }
-    ]}
+    icon="cloud"
     >
+        Access foundation models
+        <br/>
         Use <a href="/guides/inference/">W&B Inference</a> to access leading open-source foundation models through an OpenAI-compatible API. Features include multiple model options, usage tracking, and integration with Weave for tracing and evaluation.
-    </ProductCard>
+        <br/>
+        <br/>
+        • [Introduction](/guides/inference/)  
+        • [Available Models](/guides/inference/models/)  
+        • [API Reference](/guides/inference/api-reference/)  
+        • [Try in Playground](https://wandb.ai/inference)  
+    </Card>
 
 </Columns>
 </HomeWrapper>
