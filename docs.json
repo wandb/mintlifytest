@@ -1566,62 +1566,57 @@
         "language": "ko",
         "tabs": [
           {
-            "tab": "Home",
-            "pages": [
-              "ko/index"
-            ]
-          },
-          {
             "tab": "Platform",
             "pages": [
+              "ko/index",
               {
                 "group": "Configuring W&B",
                 "pages": [
-                  "ko/guides/app/settings-page/user-settings/",
-                  "ko/guides/app/settings-page/billing-settings/",
-                  "ko/guides/app/settings-page/emails/",
-                  "ko/guides/app/settings-page/teams/",
-                  "ko/guides/app/settings-page/storage/",
-                  "ko/guides/app/settings-page/anon/",
-                  "ko/guides/secrets",
+                  "ko/platform/app/settings-page/user-settings/",
+                  "ko/platform/app/settings-page/billing-settings/",
+                  "ko/platform/app/settings-page/emails/",
+                  "ko/platform/app/settings-page/teams/",
+                  "ko/platform/app/settings-page/storage/",
+                  "ko/platform/app/settings-page/anon/",
+                  "ko/platform/secrets",
                   {
                     "group": "Deployment Options",
                     "pages": [
-                      "ko/guides/hosting",
+                      "ko/platform/hosting",
                       {
                         "group": "Deployment Options",
                         "pages": [
-                          "ko/guides/hosting/hosting-options/saas_cloud",
+                          "ko/platform/hosting/hosting-options/saas_cloud",
                           {
                             "group": "Dedicated Cloud",
                             "pages": [
-                              "ko/guides/hosting/hosting-options/dedicated_cloud",
-                              "ko/guides/hosting/hosting-options/dedicated_cloud/dedicated_regions/",
-                              "ko/guides/hosting/export-data-from-dedicated-cloud"
+                              "ko/platform/hosting/hosting-options/dedicated_cloud",
+                              "ko/platform/hosting/hosting-options/dedicated_cloud/dedicated_regions/",
+                              "ko/platform/hosting/export-data-from-dedicated-cloud"
                             ]
                           },
                           {
                             "group": "Self-Managed",
                             "pages": [
-                              "ko/guides/hosting/hosting-options/self-managed",
-                              "ko/guides/hosting/self-managed/ref-arch",
+                              "ko/platform/hosting/hosting-options/self-managed",
+                              "ko/platform/hosting/self-managed/ref-arch",
                               {
                                 "group": "Run W&B Server on Kubernetes",
                                 "pages": [
-                                  "ko/guides/hosting/operator",
-                                  "ko/guides/hosting/self-managed/operator-airgapped"
+                                  "ko/platform/hosting/operator",
+                                  "ko/platform/hosting/self-managed/operator-airgapped"
                                 ]
                               },
                               {
                                 "group": "Install on public cloud",
                                 "pages": [
-                                  "ko/guides/hosting/self-managed/aws-tf",
-                                  "ko/guides/hosting/self-managed/gcp-tf",
-                                  "ko/guides/hosting/self-managed/azure-tf"
+                                  "ko/platform/hosting/self-managed/aws-tf",
+                                  "ko/platform/hosting/self-managed/gcp-tf",
+                                  "ko/platform/hosting/self-managed/azure-tf"
                                 ]
                               },
-                              "ko/guides/hosting/self-managed/bare-metal",
-                              "ko/guides/hosting/server-upgrade-process"
+                              "ko/platform/hosting/self-managed/bare-metal",
+                              "ko/platform/hosting/server-upgrade-process"
                             ]
                           }
                         ]
@@ -1629,52 +1624,52 @@
                       {
                         "group": "Identity and access management (IAM)",
                         "pages": [
-                          "ko/guides/hosting/iam/org_team_struct",
+                          "ko/platform/hosting/iam/org_team_struct",
                           {
                             "group": "Authentication",
                             "pages": [
-                              "ko/guides/hosting/iam/ldap",
-                              "ko/guides/hosting/iam/sso",
-                              "ko/guides/hosting/iam/identity_federation",
-                              "ko/guides/hosting/iam/service-accounts"
+                              "ko/platform/hosting/iam/ldap",
+                              "ko/platform/hosting/iam/sso",
+                              "ko/platform/hosting/iam/identity_federation",
+                              "ko/platform/hosting/iam/service-accounts"
                             ]
                           },
                           {
                             "group": "Access management",
                             "pages": [
-                              "ko/guides/hosting/iam/access-management-intro",
-                              "ko/guides/hosting/iam/access-management/manage-organization",
-                              "ko/guides/hosting/iam/access-management/restricted-projects"
+                              "ko/platform/hosting/iam/access-management-intro",
+                              "ko/platform/hosting/iam/access-management/manage-organization",
+                              "ko/platform/hosting/iam/access-management/restricted-projects"
                             ]
                           },
-                          "ko/guides/hosting/iam/automate_iam",
-                          "ko/guides/hosting/iam/scim",
-                          "ko/guides/hosting/iam/advanced_env_vars"
+                          "ko/platform/hosting/iam/automate_iam",
+                          "ko/platform/hosting/iam/scim",
+                          "ko/platform/hosting/iam/advanced_env_vars"
                         ]
                       },
                       {
                         "group": "Data security",
                         "pages": [
-                          "ko/guides/hosting/data-security/secure-storage-connector",
-                          "ko/guides/hosting/data-security/presigned-urls",
-                          "ko/guides/hosting/data-security/ip-allowlisting",
-                          "ko/guides/hosting/data-security/private-connectivity",
-                          "ko/guides/hosting/data-security/data-encryption"
+                          "ko/platform/hosting/data-security/secure-storage-connector",
+                          "ko/platform/hosting/data-security/presigned-urls",
+                          "ko/platform/hosting/data-security/ip-allowlisting",
+                          "ko/platform/hosting/data-security/private-connectivity",
+                          "ko/platform/hosting/data-security/data-encryption"
                         ]
                       },
-                      "ko/guides/hosting/privacy-settings",
+                      "ko/platform/hosting/privacy-settings",
                       {
                         "group": "Monitoring and usage",
                         "pages": [
-                          "ko/guides/hosting/monitoring-usage/audit-logging",
-                          "ko/guides/hosting/monitoring-usage/prometheus-logging",
-                          "ko/guides/hosting/monitoring-usage/slack-alerts",
-                          "ko/guides/hosting/monitoring-usage/org_dashboard"
+                          "ko/platform/hosting/monitoring-usage/audit-logging",
+                          "ko/platform/hosting/monitoring-usage/prometheus-logging",
+                          "ko/platform/hosting/monitoring-usage/slack-alerts",
+                          "ko/platform/hosting/monitoring-usage/org_dashboard"
                         ]
                       },
-                      "ko/guides/hosting/smtp",
-                      "ko/guides/hosting/env-vars",
-                      "ko/guides/hosting/server-release-process/"
+                      "ko/platform/hosting/smtp",
+                      "ko/platform/hosting/env-vars",
+                      "ko/platform/hosting/server-release-process/"
                     ]
                   }
                 ]
@@ -1684,87 +1679,87 @@
           {
             "tab": "W&B Models",
             "pages": [
-              "models/index",
               {
                 "group": "W&B Models",
                 "pages": [
-                  "ko/guides/models",
-                  "ko/quickstart",
+                  "ko/models",
+                  "ko/models/quickstart",
                   {
                     "group": "Experiments",
                     "pages": [
-                      "ko/guides/track",
-                      "ko/guides/track/create-an-experiment",
-                      "ko/guides/track/config",
-                      "ko/guides/track/project-page",
-                      "ko/guides/track/workspaces",
+                      "ko/models/track",
+                      "ko/models/track/create-an-experiment",
+                      "ko/models/track/config",
+                      "ko/models/track/project-page",
+                      "ko/models/track/workspaces",
                       {
                         "group": "What are runs?",
                         "pages": [
-                          "ko/guides/runs",
-                          "ko/guides/runs/tags",
-                          "ko/guides/runs/filter-runs",
-                          "ko/guides/runs/forking",
-                          "ko/guides/runs/grouping",
-                          "ko/guides/runs/manage-runs",
-                          "ko/guides/runs/resuming",
-                          "ko/guides/runs/rewind",
-                          "ko/guides/runs/alert"
+                          "ko/models/runs",
+                          "ko/models/runs/tags",
+                          "ko/models/runs/filter-runs",
+                          "ko/models/runs/forking",
+                          "ko/models/runs/grouping",
+                          "ko/models/runs/manage-runs",
+                          "ko/models/runs/resuming",
+                          "ko/models/runs/rewind",
+                          "ko/models/runs/alert"
                         ]
                       },
                       {
                         "group": "Log objects and media",
                         "pages": [
-                          "ko/guides/track/log",
-                          "ko/guides/track/log/plots",
-                          "ko/guides/track/log/customize-logging-axes",
-                          "ko/guides/track/log/distributed-training",
-                          "ko/guides/track/log/media",
-                          "ko/guides/track/log/log-models",
-                          "ko/guides/track/log/log-summary",
-                          "ko/guides/track/log/log-tables",
-                          "ko/guides/track/log/working-with-csv"
+                          "ko/models/track/log",
+                          "ko/models/track/log/plots",
+                          "ko/models/track/log/customize-logging-axes",
+                          "ko/models/track/log/distributed-training",
+                          "ko/models/track/log/media",
+                          "ko/models/track/log/log-models",
+                          "ko/models/track/log/log-summary",
+                          "ko/models/track/log/log-tables",
+                          "ko/models/track/log/working-with-csv"
                         ]
                       },
-                      "ko/guides/track/jupyter",
-                      "ko/guides/track/limits",
-                      "ko/guides/track/reproduce_experiments",
-                      "ko/guides/track/public-api-guide",
-                      "ko/guides/track/environment-variables"
+                      "ko/models/track/jupyter",
+                      "ko/models/track/limits",
+                      "ko/models/track/reproduce_experiments",
+                      "ko/models/track/public-api-guide",
+                      "ko/models/track/environment-variables"
                     ]
                   },
                   {
                     "group": "Sweeps",
                     "pages": [
-                      "ko/guides/sweeps",
-                      "ko/guides/sweeps/walkthrough",
-                      "ko/guides/sweeps/add-w-and-b-to-your-code",
+                      "ko/models/sweeps",
+                      "ko/models/sweeps/walkthrough",
+                      "ko/models/sweeps/add-w-and-b-to-your-code",
                       {
                         "group": "Define a sweep configuration",
                         "pages": [
-                          "ko/guides/sweeps/sweep-config-keys"
+                          "ko/models/sweeps/define-sweep-configuration",
+                          "ko/models/sweeps/sweep-config-keys"
                         ]
                       },
-                      "ko/guides/sweeps/initialize-sweeps",
-                      "ko/guides/sweeps/start-sweep-agents",
-                      "ko/guides/sweeps/parallelize-agents",
-                      "ko/guides/sweeps/visualize-sweep-results",
-                      "ko/guides/sweeps/pause-resume-and-cancel-sweeps",
-                      "ko/guides/sweeps/useful-resources",
-                      "ko/guides/sweeps/local-controller",
-                      "ko/guides/sweeps/troubleshoot-sweeps",
-                      "ko/guides/sweeps/sweeps-ui",
-                      "ko/guides/sweeps/existing-project"
+                      "ko/models/sweeps/initialize-sweeps",
+                      "ko/models/sweeps/start-sweep-agents",
+                      "ko/models/sweeps/parallelize-agents",
+                      "ko/models/sweeps/visualize-sweep-results",
+                      "ko/models/sweeps/pause-resume-and-cancel-sweeps",
+                      "ko/models/sweeps/useful-resources",
+                      "ko/models/sweeps/local-controller",
+                      "ko/models/sweeps/troubleshoot-sweeps",
+                      "ko/models/sweeps/sweeps-ui",
+                      "ko/models/sweeps/existing-project"
                     ]
                   },
                   {
                     "group": "Tables",
                     "pages": [
-                      "ko/guides/models/tables",
-                      "ko/guides/models/tables/tables-walkthrough",
-                      "ko/guides/models/tables/visualize-tables",
-                      "ko/guides/models/tables/tables-gallery",
-                      "ko/guides/models/tables/tables-download"
+                      "ko/models/tables",
+                      "ko/models/tables/tables-walkthrough",
+                      "ko/models/tables/visualize-tables",
+                      "ko/models/tables/tables-gallery",
+                      "ko/models/tables/tables-download"
                     ]
                   },
                   {
@@ -1773,27 +1768,27 @@
                       {
                         "group": "Panels",
                         "pages": [
-                          "ko/guides/app/features/panels",
+                          "ko/models/app/features/panels",
                           {
                             "group": "Line plots",
                             "pages": [
-                              "ko/guides/app/features/panels/line-plot",
-                              "ko/guides/app/features/panels/line-plot/reference",
-                              "ko/guides/app/features/panels/line-plot/sampling",
-                              "ko/guides/app/features/panels/line-plot/smoothing"
+                              "ko/models/app/features/panels/line-plot",
+                              "ko/models/app/features/panels/line-plot/reference",
+                              "ko/models/app/features/panels/line-plot/sampling",
+                              "ko/models/app/features/panels/line-plot/smoothing"
                             ]
                           },
-                          "ko/guides/app/features/panels/bar-plot",
-                          "ko/guides/app/features/panels/parallel-coordinates",
-                          "ko/guides/app/features/panels/scatter-plot",
-                          "ko/guides/app/features/panels/code",
-                          "ko/guides/app/features/panels/parameter-importance",
-                          "ko/guides/app/features/panels/run-comparer",
+                          "ko/models/app/features/panels/bar-plot",
+                          "ko/models/app/features/panels/parallel-coordinates",
+                          "ko/models/app/features/panels/scatter-plot",
+                          "ko/models/app/features/panels/code",
+                          "ko/models/app/features/panels/parameter-importance",
+                          "ko/models/app/features/panels/run-comparer",
                           {
                             "group": "Query panels",
                             "pages": [
-                              "ko/guides/app/features/panels/query-panels",
-                              "ko/guides/app/features/panels/query-panels/embedding-projector"
+                              "ko/models/app/features/panels/query-panels",
+                              "ko/models/app/features/panels/query-panels/embedding-projector"
                             ]
                           }
                         ]
@@ -1801,11 +1796,11 @@
                       {
                         "group": "Custom charts",
                         "pages": [
-                          "ko/guides/app/features/custom-charts",
-                          "ko/guides/app/features/custom-charts/walkthrough"
+                          "ko/models/app/features/custom-charts",
+                          "ko/models/app/features/custom-charts/walkthrough"
                         ]
                       },
-                      "ko/guides/app/features/cascade-settings"
+                      "ko/models/app/features/cascade-settings"
                     ]
                   }
                 ]
@@ -1813,60 +1808,60 @@
               {
                 "group": "W&B Core",
                 "pages": [
-                  "ko/guides/core",
                   {
                     "group": "Artifacts",
                     "pages": [
-                      "ko/guides/artifacts",
-                      "ko/guides/artifacts/construct-an-artifact",
-                      "ko/guides/artifacts/download-and-use-an-artifact",
-                      "ko/guides/artifacts/update-an-artifact",
-                      "ko/guides/artifacts/create-a-custom-alias",
-                      "ko/guides/artifacts/create-a-new-artifact-version",
-                      "ko/guides/artifacts/track-external-files",
+                      "ko/models/artifacts",
+                      "ko/models/artifacts/construct-an-artifact",
+                      "ko/models/artifacts/download-and-use-an-artifact",
+                      "ko/models/artifacts/update-an-artifact",
+                      "ko/models/artifacts/create-a-custom-alias",
+                      "ko/models/artifacts/create-a-new-artifact-version",
+                      "ko/models/artifacts/track-external-files",
                       {
                         "group": "Manage data",
                         "pages": [
-                          "ko/guides/artifacts/manage-data",
-                          "ko/guides/artifacts/delete-artifacts",
-                          "ko/guides/artifacts/ttl",
-                          "ko/guides/artifacts/storage"
+                          "ko/models/artifacts/manage-data",
+                          "ko/models/artifacts/delete-artifacts",
+                          "ko/models/artifacts/ttl",
+                          "ko/models/artifacts/storage"
                         ]
                       },
-                      "ko/guides/artifacts/explore-and-traverse-an-artifact-graph",
-                      "ko/guides/artifacts/data-privacy-and-compliance",
-                      "ko/guides/artifacts/artifacts-walkthrough"
+                      "ko/models/artifacts/explore-and-traverse-an-artifact-graph",
+                      "ko/models/artifacts/data-privacy-and-compliance",
+                      "ko/models/artifacts/artifacts-walkthrough"
                     ]
                   },
                   {
                     "group": "Registry",
                     "pages": [
-                      "ko/guides/core/registry",
-                      "ko/guides/core/registry/registry_types",
-                      "ko/guides/core/registry/create_registry",
-                      "ko/guides/core/registry/configure_registry",
-                      "ko/guides/core/registry/create_collection",
-                      "ko/guides/core/registry/link_version",
-                      "ko/guides/core/registry/download_use_artifact",
-                      "ko/guides/core/registry/search_registry",
-                      "ko/guides/core/registry/organize-with-tags",
-                      "ko/guides/core/registry/registry_cards",
-                      "ko/guides/core/registry/lineage",
-                      "ko/guides/core/registry/model_registry_eol",
+                      "ko/models/core/registry",
+                      "ko/models/core/registry/registry_types",
+                      "ko/models/core/registry/create_registry",
+                      "ko/models/core/registry/configure_registry",
+                      "ko/models/core/registry/create_collection",
+                      "ko/models/core/registry/link_version",
+                      "ko/models/core/registry/download_use_artifact",
+                      "ko/models/core/registry/search_registry",
+                      "ko/models/core/registry/organize-with-tags",
+                      "ko/models/core/registry/registry_cards",
+                      "ko/models/core/registry/lineage",
+                      "ko/models/core/registry/model_registry_eol",
                       {
                         "group": "Model registry",
                         "pages": [
-                          "ko/guides/core/registry/model_registry/walkthrough",
-                          "ko/guides/core/registry/model_registry/model-management-concepts",
-                          "ko/guides/core/registry/model_registry/log-model-to-experiment",
-                          "ko/guides/core/registry/model_registry/create-registered-model",
-                          "ko/guides/core/registry/model_registry/link-model-version",
-                          "ko/guides/core/registry/model_registry/organize-models",
-                          "ko/guides/core/registry/model_registry/model-lineage",
-                          "ko/guides/core/registry/model_registry/create-model-cards",
-                          "ko/guides/core/registry/model_registry/consume-models",
-                          "ko/guides/core/registry/model_registry/notifications",
-                          "ko/guides/core/registry/model_registry/access_controls"
+                          "ko/models/core/registry/model_registry",
+                          "ko/models/core/registry/model_registry/walkthrough",
+                          "ko/models/core/registry/model_registry/model-management-concepts",
+                          "ko/models/core/registry/model_registry/log-model-to-experiment",
+                          "ko/models/core/registry/model_registry/create-registered-model",
+                          "ko/models/core/registry/model_registry/link-model-version",
+                          "ko/models/core/registry/model_registry/organize-models",
+                          "ko/models/core/registry/model_registry/model-lineage",
+                          "ko/models/core/registry/model_registry/create-model-cards",
+                          "ko/models/core/registry/model_registry/consume-models",
+                          "ko/models/core/registry/model_registry/notifications",
+                          "ko/models/core/registry/model_registry/access_controls"
                         ]
                       }
                     ]
@@ -1874,29 +1869,29 @@
                   {
                     "group": "Reports",
                     "pages": [
-                      "ko/guides/reports",
-                      "ko/guides/reports/create-a-report",
-                      "ko/guides/reports/edit-a-report",
-                      "ko/guides/reports/collaborate-on-reports",
-                      "ko/guides/reports/clone-and-export-reports",
-                      "ko/guides/reports/embed-reports",
-                      "ko/guides/reports/cross-project-reports",
-                      "ko/guides/reports/reports-gallery"
+                      "ko/models/reports",
+                      "ko/models/reports/create-a-report",
+                      "ko/models/reports/edit-a-report",
+                      "ko/models/reports/collaborate-on-reports",
+                      "ko/models/reports/clone-and-export-reports",
+                      "ko/models/reports/embed-reports",
+                      "ko/models/reports/cross-project-reports",
+                      "ko/models/reports/reports-gallery"
                     ]
                   },
                   {
                     "group": "Automations",
                     "pages": [
-                      "ko/guides/core/automations",
+                      "ko/models/core/automations",
                       {
                         "group": "Create an automation",
                         "pages": [
-                          "ko/guides/core/automations/create-automations",
-                          "ko/guides/core/automations/create-automations/slack",
-                          "ko/guides/core/automations/create-automations/webhook"
+                          "ko/models/core/automations/create-automations",
+                          "ko/models/core/automations/create-automations/slack",
+                          "ko/models/core/automations/create-automations/webhook"
                         ]
                       },
-                      "ko/guides/core/automations/automation-events"
+                      "ko/models/core/automations/automation-events"
                     ]
                   }
                 ]
@@ -1904,131 +1899,131 @@
               {
                 "group": "Reference",
                 "pages": [
-                  "ko/ref",
+                  "ko/models/ref",
                   {
                     "group": "Command Line Interface",
                     "pages": [
-                      "ko/ref/cli",
-                      "ko/ref/cli/wandb-agent/",
+                      "ko/models/ref/cli",
+                      "ko/models/ref/cli/wandb-agent/",
                       {
                         "group": "wandb artifact",
                         "pages": [
-                          "ko/ref/cli/wandb-artifact",
+                          "ko/models/ref/cli/wandb-artifact",
                           {
                             "group": "wandb artifact cache",
                             "pages": [
-                              "ko/ref/cli/wandb-artifact/wandb-artifact-cache",
-                              "ko/ref/cli/wandb-artifact/wandb-artifact-cache/wandb-artifact-cache-cleanup/"
+                              "ko/models/ref/cli/wandb-artifact/wandb-artifact-cache",
+                              "ko/models/ref/cli/wandb-artifact/wandb-artifact-cache/wandb-artifact-cache-cleanup/"
                             ]
                           },
-                          "ko/ref/cli/wandb-artifact/wandb-artifact-get/",
-                          "ko/ref/cli/wandb-artifact/wandb-artifact-ls/",
-                          "ko/ref/cli/wandb-artifact/wandb-artifact-put/"
+                          "ko/models/ref/cli/wandb-artifact/wandb-artifact-get/",
+                          "ko/models/ref/cli/wandb-artifact/wandb-artifact-ls/",
+                          "ko/models/ref/cli/wandb-artifact/wandb-artifact-put/"
                         ]
                       },
                       {
                         "group": "wandb beta",
                         "pages": [
-                          "ko/ref/cli/wandb-beta",
-                          "ko/ref/cli/wandb-beta/wandb-beta-sync/"
+                          "ko/models/ref/cli/wandb-beta",
+                          "ko/models/ref/cli/wandb-beta/wandb-beta-sync/"
                         ]
                       },
-                      "ko/ref/cli/wandb-controller/",
-                      "ko/ref/cli/wandb-disabled/",
-                      "ko/ref/cli/wandb-docker/",
-                      "ko/ref/cli/wandb-docker-run/",
-                      "ko/ref/cli/wandb-enabled/",
-                      "ko/ref/cli/wandb-init/",
+                      "ko/models/ref/cli/wandb-controller/",
+                      "ko/models/ref/cli/wandb-disabled/",
+                      "ko/models/ref/cli/wandb-docker/",
+                      "ko/models/ref/cli/wandb-docker-run/",
+                      "ko/models/ref/cli/wandb-enabled/",
+                      "ko/models/ref/cli/wandb-init/",
                       {
                         "group": "wandb job",
                         "pages": [
-                          "ko/ref/cli/wandb-job",
-                          "ko/ref/cli/wandb-job/wandb-job-create/",
-                          "ko/ref/cli/wandb-job/wandb-job-describe/",
-                          "ko/ref/cli/wandb-job/wandb-job-list/"
+                          "ko/models/ref/cli/wandb-job",
+                          "ko/models/ref/cli/wandb-job/wandb-job-create/",
+                          "ko/models/ref/cli/wandb-job/wandb-job-describe/",
+                          "ko/models/ref/cli/wandb-job/wandb-job-list/"
                         ]
                       },
-                      "ko/ref/cli/wandb-launch/",
-                      "ko/ref/cli/wandb-launch-agent/",
-                      "ko/ref/cli/wandb-launch-sweep/",
-                      "ko/ref/cli/wandb-login/",
-                      "ko/ref/cli/wandb-offline/",
-                      "ko/ref/cli/wandb-online/",
-                      "ko/ref/cli/wandb-pull/",
-                      "ko/ref/cli/wandb-restore/",
-                      "ko/ref/cli/wandb-scheduler/",
+                      "ko/models/ref/cli/wandb-launch/",
+                      "ko/models/ref/cli/wandb-launch-agent/",
+                      "ko/models/ref/cli/wandb-launch-sweep/",
+                      "ko/models/ref/cli/wandb-login/",
+                      "ko/models/ref/cli/wandb-offline/",
+                      "ko/models/ref/cli/wandb-online/",
+                      "ko/models/ref/cli/wandb-pull/",
+                      "ko/models/ref/cli/wandb-restore/",
+                      "ko/models/ref/cli/wandb-scheduler/",
                       {
                         "group": "wandb server",
                         "pages": [
-                          "ko/ref/cli/wandb-server",
-                          "ko/ref/cli/wandb-server/wandb-server-start/",
-                          "ko/ref/cli/wandb-server/wandb-server-stop/"
+                          "ko/models/ref/cli/wandb-server",
+                          "ko/models/ref/cli/wandb-server/wandb-server-start/",
+                          "ko/models/ref/cli/wandb-server/wandb-server-stop/"
                         ]
                       },
-                      "ko/ref/cli/wandb-status/",
-                      "ko/ref/cli/wandb-sweep/",
-                      "ko/ref/cli/wandb-sync/",
-                      "ko/ref/cli/wandb-verify/"
+                      "ko/models/ref/cli/wandb-status/",
+                      "ko/models/ref/cli/wandb-sweep/",
+                      "ko/models/ref/cli/wandb-sync/",
+                      "ko/models/ref/cli/wandb-verify/"
                     ]
                   },
-                  "ko/ref/js/",
+                  "ko/models/ref/js/",
                   {
                     "group": "Python Library",
                     "pages": [
-                      "ko/ref/python",
-                      "ko/ref/python/agent/",
-                      "ko/ref/python/artifact/",
-                      "ko/ref/python/controller/",
+                      "ko/models/ref/python",
+                      "ko/models/ref/python/agent/",
+                      "ko/models/ref/python/artifact/",
+                      "ko/models/ref/python/controller/",
                       {
                         "group": "Data Types",
                         "pages": [
-                          "ko/ref/python/data-types",
-                          "ko/ref/python/data-types/audio/",
-                          "ko/ref/python/data-types/boundingboxes2d/",
-                          "ko/ref/python/data-types/graph/",
-                          "ko/ref/python/data-types/histogram/",
-                          "ko/ref/python/data-types/html/",
-                          "ko/ref/python/data-types/image/",
-                          "ko/ref/python/data-types/imagemask/",
-                          "ko/ref/python/data-types/molecule/",
-                          "ko/ref/python/data-types/object3d/",
-                          "ko/ref/python/data-types/plotly/",
-                          "ko/ref/python/data-types/table/",
-                          "ko/ref/python/data-types/video/",
-                          "ko/ref/python/data-types/wbtracetree/"
+                          "ko/models/ref/python/data-types",
+                          "ko/models/ref/python/data-types/audio/",
+                          "ko/models/ref/python/data-types/boundingboxes2d/",
+                          "ko/models/ref/python/data-types/graph/",
+                          "ko/models/ref/python/data-types/histogram/",
+                          "ko/models/ref/python/data-types/html/",
+                          "ko/models/ref/python/data-types/image/",
+                          "ko/models/ref/python/data-types/imagemask/",
+                          "ko/models/ref/python/data-types/molecule/",
+                          "ko/models/ref/python/data-types/object3d/",
+                          "ko/models/ref/python/data-types/plotly/",
+                          "ko/models/ref/python/data-types/table/",
+                          "ko/models/ref/python/data-types/video/",
+                          "ko/models/ref/python/data-types/wbtracetree/"
                         ]
                       },
-                      "ko/ref/python/finish/",
+                      "ko/models/ref/python/finish/",
                       {
                         "group": "Import & Export API",
                         "pages": [
-                          "ko/ref/python/public-api",
-                          "ko/ref/python/public-api/api/",
-                          "ko/ref/python/public-api/file/",
-                          "ko/ref/python/public-api/files/",
-                          "ko/ref/python/public-api/job/",
-                          "ko/ref/python/public-api/project/",
-                          "ko/ref/python/public-api/projects/",
-                          "ko/ref/python/public-api/queuedrun/",
-                          "ko/ref/python/public-api/run/",
-                          "ko/ref/python/public-api/runqueue/",
-                          "ko/ref/python/public-api/runs/",
-                          "ko/ref/python/public-api/sweep/"
+                          "ko/models/ref/python/public-api",
+                          "ko/models/ref/python/public-api/api/",
+                          "ko/models/ref/python/public-api/file/",
+                          "ko/models/ref/python/public-api/files/",
+                          "ko/models/ref/python/public-api/job/",
+                          "ko/models/ref/python/public-api/project/",
+                          "ko/models/ref/python/public-api/projects/",
+                          "ko/models/ref/python/public-api/queuedrun/",
+                          "ko/models/ref/python/public-api/run/",
+                          "ko/models/ref/python/public-api/runqueue/",
+                          "ko/models/ref/python/public-api/runs/",
+                          "ko/models/ref/python/public-api/sweep/"
                         ]
                       },
-                      "ko/ref/python/init/",
+                      "ko/models/ref/python/init/",
                       {
                         "group": "Integrations",
                         "pages": [
-                          "ko/ref/python/integrations",
+                          "ko/models/ref/python/integrations",
                           {
                             "group": "keras",
                             "pages": [
-                              "ko/ref/python/integrations/keras",
-                              "ko/ref/python/integrations/keras/wandbcallback/",
-                              "ko/ref/python/integrations/keras/wandbevalcallback/",
-                              "ko/ref/python/integrations/keras/wandbmetricslogger/",
-                              "ko/ref/python/integrations/keras/wandbmodelcheckpoint/"
+                              "ko/models/ref/python/integrations/keras",
+                              "ko/models/ref/python/integrations/keras/wandbcallback/",
+                              "ko/models/ref/python/integrations/keras/wandbevalcallback/",
+                              "ko/models/ref/python/integrations/keras/wandbmetricslogger/",
+                              "ko/models/ref/python/integrations/keras/wandbmodelcheckpoint/"
                             ]
                           }
                         ]
@@ -2036,56 +2031,56 @@
                       {
                         "group": "launch-library",
                         "pages": [
-                          "ko/ref/python/launch-library",
-                          "ko/ref/python/launch-library/launch/",
-                          "ko/ref/python/launch-library/launch_add/",
-                          "ko/ref/python/launch-library/launchagent/"
+                          "ko/models/ref/python/launch-library",
+                          "ko/models/ref/python/launch-library/launch/",
+                          "ko/models/ref/python/launch-library/launch_add/",
+                          "ko/models/ref/python/launch-library/launchagent/"
                         ]
                       },
-                      "ko/ref/python/log/",
-                      "ko/ref/python/login/",
-                      "ko/ref/python/run/",
-                      "ko/ref/python/save/",
-                      "ko/ref/python/sweep/",
+                      "ko/models/ref/python/log/",
+                      "ko/models/ref/python/login/",
+                      "ko/models/ref/python/run/",
+                      "ko/models/ref/python/save/",
+                      "ko/models/ref/python/sweep/",
                       {
                         "group": "wandb_workspaces",
                         "pages": [
-                          "ko/ref/python/wandb_workspaces",
-                          "ko/ref/python/wandb_workspaces/reports/",
-                          "ko/ref/python/wandb_workspaces/workspaces/"
+                          "ko/models/ref/python/wandb_workspaces",
+                          "ko/models/ref/python/wandb_workspaces/reports/",
+                          "ko/models/ref/python/wandb_workspaces/workspaces/"
                         ]
                       },
-                      "ko/ref/python/watch/"
+                      "ko/models/ref/python/watch/"
                     ]
                   },
                   {
                     "group": "Query Expression Language",
                     "pages": [
-                      "ko/ref/query-panel",
-                      "ko/ref/query-panel/artifact/",
-                      "ko/ref/query-panel/artifact-type/",
-                      "ko/ref/query-panel/artifact-version/",
-                      "ko/ref/query-panel/audio-file/",
-                      "ko/ref/query-panel/bokeh-file/",
-                      "ko/ref/query-panel/boolean/",
-                      "ko/ref/query-panel/entity/",
-                      "ko/ref/query-panel/file/",
-                      "ko/ref/query-panel/float/",
-                      "ko/ref/query-panel/html-file/",
-                      "ko/ref/query-panel/image-file/",
-                      "ko/ref/query-panel/int/",
-                      "ko/ref/query-panel/joined-table/",
-                      "ko/ref/query-panel/molecule-file/",
-                      "ko/ref/query-panel/number/",
-                      "ko/ref/query-panel/object-3-d-file/",
-                      "ko/ref/query-panel/partitioned-table/",
-                      "ko/ref/query-panel/project/",
-                      "ko/ref/query-panel/pytorch-model-file/",
-                      "ko/ref/query-panel/run/",
-                      "ko/ref/query-panel/string/",
-                      "ko/ref/query-panel/table/",
-                      "ko/ref/query-panel/user/",
-                      "ko/ref/query-panel/video-file/"
+                      "ko/models/ref/query-panel",
+                      "ko/models/ref/query-panel/artifact/",
+                      "ko/models/ref/query-panel/artifact-type/",
+                      "ko/models/ref/query-panel/artifact-version/",
+                      "ko/models/ref/query-panel/audio-file/",
+                      "ko/models/ref/query-panel/bokeh-file/",
+                      "ko/models/ref/query-panel/boolean/",
+                      "ko/models/ref/query-panel/entity/",
+                      "ko/models/ref/query-panel/file/",
+                      "ko/models/ref/query-panel/float/",
+                      "ko/models/ref/query-panel/html-file/",
+                      "ko/models/ref/query-panel/image-file/",
+                      "ko/models/ref/query-panel/int/",
+                      "ko/models/ref/query-panel/joined-table/",
+                      "ko/models/ref/query-panel/molecule-file/",
+                      "ko/models/ref/query-panel/number/",
+                      "ko/models/ref/query-panel/object-3-d-file/",
+                      "ko/models/ref/query-panel/partitioned-table/",
+                      "ko/models/ref/query-panel/project/",
+                      "ko/models/ref/query-panel/pytorch-model-file/",
+                      "ko/models/ref/query-panel/run/",
+                      "ko/models/ref/query-panel/string/",
+                      "ko/models/ref/query-panel/table/",
+                      "ko/models/ref/query-panel/user/",
+                      "ko/models/ref/query-panel/video-file/"
                     ]
                   }
                 ]
@@ -2093,39 +2088,39 @@
               {
                 "group": "Support",
                 "pages": [
-                  "ko/support",
-                  "ko/support/academic",
-                  "ko/support/administrator",
-                  "ko/support/alerts",
-                  "ko/support/anonymous",
-                  "ko/support/artifacts",
-                  "ko/support/aws",
-                  "ko/support/billing",
-                  "ko/support/charts",
-                  "ko/support/connectivity",
-                  "ko/support/crashing_and_hanging_runs",
-                  "ko/support/environment_variables",
-                  "ko/support/experiments",
-                  "ko/support/hyperparameter",
-                  "ko/support/logs",
-                  "ko/support/metrics",
-                  "ko/support/notebooks",
-                  "ko/support/outage",
-                  "ko/support/privacy",
-                  "ko/support/projects",
-                  "ko/support/python",
-                  "ko/support/reports",
-                  "ko/support/resuming",
-                  "ko/support/runs",
-                  "ko/support/security",
-                  "ko/support/storage",
-                  "ko/support/sweeps",
-                  "ko/support/tables",
-                  "ko/support/team_management",
-                  "ko/support/tensorboard",
-                  "ko/support/user_management",
-                  "ko/support/workspaces",
-                  "ko/support/wysiwyg"
+                  "ko/models/support",
+                  "ko/models/support/academic",
+                  "ko/models/support/administrator",
+                  "ko/models/support/alerts",
+                  "ko/models/support/anonymous",
+                  "ko/models/support/artifacts",
+                  "ko/models/support/aws",
+                  "ko/models/support/billing",
+                  "ko/models/support/charts",
+                  "ko/models/support/connectivity",
+                  "ko/models/support/crashing_and_hanging_runs",
+                  "ko/models/support/environment_variables",
+                  "ko/models/support/experiments",
+                  "ko/models/support/hyperparameter",
+                  "ko/models/support/logs",
+                  "ko/models/support/metrics",
+                  "ko/models/support/notebooks",
+                  "ko/models/support/outage",
+                  "ko/models/support/privacy",
+                  "ko/models/support/projects",
+                  "ko/models/support/python",
+                  "ko/models/support/reports",
+                  "ko/models/support/resuming",
+                  "ko/models/support/runs",
+                  "ko/models/support/security",
+                  "ko/models/support/storage",
+                  "ko/models/support/sweeps",
+                  "ko/models/support/tables",
+                  "ko/models/support/team_management",
+                  "ko/models/support/tensorboard",
+                  "ko/models/support/user_management",
+                  "ko/models/support/workspaces",
+                  "ko/models/support/wysiwyg"
                 ]
               }
             ]
@@ -5126,6 +5121,454 @@
     {
       "source": "/ja/support/*",
       "destination": "/ja/models/support/:slug*"
+    },
+    {
+      "source": "/ko/guides/app/settings-page/user-settings",
+      "destination": "/ko/platform/app/settings-page/user-settings"
+    },
+    {
+      "source": "/ko/guides/app/settings-page/billing-settings",
+      "destination": "/ko/platform/app/settings-page/billing-settings"
+    },
+    {
+      "source": "/ko/guides/app/settings-page/emails",
+      "destination": "/ko/platform/app/settings-page/emails"
+    },
+    {
+      "source": "/ko/guides/app/settings-page/teams",
+      "destination": "/ko/platform/app/settings-page/teams"
+    },
+    {
+      "source": "/ko/guides/app/settings-page/storage",
+      "destination": "/ko/platform/app/settings-page/storage"
+    },
+    {
+      "source": "/ko/guides/app/settings-page/anon",
+      "destination": "/ko/platform/app/settings-page/anon"
+    },
+    {
+      "source": "/ko/guides/secrets",
+      "destination": "/ko/platform/secrets"
+    },
+    {
+      "source": "/ko/guides/hosting",
+      "destination": "/ko/platform/hosting"
+    },
+    {
+      "source": "/ko/guides/hosting/hosting-options/saas_cloud",
+      "destination": "/ko/platform/hosting/hosting-options/saas_cloud"
+    },
+    {
+      "source": "/ko/guides/hosting/hosting-options/dedicated_cloud",
+      "destination": "/ko/platform/hosting/hosting-options/dedicated_cloud"
+    },
+    {
+      "source": "/ko/guides/hosting/hosting-options/dedicated_cloud/dedicated_regions",
+      "destination": "/ko/platform/hosting/hosting-options/dedicated_cloud/dedicated_regions"
+    },
+    {
+      "source": "/ko/guides/hosting/export-data-from-dedicated-cloud",
+      "destination": "/ko/platform/hosting/export-data-from-dedicated-cloud"
+    },
+    {
+      "source": "/ko/guides/hosting/hosting-options/self-managed",
+      "destination": "/ko/platform/hosting/hosting-options/self-managed"
+    },
+    {
+      "source": "/ko/guides/hosting/self-managed/ref-arch",
+      "destination": "/ko/platform/hosting/self-managed/ref-arch"
+    },
+    {
+      "source": "/ko/guides/hosting/operator",
+      "destination": "/ko/platform/hosting/operator"
+    },
+    {
+      "source": "/ko/guides/hosting/self-managed/operator-airgapped",
+      "destination": "/ko/platform/hosting/self-managed/operator-airgapped"
+    },
+    {
+      "source": "/ko/guides/hosting/self-managed/aws-tf",
+      "destination": "/ko/platform/hosting/self-managed/aws-tf"
+    },
+    {
+      "source": "/ko/guides/hosting/self-managed/gcp-tf",
+      "destination": "/ko/platform/hosting/self-managed/gcp-tf"
+    },
+    {
+      "source": "/ko/guides/hosting/self-managed/azure-tf",
+      "destination": "/ko/platform/hosting/self-managed/azure-tf"
+    },
+    {
+      "source": "/ko/guides/hosting/self-managed/bare-metal",
+      "destination": "/ko/platform/hosting/self-managed/bare-metal"
+    },
+    {
+      "source": "/ko/guides/hosting/server-upgrade-process",
+      "destination": "/ko/platform/hosting/server-upgrade-process"
+    },
+    {
+      "source": "/ko/guides/hosting/iam/org_team_struct",
+      "destination": "/ko/platform/hosting/iam/org_team_struct"
+    },
+    {
+      "source": "/ko/guides/hosting/iam/ldap",
+      "destination": "/ko/platform/hosting/iam/ldap"
+    },
+    {
+      "source": "/ko/guides/hosting/iam/sso",
+      "destination": "/ko/platform/hosting/iam/sso"
+    },
+    {
+      "source": "/ko/guides/hosting/iam/identity_federation",
+      "destination": "/ko/platform/hosting/iam/identity_federation"
+    },
+    {
+      "source": "/ko/guides/hosting/iam/service-accounts",
+      "destination": "/ko/platform/hosting/iam/service-accounts"
+    },
+    {
+      "source": "/ko/guides/hosting/iam/access-management-intro",
+      "destination": "/ko/platform/hosting/iam/access-management-intro"
+    },
+    {
+      "source": "/ko/guides/hosting/iam/access-management/manage-organization",
+      "destination": "/ko/platform/hosting/iam/access-management/manage-organization"
+    },
+    {
+      "source": "/ko/guides/hosting/iam/access-management/restricted-projects",
+      "destination": "/ko/platform/hosting/iam/access-management/restricted-projects"
+    },
+    {
+      "source": "/ko/guides/hosting/iam/automate_iam",
+      "destination": "/ko/platform/hosting/iam/automate_iam"
+    },
+    {
+      "source": "/ko/guides/hosting/iam/scim",
+      "destination": "/ko/platform/hosting/iam/scim"
+    },
+    {
+      "source": "/ko/guides/hosting/iam/advanced_env_vars",
+      "destination": "/ko/platform/hosting/iam/advanced_env_vars"
+    },
+    {
+      "source": "/ko/guides/hosting/data-security/secure-storage-connector",
+      "destination": "/ko/platform/hosting/data-security/secure-storage-connector"
+    },
+    {
+      "source": "/ko/guides/hosting/data-security/presigned-urls",
+      "destination": "/ko/platform/hosting/data-security/presigned-urls"
+    },
+    {
+      "source": "/ko/guides/hosting/data-security/ip-allowlisting",
+      "destination": "/ko/platform/hosting/data-security/ip-allowlisting"
+    },
+    {
+      "source": "/ko/guides/hosting/data-security/private-connectivity",
+      "destination": "/ko/platform/hosting/data-security/private-connectivity"
+    },
+    {
+      "source": "/ko/guides/hosting/data-security/data-encryption",
+      "destination": "/ko/platform/hosting/data-security/data-encryption"
+    },
+    {
+      "source": "/ko/guides/hosting/privacy-settings",
+      "destination": "/ko/platform/hosting/privacy-settings"
+    },
+    {
+      "source": "/ko/guides/hosting/monitoring-usage/audit-logging",
+      "destination": "/ko/platform/hosting/monitoring-usage/audit-logging"
+    },
+    {
+      "source": "/ko/guides/hosting/monitoring-usage/prometheus-logging",
+      "destination": "/ko/platform/hosting/monitoring-usage/prometheus-logging"
+    },
+    {
+      "source": "/ko/guides/hosting/monitoring-usage/slack-alerts",
+      "destination": "/ko/platform/hosting/monitoring-usage/slack-alerts"
+    },
+    {
+      "source": "/ko/guides/hosting/monitoring-usage/org_dashboard",
+      "destination": "/ko/platform/hosting/monitoring-usage/org_dashboard"
+    },
+    {
+      "source": "/ko/guides/hosting/smtp",
+      "destination": "/ko/platform/hosting/smtp"
+    },
+    {
+      "source": "/ko/guides/hosting/env-vars",
+      "destination": "/ko/platform/hosting/env-vars"
+    },
+    {
+      "source": "/ko/guides/hosting/server-release-process",
+      "destination": "/ko/platform/hosting/server-release-process"
+    },
+    {
+      "source": "/ko/guides/models",
+      "destination": "/ko/models"
+    },
+    {
+      "source": "/ko/quickstart",
+      "destination": "/ko/models/quickstart"
+    },
+    {
+      "source": "/ko/guides/track",
+      "destination": "/ko/models/track"
+    },
+    {
+      "source": "/ko/guides/track/create-an-experiment",
+      "destination": "/ko/models/track/create-an-experiment"
+    },
+    {
+      "source": "/ko/guides/track/config",
+      "destination": "/ko/models/track/config"
+    },
+    {
+      "source": "/ko/guides/track/project-page",
+      "destination": "/ko/models/track/project-page"
+    },
+    {
+      "source": "/ko/guides/track/workspaces",
+      "destination": "/ko/models/track/workspaces"
+    },
+    {
+      "source": "/ko/guides/runs",
+      "destination": "/ko/models/runs"
+    },
+    {
+      "source": "/ko/guides/runs/tags",
+      "destination": "/ko/models/runs/tags"
+    },
+    {
+      "source": "/ko/guides/runs/filter-runs",
+      "destination": "/ko/models/runs/filter-runs"
+    },
+    {
+      "source": "/ko/guides/runs/forking",
+      "destination": "/ko/models/runs/forking"
+    },
+    {
+      "source": "/ko/guides/runs/grouping",
+      "destination": "/ko/models/runs/grouping"
+    },
+    {
+      "source": "/ko/guides/runs/manage-runs",
+      "destination": "/ko/models/runs/manage-runs"
+    },
+    {
+      "source": "/ko/guides/runs/resuming",
+      "destination": "/ko/models/runs/resuming"
+    },
+    {
+      "source": "/ko/guides/runs/rewind",
+      "destination": "/ko/models/runs/rewind"
+    },
+    {
+      "source": "/ko/guides/runs/alert",
+      "destination": "/ko/models/runs/alert"
+    },
+    {
+      "source": "/ko/guides/track/log",
+      "destination": "/ko/models/track/log"
+    },
+    {
+      "source": "/ko/guides/track/log/plots",
+      "destination": "/ko/models/track/log/plots"
+    },
+    {
+      "source": "/ko/guides/track/log/customize-logging-axes",
+      "destination": "/ko/models/track/log/customize-logging-axes"
+    },
+    {
+      "source": "/ko/guides/track/log/distributed-training",
+      "destination": "/ko/models/track/log/distributed-training"
+    },
+    {
+      "source": "/ko/guides/track/log/media",
+      "destination": "/ko/models/track/log/media"
+    },
+    {
+      "source": "/ko/guides/track/log/log-models",
+      "destination": "/ko/models/track/log/log-models"
+    },
+    {
+      "source": "/ko/guides/track/log/log-summary",
+      "destination": "/ko/models/track/log/log-summary"
+    },
+    {
+      "source": "/ko/guides/track/log/log-tables",
+      "destination": "/ko/models/track/log/log-tables"
+    },
+    {
+      "source": "/ko/guides/track/log/working-with-csv",
+      "destination": "/ko/models/track/log/working-with-csv"
+    },
+    {
+      "source": "/ko/guides/track/jupyter",
+      "destination": "/ko/models/track/jupyter"
+    },
+    {
+      "source": "/ko/guides/track/limits",
+      "destination": "/ko/models/track/limits"
+    },
+    {
+      "source": "/ko/guides/track/reproduce_experiments",
+      "destination": "/ko/models/track/reproduce_experiments"
+    },
+    {
+      "source": "/ko/guides/track/public-api-guide",
+      "destination": "/ko/models/track/public-api-guide"
+    },
+    {
+      "source": "/ko/guides/track/environment-variables",
+      "destination": "/ko/models/track/environment-variables"
+    },
+    {
+      "source": "/ko/guides/sweeps",
+      "destination": "/ko/models/sweeps"
+    },
+    {
+      "source": "/ko/guides/sweeps/walkthrough",
+      "destination": "/ko/models/sweeps/walkthrough"
+    },
+    {
+      "source": "/ko/guides/sweeps/add-w-and-b-to-your-code",
+      "destination": "/ko/models/sweeps/add-w-and-b-to-your-code"
+    },
+    {
+      "source": "/ko/guides/sweeps/sweep-config-keys",
+      "destination": "/ko/models/sweeps/sweep-config-keys"
+    },
+    {
+      "source": "/ko/guides/sweeps/initialize-sweeps",
+      "destination": "/ko/models/sweeps/initialize-sweeps"
+    },
+    {
+      "source": "/ko/guides/sweeps/start-sweep-agents",
+      "destination": "/ko/models/sweeps/start-sweep-agents"
+    },
+    {
+      "source": "/ko/guides/sweeps/parallelize-agents",
+      "destination": "/ko/models/sweeps/parallelize-agents"
+    },
+    {
+      "source": "/ko/guides/sweeps/visualize-sweep-results",
+      "destination": "/ko/models/sweeps/visualize-sweep-results"
+    },
+    {
+      "source": "/ko/guides/sweeps/pause-resume-and-cancel-sweeps",
+      "destination": "/ko/models/sweeps/pause-resume-and-cancel-sweeps"
+    },
+    {
+      "source": "/ko/guides/sweeps/useful-resources",
+      "destination": "/ko/models/sweeps/useful-resources"
+    },
+    {
+      "source": "/ko/guides/sweeps/local-controller",
+      "destination": "/ko/models/sweeps/local-controller"
+    },
+    {
+      "source": "/ko/guides/sweeps/troubleshoot-sweeps",
+      "destination": "/ko/models/sweeps/troubleshoot-sweeps"
+    },
+    {
+      "source": "/ko/guides/sweeps/sweeps-ui",
+      "destination": "/ko/models/sweeps/sweeps-ui"
+    },
+    {
+      "source": "/ko/guides/sweeps/existing-project",
+      "destination": "/ko/models/sweeps/existing-project"
+    },
+    {
+      "source": "/ko/guides/models/tables",
+      "destination": "/ko/models/tables"
+    },
+    {
+      "source": "/ko/guides/models/tables/tables-walkthrough",
+      "destination": "/ko/models/tables/tables-walkthrough"
+    },
+    {
+      "source": "/ko/guides/models/tables/visualize-tables",
+      "destination": "/ko/models/tables/visualize-tables"
+    },
+    {
+      "source": "/ko/guides/models/tables/tables-gallery",
+      "destination": "/ko/models/tables/tables-gallery"
+    },
+    {
+      "source": "/ko/guides/models/tables/tables-download",
+      "destination": "/ko/models/tables/tables-download"
+    },
+    {
+      "source": "/ko/guides/app/features/panels",
+      "destination": "/ko/models/app/features/panels"
+    },
+    {
+      "source": "/ko/guides/app/features/panels/line-plot",
+      "destination": "/ko/models/app/features/panels/line-plot"
+    },
+    {
+      "source": "/ko/guides/app/features/panels/line-plot/reference",
+      "destination": "/ko/models/app/features/panels/line-plot/reference"
+    },
+    {
+      "source": "/ko/guides/app/features/panels/line-plot/sampling",
+      "destination": "/ko/models/app/features/panels/line-plot/sampling"
+    },
+    {
+      "source": "/ko/guides/app/features/panels/line-plot/smoothing",
+      "destination": "/ko/models/app/features/panels/line-plot/smoothing"
+    },
+    {
+      "source": "/ko/guides/app/features/panels/bar-plot",
+      "destination": "/ko/models/app/features/panels/bar-plot"
+    },
+    {
+      "source": "/ko/guides/app/features/panels/parallel-coordinates",
+      "destination": "/ko/models/app/features/panels/parallel-coordinates"
+    },
+    {
+      "source": "/ko/guides/app/features/panels/scatter-plot",
+      "destination": "/ko/models/app/features/panels/scatter-plot"
+    },
+    {
+      "source": "/ko/guides/app/features/panels/code",
+      "destination": "/ko/models/app/features/panels/code"
+    },
+    {
+      "source": "/ko/guides/app/features/panels/parameter-importance",
+      "destination": "/ko/models/app/features/panels/parameter-importance"
+    },
+    {
+      "source": "/ko/guides/app/features/panels/run-comparer",
+      "destination": "/ko/models/app/features/panels/run-comparer"
+    },
+    {
+      "source": "/ko/guides/app/features/panels/query-panels",
+      "destination": "/ko/models/app/features/panels/query-panels"
+    },
+    {
+      "source": "/ko/guides/app/features/panels/query-panels/embedding-projector",
+      "destination": "/ko/models/app/features/panels/query-panels/embedding-projector"
+    },
+    {
+      "source": "/ko/guides/app/features/custom-charts",
+      "destination": "/ko/models/app/features/custom-charts"
+    },
+    {
+      "source": "/ko/guides/app/features/custom-charts/walkthrough",
+      "destination": "/ko/models/app/features/custom-charts/walkthrough"
+    },
+    {
+      "source": "/ko/guides/app/features/cascade-settings",
+      "destination": "/ko/models/app/features/cascade-settings"
+    },
+    {
+      "source": "/ko/ref/*",
+      "destination": "/ko/models/ref/:slug*"
+    },
+    {
+      "source": "/ko/support/*",
+      "destination": "/ko/models/support/:slug*"
     }
   ]
 }
