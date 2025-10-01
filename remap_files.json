@@ -1,1146 +1,150 @@
 [
   {
-    "source": "/guides/models",
-    "destination": "/models/models"
+    "source": "/ref/release-notes/0.73",
+    "destination": "/release-notes/0.73"
   },
   {
-    "source": "/quickstart",
-    "destination": "/models/quickstart"
+    "source": "/ref/release-notes/0.72",
+    "destination": "/release-notes/0.72"
   },
   {
-    "source": "/guides/track",
-    "destination": "/models/track"
+    "source": "/ref/release-notes/0.71",
+    "destination": "/release-notes/0.71"
   },
   {
-    "source": "/guides/track/create-an-experiment",
-    "destination": "/models/track/create-an-experiment"
+    "source": "/ref/release-notes/0.70",
+    "destination": "/release-notes/0.70"
   },
   {
-    "source": "/guides/track/config",
-    "destination": "/models/track/config"
+    "source": "/ref/release-notes/0.69.0",
+    "destination": "/release-notes/0.69.0"
   },
   {
-    "source": "/guides/track/project-page",
-    "destination": "/models/track/project-page"
+    "source": "/ref/release-notes/0.68.0",
+    "destination": "/release-notes/0.68.0"
   },
   {
-    "source": "/guides/track/workspaces",
-    "destination": "/models/track/workspaces"
+    "source": "/ref/release-notes/0.67.0",
+    "destination": "/release-notes/0.67.0"
   },
   {
-    "source": "/guides/runs",
-    "destination": "/models/runs"
+    "source": "/ref/release-notes/0.66.0",
+    "destination": "/release-notes/0.66.0"
   },
   {
-    "source": "/guides/runs/tags",
-    "destination": "/models/runs/tags"
+    "source": "/ref/release-notes/0.65.0",
+    "destination": "/release-notes/0.65.0"
   },
   {
-    "source": "/guides/runs/multiple-runs-per-process",
-    "destination": "/models/runs/multiple-runs-per-process"
+    "source": "/ref/release-notes/0.63.0",
+    "destination": "/release-notes/0.63.0"
   },
   {
-    "source": "/guides/runs/run-colors",
-    "destination": "/models/runs/run-colors"
+    "source": "/ref/release-notes/0.61.0",
+    "destination": "/release-notes/0.61.0"
   },
   {
-    "source": "/guides/runs/filter-runs",
-    "destination": "/models/runs/filter-runs"
+    "source": "/ref/release-notes/0.60.0",
+    "destination": "/release-notes/0.60.0"
   },
   {
-    "source": "/guides/runs/forking",
-    "destination": "/models/runs/forking"
+    "source": "/ref/release-notes/archived/0.58.1",
+    "destination": "/release-notes/archived/0.58.1"
   },
   {
-    "source": "/guides/runs/grouping",
-    "destination": "/models/runs/grouping"
+    "source": "/ref/release-notes/archived/0.57.2",
+    "destination": "/release-notes/archived/0.57.2"
   },
   {
-    "source": "/guides/runs/manage-runs",
-    "destination": "/models/runs/manage-runs"
+    "source": "/ref/release-notes/archived/0.56.0",
+    "destination": "/release-notes/archived/0.56.0"
   },
   {
-    "source": "/guides/runs/resuming",
-    "destination": "/models/runs/resuming"
+    "source": "/ref/release-notes/archived/0.54.0",
+    "destination": "/release-notes/archived/0.54.0"
   },
   {
-    "source": "/guides/runs/rewind",
-    "destination": "/models/runs/rewind"
+    "source": "/ref/release-notes/archived/0.52.2",
+    "destination": "/release-notes/archived/0.52.2"
   },
   {
-    "source": "/guides/runs/color-code-runs",
-    "destination": "/models/runs/color-code-runs"
+    "source": "/ref/release-notes/archived/0.51.0",
+    "destination": "/release-notes/archived/0.51.0"
   },
   {
-    "source": "/guides/runs/alert",
-    "destination": "/models/runs/alert"
+    "source": "/ref/release-notes/archived/0.50.2",
+    "destination": "/release-notes/archived/0.50.2"
   },
   {
-    "source": "/guides/track/log",
-    "destination": "/models/track/log"
+    "source": "/ref/release-notes/archived/0.49.0",
+    "destination": "/release-notes/archived/0.49.0"
   },
   {
-    "source": "/guides/track/log/plots",
-    "destination": "/models/track/log/plots"
+    "source": "/ref/release-notes/archived/0.48.0",
+    "destination": "/release-notes/archived/0.48.0"
   },
   {
-    "source": "/guides/track/log/customize-logging-axes",
-    "destination": "/models/track/log/customize-logging-axes"
+    "source": "/ref/release-notes/archived/0.47.3",
+    "destination": "/release-notes/archived/0.47.3"
   },
   {
-    "source": "/guides/track/log/distributed-training",
-    "destination": "/models/track/log/distributed-training"
+    "source": "/ref/release-notes/archived/0.47.2",
+    "destination": "/release-notes/archived/0.47.2"
   },
   {
-    "source": "/guides/track/log/media",
-    "destination": "/models/track/log/media"
+    "source": "/ref/release-notes/archived/0.46.0",
+    "destination": "/release-notes/archived/0.46.0"
   },
   {
-    "source": "/guides/track/log/log-models",
-    "destination": "/models/track/log/log-models"
+    "source": "/ref/release-notes/archived/0.45.0",
+    "destination": "/release-notes/archived/0.45.0"
   },
   {
-    "source": "/guides/track/log/log-summary",
-    "destination": "/models/track/log/log-summary"
+    "source": "/ref/release-notes/archived/0.44.1",
+    "destination": "/release-notes/archived/0.44.1"
   },
   {
-    "source": "/guides/track/log/log-tables",
-    "destination": "/models/track/log/log-tables"
+    "source": "/ref/release-notes/archived/0.43.0",
+    "destination": "/release-notes/archived/0.43.0"
   },
   {
-    "source": "/guides/track/log/working-with-csv",
-    "destination": "/models/track/log/working-with-csv"
+    "source": "/ref/release-notes/archived/0.42.0",
+    "destination": "/release-notes/archived/0.42.0"
   },
   {
-    "source": "/guides/track/jupyter",
-    "destination": "/models/track/jupyter"
+    "source": "/ref/release-notes/archived/0.41.0",
+    "destination": "/release-notes/archived/0.41.0"
   },
   {
-    "source": "/guides/track/limits",
-    "destination": "/models/track/limits"
+    "source": "/ref/release-notes/archived/0.40.0",
+    "destination": "/release-notes/archived/0.40.0"
   },
   {
-    "source": "/guides/track/reproduce_experiments",
-    "destination": "/models/track/reproduce_experiments"
+    "source": "/ref/release-notes/archived/0.39.0",
+    "destination": "/release-notes/archived/0.39.0"
   },
   {
-    "source": "/guides/track/public-api-guide",
-    "destination": "/models/track/public-api-guide"
+    "source": "/ref/release-notes/archived/0.38.0",
+    "destination": "/release-notes/archived/0.38.0"
   },
   {
-    "source": "/guides/track/environment-variables",
-    "destination": "/models/track/environment-variables"
+    "source": "/ref/release-notes/archived/0.36.0",
+    "destination": "/release-notes/archived/0.36.0"
   },
   {
-    "source": "/guides/sweeps",
-    "destination": "/models/sweeps"
+    "source": "/ref/release-notes/archived/0.35.0",
+    "destination": "/release-notes/archived/0.35.0"
   },
   {
-    "source": "/guides/sweeps/walkthrough",
-    "destination": "/models/sweeps/walkthrough"
+    "source": "/ref/release-notes/archived/0.34.0",
+    "destination": "/release-notes/archived/0.34.0"
   },
   {
-    "source": "/guides/sweeps/add-w-and-b-to-your-code",
-    "destination": "/models/sweeps/add-w-and-b-to-your-code"
+    "source": "/ref/release-notes/archived/0.33.0",
+    "destination": "/release-notes/archived/0.33.0"
   },
   {
-    "source": "/guides/sweeps/define-sweep-configuration",
-    "destination": "/models/sweeps/define-sweep-configuration"
-  },
-  {
-    "source": "/guides/sweeps/sweep-config-keys",
-    "destination": "/models/sweeps/sweep-config-keys"
-  },
-  {
-    "source": "/guides/sweeps/initialize-sweeps",
-    "destination": "/models/sweeps/initialize-sweeps"
-  },
-  {
-    "source": "/guides/sweeps/start-sweep-agents",
-    "destination": "/models/sweeps/start-sweep-agents"
-  },
-  {
-    "source": "/guides/sweeps/parallelize-agents",
-    "destination": "/models/sweeps/parallelize-agents"
-  },
-  {
-    "source": "/guides/sweeps/visualize-sweep-results",
-    "destination": "/models/sweeps/visualize-sweep-results"
-  },
-  {
-    "source": "/guides/sweeps/pause-resume-and-cancel-sweeps",
-    "destination": "/models/sweeps/pause-resume-and-cancel-sweeps"
-  },
-  {
-    "source": "/guides/sweeps/useful-resources",
-    "destination": "/models/sweeps/useful-resources"
-  },
-  {
-    "source": "/guides/sweeps/local-controller",
-    "destination": "/models/sweeps/local-controller"
-  },
-  {
-    "source": "/guides/sweeps/troubleshoot-sweeps",
-    "destination": "/models/sweeps/troubleshoot-sweeps"
-  },
-  {
-    "source": "/guides/sweeps/sweeps-ui",
-    "destination": "/models/sweeps/sweeps-ui"
-  },
-  {
-    "source": "/guides/sweeps/existing-project",
-    "destination": "/models/sweeps/existing-project"
-  },
-  {
-    "source": "/guides/tables",
-    "destination": "/models/tables"
-  },
-  {
-    "source": "/guides/tables/tables-walkthrough",
-    "destination": "/models/tables/tables-walkthrough"
-  },
-  {
-    "source": "/guides/tables/log_tables",
-    "destination": "/models/tables/log_tables"
-  },
-  {
-    "source": "/guides/tables/visualize-tables",
-    "destination": "/models/tables/visualize-tables"
-  },
-  {
-    "source": "/guides/tables/tables-gallery",
-    "destination": "/models/tables/tables-gallery"
-  },
-  {
-    "source": "/guides/tables/tables-download",
-    "destination": "/models/tables/tables-download"
-  },
-  {
-    "source": "/guides/models/evaluate-models",
-    "destination": "/models/models/evaluate-models"
-  },
-  {
-    "source": "/guides/app",
-    "destination": "/models/app"
-  },
-  {
-    "source": "/guides/app/keyboard-shortcuts",
-    "destination": "/models/app/keyboard-shortcuts"
-  },
-  {
-    "source": "/guides/app/features/panels",
-    "destination": "/models/app/features/panels"
-  },
-  {
-    "source": "/guides/app/features/panels/line-plot",
-    "destination": "/models/app/features/panels/line-plot"
-  },
-  {
-    "source": "/guides/app/features/panels/line-plot/reference",
-    "destination": "/models/app/features/panels/line-plot/reference"
-  },
-  {
-    "source": "/guides/app/features/panels/line-plot/sampling",
-    "destination": "/models/app/features/panels/line-plot/sampling"
-  },
-  {
-    "source": "/guides/app/features/panels/line-plot/smoothing",
-    "destination": "/models/app/features/panels/line-plot/smoothing"
-  },
-  {
-    "source": "/guides/app/features/panels/bar-plot",
-    "destination": "/models/app/features/panels/bar-plot"
-  },
-  {
-    "source": "/guides/app/features/panels/parallel-coordinates",
-    "destination": "/models/app/features/panels/parallel-coordinates"
-  },
-  {
-    "source": "/guides/app/features/panels/scatter-plot",
-    "destination": "/models/app/features/panels/scatter-plot"
-  },
-  {
-    "source": "/guides/app/features/panels/media",
-    "destination": "/models/app/features/panels/media"
-  },
-  {
-    "source": "/guides/app/features/panels/code",
-    "destination": "/models/app/features/panels/code"
-  },
-  {
-    "source": "/guides/app/features/panels/parameter-importance",
-    "destination": "/models/app/features/panels/parameter-importance"
-  },
-  {
-    "source": "/guides/app/features/panels/run-comparer",
-    "destination": "/models/app/features/panels/run-comparer"
-  },
-  {
-    "source": "/guides/app/features/panels/query-panels",
-    "destination": "/models/app/features/panels/query-panels"
-  },
-  {
-    "source": "/guides/app/features/panels/query-panels/embedding-projector",
-    "destination": "/models/app/features/panels/query-panels/embedding-projector"
-  },
-  {
-    "source": "/guides/app/features/custom-charts",
-    "destination": "/models/app/features/custom-charts"
-  },
-  {
-    "source": "/guides/app/features/custom-charts/walkthrough",
-    "destination": "/models/app/features/custom-charts/walkthrough"
-  },
-  {
-    "source": "/guides/app/console-logs",
-    "destination": "/models/app/console-logs"
-  },
-  {
-    "source": "/guides/app/features/cascade-settings",
-    "destination": "/models/app/features/cascade-settings"
-  },
-  {
-    "source": "/guides/core",
-    "destination": "/models/core"
-  },
-  {
-    "source": "/guides/artifacts",
-    "destination": "/models/artifacts"
-  },
-  {
-    "source": "/guides/artifacts/construct-an-artifact",
-    "destination": "/models/artifacts/construct-an-artifact"
-  },
-  {
-    "source": "/guides/artifacts/download-and-use-an-artifact",
-    "destination": "/models/artifacts/download-and-use-an-artifact"
-  },
-  {
-    "source": "/guides/artifacts/update-an-artifact",
-    "destination": "/models/artifacts/update-an-artifact"
-  },
-  {
-    "source": "/guides/artifacts/create-a-custom-alias",
-    "destination": "/models/artifacts/create-a-custom-alias"
-  },
-  {
-    "source": "/guides/artifacts/create-a-new-artifact-version",
-    "destination": "/models/artifacts/create-a-new-artifact-version"
-  },
-  {
-    "source": "/guides/artifacts/track-external-files",
-    "destination": "/models/artifacts/track-external-files"
-  },
-  {
-    "source": "/guides/artifacts/manage-data",
-    "destination": "/models/artifacts/manage-data"
-  },
-  {
-    "source": "/guides/artifacts/delete-artifacts",
-    "destination": "/models/artifacts/delete-artifacts"
-  },
-  {
-    "source": "/guides/artifacts/ttl",
-    "destination": "/models/artifacts/ttl"
-  },
-  {
-    "source": "/guides/artifacts/storage",
-    "destination": "/models/artifacts/storage"
-  },
-  {
-    "source": "/guides/artifacts/explore-and-traverse-an-artifact-graph",
-    "destination": "/models/artifacts/explore-and-traverse-an-artifact-graph"
-  },
-  {
-    "source": "/guides/artifacts/data-privacy-and-compliance",
-    "destination": "/models/artifacts/data-privacy-and-compliance"
-  },
-  {
-    "source": "/guides/artifacts/artifacts-walkthrough",
-    "destination": "/models/artifacts/artifacts-walkthrough"
-  },
-  {
-    "source": "/guides/registry",
-    "destination": "/models/registry"
-  },
-  {
-    "source": "/guides/registry/registry_types",
-    "destination": "/models/registry/registry_types"
-  },
-  {
-    "source": "/guides/registry/create_registry",
-    "destination": "/models/registry/create_registry"
-  },
-  {
-    "source": "/guides/registry/configure_registry",
-    "destination": "/models/registry/configure_registry"
-  },
-  {
-    "source": "/guides/registry/create_collection",
-    "destination": "/models/registry/create_collection"
-  },
-  {
-    "source": "/guides/registry/link_version",
-    "destination": "/models/registry/link_version"
-  },
-  {
-    "source": "/guides/registry/aliases",
-    "destination": "/models/registry/aliases"
-  },
-  {
-    "source": "/guides/registry/download_use_artifact",
-    "destination": "/models/registry/download_use_artifact"
-  },
-  {
-    "source": "/guides/registry/search_registry",
-    "destination": "/models/registry/search_registry"
-  },
-  {
-    "source": "/guides/registry/organize-with-tags",
-    "destination": "/models/registry/organize-with-tags"
-  },
-  {
-    "source": "/guides/registry/registry_cards",
-    "destination": "/models/registry/registry_cards"
-  },
-  {
-    "source": "/guides/registry/lineage",
-    "destination": "/models/registry/lineage"
-  },
-  {
-    "source": "/guides/registry/delete_registry",
-    "destination": "/models/registry/delete_registry"
-  },
-  {
-    "source": "/guides/registry/model_registry_eol",
-    "destination": "/models/registry/model_registry_eol"
-  },
-  {
-    "source": "/guides/registry/model_registry",
-    "destination": "/models/registry/model_registry"
-  },
-  {
-    "source": "/guides/registry/model_registry/walkthrough",
-    "destination": "/models/registry/model_registry/walkthrough"
-  },
-  {
-    "source": "/guides/registry/model_registry/model-management-concepts",
-    "destination": "/models/registry/model_registry/model-management-concepts"
-  },
-  {
-    "source": "/guides/registry/model_registry/log-model-to-experiment",
-    "destination": "/models/registry/model_registry/log-model-to-experiment"
-  },
-  {
-    "source": "/guides/registry/model_registry/create-registered-model",
-    "destination": "/models/registry/model_registry/create-registered-model"
-  },
-  {
-    "source": "/guides/registry/model_registry/link-model-version",
-    "destination": "/models/registry/model_registry/link-model-version"
-  },
-  {
-    "source": "/guides/registry/model_registry/organize-models",
-    "destination": "/models/registry/model_registry/organize-models"
-  },
-  {
-    "source": "/guides/registry/model_registry/model-lineage",
-    "destination": "/models/registry/model_registry/model-lineage"
-  },
-  {
-    "source": "/guides/registry/model_registry/create-model-cards",
-    "destination": "/models/registry/model_registry/create-model-cards"
-  },
-  {
-    "source": "/guides/registry/model_registry/consume-models",
-    "destination": "/models/registry/model_registry/consume-models"
-  },
-  {
-    "source": "/guides/registry/model_registry/notifications",
-    "destination": "/models/registry/model_registry/notifications"
-  },
-  {
-    "source": "/guides/registry/model_registry/access_controls",
-    "destination": "/models/registry/model_registry/access_controls"
-  },
-  {
-    "source": "/guides/reports",
-    "destination": "/models/reports"
-  },
-  {
-    "source": "/guides/reports/create-a-report",
-    "destination": "/models/reports/create-a-report"
-  },
-  {
-    "source": "/guides/reports/edit-a-report",
-    "destination": "/models/reports/edit-a-report"
-  },
-  {
-    "source": "/guides/reports/collaborate-on-reports",
-    "destination": "/models/reports/collaborate-on-reports"
-  },
-  {
-    "source": "/guides/reports/clone-and-export-reports",
-    "destination": "/models/reports/clone-and-export-reports"
-  },
-  {
-    "source": "/guides/reports/embed-reports",
-    "destination": "/models/reports/embed-reports"
-  },
-  {
-    "source": "/guides/reports/cross-project-reports",
-    "destination": "/models/reports/cross-project-reports"
-  },
-  {
-    "source": "/guides/reports/reports-gallery",
-    "destination": "/models/reports/reports-gallery"
-  },
-  {
-    "source": "/guides/automations",
-    "destination": "/models/automations"
-  },
-  {
-    "source": "/guides/automations/create-automations",
-    "destination": "/models/automations/create-automations"
-  },
-  {
-    "source": "/guides/automations/create-automations/slack",
-    "destination": "/models/automations/create-automations/slack"
-  },
-  {
-    "source": "/guides/automations/create-automations/webhook",
-    "destination": "/models/automations/create-automations/webhook"
-  },
-  {
-    "source": "/guides/automations/automation-events",
-    "destination": "/models/automations/automation-events"
-  },
-  {
-    "source": "/ref",
-    "destination": "/models/ref"
-  },
-  {
-    "source": "/ref/python/functions/agent",
-    "destination": "/models/ref/python/functions/agent"
-  },
-  {
-    "source": "/ref/python/functions/controller",
-    "destination": "/models/ref/python/functions/controller"
-  },
-  {
-    "source": "/ref/python/functions/finish",
-    "destination": "/models/ref/python/functions/finish"
-  },
-  {
-    "source": "/ref/python/functions/init",
-    "destination": "/models/ref/python/functions/init"
-  },
-  {
-    "source": "/ref/python/functions/login",
-    "destination": "/models/ref/python/functions/login"
-  },
-  {
-    "source": "/ref/python/functions/restore",
-    "destination": "/models/ref/python/functions/restore"
-  },
-  {
-    "source": "/ref/python/functions/setup",
-    "destination": "/models/ref/python/functions/setup"
-  },
-  {
-    "source": "/ref/python/functions/sweep",
-    "destination": "/models/ref/python/functions/sweep"
-  },
-  {
-    "source": "/ref/python/functions/teardown",
-    "destination": "/models/ref/python/functions/teardown"
-  },
-  {
-    "source": "/ref/python/data-types/audio",
-    "destination": "/models/ref/python/data-types/audio"
-  },
-  {
-    "source": "/ref/python/data-types/box3d",
-    "destination": "/models/ref/python/data-types/box3d"
-  },
-  {
-    "source": "/ref/python/data-types/histogram",
-    "destination": "/models/ref/python/data-types/histogram"
-  },
-  {
-    "source": "/ref/python/data-types/html",
-    "destination": "/models/ref/python/data-types/html"
-  },
-  {
-    "source": "/ref/python/data-types/image",
-    "destination": "/models/ref/python/data-types/image"
-  },
-  {
-    "source": "/ref/python/data-types/molecule",
-    "destination": "/models/ref/python/data-types/molecule"
-  },
-  {
-    "source": "/ref/python/data-types/object3d",
-    "destination": "/models/ref/python/data-types/object3d"
-  },
-  {
-    "source": "/ref/python/data-types/plotly",
-    "destination": "/models/ref/python/data-types/plotly"
-  },
-  {
-    "source": "/ref/python/data-types/table",
-    "destination": "/models/ref/python/data-types/table"
-  },
-  {
-    "source": "/ref/python/data-types/video",
-    "destination": "/models/ref/python/data-types/video"
-  },
-  {
-    "source": "/ref/python/experiments/artifact",
-    "destination": "/models/ref/python/experiments/artifact"
-  },
-  {
-    "source": "/ref/python/experiments/run",
-    "destination": "/models/ref/python/experiments/run"
-  },
-  {
-    "source": "/ref/python/experiments/settings",
-    "destination": "/models/ref/python/experiments/settings"
-  },
-  {
-    "source": "/ref/python/experiments/system-metrics",
-    "destination": "/models/ref/python/experiments/system-metrics"
-  },
-  {
-    "source": "/ref/python/automations/automation",
-    "destination": "/models/ref/python/automations/automation"
-  },
-  {
-    "source": "/ref/python/automations/donothing",
-    "destination": "/models/ref/python/automations/donothing"
-  },
-  {
-    "source": "/ref/python/automations/metricchangefilter",
-    "destination": "/models/ref/python/automations/metricchangefilter"
-  },
-  {
-    "source": "/ref/python/automations/metricthresholdfilter",
-    "destination": "/models/ref/python/automations/metricthresholdfilter"
-  },
-  {
-    "source": "/ref/python/automations/newautomation",
-    "destination": "/models/ref/python/automations/newautomation"
-  },
-  {
-    "source": "/ref/python/automations/onaddartifactalias",
-    "destination": "/models/ref/python/automations/onaddartifactalias"
-  },
-  {
-    "source": "/ref/python/automations/oncreateartifact",
-    "destination": "/models/ref/python/automations/oncreateartifact"
-  },
-  {
-    "source": "/ref/python/automations/onlinkartifact",
-    "destination": "/models/ref/python/automations/onlinkartifact"
-  },
-  {
-    "source": "/ref/python/automations/onrunmetric",
-    "destination": "/models/ref/python/automations/onrunmetric"
-  },
-  {
-    "source": "/ref/python/automations/sendnotification",
-    "destination": "/models/ref/python/automations/sendnotification"
-  },
-  {
-    "source": "/ref/python/automations/sendwebhook",
-    "destination": "/models/ref/python/automations/sendwebhook"
-  },
-  {
-    "source": "/ref/python/custom-charts/bar",
-    "destination": "/models/ref/python/custom-charts/bar"
-  },
-  {
-    "source": "/ref/python/custom-charts/confusion_matrix",
-    "destination": "/models/ref/python/custom-charts/confusion_matrix"
-  },
-  {
-    "source": "/ref/python/custom-charts/histogram",
-    "destination": "/models/ref/python/custom-charts/histogram"
-  },
-  {
-    "source": "/ref/python/custom-charts/line_series",
-    "destination": "/models/ref/python/custom-charts/line_series"
-  },
-  {
-    "source": "/ref/python/custom-charts/line",
-    "destination": "/models/ref/python/custom-charts/line"
-  },
-  {
-    "source": "/ref/python/custom-charts/plot_table",
-    "destination": "/models/ref/python/custom-charts/plot_table"
-  },
-  {
-    "source": "/ref/python/custom-charts/pr_curve",
-    "destination": "/models/ref/python/custom-charts/pr_curve"
-  },
-  {
-    "source": "/ref/python/custom-charts/roc_curve",
-    "destination": "/models/ref/python/custom-charts/roc_curve"
-  },
-  {
-    "source": "/ref/python/custom-charts/scatter",
-    "destination": "/models/ref/python/custom-charts/scatter"
-  },
-  {
-    "source": "/ref/python/public-api/api",
-    "destination": "/models/ref/python/public-api/api"
-  },
-  {
-    "source": "/ref/python/public-api/artifactcollection",
-    "destination": "/models/ref/python/public-api/artifactcollection"
-  },
-  {
-    "source": "/ref/python/public-api/artifactcollections",
-    "destination": "/models/ref/python/public-api/artifactcollections"
-  },
-  {
-    "source": "/ref/python/public-api/artifactfiles",
-    "destination": "/models/ref/python/public-api/artifactfiles"
-  },
-  {
-    "source": "/ref/python/public-api/artifacts",
-    "destination": "/models/ref/python/public-api/artifacts"
-  },
-  {
-    "source": "/ref/python/public-api/artifacttype",
-    "destination": "/models/ref/python/public-api/artifacttype"
-  },
-  {
-    "source": "/ref/python/public-api/artifacttypes",
-    "destination": "/models/ref/python/public-api/artifacttypes"
-  },
-  {
-    "source": "/ref/python/public-api/automations",
-    "destination": "/models/ref/python/public-api/automations"
-  },
-  {
-    "source": "/ref/python/public-api/betareport",
-    "destination": "/models/ref/python/public-api/betareport"
-  },
-  {
-    "source": "/ref/python/public-api/file",
-    "destination": "/models/ref/python/public-api/file"
-  },
-  {
-    "source": "/ref/python/public-api/files",
-    "destination": "/models/ref/python/public-api/files"
-  },
-  {
-    "source": "/ref/python/public-api/member",
-    "destination": "/models/ref/python/public-api/member"
-  },
-  {
-    "source": "/ref/python/public-api/project",
-    "destination": "/models/ref/python/public-api/project"
-  },
-  {
-    "source": "/ref/python/public-api/projects",
-    "destination": "/models/ref/python/public-api/projects"
-  },
-  {
-    "source": "/ref/python/public-api/registry",
-    "destination": "/models/ref/python/public-api/registry"
-  },
-  {
-    "source": "/ref/python/public-api/reports",
-    "destination": "/models/ref/python/public-api/reports"
-  },
-  {
-    "source": "/ref/python/public-api/run",
-    "destination": "/models/ref/python/public-api/run"
-  },
-  {
-    "source": "/ref/python/public-api/runartifacts",
-    "destination": "/models/ref/python/public-api/runartifacts"
-  },
-  {
-    "source": "/ref/python/public-api/runs",
-    "destination": "/models/ref/python/public-api/runs"
-  },
-  {
-    "source": "/ref/python/public-api/sweep",
-    "destination": "/models/ref/python/public-api/sweep"
-  },
-  {
-    "source": "/ref/python/public-api/sweeps",
-    "destination": "/models/ref/python/public-api/sweeps"
-  },
-  {
-    "source": "/ref/python/public-api/team",
-    "destination": "/models/ref/python/public-api/team"
-  },
-  {
-    "source": "/ref/python/public-api/user",
-    "destination": "/models/ref/python/public-api/user"
-  },
-  {
-    "source": "/ref/cli/wandb-agent",
-    "destination": "/models/ref/cli/wandb-agent"
-  },
-  {
-    "source": "/ref/cli/wandb-artifact/wandb-artifact-cache/wandb-artifact-cache-cleanup",
-    "destination": "/models/ref/cli/wandb-artifact/wandb-artifact-cache/wandb-artifact-cache-cleanup"
-  },
-  {
-    "source": "/ref/cli/wandb-artifact/wandb-artifact-get",
-    "destination": "/models/ref/cli/wandb-artifact/wandb-artifact-get"
-  },
-  {
-    "source": "/ref/cli/wandb-artifact/wandb-artifact-ls",
-    "destination": "/models/ref/cli/wandb-artifact/wandb-artifact-ls"
-  },
-  {
-    "source": "/ref/cli/wandb-artifact/wandb-artifact-put",
-    "destination": "/models/ref/cli/wandb-artifact/wandb-artifact-put"
-  },
-  {
-    "source": "/ref/cli/wandb-beta/wandb-beta-sync",
-    "destination": "/models/ref/cli/wandb-beta/wandb-beta-sync"
-  },
-  {
-    "source": "/ref/cli/wandb-controller",
-    "destination": "/models/ref/cli/wandb-controller"
-  },
-  {
-    "source": "/ref/cli/wandb-disabled",
-    "destination": "/models/ref/cli/wandb-disabled"
-  },
-  {
-    "source": "/ref/cli/wandb-docker",
-    "destination": "/models/ref/cli/wandb-docker"
-  },
-  {
-    "source": "/ref/cli/wandb-docker-run",
-    "destination": "/models/ref/cli/wandb-docker-run"
-  },
-  {
-    "source": "/ref/cli/wandb-enabled",
-    "destination": "/models/ref/cli/wandb-enabled"
-  },
-  {
-    "source": "/ref/cli/wandb-init",
-    "destination": "/models/ref/cli/wandb-init"
-  },
-  {
-    "source": "/ref/cli/wandb-job/wandb-job-create",
-    "destination": "/models/ref/cli/wandb-job/wandb-job-create"
-  },
-  {
-    "source": "/ref/cli/wandb-job/wandb-job-describe",
-    "destination": "/models/ref/cli/wandb-job/wandb-job-describe"
-  },
-  {
-    "source": "/ref/cli/wandb-job/wandb-job-list",
-    "destination": "/models/ref/cli/wandb-job/wandb-job-list"
-  },
-  {
-    "source": "/ref/cli/wandb-launch",
-    "destination": "/models/ref/cli/wandb-launch"
-  },
-  {
-    "source": "/ref/cli/wandb-launch-agent",
-    "destination": "/models/ref/cli/wandb-launch-agent"
-  },
-  {
-    "source": "/ref/cli/wandb-launch-sweep",
-    "destination": "/models/ref/cli/wandb-launch-sweep"
-  },
-  {
-    "source": "/ref/cli/wandb-login",
-    "destination": "/models/ref/cli/wandb-login"
-  },
-  {
-    "source": "/ref/cli/wandb-offline",
-    "destination": "/models/ref/cli/wandb-offline"
-  },
-  {
-    "source": "/ref/cli/wandb-online",
-    "destination": "/models/ref/cli/wandb-online"
-  },
-  {
-    "source": "/ref/cli/wandb-pull",
-    "destination": "/models/ref/cli/wandb-pull"
-  },
-  {
-    "source": "/ref/cli/wandb-restore",
-    "destination": "/models/ref/cli/wandb-restore"
-  },
-  {
-    "source": "/ref/cli/wandb-scheduler",
-    "destination": "/models/ref/cli/wandb-scheduler"
-  },
-  {
-    "source": "/ref/cli/wandb-server/wandb-server-start",
-    "destination": "/models/ref/cli/wandb-server/wandb-server-start"
-  },
-  {
-    "source": "/ref/cli/wandb-server/wandb-server-stop",
-    "destination": "/models/ref/cli/wandb-server/wandb-server-stop"
-  },
-  {
-    "source": "/ref/cli/wandb-status",
-    "destination": "/models/ref/cli/wandb-status"
-  },
-  {
-    "source": "/ref/cli/wandb-sweep",
-    "destination": "/models/ref/cli/wandb-sweep"
-  },
-  {
-    "source": "/ref/cli/wandb-sync",
-    "destination": "/models/ref/cli/wandb-sync"
-  },
-  {
-    "source": "/ref/cli/wandb-verify",
-    "destination": "/models/ref/cli/wandb-verify"
-  },
-  {
-    "source": "/ref/query-panel/artifact",
-    "destination": "/models/ref/query-panel/artifact"
-  },
-  {
-    "source": "/ref/query-panel/artifact-type",
-    "destination": "/models/ref/query-panel/artifact-type"
-  },
-  {
-    "source": "/ref/query-panel/artifact-version",
-    "destination": "/models/ref/query-panel/artifact-version"
-  },
-  {
-    "source": "/ref/query-panel/audio-file",
-    "destination": "/models/ref/query-panel/audio-file"
-  },
-  {
-    "source": "/ref/query-panel/bokeh-file",
-    "destination": "/models/ref/query-panel/bokeh-file"
-  },
-  {
-    "source": "/ref/query-panel/boolean",
-    "destination": "/models/ref/query-panel/boolean"
-  },
-  {
-    "source": "/ref/query-panel/entity",
-    "destination": "/models/ref/query-panel/entity"
-  },
-  {
-    "source": "/ref/query-panel/file",
-    "destination": "/models/ref/query-panel/file"
-  },
-  {
-    "source": "/ref/query-panel/float",
-    "destination": "/models/ref/query-panel/float"
-  },
-  {
-    "source": "/ref/query-panel/html-file",
-    "destination": "/models/ref/query-panel/html-file"
-  },
-  {
-    "source": "/ref/query-panel/image-file",
-    "destination": "/models/ref/query-panel/image-file"
-  },
-  {
-    "source": "/ref/query-panel/int",
-    "destination": "/models/ref/query-panel/int"
-  },
-  {
-    "source": "/ref/query-panel/joined-table",
-    "destination": "/models/ref/query-panel/joined-table"
-  },
-  {
-    "source": "/ref/query-panel/molecule-file",
-    "destination": "/models/ref/query-panel/molecule-file"
-  },
-  {
-    "source": "/ref/query-panel/number",
-    "destination": "/models/ref/query-panel/number"
-  },
-  {
-    "source": "/ref/query-panel/object-3-d-file",
-    "destination": "/models/ref/query-panel/object-3-d-file"
-  },
-  {
-    "source": "/ref/query-panel/partitioned-table",
-    "destination": "/models/ref/query-panel/partitioned-table"
-  },
-  {
-    "source": "/ref/query-panel/project",
-    "destination": "/models/ref/query-panel/project"
-  },
-  {
-    "source": "/ref/query-panel/pytorch-model-file",
-    "destination": "/models/ref/query-panel/pytorch-model-file"
-  },
-  {
-    "source": "/ref/query-panel/run",
-    "destination": "/models/ref/query-panel/run"
-  },
-  {
-    "source": "/ref/query-panel/string",
-    "destination": "/models/ref/query-panel/string"
-  },
-  {
-    "source": "/ref/query-panel/table",
-    "destination": "/models/ref/query-panel/table"
-  },
-  {
-    "source": "/ref/query-panel/user",
-    "destination": "/models/ref/query-panel/user"
-  },
-  {
-    "source": "/ref/query-panel/video-file",
-    "destination": "/models/ref/query-panel/video-file"
-  },
-  {
-    "source": "/ref/wandb_workspaces/reports",
-    "destination": "/models/ref/wandb_workspaces/reports"
-  },
-  {
-    "source": "/ref/wandb_workspaces/workspaces",
-    "destination": "/models/ref/wandb_workspaces/workspaces"
-  },
-  {
-    "source": "/support",
-    "destination": "/models/support"
-  },
-  {
-    "source": "/support/academic",
-    "destination": "/models/support/academic"
-  },
-  {
-    "source": "/support/administrator",
-    "destination": "/models/support/administrator"
-  },
-  {
-    "source": "/support/alerts",
-    "destination": "/models/support/alerts"
-  },
-  {
-    "source": "/support/anonymous",
-    "destination": "/models/support/anonymous"
-  },
-  {
-    "source": "/support/artifacts",
-    "destination": "/models/support/artifacts"
-  },
-  {
-    "source": "/support/aws",
-    "destination": "/models/support/aws"
-  },
-  {
-    "source": "/support/billing",
-    "destination": "/models/support/billing"
-  },
-  {
-    "source": "/support/charts",
-    "destination": "/models/support/charts"
-  },
-  {
-    "source": "/support/connectivity",
-    "destination": "/models/support/connectivity"
-  },
-  {
-    "source": "/support/crashing-and-hanging-runs",
-    "destination": "/models/support/crashing-and-hanging-runs"
-  },
-  {
-    "source": "/support/environment-variables",
-    "destination": "/models/support/environment-variables"
-  },
-  {
-    "source": "/support/experiments",
-    "destination": "/models/support/experiments"
-  },
-  {
-    "source": "/support/hyperparameter",
-    "destination": "/models/support/hyperparameter"
-  },
-  {
-    "source": "/support/inference",
-    "destination": "/models/support/inference"
-  },
-  {
-    "source": "/support/logs",
-    "destination": "/models/support/logs"
-  },
-  {
-    "source": "/support/metrics",
-    "destination": "/models/support/metrics"
-  },
-  {
-    "source": "/support/notebooks",
-    "destination": "/models/support/notebooks"
-  },
-  {
-    "source": "/support/outage",
-    "destination": "/models/support/outage"
-  },
-  {
-    "source": "/support/privacy",
-    "destination": "/models/support/privacy"
-  },
-  {
-    "source": "/support/projects",
-    "destination": "/models/support/projects"
-  },
-  {
-    "source": "/support/python",
-    "destination": "/models/support/python"
-  },
-  {
-    "source": "/support/reports",
-    "destination": "/models/support/reports"
-  },
-  {
-    "source": "/support/resuming",
-    "destination": "/models/support/resuming"
-  },
-  {
-    "source": "/support/runs",
-    "destination": "/models/support/runs"
-  },
-  {
-    "source": "/support/security",
-    "destination": "/models/support/security"
-  },
-  {
-    "source": "/support/storage",
-    "destination": "/models/support/storage"
-  },
-  {
-    "source": "/support/sweeps",
-    "destination": "/models/support/sweeps"
-  },
-  {
-    "source": "/support/tables",
-    "destination": "/models/support/tables"
-  },
-  {
-    "source": "/support/team-management",
-    "destination": "/models/support/team-management"
-  },
-  {
-    "source": "/support/tensorboard",
-    "destination": "/models/support/tensorboard"
-  },
-  {
-    "source": "/support/user-management",
-    "destination": "/models/support/user-management"
-  },
-  {
-    "source": "/support/workspaces",
-    "destination": "/models/support/workspaces"
-  },
-  {
-    "source": "/support/wysiwyg",
-    "destination": "/models/support/wysiwyg"
+    "source": "/ref/release-notes/release-policies",
+    "destination": "/release-notes/release-policies"
   }
 ]
