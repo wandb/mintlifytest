@@ -1490,44 +1490,7 @@
                   }
                 ]
               },
-              {
-                "group": "サポート",
-                "pages": [
-                  "ja/models/support",
-                  "ja/models/support/academic",
-                  "ja/models/support/administrator",
-                  "ja/models/support/alerts",
-                  "ja/models/support/anonymous",
-                  "ja/models/support/artifacts",
-                  "ja/models/support/aws",
-                  "ja/models/support/billing",
-                  "ja/models/support/charts",
-                  "ja/models/support/connectivity",
-                  "ja/models/support/crashing_and_hanging_runs",
-                  "ja/models/support/environment_variables",
-                  "ja/models/support/experiments",
-                  "ja/models/support/hyperparameter",
-                  "ja/models/support/logs",
-                  "ja/models/support/metrics",
-                  "ja/models/support/notebooks",
-                  "ja/models/support/outage",
-                  "ja/models/support/privacy",
-                  "ja/models/support/projects",
-                  "ja/models/support/python",
-                  "ja/models/support/reports",
-                  "ja/models/support/resuming",
-                  "ja/models/support/runs",
-                  "ja/models/support/security",
-                  "ja/models/support/storage",
-                  "ja/models/support/sweeps",
-                  "ja/models/support/tables",
-                  "ja/models/support/team_management",
-                  "ja/models/support/tensorboard",
-                  "ja/models/support/user_management",
-                  "ja/models/support/workspaces",
-                  "ja/models/support/wysiwyg"
-                ]
-              }
+              "ja/models/support"
             ]
           }
         ]
@@ -2050,44 +2013,7 @@
                   }
                 ]
               },
-              {
-                "group": "Support",
-                "pages": [
-                  "ko/models/support",
-                  "ko/models/support/academic",
-                  "ko/models/support/administrator",
-                  "ko/models/support/alerts",
-                  "ko/models/support/anonymous",
-                  "ko/models/support/artifacts",
-                  "ko/models/support/aws",
-                  "ko/models/support/billing",
-                  "ko/models/support/charts",
-                  "ko/models/support/connectivity",
-                  "ko/models/support/crashing_and_hanging_runs",
-                  "ko/models/support/environment_variables",
-                  "ko/models/support/experiments",
-                  "ko/models/support/hyperparameter",
-                  "ko/models/support/logs",
-                  "ko/models/support/metrics",
-                  "ko/models/support/notebooks",
-                  "ko/models/support/outage",
-                  "ko/models/support/privacy",
-                  "ko/models/support/projects",
-                  "ko/models/support/python",
-                  "ko/models/support/reports",
-                  "ko/models/support/resuming",
-                  "ko/models/support/runs",
-                  "ko/models/support/security",
-                  "ko/models/support/storage",
-                  "ko/models/support/sweeps",
-                  "ko/models/support/tables",
-                  "ko/models/support/team_management",
-                  "ko/models/support/tensorboard",
-                  "ko/models/support/user_management",
-                  "ko/models/support/workspaces",
-                  "ko/models/support/wysiwyg"
-                ]
-              }
+              "ko/models/support"
             ]
           }
         ]
