@@ -1,150 +1,450 @@
 [
   {
-    "source": "/ref/release-notes/0.73",
-    "destination": "/release-notes/0.73"
+    "source": "/ja/ref",
+    "destination": "/ja/models/ref"
   },
   {
-    "source": "/ref/release-notes/0.72",
-    "destination": "/release-notes/0.72"
+    "source": "/ja/ref/js",
+    "destination": "/ja/models/ref/js"
   },
   {
-    "source": "/ref/release-notes/0.71",
-    "destination": "/release-notes/0.71"
+    "source": "/ja/ref/python",
+    "destination": "/ja/models/ref/python"
   },
   {
-    "source": "/ref/release-notes/0.70",
-    "destination": "/release-notes/0.70"
+    "source": "/ja/ref/python/init",
+    "destination": "/ja/models/ref/python/init"
   },
   {
-    "source": "/ref/release-notes/0.69.0",
-    "destination": "/release-notes/0.69.0"
+    "source": "/ja/ref/python/launch-library",
+    "destination": "/ja/models/ref/python/launch-library"
   },
   {
-    "source": "/ref/release-notes/0.68.0",
-    "destination": "/release-notes/0.68.0"
+    "source": "/ja/ref/python/launch-library/launch_add",
+    "destination": "/ja/models/ref/python/launch-library/launch_add"
   },
   {
-    "source": "/ref/release-notes/0.67.0",
-    "destination": "/release-notes/0.67.0"
+    "source": "/ja/ref/python/launch-library/launchagent",
+    "destination": "/ja/models/ref/python/launch-library/launchagent"
   },
   {
-    "source": "/ref/release-notes/0.66.0",
-    "destination": "/release-notes/0.66.0"
+    "source": "/ja/ref/python/launch-library/launch",
+    "destination": "/ja/models/ref/python/launch-library/launch"
   },
   {
-    "source": "/ref/release-notes/0.65.0",
-    "destination": "/release-notes/0.65.0"
+    "source": "/ja/ref/python/run",
+    "destination": "/ja/models/ref/python/run"
   },
   {
-    "source": "/ref/release-notes/0.63.0",
-    "destination": "/release-notes/0.63.0"
+    "source": "/ja/ref/python/sweep",
+    "destination": "/ja/models/ref/python/sweep"
   },
   {
-    "source": "/ref/release-notes/0.61.0",
-    "destination": "/release-notes/0.61.0"
+    "source": "/ja/ref/python/wandb_workspaces",
+    "destination": "/ja/models/ref/python/wandb_workspaces"
   },
   {
-    "source": "/ref/release-notes/0.60.0",
-    "destination": "/release-notes/0.60.0"
+    "source": "/ja/ref/python/wandb_workspaces/workspaces",
+    "destination": "/ja/models/ref/python/wandb_workspaces/workspaces"
   },
   {
-    "source": "/ref/release-notes/archived/0.58.1",
-    "destination": "/release-notes/archived/0.58.1"
+    "source": "/ja/ref/python/wandb_workspaces/reports",
+    "destination": "/ja/models/ref/python/wandb_workspaces/reports"
   },
   {
-    "source": "/ref/release-notes/archived/0.57.2",
-    "destination": "/release-notes/archived/0.57.2"
+    "source": "/ja/ref/python/watch",
+    "destination": "/ja/models/ref/python/watch"
   },
   {
-    "source": "/ref/release-notes/archived/0.56.0",
-    "destination": "/release-notes/archived/0.56.0"
+    "source": "/ja/ref/python/artifact",
+    "destination": "/ja/models/ref/python/artifact"
   },
   {
-    "source": "/ref/release-notes/archived/0.54.0",
-    "destination": "/release-notes/archived/0.54.0"
+    "source": "/ja/ref/python/public-api",
+    "destination": "/ja/models/ref/python/public-api"
   },
   {
-    "source": "/ref/release-notes/archived/0.52.2",
-    "destination": "/release-notes/archived/0.52.2"
+    "source": "/ja/ref/python/public-api/api",
+    "destination": "/ja/models/ref/python/public-api/api"
   },
   {
-    "source": "/ref/release-notes/archived/0.51.0",
-    "destination": "/release-notes/archived/0.51.0"
+    "source": "/ja/ref/python/public-api/queuedrun",
+    "destination": "/ja/models/ref/python/public-api/queuedrun"
   },
   {
-    "source": "/ref/release-notes/archived/0.50.2",
-    "destination": "/release-notes/archived/0.50.2"
+    "source": "/ja/ref/python/public-api/runs",
+    "destination": "/ja/models/ref/python/public-api/runs"
   },
   {
-    "source": "/ref/release-notes/archived/0.49.0",
-    "destination": "/release-notes/archived/0.49.0"
+    "source": "/ja/ref/python/public-api/run",
+    "destination": "/ja/models/ref/python/public-api/run"
   },
   {
-    "source": "/ref/release-notes/archived/0.48.0",
-    "destination": "/release-notes/archived/0.48.0"
+    "source": "/ja/ref/python/public-api/runqueue",
+    "destination": "/ja/models/ref/python/public-api/runqueue"
   },
   {
-    "source": "/ref/release-notes/archived/0.47.3",
-    "destination": "/release-notes/archived/0.47.3"
+    "source": "/ja/ref/python/public-api/sweep",
+    "destination": "/ja/models/ref/python/public-api/sweep"
   },
   {
-    "source": "/ref/release-notes/archived/0.47.2",
-    "destination": "/release-notes/archived/0.47.2"
+    "source": "/ja/ref/python/public-api/job",
+    "destination": "/ja/models/ref/python/public-api/job"
   },
   {
-    "source": "/ref/release-notes/archived/0.46.0",
-    "destination": "/release-notes/archived/0.46.0"
+    "source": "/ja/ref/python/public-api/files",
+    "destination": "/ja/models/ref/python/public-api/files"
   },
   {
-    "source": "/ref/release-notes/archived/0.45.0",
-    "destination": "/release-notes/archived/0.45.0"
+    "source": "/ja/ref/python/public-api/project",
+    "destination": "/ja/models/ref/python/public-api/project"
   },
   {
-    "source": "/ref/release-notes/archived/0.44.1",
-    "destination": "/release-notes/archived/0.44.1"
+    "source": "/ja/ref/python/public-api/projects",
+    "destination": "/ja/models/ref/python/public-api/projects"
   },
   {
-    "source": "/ref/release-notes/archived/0.43.0",
-    "destination": "/release-notes/archived/0.43.0"
+    "source": "/ja/ref/python/public-api/file",
+    "destination": "/ja/models/ref/python/public-api/file"
   },
   {
-    "source": "/ref/release-notes/archived/0.42.0",
-    "destination": "/release-notes/archived/0.42.0"
+    "source": "/ja/ref/python/integrations/keras/wandbcallback",
+    "destination": "/ja/models/ref/python/integrations/keras/wandbcallback"
   },
   {
-    "source": "/ref/release-notes/archived/0.41.0",
-    "destination": "/release-notes/archived/0.41.0"
+    "source": "/ja/ref/python/integrations/keras/wandbevalcallback",
+    "destination": "/ja/models/ref/python/integrations/keras/wandbevalcallback"
   },
   {
-    "source": "/ref/release-notes/archived/0.40.0",
-    "destination": "/release-notes/archived/0.40.0"
+    "source": "/ja/ref/python/integrations/keras/wandbmetricslogger",
+    "destination": "/ja/models/ref/python/integrations/keras/wandbmetricslogger"
   },
   {
-    "source": "/ref/release-notes/archived/0.39.0",
-    "destination": "/release-notes/archived/0.39.0"
+    "source": "/ja/ref/python/integrations/keras/wandbmodelcheckpoint",
+    "destination": "/ja/models/ref/python/integrations/keras/wandbmodelcheckpoint"
   },
   {
-    "source": "/ref/release-notes/archived/0.38.0",
-    "destination": "/release-notes/archived/0.38.0"
+    "source": "/ja/ref/python/agent",
+    "destination": "/ja/models/ref/python/agent"
   },
   {
-    "source": "/ref/release-notes/archived/0.36.0",
-    "destination": "/release-notes/archived/0.36.0"
+    "source": "/ja/ref/python/data-types",
+    "destination": "/ja/models/ref/python/data-types"
   },
   {
-    "source": "/ref/release-notes/archived/0.35.0",
-    "destination": "/release-notes/archived/0.35.0"
+    "source": "/ja/ref/python/data-types/boundingboxes2d",
+    "destination": "/ja/models/ref/python/data-types/boundingboxes2d"
   },
   {
-    "source": "/ref/release-notes/archived/0.34.0",
-    "destination": "/release-notes/archived/0.34.0"
+    "source": "/ja/ref/python/data-types/html",
+    "destination": "/ja/models/ref/python/data-types/html"
   },
   {
-    "source": "/ref/release-notes/archived/0.33.0",
-    "destination": "/release-notes/archived/0.33.0"
+    "source": "/ja/ref/python/data-types/imagemask",
+    "destination": "/ja/models/ref/python/data-types/imagemask"
   },
   {
-    "source": "/ref/release-notes/release-policies",
-    "destination": "/release-notes/release-policies"
+    "source": "/ja/ref/python/data-types/molecule",
+    "destination": "/ja/models/ref/python/data-types/molecule"
+  },
+  {
+    "source": "/ja/ref/python/data-types/object3d",
+    "destination": "/ja/models/ref/python/data-types/object3d"
+  },
+  {
+    "source": "/ja/ref/python/data-types/plotly",
+    "destination": "/ja/models/ref/python/data-types/plotly"
+  },
+  {
+    "source": "/ja/ref/python/data-types/wbtracetree",
+    "destination": "/ja/models/ref/python/data-types/wbtracetree"
+  },
+  {
+    "source": "/ja/ref/python/data-types/image",
+    "destination": "/ja/models/ref/python/data-types/image"
+  },
+  {
+    "source": "/ja/ref/python/data-types/table",
+    "destination": "/ja/models/ref/python/data-types/table"
+  },
+  {
+    "source": "/ja/ref/python/data-types/audio",
+    "destination": "/ja/models/ref/python/data-types/audio"
+  },
+  {
+    "source": "/ja/ref/python/data-types/graph",
+    "destination": "/ja/models/ref/python/data-types/graph"
+  },
+  {
+    "source": "/ja/ref/python/data-types/histogram",
+    "destination": "/ja/models/ref/python/data-types/histogram"
+  },
+  {
+    "source": "/ja/ref/python/data-types/video",
+    "destination": "/ja/models/ref/python/data-types/video"
+  },
+  {
+    "source": "/ja/ref/python/controller",
+    "destination": "/ja/models/ref/python/controller"
+  },
+  {
+    "source": "/ja/ref/python/log",
+    "destination": "/ja/models/ref/python/log"
+  },
+  {
+    "source": "/ja/ref/python/login",
+    "destination": "/ja/models/ref/python/login"
+  },
+  {
+    "source": "/ja/ref/python/finish",
+    "destination": "/ja/models/ref/python/finish"
+  },
+  {
+    "source": "/ja/ref/python/save",
+    "destination": "/ja/models/ref/python/save"
+  },
+  {
+    "source": "/ja/ref/query-panel",
+    "destination": "/ja/models/ref/query-panel"
+  },
+  {
+    "source": "/ja/ref/query-panel/float",
+    "destination": "/ja/models/ref/query-panel/float"
+  },
+  {
+    "source": "/ja/ref/query-panel/artifact-version",
+    "destination": "/ja/models/ref/query-panel/artifact-version"
+  },
+  {
+    "source": "/ja/ref/query-panel/artifact-type",
+    "destination": "/ja/models/ref/query-panel/artifact-type"
+  },
+  {
+    "source": "/ja/ref/query-panel/audio-file",
+    "destination": "/ja/models/ref/query-panel/audio-file"
+  },
+  {
+    "source": "/ja/ref/query-panel/bokeh-file",
+    "destination": "/ja/models/ref/query-panel/bokeh-file"
+  },
+  {
+    "source": "/ja/ref/query-panel/html-file",
+    "destination": "/ja/models/ref/query-panel/html-file"
+  },
+  {
+    "source": "/ja/ref/query-panel/int",
+    "destination": "/ja/models/ref/query-panel/int"
+  },
+  {
+    "source": "/ja/ref/query-panel/joined-table",
+    "destination": "/ja/models/ref/query-panel/joined-table"
+  },
+  {
+    "source": "/ja/ref/query-panel/molecule-file",
+    "destination": "/ja/models/ref/query-panel/molecule-file"
+  },
+  {
+    "source": "/ja/ref/query-panel/object-3-d-file",
+    "destination": "/ja/models/ref/query-panel/object-3-d-file"
+  },
+  {
+    "source": "/ja/ref/query-panel/pytorch-model-file",
+    "destination": "/ja/models/ref/query-panel/pytorch-model-file"
+  },
+  {
+    "source": "/ja/ref/query-panel/run",
+    "destination": "/ja/models/ref/query-panel/run"
+  },
+  {
+    "source": "/ja/ref/query-panel/video-file",
+    "destination": "/ja/models/ref/query-panel/video-file"
+  },
+  {
+    "source": "/ja/ref/query-panel/artifact",
+    "destination": "/ja/models/ref/query-panel/artifact"
+  },
+  {
+    "source": "/ja/ref/query-panel/partitioned-table",
+    "destination": "/ja/models/ref/query-panel/partitioned-table"
+  },
+  {
+    "source": "/ja/ref/query-panel/boolean",
+    "destination": "/ja/models/ref/query-panel/boolean"
+  },
+  {
+    "source": "/ja/ref/query-panel/user",
+    "destination": "/ja/models/ref/query-panel/user"
+  },
+  {
+    "source": "/ja/ref/query-panel/entity",
+    "destination": "/ja/models/ref/query-panel/entity"
+  },
+  {
+    "source": "/ja/ref/query-panel/project",
+    "destination": "/ja/models/ref/query-panel/project"
+  },
+  {
+    "source": "/ja/ref/query-panel/image-file",
+    "destination": "/ja/models/ref/query-panel/image-file"
+  },
+  {
+    "source": "/ja/ref/query-panel/file",
+    "destination": "/ja/models/ref/query-panel/file"
+  },
+  {
+    "source": "/ja/ref/query-panel/table",
+    "destination": "/ja/models/ref/query-panel/table"
+  },
+  {
+    "source": "/ja/ref/query-panel/string",
+    "destination": "/ja/models/ref/query-panel/string"
+  },
+  {
+    "source": "/ja/ref/query-panel/number",
+    "destination": "/ja/models/ref/query-panel/number"
+  },
+  {
+    "source": "/ja/ref/cli",
+    "destination": "/ja/models/ref/cli"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-disabled",
+    "destination": "/ja/models/ref/cli/wandb-disabled"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-docker",
+    "destination": "/ja/models/ref/cli/wandb-docker"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-docker-run",
+    "destination": "/ja/models/ref/cli/wandb-docker-run"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-init",
+    "destination": "/ja/models/ref/cli/wandb-init"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-offline",
+    "destination": "/ja/models/ref/cli/wandb-offline"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-pull",
+    "destination": "/ja/models/ref/cli/wandb-pull"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-restore",
+    "destination": "/ja/models/ref/cli/wandb-restore"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-sweep",
+    "destination": "/ja/models/ref/cli/wandb-sweep"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-sync",
+    "destination": "/ja/models/ref/cli/wandb-sync"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-verify",
+    "destination": "/ja/models/ref/cli/wandb-verify"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-artifact",
+    "destination": "/ja/models/ref/cli/wandb-artifact"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-artifact/wandb-artifact-cache",
+    "destination": "/ja/models/ref/cli/wandb-artifact/wandb-artifact-cache"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-artifact/wandb-artifact-cache/wandb-artifact-cache-cleanup",
+    "destination": "/ja/models/ref/cli/wandb-artifact/wandb-artifact-cache/wandb-artifact-cache-cleanup"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-artifact/wandb-artifact-get",
+    "destination": "/ja/models/ref/cli/wandb-artifact/wandb-artifact-get"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-artifact/wandb-artifact-ls",
+    "destination": "/ja/models/ref/cli/wandb-artifact/wandb-artifact-ls"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-artifact/wandb-artifact-put",
+    "destination": "/ja/models/ref/cli/wandb-artifact/wandb-artifact-put"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-server",
+    "destination": "/ja/models/ref/cli/wandb-server"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-server/wandb-server-start",
+    "destination": "/ja/models/ref/cli/wandb-server/wandb-server-start"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-server/wandb-server-stop",
+    "destination": "/ja/models/ref/cli/wandb-server/wandb-server-stop"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-agent",
+    "destination": "/ja/models/ref/cli/wandb-agent"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-beta",
+    "destination": "/ja/models/ref/cli/wandb-beta"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-beta/wandb-beta-sync",
+    "destination": "/ja/models/ref/cli/wandb-beta/wandb-beta-sync"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-launch",
+    "destination": "/ja/models/ref/cli/wandb-launch"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-launch-sweep",
+    "destination": "/ja/models/ref/cli/wandb-launch-sweep"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-launch-agent",
+    "destination": "/ja/models/ref/cli/wandb-launch-agent"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-online",
+    "destination": "/ja/models/ref/cli/wandb-online"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-controller",
+    "destination": "/ja/models/ref/cli/wandb-controller"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-job",
+    "destination": "/ja/models/ref/cli/wandb-job"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-job/wandb-job-create",
+    "destination": "/ja/models/ref/cli/wandb-job/wandb-job-create"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-job/wandb-job-describe",
+    "destination": "/ja/models/ref/cli/wandb-job/wandb-job-describe"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-job/wandb-job-list",
+    "destination": "/ja/models/ref/cli/wandb-job/wandb-job-list"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-status",
+    "destination": "/ja/models/ref/cli/wandb-status"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-scheduler",
+    "destination": "/ja/models/ref/cli/wandb-scheduler"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-login",
+    "destination": "/ja/models/ref/cli/wandb-login"
+  },
+  {
+    "source": "/ja/ref/cli/wandb-enabled",
+    "destination": "/ja/models/ref/cli/wandb-enabled"
   }
 ]
