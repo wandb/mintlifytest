@@ -16,7 +16,7 @@ W&B는 각 run에서 로그된 아티팩트와 각 run에서 사용하여 아티
 Public API를 사용하여 아티팩트 또는 run에서 시작하여 프로그래밍 방식으로 그래프를 탐색합니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="아티팩트에서">
 ```python
 api = wandb.Api()
 
@@ -33,7 +33,7 @@ next_artifacts = consumer_runs[0].logged_artifacts()
 previous_artifacts = producer_run.used_artifacts()
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Run에서">
 ```python
 api = wandb.Api()
 

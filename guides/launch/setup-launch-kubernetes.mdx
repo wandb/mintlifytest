@@ -25,7 +25,7 @@ The Launch queue configuration for a Kubernetes target resource will resemble ei
 You can control any aspect of the Kubernetes workload resource spec when you create a Launch queue.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Kubernetes job spec">
 ```yaml
 spec:
   template:
@@ -44,7 +44,7 @@ metadata:
 namespace: wandb
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Custom resource spec">
 In some use cases, you might want to use `CustomResource` definitions. `CustomResource` definitions are useful if, for example, you want to perform multi-node distributed training. See the tutorial for using Launch with multi-node jobs using Volcano for an example application. Another use case might be that you want to use W&B Launch with Kubeflow.
 
 The following YAML snippet shows a sample Launch queue config that uses Kubeflow:

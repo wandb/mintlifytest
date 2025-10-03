@@ -38,7 +38,7 @@ W&B entity は、W&B App のそのユーザーまたはチームページのプ�
 以下の例は、Dagster コード内で API キーを指定する場所を示しています。`wandb_config` のネストされた辞書内でエンティティとプロジェクト名を必ず指定してください。異なる W&B Project を使用したい場合は、異なる `wandb_config` の値を異なる ops/assets に渡すことができます。渡すことができる可能性のあるキーについての詳細は、以下の設定セクションを参照してください。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Config for @job">
 例: `@job` の設定
 ```python
 # これを config.yaml に追加します
@@ -66,7 +66,7 @@ def simple_job_example():
    my_op()
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Config for @repository using assets">
 例: アセットを使用する `@repository` の設定
 
 ```python
@@ -160,7 +160,7 @@ Python 関数からオブジェクトを返すことで W&B Artifact を書き�
 以下の例は、Dagster アセット (`@asset`) を使用して W&B Artifacts を書き込む方法を示しています：
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Python objects">
 [pickle](https://docs.python.org/3/library/pickle.html) モジュールでシリアライズできるものは何でも、インテグレーションによって作成された Artifact にピクルスされて追加されます。ダグスター内でその Artifact を読むときに内容が読み込まれます（さらなる詳細については [Read artifacts](#read-wb-artifacts) を参照してください）。
 
 ```python
@@ -179,7 +179,7 @@ def create_dataset():
 
 W&B は複数のピクルスベースのシリアライズモジュール([pickle](https://docs.python.org/3/library/pickle.html), [dill](https://github.com/uqfoundation/dill), [cloudpickle](https://github.com/cloudpipe/cloudpickle), [joblib](https://github.com/joblib/joblib)) をサポートしています。また、[ONNX](https://onnx.ai/) や [PMML](https://en.wikipedia.org/wiki/Predictive_Model_Markup_Language) といったより高度なシリアライズも利用できます。[Serialization](#serialization-configuration) セクションを参照してください。
 </Tab>
-<Tab title="Tab">
+<Tab title="W&B Object">
 ネイティブ W&B オブジェクト (例: [Table](/ja/ref/python/data-types/table), [Image](/ja/ref/python/data-types/image), or [Graph](/ja/ref/python/data-types/graph)) のいずれかが作成された Artifact にインテグレーションによって追加されます。以下は Table を使った例です。
 
 ```python
@@ -198,7 +198,7 @@ def create_dataset_in_table():
     return wandb.Table(columns=["a", "b", "c"], data=[[1, 2, 3]])
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="W&B Artifact">
 複雑なユースケースの場合、独自の Artifact オブジェクトを構築する必要があるかもしれません。インテグレーションは、統合の両側のメタデータを拡充するなど、便利な追加機能も提供しています。
 
 ```python   
@@ -230,7 +230,7 @@ def create_artifact():
 以下のコード例は、`@op`、`@asset`、および `@multi_asset` 計算で辞書を構成する方法を示しています：
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Example for @op">
 `@op` の例:
 ```python 
 @op(
@@ -247,7 +247,7 @@ def create_dataset():
    return [1, 2, 3]
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Example for @asset">
 `@asset` の例:
 ```python
 @asset(
@@ -265,7 +265,7 @@ def create_dataset():
 
 設定を通じて名前を渡す必要はありません。@asset にはすでに名前があります。インテグレーションはアセット名として Artifact 名を設定します。
 </Tab>
-<Tab title="Tab">
+<Tab title="Example for @multi_asset">
 `@multi_asset` の例:
 
 ```python
@@ -440,7 +440,7 @@ W&B Artifacts の読み取りは、それらを書くのと似ています。`@o
 次の例は、さまざまな ops から Artifact を読み取る方法を示しています。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="From an @op">
 `@op` からアーティファクトを読み取る
 ```python
 @op(
@@ -459,7 +459,7 @@ def read_artifact(context, artifact):
    context.log.info(artifact)
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Created by another @asset">
 別の `@asset` によって作成されたアーティファクトを読み取る
 ```python
 @asset(
@@ -476,7 +476,7 @@ def read_artifact(context, artifact):
    context.log.info(artifact)
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Artifact created outside Dagster">
 Dagster の外部で作成された Artifact を読み取る：
 
 ```python
@@ -710,7 +710,7 @@ def use_onnx_model(context, my_onnx_model, my_test_set):
 すべてのパーティションは辞書で提供され、キーと値はそれぞれパーティションキーとアーティファクトコンテンツを表します。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Read all partitions">
 上流の `@asset` のすべてのパーティションを読み取り、それらは辞書として与えられます。この辞書で、キーはパーティションキー、値はアーティファクトコンテンツに関連しています。
 ```python
 @asset(
@@ -723,7 +723,7 @@ def read_all_partitions(context, my_daily_partitioned_asset):
         context.log.info(f"partition={partition}, content={content}")
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Read specific partitions">
 指定したパーティションを選ぶために `AssetIn` の `partition_mapping` 設定を使用します。この例では `TimeWindowPartitionMapping` を使用しています。
 ```python
 @asset(

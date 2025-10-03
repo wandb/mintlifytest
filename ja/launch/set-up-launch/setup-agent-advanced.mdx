@@ -49,7 +49,7 @@ Helm チャートを経由してエージェントをデプロイする場合、
 環境とレジストリに基づいてローンチエージェントを設定する方法を、以下のタブで示します。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="AWS">
 AWS 環境設定には地域キーが必要です。リージョンはエージェントが実行される AWS 地域であるべきです。
 
 ```yaml title="launch-config.yaml"
@@ -67,7 +67,7 @@ builder:
 
 エージェントは boto3 を使用してデフォルトの AWS 資格情報を読み込みます。デフォルトの AWS 資格情報の設定方法については、[boto3 ドキュメント](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) を参照してください。
 </Tab>
-<Tab title="Tab">
+<Tab title="GCP">
 Google Cloud 環境には、region および project キーが必要です。`region` にはエージェントが実行されるリージョンを設定し、`project` にはエージェントが実行される Google Cloud プロジェクトを設定します。エージェントは Python の `google.auth.default()` を使用してデフォルトの資格情報を読み込みます。
 
 ```yaml title="launch-config.yaml"
@@ -86,7 +86,7 @@ builder:
 
 デフォルトの GCP 資格情報をエージェントが利用できるように設定する方法については、[`google-auth` ドキュメント](https://google-auth.readthedocs.io/en/latest/reference/google.auth.html#google.auth.default) を参照してください。
 </Tab>
-<Tab title="Tab">
+<Tab title="Azure">
 Azure 環境には追加のキーは必要ありません。エージェントが起動するときに、`azure.identity.DefaultAzureCredential()` を使用してデフォルトの Azure 資格情報を読み込みます。
 
 ```yaml title="launch-config.yaml"
@@ -113,7 +113,7 @@ builder:
 ローンチエージェントがクラウドレジストリと対話するために通常必要な権限は以下の通りです。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="AWS">
 ```yaml
 {
   'Version': '2012-10-17',
@@ -144,7 +144,7 @@ builder:
 }
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="GCP">
 ```js
 artifactregistry.dockerimages.list;
 artifactregistry.repositories.downloadArtifacts;
@@ -152,7 +152,7 @@ artifactregistry.repositories.list;
 artifactregistry.repositories.uploadArtifacts;
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Azure">
 Kaniko ビルダーを使用する場合は、[`AcrPush` ロール](https://learn.microsoft.com/azure/container-registry/container-registry-roles?tabs=azure-cli#acrpush)を追加してください。
 </Tab>
 </Tabs>
@@ -162,7 +162,7 @@ Kaniko ビルダーを使用する場合は、[`AcrPush` ロール](https://lear
 ローンチエージェントは、Kaniko ビルダーを使用している場合、クラウドストレージにプッシュする権限が必要です。Kaniko はビルドジョブを実行するポッドの外にコンテキストストアを使用します。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="AWS">
 AWS での Kaniko ビルダーの推奨コンテキストストアは Amazon S3 です。エージェントが S3 バケットにアクセスするためのポリシーは以下の通りです：
 
 ```json
@@ -185,7 +185,7 @@ AWS での Kaniko ビルダーの推奨コンテキストストアは Amazon S3 
 }
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="GCP">
 GCP では、エージェントが GCS にビルドコンテキストをアップロードするために必要な IAM 権限は次の通りです：
 
 ```js
@@ -195,7 +195,7 @@ storage.objects.delete;
 storage.objects.get;
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Azure">
 Azure Blob Storage にビルドコンテキストをアップロードするためには、[Storage Blob Data Contributor](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) ロールが必要です。
 </Tab>
 </Tabs>

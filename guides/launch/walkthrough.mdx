@@ -61,14 +61,14 @@ pip install wandb>=0.17.1
 4. Within your terminal, execute `wandb login` or set the `WANDB_API_KEY` environment variable to authenticate with W&B.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Log in to W&B">
 Within your terminal execute:
     
     ```bash
     wandb login
     ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Environment variable">
 ```bash
     WANDB_API_KEY=<your-api-key>
     ```
@@ -81,7 +81,7 @@ Within your terminal execute:
 Create a [launch job](./launch-terminology#launch-job) in one of three ways: with a Docker image, from a git repository or from local source code:
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="With a Docker image">
 To run a pre-made container that logs a message to W&B, open a terminal and run the following command:
 
 ```bash
@@ -92,7 +92,7 @@ The preceding command downloads and runs the container image `wandb/job_hello_wo
 
 Launch configures the container to report everything logged with `wandb` to the `launch-quickstart` project. The container logs a message to W&B and displays a link to the newly created run in W&B. Click the link to view the run in the W&B UI.
 </Tab>
-<Tab title="Tab">
+<Tab title="From a git repository">
 To launch the same hello-world job from its [source code in the W&B Launch jobs repository](https://github.com/wandb/launch-jobs), run the following command:
 
 ```bash
@@ -109,7 +109,7 @@ The command does the following:
 
 The console output shows the image build and execution. The output of the container should be nearly identical to the previous example.
 </Tab>
-<Tab title="Tab">
+<Tab title="From local source code">
 Code not versioned in a git repository can be launched by specifying a local directory path to the `--uri` argument. 
 
 Create an empty directory and add a Python script named `train.py` with the following content:

@@ -46,7 +46,7 @@ First, create a launch queue for our launch jobs.
 4. The **Config** section of the drawer is where you will enter a [Kubernetes job specification](https://kubernetes.io/docs/concepts/workloads/controllers/job/) for the launch queue. Any runs launched from this queue will be created using this job specification, so you can modify this configuration as needed to customize your jobs. For this tutorial, you can copy and paste the sample config below in your queue config as YAML or JSON:
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="YAML">
 ```yaml
 spec:
   template:
@@ -62,7 +62,7 @@ spec:
   backoffLimit: 0
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="JSON">
 ```json
 {
   "spec": {
@@ -280,7 +280,7 @@ kubectl apply -f nfs-persistent-volume.yaml
 In order for our runs to make use of this cache, we will need to add `volumes` and `volumeMounts` to our launch queue config. To edit the launch config, head back to [wandb.ai/launch](https://wandb.ai/launch) (or `<your-wandb-url>/launch` for users on wandb server), find your queue, click to the queue page, and then click the **Edit config** tab. The original config can be modified to:
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="YAML">
 ```yaml
 spec:
   template:
@@ -303,7 +303,7 @@ spec:
   backoffLimit: 0
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="JSON">
 ```json
 {
   "spec": {

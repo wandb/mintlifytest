@@ -19,17 +19,17 @@ Dockerfile を設定した後、W&B に指定する方法は次の3つです:
 * W&B App を使用する
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Dockerfile.wandb">
 W&B run のエントリポイントと同じディレクトリーに `Dockerfile.wandb` ファイルを含めます。W&B はこのファイルを組み込みの Dockerfile ではなく使用します。
 </Tab>
-<Tab title="Tab">
+<Tab title="W&B CLI">
 `wandb launch` コマンドに `--dockerfile` フラグを使用してジョブをキューに追加します:
 
 ```bash
 wandb launch --dockerfile path/to/Dockerfile
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="W&B app">
 W&B App でジョブをキューに追加する際、**Overrides** セクションで Dockerfile のパスを指定します。それをキーと値のペアとして入力し、キーを `"dockerfile"`、値を Dockerfile のパスとします。
 
 次の JSON は、ローカルディレクトリーに Dockerfile を含む方法を示しています:

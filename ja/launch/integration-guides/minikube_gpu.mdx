@@ -45,7 +45,7 @@ W&B LaunchをMinikubeクラスターにセットアップし、GPU のワーク�
 4. ドロワーの **Config** セクションには、launchキュー用の[Kubernetesジョブ仕様](https://kubernetes.io/docs/concepts/workloads/controllers/job/)を入力します。このキューから起動されたrunは、このジョブ仕様を使用して作成されるため、必要に応じてジョブをカスタマイズするためにこの設定を変更できます。このチュートリアルでは、下記のサンプル設定をキューの設定にYAMLまたはJSONとしてコピー＆ペーストできます：
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="YAML">
 ```yaml
 spec:
   template:
@@ -61,7 +61,7 @@ spec:
   backoffLimit: 0
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="JSON">
 ```json
 {
   "spec": {
@@ -268,7 +268,7 @@ kubectl apply -f nfs-persistent-volume.yaml
 私たちのrunがこのキャッシュを使用できるようにするためには、launchキューの設定に `volumes` と `volumeMounts` を追加する必要があります。launchの設定を編集するには、再び [wandb.ai/launch](http://wandb.ai/launch)（またはwandbサーバー上のユーザーの場合は\<your-wandb-url\>/launch）に戻り、キューを見つけ、キューページに移動し、その後、**Edit config** タブをクリックします。元の設定を次のように変更できます：
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="YAML">
 ```yaml
 spec:
   template:
@@ -291,7 +291,7 @@ spec:
   backoffLimit: 0
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="JSON">
 ```json
 {
   "spec": {

@@ -16,7 +16,7 @@ W&B は、各 run によってログされた Artifacts と、artifact graph を
 Public API を使用して、Artifacts または run からプログラム的にグラフをナビゲートします。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Artifacts から">
 ```python
 api = wandb.Api()
 
@@ -33,7 +33,7 @@ next_artifacts = consumer_runs[0].logged_artifacts()
 previous_artifacts = producer_run.used_artifacts()
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Run から">
 ```python
 api = wandb.Api()
 

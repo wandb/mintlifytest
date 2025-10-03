@@ -93,7 +93,7 @@ W&B 스윕이 시작되면 스윕 구성을 변경할 수 없습니다. 그러�
 Plotly 또는 Bokeh figure를 테이블에 직접 통합하는 것은 지원되지 않습니다. 대신, figure를 HTML로 내보내고 해당 HTML을 테이블에 포함하세요. 아래는 인터랙티브 Plotly 및 Bokeh 차트를 사용하여 이를 보여주는 예제입니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_0">
 ```python
 import wandb
 import plotly.express as px
@@ -122,7 +122,7 @@ run.log({"test_table": table})
 wandb.finish()
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_1">
 ```python
 from scipy.signal import spectrogram
 import holoviews as hv
@@ -196,7 +196,7 @@ W&B에서 서비스 계정은 여러 팀에 추가할 수 없습니다. 각 서�
 `pip` 또는 `conda`를 사용하여 설치할 수 있는 Anaconda 패키지가 있습니다. `conda`의 경우 [conda-forge](https://conda-forge.org) 채널에서 패키지를 받으세요.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_2">
 ```shell
 # conda 환경 생성
 conda create -n wandb-env python=3.8 anaconda
@@ -206,7 +206,7 @@ conda activate wandb-env
 pip install wandb
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_3">
 ```shell
 conda activate myenv
 conda install wandb --channel conda-forge
@@ -808,7 +808,7 @@ W&B는 각 run에서 로그된 아티팩트와 각 run에서 사용하여 아티
 Public API를 사용하여 아티팩트 또는 run에서 시작하여 프로그래밍 방식으로 그래프를 탐색합니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_4">
 ```python
 api = wandb.Api()
 
@@ -825,7 +825,7 @@ next_artifacts = consumer_runs[0].logged_artifacts()
 previous_artifacts = producer_run.used_artifacts()
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_5">
 ```python
 api = wandb.Api()
 
@@ -1061,12 +1061,12 @@ run 초기화 시간 초과 오류를 해결하려면 다음 단계를 따르세
 다음 해결 방법은 특정 환경에서 문제를 해결합니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_6">
 ```python
 wandb.init(settings=wandb.Settings(start_method="fork"))
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_7">
 `0.13.0` 이전 버전의 경우 다음을 사용하세요.
 
 ```python
@@ -1261,13 +1261,13 @@ W&B에 로그하는 자동화된 테스트 또는 내부 툴을 실행하려면 
 다음 예제는 [`wandb.log()`](/ko/ref/python/log/)를 사용하여 여러 가지 방법으로 손실을 기록하는 방법을 보여줍니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_8">
 ```python
 wandb.log({f"losses/loss-{ii}": loss for ii, 
   loss in enumerate(losses)})
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_9">
 ```python
 # 손실을 히스토그램으로 변환합니다.
 wandb.log({"losses": wandb.Histogram(losses)})  
@@ -1440,7 +1440,7 @@ has finished its bootstrapping phase.
 명시적인 행동을 위해 `config.setdefaults`를 사용하세요. 다음 코드 조각은 두 가지 방법을 모두 보여줍니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_10">
 ```python
 # Set default values for hyperparameters
 config_defaults = {"lr": 0.1, "batch_size": 256}
@@ -1452,7 +1452,7 @@ with wandb.init(config=config_defaults) as run:
     ...
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_11">
 ```python
 # Set default values for hyperparameters
 config_defaults = {"lr": 0.1, "batch_size": 256}
@@ -1581,12 +1581,12 @@ run_name = wandb.run.name
 `"Failed to query for notebook name, you can set it manually with the WANDB_NOTEBOOK_NAME environment variable,"` 오류 메시지가 발생하면 환경 변수를 설정하여 해결하십시오. 이를 수행하는 방법에는 여러 가지가 있습니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_12">
 ```python
 %env "WANDB_NOTEBOOK_NAME" "여기에 노트북 이름"
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_13">
 ```python
 import os
 
@@ -2062,12 +2062,12 @@ logger.setLevel(logging.ERROR)
 로그 출력을 완전히 끄려면 `WANDB_SILENT` 환경 변수를 설정합니다. `wandb.login`을 실행하기 전에 노트북 셀에서 이 작업을 수행해야 합니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_14">
 ```python
 %env WANDB_SILENT=True
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_15">
 ```python
 import os
 
@@ -2111,12 +2111,12 @@ W&B는 Auth0을 통해 멀티 테넌트 제품에 대한 Single Sign-On (SSO)을
 os.environ["WANDB_SILENT"] = "true"
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_16">
 ```python
 %env WANDB_SILENT=true
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="NOT_FOUND_17">
 ```shell
 WANDB_SILENT=true
 ```

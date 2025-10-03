@@ -112,14 +112,14 @@ Launch 작업이 W&B run에 의해 자동으로 생성되는 경우 Git 원격 U
 W&B 환경 변수 또는 W&B Python SDK로 작업 이름을 지정하세요.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Environment variable">
 `WANDB_JOB_NAME` 환경 변수를 원하는 작업 이름으로 설정하세요. 예를 들어:
 
 ```bash
 WANDB_JOB_NAME=awesome-job-name
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="W&B Python SDK">
 `wandb.Settings`로 작업 이름을 정의합니다. 그런 다음 `wandb.init`로 W&B를 초기화할 때 이 오브젝트를 전달합니다. 예를 들어:
 
 ```python

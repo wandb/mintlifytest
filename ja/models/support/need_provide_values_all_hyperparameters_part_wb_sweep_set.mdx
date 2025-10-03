@@ -17,7 +17,7 @@ sweep の外で run を行う場合、`wandb.config` の値を設定するには
 明示的な振る舞いには `config.setdefaults` を使用します。以下のコードスニペットは両方のメソッドを示しています：
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="wandb.init()">
 ```python
 # ハイパーパラメーターのデフォルト値を設定
 config_defaults = {"lr": 0.1, "batch_size": 256}
@@ -29,7 +29,7 @@ with wandb.init(config=config_defaults) as run:
     ...
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="config.setdefaults()">
 ```python
 # ハイパーパラメーターのデフォルト値を設定
 config_defaults = {"lr": 0.1, "batch_size": 256}

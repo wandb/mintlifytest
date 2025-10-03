@@ -33,7 +33,7 @@ W&B Launch でスイープを作成する前に、まずスイープするジョ
 </Note>
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="W&B app">
 W&B App を使って、インタラクティブにスイープを作成します。
 
 1. W&B App であなたの W&B プロジェクトへ移動します。
@@ -52,7 +52,7 @@ W&B App を使って、インタラクティブにスイープを作成します
     <img src="/images/launch/create_sweep_with_launch.png"  />
 </Frame>
 </Tab>
-<Tab title="Tab">
+<Tab title="CLI">
 W&B CLI を使って、Launch でプログラム的に W&B Sweep を作成します。
 
 1. Sweep の設定を作成します。
@@ -121,7 +121,7 @@ W&B スケジューラーまたはカスタムスケジューラーを使用し�
 </Note>
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="W&B scheduler">
 W&B スイープスケジューリングロジックをジョブとして使用して Launch スイープを作成します。
   
   1. パブリックの wandb/sweep-jobs プロジェクトで Wandb スケジューラージョブを識別するか、以下のジョブ名を使用します: `'wandb/sweep-jobs/job-wandb-sweep-scheduler:latest'`
@@ -145,7 +145,7 @@ parameters:
     max: 0.1
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="カスタムスケジューラー">
 カスタムスケジューラーは、スケジューラージョブを作成することで作成できます。このガイドの目的のために、`WandbScheduler` を変更してより多くのログを提供します。
 
   1. `wandb/launch-jobs` リポジトリをクローンします（特定の場所: `wandb/launch-jobs/jobs/sweep_schedulers`）
@@ -161,7 +161,7 @@ scheduler:
 ...
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Optuna スケジューラー">
 Optuna は、指定されたモデルに最適なハイパーパラメーターを見つけるために様々なアルゴリズムを使用するハイパーパラメータ最適化フレームワークです（W&B と似ています）。[サンプリングアルゴリズム](https://optuna.readthedocs.io/en/stable/reference/samplers/index.html) に加え、Optuna は数多くの [プルーニングアルゴリズム](https://optuna.readthedocs.io/en/stable/reference/pruners.html) も提供し、パフォーマンスが低い run を早期に終了させることができます。多数の run を実行する際、これは時間とリソースを節約するのに特に有用です。クラスは非常に設定可能で、`scheduler.settings.pruner/sampler.args` ブロックに期待されるパラメーターを渡すだけです。
 
 Optuna のスケジューリングロジックをジョブとして使用して Launch スイープを作成します。

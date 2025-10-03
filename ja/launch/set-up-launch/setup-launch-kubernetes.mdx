@@ -24,7 +24,7 @@ Kubernetes のターゲットリソースに対する Launch キューの設定�
 Launch キューを作成する際に、Kubernetes ワークロードリソーススペックの任意の側面を制御できます。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Kubernetes job spec">
 ```yaml
 spec:
   template:
@@ -43,7 +43,7 @@ metadata:
 namespace: wandb
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Custom resource spec">
 一部のユースケースでは、`CustomResource` の定義を使用したいかもしれません。例えば、マルチノードの分散トレーニングを実行したい場合に `CustomResource` が便利です。Volcano を使用してマルチノードジョブを Launch で使用するためのアプリケーションの例をチュートリアルで参照してください。別のユースケースとして、W&B Launch を Kubeflow と一緒に使用したい場合があるかもしれません。
 
 以下の YAML スニペットは、Kubeflow を使用したサンプルの Launch キュー設定を示しています：

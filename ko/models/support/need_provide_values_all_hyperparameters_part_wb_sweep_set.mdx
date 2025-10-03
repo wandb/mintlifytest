@@ -18,7 +18,7 @@ slug: /ko/support/:filename
 명시적인 행동을 위해 `config.setdefaults`를 사용하세요. 다음 코드 조각은 두 가지 방법을 모두 보여줍니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="wandb.init()">
 ```python
 # Set default values for hyperparameters
 config_defaults = {"lr": 0.1, "batch_size": 256}
@@ -30,7 +30,7 @@ with wandb.init(config=config_defaults) as run:
     ...
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="config.setdefaults()">
 ```python
 # Set default values for hyperparameters
 config_defaults = {"lr": 0.1, "batch_size": 256}

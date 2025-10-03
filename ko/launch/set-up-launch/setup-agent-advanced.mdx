@@ -49,7 +49,7 @@ launch 에이전트 설정(`launch-config.yaml`) 내에서 대상 리소스 환�
 다음 탭은 환경 및 레지스트리를 기반으로 launch 에이전트를 구성하는 방법을 보여줍니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="AWS">
 AWS 환경 설정에는 region 키가 필요합니다. region은 에이전트가 실행되는 AWS region이어야 합니다.
 
 ```yaml title="launch-config.yaml"
@@ -67,7 +67,7 @@ builder:
 
 에이전트는 boto3을 사용하여 기본 AWS 자격 증명을 로드합니다. 기본 AWS 자격 증명을 구성하는 방법에 대한 자세한 내용은 [boto3 설명서](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)를 참조하세요.
 </Tab>
-<Tab title="Tab">
+<Tab title="GCP">
 Google Cloud 환경에는 region 및 project 키가 필요합니다. `region`을 에이전트가 실행되는 region으로 설정합니다. `project`를 에이전트가 실행되는 Google Cloud 프로젝트로 설정합니다. 에이전트는 Python에서 `google.auth.default()`를 사용하여 기본 자격 증명을 로드합니다.
 
 ```yaml title="launch-config.yaml"
@@ -86,7 +86,7 @@ builder:
 
 에이전트에서 사용할 수 있도록 기본 GCP 자격 증명을 구성하는 방법에 대한 자세한 내용은 [`google-auth` 설명서](https://google-auth.readthedocs.io/en/latest/reference/google.auth.html#google.auth.default)를 참조하세요.
 </Tab>
-<Tab title="Tab">
+<Tab title="Azure">
 Azure 환경은 추가 키가 필요하지 않습니다. 에이전트가 시작되면 `azure.identity.DefaultAzureCredential()`을 사용하여 기본 Azure 자격 증명을 로드합니다.
 
 ```yaml title="launch-config.yaml"
@@ -113,7 +113,7 @@ builder:
 다음은 클라우드 레지스트리와 상호 작용하기 위해 launch 에이전트에서 일반적으로 요구하는 권한입니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="AWS">
 ```yaml
 {
   'Version': '2012-10-17',
@@ -144,7 +144,7 @@ builder:
 }
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="GCP">
 ```js
 artifactregistry.dockerimages.list;
 artifactregistry.repositories.downloadArtifacts;
@@ -152,7 +152,7 @@ artifactregistry.repositories.list;
 artifactregistry.repositories.uploadArtifacts;
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Azure">
 Kaniko 빌더를 사용하는 경우 [`AcrPush` 역할](https://learn.microsoft.com/azure/container-registry/container-registry-roles?tabs=azure-cli#acrpush)을 추가합니다.
 </Tab>
 </Tabs>
@@ -162,7 +162,7 @@ Kaniko 빌더를 사용하는 경우 [`AcrPush` 역할](https://learn.microsoft.
 에이전트가 Kaniko 빌더를 사용하는 경우 launch 에이전트는 클라우드 스토리지에 푸시할 수 있는 권한이 필요합니다. Kaniko는 빌드 job을 실행하는 pod 외부의 컨텍스트 저장소를 사용합니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="AWS">
 AWS에서 Kaniko 빌더에 권장되는 컨텍스트 저장소는 Amazon S3입니다. 다음 정책을 사용하여 에이전트에 S3 버킷에 대한 액세스 권한을 부여할 수 있습니다.
 
 ```json
@@ -185,7 +185,7 @@ AWS에서 Kaniko 빌더에 권장되는 컨텍스트 저장소는 Amazon S3입�
 }
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="GCP">
 GCP에서 에이전트가 빌드 컨텍스트를 GCS에 업로드하려면 다음 IAM 권한이 필요합니다.
 
 ```js
@@ -195,7 +195,7 @@ storage.objects.delete;
 storage.objects.get;
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Azure">
 에이전트가 빌드 컨텍스트를 Azure Blob Storage에 업로드하려면 [Storage Blob Data Contributor](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) 역할이 필요합니다.
 </Tab>
 </Tabs>

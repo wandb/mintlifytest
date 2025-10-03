@@ -13,7 +13,7 @@ slug: /ko/support/:filename
 `pip` 또는 `conda`를 사용하여 설치할 수 있는 Anaconda 패키지가 있습니다. `conda`의 경우 [conda-forge](https://conda-forge.org) 채널에서 패키지를 받으세요.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="pip">
 ```shell
 # conda 환경 생성
 conda create -n wandb-env python=3.8 anaconda
@@ -23,7 +23,7 @@ conda activate wandb-env
 pip install wandb
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="conda">
 ```shell
 conda activate myenv
 conda install wandb --channel conda-forge

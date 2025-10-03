@@ -33,7 +33,7 @@ W&B Launch로 스윕을 생성하기 전에 먼저 스윕할 작업을 생성해
 </Note>
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="W&B app">
 W&B App을 사용하여 대화식으로 스윕을 생성합니다.
 
 1. W&B App에서 W&B 프로젝트로 이동합니다.
@@ -52,7 +52,7 @@ W&B App을 사용하여 대화식으로 스윕을 생성합니다.
     <img src="/images/launch/create_sweep_with_launch.png"  />
 </Frame>
 </Tab>
-<Tab title="Tab">
+<Tab title="CLI">
 W&B CLI를 사용하여 프로그래밍 방식으로 Launch로 W&B 스윕을 생성합니다.
 
 1. 스윕 구성을 만듭니다.
@@ -120,7 +120,7 @@ W&B 스케줄러 또는 사용자 정의 스케줄러로 사용자 정의 스윕
 </Note>
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="W&B scheduler">
 W&B 스윕 스케줄링 로직을 작업으로 사용하여 Launch 스윕을 생성합니다.
   
   1. 공개 wandb/sweep-jobs 프로젝트에서 Wandb 스케줄러 작업을 식별하거나 작업 이름을 사용합니다.
@@ -145,7 +145,7 @@ parameters:
     max: 0.1
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Custom scheduler">
 사용자 정의 스케줄러는 스케줄러 작업을 만들어 생성할 수 있습니다. 이 가이드에서는 로깅을 더 많이 제공하기 위해 `WandbScheduler`를 수정합니다.
 
   1. `wandb/launch-jobs` 리포지토리를 복제합니다(특히: `wandb/launch-jobs/jobs/sweep_schedulers`).
@@ -161,7 +161,7 @@ scheduler:
 ...
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Optuna scheduler">
 Optuna는 주어진 모델에 대한 최상의 하이퍼파라미터를 찾기 위해 다양한 알고리즘을 사용하는 하이퍼파라미터 최적화 프레임워크입니다(W&B와 유사). [샘플링 알고리즘](https://optuna.readthedocs.io/en/stable/reference/samplers/index.html) 외에도 Optuna는 성능이 낮은 Runs를 조기에 종료하는 데 사용할 수 있는 다양한 [가지치기 알고리즘](https://optuna.readthedocs.io/en/stable/reference/pruners.html)도 제공합니다. 이는 많은 수의 Runs를 실행할 때 특히 유용하며 시간과 리소스를 절약할 수 있습니다. 클래스는 고도로 구성 가능하며 구성 파일의 `scheduler.settings.pruner/sampler.args` 블록에서 예상되는 파라미터를 전달하기만 하면 됩니다.
 
 Optuna의 스케줄링 로직을 작업과 함께 사용하여 Launch 스윕을 생성합니다.
