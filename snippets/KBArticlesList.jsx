@@ -1,4 +1,4 @@
-export const KBArticlesList = ({ kbArticleMap, tag }) => {
+export const KBArticlesList = ({ kbArticleMap, tag, language }) => {
   // Filter articles that contain the specified tag
   const filteredArticles = kbArticleMap.filter((article) =>
     article.tags.some((articleTag) => articleTag.toLowerCase() === tag.toLowerCase())
@@ -10,6 +10,11 @@ export const KBArticlesList = ({ kbArticleMap, tag }) => {
       .split(" ")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
+  };
+
+  const buildTagHref = (articleTag) => {
+    const basePath = `/support/${articleTag.toLowerCase().replace(" ", "_")}`;
+    return language ? `/${language}${basePath}` : basePath;
   };
 
   return (
@@ -55,7 +60,7 @@ export const KBArticlesList = ({ kbArticleMap, tag }) => {
               {article.tags.map((articleTag, tagIndex) => (
                 <a
                   key={tagIndex}
-                  href={`/support/${articleTag.toLowerCase().replace(" ", "_")}`}
+                  href={buildTagHref(articleTag)}
                   className="bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded px-2 md:px-3 py-1 text-xs text-teal-600 dark:text-teal-400 font-medium whitespace-nowrap hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors no-underline"
                 >
                   {capitalizeTag(articleTag)}

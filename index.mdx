@@ -1,9 +1,88 @@
 ---
 title: "W&B Documentation"
 description: ""
-mode: wide
+mode: custom
 ---
-To contain:
+
+import {Banner} from "/snippets/Banner.jsx";
+import {HomeWrapper} from "/snippets/home.jsx";
+import {ProductCard} from "/snippets/ProductCard.jsx";
+
+<HomeWrapper>
+<br/>
+<Banner title="Weights & Biases Documentation" background="/images/support/support_banner.png">
+Choose the product for which you need documentation.
+</Banner>
+<br/>
+<br/>
+
+<HomeWrapper padding="mint-px-24">
+<Columns cols={3}>
+    <Card
+        title="W&B Models"
+        subtitle="Develop AI models"
+        href="/guides"
+        icon="hexagon-nodes"
+    >
+        Develop AI models
+        <br/>
+        Use [W&B Models](/guides) to manage AI model development. Features include training, fine-tuning, reporting, automating hyperparameter sweeps, and utilizing the model registry for versioning and reproducibility.
+        <br/>
+        <br/>
+
+        • [Introduction](/guides/)  
+        • [Quickstart](/quickstart/)  
+        • [YouTube Tutorial](https://www.youtube.com/watch?v=tHAFujRhZLA)  
+        • [Online Course](https://wandb.ai/site/courses/101/)  
+    </Card>
+
+    <Card
+        title="W&B Weave"
+        subtitle=""
+        href="/weave"
+        icon="table"
+        links={[
+            { href: "/guides/", text: "Introduction" },
+            { href: "/weave/quickstart", text: "Quickstart" },
+            { href: "https://www.youtube.com/watch?v=IQcGGNLN3zo", text: "YouTube Demo" },
+            { href: "/weave/guides/tools/playground/", text: "Try the Playground" },
+            { href: "/guides/weave/set-up-weave", text: "Use Weave in your W&B runs" }
+        ]}
+    >   
+        Use AI models in your app
+        <br/>
+        Use [W&B Weave](/weave/) to manage AI models in your code. Features include tracing, output evaluation, cost estimates, and a hosted inference service and playground for comparing different large language models (LLMs) and settings.
+        <br/>
+        <br/>
+        • [Introduction](/guides/)  
+        • [Quickstart](/weave/quickstart)  
+        • [YouTube Demo](https://www.youtube.com/watch?v=IQcGGNLN3zo)  
+        • [Try the Playground](/weave/guides/tools/playground/)  
+        • [Use Weave in your W&B runs](/guides/weave/set-up-weave)  
+    </Card>
+    
+    <Card
+    title="W&B Inference"
+    href="/guides/inference/"
+    icon="cloud"
+    >
+        Access foundation models
+        <br/>
+        Use <a href="/guides/inference/">W&B Inference</a> to access leading open-source foundation models through an OpenAI-compatible API. Features include multiple model options, usage tracking, and integration with Weave for tracing and evaluation.
+        <br/>
+        <br/>
+        • [Introduction](/guides/inference/)  
+        • [Available Models](/guides/inference/models/)  
+        • [API Reference](/guides/inference/api-reference/)  
+        • [Try in Playground](https://wandb.ai/inference)  
+    </Card>
+
+</Columns>
+</HomeWrapper>
+</HomeWrapper>
+<br/>
+<br/>
+{/* To contain:
 
 - The homepage, featuring the cards currently on the homepage of https://docs.wandb.ai
 - Getting started page full of pointers to good resources (new topic)
@@ -21,4 +100,4 @@ To contain:
 - The migrated topics in this section (i.e. topics that were originally from the Hugo site) are to be moved under `/platform/` in the file structure, from their original locations. These will require redirects.
     - `/platform/hosting/`
     - `/platform/settings/`
-    - `/platform/settings/secrets/`
+    - `/platform/settings/secrets/` */}
