@@ -94,7 +94,7 @@ W&B Sweep が開始すると、Sweep configuration を変更することはで�
 Plotly または Bokeh の図をテーブルに直接統合することはサポートされていません。代わりに、図を HTML にエクスポートし、HTML をテーブルに含めてください。以下に、対話型の Plotly と Bokeh グラフを使用した例を示します。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Using Plotly">
 ```python
 import wandb
 import plotly.express as px
@@ -123,7 +123,7 @@ run.log({"test_table": table})
 wandb.finish()
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Using Bokeh">
 ```python
 from scipy.signal import spectrogram
 import holoviews as hv
@@ -197,7 +197,7 @@ run.finish()
 `pip` または `conda` を使用してインストール可能な Anaconda パッケージがあります。`conda` の場合、[conda-forge](https://conda-forge.org) チャンネルからパッケージを取得してください。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="pip">
 ```shell
 # conda 環境の作成
 conda create -n wandb-env python=3.8 anaconda
@@ -207,7 +207,7 @@ conda activate wandb-env
 pip install wandb
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="conda">
 ```shell
 conda activate myenv
 conda install wandb --channel conda-forge
@@ -806,7 +806,7 @@ W&B は、各 run によってログされた Artifacts と、artifact graph を
 Public API を使用して、Artifacts または run からプログラム的にグラフをナビゲートします。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Artifacts から">
 ```python
 api = wandb.Api()
 
@@ -823,7 +823,7 @@ next_artifacts = consumer_runs[0].logged_artifacts()
 previous_artifacts = producer_run.used_artifacts()
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Run から">
 ```python
 api = wandb.Api()
 
@@ -1064,12 +1064,12 @@ run の初期化タイムアウトエラーを解決するには、次の手順�
 以下の回避策は、特定の環境で問題を解決します。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Linux and OS X">
 ```python
 wandb.init(settings=wandb.Settings(start_method="fork"))
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Google Colab">
 バージョン `0.13.0` より前のものには、次を使用してください：
 
 ```python
@@ -1263,13 +1263,13 @@ W&B にログを記録する自動テストや内部ツールをローンチす�
 
 これらの例は、異なる方法で損失をログとして記録する [`wandb.log()`](/ja/ref/python/log/) の使い方を示しています。
 <Tabs>
-<Tab title="Tab">
+<Tab title="辞書を使う">
 ```python
 wandb.log({f"losses/loss-{ii}": loss for ii, 
   loss in enumerate(losses)})
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="ヒストグラムとして">
 ```python
 # 損失をヒストグラムに変換します
 wandb.log({"losses": wandb.Histogram(losses)})  
@@ -1444,7 +1444,7 @@ sweep の外で run を行う場合、`wandb.config` の値を設定するには
 明示的な振る舞いには `config.setdefaults` を使用します。以下のコードスニペットは両方のメソッドを示しています：
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="wandb.init()">
 ```python
 # ハイパーパラメーターのデフォルト値を設定
 config_defaults = {"lr": 0.1, "batch_size": 256}
@@ -1456,7 +1456,7 @@ with wandb.init(config=config_defaults) as run:
     ...
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="config.setdefaults()">
 ```python
 # ハイパーパラメーターのデフォルト値を設定
 config_defaults = {"lr": 0.1, "batch_size": 256}
@@ -1585,12 +1585,12 @@ run_name = wandb.run.name
 `"Failed to query for notebook name, you can set it manually with the WANDB_NOTEBOOK_NAME environment variable,"` というエラーメッセージが表示された場合は、環境変数を設定することで解決できます。これを達成するための複数のメソッドがあります:
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Notebook">
 ```python
 %env "WANDB_NOTEBOOK_NAME" "ノートブック名はこちら"
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="python">
 ```python
 import os
 
@@ -2073,12 +2073,12 @@ logger.setLevel(logging.ERROR)
 ログ出力を完全にオフにするには、`WANDB_SILENT` 環境変数を設定します。これは `wandb.login` を実行する前にノートブックセル内で行う必要があります。
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="ノートブック">
 ```python
 %env WANDB_SILENT=True
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Python">
 ```python
 import os
 
@@ -2122,12 +2122,12 @@ W&B は、Auth0 を通じたマルチテナント提供のためにシングル�
 os.environ["WANDB_SILENT"] = "true"
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Notebook">
 ```python
 %env WANDB_SILENT=true
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Command-Line">
 ```shell
 WANDB_SILENT=true
 ```
