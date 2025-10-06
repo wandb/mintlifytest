@@ -7,7 +7,7 @@ Write a doc that explains how to set up and use the W&B MCP server. Here is a pr
 The W&B MCP Server enables AI assistants like Cursor, Windsurf, Claude Code and Claude Desktop to directly query and analyze your Weights & Biases data. This gives your AI coding assistant powerful capabilities to help you understand experiments, debug issues, and generate insights from your W&B Models and W&B Weave data.
 
 :::note
-The **[wandb MCP server documentation on GitHub](https://github.com/wandb/wandb-mcp-server/blob/main/README.md)** contains a fuller, in-depth guide on installation, available tools and troubleshooting.
+The **[wandb MCP server documentation on GitHub](https://github.com/wandb/wandb-mcp-server/blob/main/README)** contains a fuller, in-depth guide on installation, available tools and troubleshooting.
 :::
 
 ## Why use the W&B MCP Server?
@@ -64,7 +64,7 @@ Generate shareable W&B Reports with visualizations and analysis that you can sha
 
 ### 1-line Quickstart helpers for Cursor, Windsurf, Claude and more
 
-The [full wandb MCP server documentation on GitHub](https://github.com/wandb/wandb-mcp-server/blob/main/README.md) contains 1-line quickstart helpers for Cursor, Windsurf, Claude Code and Claude Desktop.
+The [full wandb MCP server documentation on GitHub](https://github.com/wandb/wandb-mcp-server/blob/main/README) contains 1-line quickstart helpers for Cursor, Windsurf, Claude Code and Claude Desktop.
 
 ## Example queries
 
@@ -77,7 +77,7 @@ Once configured, you can ask your AI assistant questions like:
 
 ## Learn more
 
-For detailed configuration options, sandbox setup, and troubleshooting, see the [full documentation on GitHub](https://github.com/wandb/wandb-mcp-server/blob/main/README.md).
+For detailed configuration options, sandbox setup, and troubleshooting, see the [full documentation on GitHub](https://github.com/wandb/wandb-mcp-server/blob/main/README).
 ```
 
 

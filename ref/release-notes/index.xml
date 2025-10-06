@@ -1,0 +1,128 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<channel>
+<title>Release Notes on Weights & Biases Documentation</title>
+<link>https://docs.wandb.ai/ref/release-notes/</link>
+<description>Recent content in Release Notes on Weights & Biases Documentation</description>
+<generator>Hugo</generator>
+<language>en</language>
+<lastBuildDate>Fri, 26 Sep 2025 11:15:54 -0700</lastBuildDate>
+<atom:link href="https://docs.wandb.ai/ref/release-notes/index.xml" rel="self" type="application/rss+xml"/>
+<item>
+<title>0.73.x</title>
+<link>https://docs.wandb.ai/ref/release-notes/0.73/</link>
+<pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/0.73/</guid>
+<description>
+<![CDATA[ W&amp;B v0.73 marks a significant milestone in the migration to W&amp;B Registry from team-level Model Registry; most organizations will be migrated automatically during the upgrade. UI improvements include colorblind-safe run color palettes, continuous color options metric-based run coloring, and smoother panel reorganization. This release also provides service principal authentication for BYOB (Bring Your Own Bucket) setups with CoreWeave AI Object Storage, along with improved console log handling and additional enhancements. The latest patch is v0.73.1. Refer to Patches. <a href="https://docs.wandb.ai/ref/release-notes/0.73/">Read more</a>. ]]>
+</description>
+</item>
+<item>
+<title>0.72.x</title>
+<link>https://docs.wandb.ai/ref/release-notes/0.72/</link>
+<pubDate>Wed, 06 Aug 2025 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/0.72/</guid>
+<description>
+<![CDATA[ W&amp;B 0.72 includes fixes for line plots and media panels, as well as improvements to Weave integrations for OpenTelemetry and Google Agent Development Kit. <a href="https://docs.wandb.ai/ref/release-notes/0.72/">Read more</a>. ]]>
+</description>
+</item>
+<item>
+<title>0.71.x</title>
+<link>https://docs.wandb.ai/ref/release-notes/0.71/</link>
+<pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/0.71/</guid>
+<description>
+<![CDATA[ With W&amp;B Server 0.71, Registry is turned on by default for all organizations. For more details about the staged Registry rollout, see the relevant note in Features. This release brings several improvements and fixes to workspaces: Keep media panels with a common step slider in sync, navigate through through full-screen panels more efficiently, and find more details about a run’s total duration and time actively running. in the Run Overview page. Automations have been enhanced, and you can now trigger an automation based on an artifact version’s tags. <a href="https://docs.wandb.ai/ref/release-notes/0.71/">Read more</a>. ]]>
+</description>
+</item>
+<item>
+<title>0.70.x</title>
+<link>https://docs.wandb.ai/ref/release-notes/0.70/</link>
+<pubDate>Wed, 09 Jul 2025 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/0.70/</guid>
+<description>
+<![CDATA[ W&amp;B Server v0.70 includes features, enhancements, and performance improvements to help you gain and share insights more efficiently. For example: W&amp;B Registry is now generally available, and organizations will be migrated from the legacy Model Registry in stages over several releases, with no action required. W&amp;B organizations who use CoreWeave infrastructure can now observe CoreWeave infrastructure issues from within W&amp;B, to streamline detection and resolution of problems. This release also brings CoreWeave AI Object Storage support for externally tracked files, as well as for BYOB storage for Dedicated Cloud and Self-Managed deployments. Rapidly prototype workspaces and visualizations to gain and share insights with workspace templates and additional bulk line plot and media panel settings at the workspace and section level. Monitor long-running running experiments before they finish with incremental table logging. The latest patch is v0.70.1. Refer to Patches. <a href="https://docs.wandb.ai/ref/release-notes/0.70/">Read more</a>. ]]>
+</description>
+</item>
+<item>
+<title>0.69.x</title>
+<link>https://docs.wandb.ai/ref/release-notes/0.69.0/</link>
+<pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/0.69.0/</guid>
+<description>
+<![CDATA[ W&amp;B 0.69 focuses on making the workspace more intuitive, collaborative, and efficient. Clearer visualizations and faster artifact downloads streamline how you interact with your data, so you can gain and share insights more quickly. Updates to W&amp;B Weave improve team workflows and evaluation tracking. A range of quality-of-life fixes tidy up the overall user experience. This release also marks the end of life for v0.54 and older, which are now officially unsupported. The latest patch is v0.69.1. <a href="https://docs.wandb.ai/ref/release-notes/0.69.0/">Read more</a>. ]]>
+</description>
+</item>
+<item>
+<title>0.68.x</title>
+<link>https://docs.wandb.ai/ref/release-notes/0.68.0/</link>
+<pubDate>Wed, 07 May 2025 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/0.68.0/</guid>
+<description>
+<![CDATA[ W&amp;B Server v0.68 includes enhancements to various types of panels and visualizations, security improvements for Registry, W&amp;B Weave, and service accounts, performance improvements when forking and rewinding runs, and more. The latest patch is v0.68.2. <a href="https://docs.wandb.ai/ref/release-notes/0.68.0/">Read more</a>. ]]>
+</description>
+</item>
+<item>
+<title>0.67.x</title>
+<link>https://docs.wandb.ai/ref/release-notes/0.67.0/</link>
+<pubDate>Fri, 28 Mar 2025 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/0.67.0/</guid>
+<description>
+<![CDATA[ Features In Reports, you can now give a run a custom display name per panel grid. This allows you to replace the run’s (often long and opaque) training-time name with one that is more meaningful to your audience. The report updates the name in all panel grids, helping you to explain your hard-won experimental insights to your colleagues in a concise and readable way. The original run name remain intact in the project, so doing this won’t disrupt your collaborators. When you expand a panel in the workspace, it now opens in full screen mode with more space. In this view, line plots now render with more granular detail, using up 10,000 bins. The run selector appear next to the panel, letting you easily toggle, group, or filter runs in context. From any panel, you can now copy a unique URL that links directly to that panel&rsquo;s full screen view. This makes it even easier to share a link to dig into interesting or pathological patterns in your plots. Run Comparer is a powerful tool you can use to compare the configurations and key metrics of important runs alongside their loss curves. Run Comparer has been updated: Faster to add a Run Comparer panel, as an expanded option in Add Panels. By default, a Run Comparer panel takes up more space, so you can see the values right away. Improved readability and legibility of a Run Comparer panel. You can use new controls to quickly change row and column sizes so you can read long or nested values. You can copy any value in the panel to your clipboard with a single click. You can search keys with regular expressions to quickly find exactly the subset of metrics you want to compare across. Your search history is saved to help you iterate efficiently between views. Run Comparer is now more reliable at scale, and handles larger workspaces more efficiently, reducing the likelihood of poor performance or a crashed panel. <a href="https://docs.wandb.ai/ref/release-notes/0.67.0/">Read more</a>. ]]>
+</description>
+</item>
+<item>
+<title>0.66.x</title>
+<link>https://docs.wandb.ai/ref/release-notes/0.66.0/</link>
+<pubDate>Thu, 06 Mar 2025 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/0.66.0/</guid>
+<description>
+<![CDATA[ Features In tables and query panels, columns you derive from other columns now persist, so you can use them for filtering or in query panel plots. Security Limited the maximum depth for a GraphQL document to 20. Upgraded pyarrow to v17.0.0. ]]>
+</description>
+</item>
+<item>
+<title>0.65.x</title>
+<link>https://docs.wandb.ai/ref/release-notes/0.65.0/</link>
+<pubDate>Thu, 30 Jan 2025 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/0.65.0/</guid>
+<description>
+<![CDATA[ Features From a registry&rsquo;s Settings, you can now update the owner to a different user with the Admin role. Select Owner from the user&rsquo;s Role menu. You can now move a run to a different group in the same project. Hover over a run in the run list, click the three-vertical-dots menu, and choose Move to another group. You can now configure whether the Log Scale setting for line plots is enabled by default at the level of the workspace or section. To configure the behavior for a workspace, click the action ... menu for the workspace, click Line plots, then toggle Log scale for the X or Y axis. To configure the behavior for a section, click the gear icon for the section, then toggle Log scale for the X or Y axis. ]]>
+</description>
+</item>
+<item>
+<title>0.63.x</title>
+<link>https://docs.wandb.ai/ref/release-notes/0.63.0/</link>
+<pubDate>Tue, 10 Dec 2024 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/0.63.0/</guid>
+<description>
+<![CDATA[ Features W&amp;B Weave is now generally available (GA) in Dedicated Cloud on AWS. Reach out to your W&amp;B team if your teams are looking to build Generative AI apps with confidence and putting those in production. The release includes the following additional updates: W&amp;B Models now seamlessly integrates with Azure public cloud. You could now create a Dedicated Cloud instance in an Azure region directly from your Azure subscription and manage it as an Azure ISV resource. This integration is in private preview. Enable automations at the Registry level to monitor changes and events across all collections in the registry and trigger actions accordingly. This eliminates the need to configure separate webhooks and automations for individual collections. <a href="https://docs.wandb.ai/ref/release-notes/0.63.0/">Read more</a>. ]]>
+</description>
+</item>
+<item>
+<title>0.61.0</title>
+<link>https://docs.wandb.ai/ref/release-notes/0.61.0/</link>
+<pubDate>Thu, 17 Oct 2024 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/0.61.0/</guid>
+<description>
+<![CDATA[ Features This is a mini-feature and patch release, delivered at a different schedule than the monthly W&amp;B server major releases Organization admins can now configure Models seats and access control for both Models &amp; W&amp;B Weave in a seamless manner from their organization dashboard. This change allows for a efficient user management when Weave is enabled for a Dedicated Cloud or Self-managed instance. Weave pricing is consumption-based rather than based on number of seats used. Seat management only applies to the Models product. You can now configure access roles at the project level for team and restricted scoped projects. It allows assigning different access roles to a user within different projects in the same team, and thus adding another strong control to conform to enterprise governance needs. <a href="https://docs.wandb.ai/ref/release-notes/0.61.0/">Read more</a>. ]]>
+</description>
+</item>
+<item>
+<title>0.60.0</title>
+<link>https://docs.wandb.ai/ref/release-notes/0.60.0/</link>
+<pubDate>Thu, 26 Sep 2024 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/0.60.0/</guid>
+<description>
+<![CDATA[ Features Final updates for 1.1.1 Compliance of Level AA 2.2 for Web Content Accessibility Guidelines (WCAG) standards. W&amp;B can now disable auto-version-upgrade for customer-managed instances using the W&amp;B kubernetes operator. You can request this to your W&amp;B team. Note that W&amp;B requires all instances to upgrade periodically to comply with the 6-month end-of-life period for each version. W&amp;B does not support versions older than 6 months. <a href="https://docs.wandb.ai/ref/release-notes/0.60.0/">Read more</a>. ]]>
+</description>
+</item>
+<item>
+<title>Release policies and processes</title>
+<link>https://docs.wandb.ai/ref/release-notes/release-policies/</link>
+<pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
+<guid>https://docs.wandb.ai/ref/release-notes/release-policies/</guid>
+<description>
+<![CDATA[ This page gives details about W&amp;B Server releases and W&amp;B&rsquo;s release policies. This page relates to W&amp;B Dedicated Cloud and Self-Managed deployments. To learn more about an individual W&amp;B Server release, refer to W&amp;B release notes. W&amp;B fully manages W&amp;B Multi-tenant Cloud and the details in this page do not apply. Release support and end of life policy W&amp;B supports a major W&amp;B Server release for 12 months from its initial release date. ]]>
+</description>
+</item>
+</channel>
+</rss>
