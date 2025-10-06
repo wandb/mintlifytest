@@ -49,7 +49,7 @@ Make a note of the ARNs for these resources. You will need the ARNs when you def
 2. Toggle to the JSON policy editor, then paste the following policy based on your use case. Substitute values enclosed with `<>` with your own values:
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Agent submits pre-built Docker image">
 ```json
   {
     "Version": "2012-10-17",
@@ -84,7 +84,7 @@ Make a note of the ARNs for these resources. You will need the ARNs when you def
   }
   ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Agent builds and submits Docker image">
 ```json
   {
     "Version": "2012-10-17",
@@ -218,10 +218,10 @@ For experimental or solo use cases, running the Launch agent on your local machi
 
 Based on your use case, follow the instructions provided in the following tabs to properly configure up your launch agent: 
 <Tabs>
-<Tab title="Tab">
+<Tab title="EKS">
 W&B strongly encourages that you use the[ W&B managed helm chart](https://github.com/wandb/helm-charts/tree/main/charts/launch-agent) to install the agent in an EKS cluster.
 </Tab>
-<Tab title="Tab">
+<Tab title="EC2">
 Navigate to the Amazon EC2 Dashboard and complete the following steps:
 
 1. Click **Launch instance**.
@@ -249,7 +249,7 @@ newgrp docker
 
 Now you can proceed to setting up the Launch agent config.
 </Tab>
-<Tab title="Tab">
+<Tab title="Local machine">
 Use the AWS config files located at `~/.aws/config`  and `~/.aws/credentials` to associate a role with an agent that is polling on a local machine. Provide the IAM role ARN that you created for the launch agent in the previous step.
  
 ```yaml title="~/.aws/config"

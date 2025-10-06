@@ -39,7 +39,7 @@ The proceeding examples demonstrate where to specify your API key in your Dagste
 
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Config for @job">
 Example: configuration for `@job`
 ```python
 # add this to your config.yaml
@@ -68,7 +68,7 @@ def simple_job_example():
    my_op()
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Config for @repository using assets">
 Example: configuration for `@repository` using assets
 
 ```python
@@ -164,7 +164,7 @@ The proceeding examples demonstrate how to write W&B Artifacts with Dagster asse
 
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Python objects">
 Anything that can be serialized with the [pickle](https://docs.python.org/3/library/pickle.html) module is pickled and added to an Artifact created by the integration. The content is unpickled when you read that Artifact inside Dagster (see [Read artifacts](#read-wb-artifacts) for more details). 
 
 ```python
@@ -184,7 +184,7 @@ def create_dataset():
 
 W&B supports multiple Pickle-based serialization modules ([pickle](https://docs.python.org/3/library/pickle.html), [dill](https://github.com/uqfoundation/dill), [cloudpickle](https://github.com/cloudpipe/cloudpickle), [joblib](https://github.com/joblib/joblib)). You can also use more advanced serialization like [ONNX](https://onnx.ai/) or [PMML](https://en.wikipedia.org/wiki/Predictive_Model_Markup_Language). Please refer to the [Serialization](#serialization-configuration) section for more information.
 </Tab>
-<Tab title="Tab">
+<Tab title="W&B Object">
 Any W&B object, such as a [Table](/ref/python/data-types/table) or [Image](/ref/python/data-types/image), is added to an Artifact created by the integration. This example adds a Table to an Artifact:
 
 ```python
@@ -203,7 +203,7 @@ def create_dataset_in_table():
     return wandb.Table(columns=["a", "b", "c"], data=[[1, 2, 3]])
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="W&B Artifact">
 For complex use cases, it might be necessary to build your own Artifact object. The integration still provides useful additional features like augmenting the metadata on both sides of the integration.
 
 ```python
@@ -235,7 +235,7 @@ For `@multi_asset`, it’s located in each output metadata through the [AssetOut
 The proceeding code examples demonstrate how to configure a dictionary on an `@op`, `@asset` and `@multi_asset` computations:
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Example for @op">
 Example for `@op`:
 ```python 
 @op(
@@ -252,7 +252,7 @@ def create_dataset():
    return [1, 2, 3]
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Example for @asset">
 Example for `@asset`:
 ```python
 @asset(
@@ -270,7 +270,7 @@ def create_dataset():
 
 You do not need to pass a name through the configuration because the @asset already has a name. The integration sets the Artifact name as the asset name.
 </Tab>
-<Tab title="Tab">
+<Tab title="Example for @multi_asset">
 Example for `@multi_asset`:
 
 ```python
@@ -452,7 +452,7 @@ If you want to have a dependency on an Artifact created outside the integration 
 The following examples demonstrate how to read an Artifact from various ops.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="From an @op">
 Reading an artifact from an `@op`
 ```python
 @op(
@@ -471,7 +471,7 @@ def read_artifact(context, artifact):
    context.log.info(artifact)
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Created by another @asset">
 Reading an artifact created by another `@asset`
 ```python
 @asset(
@@ -488,7 +488,7 @@ def read_artifact(context, artifact):
    context.log.info(artifact)
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Artifact created outside Dagster">
 Reading an Artifact created outside Dagster:
 
 ```python
@@ -726,7 +726,7 @@ All partitions are provided in a dictionary, with the key and value representing
 
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Read all partitions">
 It reads all partitions of the upstream `@asset`, which are given as a dictionary. In this dictionary, the key and value correlate to the partition key and the Artifact content, respectively.
 ```python
 @asset(
@@ -739,7 +739,7 @@ def read_all_partitions(context, my_daily_partitioned_asset):
         context.log.info(f"partition={partition}, content={content}")
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Read specific partitions">
 The `AssetIn`'s `partition_mapping` configuration allows you to choose specific partitions. In this case, we are employing the `TimeWindowPartitionMapping`.
 ```python
 @asset(

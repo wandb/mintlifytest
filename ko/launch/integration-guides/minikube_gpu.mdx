@@ -45,7 +45,7 @@ GPU 워크로드를 예약하고 실행할 수 있는 Minikube 클러스터에 W
 4. 서랍의 **설정** 섹션은 Launch 대기열에 대한 [Kubernetes 작업 사양](https://kubernetes.io/docs/concepts/workloads/controllers/job/)을 입력할 위치입니다. 이 대기열에서 실행되는 모든 run은 이 작업 사양을 사용하여 생성되므로 필요에 따라 이 설정을 수정하여 작업을 사용자 정의할 수 있습니다. 이 튜토리얼에서는 아래 샘플 설정을 YAML 또는 JSON으로 대기열 설정에 복사하여 붙여넣을 수 있습니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="YAML">
 ```yaml
 spec:
   template:
@@ -61,7 +61,7 @@ spec:
   backoffLimit: 0
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="JSON">
 ```json
 {
   "spec": {
@@ -271,7 +271,7 @@ kubectl apply -f nfs-persistent-volume.yaml
 run이 이 캐시를 사용하려면 Launch 대기열 설정에 `volumes` 및 `volumeMounts`를 추가해야 합니다. Launch 설정을 편집하려면 [wandb.ai/launch](http://wandb.ai/launch) (또는 wandb 서버의 사용자의 경우 \<your-wandb-url\>/launch)로 돌아가서 대기열을 찾고 대기열 페이지를 클릭한 다음 **설정 편집** 탭을 클릭합니다. 원래 설정을 다음과 같이 수정할 수 있습니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="YAML">
 ```yaml
 spec:
   template:
@@ -294,7 +294,7 @@ spec:
   backoffLimit: 0
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="JSON">
 ```json
 {
   "spec": {

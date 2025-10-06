@@ -17,73 +17,47 @@ import {ProductCard} from "/snippets/ProductCard.jsx";
 
 <HomeWrapper padding="mint-px-24">
 <Columns cols={2}>
-    <ProductCard
+    <Card
         title="W&B Models"
-        subtitle="AI モデルを開発する"
-        href="/ja/guides"
+        href="/ja/models/"
         icon="/icons/Name=Models,%20Mode=Dark.svg"
-        links={[
-            { href: "/ja/guides/", text: "イントロダクション" },
-            { href: "/ja/quickstart/", text: "クイックスタート" },
-            { href: "https://www.youtube.com/watch?v=tHAFujRhZLA", text: "YouTube チュートリアル" },
-            { href: "https://wandb.ai/site/courses/101/", text: "オンライン コース" },
-        ]}
     >
-        [W&B Models](/ja/guides) を使用して、AI モデルの開発を管理します。機能には、トレーニング、ファインチューニング、レポート作成、自動化されたハイパーパラメーター探索、モデルレジストリを使用したバージョン管理と再現性があります。
-    </ProductCard>
+        AI モデルを開発する
+        <br/>
+        Use <a href="/ja/models/">W&B Models</a> を使用して、AI モデルの開発を管理します。
+        機能には、トレーニング、ファインチューニング、レポート作成、
+        自動化されたハイパーパラメーター探索、モデルレジストリを使用した
+        バージョン管理と再現性があります。
+        <br/>
+        <br/>
+        • [イントロダクション](/ja/models/)  
+        • [クイックスタート](/ja/quickstart/)  
+        • [YouTube チュートリアル](https://www.youtube.com/watch?v=tHAFujRhZLA)  
+        • [オンライン コース](https://wandb.ai/site/courses/101/)  
+    </Card>
 
-    <ProductCard
+    <Card
         title="W&B Weave"
-        subtitle="アプリで AI モデルを利用する"
         href="/weave"
         icon="/icons/Name=Weave,%20Mode=Dark.svg"
-        links={[
-            { href: "ja/weave/", text: "イントロダクション" },
-            { href: "/weave/quickstart", text: "クイックスタート" },
-            { href: "https://www.youtube.com/watch?v=IQcGGNLN3zo", text: "YouTube デモ" },
-            { href: "/weave/guides/tools/playground/", text: "プレイグラウンドを試す" },
-            { href: "https://wandb.ai/signup", text: "無料のサインアップが必要です" }
-        ]}
     >
-        [W&B Weave](/weave/) を使用して、コード内で AI モデルを管理します。機能には、トレース、評価の出力、コスト見積もり、異なる大型言語モデル (LLM) や設定を比較するためのプレイグラウンドがあります。
-    </ProductCard>
-    
-    {/* <ProductCard
-    title="W&B Inference"
-    subtitle="Access foundation models"
-    href="/guides/inference/"
-    icon="https://docs.wandb.ai/icons/Name=Inference,%20Mode=Dark.svg"
-    links={[
-        { href: "/guides/inference/", text: "Introduction" },
-        { href: "/guides/inference/models/", text: "Available Models" },
-        { href: "/guides/inference/api-reference/", text: "API Reference" },
-        { href: "https://wandb.ai/inference", text: "Try in Playground" }
-    ]}
-    >
-        Use <a href="/guides/inference/">W&B Inference</a> to access leading open-source foundation models through an OpenAI-compatible API. Features include multiple model options, usage tracking, and integration with Weave for tracing and evaluation.
-    </ProductCard> */}
+        アプリで AI モデルを利用する
+        <br/>
+        Use <a href="/weave/">W&B Weave</a> を使用して、コード内で AI モデルを管理します。
+        機能には、トレース、評価の出力、コスト見積もり、
+        異なる大型言語モデル (LLM) や設定を比較するためのプレイグラウンドがあります。
+        <br/>
+        <br/>
+        • [イントロダクション](/ja/weave/)  
+        • [クイックスタート](/weave/quickstart)  
+        • [YouTube デモ](https://www.youtube.com/watch?v=IQcGGNLN3zo)  
+        • [プレイグラウンドを試す](/weave/guides/tools/playground/)  
+        • [無料のサインアップが必要です](https://wandb.ai/signup)  
+    </Card>
 
+    
 </Columns>
 </HomeWrapper>
 </HomeWrapper>
 <br/>
 <br/>
-{/* To contain:
-
-- The homepage, featuring the cards currently on the homepage of https://docs.wandb.ai
-- Getting started page full of pointers to good resources (new topic)
-- Pointers to high-level W&B details from www such as security and pricing pages (nav entries only)
-    - https://wandb.ai/site/pricing/
-    - https://wandb.ai/site/security/
-- Topics from https://docs.wandb.ai/guides/models/app/settings-page/ under heading **Configuring W&B**
-    - Under this, bring in the secrets page from: https://docs.wandb.ai/guides/secrets/
-    - Also under this heading, the topics from https://docs.wandb.ai/guides/hosting/ under heading **Deployment options**
-
-## Implementation notes
-
-- URL rewriting is currently happening to get rid of `/core/` and `/models/` in the current site. This was necessary because of Docsy's requirement that the left-hand navigation be derived from the file structure, rather than a component like `docs.json` which composes a navigation as desired. 
-- In the migrated site, there is no need to have a `core` directory, as that section is being dissolved. 
-- The migrated topics in this section (i.e. topics that were originally from the Hugo site) are to be moved under `/platform/` in the file structure, from their original locations. These will require redirects.
-    - `/platform/hosting/`
-    - `/platform/settings/`
-    - `/platform/settings/secrets/` */}

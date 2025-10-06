@@ -24,7 +24,7 @@ Kubernetes 대상 리소스에 대한 Launch 대기열 설정은 [Kubernetes Job
 Launch 대기열을 만들 때 Kubernetes 워크로드 리소스 spec의 모든 측면을 제어할 수 있습니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Kubernetes job spec">
 ```yaml
 spec:
   template:
@@ -43,7 +43,7 @@ metadata:
 namespace: wandb
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Custom resource spec">
 일부 유스 케이스에서는 `CustomResource` 정의를 사용하고 싶을 수 있습니다. 예를 들어, 다중 노드 분산 트레이닝을 수행하려는 경우 `CustomResource` 정의가 유용합니다. Volcano를 사용하여 다중 노드 작업으로 Launch를 사용하는 방법에 대한 튜토리얼에서 예제 애플리케이션을 참조하십시오. 또 다른 유스 케이스는 Kubeflow와 함께 W&B Launch를 사용하려는 경우일 수 있습니다.
 
 다음 YAML 스니펫은 Kubeflow를 사용하는 샘플 Launch 대기열 설정을 보여줍니다.

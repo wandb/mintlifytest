@@ -112,14 +112,14 @@ Git リモート URL は、W&B Run によって自動的に作成された Launc
 W&B 環境変数または W&B Python SDK でジョブに名前を付けます
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Environment variable">
 `WANDB_JOB_NAME` 環境変数を希望のジョブ名に設定します。例:
 
 ```bash
 WANDB_JOB_NAME=awesome-job-name
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="W&B Python SDK">
 `wandb.Settings` でジョブの名前を定義します。そして、このオブジェクトを使用して W&B を `wandb.init` で初期化する際に渡します。例:
 
 ```python

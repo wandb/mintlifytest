@@ -49,7 +49,7 @@ Within your launch agent config (`launch-config.yaml`), provide the name of the 
 The following tabs demonstrates how to configure the launch agent based on your environment and registry.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="AWS">
 The AWS environment configuration requires the region key. The region should be the AWS region that the agent runs in. 
 
 ```yaml title="launch-config.yaml"
@@ -69,7 +69,7 @@ builder:
 
 The agent uses boto3 to load the default AWS credentials. See the [boto3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) for more information on how to configure default AWS credentials.
 </Tab>
-<Tab title="Tab">
+<Tab title="GCP">
 The Google Cloud environment requires region and project keys. Set `region` to the region that the agent runs in. Set `project` to the Google Cloud project that the agent runs in. The agent uses `google.auth.default()` in Python to load the default credentials.
 
 ```yaml title="launch-config.yaml"
@@ -90,7 +90,7 @@ builder:
 
 See the [`google-auth` documentation](https://google-auth.readthedocs.io/en/latest/reference/google.auth.html#google.auth.default) for more information on how to configure default GCP credentials so they are available to the agent.
 </Tab>
-<Tab title="Tab">
+<Tab title="Azure">
 The Azure environment does not require any additional keys. When the agent starts, it use `azure.identity.DefaultAzureCredential()` to load the default Azure credentials.
 
 ```yaml title="launch-config.yaml"
@@ -118,7 +118,7 @@ The agent permissions required vary by use case.
 Below are the permissions that are generally required by launch agents to interact with cloud registries.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="AWS">
 ```yaml
 {
   'Version': '2012-10-17',
@@ -149,7 +149,7 @@ Below are the permissions that are generally required by launch agents to intera
 }
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="GCP">
 ```js
 artifactregistry.dockerimages.list;
 artifactregistry.repositories.downloadArtifacts;
@@ -157,7 +157,7 @@ artifactregistry.repositories.list;
 artifactregistry.repositories.uploadArtifacts;
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Azure">
 Add the [`AcrPush` role](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/containers#acrpush) if you use the Kaniko builder.
 </Tab>
 </Tabs>
@@ -167,7 +167,7 @@ Add the [`AcrPush` role](https://learn.microsoft.com/azure/role-based-access-con
 The launch agent requires permission to push to cloud storage if the agent uses the Kaniko builder. Kaniko uses a context store outside of the pod running the build job.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="AWS">
 The recommended context store for the Kaniko builder on AWS is Amazon S3. The following policy can be used to give the agent access to an S3 bucket:
 
 ```json
@@ -190,7 +190,7 @@ The recommended context store for the Kaniko builder on AWS is Amazon S3. The fo
 }
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="GCP">
 On GCP, the following IAM permissions are required for the agent to upload build contexts to GCS:
 
 ```js
@@ -200,7 +200,7 @@ storage.objects.delete;
 storage.objects.get;
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Azure">
 The [Storage Blob Data Contributor](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) role is required in order for the agent to upload build contexts to Azure Blob Storage.
 </Tab>
 </Tabs>

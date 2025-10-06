@@ -38,7 +38,7 @@ W&B App에서 해당 사용자 또는 팀의 프로필 페이지를 확인하여
 다음 예제에서는 Dagster 코드에서 API 키를 지정할 위치를 보여줍니다. `wandb_config` 중첩 사전에 entity 및 프로젝트 이름을 지정해야 합니다. 다른 W&B 프로젝트를 사용하려는 경우 다른 `wandb_config` 값을 다른 ops/assets에 전달할 수 있습니다. 전달할 수 있는 가능한 키에 대한 자세한 내용은 아래의 Configuration 섹션을 참조하십시오.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Config for @job">
 `@job`에 대한 구성 예시
 ```python
 # add this to your config.yaml
@@ -67,7 +67,7 @@ def simple_job_example():
    my_op()
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Config for @repository using assets">
 assets를 사용하는 `@repository`에 대한 구성 예시
 
 ```python
@@ -161,7 +161,7 @@ Python 함수에서 오브젝트를 반환하여 W&B Artifact를 작성합니다
 다음 예제에서는 Dagster assets (`@asset`)로 W&B Artifacts를 쓰는 방법을 보여줍니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Python objects">
 [pickle](https://docs.python.org/3/library/pickle.html) 모듈로 직렬화할 수 있는 모든 항목이 피클링되고 통합에서 생성된 Artifact에 추가됩니다. 콘텐츠는 Dagster 내부에서 해당 Artifact를 읽을 때 피클링 해제됩니다 (자세한 내용은 [Artifacts 읽기](#read-wb-artifacts) 참조).
 
 ```python
@@ -180,7 +180,7 @@ def create_dataset():
 
 W&B는 여러 Pickle 기반 직렬화 모듈을 지원합니다 ([pickle](https://docs.python.org/3/library/pickle.html), [dill](https://github.com/uqfoundation/dill), [cloudpickle](https://github.com/cloudpipe/cloudpickle), [joblib](https://github.com/joblib/joblib)). [ONNX](https://onnx.ai/) 또는 [PMML](https://en.wikipedia.org/wiki/Predictive_Model_Markup_Language)과 같은 고급 직렬화를 사용할 수도 있습니다. 자세한 내용은 [직렬화](#serialization-configuration) 섹션을 참조하십시오.
 </Tab>
-<Tab title="Tab">
+<Tab title="W&B Object">
 모든 기본 W&B 오브젝트 (예: [Table](/ko/ref/python/data-types/table), [Image](/ko/ref/python/data-types/image) 또는 [Graph](/ko/ref/python/data-types/graph))가 통합에서 생성된 Artifact에 추가됩니다. 다음은 Table을 사용하는 예입니다.
 
 ```python
@@ -199,7 +199,7 @@ def create_dataset_in_table():
     return wandb.Table(columns=["a", "b", "c"], data=[[1, 2, 3]])
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="W&B Artifact">
 복잡한 유스 케이스의 경우 자체 Artifact 오브젝트를 빌드해야 할 수 있습니다. 통합은 여전히 통합 양쪽에서 메타데이터를 보강하는 것과 같은 유용한 추가 기능을 제공합니다.
 
 ```python
@@ -230,7 +230,7 @@ def create_artifact():
 다음 코드 예제에서는 `@op`, `@asset` 및 `@multi_asset` 계산에서 사전을 구성하는 방법을 보여줍니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Example for @op">
 `@op`의 예시:
 ```python
 @op(
@@ -247,7 +247,7 @@ def create_dataset():
    return [1, 2, 3]
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Example for @asset">
 `@asset`의 예시:
 ```python
 @asset(
@@ -265,7 +265,7 @@ def create_dataset():
 
 @asset에는 이미 이름이 있으므로 구성을 통해 이름을 전달할 필요가 없습니다. 통합은 Artifact 이름을 asset 이름으로 설정합니다.
 </Tab>
-<Tab title="Tab">
+<Tab title="Example for @multi_asset">
 `@multi_asset`의 예시:
 
 ```python
@@ -440,7 +440,7 @@ W&B Artifacts를 읽는 것은 쓰는 것과 유사합니다. `wandb_artifact_co
 다음 예제에서는 다양한 ops에서 Artifact를 읽는 방법을 보여줍니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="From an @op">
 `@op`에서 Artifact 읽기
 ```python
 @op(
@@ -459,7 +459,7 @@ def read_artifact(context, artifact):
    context.log.info(artifact)
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Created by another @asset">
 다른 `@asset`에서 생성한 Artifact 읽기
 ```python
 @asset(
@@ -476,7 +476,7 @@ def read_artifact(context, artifact):
    context.log.info(artifact)
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Artifact created outside Dagster">
 Dagster 외부에서 생성한 Artifact 읽기:
 
 ```python
@@ -710,7 +710,7 @@ asset의 하나, 여러 또는 모든 파티션을 선택적으로 읽을 수 �
 모든 파티션은 파티션 키와 Artifact 콘텐츠를 각각 나타내는 키와 값으로 사전에서 제공됩니다.
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Read all partitions">
 업스트림 `@asset`의 모든 파티션을 읽습니다. 이는 사전으로 제공됩니다. 이 사전에서 키와 값은 각각 파티션 키와 Artifact 콘텐츠와 관련됩니다.
 ```python
 @asset(
@@ -723,7 +723,7 @@ def read_all_partitions(context, my_daily_partitioned_asset):
         context.log.info(f"partition={partition}, content={content}")
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="Read specific partitions">
 `AssetIn`의 `partition_mapping` 구성을 통해 특정 파티션을 선택할 수 있습니다. 이 경우 `TimeWindowPartitionMapping`을 사용합니다.
 ```python
 @asset(

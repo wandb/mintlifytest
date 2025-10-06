@@ -48,7 +48,7 @@ W&B Launch エージェントに Docker イメージを作成させるかどう�
 2. JSON ポリシーエディターに切り替え、以下のポリシーをケースに基づいて貼り付けます。`<>` で囲まれた値を実際の値に置き換えてください:
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="エージェントが事前構築された Docker イメージを送信">
 ```json
   {
     "Version": "2012-10-17",
@@ -83,7 +83,7 @@ W&B Launch エージェントに Docker イメージを作成させるかどう�
   }
   ```
 </Tab>
-<Tab title="Tab">
+<Tab title="エージェントが Docker イメージを構築して送信">
 ```json
   {
     "Version": "2012-10-17",
@@ -212,10 +212,10 @@ Amazon SageMaker キューに Launch エージェントをデプロイする方�
 
 選択したユースケースに基づいて、以下のタブに記載されている指示に従って Launch エージェントを適切に設定してください: 
 <Tabs>
-<Tab title="Tab">
+<Tab title="EKS">
 W&B は、エージェントを EKS クラスターでインストールするために、[W&B 管理 helm チャート](https://github.com/wandb/helm-charts/tree/main/charts/launch-agent) の使用を強く推奨しています。
 </Tab>
-<Tab title="Tab">
+<Tab title="EC2">
 Amazon EC2 ダッシュボードに移動し、次のステップを完了します:
 
 1. **インスタンスを起動** をクリックします。
@@ -243,7 +243,7 @@ newgrp docker
 
 これで、Launchエージェントの構成を設定する準備が整いました。
 </Tab>
-<Tab title="Tab">
+<Tab title="ローカルマシン">
 ローカルマシンでポーリングを実行するエージェントとロールを関連付けるには、`~/.aws/config` と `~/.aws/credentials` にある AWS 設定ファイルを使用します。前のステップで作成した Launch エージェントの IAM ロール ARN を指定します。
 
 ```yaml title="~/.aws/config"

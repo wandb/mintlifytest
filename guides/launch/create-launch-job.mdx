@@ -114,14 +114,14 @@ The following table describes the job naming convention used by default based on
 Name your job with a W&B environment variable or with the W&B Python SDK
 
 <Tabs>
-<Tab title="Tab">
+<Tab title="Environment variable">
 Set the `WANDB_JOB_NAME` environment variable to your preferred job name. For example:
 
 ```bash
 WANDB_JOB_NAME=awesome-job-name
 ```
 </Tab>
-<Tab title="Tab">
+<Tab title="W&B Python SDK">
 Define the name of your job with `wandb.Settings`. Then pass this object when you initialize W&B with `wandb.init`. For example:
 
 ```python

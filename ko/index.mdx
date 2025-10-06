@@ -18,73 +18,48 @@ import {ProductCard} from "/snippets/ProductCard.jsx";
 
 <HomeWrapper padding="mint-px-24">
 <Columns cols={2}>
-    <ProductCard
+    <Card
         title="W&B Models"
-        subtitle="AI 모델 개발"
-        href="/ko/guides"
-        icon="/icons/Name=Models,%20Mode=Dark.svg"
-        links={[
-            { href: "/ko/guides/", text: "Introduction" },
-            { href: "/ko/quickstart/", text: "Quickstart" },
-            { href: "https://www.youtube.com/watch?v=tHAFujRhZLA", text: "YouTube Tutorial" },
-            { href: "https://wandb.ai/site/courses/101/", text: "Online Course" },
-        ]}
+        href="/ko/models/"
+        icon="hexagon-nodes"
     >
-        Use [W&B Models](/ko/guides) 를 사용하여 AI 모델 개발을 관리하세요. 기능에는 트레이닝, 파인튜닝, 리포트 작성, 하이퍼파라미터 탐색 자동화, 버전 관리 및 재현성을 위한 모델 레지스트리 활용이 포함됩니다.
-    </ProductCard>
+        AI 모델 개발
+        <br/>
+        Use <a href="/ko/models/">W&B Models</a> 를 사용하여 AI 모델 개발을 관리하세요. 
+        기능에는 트레이닝, 파인튜닝, 리포트 작성, 하이퍼파라미터 탐색 자동화, 
+        버전 관리 및 재현성을 위한 모델 레지스트리 활용이 포함됩니다.
+        <br/>
+        <br/>
+        • [Introduction](/ko/models/)  
+        • [Quickstart](/ko/quickstart/)  
+        • [YouTube Tutorial](https://www.youtube.com/watch?v=tHAFujRhZLA)  
+        • [Online Course](https://wandb.ai/site/courses/101/)  
+    </Card>
 
-    <ProductCard
+
+    <Card
         title="W&B Weave"
-        subtitle="앱에서 AI 모델 사용"
         href="/weave"
-        icon="/icons/Name=Weave,%20Mode=Dark.svg"
-        links={[
-            { href: "/guides/", text: "Introduction" },
-            { href: "https://weave-docs.wandb.ai/quickstart", text: "Quickstart" },
-            { href: "https://www.youtube.com/watch?v=IQcGGNLN3zo", text: "YouTube Demo" },
-            { href: "https://wandb.ai/wandb/weave-playground/weave/playground", text: "플레이그라운드 사용해 보기" },
-            { href: "https://wandb.ai/signup", text: "무료 가입 필요" }
-        ]}
+        icon="table"
     >
-        [W&B Weave](/weave) 를 사용하여 코드에서 AI 모델을 관리하세요. 기능에는 추적, 출력 평가, 비용 추정, 다양한 대규모 언어 모델 (LLM) 및 설정을 비교하기 위한 플레이그라운드가 포함됩니다.
-    </ProductCard>
+        앱에서 AI 모델 사용
+        <br/>
+        Use <a href="/weave">W&B Weave</a> 를 사용하여 코드에서 AI 모델을 관리하세요. 
+        기능에는 추적, 출력 평가, 비용 추정, 다양한 대규모 언어 모델 (LLM) 및 
+        설정을 비교하기 위한 플레이그라운드가 포함됩니다.
+        <br/>
+        <br/>
+        • [Introduction](/guides/)  
+        • [Quickstart](https://weave-docs.wandb.ai/quickstart)  
+        • [YouTube Demo](https://www.youtube.com/watch?v=IQcGGNLN3zo)  
+        • [플레이그라운드 사용해 보기](https://wandb.ai/wandb/weave-playground/weave/playground)  
+        • [무료 가입 필요](https://wandb.ai/signup)  
+    </Card>
+
     
-    {/* <ProductCard
-    title="W&B Inference"
-    subtitle="Access foundation models"
-    href="/guides/inference/"
-    icon="https://docs.wandb.ai/icons/Name=Inference,%20Mode=Dark.svg"
-    links={[
-        { href: "/guides/inference/", text: "Introduction" },
-        { href: "/guides/inference/models/", text: "Available Models" },
-        { href: "/guides/inference/api-reference/", text: "API Reference" },
-        { href: "https://wandb.ai/inference", text: "Try in Playground" }
-    ]}
-    >
-        Use <a href="/guides/inference/">W&B Inference</a> to access leading open-source foundation models through an OpenAI-compatible API. Features include multiple model options, usage tracking, and integration with Weave for tracing and evaluation.
-    </ProductCard> */}
 
 </Columns>
 </HomeWrapper>
 </HomeWrapper>
 <br/>
 <br/>
-{/* To contain:
-
-- The homepage, featuring the cards currently on the homepage of https://docs.wandb.ai
-- Getting started page full of pointers to good resources (new topic)
-- Pointers to high-level W&B details from www such as security and pricing pages (nav entries only)
-    - https://wandb.ai/site/pricing/
-    - https://wandb.ai/site/security/
-- Topics from https://docs.wandb.ai/guides/models/app/settings-page/ under heading **Configuring W&B**
-    - Under this, bring in the secrets page from: https://docs.wandb.ai/guides/secrets/
-    - Also under this heading, the topics from https://docs.wandb.ai/guides/hosting/ under heading **Deployment options**
-
-## Implementation notes
-
-- URL rewriting is currently happening to get rid of `/core/` and `/models/` in the current site. This was necessary because of Docsy's requirement that the left-hand navigation be derived from the file structure, rather than a component like `docs.json` which composes a navigation as desired. 
-- In the migrated site, there is no need to have a `core` directory, as that section is being dissolved. 
-- The migrated topics in this section (i.e. topics that were originally from the Hugo site) are to be moved under `/platform/` in the file structure, from their original locations. These will require redirects.
-    - `/platform/hosting/`
-    - `/platform/settings/`
-    - `/platform/settings/secrets/` */}
