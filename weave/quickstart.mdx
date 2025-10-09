@@ -1,114 +1,153 @@
 ---
-title: "Quickstart: Track LLM inputs & outputs"
+title: "Track LLM inputs & outputs"
 description: "Follow these steps to track your first call"
 mode: "wide"
 ---
 
+<Tip>
+Try our [W&B Inference quickstart](/weave/quickstart-inference) to get started without external API keys.
+</Tip>
+
+{/* TODO: Update wandb.me/weave-quickstart to match this new link */}
+
+W&B Weave makes it easy to track and evaluate your LLM applications. Follow these steps to track your first call or <a className="vertical-align-colab-button" target="_blank" href="http://wandb.me/weave_colab"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+## 1. Install W&B Weave and create an API Key
+
+**Install weave**
+
+First install the weave library:
+
 <Tabs>
-<Tab title="Python">
+  <Tab title="Python">
+    ```bash
+    pip install weave
+    ```
+  </Tab>
+  <Tab title="TypeScript">
+    ```bash
+    pnpm install weave
+    ```
+  </Tab>
+</Tabs>
 
-The following Quickstart uses an embedded notebook hosted by Deepnote so you can try out W&B Weave 
-without setting up an environment on your local machine.
+**Get your API key**
 
-After providing your API key and running the notebook, you will get live URLs to explore 
-the W&B Weave dashboard and observe what happened when your LLM code was executed.
+Then, create a Weights & Biases (W&B) account at https://wandb.ai and copy your API key from https://wandb.ai/authorize
 
-<iframe
-  height="700"
-  src="https://deepnote.com/app/weights-and-biases-10af/Weave-Quickstart-4a7f7fb1-5a3f-4961-9c36-aad0d2de2a0b?utm_source=app-settings&utm_medium=product-embed&utm_campaign=data-app&utm_content=4a7f7fb1-5a3f-4961-9c36-aad0d2de2a0b&__embedded=true"
-  title="Weave Quickstart"
-  width="800" 
-  allowfullscreen>
-</iframe>
+## 2. Log a trace to a new project
 
-After running this notebook with your API keys, you should have live Weave dashboards that
-allow you to deep dive on Weave's observability functionality. 
+To get started with tracking your first project with Weave:
 
-</Tab>
-<Tab title="TypeScript">
-## Install Weave and set up your environment
+1. Import the `weave` library
+2. Call `weave.init('project-name')` to start tracking
+    - You will be prompted to log in with your API key if you are not yet logged in on your machine.
+    - To log to a specific W&B Team name, replace `project-name` with `team-name/project-name`. If you don't specify a W&B team, your default entity is used. To find or update your default entity, refer to [User Settings](https://docs.wandb.ai/guides/models/app/settings-page/user-settings/#default-team) in the W&B Models documentation.
+    
+    **NOTE:** In automated environments, you can define the environment variable `WANDB_API_KEY` with your API key to login without prompting.
+3. Add the `@weave.op()` decorator to the python functions you want to track
 
-First install the required libraries:
+In this example, we're using openai so you will need to add an OpenAI [API key](https://platform.openai.com/docs/quickstart/step-2-setup-your-api-key).
 
-```shell
-pnpm install weave dotenv
-```
+<Tabs>
+  <Tab title="Python">
+    ```python
+    # highlight-next-line
+    import weave
+    from openai import OpenAI
 
-Then, retrieve your Weights & Biases API key from https://wandb.ai/authorize and your OpenAI API key from https://platform.openai.com/api-keys. 
+    client = OpenAI()
 
-Set up environment variables by running these commands in your terminal:
-
-```bash
-export WANDB_API_KEY="your_wandb_key"
-export OPENAI_API_KEY="your_openai_key"
-```
-
-Alternatively, you can create a `.env` file in your project root:
-
-```bash
-WANDB_API_KEY=your_wandb_key
-OPENAI_API_KEY=your_openai_key
-```
-
-If you use the `.env` file approach, make sure to import dotenv at the top of your TypeScript file:
-
-```typescript
-import 'dotenv/config';  // Add this at the top of your file
-```
-
-## Track your LLM calls
-
-Add Weave tracking to the functions you want to track:
-
-```typescript
-// If using .env file, add this line:
-// import 'dotenv/config';
-import OpenAI from 'openai';
-// highlight-next-line
-import * as weave from 'weave';
-
-// highlight-next-line
-const openai = new OpenAI();
-
-async function extractDinos(input: string) {
-  const response = await openai.chat.completions.create({
-    model: 'gpt-4o',
-    messages: [
-      {
-        role: 'user',
-        content: `In JSON format extract a list of 'dinosaurs', with their 'name', their 'common_name', and whether its 'diet' is a herbivore or carnivore: ${input}`,
-      },
-    ],
-  });
-  return response.choices[0].message.content;
-}
-// highlight-next-line
-const extractDinosOp = weave.op(extractDinos);
-
-async function main() {
-  // highlight-next-line
-  await weave.init('examples');
-  const result = await extractDinosOp(
-    'I watched as a Tyrannosaurus rex (T. rex) chased after a Triceratops (Trike), both carnivore and herbivore locked in an ancient dance. Meanwhile, a gentle giant Brachiosaurus (Brachi) calmly munched on treetops, blissfully unaware of the chaos below.'
-  );
-  console.log(result);
-}
-
-main();
-
-```
-When you call the `extractDinos` function Weave will output a link to view your trace.
+    # Weave will track the inputs, outputs and code of this function
+    # highlight-next-line
+    @weave.op()
+    def extract_dinos(sentence: str) -> dict:
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {
+                    "role": "system",
+                    "content": """In JSON format extract a list of `dinosaurs`, with their `name`,
+    their `common_name`, and whether its `diet` is a herbivore or carnivore"""
+                },
+                {
+                    "role": "user",
+                    "content": sentence
+                }
+                ],
+                response_format={ "type": "json_object" }
+            )
+        return response.choices[0].message.content
 
 
-</Tab>
-</Tabs> 
+    # Initialise the weave project
+    # highlight-next-line
+    weave.init('jurassic-park')
+
+    sentence = """I watched as a Tyrannosaurus rex (T. rex) chased after a Triceratops (Trike), \
+    both carnivore and herbivore locked in an ancient dance. Meanwhile, a gentle giant \
+    Brachiosaurus (Brachi) calmly munched on treetops, blissfully unaware of the chaos below."""
+
+    result = extract_dinos(sentence)
+    print(result)
+    ```
+    When you call the `extract_dinos` function Weave will output a link to view your trace.
+  </Tab>
+  <Tab title="TypeScript">
+    ```typescript
+    import OpenAI from 'openai';
+    // highlight-next-line
+    import * as weave from 'weave';
+    
+    // highlight-next-line
+    const openai = new OpenAI();
+  
+    async function extractDinos(input: string) {
+      const response = await openai.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [
+          {
+            role: 'user',
+            content: `In JSON format extract a list of 'dinosaurs', with their 'name', their 'common_name', and whether its 'diet' is a herbivore or carnivore: ${input}`,
+          },
+        ],
+      });
+      return response.choices[0].message.content;
+    }
+    // highlight-next-line
+    const extractDinosOp = weave.op(extractDinos);
+
+    async function main() {
+      // highlight-next-line
+      await weave.init('examples');
+      const result = await extractDinosOp(
+        'I watched as a Tyrannosaurus rex (T. rex) chased after a Triceratops (Trike), both carnivore and herbivore locked in an ancient dance. Meanwhile, a gentle giant Brachiosaurus (Brachi) calmly munched on treetops, blissfully unaware of the chaos below.'
+      );
+      console.log(result);
+    }
+
+    main();
+
+    ```
+    When you call the `extractDinos` function Weave will output a link to view your trace.
+  </Tab>
+</Tabs>
+
+## 3. Automated LLM library logging
+
+Calls made to OpenAI, Anthropic and [many more LLM libraries](/weave/guides/integrations/index) are automatically tracked with Weave, with **LLM metadata**, **token usage** and **cost** being logged automatically. If your LLM library isn't currently one of our integrations you can track calls to other LLMs libraries or frameworks easily by wrapping them with `@weave.op()`.
+
+## 4. See traces of your application in your project
+
+🎉 Congrats! Now, every time you call this function, Weave will automatically capture the input & output data and log any changes made to the code.
+
+![Weave Trace Outputs 1](/static/img/tutorial_trace_1.png)
 
 ## Next steps
 
-Now that you've seen Weave in action, try the W&B Inference service for easier experimentation. [Get Started with W&B Inference](/quickstart-inference) - no need to manage multiple API keys, and free credits are included.
+Now that you've seen Weave in action, try the W&B Inference service for easier experimentation. [Get Started with W&B Inference](/weave/quickstart-inference) - no need to manage multiple API keys, and free credits are included.
 
 Continue learning:
-- [Track flows and app metadata](/tutorial-tracing_2) - Dive deeper into tracing complex applications
-- [Build evaluations](/tutorial-eval) - Learn systematic model evaluation  
-- [Explore integrations](./guides/integrations/index) - Connect more LLM providers and frameworks
-- Try the [Playground](./guides/tools/playground) to test different models 
+- [Track flows and app metadata](/weave/tutorial-tracing_2) - Dive deeper into tracing complex applications
+- [Build evaluations](/weave/tutorial-eval) - Learn systematic model evaluation  
+- [Explore integrations](/weave/guides/integrations/index) - Connect more LLM providers and frameworks
