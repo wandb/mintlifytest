@@ -1,15 +1,12 @@
 ---
 title: W&B Training API
 description: Complete API documentation for W&B Training
+openapi: https://api.training.wandb.ai/openapi.json
 ---
 
-The W&B Training API provides endpoints for managing and interacting with serverless reinforcement learning training jobs.
-
-## Base URL
-
-```
-https://api.training.wandb.ai/v1
-```
+<Note>
+The W&B Training API provides endpoints for managing and interacting with serverless reinforcement learning training jobs. The API is OpenAI-compatible for chat completions.
+</Note>
 
 ## Authentication
 
@@ -21,75 +18,16 @@ Include your API key in the `Authorization` header:
 Authorization: Bearer YOUR_API_KEY
 ```
 
-## Endpoints
+## Base URL
 
-### Chat Completions
-
-Make inference requests to your trained models using the OpenAI-compatible chat completions endpoint.
-
-**POST** `/chat/completions`
-
-#### Request Body
-
-```json
-{
-  "model": "wandb-artifact:///<entity>/<project>/<model-name>:<step>",
-  "messages": [
-    {
-      "role": "system",
-      "content": "You are a helpful assistant."
-    },
-    {
-      "role": "user", 
-      "content": "Your message here"
-    }
-  ],
-  "temperature": 0.7,
-  "top_p": 0.95,
-  "max_tokens": 1000
-}
 ```
-
-#### Response
-
-```json
-{
-  "id": "chatcmpl-abc123",
-  "object": "chat.completion",
-  "created": 1234567890,
-  "model": "wandb-artifact:///<entity>/<project>/<model-name>:<step>",
-  "choices": [
-    {
-      "index": 0,
-      "message": {
-        "role": "assistant",
-        "content": "Response from the model"
-      },
-      "finish_reason": "stop"
-    }
-  ],
-  "usage": {
-    "prompt_tokens": 10,
-    "completion_tokens": 20,
-    "total_tokens": 30
-  }
-}
+https://api.training.wandb.ai/v1
 ```
-
-## SDK Support
-
-The W&B Training API is compatible with the OpenAI Python SDK. See [Use your trained models](/training/serverless-rl/use-trained-models) for examples.
-
-## Rate Limits
-
-- **Concurrent requests**: 2000 per user, 6000 per project
-- If you exceed rate limits, the API returns a `429` status code
-
-For higher rate limits, contact [support@wandb.com](mailto:support@wandb.com).
 
 ## Related Resources
 
 - [W&B Training overview](/training)
 - [Prerequisites](/training/prerequisites)
+- [Use your trained models](/training/serverless-rl/use-trained-models)
 - [Available models](/training/serverless-rl/available-models)
 - [Usage limits](/training/serverless-rl/usage-limits)
