@@ -54,40 +54,46 @@ If you still need alternatives:
 
 ## Usage
 
-### Generate All Documentation
+### Automated Generation via GitHub Actions (Recommended)
 
-Run all three generators in sequence:
+The primary way to generate reference documentation is through the GitHub Actions workflow:
+
+1. Go to the [Actions tab](https://github.com/wandb/mintlifytest/actions) in the repository
+2. Select "Generate Reference Documentation" workflow
+3. Click "Run workflow"
+4. Enter the Weave version:
+   - `latest` - Latest PyPI release (default)
+   - `0.51.34` or `v0.51.34` - Specific version
+   - Commit SHA - Specific commit
+   - Branch name - From a branch
+5. Click "Run workflow"
+
+The workflow will:
+- Generate all three types of documentation
+- Fix any broken internal links
+- Create a draft PR with the changes for review
+
+### Manual Local Generation
+
+For development or testing, you can run the generators locally:
 
 ```bash
+# Option 1: Use the test script (runs all generators in isolated environments)
+./scripts/reference-generation/test-locally.sh latest
+
+# Option 2: Run individual generators
 # Generate Service API docs
 python scripts/reference-generation/generate_service_api_spec.py
 
-# Generate Python SDK docs
-python scripts/reference-generation/generate_python_sdk_docs.py
+# Generate Python SDK docs (specify version as argument)
+python scripts/reference-generation/generate_python_sdk_docs.py latest
 
-# Generate TypeScript SDK docs
-python scripts/reference-generation/generate_typescript_sdk_docs.py
+# Generate TypeScript SDK docs (specify version as argument)
+python scripts/reference-generation/generate_typescript_sdk_docs.py latest
+
+# Fix broken links after generation
+python scripts/reference-generation/fix_broken_links.py
 ```
-
-### Generate Specific Version
-
-You can specify a Weave version using the `WEAVE_VERSION` environment variable:
-
-```bash
-# Latest PyPI release (default)
-export WEAVE_VERSION=latest
-
-# Specific version tag
-export WEAVE_VERSION=v0.50.0
-
-# Specific commit
-export WEAVE_VERSION=abc123def
-
-# Branch name
-export WEAVE_VERSION=main
-```
-
-Then run the Python or TypeScript generation scripts.
 
 ## Output Structure
 
@@ -148,7 +154,32 @@ Then navigate to the reference documentation sections to verify the output.
 - Converts to Mintlify MDX format
 - Organizes files according to Mintlify structure
 
+## Verifying Generated Documentation
+
+After generation (either via GitHub Actions or locally):
+
+1. **Check Generated Files**:
+   - `weave/api-reference/openapi.json` - Service API spec
+   - `weave/reference/python-sdk/` - Python SDK docs
+   - `weave/reference/typescript-sdk/` - TypeScript SDK docs
+
+2. **Validate Links**:
+   ```bash
+   mintlify broken-links
+   ```
+   All internal links should work correctly.
+
+3. **Review PR** (if generated via GitHub Actions):
+   - A draft PR titled "[Draft] Update reference documentation (Weave X.X.X)"
+   - Labels: `documentation`, `automated`, `weave`
+   - Description includes version info and changes made
+
 ## Troubleshooting
+
+### GitHub Actions Issues
+- **Permission errors**: The workflow needs write permissions to create PRs
+- **Package not found**: Check the Weave version exists on PyPI
+- **TypeScript download fails**: Check the npm registry for the @wandb/weave package
 
 ### Python SDK Issues
 - If module imports fail, check that Weave installed correctly
@@ -163,3 +194,4 @@ Then navigate to the reference documentation sections to verify the output.
 - Check that you're in the activated virtual environment
 - Ensure you have internet access for downloading packages and source code
 - For version-specific issues, try using `latest` or `main` as a fallback
+- If broken links persist after generation, run `fix_broken_links.py` manually
