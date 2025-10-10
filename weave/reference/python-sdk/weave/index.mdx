@@ -16,7 +16,7 @@ description: "Python SDK reference for weave"
 ---
 
 
-<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L44"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L45"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>function</kbd> `init`
 
@@ -41,7 +41,8 @@ Following init, calls of weave.op() decorated functions will be logged to the sp
 
 **Args:**
  
- - <b>`project_name`</b>:  The name of the Weights & Biases project to log to. 
+ - <b>`project_name`</b>:  The name of the Weights & Biases team and project to log to. If you don't  specify a team, your default entity is used. 
+ - <b>`To find or update your default entity, refer to [User Settings](https`</b>: //docs.wandb.ai/guides/models/app/settings-page/user-settings/#default-team) in the W&B Models documentation. 
  - <b>`settings`</b>:  Configuration for the Weave client generally. 
  - <b>`autopatch_settings`</b>:  (Deprecated) Configuration for autopatch integrations. Use explicit patching instead. 
  - <b>`global_postprocess_inputs`</b>:  A function that will be applied to all inputs of all ops. 
@@ -59,7 +60,7 @@ NOTE: Global postprocessing settings are applied to all ops after each op's own 
 ---
 
 
-<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L124"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L127"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>function</kbd> `publish`
 
@@ -87,7 +88,7 @@ Weave creates a new version of the object if the object's name already exists an
 ---
 
 
-<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L176"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L179"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>function</kbd> `ref`
 
@@ -112,7 +113,7 @@ Creates a Ref to an existing Weave object. This does not directly retrieve the o
 ---
 
 
-<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L205"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L208"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>function</kbd> `get`
 
@@ -230,7 +231,7 @@ Get the Call object for the currently executing Op, within that Op.
 ---
 
 
-<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L328"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L384"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>function</kbd> `finish`
 
@@ -269,7 +270,7 @@ A decorator to weave op-ify a function or method. Works for both sync and async.
 ---
 
 
-<a href="https://github.com/wandb/weave/blob/master/../../../../weave/trace/api/attributes#L231"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/../../../../weave/trace/api/attributes#L234"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>function</kbd> `attributes`
 
@@ -291,13 +292,13 @@ with weave.attributes({'env': 'production'}):
 ---
 
 
-<a href="https://github.com/wandb/weave/blob/master/../../../../weave/trace/api/thread#L281"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/../../../../weave/trace/api/thread#L337"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>function</kbd> `thread`
 
 ```python
 thread(
-    thread_id: 'str | None | object' = <object object at 0x7fbc013b4db0>
+    thread_id: 'str | None | object' = <object object at 0x7f0513a98e40>
 ) → Iterator[ThreadContext]
 ```
 
@@ -917,14 +918,15 @@ asyncio.run(evaluation.evaluate(function_to_evaluate))
 - `description`: `typing.Optional[str]`
 - `ref`: `typing.Optional[trace.refs.ObjectRef]`
 - `dataset`: `<class 'dataset.dataset.Dataset'>`
-- `scorers`: `typing.Optional[list[typing.Annotated[typing.Union[trace.op_protocol.Op, flow.scorer.Scorer], BeforeValidator(func=<function cast_to_scorer at 0x7fbc01162de0>, json_schema_input_type=PydanticUndefined)]]]`
+- `scorers`: `typing.Optional[list[typing.Annotated[typing.Union[trace.op_protocol.Op, flow.scorer.Scorer], BeforeValidator(func=<function cast_to_scorer at 0x7f05138e5800>, json_schema_input_type=PydanticUndefined)]]]`
 - `preprocess_model_input`: `typing.Optional[typing.Callable[[dict], dict]]`
 - `trials`: `<class 'int'>`
+- `metadata`: `typing.Optional[dict[str, typing.Any]]`
 - `evaluation_name`: `typing.Union[str, typing.Callable[[trace.call.Call], str], NoneType]`
 
 ---------
 
-<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L276"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L278"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `evaluate`
 
@@ -938,7 +940,7 @@ evaluate(model: Union[Op, Model]) → dict
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L115"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L117"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>classmethod</kbd> `from_obj`
 
@@ -952,7 +954,7 @@ from_obj(obj: WeaveObject) → Self
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L234"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L236"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `get_eval_results`
 
@@ -966,7 +968,7 @@ get_eval_results(model: Union[Op, Model]) → EvaluationResults
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L287"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L289"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `get_evaluate_calls`
 
@@ -1003,7 +1005,7 @@ for call in calls:
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L323"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L325"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `get_score_calls`
 
@@ -1035,7 +1037,7 @@ for trace_id, calls in score_calls.items():
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L362"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L364"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `get_scores`
 
@@ -1081,7 +1083,7 @@ Expected output:
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/pydantic/_internal/_model_construction.py#L156"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/pydantic/_internal/_model_construction.py#L158"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `model_post_init`
 
@@ -1095,7 +1097,7 @@ model_post_init(_Evaluation__context: Any) → None
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L173"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L175"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `predict_and_score`
 
@@ -1109,7 +1111,7 @@ predict_and_score(model: Union[Op, Model], example: dict) → dict
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L211"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L213"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `summarize`
 
@@ -1126,7 +1128,7 @@ summarize(eval_table: EvaluationResults) → dict
 ---
 
 
-<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L329"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L361"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ## <kbd>class</kbd> `EvaluationLogger`
 This class provides an imperative interface for logging evaluations. 
@@ -1153,6 +1155,7 @@ ev.log_summary(summary)
 - `model`: `flow.model.Model | dict | str`
 - `dataset`: `dataset.dataset.Dataset | list[dict] | str`
 - `eval_attributes`: `dict[str, typing.Any]`
+- `scorers`: `list[str] | None`
 
 ---
 
@@ -1174,7 +1177,7 @@ ev.log_summary(summary)
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L650"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L749"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `fail`
 
@@ -1186,7 +1189,7 @@ Convenience method to fail the evaluation with an exception.
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L634"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L733"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `finish`
 
@@ -1200,7 +1203,7 @@ Ensures all prediction calls and the main evaluation call are finalized. This is
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L538"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L579"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `log_prediction`
 
@@ -1214,7 +1217,7 @@ The reference can be used to log scores which are attached to the specific predi
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L585"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L627"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `log_summary`
 
@@ -1228,7 +1231,7 @@ This will calculate the summary, call the summarize op, and then finalize the ev
 
 ---
 
-<a href="https://github.com/wandb/weave/blob/master/pydantic/_internal/_model_construction.py#L412"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+<a href="https://github.com/wandb/weave/blob/master/pydantic/_internal/_model_construction.py#L452"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
 
 ### <kbd>method</kbd> `model_post_init`
 
@@ -1237,6 +1240,51 @@ model_post_init(_EvaluationLogger__context: 'Any') → None
 ```
 
 Initialize the pseudo evaluation with the dataset from the model. 
+
+---
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L676"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+### <kbd>method</kbd> `set_view`
+
+```python
+set_view(
+    name: 'str',
+    content: 'Content | str',
+    extension: 'str | None' = None,
+    mimetype: 'str | None' = None,
+    metadata: 'dict[str, Any] | None' = None,
+    encoding: 'str' = 'utf-8'
+) → None
+```
+
+Attach a view to the evaluation's main call summary under `weave.views`. 
+
+Saves the provided content as an object in the project and writes its reference URI under `summary.weave.views.<name>` for the evaluation's `evaluate` call. String inputs are wrapped as text content using `Content.from_text` with the provided extension or mimetype. 
+
+
+
+**Args:**
+ 
+ - <b>`name`</b>:  The view name to display, used as the key under `summary.weave.views`. 
+ - <b>`content`</b>:  A `weave.Content` instance or string to serialize. 
+ - <b>`extension`</b>:  Optional file extension for string content inputs. 
+ - <b>`mimetype`</b>:  Optional MIME type for string content inputs. 
+ - <b>`metadata`</b>:  Optional metadata attached to newly created `Content`. 
+ - <b>`encoding`</b>:  Text encoding for string content inputs. 
+
+
+
+**Returns:**
+ None 
+
+
+
+**Examples:**
+ ``` import weave```
+    >>> ev = weave.EvaluationLogger()
+    >>> ev.set_view("report", "# Report", extension="md")
+
 
 
 
