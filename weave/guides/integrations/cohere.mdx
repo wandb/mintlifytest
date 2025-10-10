@@ -33,6 +33,9 @@ response = co.chat(
 )
 print(response.text)
 ```
+
+If you don't specify a W&B team when you call `weave.init()`, your default entity is used. To find or update your default entity, refer to [User Settings](https://docs.wandb.ai/guides/models/app/settings-page/user-settings/#default-team) in the W&B Models documentation.
+
 A powerful feature of cohere models is using [connectors](https://docs.cohere.com/docs/overview-rag-connectors#using-connectors-to-create-grounded-generations) enabling you to make requests to other API on the endpoint side. The response will then contain the generated text with citation elements that link to the documents returned from the connector. 
 
 [![cohere_trace.png](/weave/guides/integrations/imgs/cohere_trace.png)](https://wandb.ai/capecape/cohere_dev/weave/calls)
