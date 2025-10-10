@@ -1,0 +1,2305 @@
+---
+- title: weave
+- description: weaveのPython SDKリファレンス
+---
+
+# API概要
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L45">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>関数</kbd> `init`
+
+```python
+init(
+    project_name: 'str',
+    settings: 'UserSettings | dict[str, Any] | None' = None,
+    autopatch_settings: 'AutopatchSettings | None' = None,
+    global_postprocess_inputs: 'PostprocessInputsFunc | None' = None,
+    global_postprocess_output: 'PostprocessOutputFunc | None' = None,
+    global_attributes: 'dict[str, Any] | None' = None
+) → WeaveClient
+```
+
+wandbプロジェクトへのログ記録のためにweaveトラッキングを初期化します。
+
+ログ記録はグローバルに初期化されるため、initの戻り値への参照を保持する必要はありません。
+
+init実行後、weave.op()でデコレートされた関数の呼び出しは指定されたプロジェクトにログ記録されます。
+
+**Args:**
+
+* <b>`project_name`</b>：Weights & Biasesのチームとプロジェクトの名前（ログ記録先）。チームを指定しない場合、デフォルトのエンティティが使用されます。
+* <b>`To find or update your default entity, refer to [User Settings](https`</b>：//docs.wandb.ai/guides/models/app/settings-page/user-settings/#default-team）W\&B Modelsドキュメント内。
+* <b>`settings`</b>：Weaveクライアント全般の設定。
+* <b>`autopatch_settings`</b>：（非推奨）autopatch統合のための設定。代わりに明示的なパッチングを使用してください。
+* <b>`global_postprocess_inputs`</b>：すべてのオペレーションのすべての入力に適用される関数。
+* <b>`global_postprocess_output`</b>：すべてのオペレーションのすべての出力に適用される関数。
+* <b>`global_attributes`</b>：すべてのトレースに適用される属性の辞書。
+
+NOTE: Global postprocessing settings are applied to all ops after each op's own postprocessing.  The order is always: 1. Op-specific postprocessing 2. Global postprocessing
+
+**Returns:**&#x57;eaveクライアント。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L127">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>関数</kbd> `publish`
+
+```python
+publish(obj: 'Any', name: 'str | None' = None) → ObjectRef
+```
+
+Pythonオブジェクトを保存してバージョン管理します。
+
+Weaveは、オブジェクトの名前がすでに存在し、そのコンテンツハッシュがそのオブジェクトの最新バージョンと一致しない場合、オブジェクトの新しいバージョンを作成します。
+
+**Args:**
+
+* <b>`obj`</b>：保存してバージョン管理するオブジェクト。
+* <b>`name`</b>：オブジェクトを保存する名前。
+
+**Returns:**&#x4FDD;存されたオブジェクトへのWeave Ref。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L179">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>関数</kbd> `ref`
+
+```python
+ref(location: 'str') → ObjectRef
+```
+
+既存のWeaveオブジェクトへのRefを作成します。これは直接オブジェクトを取得するのではなく、他のWeave API関数に渡すことができるようにします。
+
+**Args:**
+
+* <b>`location`</b>：Weave Ref URI、または`weave.init()`が呼び出された場合、`name:version`または`name`。バージョンが提供されない場合、`latest`が使用されます。
+
+**Returns:**&#x30AA;ブジェクトへのWeave Ref。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L208">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>関数</kbd> `get`
+
+```python
+get(uri: 'str | ObjectRef') → Any
+```
+
+URIからオブジェクトを取得するための便利な関数。
+
+Weaveによってログ記録された多くのオブジェクトは自動的にWeaveサーバーに登録されます。この関数を使用すると、URIでそれらのオブジェクトを取得できます。
+
+**Args:**
+
+* <b>`uri`</b>：完全修飾されたweave ref URI。
+
+**Returns:**&#x30AA;ブジェクト。
+
+**Example:**
+
+```python
+weave.init("weave_get_example")
+dataset = weave.Dataset(rows=[{"a": 1, "b": 2}])
+ref = weave.publish(dataset)
+
+dataset2 = weave.get(ref)  # same as dataset!
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/context/call_context.py#L76">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>関数</kbd> `require_current_call`
+
+```python
+require_current_call() → Call
+```
+
+そのOp内で、現在実行中のOpのCallオブジェクトを取得します。
+
+これにより、実行中にCallのIDやフィードバックなどの属性にアクセスできます。
+
+```python
+@weave.op
+def hello(name: str) -> None:
+     print(f"Hello {name}!")
+     current_call = weave.require_current_call()
+     print(current_call.id)
+```
+
+Opが戻った後にCallにアクセスすることも可能です。
+
+CallのIDがある場合（おそらくUIから）、`get_call`メソッドを`WeaveClient`から返された`weave.init`で使用してCallオブジェクトを取得できます。
+
+```python
+client = weave.init("<project>")
+mycall = client.get_call("<call_id>")
+```
+
+あるいは、Opを定義した後、その`call`メソッドを使用できます。例えば：
+
+```python
+@weave.op
+def add(a: int, b: int) -> int:
+     return a + b
+
+result, call = add.call(1, 2)
+print(call.id)
+```
+
+**Returns:**&#x73FE;在実行中のOpのCallオブジェクト
+
+**Raises:**
+
+* <b>`NoCurrentCallError`</b>：トラッキングが初期化されていないか、このメソッドがOp外で呼び出された場合。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/context/call_context.py#L125">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>関数</kbd> `get_current_call`
+
+```python
+get_current_call() → Call | None
+```
+
+そのOp内で、現在実行中のOpのCallオブジェクトを取得します。
+
+**Returns:**&#x73FE;在実行中のOpのCallオブジェクト、またはトラッキングが初期化されていないか、このメソッドがOp外で呼び出された場合はNone。
+
+**Note:**
+
+> 返されるCallの`attributes`辞書は、呼び出しが開始されると不変になります。:func:`weave.attributes`を使用して、Opを呼び出す前に呼び出しメタデータを設定します。`summary`フィールドはOp実行中に更新でき、呼び出しが終了すると計算された要約情報とマージされます。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/api.py#L384">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>関数</kbd> `finish`
+
+```python
+finish() → None
+```
+
+weaveへのログ記録を停止します。
+
+finish実行後、weave.op()でデコレートされた関数の呼び出しはログ記録されなくなります。ログ記録を再開するには、weave.init()を再度実行する必要があります。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L1185">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>関数</kbd> `op`
+
+```python
+op(
+    func: 'Callable[P, R] | None' = None,
+    name: 'str | None' = None,
+    call_display_name: 'str | CallDisplayNameFunc | None' = None,
+    postprocess_inputs: 'PostprocessInputsFunc | None' = None,
+    postprocess_output: 'PostprocessOutputFunc | None' = None,
+    tracing_sample_rate: 'float' = 1.0,
+    enable_code_capture: 'bool' = True,
+    accumulator: 'Callable[[Any | None, Any], Any] | None' = None
+) → Callable[[Callable[P, R]], Op[P, R]] | Op[P, R]
+```
+
+関数またはメソッドをweave op化するデコレータ。同期と非同期の両方で動作します。イテレータ関数を自動的に検出し、適切な動作を適用します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/../../../../weave/trace/api/attributes#L234">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>関数</kbd> `attributes`
+
+```python
+attributes(attributes: 'dict[str, Any]') → Iterator
+```
+
+呼び出しに属性を設定するためのコンテキストマネージャ。
+
+**Example:**
+
+```python
+with weave.attributes({'env': 'production'}):
+     print(my_function.call("World"))
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/../../../../weave/trace/api/thread#L337">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>関数</kbd> `thread`
+
+```python
+thread(
+    thread_id: 'str | None | object' = <object object at 0x7faf2b950e30>
+) → Iterator[ThreadContext]
+```
+
+コンテキスト内の呼び出しにthread\_idを設定するためのコンテキストマネージャ。
+
+**Examples:**
+
+```python
+# Auto-generate thread_id
+with weave.thread() as t:
+     print(f"Thread ID: {t.thread_id}")
+     result = my_function("input")  # This call will have the auto-generated thread_id
+     print(f"Current turn: {t.turn_id}")
+
+# Explicit thread_id
+with weave.thread("custom_thread") as t:
+     result = my_function("input")  # This call will have thread_id="custom_thread"
+
+# Disable threading
+with weave.thread(None) as t:
+     result = my_function("input")  # This call will have thread_id=None
+```
+
+**Args:**
+
+* <b>`thread_id`</b>：このコンテキスト内の呼び出しに関連付けるスレッド識別子。提供されない場合、UUID v7が自動生成されます。Noneの場合、スレッドトラッキングは無効になります。
+
+**Yields:**
+
+* <b>`ThreadContext`</b>：thread\_idと現在のturn\_idへのアクセスを提供するオブジェクト。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/object/obj.py#L74">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>クラス</kbd> `Object`
+
+トラッキングとバージョン管理が可能なWeaveオブジェクトの基本クラス。
+
+このクラスはPydanticのBaseModelを拡張し、オブジェクトトラッキング、参照、シリアル化のためのWeave固有の機能を提供します。オブジェクトには名前、説明、Weaveシステムに保存および取得できるようにする参照を持つことができます。
+
+**Attributes:**
+
+* <b>`name`</b>(Optional\[str])：オブジェクトの人間が読める名前。
+* <b>`description`</b>(Optional\[str])：オブジェクトが表すものの説明。
+* <b>`ref`</b>(Optional\[ObjectRef])：Weaveシステム内のオブジェクトへの参照。
+
+**Examples:**
+
+```python
+# Create a simple object
+obj = Object(name="my_object", description="A test object")
+
+# Create an object from a URI
+obj = Object.from_uri("weave:///entity/project/object:digest")
+```
+
+**Pydanticフィールド：**
+
+* `name`：`typing.Optional[str]`
+* `description`：`typing.Optional[str]`
+* `ref`：`typing.Optional[trace.refs.ObjectRef]`
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/object/obj.py#L113">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>クラスメソッド</kbd> `from_uri`
+
+```python
+from_uri(uri: str, objectify: bool = True) → Self
+```
+
+Weave URIからオブジェクトインスタンスを作成します。
+
+**Args:**
+
+* <b>`uri`</b>(str)：オブジェクトを指すWeave URI。
+* <b>`objectify`</b>(bool)：結果をオブジェクト化するかどうか。デフォルトはTrue。
+
+**Returns:**
+
+* <b>`Self`</b>：URIから作成されたクラスのインスタンス。
+
+**Raises:**
+
+* <b>`NotImplementedError`</b>：クラスがデシリアライゼーションに必要なメソッドを実装していない場合。
+
+**Examples:**
+
+```python
+obj = MyObject.from_uri("weave:///entity/project/object:digest")
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/object/obj.py#L139">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>クラスメソッド</kbd> `handle_relocatable_object`
+
+```python
+handle_relocatable_object(
+    v: Any,
+    handler: ValidatorFunctionWrapHandler,
+    info: ValidationInfo
+) → Any
+```
+
+ObjectRefやWeaveObjectを含む再配置可能なオブジェクトの検証を処理します。
+
+このバリデータは、標準のObjectインスタンスに適切に変換する必要があるObjectRefまたはWeaveObjectである入力の特殊なケースを処理します。検証プロセス中に参照が保持され、無視されるタイプが正しく処理されることを保証します。
+
+**Args:**
+
+* <b>`v`</b>(Any)：検証する値。
+* <b>`handler`</b>(ValidatorFunctionWrapHandler)：標準のpydantic検証ハンドラ。
+* <b>`info`</b>(ValidationInfo)：検証コンテキスト情報。
+
+**Returns:**
+
+* <b>`Any`</b>：検証されたオブジェクトインスタンス。
+
+**Examples:**&#x3053;のメソッドはオブジェクト作成と検証中に自動的に呼び出されます。次のようなケースを処理します：\`\`\`python
+
+# ObjectRefが渡された場合
+
+obj = MyObject(some\_object\_ref)
+
+# WeaveObjectが渡された場合
+
+obj = MyObject(some\_weave\_object)
+
+````
+
+
+
+---
+
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L26"><img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" /></a>
+
+## <kbd>class</kbd> `Dataset`
+Dataset object with easy saving and automatic versioning. 
+
+
+
+**Examples:**
+```python
+# Create a dataset
+dataset = Dataset(name='grammar', rows=[
+ {'id': '0', 'sentence': "He no likes ice cream.", 'correction': "He doesn't like ice cream."},
+ {'id': '1', 'sentence': "She goed to the store.", 'correction': "She went to the store."},
+ {'id': '2', 'sentence': "They plays video games all day.", 'correction': "They play video games all day."}
+])
+
+# Publish the dataset
+weave.publish(dataset)
+
+# Retrieve the dataset
+dataset_ref = weave.ref('grammar').get()
+
+# Access a specific example
+example_label = dataset_ref.rows[2]['sentence']
+````
+
+**Pydanticフィールド：**
+
+* `name`：`typing.Optional[str]`
+* `description`：`typing.Optional[str]`
+* `ref`：`typing.Optional[trace.refs.ObjectRef]`
+* `rows`：`typing.Union[trace.table.Table, trace.vals.WeaveTable]`
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L129">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>メソッド</kbd> `add_rows`
+
+```python
+add_rows(rows: Iterable[dict]) → Dataset
+```
+
+既存のデータセットに行を追加して新しいデータセットバージョンを作成します。
+
+これは、大規模なデータセット全体をメモリにロードすることなく、例を追加するのに役立ちます。
+
+**Args:**
+
+* <b>`rows`</b>：データセットに追加する行。
+
+**Returns:**&#x66F4;新されたデータセット。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L173">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>クラスメソッド</kbd> `convert_to_table`
+
+```python
+convert_to_table(rows: Any) → Union[Table, WeaveTable]
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L61">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>クラスメソッド</kbd> `from_calls`
+
+```python
+from_calls(calls: Iterable[Call]) → Self
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L71">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>クラスメソッド</kbd> `from_hf`
+
+```python
+from_hf(
+    hf_dataset: Union[ForwardRef('HFDataset'), ForwardRef('HFDatasetDict')]
+) → Self
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L52">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>クラスメソッド</kbd> `from_obj`
+
+```python
+from_obj(obj: WeaveObject) → Self
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L66">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>クラスメソッド</kbd> `from_pandas`
+
+```python
+from_pandas(df: 'DataFrame') → Self
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L220">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>メソッド</kbd> `select`
+
+```python
+select(indices: Iterable[int]) → Self
+```
+
+提供されたインデックスに基づいてデータセットから行を選択します。
+
+**Args:**
+
+* <b>`indices`</b>:  選択する行を指定する整数インデックスのイテラブル。
+
+**Returns:**
+選択された行のみを含む新しいDatasetオブジェクト。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L115">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `to_hf`
+
+```python
+to_hf() → HFDataset
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/dataset/dataset.py#L107">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `to_pandas`
+
+```python
+to_pandas() → DataFrame
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/model.py#L24">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `Model`
+
+入力に対して動作するコードとデータの組み合わせをキャプチャすることを目的としています。例えば、予測を行ったりテキストを生成したりするためにプロンプトを使用してLLMを呼び出すことがあります。
+
+モデルを定義する属性やコードを変更すると、これらの変更がログに記録され、バージョンが更新されます。これにより、異なるバージョンのモデル間で予測を比較できます。これを使用してプロンプトを反復したり、最新のLLMを試したり、異なる設定間で予測を比較したりすることができます。
+
+**Examples:**
+
+```python
+class YourModel(Model):
+     attribute1: str
+     attribute2: int
+
+     @weave.op()
+     def predict(self, input_data: str) -> dict:
+         # Model logic goes here
+         prediction = self.attribute1 + ' ' + input_data
+         return {'pred': prediction}
+```
+
+**Pydantic フィールド:**
+
+* `name`: `typing.Optional[str]`
+* `description`: `typing.Optional[str]`
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/model.py#L50">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `get_infer_method`
+
+```python
+get_infer_method() → Callable
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L77">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `Prompt`
+
+**Pydantic フィールド:**
+
+* `name`: `typing.Optional[str]`
+* `description`: `typing.Optional[str]`
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L78">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `format`
+
+```python
+format(**kwargs: Any) → Any
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L82">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `StringPrompt`
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L86">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
+__init__(content: str)
+```
+
+**Pydantic フィールド:**
+
+* `name`: `typing.Optional[str]`
+* `description`: `typing.Optional[str]`
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+* `content`: `<class 'str'>`
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L90">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `format`
+
+```python
+format(**kwargs: Any) → str
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L93">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_obj`
+
+```python
+from_obj(obj: WeaveObject) → Self
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L102">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `MessagesPrompt`
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L106">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
+__init__(messages: list[dict])
+```
+
+**Pydantic フィールド:**
+
+* `name`: `typing.Optional[str]`
+* `description`: `typing.Optional[str]`
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+* `messages`: `list[dict]`
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L121">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `format`
+
+```python
+format(**kwargs: Any) → list
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L110">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `format_message`
+
+```python
+format_message(message: dict, **kwargs: Any) → dict
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/prompt/prompt.py#L124">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_obj`
+
+```python
+from_obj(obj: WeaveObject) → Self
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L59">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `Evaluation`
+
+スコアラーのセットとデータセットを含む評価をセットアップします。
+
+evaluation.evaluate(model)を呼び出すと、データセットの列の名前をmodel.predictの引数名に一致させてデータセットから行がモデルに渡されます。
+
+その後、すべてのスコアラーを呼び出し、結果をweaveに保存します。
+
+データセットからの行を前処理したい場合は、preprocess\_model\_inputに関数を渡すことができます。
+
+**Examples:**
+
+```python
+# Collect your examples
+examples = [
+     {"question": "What is the capital of France?", "expected": "Paris"},
+     {"question": "Who wrote 'To Kill a Mockingbird'?", "expected": "Harper Lee"},
+     {"question": "What is the square root of 64?", "expected": "8"},
+]
+
+# Define any custom scoring function
+@weave.op()
+def match_score1(expected: str, model_output: dict) -> dict:
+     # Here is where you'd define the logic to score the model output
+     return {'match': expected == model_output['generated_text']}
+
+@weave.op()
+def function_to_evaluate(question: str):
+     # here's where you would add your LLM call and return the output
+     return  {'generated_text': 'Paris'}
+
+# Score your examples using scoring functions
+evaluation = Evaluation(
+     dataset=examples, scorers=[match_score1]
+)
+
+# Start tracking the evaluation
+weave.init('intro-example')
+# Run the evaluation
+asyncio.run(evaluation.evaluate(function_to_evaluate))
+```
+
+**Pydantic フィールド:**
+
+* `name`: `typing.Optional[str]`
+* `description`: `typing.Optional[str]`
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+* `dataset`: `<class 'dataset.dataset.Dataset'>`
+* `scorers`: `typing.Optional[list[typing.Annotated[typing.Union[trace.op_protocol.Op, flow.scorer.Scorer], BeforeValidator(func=<function cast_to_scorer at 0x7faf2b791760>, json_schema_input_type=PydanticUndefined)]]]`
+* `preprocess_model_input`: `typing.Optional[typing.Callable[[dict], dict]]`
+* `trials`: `<class 'int'>`
+* `metadata`: `typing.Optional[dict[str, typing.Any]]`
+* `evaluation_name`: `typing.Union[str, typing.Callable[[trace.call.Call], str], NoneType]`
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L278">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `evaluate`
+
+```python
+evaluate(model: Union[Op, Model]) → dict
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L117">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_obj`
+
+```python
+from_obj(obj: WeaveObject) → Self
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L236">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `get_eval_results`
+
+```python
+get_eval_results(model: Union[Op, Model]) → EvaluationResults
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L289">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `get_evaluate_calls`
+
+```python
+get_evaluate_calls() → PaginatedIterator[CallSchema, WeaveObject]
+```
+
+このEvaluationオブジェクトを使用したすべての評価呼び出しを取得します。
+
+これは単一の呼び出しではなくCallsIterを返すことに注意してください。これは、1つの評価に対して複数の評価呼び出しが存在する可能性があるためです（例えば、同じ評価を複数回実行する場合）。
+
+**Returns:**
+
+* <b>`CallsIter`</b>:  評価実行を表すCallオブジェクトのイテレータ。
+
+**Raises:**
+
+* <b>`ValueError`</b>:  評価にrefがない場合（まだ保存/実行されていない場合）。
+
+**Examples:**
+
+```python
+evaluation = Evaluation(dataset=examples, scorers=[scorer])
+await evaluation.evaluate(model)  # Run evaluation first
+calls = evaluation.get_evaluate_calls()
+for call in calls:
+     print(f"Evaluation run: {call.id} at {call.started_at}")
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L325">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `get_score_calls`
+
+```python
+get_score_calls() → dict[str, list[Call]]
+```
+
+各評価実行のスコアラー呼び出しをトレースIDでグループ化して取得します。
+
+**Returns:**
+
+* <b>`dict[str, list[Call]]`</b>:  トレースIDをスコアラーのCallオブジェクトのリストにマッピングする辞書。各トレースIDは1つの評価実行を表し、リストにはその実行中に実行されたすべてのスコアラー呼び出しが含まれます。
+
+**Examples:**
+
+```python
+evaluation = Evaluation(dataset=examples, scorers=[accuracy_scorer, f1_scorer])
+await evaluation.evaluate(model)
+score_calls = evaluation.get_score_calls()
+for trace_id, calls in score_calls.items():
+     print(f"Trace {trace_id}: {len(calls)} scorer calls")
+     for call in calls:
+         scorer_name = call.summary.get("weave", {}).get("trace_name")
+         print(f"  Scorer: {scorer_name}, Output: {call.output}")
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval.py#L364">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `get_scores`
+
+```python
+get_scores() → dict[str, dict[str, list[Any]]]
+```
+
+評価実行からスコアラー出力を抽出して整理します。
+
+**Returns:**
+
+* <b>`dict[str, dict[str, list[Any]]]`</b>:  以下のようなネストされた辞書構造:
+  * 第1レベルのキーはトレースID（評価実行）
+  * 第2レベルのキーはスコアラー名
+  * 値はその実行とスコアラーのスコアラー出力のリスト
+
+**Examples:**
+
+```python
+evaluation = Evaluation(dataset=examples, scorers=[accuracy_scorer, f1_scorer])
+await evaluation.evaluate(model)
+scores = evaluation.get_scores()
+# Access scores by trace and scorer
+for trace_id, trace_scores in scores.items():
+         print(f"Evaluation run {trace_id}:")
+         for scorer_name, outputs in trace_scores.items():
+             print(f"  {scorer_name}: {outputs}")
+```
+
+期待される出力:
+
+```
+{
+     "trace_123": {
+     "accuracy_scorer": [{"accuracy": 0.85}],
+     "f1_scorer": [{"f1": 0.78}]
+     }
+}
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/pydantic/_internal/_model_construction.py#L158">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `model_post_init`
+
+```python
+model_post_init(_Evaluation__context: Any) → None
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L175">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `predict_and_score`
+
+```python
+predict_and_score(model: Union[Op, Model], example: dict) → dict
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L213">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `summarize`
+
+```python
+summarize(eval_table: EvaluationResults) → dict
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L361">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `EvaluationLogger`
+
+このクラスは評価をログに記録するための命令型インターフェースを提供します。
+
+評価は、最初の予測が`log_prediction`メソッドを使用してログに記録されると自動的に開始され、`log_summary`メソッドが呼び出されると終了します。
+
+予測をログに記録するたびに、`ScoreLogger`オブジェクトが返されます。このオブジェクトを使用して、その特定の予測のスコアとメタデータをログに記録できます。詳細については、`ScoreLogger`クラスを参照してください。
+
+**Example:**
+
+```python
+ev = EvaluationLogger()
+pred = ev.log_prediction(inputs, output)
+pred.log_score(scorer_name, score)
+ev.log_summary(summary)
+```
+
+**Pydantic フィールド:**
+
+* `name`: `str | None`
+* `model`: `flow.model.Model | dict | str`
+* `dataset`: `dataset.dataset.Dataset | list[dict] | str`
+* `eval_attributes`: `dict[str, typing.Any]`
+* `scorers`: `list[str] | None`
+
+***
+
+#### <kbd>property</kbd>属性
+
+***
+
+#### <kbd>property</kbd>ui\_url
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L749">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `fail`
+
+```python
+fail(exception: 'BaseException') → None
+```
+
+例外で評価を失敗させるための便利なメソッド。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L733">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `finish`
+
+```python
+finish(exception: 'BaseException | None' = None) → None
+```
+
+サマリーをログに記録せずに評価リソースを明示的にクリーンアップします。
+
+すべての予測呼び出しとメイン評価呼び出しが確実に終了します。これはロガーがコンテキストマネージャーとして使用される場合に自動的に呼び出されます。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L579">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `log_prediction`
+
+```python
+log_prediction(inputs: 'dict', output: 'Any') → ScoreLogger
+```
+
+予測を評価にログに記録し、参照を返します。
+
+この参照を使用して、特定の予測インスタンスに添付されるスコアをログに記録できます。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L627">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `log_summary`
+
+```python
+log_summary(summary: 'dict | None' = None, auto_summarize: 'bool' = True) → None
+```
+
+サマリー辞書を評価にログに記録します。
+
+これはサマリーを計算し、summarize操作を呼び出し、その後評価を終了します。これにより、それ以上の予測やスコアをログに記録することはできなくなります。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/pydantic/_internal/_model_construction.py#L452">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `model_post_init`
+
+```python
+model_post_init(_EvaluationLogger__context: 'Any') → None
+```
+
+モデルからのデータセットで疑似評価を初期化します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/evaluation/eval_imperative.py#L676">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `set_view`
+
+```python
+set_view(
+    name: 'str',
+    content: 'Content | str',
+    extension: 'str | None' = None,
+    mimetype: 'str | None' = None,
+    metadata: 'dict[str, Any] | None' = None,
+    encoding: 'str' = 'utf-8'
+) → None
+```
+
+評価のメイン呼び出しサマリーの`weave.views`にビューを添付します。
+
+提供されたコンテンツをプロジェクト内のオブジェクトとして保存し、そのリファレンスURIを評価の`summary.weave.views.<name>`呼び出しの`evaluate`に書き込みます。文字列入力は、提供された拡張子またはMIMEタイプを使用して`Content.from_text`を使用してテキストコンテンツとしてラップされます。
+
+**Args:**
+
+* <b>`name`</b>:  表示するビュー名で、`summary.weave.views`のキーとして使用されます。
+* <b>`content`</b>:  `weave.Content`インスタンスまたはシリアル化する文字列。
+* <b>`extension`</b>:  文字列コンテンツ入力のオプションのファイル拡張子。
+* <b>`mimetype`</b>:  文字列コンテンツ入力のオプションのMIMEタイプ。
+* <b>`metadata`</b>:  新しく作成された`Content`に添付されるオプションのメタデータ。
+* <b>`encoding`</b>:  文字列コンテンツ入力のテキストエンコーディング。
+
+**Returns:**
+None
+
+**Examples:**
+` import weave`
+
+> > > ev = weave.EvaluationLogger()
+> > > ev.set\_view("report", "# Report", extension="md")
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/scorer.py#L30">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `Scorer`
+
+**Pydantic フィールド:**
+
+* `name`: `typing.Optional[str]`
+* `description`: `typing.Optional[str]`
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+* `column_map`: `typing.Optional[dict[str, str]]`
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/scorer.py#L48">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_obj`
+
+```python
+from_obj(obj: WeaveObject) → Self
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/scorer.py#L36">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `model_post_init`
+
+```python
+model_post_init(_Scorer__context: Any) → None
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L40">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `score`
+
+```python
+score(output: Any, **kwargs: Any) → Any
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace/op.py#L44">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `summarize`
+
+```python
+summarize(score_rows: list) → Optional[dict]
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L12">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `AnnotationSpec`
+
+**Pydantic フィールド:**
+
+* `name`: `typing.Optional[str]`
+* `description`: `typing.Optional[str]`
+* `field_schema`: `dict[str, typing.Any]`
+* `unique_among_creators`: `<class 'bool'>`
+* `op_scope`: `typing.Optional[list[str]]`
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L47">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `preprocess_field_schema`
+
+```python
+preprocess_field_schema(data: dict[str, Any]) → dict[str, Any]
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L92">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `validate_field_schema`
+
+```python
+validate_field_schema(schema: dict[str, Any]) → dict[str, Any]
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/trace_server/interface/builtin_object_classes/annotation_spec.py#L103">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `value_is_valid`
+
+```python
+value_is_valid(payload: Any) → bool
+```
+
+このアノテーション仕様のスキーマに対してペイロードを検証します。
+
+**Args:**
+
+* <b>`payload`</b>: スキーマに対して検証するデータ
+
+**Returns:**
+
+* <b>`bool`</b>: 検証が成功した場合はTrue、それ以外の場合はFalse
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L29">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `File`
+
+パス、MIMEタイプ、サイズ情報を持つファイルを表すクラス。
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L33">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
+__init__(path: 'str | Path', mimetype: 'str | None' = None)
+```
+
+Fileオブジェクトを初期化します。
+
+**Args:**
+
+* <b>`path`</b>: ファイルへのパス（文字列またはpathlib.Path）
+* <b>`mimetype`</b>: ファイルのオプションのMIMEタイプ - 提供されない場合は拡張子から推測されます
+
+***
+
+#### <kbd>property</kbd> filename
+
+ファイルのファイル名を取得します。
+
+**Returns:**
+
+* <b>`str`</b>: ディレクトリパスを除いたファイルの名前。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L59">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `open`
+
+```python
+open() → bool
+```
+
+オペレーティングシステムのデフォルトアプリケーションを使用してファイルを開きます。
+
+このメソッドは、ファイルの種類に関連付けられたデフォルトアプリケーションでファイルを開くためにプラットフォーム固有のメカニズムを使用します。
+
+**Returns:**
+
+* <b>`bool`</b>: ファイルが正常に開かれた場合はTrue、それ以外の場合はFalse。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/File/file.py#L80">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `save`
+
+```python
+save(dest: 'str | Path') → None
+```
+
+ファイルを指定された宛先パスにコピーします。
+
+**Args:**
+
+* <b>`dest`</b>: ファイルのコピー先となる宛先パス（文字列またはpathlib.Path）。宛先パスはファイルまたはディレクトリにすることができます。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L43">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `Content`
+
+様々なソースからのコンテンツを表現し、関連するメタデータを持つ統一されたバイト指向の表現に解決するクラス。
+
+このクラスは以下のクラスメソッドのいずれかを使用してインスタンス化する必要があります：
+
+* from\_path()
+* from\_bytes()
+* from\_text()
+* from\_url()
+* from\_base64()
+* from\_data\_url()
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L90">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
+__init__(*args: 'Any', **kwargs: 'Any') → None
+```
+
+直接初期化は無効になっています。インスタンスを作成するには `Content.from_path()` のようなクラスメソッドを使用してください。
+
+**Pydantic フィールド：**
+
+* `id`: `<class 'str'>`
+* `data`: `<class 'bytes'>`
+* `size`: `<class 'int'>`
+* `mimetype`: `<class 'str'>`
+* `digest`: `<class 'str'>`
+* `filename`: `<class 'str'>`
+* `content_type`: `typing.Literal['bytes', 'text', 'base64', 'file', 'url', 'data_url', 'data_url:base64', 'data_url:encoding', 'data_url:encoding:base64']`
+* `input_type`: `<class 'str'>`
+* `encoding`: `<class 'str'>`
+* `metadata`: `dict[str, typing.Any] | None`
+* `path`: `str | None`
+* `extension`: `str | None`
+
+***
+
+#### <kbd>property</kbd> art
+
+***
+
+#### <kbd>property</kbd> ref
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L542">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `as_string`
+
+```python
+as_string() → str
+```
+
+データを文字列として表示します。バイトは `encoding` 属性を使用してデコードされます。base64の場合、データはbase64バイトに再エンコードされてからASCII文字列にデコードされます
+
+**Returns:**
+str.
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L252">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_base64`
+
+```python
+from_base64(
+    b64_data: 'str | bytes',
+    extension: 'str | None' = None,
+    mimetype: 'str | None' = None,
+    metadata: 'dict[str, Any] | None' = None
+) → Self
+```
+
+base64エンコードされた文字列またはバイトからContentを初期化します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L160">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_bytes`
+
+```python
+from_bytes(
+    data: 'bytes',
+    extension: 'str | None' = None,
+    mimetype: 'str | None' = None,
+    metadata: 'dict[str, Any] | None' = None,
+    encoding: 'str' = 'utf-8'
+) → Self
+```
+
+生のバイトからContentを初期化します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L354">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_data_url`
+
+```python
+from_data_url(url: 'str', metadata: 'dict[str, Any] | None' = None) → Self
+```
+
+データURLからContentを初期化します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L304">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_path`
+
+```python
+from_path(
+    path: 'str | Path',
+    encoding: 'str' = 'utf-8',
+    mimetype: 'str | None' = None,
+    metadata: 'dict[str, Any] | None' = None
+) → Self
+```
+
+ローカルファイルパスからContentを初期化します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L202">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_text`
+
+```python
+from_text(
+    text: 'str',
+    extension: 'str | None' = None,
+    mimetype: 'str | None' = None,
+    metadata: 'dict[str, Any] | None' = None,
+    encoding: 'str' = 'utf-8'
+) → Self
+```
+
+テキスト文字列からContentを初期化します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L397">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_url`
+
+```python
+from_url(
+    url: 'str',
+    headers: 'dict[str, Any] | None' = None,
+    timeout: 'int | None' = 30,
+    metadata: 'dict[str, Any] | None' = None
+) → Self
+```
+
+HTTP(S) URLからバイトをフェッチしてContentを初期化します。
+
+コンテンツをダウンロードし、ヘッダー、URLパス、データからMIMEタイプ/拡張子を推測し、結果のバイトからContentオブジェクトを構築します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L100">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `model_validate`
+
+```python
+model_validate(
+    obj: 'Any',
+    strict: 'bool | None' = None,
+    from_attributes: 'bool | None' = None,
+    context: 'dict[str, Any] | None' = None
+) → Self
+```
+
+辞書からのContent再構築を処理するためにmodel\_validateをオーバーライドします。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L143">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `model_validate_json`
+
+```python
+model_validate_json(
+    json_data: 'str | bytes | bytearray',
+    strict: 'bool | None' = None,
+    context: 'dict[str, Any] | None' = None
+) → Self
+```
+
+JSONからのContent再構築を処理するためにmodel\_validate\_jsonをオーバーライドします。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L552">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `open`
+
+```python
+open() → bool
+```
+
+オペレーティングシステムのデフォルトアプリケーションを使用してファイルを開きます。
+
+このメソッドは、ファイルの種類に関連付けられたデフォルトアプリケーションでファイルを開くためにプラットフォーム固有のメカニズムを使用します。
+
+**Returns:**
+
+* <b>`bool`</b>: ファイルが正常に開かれた場合はTrue、それ以外の場合はFalse。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L582">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `save`
+
+```python
+save(dest: 'str | Path') → None
+```
+
+ファイルを指定された宛先パスにコピーします。最後に保存されたコピーを反映するためにコンテンツのファイル名とパスを更新します。
+
+**Args:**
+
+* <b>`dest`</b>: ファイルのコピー先となる宛先パス（文字列またはpathlib.Path）。宛先パスはファイルまたはディレクトリにすることができます。destにファイル拡張子（例：.txt）がない場合、宛先はディレクトリと見なされます。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L534">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `serialize_data`
+
+```python
+serialize_data(data: 'bytes') → str
+```
+
+JSONモードでモデルをダンプするとき
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_wrappers/Content/content.py#L509">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `to_data_url`
+
+```python
+to_data_url(use_base64: 'bool' = True) → str
+```
+
+コンテンツからデータURLを構築します。
+
+**Args:**
+
+* <b>`use_base64`</b>: Trueの場合、データはbase64エンコードされます。それ以外の場合は、パーセントエンコードされます。デフォルトはTrueです。
+
+**Returns:**
+データURL文字列。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/rich/markdown.py#L498">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `Markdown`
+
+Markdownレンダリング可能オブジェクト。
+
+**Args:**
+
+* <b>`markup`</b> (str): マークダウンを含む文字列。
+* <b>`code_theme`</b> (str, optional): コードブロック用のPygmentsテーマ。デフォルトは「monokai」。コードテーマについては [https://pygments.org/styles/](https://pygments.org/styles/) を参照してください。
+* <b>`justify`</b> (JustifyMethod, optional): 段落の揃え値。デフォルトはNone。
+* <b>`style`</b> (Union\[str, Style], optional): マークダウンに適用するオプションのスタイル。
+* <b>`hyperlinks`</b> (bool, optional): ハイパーリンクを有効にします。デフォルトは `True`。
+* <b>`inline_code_lexer`</b>: (str, optional): インラインコードハイライトが有効な場合に使用するレクサー。デフォルトはNone。
+* <b>`inline_code_theme`</b>: (Optional\[str], optional): インラインコードハイライト用のPygmentsテーマ、またはハイライトなしの場合はNone。デフォルトはNone。
+
+<a href="https://github.com/wandb/weave/blob/master/rich/markdown.py#L534">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
+__init__(
+    markup: 'str',
+    code_theme: 'str' = 'monokai',
+    justify: 'JustifyMethod | None' = None,
+    style: 'str | Style' = 'none',
+    hyperlinks: 'bool' = True,
+    inline_code_lexer: 'str | None' = None,
+    inline_code_theme: 'str | None' = None
+) → None
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L14">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `Monitor`
+
+着信コールを自動的にスコアリングするモニターを設定します。
+
+**Examples:**
+
+```python
+import weave
+from weave.scorers import ValidJSONScorer
+
+json_scorer = ValidJSONScorer()
+
+my_monitor = weave.Monitor(
+     name="my-monitor",
+     description="This is a test monitor",
+     sampling_rate=0.5,
+     op_names=["my_op"],
+     query={
+         "$expr": {
+             "$gt": [
+                 {
+                         "$getField": "started_at"
+                     },
+                     {
+                         "$literal": 1742540400
+                     }
+                 ]
+             }
+         }
+     },
+     scorers=[json_scorer],
+)
+
+my_monitor.activate()
+```
+
+**Pydantic フィールド：**
+
+* `name`: `typing.Optional[str]`
+* `description`: `typing.Optional[str]`
+* `ref`: `typing.Optional[trace.refs.ObjectRef]`
+* `sampling_rate`: `<class 'float'>`
+* `scorers`: `list[flow.scorer.Scorer]`
+* `op_names`: `list[str]`
+* `query`: `typing.Optional[trace_server.interface.query.Query]`
+* `active`: `<class 'bool'>`
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L56">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `activate`
+
+```python
+activate() → ObjectRef
+```
+
+モニターをアクティブにします。
+
+**Returns:**
+モニターへの参照。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L66">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `deactivate`
+
+```python
+deactivate() → ObjectRef
+```
+
+モニターを非アクティブにします。
+
+**Returns:**
+モニターへの参照。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/monitor.py#L76">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_obj`
+
+```python
+from_obj(obj: WeaveObject) → Self
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L491">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `SavedView`
+
+SavedViewオブジェクトを操作するためのフルエントスタイルのクラス。
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L497">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
+__init__(view_type: 'str' = 'traces', label: 'str' = 'SavedView') → None
+```
+
+***
+
+#### <kbd>property</kbd> entity
+
+***
+
+#### <kbd>property</kbd> label
+
+***
+
+#### <kbd>property</kbd> project
+
+***
+
+#### <kbd>property</kbd> view\_type
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L621">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `add_column`
+
+```python
+add_column(path: 'str | ObjectPath', label: 'str | None' = None) → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L630">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `add_columns`
+
+```python
+add_columns(*columns: 'str') → SavedView
+```
+
+グリッドに複数の列を追加するための便利なメソッド。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L522">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `add_filter`
+
+```python
+add_filter(
+    field: 'str',
+    operator: 'str',
+    value: 'Any | None' = None
+) → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L596">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `add_sort`
+
+```python
+add_sort(field: 'str', direction: 'SortDirection') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L661">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `column_index`
+
+```python
+column_index(path: 'int | str | ObjectPath') → int
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L576">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `filter_op`
+
+```python
+filter_op(op_name: 'str | None') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L846">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `get_calls`
+
+```python
+get_calls(
+    limit: 'int | None' = None,
+    offset: 'int | None' = None,
+    include_costs: 'bool' = False,
+    include_feedback: 'bool' = False,
+    all_columns: 'bool' = False
+) → CallsIter
+```
+
+この保存されたビューのフィルターと設定に一致する呼び出しを取得します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L904">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `get_known_columns`
+
+```python
+get_known_columns(num_calls_to_query: 'int | None' = None) → list[str]
+```
+
+存在することが分かっている列のセットを取得します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L914">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `get_table_columns`
+
+```python
+get_table_columns() → list[TableColumn]
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L615">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `hide_column`
+
+```python
+hide_column(col_name: 'str') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L636">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `insert_column`
+
+```python
+insert_column(
+    idx: 'int',
+    path: 'str | ObjectPath',
+    label: 'str | None' = None
+) → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L974">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `load`
+
+```python
+load(ref: 'str') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L739">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `page_size`
+
+```python
+page_size(page_size: 'int') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L709">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `pin_column_left`
+
+```python
+pin_column_left(col_name: 'str') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L719">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `pin_column_right`
+
+```python
+pin_column_right(col_name: 'str') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L681">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `remove_column`
+
+```python
+remove_column(path: 'int | str | ObjectPath') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L700">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `remove_columns`
+
+```python
+remove_columns(*columns: 'str') → SavedView
+```
+
+保存されたビューから列を削除します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L545">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `remove_filter`
+
+```python
+remove_filter(index_or_field: 'int | str') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L560">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `remove_filters`
+
+```python
+remove_filters() → SavedView
+```
+
+保存されたビューからすべてのフィルターを削除します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L518">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `rename`
+
+```python
+rename(label: 'str') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L675">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `rename_column`
+
+```python
+rename_column(path: 'int | str | ObjectPath', label: 'str') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L831">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `save`
+
+```python
+save() → SavedView
+```
+
+保存されたビューをサーバーに公開します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L655">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `set_columns`
+
+```python
+set_columns(*columns: 'str') → SavedView
+```
+
+グリッドに表示する列を設定します。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L609">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `show_column`
+
+```python
+show_column(col_name: 'str') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L603">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `sort_by`
+
+```python
+sort_by(field: 'str', direction: 'SortDirection') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L887">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `to_grid`
+
+```python
+to_grid(limit: 'int | None' = None) → Grid
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L768">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `to_rich_table_str`
+
+```python
+to_rich_table_str() → str
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L751">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `ui_url`
+
+```python
+ui_url() → str | None
+```
+
+UIでこの保存されたビューを表示するためのURL。
+
+これはトレースなどを含む「結果」ページであり、ビューオブジェクトのURLではないことに注意してください。
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/flow/saved_view.py#L729">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `unpin_column`
+
+```python
+unpin_column(col_name: 'str') → SavedView
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L79">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+## <kbd>class</kbd> `Audio`
+
+サポートされている形式（wavまたはmp3）のオーディオデータを表すクラス。
+
+このクラスはオーディオデータの保存を処理し、異なるソースからの読み込みやファイルへのエクスポートのためのメソッドを提供します。
+
+**Attributes:**
+
+* <b>`format`</b>：オーディオ形式（現在は「wav」または「mp3」をサポート）
+* <b>`data`</b>：バイトとしての生のオーディオデータ
+
+**Args:**
+
+* <b>`data`</b>：オーディオデータ（バイトまたはbase64エンコードされた文字列）
+* <b>`format`</b>：オーディオ形式（「wav」または「mp3」）
+* <b>`validate_base64`</b>：入力データのbase64デコードを試みるかどうか
+
+**Raises:**
+
+* <b>`ValueError`</b>：オーディオデータが空または形式がサポートされていない場合
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L104">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `__init__`
+
+```python
+__init__(
+    data: 'bytes',
+    format: 'SUPPORTED_FORMATS_TYPE',
+    validate_base64: 'bool' = True
+) → None
+```
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L172">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>method</kbd> `export`
+
+```python
+export(path: 'str | bytes | Path | PathLike') → None
+```
+
+オーディオデータをファイルにエクスポートします。
+
+**Args:**
+
+* <b>`path`</b>：オーディオファイルを書き込むパス
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L119">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_data`
+
+```python
+from_data(data: 'str | bytes', format: 'str') → Audio
+```
+
+生データと指定された形式からAudioオブジェクトを作成します。
+
+**Args:**
+
+* <b>`data`</b>：バイトまたはbase64エンコードされた文字列としてのオーディオデータ
+* <b>`format`</b>：オーディオ形式（「wav」または「mp3」）
+
+**Returns:**
+
+* <b>`Audio`</b>：新しいAudioインスタンス
+
+**Raises:**
+
+* <b>`ValueError`</b>：形式がサポートされていない場合
+
+***
+
+<a href="https://github.com/wandb/weave/blob/master/weave/type_handlers/Audio/audio.py#L144">
+  <img align="right" src="https://img.shields.io/badge/-source-cccccc?style=flat-square" />
+</a>
+
+### <kbd>classmethod</kbd> `from_path`
+
+```python
+from_path(path: 'str | bytes | Path | PathLike') → Audio
+```
+
+ファイルパスからAudioオブジェクトを作成します。
+
+**Args:**
+
+* <b>`path`</b>：オーディオファイルへのパス（.wavまたは.mp3拡張子が必要）
+
+**Returns:**
+
+* <b>`Audio`</b>：ファイルから読み込まれた新しいAudioインスタンス
+
+**Raises:**
+
+* <b>`ValueError`</b>：ファイルが存在しないか、サポートされていない拡張子を持つ場合
