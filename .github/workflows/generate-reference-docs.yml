@@ -1,4 +1,4 @@
-name: Generate Reference Documentation
+name: Generate Weave Reference Documentation
 
 on:
   workflow_dispatch:
