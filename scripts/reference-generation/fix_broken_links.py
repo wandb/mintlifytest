@@ -69,6 +69,20 @@ def fix_links_in_file(file_path):
         content
     )
     
+    # Fix /weave/media/ paths to /media/
+    content = re.sub(
+        r'!\[([^\]]*)\]\(/weave/media/',
+        r'![\1](/media/',
+        content
+    )
+    
+    # Fix image src paths with /weave/media/ to /media/
+    content = re.sub(
+        r'<img src="/weave/media/',
+        '<img src="/media/',
+        content
+    )
+    
     # Write back if changed
     if content != original_content:
         with open(file_path, 'w') as f:
