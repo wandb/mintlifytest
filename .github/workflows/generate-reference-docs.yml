@@ -48,6 +48,11 @@ jobs:
         echo "version=${VERSION}" >> $GITHUB_OUTPUT
         echo "Using Weave version: ${VERSION}"
         
+        # Generate timestamp
+        TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+        echo "timestamp=${TIMESTAMP}" >> $GITHUB_OUTPUT
+        echo "Generated at: ${TIMESTAMP}"
+        
     - name: Generate Service API Documentation
       run: |
         echo "Generating Service API documentation..."
@@ -86,6 +91,7 @@ jobs:
         python scripts/reference-generation/fix_broken_links.py
         
     - name: Create Pull Request
+      id: create-pr
       uses: peter-evans/create-pull-request@v6
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -96,7 +102,7 @@ jobs:
           This PR updates the reference documentation for Weave.
           
           **Version**: ${{ steps.version.outputs.version }}
-          **Generated on**: ${{ github.run_started_at }}
+          **Generated on**: ${{ steps.version.outputs.timestamp }}
           
           ### Changes
           - Updated Service API documentation from OpenAPI spec
@@ -114,3 +120,12 @@ jobs:
           documentation
           automated
           weave
+    
+    - name: Display PR Link
+      if: steps.create-pr.outputs.pull-request-number
+      run: |
+        PR_URL="https://github.com/${{ github.repository }}/pull/${{ steps.create-pr.outputs.pull-request-number }}"
+        echo "📝 Draft PR created successfully!"
+        echo "🔗 Review the changes at: $PR_URL"
+        echo ""
+        echo "::notice title=Pull Request Created::A draft PR has been created for review: $PR_URL"
