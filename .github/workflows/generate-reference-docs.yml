@@ -48,6 +48,11 @@ jobs:
         echo "version=${VERSION}" >> $GITHUB_OUTPUT
         echo "Using Weave version: ${VERSION}"
         
+        # Generate timestamp
+        TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+        echo "timestamp=${TIMESTAMP}" >> $GITHUB_OUTPUT
+        echo "Generated at: ${TIMESTAMP}"
+        
     - name: Generate Service API Documentation
       run: |
         echo "Generating Service API documentation..."
@@ -97,7 +102,7 @@ jobs:
           This PR updates the reference documentation for Weave.
           
           **Version**: ${{ steps.version.outputs.version }}
-          **Generated on**: ${{ github.run_started_at }}
+          **Generated on**: ${{ steps.version.outputs.timestamp }}
           
           ### Changes
           - Updated Service API documentation from OpenAPI spec
