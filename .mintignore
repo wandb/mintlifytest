@@ -21,6 +21,12 @@ __pycache__/
 *.pyd
 .Python
 
+# Ignore Python virtual environments
+.venv/
+venv/
+env/
+.env/
+
 # Ignore temporary files
 *.tmp
 *.temp
@@ -42,4 +48,7 @@ weave-docusaurus-src/**/*.mdx
 # Ignore specific problematic files
 **/soupsieve-*/licenses/LICENSE.md
 **/site-packages/**/*.md
-**/site-packages/**/*.mdx 
+**/site-packages/**/*.mdx
+
+# Ignore internal documentation and prompts
+CLAUDE.md 
